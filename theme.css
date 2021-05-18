@@ -1,4 +1,5 @@
 
+
 @keyframes menu {
 0% { transform: scale(.9); 
 transform: translateY(-1px);
@@ -47,7 +48,7 @@ transform: translateY(-1px);
 	--b3-list-background-more:rgba(108, 106, 101);
 
    /* 字体 */
-    --b3-font-family: "Segoe UI", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif, "Win10 Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
+    --b3-font-family: "Segoe UI", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif,  "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
     --b3-font-family-code: mononoki, Consolas, "Liberation Mono", Menlo, Courier, monospace, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
     --b3-font-family-graph: mononoki;
 
@@ -338,16 +339,17 @@ align-items: center;
 /* zoom in栏 */
 .protyle-breadcrumb{
     background-color: var(--b3-theme-background);
-	height: 25px;
+	padding: 10px 10px;
 }
 .protyle-breadcrumb__item,.protyle-breadcrumb__icon{
 	color: var( --b3-theme-on-background);
+    padding: 5px 6px;
 	margin:0 5px;
 }
+
 .protyle-breadcrumb__icon:hover,
 .protyle-breadcrumb__item:hover{
 	background-color:var(--toolbar-item-hover);
-	height: 25px;
 	border-radius: 3px;
 }
 
@@ -545,16 +547,16 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 
 /* 表格 */
 
-.protyle-content table tr th:first-child,
-.protyle-content table tr td:first-child {
+.protyle-wysiwyg table tr th:first-child,
+.protyle-wysiwyg table tr td:first-child {
   border-left-width: 0px;
 }
-.protyle-content table tr td{
+.protyle-wysiwyg table tr td{
 	font-size: 90%;
 }
 
-.protyle-content table tr th:last-child,
-.protyle-content table tr td:last-child {
+.protyle-wysiwyg table tr th:last-child,
+.protyle-wysiwyg table tr td:last-child {
   border-right-width: 0px;
 }
 
@@ -615,3 +617,5 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
     border-left: 1px dashed var(--b3-theme-on-surface);
     background-color: var(--p-theme-background);
 }
+
+
