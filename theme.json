@@ -1,9 +1,10 @@
 {
-  "name": "daylight",
-  "author": "Vanessa",
-  "url": "https://github.com/Vanessa219",
-  "version": "1.0.0",
+  "name": "notion",
+  "author": "Roy",
+  "url": "https://github.com/royc01",
+  "version": "1.2.0",
   "modes": [
     "light"
   ]
 }
+
