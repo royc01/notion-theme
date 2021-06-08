@@ -212,7 +212,7 @@ align-items: center;
 /* ############# 侧栏 ############ */
 /* dock */
 .dock{
-    background-color: var(--b3-theme-background);
+    background-color:var(--b3-scroll-bgcolor);
 }
 .dock__item--active{
 	 color:var(--b3-theme-error);
@@ -509,21 +509,21 @@ border-left:1px solid var(--b3-theme-on-background);
 
 
 /* 块标 */
+.protyle-gutters{
+    padding: 9px 0; 
+}
 .protyle-gutters svg {
     color: var(--b3-scroll-color);
 }
 
 .protyle-gutters button{
-	padding-top:5px;
+	padding-top: 4px;
     width: 24px;
     height: 24px;
-	position: relative;
-    bottom: 5px;
-	margin-right: 0px;
+    border-radius: 3px;
 }
 .protyle-gutters button:hover {
     background-color: var(--toolbar-item-hover);
-    border-radius: 3px;
 }
 
 /* 标题 */
