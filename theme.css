@@ -38,7 +38,7 @@ transform: translateY(-1px);
     --b3-theme-on-primary: rgb(55, 53, 47);
     --b3-theme-on-secondary: #fff;
     --b3-theme-on-background: rgb(55, 53, 47);
-    --b3-theme-on-surface: rgba(132, 130, 125);
+    --b3-theme-on-surface: rgba(148, 146, 140);
     --b3-theme-on-error: #fff;
 	
 	--b3-list-background: rgba(55, 53, 47, 0.08);
@@ -46,7 +46,7 @@ transform: translateY(-1px);
 	--b3-list-background-more:rgba(108, 106, 101);
 
    /* 字体 */
-    --b3-font-family: "Segoe UI", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif,  "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
+    --b3-font-family:apple-system, BlinkMacSystemFont, "Segoe UI", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif,  "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
     --b3-font-family-code: mononoki, Consolas, "Liberation Mono", Menlo, Courier, monospace, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
     --b3-font-family-graph: mononoki;
 
@@ -201,6 +201,10 @@ align-items: center;
 .b3-menu__separator{
     height: 1px;
 }
+.b3-list-item--big{
+	padding: 15px 24px;
+}
+
 /*属性面板*/
 .b3-dialog__container{
 	background-color: var(--b3-column-surface);
@@ -261,7 +265,8 @@ align-items: center;
 }
 .b3-list--background .b3-list-item--focus .b3-list-item__text,
 .b3-list--background .b3-list-item--focus .b3-list-item__graphic
-{
+{   
+	font-weight:600;
 	color:var(--b3-theme-on-background)!important;
 }
 
@@ -449,8 +454,9 @@ border-left:1px solid var(--b3-theme-on-background);
 /* 按钮 */
 .b3-button:not(.b3-button--text):not(.b3-button--cancel){
   font-weight:700;
+  background-color:var(--b3-theme-primary);
   color: var(--b3-theme-background) !important;
-  box-shadow: 0 0 0 1px var(--b3-border-color) inset;
+  border:1px solid var(--b3-border-color);
 }
 
 .b3-button:not(.b3-button--text):not(.b3-button--cancel):hover{
@@ -603,14 +609,14 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
     color: var(--b3-scroll-color);
     text-decoration: line-through;
 }
-
 .protyle-task--done svg{
     color: var(--b3-theme-primary) !important;
 }
 
-.protyle-wysiwyg [data-node-id].li>.protyle-action--task:hover svg{
-   background-color: var(--toolbar-item-hover);
+.protyle-task--done:hover svg{
+    color: #069ccd !important;
 }
+
 .protyle-wysiwyg [data-node-id].li>.protyle-action--task:hover:after{
 	display:none;
 }
