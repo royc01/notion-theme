@@ -244,7 +244,7 @@ align-items: center;
 }
 .b3-list-item__graphic--arrow{
 	color:var(--svg-theme-graphic);
-    margin-right: 4px;
+    margin-left: -2px;
     border-radius: 3px;
 	width:10px;
 	height:10px;
@@ -371,6 +371,7 @@ align-items: center;
     padding: 5px 6px;
 	margin:0 5px;
 }
+
 
 
 .protyle-breadcrumb__icon:hover,.protyle-breadcrumb__item:hover{
@@ -520,14 +521,15 @@ border-left:1px solid var(--b3-theme-on-background);
 
 /* 块标 */
 .protyle-gutters{
-    padding: 9px 0; 
+    
 }
 .protyle-gutters svg {
     color: var(--b3-scroll-color);
+	margin-top:-5px;
 }
 
 .protyle-gutters button{
-	padding-top: 4px;
+	margin-top:5px;
     width: 24px;
     height: 24px;
     border-radius: 3px;
