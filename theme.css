@@ -520,9 +520,6 @@ border-left:1px solid var(--b3-theme-on-background);
 
 
 /* 块标 */
-.protyle-gutters{
-    
-}
 .protyle-gutters svg {
     color: var(--b3-scroll-color);
 	margin-top:-5px;
