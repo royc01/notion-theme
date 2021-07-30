@@ -174,7 +174,7 @@ transform: translateY(-1px);
 /* ################顶栏################### */
 
 .toolbar{
-     background-color: var(--b3-theme-background);
+      background-color:var(--b3-scroll-bgcolor);
 }
 
 .toolbar__item {
@@ -230,6 +230,15 @@ align-items: center;
 .fn__flex-column{
     background-color: var(--b3-column-surface);
 }
+.block__icons>.block__icon svg{
+	padding:5px;
+	height: 12px;
+    width: 12px;
+}
+.block__icons>.block__icon {
+	margin:-4px;
+}
+
 
 
 /* 面板列表 */
@@ -361,8 +370,8 @@ align-items: center;
 
 /* ################## 面包屑 ########################## */
 .protyle-breadcrumb{
-	padding: 10px 5px;
-	margin-right:10px;
+	padding-top:5px;
+	padding-left:5px;
 }
 
 
@@ -372,20 +381,30 @@ align-items: center;
 	margin:0 5px;
 }
 
+.protyle-breadcrumb__item svg {
+    margin-right: 0px;
+}
 
+.protyle-breadcrumb__text{
+	margin-left: 5px;
+}
 
-.protyle-breadcrumb__icon:hover,.protyle-breadcrumb__item:hover{
+.protyle-breadcrumb__icon:hover,.protyle-breadcrumb__item:hover,.block__icon:hover{
 	background-color:var(--toolbar-item-hover);
 	border-radius: 3px;
 }
-
-
 
 .protyle-breadcrumb__arrow{
 width:0px;
 transform:rotate(25deg);
 border-left:1px solid var(--b3-theme-on-background);
 }
+
+.protyle-breadcrumb>.block__icon svg{
+	color: var( --b3-theme-on-background);
+}
+
+
 /* ----------------------------------- */
 
 /* ##########设置菜单窗口################ */
@@ -484,11 +503,7 @@ border-left:1px solid var(--b3-theme-on-background);
 .protyle-wysiwyg,.protyle-wysiwyg--select{
 	border-radius: 3px;
 }
-/* 
-.protyle-wysiwyg--select{
-	border-radius: 3px;
-	background-color:rgba(46, 170, 220, 0.2)!important;
-}*/ 
+
 
 
 /*文本框选颜色*/
@@ -698,7 +713,7 @@ background-color:var(--b3-font-background7);
 	height:30px;/*弹出框bar高度*/
 }
 /* 弹出框钉住 */
-.ft__primary {
+.b3-tooltips__sw>.ft__primary {
     color: var(--b3-theme-primary)!important;
 	transition: all 200ms;
 	transform: rotate(-46deg);
