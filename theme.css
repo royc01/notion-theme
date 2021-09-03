@@ -211,7 +211,7 @@ align-items: center;
     height: 1px;
 }
 .b3-list-item--big{
-	padding: 15px 24px;
+	padding: 14px 24px;
 }
 
 /*属性面板*/
@@ -369,7 +369,9 @@ align-items: center;
 .block__icon:not(.ft__primary) svg{
 	color:var(--svg-theme-surface);
 }
-
+.block__popover--move .block__icon:not(.ft__primary) svg{
+	color:var(--b3-theme-on-background);
+}
 
 /* ----------------------------------- */
 
@@ -431,7 +433,7 @@ transform:rotate(25deg);
 border-left:1px solid var(--b3-theme-on-background);
 }
 
-.protyle-breadcrumb>.block__icon svg{
+.protyle-breadcrumb>.block__icon:not(.ft__primary) svg{
 	color: var( --b3-theme-on-background);
 }
 
@@ -703,16 +705,28 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	font-weight:500;
 	border-radius: 6px;
 	font-size: 90%;
-	border-collapse:collapse;
+	border:1px solid var(--b3-border-color);
 }
+.protyle-wysiwyg table tr,.protyle-wysiwyg table tr th
+ {
+  border-top-width: 0px;
 
+}
 .protyle-wysiwyg table tr th{
 	background-color:#f6f4f5;
 }
-.protyle-wysiwyg table tr th,
-.protyle-wysiwyg table tr td{
-	border:1px solid var(--b3-border-color);
+.protyle-wysiwyg table tr th:first-child,
+.protyle-wysiwyg table tr td:first-child {
+  border-left-width: 0px;
 }
+.protyle-wysiwyg table tr th:last-child,
+.protyle-wysiwyg table tr td:last-child {
+  border-right-width: 0px;
+}
+.protyle-wysiwyg table tr td{
+	  border-bottom-width: 0px;
+}
+
 .protyle-wysiwyg table tr td{
 	font-size: 90%;
 }
