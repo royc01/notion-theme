@@ -51,7 +51,7 @@ transform: translateY(-1px);
     --b3-font-family-graph: mononoki;
 
     /* 线条 */
-    --b3-border-color: rgba(0, 0, 0, .1);
+    --b3-border-color: #e5e5e5;
 	--surface-border-color: rgba(230, 229, 225);
 
     /* 滚动条 */
@@ -353,7 +353,7 @@ align-items: center;
     background-color: var(--b3-column-surface);
 	height:45px;  
 }
-.block__icons:hover{
+.block__icon:hover{
 	background-color: var(--b3-list-background)!important ;
 }
 
@@ -366,7 +366,7 @@ align-items: center;
 	background-color: var(--svg-theme-surface);
 	border-radius: 2px;
 }
-.block__icon svg{
+.block__icon:not(.ft__primary) svg{
 	color:var(--svg-theme-surface);
 }
 
@@ -701,19 +701,20 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 /* 表格 */
 .protyle-wysiwyg table {
 	font-weight:500;
+	border-radius: 6px;
+	font-size: 90%;
+	border-collapse:collapse;
 }
 
-.protyle-wysiwyg table tr th:first-child,
-.protyle-wysiwyg table tr td:first-child {
-  border-left-width: 0px;
+.protyle-wysiwyg table tr th{
+	background-color:#f6f4f5;
+}
+.protyle-wysiwyg table tr th,
+.protyle-wysiwyg table tr td{
+	border:1px solid var(--b3-border-color);
 }
 .protyle-wysiwyg table tr td{
 	font-size: 90%;
-}
-
-.protyle-wysiwyg table tr th:last-child,
-.protyle-wysiwyg table tr td:last-child {
-  border-right-width: 0px;
 }
 
 
