@@ -1,8 +1,12 @@
 # notion复刻版
-适用版本：思源笔记 v1.2.5
-更新：常驻箭头，调整图标按钮大小
+适用版本：思源笔记 v1.3.5
 需要搭配复刻图标使用：https://github.com/royc01/notion-icon
 ![preview](https://raw.githubusercontent.com/royc01/notion-theme/main/preview.png)
+*********
+调整整体结构
+设置栏改到右侧
+适配PDF标注特性
+没有子文档的文档前加标识
 *********
 修正上下文图标问题
 修改表格样式
