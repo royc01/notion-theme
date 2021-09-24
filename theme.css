@@ -261,6 +261,9 @@ body{
 	margin-top:-24px;
 	background:#fff;
 }
+.layout__center>.fn__flex-1.fn__flex [data-type='wnd']{
+	background:#fff;
+}
 
 .fn__flex-shrink{
 	margin-top:-24px;
