@@ -192,13 +192,11 @@ body{
     z-index:99;
 	position: absolute;
     right: 0px;
-	pointer-events:inherit;
 }
 
 .toolbar__item {
     align-items: center;
 	background-color:#fff;
-	
 }
 #minWindow svg, #restoreWindow svg, #maxWindow svg, #closeWindow svg{
 	width:10px;
@@ -215,16 +213,50 @@ body{
 #barSync.toolbar__item,#barMore.toolbar__item,
 #barBack.toolbar__item,#barForward.toolbar__item,
 #toolbarVIP.fn__flex
-{
-    opacity: 0.3;
-    transition: opacity 400ms ease 0s;
+{   
+    position:fixed;
+	right:120px;
+	width:0px;
+	background-color:#eb8383;
+    -webkit-mask:   url(img/more.svg) no-repeat;
+    mask:           url(img/more.svg) no-repeat;
+    -webkit-mask-size:  100% 100%;
+    mask-size:          100% 100%;
+	padding: 0 18px;
 }
-
+/*
 .toolbar:hover>.toolbar__item,.toolbar:hover>#toolbarVIP.fn__flex{
     opacity: 1!important;
+	width:28px!important;
+	transition: width 400ms ease 0s;
+}*/
+
+.toolbar:hover>#barDailyNote.toolbar__item,.toolbar:hover>#barSearch.toolbar__item,
+.toolbar:hover>#barDock.toolbar__item,.toolbar:hover>#barThemeMode.toolbar__item,
+.toolbar:hover>#barSync.toolbar__item,.toolbar:hover>#barMore.toolbar__item,
+.toolbar:hover>#barBack.toolbar__item,.toolbar:hover>#barForward.toolbar__item
+{
+	position:relative;
+	right:0px;
+	width:28px!important;
+	transition: width 400ms ease 0s;
+	-webkit-mask: none;
+    mask: none;
+	background-color:#fff;
+	padding: 0 8px;
 }
+.toolbar:hover>#toolbarVIP.fn__flex
+{
+	position:relative;
+	right:-8px;
+	width:56px!important;
+	transition: width 400ms ease 0s;
+	-webkit-mask: none;
+    mask: none;
+	background-color:#fff;
+	padding: 0 8px;
 
-
+}
 .toolbar__item:not(#closeWindow):hover {
   background-color: var(--toolbar-item-hover) !important;
 }
@@ -408,8 +440,8 @@ body{
 }
 .b3-list--files .b3-list-item__icon svg,.b3-list--files .b3-list-item__icon img{
 	margin:  0px;
-	padding: 0px 2px;
-    height: 22px;
+	padding: 4px 2px;
+    /*height: 22px;*/
 	border-radius: 3px;
 }
 
@@ -537,7 +569,6 @@ body{
 /* ################ 页签 ############# */
 .layout-tab-bar .item{
   background-color: var(--b3-theme-background);
-  box-shadow: 0px -1px 0px 0px rgba(0, 0, 0 ,0.1) inset;
   padding-top: 14px;
   padding-left: 14px;
 }
@@ -558,13 +589,14 @@ body{
 
 .fn__flex .layout-tab-bar{
     background-color: var(--b3-theme-background);
-	box-shadow: 0px -1px 0px 0px rgba(0, 0, 0 ,0.1) inset;
+	margin-right:150px;
 }
 /* ----------------------------------- */
 
 /* ################## 面包屑 ########################## */
 .protyle-breadcrumb{
 	padding:9px 10px 9px 6px;
+	box-shadow: 0px 1px 0px 0px rgba(0, 0, 0 ,0.1) inset;
 }
 
 
