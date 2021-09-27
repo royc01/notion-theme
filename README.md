@@ -3,6 +3,8 @@
 需要搭配复刻图标使用：https://github.com/royc01/notion-icon
 ![preview](https://raw.githubusercontent.com/royc01/notion-theme/main/preview.png)
 *********
+更新隐藏工具栏方式
+*********
 调整整体结构
 设置栏改到右侧
 适配PDF标注特性
