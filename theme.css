@@ -51,7 +51,7 @@ transform: translateY(-1px);
     --b3-font-family-graph: mononoki;
 
     /* 线条 */
-    --b3-border-color: #e5e5e5;
+    --b3-border-color: rgba(0, 0, 0, .1);
 	--surface-border-color: rgba(230, 229, 225);
 
     /* 滚动条 */
