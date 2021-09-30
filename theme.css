@@ -590,9 +590,9 @@ body{
     padding: 3px 0px 3px 3px; 
 }
 
-.layout__center>.fn__flex-1.fn__flex [data-type='wnd']>.layout-tab-bar{
+/*.layout__center>.fn__flex-1.fn__flex [data-type='wnd']>.layout-tab-bar{
 	margin-right:150px;
-}
+}*/
 .layout-tab-bar{
  background-color: var(--b3-theme-background);
 }
