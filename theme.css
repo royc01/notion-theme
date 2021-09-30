@@ -184,10 +184,13 @@ transform: translateY(-1px);
 body{
    border: 0px!important;
 }
+.fn__flex{
+	background:transparent;
+}
 /* ################顶栏################### */
 
 .toolbar{
-	background:#fff;
+	background:transparent;
 	margin-bottom:-24px;
     z-index:99;
 	position: absolute;
@@ -196,7 +199,7 @@ body{
 
 .toolbar__item {
     align-items: center;
-	background-color:#fff;
+	background-color:transparent;
 }
 #minWindow svg, #restoreWindow svg, #maxWindow svg, #closeWindow svg{
 	width:10px;
@@ -242,7 +245,7 @@ body{
 	transition: width 400ms ease 0s;
 	-webkit-mask: none;
     mask: none;
-	background-color:#fff;
+	background-color:transparent;
 	padding: 0 8px;
 }
 .toolbar:hover>#toolbarVIP.fn__flex
@@ -253,7 +256,7 @@ body{
 	transition: width 400ms ease 0s;
 	-webkit-mask: none;
     mask: none;
-	background-color:#fff;
+	background-color:transparent;
 	padding: 0 8px;
 
 }
@@ -375,7 +378,7 @@ body{
 }
 
 /* 面板column */
-.fn__flex-column{
+.fn__flex-1 > .fn__flex-column,.fn__flex > .fn__flex-column{
     background-color: var(--b3-column-surface);
 }
 
@@ -587,9 +590,11 @@ body{
     padding: 3px 0px 3px 3px; 
 }
 
-.fn__flex .layout-tab-bar{
-    background-color: var(--b3-theme-background);
+.layout__center>.fn__flex-1.fn__flex [data-type='wnd']>.layout-tab-bar{
 	margin-right:150px;
+}
+.layout-tab-bar{
+ background-color: var(--b3-theme-background);
 }
 /* ----------------------------------- */
 
