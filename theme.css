@@ -183,6 +183,7 @@ transform: translateY(-1px);
 
 body{
    border: 0px!important;
+   background-color:#fff;
 }
 .fn__flex{
 	background:transparent;
@@ -459,10 +460,10 @@ body{
    margin-left: -5px;
 }
 
-.b3-list-item[data-type='navigation-root'] .svg {
+/*.b3-list-item[data-type='navigation-root'] .svg {
     width:0px;
 	margin-left:-6px;
-}/*取消笔记本图标*/
+}取消笔记本图标*/
 
 .b3-list-item[data-type='navigation-root'] .b3-list-item__text {
 	color:#8f8d88;
@@ -584,7 +585,9 @@ body{
 .layout-tab-bar .item--focus:hover .item__text::after,.layout-tab-bar .item:hover .item__text::after{
 	background: linear-gradient(90deg, rgba(0,0,0,0.001),#f3f3f2)!important;
 }
-
+.layout-tab-bar .item__text::after{
+	background: linear-gradient(90deg, rgba(0,0,0,0.001), var(--b3-theme-background))!important;
+}
 
 .layout-tab-bar .item__text{
     padding: 3px 0px 3px 3px; 
@@ -1070,6 +1073,7 @@ background-color:var(--b3-font-background7);
 	font-size:100%;
 }*/
 
+/*新建文档*/
 .b3-list-item__action[data-type='new'] svg{
     content: "";
 	color:transparent;
@@ -1082,4 +1086,8 @@ background-color:var(--b3-font-background7);
 }
 .b3-list-item__action[data-type='new']{
 	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0 ,0.1) inset;
+}
+
+.protyle-wysiwyg [data-node-id].li>.list{
+	padding-left: 0px;
 }
