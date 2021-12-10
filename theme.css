@@ -196,6 +196,7 @@ body{
     z-index:99;
 	position: absolute;
     right: 0px;
+	height:24px;
 }
 
 .toolbar__item {
@@ -205,7 +206,7 @@ body{
 #minWindow svg, #restoreWindow svg, #maxWindow svg, #closeWindow svg{
 	width:10px;
 	color: var(--b3-theme-on-background);
-	padding:0 6px;
+	padding: 0 4px;
 }
 
 .toolbar__item:not(.toolbar__item--disabled) svg{
@@ -253,7 +254,7 @@ body{
 {
 	position:relative;
 	right:-8px;
-	width:56px!important;
+	width:72px!important;
 	transition: width 400ms ease 0s;
 	-webkit-mask: none;
     mask: none;
@@ -304,6 +305,7 @@ body{
 .fn__flex-shrink{
 	margin-top:-24px;
 }
+
 /*悬浮大纲试验
 .layout__center .fn__flex-1>.file-tree{
 	background:#fff;
@@ -368,7 +370,7 @@ body{
 	margin-top:24px;
 }
 #dockLeft{
-	padding-top:8px;
+	padding-top:4px;
 }
 .dock__item--active{
 	 color:var(--b3-theme-error);
@@ -395,8 +397,10 @@ body{
 
 
 /* 面板列表 */
-.b3-list-item__text{
+.b3-list-item[data-type='navigation-root'] .b3-list-item__text {
 	font-weight:500;
+}
+.b3-list-item__text{
 	color:var(--b3-theme-on-surface);
 }
 
@@ -439,7 +443,7 @@ body{
 	visibility: visible!important;
     content: "·";  
 	margin:-4px -19px 0 14px;
-    color: #84827d;
+    color:var(--svg-theme-graphic);
 	font-size: 180%;
 }
 .b3-list--files .b3-list-item__icon svg,.b3-list--files .b3-list-item__icon img{
@@ -448,7 +452,9 @@ body{
     /*height: 22px;*/
 	border-radius: 3px;
 }
-
+.b3-list--files .b3-list-item__icon svg{
+	color:var(--svg-theme-graphic);
+}
 .file-tree .b3-list-item__graphic--arrow:not(.fn__hidden) {
     opacity: 1;
 }
@@ -460,17 +466,25 @@ body{
    margin-left: -5px;
 }
 
+.b3-list-item .counter{
+	height: 18px;
+	min-width:13px;
+	text-align:center;
+	padding-top:2px;
+	margin-left:2px;
+}
+
 /*.b3-list-item[data-type='navigation-root'] .svg {
     width:0px;
 	margin-left:-6px;
-}取消笔记本图标*/
+}取消笔记本图标
 
 .b3-list-item[data-type='navigation-root'] .b3-list-item__text {
 	color:#8f8d88;
-}
+}*/
 
 /* 面板列表项 选中状态*/
- .b3-list--files .b3-list-item--focus:not(.dragover),.b3-list-item--focus:not(.dragover){
+.b3-list--files .b3-list-item--focus:not(.dragover):not(.dragover__top):not(.dragover__bottom),.b3-list-item--focus:not(.dragover):not(.dragover__top):not(.dragover__bottom){
     background-color: var(--b3-list-background)!important;
 }
 .b3-list--files .b3-list-item--focus:not(.dragover) .b3-list-item__text, .b3-list-item--focus:not(.dragover) .b3-list-item__text
@@ -485,7 +499,8 @@ body{
  .b3-list--files .b3-list-item:not(.dragover):hover,.b3-list-item:not(.dragover):hover{
     background-color: var(--b3-list-background)!important ;
 }
-  .b3-list--files .b3-list-item--focus:not(.dragover):hover,.b3-list-item--focus:not(.dragover):hover{
+  .b3-list--files .b3-list-item--focus:not(.dragover):not(.dragover__top):not(.dragover__bottom):hover,
+  .b3-list-item--focus:not(.dragover):not(.dragover__top):not(.dragover__bottom):hover{
     background-color: var(--b3-list-background-focus)!important ;
 }
 
@@ -530,7 +545,7 @@ body{
 .block__icons{
 	background-color:var(--b3-column-surface);
 	height:45px; 
-    padding: 0 14px;
+    padding: 0 16px;
 }
 
 .block__icons:hover{
@@ -573,7 +588,7 @@ body{
 /* ################ 页签 ############# */
 .layout-tab-bar .item{
   background-color: var(--b3-theme-background);
-  padding-top: 14px;
+  padding-top: 13px;
   padding-left: 14px;
 }
 .layout-tab-bar .item--focus {
@@ -731,11 +746,109 @@ border-left:1px solid var(--b3-theme-on-background);
 
 
 /* #################### 编辑区 ###################### */
+/*头图、图标、标签*/
+.protyle-background{
+	min-height:88px;margin:0 !important
+}
+.protyle-background[style*="30vh"]{
+	border-bottom:36px solid transparent !important
+}
+.protyle-background[style*="30vh"] .protyle-icons{
+	top:30vh
+}
+.protyle-background[style*="30vh"][style*="40px"]
+{
+	min-height:30vh !important;border-bottom:50px solid transparent !important
+}
+.protyle-background[style*="30vh"][style*="40px"] .protyle-icons{
+	top:calc(30vh + 36px)
+}
+.protyle-background[style*="40px"][style*="48px"]{
+	min-height:190px !important;margin:0px !important
+}
+.protyle-background[style*="40px"][style*="48px"] .protyle-background__icon{
+	top:96px;margin:0 0 36px 3px
+}
+.protyle-background[style*="40px"][style*="48px"] .protyle-icons{
+	top:174px
+}
+.protyle-background .protyle-icons{
+	background-color:transparent;
+	margin:8px 0 4px;
+	height:24px;
+	top:72px;
+	left:max(calc((100% - min(1920px, max(1500px, 46.9vw))) / 2), 96px);
+	opacity:0
+	}
+.protyle-background .protyle-icons .b3-tooltips{
+	display:-webkit-inline-box;
+	display:-ms-inline-flexbox;
+	display:inline-flex;
+	height:28px;
+	border-radius:3px;
+	padding:0 8px 0 6px;
+	color:rgba(55, 53, 47, 0.3);
+	background-color:transparent
+	}
+.protyle-background .protyle-icons .b3-tooltips:hover{
+	background-color:var(--b3-list-background)
+	}
+.protyle-background .protyle-icons .b3-tooltips svg{
+	width:14px;
+	height:14px;
+	padding:7px 6px 0 0;
+	display:-webkit-inline-box;
+	display:-ms-inline-flexbox;
+	display:inline-flex
+	}
+.protyle-background .protyle-icons .b3-tooltips::after{
+	display:-webkit-inline-box;
+	display:-ms-inline-flexbox;
+	display:inline-flex;
+	height:28px;
+	font-size:12px;
+	line-height:28px;
+	-webkit-transform:none;
+	transform:none;
+	-webkit-transition:none;
+	transition:none;
+	opacity:1;
+	color:rgba(55, 53, 47, 0.3);
+	background-color:transparent;
+	position:static;
+	margin:0;
+	padding:0
+	}
+.protyle-background .protyle-icons .b3-tooltips input{
+	width:100% !important;font-size:0
+	}
+.protyle-background .protyle-background__icon{
+	width:78px;
+	height:78px;
+	font-size:54px;
+	top:calc(30vh - 42px);
+	line-height:78px;
+	text-align:center;
+	border-radius:4px
+	}
+.protyle-background .protyle-background__icon svg{
+	width:78px;
+	height:78px
+	}
+.protyle-background .protyle-background__icon:hover{
+	background-color:var(--b3-list-background)
+	}
+.protyle-background:hover .protyle-icons{
+	opacity:1
+	}
 
+.protyle-background .protyle-icons  .b3-tooltips::before{
+	border:none
+	}
 /*文档标题块*/
 .protyle-title__input
 {font-weight:700;
- font-size: 30px;
+ font-size: 40px;
 }
 
 /* 文本块,选中样式
@@ -773,21 +886,22 @@ border-left:1px solid var(--b3-theme-on-background);
 }
 
 
-/* 块标 */
-.protyle-gutters svg {
+ /*块标 */
+.protyle-gutters button svg {
     color: var(--b3-scroll-color);
-	margin-top:-5px;
+	padding:0 4px;
+}
+.protyle-gutters button svg:hover {
+  background: url("img/square.svg") no-repeat center;
 }
 
 .protyle-gutters button{
-	margin-top:5px;
-    width: 24px;
-    height: 24px;
-    border-radius: 3px;
+	padding:2px 0px;
 }
+/*
 .protyle-gutters button:hover {
     background-color: var(--toolbar-item-hover);
-}
+}*/
 
 /* 标题 */
 .protyle-wysiwyg .h1,.protyle-wysiwyg .h2,
