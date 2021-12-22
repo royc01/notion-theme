@@ -188,20 +188,20 @@ body{
 .fn__flex{
 	background:transparent;
 }
+
 /* ################顶栏################### */
 
 .toolbar{
-	background:transparent;
-	margin-bottom:-24px;
-    z-index:99;
-	position: absolute;
-    right: 0px;
-	height:24px;
+	height:30px;
+	 box-shadow: 0px -1px 0px 0px rgba(0, 0, 0 ,.05) inset;
 }
 
 .toolbar__item {
     align-items: center;
-	background-color:transparent;
+	padding: 0 10px;
+}
+.toolbar__item:not(.toolbar__item--disabled) svg{
+	width:12px;
 }
 #minWindow svg, #restoreWindow svg, #maxWindow svg, #closeWindow svg{
 	width:10px;
@@ -209,128 +209,14 @@ body{
 	padding: 0 4px;
 }
 
-.toolbar__item:not(.toolbar__item--disabled) svg{
-	width:12px;
-	color: var(--b3-theme-on-background);
-}
-#barDailyNote.toolbar__item, #barSearch.toolbar__item,
-#barDock.toolbar__item,#barThemeMode.toolbar__item,
-#barSync.toolbar__item,#barMore.toolbar__item,
-#barBack.toolbar__item,#barForward.toolbar__item,
-#toolbarVIP.fn__flex
-{   
-    position:fixed;
-	right:120px;
-	width:0px;
-	background-color:#eb8383;
-    -webkit-mask:   url(img/more.svg) no-repeat;
-    mask:           url(img/more.svg) no-repeat;
-    -webkit-mask-size:  100% 100%;
-    mask-size:          100% 100%;
-	padding: 0 18px;
-}
-/*
-.toolbar:hover>.toolbar__item,.toolbar:hover>#toolbarVIP.fn__flex{
-    opacity: 1!important;
-	width:28px!important;
-	transition: width 400ms ease 0s;
-}*/
 
-.toolbar:hover>#barDailyNote.toolbar__item,.toolbar:hover>#barSearch.toolbar__item,
-.toolbar:hover>#barDock.toolbar__item,.toolbar:hover>#barThemeMode.toolbar__item,
-.toolbar:hover>#barSync.toolbar__item,.toolbar:hover>#barMore.toolbar__item,
-.toolbar:hover>#barBack.toolbar__item,.toolbar:hover>#barForward.toolbar__item
-{
-	position:relative;
-	right:0px;
-	width:28px!important;
-	transition: width 400ms ease 0s;
-	-webkit-mask: none;
-    mask: none;
-	background-color:transparent;
-	padding: 0 8px;
-}
-.toolbar:hover>#toolbarVIP.fn__flex
-{
-	position:relative;
-	right:-8px;
-	width:72px!important;
-	transition: width 400ms ease 0s;
-	-webkit-mask: none;
-    mask: none;
-	background-color:transparent;
-	padding: 0 8px;
-
-}
-.toolbar__item:not(#closeWindow):hover {
-  background-color: var(--toolbar-item-hover) !important;
-}
-
-.toolbar #drag>.fn__none {
-	display:inline!important;
-	color:transparent;
-	font-size:50%;
-}
-.toolbar #drag{
-	position: absolute;
-    right: 398px;
-	width:1600px;
-	height:50%;
-	overflow:hidden;
-}
 #closeWindow:hover{
 	background-color:#e81123;
 }
 #closeWindow:hover svg{
 	color:#fff;
 }
-/*中心结构变化*/
-#layouts > .fn__flex-1 {
-	overflow:visible;
-}
-.layout{
-	min-height: 90% ;
-	margin-top:24px;
-	overflow:visible!important;
- }
 
-.layout__center{
-	margin-top:-24px;
-	background:#fff;
-}
-.layout__center>.fn__flex-1.fn__flex [data-type='wnd']{
-	background:#fff;
-}
-
-.fn__flex-shrink{
-	margin-top:-24px;
-}
-
-/*悬浮大纲试验
-.layout__center .fn__flex-1>.file-tree{
-	background:#fff;
-}
-.layout__center .fn__flex-1>.file-tree>.fn__flex-1{
-	background:#fff;
-	padding-left:30px;
-	max-height:600px!important;
-}
-.layout__center .fn__flex-1::-webkit-scrollbar { 
-	width:0!important;
-}
-
-.layout__center .fn__flex-1>.file-tree>.block__icons{
-	opacity:0;
-	padding-top:100px;
-
-}
-.layout__center .fn__flex-1>.file-tree>.block__icons+.fn__flex-1{
-	height:50%;
-}
-.layout__center .fn__flex-1>.file-tree>.fn__flex-1>.b3-list{
-	 box-shadow: 4px 0 0 0px var(--b3-border-color) inset!important;
-}
-*/
 /*弹出菜单*/
 .b3-menu{
 	animation: menu 0.2s ease-in-out;
@@ -366,12 +252,7 @@ body{
     background-color:var(--b3-scroll-bgcolor);
 	height:auto;
 }
-#dockRight{
-	margin-top:24px;
-}
-#dockLeft{
-	padding-top:4px;
-}
+
 .dock__item--active{
 	 color:var(--b3-theme-error);
 	 }
@@ -590,6 +471,8 @@ body{
   background-color: var(--b3-theme-background);
   padding-top: 13px;
   padding-left: 14px;
+  max-width:120px;
+  box-shadow: none;
 }
 .layout-tab-bar .item--focus {
     box-shadow: 0px -3px 0px 0px rgba(0, 0, 0 ,1) inset;
@@ -1178,6 +1061,7 @@ background-color:var(--b3-font-background7);
 	 background: no-repeat round url("img/a2.svg") #fff;
 	 box-shadow: 0 0 0 1px var(--b3-border-color) inset;
 }
+
 
 /*折叠块
 
