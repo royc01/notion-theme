@@ -347,12 +347,19 @@ body{
    margin-left: -5px;
 }
 
-.b3-list-item .counter{
+/*引用数*/
+.b3-list-item .counter:not(:empty){
 	height: 18px;
-	min-width:13px;
+	min-width:12px;
 	text-align:center;
 	padding-top:2px;
-	margin-left:2px;
+	margin:0 2px;
+	background-color:transparent;
+	border-radius: 3px;
+	box-shadow: 0 0 0 1px var(--b3-border-color) inset;
+}
+.counter:not(:empty):hover{
+	background-color:var(--b3-list-background);
 }
 
 /*.b3-list-item[data-type='navigation-root'] .svg {
@@ -469,7 +476,7 @@ body{
 /* ################ 页签 ############# */
 .layout-tab-bar .item{
   background-color: var(--b3-theme-background);
-  padding-top: 13px;
+  padding-top: 16px;
   padding-left: 14px;
   max-width:120px;
   box-shadow: none;
@@ -756,7 +763,9 @@ border-left:1px solid var(--b3-theme-on-background);
 ::-webkit-scrollbar-thumb:hover{
     background-color:var(--b3-scroll-color-hover);
 }
-
+::-webkit-scrollbar-thumb{
+	border-radius: 0px;
+}
 
 /* 超级块 */
 .protyle-wysiwyg [data-node-id].sb[data-sb-layout="col"],
@@ -1088,4 +1097,23 @@ background-color:var(--b3-font-background7);
 
 .protyle-wysiwyg [data-node-id].li>.list{
 	padding-left: 0px;
+}
+/*pdf批注*/
+.protyle-wysiwyg [data-node-id] span[data-type="file-annotation-ref"]:before {
+    content:"💡 ";
+}
+.protyle-wysiwyg span[data-type="file-annotation-ref"] {
+  font-size: 90%;
+  border-radius: 3px;
+  padding:2px 6px 4px 6px;
+  color: var( --b3-theme-on-background)!important;
+  background-color:var(--toolbar-item-hover);
+}
+
+.protyle-wysiwyg span[data-type="file-annotation-ref"]:hover {
+  background-color:var(--b3-border-color);
+}
+/*已关闭笔记本*/
+.file-tree__close{
+	box-shadow: 0 1px 0 var(--surface-border-color) inset;
 }
