@@ -1,0 +1,85 @@
+.li[data-subtype="o"]>.protyle-action{
+	color:transparent!important;
+}
+.li[data-subtype="o"]:before{
+	padding-left:10px;
+	padding-top:3px;
+}
+.list[data-subtype="o"]{
+	counter-reset: o1 0 o2 0 o3 0;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"]:before {
+    counter-increment: o1;
+    content: counter(o1,decimal)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"]:before {
+    counter-increment: o2;
+    content: counter(o2,lower-latin)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before{
+    counter-increment: o3;
+    content: counter(o3,lower-roman)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before{
+    counter-increment: o1;
+    content: counter(o1,decimal)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before {
+    counter-increment: o2;
+    content: counter(o2,lower-latin)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before{
+    counter-increment: o3;
+    content: counter(o3,lower-roman)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before{
+    counter-increment: o1;
+    content: counter(o1,decimal)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before {
+    counter-increment: o2;
+    content: counter(o2,lower-latin)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before{
+    counter-increment: o3;
+    content: counter(o3,lower-roman)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before{
+    counter-increment: o1;
+    content: counter(o1,decimal)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before {
+    counter-increment: o2;
+    content: counter(o2,lower-latin)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before{
+    counter-increment: o3;
+    content: counter(o3,lower-roman)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before{
+    counter-increment: o1;
+    content: counter(o1,decimal)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before {
+    counter-increment: o2;
+    content: counter(o2,lower-latin)".";
+	position:absolute;
+}
+.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]:before{
+    counter-increment: o3;
+    content: counter(o3,lower-roman)".";
+	position:absolute;
+}

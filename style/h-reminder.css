@@ -1,0 +1,96 @@
+.protyle-wysiwyg .h1>[spellcheck="false"]{
+	display:inline-block;
+}
+.protyle-wysiwyg .h1>[spellcheck="false"]::after{
+	content:"";
+	position:absolute;
+	float:left;
+	margin-left:5px;
+	height:12px;
+	width:4px;
+	bottom:10px;
+	border-radius:3px;
+	background-color:var(--block--icons--active);
+	opacity:0.3;
+}
+
+.protyle-wysiwyg .h2>[spellcheck="false"]{
+	display:inline-block;
+}
+.protyle-wysiwyg .h2>[spellcheck="false"]::after{
+	content:"";
+	position:absolute;
+	float:left;
+	margin-left:5px;
+	height:4px;
+	width:4px;
+	bottom:16px;
+	border-radius:3px;
+	background-color:var(--h2-list-graphic);
+	opacity:0.3;
+	box-shadow: 6px 6px 0px 0px var(--h2-list-graphic);
+}
+.protyle-wysiwyg .h3>[spellcheck="false"]{
+	display:inline-block;
+}
+.protyle-wysiwyg .h3>[spellcheck="false"]::after{
+	content:"";
+	position:absolute;
+	float:left;
+	margin-left:5px;
+	height:3px;
+	width:3px;
+	bottom:12px;
+	border-radius:3px;
+	background-color:var(--h3-list-graphic);
+	opacity:0.3;
+	box-shadow: 6px 6px 0px 0px var(--h3-list-graphic),0px 6px 0px 0px var(--h3-list-graphic);
+}
+.protyle-wysiwyg .h4>[spellcheck="false"]{
+	display:inline-block;
+}
+.protyle-wysiwyg .h4>[spellcheck="false"]::after{
+	content:"";
+	position:absolute;
+	float:left;
+	margin-left:5px;
+	height:3px;
+	width:3px;
+	bottom:12px;
+	border-radius:3px;
+	background-color:var(--h4-list-graphic);
+	opacity:0.3;
+	box-shadow: 6px 6px 0px 0px var(--h4-list-graphic),0px 6px 0px 0px var(--h4-list-graphic),6px 0px 0px 0px var(--h4-list-graphic);
+}
+.protyle-wysiwyg .h5>[spellcheck="false"]{
+	display:inline-block;
+}
+.protyle-wysiwyg .h5>[spellcheck="false"]::after{
+	content:"";
+	position:absolute;
+	float:left;
+	margin-left:5px;
+	height:3px;
+	width:3px;
+	bottom:13px;
+	border-radius:3px;
+	background-color:var(--h5-list-graphic);
+	opacity:0.3;
+	box-shadow: 5px 5px 0px 0px var(--h5-list-graphic),0px 5px 0px 0px var(--h5-list-graphic),5px 0px 0px 0px var(--h5-list-graphic),0px -5px 0px 0px var(--h5-list-graphic);
+}
+.protyle-wysiwyg .h6>[spellcheck="false"]{
+	display:inline-block;
+}
+.protyle-wysiwyg .h6>[spellcheck="false"]::after{
+	content:"";
+	position:absolute;
+	float:left;
+	margin-left:5px;
+	height:0.18em;
+	width:0.18em;
+	bottom:15px;
+	border-radius:3px;
+	background-color:var(--h6-list-graphic);
+	opacity:0.3;
+	box-shadow: 5px 5px 0px 0px var(--h6-list-graphic),0px 5px 0px 0px var(--h6-list-graphic),5px 0px 0px 0px var(--h6-list-graphic),0px -5px 0px 0px var(--h6-list-graphic),5px -5px 0px 0px var(--h6-list-graphic);
+}
