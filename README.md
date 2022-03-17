@@ -1,20 +1,18 @@
-# notion复刻版
-适用版本：思源笔记 v1.3.6
-需要搭配复刻图标使用：https://github.com/royc01/notion-icon
-![preview](https://raw.githubusercontent.com/royc01/notion-theme/main/preview.png)
-*********
-修改头图添加方式
-*********
-更新隐藏工具栏方式
-*********
-调整整体结构
-设置栏改到右侧
-适配PDF标注特性
-没有子文档的文档前加标识
-*********
-修正上下文图标问题
-修改表格样式
-*********
-修正自定义图标
-修正边栏被压缩问题
-*********
+# Notion配色版主題
+
+---
+
+## 新特性更新：
+
+### 标题样式
+
+![image.png](https://b3logfile.com/siyuan/1601258007003/assets/image-20220317234808-1rle8yv.png)
+
+浅色点数提示为几级标题，此特性可删除style/h-reminder.css取消
+
+
+### 有序列表&无序列表序号样式特性
+
+![image.png](https://b3logfile.com/siyuan/1601258007003/assets/image-20220317235147-f83l2la.png)
+
+用于方便分辨列表层级，此特性可删除style/ordered-list.css和unordered-list.css取消
