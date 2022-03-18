@@ -2,8 +2,10 @@
 	color:transparent!important;
 }
 .li[data-subtype="o"]:before{
-	padding-left:10px;
-	padding-top:3px;
+	padding:3px 2px;
+	width: 26px;
+	display:flex;
+    justify-content: center;
 }
 .list[data-subtype="o"]{
 	counter-reset: o1 0 o2 0 o3 0;
