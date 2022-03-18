@@ -1021,10 +1021,10 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
     margin: 0 0 4px 0;
     background-color: var(--p-theme-background);
 	border-radius:5px;
-	border-left: 0;
+	border-left:0.25em solid transparent;
 	padding:4px 0 4px 20px;
 }
-.protyle-wysiwyg .bq::before{
+.protyle-wysiwyg .bq::after{
 	content:"";
 	position:absolute;
 	width:4px;
@@ -1034,10 +1034,6 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	margin:10px 0;
 	border-radius:3px;
 	background-color:var(--b3-theme-on-primary);
-}
-.protyle-wysiwyg [data-node-id].li>.bq::before{
-	margin-top:-20px!important;
-	left:8px!important;
 }
 /* 表格 */
 .protyle-wysiwyg table {
