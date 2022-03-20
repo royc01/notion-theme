@@ -6,9 +6,9 @@
 	position:absolute;
 	float:left;
 	margin-left:5px;
-	height:12px;
-	width:4px;
-	bottom:10px;
+	height:0.45em;
+	width:0.15em;
+	bottom:0.5em;
 	border-radius:3px;
 	background-color:var(--block--icons--active);
 	opacity:0.3;
@@ -22,13 +22,13 @@
 	position:absolute;
 	float:left;
 	margin-left:5px;
-	height:4px;
-	width:4px;
-	bottom:16px;
+	height:0.16em;
+	width:0.16em;
+	bottom:0.76em;
 	border-radius:3px;
 	background-color:var(--h2-list-graphic);
 	opacity:0.3;
-	box-shadow: 6px 6px 0px 0px var(--h2-list-graphic);
+	box-shadow: 0.25em 0.25em 0 0 var(--h2-list-graphic);
 }
 .protyle-wysiwyg .h3>[spellcheck="false"]{
 	display:inline-block;
@@ -38,13 +38,13 @@
 	position:absolute;
 	float:left;
 	margin-left:5px;
-	height:3px;
-	width:3px;
-	bottom:12px;
+	height:0.16em;
+	width:0.16em;
+	bottom:0.62em;
 	border-radius:3px;
 	background-color:var(--h3-list-graphic);
 	opacity:0.3;
-	box-shadow: 6px 6px 0px 0px var(--h3-list-graphic),0px 6px 0px 0px var(--h3-list-graphic);
+	box-shadow: 0.25em 0.25em 0 0 var(--h3-list-graphic),0 0.25em 0 0 var(--h3-list-graphic);
 }
 .protyle-wysiwyg .h4>[spellcheck="false"]{
 	display:inline-block;
@@ -54,13 +54,13 @@
 	position:absolute;
 	float:left;
 	margin-left:5px;
-	height:3px;
-	width:3px;
-	bottom:12px;
+	height:0.15em;
+	width:0.15em;
+	bottom:0.68em;
 	border-radius:3px;
 	background-color:var(--h4-list-graphic);
 	opacity:0.3;
-	box-shadow: 6px 6px 0px 0px var(--h4-list-graphic),0px 6px 0px 0px var(--h4-list-graphic),6px 0px 0px 0px var(--h4-list-graphic);
+	box-shadow: 0.25em 0.25em 0 0 var(--h4-list-graphic),0 0.25em 0 0 var(--h4-list-graphic),0.25em 0 0 0 var(--h4-list-graphic);
 }
 .protyle-wysiwyg .h5>[spellcheck="false"]{
 	display:inline-block;
@@ -70,13 +70,13 @@
 	position:absolute;
 	float:left;
 	margin-left:5px;
-	height:3px;
-	width:3px;
-	bottom:13px;
+	height:0.15em;
+	width:0.15em;
+	bottom:0.85em;
 	border-radius:3px;
 	background-color:var(--h5-list-graphic);
 	opacity:0.3;
-	box-shadow: 5px 5px 0px 0px var(--h5-list-graphic),0px 5px 0px 0px var(--h5-list-graphic),5px 0px 0px 0px var(--h5-list-graphic),0px -5px 0px 0px var(--h5-list-graphic);
+	box-shadow: 0.25em 0.25em 0 0 var(--h5-list-graphic),0 0.25em 0 0 var(--h5-list-graphic),0.25em 0 0 0 var(--h5-list-graphic),0 -0.25em 0 0 var(--h5-list-graphic);
 }
 .protyle-wysiwyg .h6>[spellcheck="false"]{
 	display:inline-block;
@@ -86,11 +86,11 @@
 	position:absolute;
 	float:left;
 	margin-left:5px;
-	height:0.18em;
-	width:0.18em;
-	bottom:15px;
+	height:0.15em;
+	width:0.15em;
+	bottom:1.05em;
 	border-radius:3px;
 	background-color:var(--h6-list-graphic);
 	opacity:0.3;
-	box-shadow: 5px 5px 0px 0px var(--h6-list-graphic),0px 5px 0px 0px var(--h6-list-graphic),5px 0px 0px 0px var(--h6-list-graphic),0px -5px 0px 0px var(--h6-list-graphic),5px -5px 0px 0px var(--h6-list-graphic);
+	box-shadow: 0.25em 0.25em 0 0 var(--h6-list-graphic),0 0.25em 0 0 var(--h6-list-graphic),0.25em 0 0 0 var(--h6-list-graphic),0 -0.25em 0 0 var(--h6-list-graphic),0.25em -0.25em 0 0 var(--h6-list-graphic);
 }
