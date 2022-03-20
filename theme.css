@@ -370,6 +370,10 @@
 	background-color:var(--b3-list-background);
 	border-radius: 3px;
 }
+/*已关闭笔记*/
+.file-tree:hover>.b3-list .b3-list-item[data-type='toggle'] {
+	box-shadow: 0px 1px 0px 0px var(--b3-scroll-bgcolor) inset;
+}
 /*面板标题logo*/
 .block__logo svg{
 	width:10px;
@@ -1029,11 +1033,15 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 }
 
 /* 表格 */
-.protyle-wysiwyg table {
+.b3-typography table, .protyle-wysiwyg table{
+	margin:1px 0 0 1px;
 	font-weight:500;
 	border-radius:6px;
-	box-shadow: 0px 0px 1px 1px  var(--b3-border-color);
 	max-width:100%;
+	box-shadow:0 0 0 1px var(--b3-border-color);
+}
+.b3-typography colgroup, .protyle-wysiwyg colgroup{
+	border-style:hidden;
 }
 .protyle-wysiwyg table tbody tr{
 	background-color:var(--b3-theme-background);
@@ -1208,10 +1216,7 @@ background-color:var(--b3-font-background7);
 .protyle-background__tags .item svg:hover{
 	background-color:var(--b3-list-background-focus);
 }
-/*已关闭笔记*/
-.b3-list-item[data-type='toggle'] {
-	box-shadow: 0px 1px 0px 0px var(--b3-scroll-bgcolor) inset;
-}
+
 
 /*折叠样式*/
 .protyle-wysiwyg div[fold="1"]:not(div[data-type="NodeListItem"]){
@@ -1219,4 +1224,6 @@ background-color:var(--b3-font-background7);
 	border-radius:5px;
 	border:1px solid rgb(15 15 15 / 10%);
 }
+
+
 
