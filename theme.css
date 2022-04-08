@@ -540,24 +540,28 @@
 
 /* 分界线 */
 .layout__resize:after{
-   background-color:var(--surface-border-color);
-
+	background-color:var(--surface-border-color);
 }
 .layout__resize:hover:after{
-   background-color:var(--b3-scroll-color);
-   transition: background-color 300ms ease-in 0s;
+	background-color:var(--b3-scroll-color);
+	transition: background-color 300ms ease-in 0s;
 }
-
 .layout__resize--lr:after{
-	background-color: transparent;
+	background-color:var(--surface-border-color);
+	width:1px;
+	margin-left:-1px;
+	top: 0px;
+	height:100%;
+}
+.fn__flex-shrink+.layout__resize--lr:after{
+	background-color:transparent;
 	width:2px;
 	margin-left:-2px;
 }
 .layout__resize--lr:hover:after,.layout__resize--lr:active:after{
-	background-color: transparent;
-	transition: box-shadow 300ms ease-in 0s;
-	box-shadow: -2px 0px 0px 0px rgba(0, 0, 0 ,0.1) inset;
-	
+	width:2px;
+	background-color:var(--b3-scroll-color);
+	transition: background-color 300ms ease-in 0s;
 }
 /*标签树*/
 .sy__tag>.fn__flex-1>ul>.b3-list-item>.b3-list-item__graphic,
@@ -626,7 +630,7 @@
 	border-radius: 0px;
 }
 .layout-tab-bar .item--focus {
-    box-shadow: 0px -3px 0px 0px rgba(0, 0, 0 ,1) inset;
+    box-shadow: 0px -3px 0px 0px rgba(0, 0, 0 ,1) inset!important;
 }
 .layout-tab-bar .item:hover {
 	background-color: var(--b3-column-surface)!important;
@@ -856,7 +860,7 @@ border-left:1px solid var(--b3-theme-on-background);
 	color:var(--b3-theme-on-surface);
 }
 
-.protyle-background__img .protyle-icons>span:not(span[data-type='cancel']):not(span[data-type='confirm']):not(span[data-type='link']):not(span[data-type='random']):not(span[data-type='position']):not(span[data-type='remove']):not(span[aria-label='上传'])
+.protyle-background__img .protyle-icons>span:not(span[data-type='cancel']):not(span[data-type='confirm']):not(span[data-type='link']):not(span[data-type='random']):not(span[data-type='position']):not(span[data-type='remove']):not(span[style*="relative"])
 {
 	background-color:rgba(0, 0, 0, .5);
 	color:var(--b3-theme-background);
@@ -1037,7 +1041,6 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	margin:1px 0 0 1px;
 	font-weight:500;
 	border-radius:6px;
-	max-width:100%;
 	box-shadow:0 0 0 1px var(--b3-border-color);
 }
 .b3-typography colgroup, .protyle-wysiwyg colgroup{
@@ -1224,6 +1227,3 @@ background-color:var(--b3-font-background7);
 	border-radius:5px;
 	border:1px solid rgb(15 15 15 / 10%);
 }
-
-
-
