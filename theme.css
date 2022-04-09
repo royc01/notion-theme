@@ -190,6 +190,7 @@
     --b3-pdf-background5: var(--b3-font-background10);
     --b3-pdf-background6: var(--b3-font-background11);
     --b3-pdf-background7: var(--b3-font-background13);
+
 }
 
 /* PDF */
@@ -693,7 +694,7 @@ border-left:1px solid var(--b3-theme-on-background);
 .protyle-background{
 	min-height:88px;margin:0 !important
 }
-.protyle-background[style*="30vh"],.protyle-background[style*="64px"],.protyle-background[style*="56px"]{
+.protyle-background[style*="30vh"],.protyle-background[style*="64px"],.protyle-background[style*="56px"],.protyle-background[style*="103px"]{
 	border-bottom:10px solid transparent !important
 }
 .protyle-background__tags{
@@ -707,7 +708,8 @@ border-left:1px solid var(--b3-theme-on-background);
 	}
 .protyle-background[style*="30vh"]>.protyle-background__iconw >.protyle-icons,
 .protyle-background[style*="64px"]>.protyle-background__iconw >.protyle-icons,
-.protyle-background[style*="56px"]>.protyle-background__iconw >.protyle-icons
+.protyle-background[style*="56px"]>.protyle-background__iconw >.protyle-icons,
+.protyle-background[style*="103px"]>.protyle-background__iconw >.protyle-icons
 {
 	background-color:transparent;
 	position:absolute;
@@ -718,20 +720,18 @@ border-left:1px solid var(--b3-theme-on-background);
 	}
 .protyle-background[style*="30vh"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips,
 .protyle-background[style*="64px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips,
-.protyle-background[style*="56px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips
+.protyle-background[style*="56px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips,
+.protyle-background[style*="103px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips
 {
 	margin-top:80px;
 	}
 .protyle-background[style*="30vh"]>.protyle-background__iconw >.fn__none+.protyle-icons>.b3-tooltips{
 	margin-top:0px;
 }
-.protyle-background[style*="103px"],.protyle-background[style*="47px"]{
-	margin-bottom:-20px!important;
-	z-index:999;
-}
-.protyle-background[style*="103px"]>.protyle-background__iconw >.protyle-icons{
-	margin-top:5px!important;
-}
+/*.protyle-background[style*="103px"],.protyle-background[style*="47px"]{
+	margin-bottom:20px!important;
+}*/
+
 .protyle-background__iconw {
 	height:auto;
 	width:256px;
@@ -1197,7 +1197,7 @@ background-color:var(--b3-font-background7);
 	float:right;
 	padding-top:30.5vh;
 }
-.protyle-background[style*="103px"]>.protyle-background__tags{
+.protyle-background[style*="103px"]>.protyle-background__tags,.protyle-background[style*="47px"]>.protyle-background__tags{
 	float:right;
 }
 .protyle-background__tags .item{
@@ -1227,3 +1227,4 @@ background-color:var(--b3-font-background7);
 	border-radius:5px;
 	border:1px solid rgb(15 15 15 / 10%);
 }
+
