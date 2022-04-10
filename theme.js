@@ -66,7 +66,7 @@ var 全局菜单定时器={}
     clearInterval(全局菜单定时器)
   }
 }
-表格自动宽度视图按钮=function(id){
+自动宽度视图按钮=function(id){
   let button = document.createElement("button")
   button.className="b3-menu__item diy"
   button.setAttribute("data-node-id",id)
@@ -77,7 +77,7 @@ var 全局菜单定时器={}
   button.onclick=视图菜单监听器
   return button
 }
-表格页面宽度视图按钮=function(id){
+页面宽度视图按钮=function(id){
   let button = document.createElement("button")
   button.className="b3-menu__item diy"
   button.onclick=视图菜单监听器
