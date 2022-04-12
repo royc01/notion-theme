@@ -57,6 +57,7 @@
     --b3-theme-on-surface: rgba(55, 53, 47, 0.6);
     --b3-theme-on-error: #fff;
 	--b3-theme-on-tooltips: rgba(55, 53, 47, 0.5);
+	--b3-inline-code:var(--b3-theme-error);
 
     /* 字体 */
     --b3-font-family:apple-system, BlinkMacSystemFont, "Segoe UI", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif,  "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
@@ -1333,7 +1334,7 @@ background-color:var(--b3-font-background7);
 }
 /*行内代码*/
 .b3-typography code:not(.hljs), .protyle-wysiwyg code:not(.hljs){
-	color:var(--b3-theme-error);
+	color:var(--b3-inline-code);
 }
 
 /*pdf*/
