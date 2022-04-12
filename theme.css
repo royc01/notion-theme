@@ -1,6 +1,6 @@
 @import url(style/ordered-list.css);
 @import url(style/unordered-list.css);
-/*@import url(style/h-reminder.css);*/
+@import url(style/h-reminder.css);
 /*-------------------------------------------*/
 @keyframes menu {
 	0% {opacity: 0;}
