@@ -372,10 +372,13 @@ body{
 	opacity:0;
 	color: var(--svg-theme-block-icon);
 }
+.file-tree .block__icons>input[type="checkbox" i]{
+	opacity:0;
+}
 .file-tree .block__icons>.block__icon {
 	margin:-4px;
 }
-.file-tree:hover>.block__icons .block__icon svg{
+.file-tree:hover>.block__icons .block__icon svg,.file-tree:hover>.block__icons>input[type="checkbox" i]{
 	transition: all 300ms;
 	opacity:1;
 }
@@ -1418,3 +1421,10 @@ background-color:var(--b3-font-background7);
 	background-color:transparent;
 }
 															   
+/*收集箱样式*/
+.sy__inbox .inbox__details{
+	top: 45px;
+}
+input[type="checkbox" i] {
+	margin-left:6px;
+}
