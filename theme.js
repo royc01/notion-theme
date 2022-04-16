@@ -50,12 +50,50 @@ var 全局菜单定时器={}
 
 扩展菜单=function(父元素){
 
-  if(父元素.getAttribute("data-type")=="NodeTable"){
+  if(父元素.getAttribute("data-type")=="NodeList"){
     let id = 父元素.getAttribute("data-node-id")
     全局菜单定时器= setInterval(()=>生成列表菜单项目(id), 10);
   }
+  else if(父元素.getAttribute("data-type")=="NodeTable"){
+    let id = 父元素.getAttribute("data-node-id")
+    全局菜单定时器= setInterval(()=>生成列表菜单项目2(id), 10);
+  }
 }
 生成列表菜单项目=function(id){
+  let 块标菜单 = document.getElementById("commonMenu")
+  let  最后项 = 块标菜单.querySelector(".b3-menu__item--readonly")
+  if(最后项){
+    console.log(最后项)
+    块标菜单.insertBefore(列表转换导图按钮(id),最后项)
+    块标菜单.insertBefore(列表恢复默认按钮(id),最后项)
+
+    clearInterval(全局菜单定时器)
+  }
+}
+列表转换导图按钮=function(id){
+  let button = document.createElement("button")
+  button.className="b3-menu__item diy"
+  button.setAttribute("data-node-id",id)
+  button.setAttribute("custom-attr-name","f")
+  button.setAttribute("custom-attr-value","dt")
+
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconFiles"></use></svg><span class="b3-menu__label">列表转换导图</span>`
+  button.onclick=视图菜单监听器
+  return button
+}
+列表恢复默认按钮=function(id){
+  let button = document.createElement("button")
+  button.className="b3-menu__item diy"
+  button.onclick=视图菜单监听器
+  button.setAttribute("data-node-id",id)
+  button.setAttribute("custom-attr-name","f")
+  button.setAttribute("custom-attr-value","")
+
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconList"></use></svg><span class="b3-menu__label">列表恢复默认</span>`
+  return button
+}
+
+生成列表菜单项目2=function(id){
   let 块标菜单 = document.getElementById("commonMenu")
   let  最后项 = 块标菜单.querySelector(".b3-menu__item--readonly")
   if(最后项){
