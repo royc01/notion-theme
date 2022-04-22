@@ -203,6 +203,9 @@
 	
 	/* 面包屑 */
 	--b3-breadcrumb-svg: rgba(55, 53, 47, 0.8);
+  /* ———————————— 列表2看板 ———————————— */
+    --kbline-boarditem-minwidth: 14rem;                /*看板卡片的最小宽度*/
+	--kb--li--background:#fff;
 }
 
 /* PDF */
@@ -433,12 +436,12 @@ body{
 }
 
 /* 面板列表 */
-.b3-list-item[data-type='navigation-root'] .b3-list-item__text {
+/*.b3-list-item[data-type='navigation-root'] .b3-list-item__text {
 	font-weight:500;
-}/*根目录字体加粗*/
+}根目录字体加粗
 .b3-list-item.b3-list-item--hide-action{
 	font-weight:500;
-}
+}*/
 .b3-list-item__text{
 	color:var(--b3-theme-on-surface);
 	margin-left:10px;
@@ -1176,10 +1179,18 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
     background-color: var(--b3-border-color)!important;
 }
 /* 有序列表 */
-.protyle-wysiwyg [data-node-id].li>.protyle-action--order:hover:after{
-	 background-color: var(--toolbar-item-hover)!important;
+.protyle-wysiwyg [data-node-id].li[data-subtype="o"]>.protyle-action--order:after{
 	 padding:4px;
-	 margin:-12px 0 0 -13px;
+	 margin:-20px 0 0 -12px;
+	 height:32px;
+}
+.protyle-wysiwyg div[fold="1"].li[data-subtype="o"]>.protyle-action--order:after{
+	 background: url("img/square.svg") no-repeat center!important;
+	 transition:none;
+}
+.protyle-wysiwyg [data-node-id].li[data-subtype="o"]>.protyle-action--order:hover:after{
+	 background: url("img/square.svg") no-repeat center!important;
+	 transition:none;
 }
 
 /* 任务列表 */
@@ -1444,41 +1455,41 @@ input[type="checkbox" i] {
 /*————————————————————————列表转导图————————————————————————*/
 
 /*整个导图取消缩进*/
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li .list{
+.protyle-wysiwyg *[custom-f="dt"] .li .list{
     padding: 0px;
     margin: 0px;
 	transition: all 0.5s;
 } 
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"].list[data-node-index]{
-	width:100%;
+.protyle-wysiwyg *[custom-f="dt"].list[data-node-index]{
+	width:100%!important;
 	overflow-x:auto;/*溢出滚动*/
 	padding-bottom:50px;
 }
 /*子项设偏移调整*/
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] [data-node-id].li>[data-node-id]{
+.protyle-wysiwyg *[custom-f="dt"] [data-node-id].li>[data-node-id]{
     margin-left: 20px !important;
 	margin-right: -14px !important;
 }
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] [data-node-id].li>.list{
+.protyle-wysiwyg *[custom-f="dt"] [data-node-id].li>.list{
 	padding-left: 20px;
 }
 /*文字设置居中*/
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li {
+.protyle-wysiwyg *[custom-f="dt"] .li {
 	display: flex;
 }
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li .p,.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li [data-type="NodeHeading"] {
+.protyle-wysiwyg *[custom-f="dt"] .li .p,.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"] {
 	display: flex;
 	align-items: center;
 	left:6px;
     margin: 0;
 }
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
+.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
 	display:none;
-}
+}/*取消标题层级提示*/
 
 /*文字框*/
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li div>div[spellcheck="false"]{
-	margin-left:-6px;
+.protyle-wysiwyg *[custom-f="dt"] .li div>div[spellcheck="false"]{
+	margin-left:-8px;
 	padding:5px 10px;
 	margin-top:2px;
 	background-color:var(--b3-block-daotu);
@@ -1486,22 +1497,39 @@ input[type="checkbox" i] {
 	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 	white-space: nowrap;
 }
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"]>[data-node-id]>div[spellcheck="false"]
+{
+	padding:5px 10px 5px 32px;
+}
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"]>[data-node-id]>div[spellcheck="false"]
+{
+	padding:5px 10px 5px 25px;
+}
 /*去除竖线*/
-.list[custom-f="dt"][data-node-id][data-subtype="u"] .li>:before {
+.list[custom-f="dt"][data-node-id] .li>:before {
     display: none;
 }
 
 /*圆点符号居中对齐*/
-.list[custom-f="dt"][data-node-id][data-subtype="u"] .protyle-action {
-    top: 50%;
-	position: absolute;
-	transform: translate(0, -50%);
-	margin-left:6px;
-	z-index:2;
+.list[custom-f="dt"][data-node-id] .protyle-action{
+    top:calc(50% + 1px);
+	left:23px;
+    position: absolute;
+    transform: translate(0, -50%);
+    z-index: 2;
+	 
 }
 
+.protyle-content *[custom-f~=dt] [data-subtype="u"][data-node-id].li>div.protyle-action {
+	top:50%;
+	margin-left:-18px;
+}
+.protyle-content *[custom-f~=dt] [data-subtype="o"][data-node-id].li>div.protyle-action {
+	top:50%;
+	margin-left:-5px;
+}
 /*前继承线*/
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"]::before{   
+.protyle-wysiwyg *[custom-f="dt"] .li::before{   
     content: '';   
     position: absolute;  
 	top: 50%;   
@@ -1510,44 +1538,45 @@ input[type="checkbox" i] {
 	height: 50%;     
 }
 /*上竖线*/
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"]::before{   
+.protyle-wysiwyg *[custom-f="dt"] .li::before{   
     bottom: 50%;    
     border-left:var(--b3-border-daotu);   
 }
 /*下竖线*/
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"]::after{   
+.protyle-wysiwyg *[custom-f="dt"] .li::after{   
     content: '';   
     position: absolute;  
 	bottom: 50%;   
-    border-left:var(--b3-border-daotu);    
+    border-left:var(--b3-border-daotu);  
     width: 20px;  
 	height: 50%; 
 }
 /*单个子项直线*/
-.protyle-wysiwyg *[custom-f="dt"] .list[data-subtype="u"]>.li[data-subtype="u"]:first-child:nth-last-child(2)::after{   
+.protyle-wysiwyg *[custom-f="dt"] .list>.li:first-child:nth-last-child(2)::after{   
 	 border-radius:0px; 
+	 width: 22px; 
 	 margin-bottom:-2px;
 }
 /*单子项居中*/
-.protyle-wysiwyg *[custom-f="dt"] .list[data-subtype="u"]>.li[data-subtype="u"]:first-child:nth-last-child(2){
+.protyle-wysiwyg *[custom-f="dt"] .list>.li:first-child:nth-last-child(2){
     top: 50%;
     transform: translate(0, -50%);
 }
 /*取消多余线条*/
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"]:first-child::after,.protyle-wysiwyg *[custom-f="dt"]  .li[data-subtype="u"]:nth-last-child(2)::before{   
+.protyle-wysiwyg *[custom-f="dt"] .li:first-child::after,.protyle-wysiwyg *[custom-f="dt"]  .li:nth-last-child(2)::before{   
     border:none!important;    
 }
 /*上框线*/
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"]:first-child::before{   
+.protyle-wysiwyg *[custom-f="dt"] .li:first-child::before{   
     border-radius:5px 0 0 0 ;    
 }  
 /*下框线*/
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"]:nth-last-child(2)::after{   
+.protyle-wysiwyg *[custom-f="dt"] .li:nth-last-child(2)::after{   
     border-bottom:var(--b3-border-daotu)!important;    
     border-radius:0 0 0 5px;    
 }
 /*后继承线*/
-.list[data-subtype="u"][custom-f="dt"] .list[data-subtype="u"]::after{   
+.list[custom-f="dt"] .list::after{   
     content: '';   
     position: absolute; 
 	left: 0; 
@@ -1557,21 +1586,226 @@ input[type="checkbox" i] {
 	height: 0;  
 }
 /*取消根目录线*/
-div[data-node-index]>[data-type="NodeListItem"][data-subtype="u"]::after,
-div[data-node-index]>[data-type="NodeListItem"][data-subtype="u"]::before{   
+div[data-node-index]>[data-type="NodeListItem"]::after,
+div[data-node-index]>[data-type="NodeListItem"]::before{   
 	display: none;
 }  
-/*文本高亮*/
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li div>[spellcheck="false"]:hover, 
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li div:hover+.list .li div>[spellcheck="false"]
+/*————————————————————————————————————————————————————————————————————————*/
+
+/* -----------------------------------------------列表转化为表格------------------------------------------- */
+/* 设置整个列表表格的缩进 */
+.list[data-node-id][data-type="NodeList"][custom-f="bg"] {
+    margin: 10px;
+	padding:0px;
+	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+}
+
+/* ————————————————————所有子项目的表格（除去第一列其余的列），包含溢出的空白部分，所以才会有边框—————————————————————— */
+.protyle-wysiwyg *[custom-f="bg"].list {
+	width:98%!important;
+}
+.protyle-wysiwyg *[custom-f="bg"] .li .list {
+    padding: 0px;
+    margin: 0px !important;
+	width:100%;
+    outline: 1px solid var(--surface-border-color);
+}
+
+/* ————————————————————对所有子列表项设置格式———————————————————— */
+.protyle-wysiwyg *[custom-f="bg"] .li {
+    display: flex;
+    outline:  1px solid var(--surface-border-color);
+    background-color: var(--b3-theme-background);
+}
+
+/* ————————————————————调整每个子列表项右侧边距———————————————————— */
+.protyle-wysiwyg *[custom-f="bg"] .li>div {
+    margin-right: 20px;
+}
+
+/* ————————————————————大神增加代码———————————————————— */
+.protyle-wysiwyg *[custom-f="bg"] [data-node-id].li>[data-node-id] {
+    margin-left: 6px !important;
+}
+
+/* ————————————————————对符号后文字设置格式———————————————————— */
+.protyle-wysiwyg *[custom-f="bg"] .p {
+    flex: 1;
+	left:18px;
+    text-align: left;
+    align-items: center;
+    display: flex;
+    min-width: 120px;
+    height: auto;
+    margin: 0;
+    text-align: justify;
+}
+
+.protyle-wysiwyg *[custom-f="bg"] .li>.list>.li {
+    outline: none !important;
+    border-top: 1px solid var(--b3-border-color);
+}
+
+.protyle-wysiwyg *[custom-f="bg"] .li>.list>.li:first-of-type {
+    border-top: none;
+}
+
+/* ————————————————————去除小竖线———————————————————— */
+.list[data-node-id][data-type="NodeList"][custom-f="bg"] .li>:before {
+    display: none;
+}
+
+/* ————————————————————设置前面的符号居中对齐———————————————————— */
+.list[data-node-id][data-type="NodeList"][custom-f="bg"] .protyle-action {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+	opacity:0.3;
+}
+
+.protyle-wysiwyg *[custom-f="bg"] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
+	display:none;
+}/*取消标题层级提示*/
+
+/* ---------------------------------------------------------列表转化为表格 END-------------------------------------------------- */
+
+
+
+/*---------ctrl+p窗口改造-------------*/
+/*放大ctrl+p窗口尺寸*/
+/*不添加[data-key]属性选择器将会同时影响alt+p窗口*/
+body > div[data-key] > .b3-dialog > .b3-dialog__container {
+	width: 80vw !important;
+}
+
+body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column {
+	height: 80vh !important;
+	width: 80vw !important;
+}
+
+/*ctrl+p改造成左右排列*/
+/*先把容器改成左右排列并自动换行*/
+body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column {
+	flex-direction: row !important;
+	flex-wrap: wrap;
+}
+
+/*设置需要占满一行的项目*/
+body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column .search__header,
+body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column .b3-form__space--small {
+	width: 100vw;
+}
+
+/*窗口宽度大于一定尺寸时候，左右排列*/
+@media screen and (min-width: 960px) {
+	/*搜索结果列表占一半宽度，靠左排列*/
+	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column #searchList {
+		float: left;
+		width: 30vw;
+		height: calc(100% - 85px) !important;
+	}
+}
+
+/*窗口宽度小于一定尺寸时候，上下排列*/
+@media screen and (max-width: 960px) {
+	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column #searchList {
+		float: left;
+		/*width:45vw;*/
+		width: calc(100%);
+		height: calc(50% - 85px) !important;
+	}
+}
+
+/*结果预览自动占满剩余宽度*/
+body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn_flex > .fn__flex-column #searchPreview {
+	width: 45vw;
+}
+
+/* 修复搜索文章不能完整显示的问题 */
+.spread-search__preview .protyle-content {
+	padding-bottom: 56px;
+}
+
+div[data-key='⌘R'] #searchPreview .protyle-content {
+	padding-bottom: 90px;
+}
+
+/*---------ctrl+p窗口改造 end -------------*/
+
+
+
+
+
+
+/*————————————————————列表转看板————————————————————*/
+
+.protyle-wysiwyg .list[custom-f~=kb][data-node-id][data-type="NodeList"]
 {
-	background-color:var(--b3-theme-primary-lightest)!important; 
-	box-shadow: var(--b3-theme-primary) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
-}   
-/*继承线高亮*/
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li :hover+.list .li::after,    
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li :hover+.list .li::before,    
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li :hover+.list::after,    
-.protyle-wysiwyg *[custom-f="dt"][data-subtype="u"] .li :hover+.list .list::after{   
-    border-color:var(--b3-theme-primary)!important;    
-}  
+    display: flex;
+}
+.protyle-wysiwyg *[custom-f~=kb].list[data-node-index]{
+	width:100%!important;
+	overflow-x:auto;/*溢出滚动*/
+	padding-bottom:50px;
+}
+/* ————————————————————所有子项目的表格（除去第一列其余的列），包含溢出的空白部分，所以才会有边框—————————————————————— */
+.protyle-wysiwyg *[custom-f~=kb] .li .list{
+    min-width: var(--kbline-boarditem-minwidth);
+    border-radius: 3px;
+    transform: translate(-30px, 0);
+}
+
+
+/* ————————————————————对所有子列表项设置格式———————————————————— */
+
+.protyle-wysiwyg *[custom-f~=kb] .li .li{
+    border-radius: 3px;
+    padding: 0.4em 0 0.1em 0 ;
+    margin-bottom: 6px; 
+	background-color:var(--kb--li--background);
+	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+}
+
+/*只处理每个列表的第一行*/
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(2){
+	min-width: var(--kbline-boarditem-minwidth);
+    border-radius: 3px;
+	padding:7px 0px 8px 30px;
+	left:-30px;
+    margin-bottom: 10px;
+}
+/*标题行循环颜色*/
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-3) > div:nth-child(2){
+    background-color:var(--b3-card-error-background);
+}
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-2) > div:nth-child(2){
+    background-color:var(--b3-card-warning-background);
+}
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-1) > div:nth-child(2){
+    background-color:var(--b3-card-info-background);
+}
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n) > div:nth-child(2){
+    background-color:var(--b3-card-success-background);
+}
+
+/*只处理每个列表第一行的点*/
+.protyle-wysiwyg *[custom-f~=kb][data-node-index]:not([data-type="NodeBlockquote"]) > div > div:nth-child(1)
+{
+    transform: translate(3px,4px);
+	z-index:2;
+}
+
+/* ————————————————————去除小竖线———————————————————— */
+.list[custom-f="kb"][data-node-id] .li>:before {
+    display: none;
+}
+
+/* 对除了第一层之外的子列表 .protyle-action 移动 */
+.protyle-wysiwyg *[custom-f~=kb] .li .list .protyle-action{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 3px;
+}
+
+/*————————————————————列表转化看板 END————————————————————*/
