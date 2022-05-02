@@ -28,7 +28,7 @@
     --b3-theme-background: #fff;/* 编辑区背景 */
 													  
     --b3-theme-surface:rgb(247, 246, 243);/* 面板主色 */
-    --b3-theme-surface-light: rgba(243, 243, 243, .86);
+    --b3-theme-surface-light: rgba(243, 243, 243, .5);
     --b3-theme-error: #eb5757;
 	
 	--b3-column-surface: rgb(247, 246, 243);/* 侧栏面板 */
@@ -494,6 +494,8 @@ body{
 	margin-right:-6px;
 	height: 22px;
 	width: 18px;
+	font-size:14px;
+	line-height:22px;
 }
 
 .b3-list-item__icon svg,.b3-list-item__icon img{
@@ -753,7 +755,7 @@ border-left:1px solid var(--b3-theme-on-background);
 }
 
 .protyle-breadcrumb>.block__icon:not(.ft__primary) svg{
-	color:var(--b3-breadcrumb-svg);
+	color:var(--b3-breadcrumb-svg)!important;
 	width:19px;
 	height:19px;
 	padding: 3px 1px;
@@ -1223,7 +1225,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 .b3-typography table, .protyle-wysiwyg table{
 					
 	font-weight:500;
-	border-radius:6px;
+	border-radius:4px;
 	border:1px solid var(--b3-border-color);
 }
 
@@ -1235,12 +1237,23 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 }
 
 /* 自定义表格宽度 */
-.protyle-wysiwyg div.table[data-node-id][custom-f~=auto] {
+.protyle-wysiwyg div.table[data-node-id]{
     width: 100%;
 }
-
-.protyle-wysiwyg div.table[data-node-id][custom-f~=auto] table {
+.protyle-wysiwyg div.table[data-node-id] table {
     width: auto;
+}
+.protyle-wysiwyg [data-node-id][custom-f~=auto] table {
+    width: auto !important;
+    white-space: nowrap;
+}
+
+/* 表头和表行格式一致 */
+.protyle-wysiwyg [data-node-id][custom-t~=biaotou] table th {
+    font-weight: normal !important;
+    text-align: left !important;
+    color: inherit !important;
+    background-color: var(--b3-theme-background) !important;
 }
 /* 标签 */
 .protyle-wysiwyg span[data-type="tag"] {
@@ -1326,10 +1339,8 @@ background-color:var(--b3-font-background7);
 .protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"]{
     color: var( --b3-theme-on-background);
     border-left: 1px dashed var(--b3-theme-on-surface);
-    background-color: var(--p-theme-background);
-}
-.protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"]:before{
-	left:-19px;
+    background-color: var(--b3-theme-surface-light);
+	border-radius:0 5px 5px 0;
 }
 
 /* 命名，别名，备注*/
@@ -1342,6 +1353,9 @@ background-color:var(--b3-font-background7);
 }
 
 /*代码块*/
+.code-block {
+    left: 4px !important;
+}
 .b3-typography .hljs, .protyle-wysiwyg .hljs{
 	background-color:var(--b3-column-surface);
 }
@@ -1453,17 +1467,17 @@ input[type="checkbox" i] {
 
 
 /*————————————————————————列表转导图————————————————————————*/
-
+							
 /*整个导图取消缩进*/
 .protyle-wysiwyg *[custom-f="dt"] .li .list{
     padding: 0px;
     margin: 0px;
 	transition: all 0.5s;
 } 
-.protyle-wysiwyg *[custom-f="dt"].list[data-node-index]{
+.protyle-wysiwyg *[custom-f="dt"].list{
 	width:100%!important;
 	overflow-x:auto;/*溢出滚动*/
-	padding-bottom:50px;
+	padding-bottom:30px!important;
 }
 /*子项设偏移调整*/
 .protyle-wysiwyg *[custom-f="dt"] [data-node-id].li>[data-node-id]{
@@ -1482,6 +1496,7 @@ input[type="checkbox" i] {
 	align-items: center;
 	left:6px;
     margin: 0;
+	flex-shrink:0;/*不压缩宽度*/
 }
 .protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
 	display:none;
@@ -1495,7 +1510,8 @@ input[type="checkbox" i] {
 	background-color:var(--b3-block-daotu);
 	border-radius:3px;
 	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
-	white-space: nowrap;
+	/*white-space: pre;*/
+	max-width:15vw;
 }
 .protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"]>[data-node-id]>div[spellcheck="false"]
 {
@@ -1517,7 +1533,6 @@ input[type="checkbox" i] {
     position: absolute;
     transform: translate(0, -50%);
     z-index: 2;
-	 
 }
 
 .protyle-content *[custom-f~=dt] [data-subtype="u"][data-node-id].li>div.protyle-action {
@@ -1586,8 +1601,8 @@ input[type="checkbox" i] {
 	height: 0;  
 }
 /*取消根目录线*/
-div[data-node-index]>[data-type="NodeListItem"]::after,
-div[data-node-index]>[data-type="NodeListItem"]::before{   
+div *[custom-f="dt"]>[data-type="NodeListItem"]::before,
+div *[custom-f="dt"]>[data-type="NodeListItem"]::after{   
 	display: none;
 }  
 /*————————————————————————————————————————————————————————————————————————*/
@@ -1701,7 +1716,7 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 	/*搜索结果列表占一半宽度，靠左排列*/
 	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column #searchList {
 		float: left;
-		width: 30vw;
+		width: 35vw;
 		height: calc(100% - 85px) !important;
 	}
 }
@@ -1729,7 +1744,20 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn_flex > .fn
 div[data-key='⌘R'] #searchPreview .protyle-content {
 	padding-bottom: 90px;
 }
-
+.fn__flex-column #searchList .b3-list-item[data-type='search-item']{
+	padding-bottom:20px;
+	box-shadow: 0 1px 0 0 var(--b3-scroll-bgcolor) inset;
+}
+.fn__flex-column #searchList .b3-list-item[data-type='search-item']>.b3-list-item__meta{
+	color:var(--svg-theme-surface);
+	top:22px;
+	right:8px;
+	max-width:34vw;
+	position:absolute;
+	white-space:nowrap;
+	overflow:hidden !important;
+	text-overflow: ellipsis;
+}
 /*---------ctrl+p窗口改造 end -------------*/
 
 
@@ -1767,31 +1795,48 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
 }
 
 /*只处理每个列表的第一行*/
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(2){
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(2),
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div > div:nth-child(2)
+{
 	min-width: var(--kbline-boarditem-minwidth);
     border-radius: 3px;
-	padding:7px 0px 8px 30px;
+	padding:9px 0px 11px 30px;
 	left:-30px;
     margin-bottom: 10px;
 }
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(2)[data-type="NodeHeading"],
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div > div:nth-child(2)[data-type="NodeHeading"]
+{
+
+	padding:5px 0px 7px 30px;
+}
+.protyle-wysiwyg *[custom-f~=kb] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
+	display:none;
+}/*取消标题层级提示*/
+
 /*标题行循环颜色*/
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-3) > div:nth-child(2){
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-3) > div:nth-child(2),
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-3) > div:nth-child(2){
     background-color:var(--b3-card-error-background);
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-2) > div:nth-child(2){
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-2) > div:nth-child(2),
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-2) > div:nth-child(2){
     background-color:var(--b3-card-warning-background);
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-1) > div:nth-child(2){
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-1) > div:nth-child(2),
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-1) > div:nth-child(2){
     background-color:var(--b3-card-info-background);
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n) > div:nth-child(2){
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n) > div:nth-child(2),
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n) > div:nth-child(2){
     background-color:var(--b3-card-success-background);
 }
 
 /*只处理每个列表第一行的点*/
-.protyle-wysiwyg *[custom-f~=kb][data-node-index]:not([data-type="NodeBlockquote"]) > div > div:nth-child(1)
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(1),
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div > div:nth-child(1)
 {
-    transform: translate(3px,4px);
+    transform: translate(4px,5px);
 	z-index:2;
 }
 
@@ -1808,4 +1853,27 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
     border-radius: 3px;
 }
 
+
+
 /*————————————————————列表转化看板 END————————————————————*/
+
+
+/*——————————————移动文档菜单————————————————*/
+#foldList .b3-list-item__icon{
+	padding-left:10px;
+}
+#foldList .b3-list-item__showall{
+	padding-left:10px;
+	height:26px;
+	line-height:26px;
+	color:var(--b3-theme-on-surface);
+}
+
+/*——————————————块右上角引用数————————————————*/
+.protyle-attr--refcount{
+	height: 20px;
+    width: 20px;
+    padding: 0;
+    line-height: 20px;
+	text-align: center;
+}
