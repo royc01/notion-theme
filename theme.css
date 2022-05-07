@@ -209,9 +209,18 @@
 }
 
 /* PDF */
+						
+				 
+																						  
+ 
+
 .textLayer,
 .pdf__resize {
     mix-blend-mode: darken;
+ 
+
+												   
+					 
 }
 body{
 	border: 0px!important;
@@ -390,7 +399,7 @@ body{
 }
 .file-tree:hover>.block__icons{
 	transition: all 300ms;
-	box-shadow: 0 -1px 0 0 var(--b3-scroll-bgcolor) inset;
+	box-shadow: 0 -1px 0 0 var(--surface-border-color) inset;
 }
 .file-tree .block__icons .block__icon:hover{
 	background-color:var(--b3-list-background);
@@ -398,7 +407,7 @@ body{
 }
 /*已关闭笔记*/
 .file-tree:hover>.b3-list .b3-list-item[data-type='toggle'] {
-	box-shadow: 0px 1px 0px 0px var(--b3-scroll-bgcolor) inset;
+	box-shadow: 0px 1px 0px 0px var(--surface-border-color) inset;
 }
 /*面板标题logo*/
 .block__logo svg{
@@ -581,7 +590,7 @@ body{
 	top: 0px;
 	height:100%;
 }
-.fn__flex-shrink+.layout__resize--lr:after{
+.fn__flex-shrink+.layout__resize--lr:after,.layout__center+.layout__resize--lr:after{
 	background-color:transparent;
 	width:2px;
 	margin-left:-2px;
@@ -613,7 +622,7 @@ body{
 	margin-left:-12px;/*大纲缩进*/
 }
 .sy__outline>.fn__flex-1>ul>li>.b3-list-item__toggle{
-	display:none;
+	margin-left:1px;
 }
 /*大纲前圆点*/
 .sy__outline .b3-list-item__toggle .fn__hidden{
@@ -721,7 +730,7 @@ body{
 /* ------------------------面包屑------------------------ */
 .protyle-breadcrumb{
 	padding:9px 10px 9px 6px;
-	box-shadow: 0px 1px 0px 0px var(--b3-column-surface) inset;
+	box-shadow: 0px 1px 0px 0px var(--b3-border-color) inset;
 }
 
 
@@ -948,6 +957,9 @@ border-left:1px solid var(--b3-theme-on-background);
 	padding:5px 20px;
 }
 
+.protyle-background .protyle-background__img:hover .protyle-icons{opacity:1;}
+/*选项块透明度*/
+
 /*文档标题块*/
 .protyle-title__input
 {font-weight:700;
@@ -960,6 +972,9 @@ border-left:1px solid var(--b3-theme-on-background);
 ::selection {
      background: rgba(46, 170, 220, 0.2);
 }
+/*.protyle-wysiwyg--select{
+	transition: all 200ms;
+}会闪烁，取消*/
 /*滚动条*/
 ::-webkit-scrollbar {
     width : 10px; 
@@ -993,6 +1008,9 @@ border-left:1px solid var(--b3-theme-on-background);
 }
 .protyle-gutters button{
 	padding:4px 0px;
+}
+.protyle-gutters{
+	transition: all 200ms ease-out;
 }
 /* 标题 */
 .protyle-wysiwyg .h1,.protyle-wysiwyg .h2,
@@ -1354,14 +1372,36 @@ background-color:var(--b3-font-background7);
 
 /*代码块*/
 .code-block {
-    left: 4px !important;
+	margin-left:4px!important;
+	margin-right:-4px!important;
 }
 .b3-typography .hljs, .protyle-wysiwyg .hljs{
 	background-color:var(--b3-column-surface);
+	padding: 30px 20px 22px 20px;
 }
-
+.protyle-wysiwyg[contenteditable="true"] .code-block .protyle-action{
+	padding:6px 3px;
+}
+.code-block .protyle-action .protyle-action__language{
+	padding:4px;
+	height:14px;
+	line-height:12px;
+	border-radius:3px;
+}
+.code-block .protyle-action .protyle-action__language:hover{
+	background-color:var(--b3-list-background);	
+}
+.code-block .protyle-action .protyle-action__copy,.code-block .protyle-action .protyle-action__menu{
+	margin-top:-3px;
+	color:var(--b3-theme-on-tooltips);
+	background-color:var(--b3-list-background);
+}
 .protyle-linenumber__rows{
 	background-color:var(--b3-scroll-bgcolor);
+	padding: 30px 4px 22px 4px;
+}
+.protyle-linenumber {
+    padding-left: calc(3.6em + 8px) !important;
 }
 /*行内代码*/
 .b3-typography code:not(.hljs), .protyle-wysiwyg code:not(.hljs){
@@ -1467,7 +1507,6 @@ input[type="checkbox" i] {
 
 
 /*————————————————————————列表转导图————————————————————————*/
-							
 /*整个导图取消缩进*/
 .protyle-wysiwyg *[custom-f="dt"] .li .list{
     padding: 0px;
@@ -1475,14 +1514,15 @@ input[type="checkbox" i] {
 	transition: all 0.5s;
 } 
 .protyle-wysiwyg *[custom-f="dt"].list{
-	width:100%!important;
+	width:100%-50!important;
 	overflow-x:auto;/*溢出滚动*/
 	padding-bottom:30px!important;
+	margin:10px 4px;
 }
 /*子项设偏移调整*/
 .protyle-wysiwyg *[custom-f="dt"] [data-node-id].li>[data-node-id]{
     margin-left: 20px !important;
-	margin-right: -14px !important;
+	margin-right: -24px !important;
 }
 .protyle-wysiwyg *[custom-f="dt"] [data-node-id].li>.list{
 	padding-left: 20px;
@@ -1501,21 +1541,24 @@ input[type="checkbox" i] {
 .protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
 	display:none;
 }/*取消标题层级提示*/
-
+.protyle-wysiwyg *[custom-f="dt"] .li div{
+	border-right:10px solid transparent;
+}
 /*文字框*/
 .protyle-wysiwyg *[custom-f="dt"] .li div>div[spellcheck="false"]{
 	margin-left:-8px;
-	padding:5px 10px;
+	padding:5px 0 5px 10px;
 	margin-top:2px;
 	background-color:var(--b3-block-daotu);
 	border-radius:3px;
 	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
-	/*white-space: pre;*/
+	   
 	max-width:15vw;
+
 }
 .protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"]>[data-node-id]>div[spellcheck="false"]
 {
-	padding:5px 10px 5px 32px;
+	padding:5px 0px 5px 35px;
 }
 .protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"]>[data-node-id]>div[spellcheck="false"]
 {
@@ -1527,22 +1570,28 @@ input[type="checkbox" i] {
 }
 
 /*圆点符号居中对齐*/
+.protyle-content *[custom-f~=dt] [data-subtype="u"][data-node-id].li>div.protyle-action {
+	top:50%;
+	margin-left:-18px;
+}/*无序列表*/
+.protyle-content *[custom-f~=dt] [data-subtype="o"][data-node-id].li>div.protyle-action {
+	top:calc(50% + 1px);
+	margin-left:17px;
+}/*有序列表*/
 .list[custom-f="dt"][data-node-id] .protyle-action{
     top:calc(50% + 1px);
-	left:23px;
+	left:3px;
     position: absolute;
     transform: translate(0, -50%);
     z-index: 2;
 }
+.protyle-wysiwyg *[custom-f="dt"] [data-subtype="u"][data-node-id].li>.protyle-action:after{
+	left:37px;
+}
+.list[custom-f="dt"][data-node-id] .protyle-action svg{
+	left:20px;
+}
 
-.protyle-content *[custom-f~=dt] [data-subtype="u"][data-node-id].li>div.protyle-action {
-	top:50%;
-	margin-left:-18px;
-}
-.protyle-content *[custom-f~=dt] [data-subtype="o"][data-node-id].li>div.protyle-action {
-	top:50%;
-	margin-left:-5px;
-}
 /*前继承线*/
 .protyle-wysiwyg *[custom-f="dt"] .li::before{   
     content: '';   
@@ -1607,18 +1656,14 @@ div *[custom-f="dt"]>[data-type="NodeListItem"]::after{
 }  
 /*————————————————————————————————————————————————————————————————————————*/
 
-/* -----------------------------------------------列表转化为表格------------------------------------------- */
-/* 设置整个列表表格的缩进 */
-.list[data-node-id][data-type="NodeList"][custom-f="bg"] {
-    margin: 10px;
-	padding:0px;
-	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
-}
 
-/* ————————————————————所有子项目的表格（除去第一列其余的列），包含溢出的空白部分，所以才会有边框—————————————————————— */
-.protyle-wysiwyg *[custom-f="bg"].list {
-	width:98%!important;
+/* -----------------------------------------------列表转化为表格------------------------------------------- */
+.list[data-node-id][data-type="NodeList"][custom-f="bg"]{
+	display:table-cell;
+	padding:0 50px 0 5px;
 }
+/* ————————————————————所有子项目的表格（除去第一列其余的列），包含溢出的空白部分，所以才会有边框—————————————————————— */
+
 .protyle-wysiwyg *[custom-f="bg"] .li .list {
     padding: 0px;
     margin: 0px !important;
@@ -1628,7 +1673,7 @@ div *[custom-f="dt"]>[data-type="NodeListItem"]::after{
 
 /* ————————————————————对所有子列表项设置格式———————————————————— */
 .protyle-wysiwyg *[custom-f="bg"] .li {
-    display: flex;
+	display: flex;
     outline:  1px solid var(--surface-border-color);
     background-color: var(--b3-theme-background);
 }
@@ -1651,18 +1696,9 @@ div *[custom-f="dt"]>[data-type="NodeListItem"]::after{
     align-items: center;
     display: flex;
     min-width: 120px;
-    height: auto;
+	min-height: 30px;
+	height:auto;
     margin: 0;
-    text-align: justify;
-}
-
-.protyle-wysiwyg *[custom-f="bg"] .li>.list>.li {
-    outline: none !important;
-    border-top: 1px solid var(--b3-border-color);
-}
-
-.protyle-wysiwyg *[custom-f="bg"] .li>.list>.li:first-of-type {
-    border-top: none;
 }
 
 /* ————————————————————去除小竖线———————————————————— */
@@ -1677,10 +1713,18 @@ div *[custom-f="dt"]>[data-type="NodeListItem"]::after{
     transform: translate(0, -50%);
 	opacity:0.3;
 }
+/*单子项居中*/
+
+.protyle-wysiwyg *[custom-f="bg"] .list>.li:first-child:nth-last-child(2){
+    top: 50%;
+    transform: translate(0, -50%);
+	height:100%;
+}
 
 .protyle-wysiwyg *[custom-f="bg"] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
 	display:none;
 }/*取消标题层级提示*/
+
 
 /* ---------------------------------------------------------列表转化为表格 END-------------------------------------------------- */
 
@@ -1876,4 +1920,15 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
     padding: 0;
     line-height: 20px;
 	text-align: center;
+}
+
+/*历史面板*/
+.layout-tab-bar .item[data-type="doc"]{
+	padding: 8px 4px 8px 14px;
+}
+.layout-tab-bar .item[data-type="assets"],.layout-tab-bar .item[data-type="notebook"]{
+	padding: 8px 14px 8px 14px;
+}
+div#historyContainer{
+	border-top:1px solid var(--b3-border-color);
 }
