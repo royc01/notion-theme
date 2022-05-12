@@ -2,6 +2,9 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
 ---
+## 2.0.5
+* 适配2.0.8版本页签
+* 新增大纲&标签展开动画
 ## 2.0.4
 * 修复大纲圆点定位
 * 页签样式调整
