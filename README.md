@@ -2,6 +2,9 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
 ---
+## 2.0.6
+* 引入[UserZYF](https://github.com/UserZYF)横版斜杠菜单
+* 引入[langzhou](https://github.com/langzhou/siyuan-note)评论功能
 ## 2.0.5
 * 适配2.0.8版本页签
 * 新增大纲&标签展开动画
