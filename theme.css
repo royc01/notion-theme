@@ -1996,3 +1996,29 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
 div#historyContainer{
 	border-top:1px solid var(--b3-border-color);
 }
+/* ——————————————'/'弹出分栏————————————————————*/
+.b3-menu .b3-list-item{
+	border-radius:3px;
+}
+.b3-menu .b3-list-item__text{
+	margin:0 0 0 8px;
+	color:var(--b3-theme-on-primary);
+}
+.b3-menu .b3-list-item__graphic{
+	margin:0px;
+	width:10px;
+	height:12px;
+	border:1px solid var(--b3-border-color);
+}
+.b3-menu .b3-menu__accelerator{
+	margin:0px;
+}
+.b3-menu.b3-list.b3-list--background {
+    column-count: auto;
+    column-width: 160px !important;
+    column-gap: 5px;
+    min-width: 40vw !important;
+    max-height: 480px !important;
+    border: var(--b3-border-column);
+}
+/* ——————————————end————————————————————*/
