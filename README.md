@@ -2,6 +2,14 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
 ---
+## 2.0.7
+* 适配2.0.9主题
+  * toolbar图标大小间距
+  * dock图标大小间距
+  * 面板工具栏图标&引用计数大小
+  * 面包屑样式调整
+* 超链接字体样式调整
+* 修正搜索页面包屑过长bug
 ## 2.0.6
 * 引入[UserZYF](https://github.com/UserZYF)横版斜杠菜单
 * 引入[langzhou](https://github.com/langzhou/siyuan-note)评论功能
