@@ -31,7 +31,6 @@
     --b3-theme-primary-lightest: rgba(46, 170, 220, 0.2);
     --b3-theme-secondary: #f3a92f;
     --b3-theme-background: #fff;/* 编辑区背景 */
-													  
     --b3-theme-surface:rgb(247, 246, 243);/* 面板主色 */
     --b3-theme-surface-light: rgba(243, 243, 243, .5);
     --b3-theme-error: #eb5757;
@@ -214,19 +213,10 @@
 }
 
 /* PDF */
-						
-				 
-																						  
- 
-
 .textLayer,
 .pdf__resize {
     mix-blend-mode: darken;
 }
-
-												   
-					 
- 
 body{
 	border: 0px!important;
 	}
@@ -235,11 +225,19 @@ body{
 .toolbar{
 	background-color:var(--b3-theme-background);
 	box-shadow: 0px -1px 0px 0px var(--b3-column-surface) inset;
+	height:24px;
+	line-height: 24px;
 }
-.toolbar__item:not(.toolbar__item--disabled) svg{
-	padding: 0 1px;
+.toolbar__item{
+	margin: 0px;
+	border-radius: 0px;
 }
 .toolbar__item svg{
+	padding: 0 4px;
+	height:12px;
+	width:12px;
+}
+.toolbar__item:not(.toolbar__item--disabled) svg{
 	color:var(--b3-list-background-more);
 }
 .toolbar__item:hover
@@ -365,13 +363,17 @@ body{
 /* dock */
 .dock{
 	background-color:var(--b3-scroll-bgcolor);
+	border:0px solid var(--b3-border-color);
 }
-
+.dock#dockLeft,.dock#dockRight{
+	border:0px solid var(--b3-border-color);
+}
 .dock__item--active{
 	color:var(--block--icons--active);
 }
 .dock--vertical .dock__item{
-	padding:7px;
+	padding:8px;
+	margin:0px;
 }
 .dock--vertical .dock__item:hover{
 	background-color:var(--b3-list-background);
@@ -397,6 +399,7 @@ body{
 }
 .file-tree .block__icons>.block__icon {
 	margin:-4px;
+	padding: 0px;
 }
 .file-tree:hover>.block__icons .block__icon svg,.file-tree:hover>.block__icons>input[type="checkbox" i]{
 	transition: all 300ms;
@@ -530,13 +533,10 @@ body{
 }
 /*引用数*/
 .b3-list-item .counter:not(:empty){
-	height: 18px;
-	min-width:12px;
-	text-align:center;
-	padding-top:2px;
-	margin:0 2px;
-	background-color:transparent;
+	height: 20px;
+	line-height: 20px;
 	border-radius: 3px;
+	padding: 0 7px;
 	box-shadow: 0 0 0 1px var(--b3-border-color) inset;
 }
 .counter:not(:empty):hover{
@@ -794,26 +794,22 @@ body{
 }
 /* ------------------------面包屑------------------------ */
 .protyle-breadcrumb{
-	padding:9px 10px 9px 6px;
+	padding:8px 10px 9px 10px;
 	box-shadow: 0px 1px 0px 0px var(--b3-column-surface) inset;
 }
-
+.protyle-breadcrumb__item--active,.protyle-breadcrumb__item--active>svg.ft__primary+span{
+	color:var(--b3-theme-primary)!important;
+	background-color:transparent;
+}
 
 .protyle-breadcrumb__item,.protyle-breadcrumb__icon{
 	color: var( --b3-theme-on-background);
-    padding: 5px 6px;
-	margin:0 5px;
-}
-
-.protyle-breadcrumb__item svg {
-    margin-right: 0px;
+    padding: 5px 8px;
+	margin:0px;
 }
 
 .protyle-breadcrumb__text{
-	margin-left: 5px;
-}
-.protyle-breadcrumb__item>svg.ft__primary+span{
-	color:var(--b3-theme-primary);
+	margin-left: 6px;
 }
 
 .protyle-breadcrumb__icon:hover,.protyle-breadcrumb__item:hover,.protyle-breadcrumb>.b3-tooltips__w:hover{
@@ -824,8 +820,9 @@ body{
 
 .protyle-breadcrumb__arrow{
 width:0px;
-transform:rotate(25deg);
-border-left:1px solid var(--b3-theme-on-background);
+height:13px;
+transform:rotate(20deg);
+border-left:1px solid var(--b3-scroll-color-hover);
 }
 
 .protyle-breadcrumb>.block__icon:not(.ft__primary) svg{
@@ -833,7 +830,7 @@ border-left:1px solid var(--b3-theme-on-background);
 	width:19px;
 	height:19px;
 	padding: 3px 1px;
-}
+}/*面包屑更多*/
 .protyle-breadcrumb>.b3-tooltips__w{
 	padding:0 4px;
 }
@@ -1408,7 +1405,6 @@ background-color:var(--b3-font-background7);
 /* 超链接 */
 .protyle-wysiwyg [data-node-id] span[data-type="a"]{
     padding: 0 2px;
-	font-size: 90%;
 	color: var(--b3-theme-on-surface);
 	border-bottom:1px solid var(--b3-border-color);
 }
@@ -1865,6 +1861,9 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
 	white-space:nowrap;
 	overflow:hidden !important;
 	text-overflow: ellipsis;
+}
+.fn__flex-column .protyle-breadcrumb__item .fn__ellipsis{
+	display: -webkit-box;
 }
 /*---------ctrl+p窗口改造 end -------------*/
 
