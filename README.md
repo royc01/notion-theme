@@ -3,6 +3,7 @@
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
 ---
 ## 2.0.8
+* 关闭大纲动画
 * 修正历史与集市页签显示
 * 调整列表转表格的间距
 ## 2.0.7
