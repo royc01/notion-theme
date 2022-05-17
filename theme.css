@@ -765,7 +765,7 @@ body{
 }
 
 .layout-tab-bar .item__text{
-    padding: 3px 0px 3px 3px; 
+    padding: 3px; 
 	text-align: left;
 	min-width: 1px;
 }
@@ -791,6 +791,9 @@ body{
 }
 .layout-tab-bar{
  background-color: var(--b3-theme-background);
+}
+.layout-tab-bar .item__close{
+	padding: 4px 8px 4px 2px;
 }
 /* ------------------------面包屑------------------------ */
 .protyle-breadcrumb{
@@ -1720,7 +1723,7 @@ div *[custom-f="dt"]>[data-type="NodeListItem"]::after{
 /* -----------------------------------------------列表转化为表格------------------------------------------- */
 .list[data-node-id][data-type="NodeList"][custom-f="bg"]{
 	display:table-cell;
-	padding:0 50px 0 5px;
+	padding:15px 50px 15px 5px;
 }
 /* ————————————————————所有子项目的表格（除去第一列其余的列），包含溢出的空白部分，所以才会有边框—————————————————————— */
 
@@ -1986,11 +1989,20 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
 }
 
 /*历史面板*/
-.layout-tab-bar .item[data-type="doc"]{
-	padding: 8px 4px 8px 14px;
+.b3-dialog__container .layout-tab-bar .item{
+	padding: 8px 14px;
 }
-.layout-tab-bar .item[data-type="assets"],.layout-tab-bar .item[data-type="notebook"]{
-	padding: 8px 14px 8px 14px;
+.b3-dialog__container .layout-tab-bar .item--focus{
+	position:relative;
+}
+.b3-dialog__container .layout-tab-bar .item--focus::after{
+	content: '';
+	position: absolute;
+	bottom: -7px;
+	left: 0px;
+	right: 0px;
+	height: 2px;
+	background-color:var(--b3-active-item--focus);
 }
 div#historyContainer{
 	border-top:1px solid var(--b3-border-color);
