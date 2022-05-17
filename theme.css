@@ -31,6 +31,7 @@
     --b3-theme-primary-lightest: rgba(46, 170, 220, 0.2);
     --b3-theme-secondary: #f3a92f;
     --b3-theme-background: #fff;/* 编辑区背景 */
+													  
     --b3-theme-surface:rgb(247, 246, 243);/* 面板主色 */
     --b3-theme-surface-light: rgba(243, 243, 243, .5);
     --b3-theme-error: #eb5757;
@@ -213,10 +214,19 @@
 }
 
 /* PDF */
+						
+				 
+																						  
+ 
+
 .textLayer,
 .pdf__resize {
     mix-blend-mode: darken;
 }
+
+												   
+					 
+ 
 body{
 	border: 0px!important;
 	}
@@ -633,12 +643,6 @@ body{
 }
 .sy__outline>.fn__flex-1>ul>li>.b3-list-item__toggle{
 	margin-left:1px;
-}
-.sy__tag>.fn__flex-1>ul ul,
-.sy__outline>.fn__flex-1>ul ul{
-	animation: slide-down 100ms ease-in-out;
-	transition:  .1s ease-in-out;
-	transform-origin: 50% 0;
 }
 /*大纲前圆点*/
 .sy__outline .b3-list-item__arrow.fn__hidden{
