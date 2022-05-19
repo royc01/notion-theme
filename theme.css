@@ -222,11 +222,11 @@
 .textLayer,
 .pdf__resize {
     mix-blend-mode: darken;
-}
+ 
 
 												   
 					 
- 
+}
 body{
 	border: 0px!important;
 	}
@@ -243,7 +243,7 @@ body{
 	border-radius: 0px;
 }
 .toolbar__item svg{
-	padding: 0 4px;
+	padding: 3px 8px;
 	height:12px;
 	width:12px;
 }
@@ -257,7 +257,10 @@ body{
 #minWindow svg, #restoreWindow svg, #maxWindow svg, #closeWindow svg{
 	width:10px!important;
 	color: var(--b3-theme-on-background);
-	padding: 0 8px;
+	padding: 2px 8px;
+}
+.toolbar__item--close{
+	padding: 4px 8px;
 }
 #closeWindow:hover{
 	background-color:#e81123;
@@ -545,8 +548,10 @@ body{
 .b3-list-item .counter:not(:empty){
 	height: 20px;
 	line-height: 20px;
+	text-align:center;
+	min-width:12px;
 	border-radius: 3px;
-	padding: 0 7px;
+	padding: 0 4px;
 	box-shadow: 0 0 0 1px var(--b3-border-color) inset;
 }
 .counter:not(:empty):hover{
@@ -634,7 +639,7 @@ body{
     color:var(--svg-theme-graphic);
 	padding-left:5px;
 }
-/* 大纲面板 */
+/* 大纲面板*/
 .sy__outline>.fn__flex-1>ul{
 	margin-left:-4px;
 }
@@ -643,85 +648,109 @@ body{
 }
 .sy__outline>.fn__flex-1>ul>li>.b3-list-item__toggle{
 	margin-left:1px;
-}
+} 
 /*大纲前圆点*/
 .sy__outline .b3-list-item__arrow.fn__hidden{
 	visibility:visible!important;
 	opacity:0.5;
-	margin-left:7px;
-	margin-right:-12px;
-	background-color:var(--b3-border-color);
-	-webkit-mask:   url(style/img/dot.svg) no-repeat;
-    mask:           url(style/img/dot.svg) no-repeat;
-	-webkit-mask-size:  100% 100%;
-    mask-size:          100% 100%;
+	width:4px;
+	height:4px;
+	background-color:var(--svg-theme-graphic);
+	border-radius:50%;
+	padding: 0px;
+	margin-right:-3px;
+	margin-left:15px;
 }
-/*大纲数字遮罩*/
+/*大纲数字*/
+.file-tree ul.b3-list.b3-list--background [data-subtype="h1"] .b3-list-item__toggle::after{
+	content:"1";
+	font-weight: 600;
+	color:var(--block--icons--active);
+	position:relative;
+	left:17px;
+	border-radius:3px;
+}
+.file-tree ul.b3-list.b3-list--background [data-subtype="h2"] .b3-list-item__toggle::after{
+	content:"2";
+	font-weight: 600;
+	color:var(--h2-list-graphic);
+	position:relative;
+	left:16px;
+	border-radius:3px;
+}
+.file-tree ul.b3-list.b3-list--background [data-subtype="h3"] .b3-list-item__toggle::after{
+	content:"3";
+	font-weight: 600;
+	color:var(--h3-list-graphic);
+	position:relative;
+	left:16px;
+	border-radius:3px;
+}
+.file-tree ul.b3-list.b3-list--background [data-subtype="h4"] .b3-list-item__toggle::after{
+	content:"4";
+	font-weight: 600;
+	color:var(--h4-list-graphic);
+	position:relative;
+	left:16px;
+	border-radius:3px;
+}
+.file-tree ul.b3-list.b3-list--background [data-subtype="h5"] .b3-list-item__toggle::after{
+	content:"5";
+	font-weight: 600;
+	color:var(--h5-list-graphic);
+	position:relative;
+	left:16px;
+	border-radius:3px;
+}
+.file-tree ul.b3-list.b3-list--background [data-subtype="h6"] .b3-list-item__toggle::after{
+	content:"6";
+	font-weight: 600;
+	color:var(--h6-list-graphic);
+	position:relative;
+	left:16px;
+	border-radius:3px;
+}
 .file-tree ul.b3-list.b3-list--background [data-subtype="h1"] svg.b3-list-item__graphic{
+	margin-left:2px;
+	margin-right:-6px;
     color:transparent;
-	background-color:var(--block--icons--active);
-	-webkit-mask:   url(img/h1.svg) no-repeat;
-    mask:           url(img/h1.svg) no-repeat;
+	z-index:2;
+}
+.file-tree ul.b3-list.b3-list--background [data-subtype="h2"] svg.b3-list-item__graphic,
+.file-tree ul.b3-list.b3-list--background [data-subtype="h3"] svg.b3-list-item__graphic,
+.file-tree ul.b3-list.b3-list--background [data-subtype="h4"] svg.b3-list-item__graphic,
+.file-tree ul.b3-list.b3-list--background [data-subtype="h5"] svg.b3-list-item__graphic,
+.file-tree ul.b3-list.b3-list--background [data-subtype="h6"] svg.b3-list-item__graphic{
+	margin-left:0px;
+	margin-right:-6px;
+    color:transparent;
+	z-index:2;
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h1"] svg.b3-list-item__graphic:hover{
-	-webkit-mask:   url(img/h1.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-    mask:           url(img/h1.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-}
-
-.file-tree ul.b3-list.b3-list--background [data-subtype="h2"] svg.b3-list-item__graphic {
-    color:transparent;
-	background-color:var(--h2-list-graphic);
-	-webkit-mask:   url(img/h2.svg) no-repeat;
-    mask:           url(img/h2.svg) no-repeat;
+	background-color:var(--block--icons--active);
+	opacity:0.2;
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h2"] svg.b3-list-item__graphic:hover{
-	-webkit-mask:   url(img/h2.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-    mask:           url(img/h2.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-}
-
-.file-tree ul.b3-list.b3-list--background [data-subtype="h3"] svg.b3-list-item__graphic{
-    color:transparent;
-	background-color:var(--h3-list-graphic);
-	-webkit-mask:   url(img/h3.svg) no-repeat;
-    mask:           url(img/h3.svg) no-repeat;
+	background-color:var(--h2-list-graphic);
+	opacity:0.2;
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h3"] svg.b3-list-item__graphic:hover{
-	-webkit-mask:   url(img/h3.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-    mask:           url(img/h3.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-}
-
-.file-tree ul.b3-list.b3-list--background [data-subtype="h4"] svg.b3-list-item__graphic{
-    color:transparent;
-	background-color:var(--h4-list-graphic);
-	-webkit-mask:   url(img/h4.svg) no-repeat;
-    mask:           url(img/h4.svg) no-repeat;
+	background-color:var(--h3-list-graphic);
+	opacity:0.2;
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h4"] svg.b3-list-item__graphic:hover{
-	-webkit-mask:   url(img/h4.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-    mask:           url(img/h4.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-}
-
-.file-tree ul.b3-list.b3-list--background [data-subtype="h5"] svg.b3-list-item__graphic{
-    color:transparent;
-	background-color:var(--h5-list-graphic);
-	-webkit-mask:   url(img/h5.svg) no-repeat;
-    mask:           url(img/h5.svg) no-repeat;
+	background-color:var(--h4-list-graphic);
+	opacity:0.2;
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h5"] svg.b3-list-item__graphic:hover{
-	-webkit-mask:   url(img/h5.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-    mask:           url(img/h5.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-}
-
-.file-tree ul.b3-list.b3-list--background [data-subtype="h6"] svg.b3-list-item__graphic{
-    color:transparent;
-	background-color:var(--h6-list-graphic);
-	-webkit-mask:   url(img/h6.svg) no-repeat;
-    mask:           url(img/h6.svg) no-repeat;
+	background-color:var(--h5-list-graphic);
+	opacity:0.2;
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h6"] svg.b3-list-item__graphic:hover{
-	-webkit-mask:   url(img/h6.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
-    mask:           url(img/h6.svg), url(img/square.svg), url(img/square.svg), url(img/square.svg);
+	background-color:var(--h6-list-graphic);
+	opacity:0.2;
 }
+
 /* ------------------------页签------------------------ */
 .layout-tab-bar{
 	padding-left:8px;
@@ -1397,17 +1426,16 @@ background-color:var(--b3-font-background7);
 	padding: 0px;
 }
 .block__popover--move>.block__icons{
-	padding:5px 5px;
-}
-.block__popover--move>.block__icons .block__icon{
-	padding:0 5px;
-	margin:0;
+	padding:5px;
 }
 /* 弹出框钉住 */
-.b3-tooltips__sw>.ft__primary {
+.block__icon--active[data-type='pin'] svg{
     color: var(--b3-theme-primary)!important;
 	transition: all 200ms;
 	transform: rotate(-46deg);
+}
+.block__icon--active{
+	background-color:transparent;
 }
 /* 超链接 */
 .protyle-wysiwyg [data-node-id] span[data-type="a"]{
@@ -1818,7 +1846,7 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 
 /*设置需要占满一行的项目*/
 body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column .search__header,
-body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column .b3-form__space--small {
+body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column>.b3-form__space--small {
 	width: 100vw;
 }
 
