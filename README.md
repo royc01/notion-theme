@@ -2,6 +2,8 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
 ---
+## 2.1.0
+* 修正代码块间距
 ## 2.0.9
 * 修复搜索预览窗口链接输入框宽度
 * 大纲性能优化
