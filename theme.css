@@ -31,7 +31,6 @@
     --b3-theme-primary-lightest: rgba(46, 170, 220, 0.2);
     --b3-theme-secondary: #f3a92f;
     --b3-theme-background: #fff;/* 编辑区背景 */
-													  
     --b3-theme-surface:rgb(247, 246, 243);/* 面板主色 */
     --b3-theme-surface-light: rgba(243, 243, 243, .5);
     --b3-theme-error: #eb5757;
@@ -214,18 +213,9 @@
 }
 
 /* PDF */
-						
-				 
-																						  
- 
-
 .textLayer,
 .pdf__resize {
     mix-blend-mode: darken;
- 
-
-												   
-					 
 }
 body{
 	border: 0px!important;
@@ -1473,7 +1463,7 @@ background-color:var(--b3-font-background7);
 }
 .b3-typography .hljs, .protyle-wysiwyg .hljs{
 	background-color:var(--b3-column-surface);
-	padding: 30px 20px 22px 20px;
+	padding: 30px 10px 22px 10px;
 }
 .protyle-wysiwyg[contenteditable="true"] .code-block .protyle-action{
 	padding:6px 3px;
@@ -1495,9 +1485,6 @@ background-color:var(--b3-font-background7);
 .protyle-linenumber__rows{
 	background-color:var(--b3-scroll-bgcolor);
 	padding: 30px 4px 22px 4px;
-}
-.protyle-linenumber {
-    padding-left: calc(3.6em + 8px) !important;
 }
 /*行内代码*/
 .b3-typography code:not(.hljs), .protyle-wysiwyg code:not(.hljs){
