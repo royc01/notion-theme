@@ -1105,6 +1105,8 @@ border-left:1px solid var(--b3-scroll-color-hover);
 .protyle-wysiwyg .h3,.protyle-wysiwyg .h4,.protyle-wysiwyg .h5,.protyle-wysiwyg .h6
 {
 	font-weight:700;
+	margin-top: 1.2em;
+    margin-bottom: .4em;
 }
 /* 图片圆角 */
 .protyle-wysiwyg img{
@@ -1466,13 +1468,13 @@ background-color:var(--b3-font-background7);
 	padding: 30px 10px 22px 10px;
 }
 .protyle-wysiwyg[contenteditable="true"] .code-block .protyle-action{
-	padding:6px 3px;
+	padding:5px 3px;
 }
 .code-block .protyle-action .protyle-action__language{
-	padding:4px;
 	height:14px;
 	line-height:12px;
 	border-radius:3px;
+	padding:5px 4px;
 }
 .code-block .protyle-action .protyle-action__language:hover{
 	background-color:var(--b3-list-background);	
@@ -1485,6 +1487,9 @@ background-color:var(--b3-font-background7);
 .protyle-linenumber__rows{
 	background-color:var(--b3-scroll-bgcolor);
 	padding: 30px 4px 22px 4px;
+}
+.protyle-wysiwyg [data-node-id][fold="1"]:not(.li):not([data-type="NodeHeading"]).code-block{
+	height: 2.1em;
 }
 /*行内代码*/
 .b3-typography code:not(.hljs), .protyle-wysiwyg code:not(.hljs){
