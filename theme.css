@@ -2036,7 +2036,7 @@ div#historyContainer{
 	border-radius:3px;
 }
 .b3-menu .b3-list-item__text{
-	margin:0 0 0 8px;
+	margin:0 0 0 8px;	
 	color:var(--b3-theme-on-primary);
 }
 .b3-menu .b3-list-item__graphic{
@@ -2048,11 +2048,12 @@ div#historyContainer{
 .b3-menu .b3-menu__accelerator{
 	margin:0px;
 }
-.b3-menu.b3-list.b3-list--background {
-    column-count: auto;
+.b3-menu.b3-list.b3-list--background.hint--menu{
+    column-count: 4;
     column-width: 160px !important;
-    column-gap: 5px;
-    min-width: 40vw !important;
+    column-gap: 10px;
+	column-rule: 1px solid var(--b3-border-color);
+    min-width: 50vw !important;
     max-height: 480px !important;
     border: var(--b3-border-column);
 }
