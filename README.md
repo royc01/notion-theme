@@ -2,6 +2,9 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
 ---
+## 2.1.4
+* 调整面包屑高度遮盖
+* 调整完成任务列表文本颜色
 ## 2.1.3
 * 修正大纲层级缩进
 ## 2.1.2
