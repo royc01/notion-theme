@@ -633,7 +633,6 @@ body{
 .sy__outline>.fn__flex-1>ul{
 	margin-left:-4px;
 }
-
 .sy__outline>.fn__flex-1>ul>li>.b3-list-item__toggle{
 	margin-left:1px;
 } 
@@ -818,7 +817,7 @@ body{
 }
 /* ------------------------面包屑------------------------ */
 .protyle-breadcrumb{
-	padding:8px 10px 9px 10px;
+	padding:8px 10px 2px 10px;
 	box-shadow: 0px 1px 0px 0px var(--b3-column-surface) inset;
 }
 .protyle-breadcrumb__item--active,.protyle-breadcrumb__item--active>svg.ft__primary+span{
@@ -1303,7 +1302,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 
 /* 任务列表 */
 .protyle-task--done{
-    color: var(--b3-scroll-color);
+    color: var(--b3-scroll-color-hover);
     text-decoration: line-through;
 }
 .protyle-task--done svg{
@@ -1886,9 +1885,6 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
 	white-space:nowrap;
 	overflow:hidden !important;
 	text-overflow: ellipsis;
-}
-.fn__flex-column .protyle-breadcrumb__item .fn__ellipsis{
-	display: -webkit-box;
 }
 /*---------ctrl+p窗口改造 end -------------*/
 
