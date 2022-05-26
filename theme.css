@@ -633,9 +633,7 @@ body{
 .sy__outline>.fn__flex-1>ul{
 	margin-left:-4px;
 }
-.sy__outline>.fn__flex-1>ul>ul{
-	margin-left:-12px;/*大纲缩进*/
-}
+
 .sy__outline>.fn__flex-1>ul>li>.b3-list-item__toggle{
 	margin-left:1px;
 } 
