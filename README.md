@@ -2,6 +2,8 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
 ---
+## 2.1.3
+* 修正大纲层级缩进
 ## 2.1.2
 * 调整斜杆菜单分栏宽度
 * 取消引用块分栏
