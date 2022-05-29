@@ -1880,6 +1880,11 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 		width: 35vw;
 		height: calc(100% - 85px) !important;
 	}
+	/*结果预览自动占满剩余宽度，高度和结果列表等高*/
+	div[data-key] .b3-dialog__container .fn__flex-column #searchPreview {
+		/*width:45vw;*/
+		height: calc(100% - 86px) !important;
+	}
 }
 
 /*窗口宽度小于一定尺寸时候，上下排列*/
