@@ -2,6 +2,8 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
 ---
+## 2.1.6
+* 修复搜索框显示错误问题
 ## 2.1.5
 * 列表转表格样式调整
 * 列表里列表转表格辅助线修正
