@@ -2,6 +2,10 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
 ---
+## 2.1.7
+* 修复替换搜索框跳动问题
+* 修复graphviz，flowchart显示问题
+* 调整行内右侧引用数间距
 ## 2.1.6
 * 修复搜索框显示错误问题
 ## 2.1.5
