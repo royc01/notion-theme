@@ -1,6 +1,6 @@
 # Notion配色版主題
 
-![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h1bi87pw82j20u01r4dmi.jpg)
+![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
 ## 2.1.8
 * 重构css，使三个主题结构代码一致
