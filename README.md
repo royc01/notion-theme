@@ -2,6 +2,10 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
+## 2.1.9
+* 更新预览图&简介图
+* 加入自定义配置css文件
+* 修复H1标题后色块
 ## 2.1.8
 * 重构css，使三个主题结构代码一致
 * 清除部分不生效的样式
