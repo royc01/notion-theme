@@ -7,7 +7,7 @@
 	width:0.15em;
 	bottom:0.5em;
 	border-radius:3px;
-	background-color:var(--block--icons--active);
+	background-color:var(--h1-list-graphic);
 	opacity:0.3;
 }
 .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1>[spellcheck="false"]::after{
