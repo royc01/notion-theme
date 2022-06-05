@@ -1,5 +1,7 @@
 /* 自定义配置文件 */
 @import url(/widgets/custom.css);
+/* 显示顶栏 */
+@import url(/widgets/n-topbar.css);
 /* 引入特性 */
 @import url(style/ordered-list.css);
 @import url(style/unordered-list.css);
@@ -1325,6 +1327,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	background-color:var(--b3-theme-background)!important;
 }
 .b3-menu__item{
+	padding: 0 8px;
 	background-color: var(--b3-theme-background);
 	border-radius:3px;
 }
@@ -1333,7 +1336,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	background-color:var(--b3-list-background);
 }
 .b3-menu__accelerator{
-	color:var(--b3-scroll-color-hover)
+	color:var(--b3-scroll-color-hover);
 }/*快捷键提示*/
 .b3-list-item--big{
 	padding: 14px 24px;
@@ -1521,16 +1524,27 @@ div#historyContainer{
 	height:12px;
 	border:1px solid var(--b3-border-color);
 }
-.b3-menu .b3-menu__accelerator{
-	margin:0px;
-}
 .b3-menu.b3-list.b3-list--background.hint--menu{
-    column-count: 4;
-    column-width: 160px !important;
-    column-gap: 10px;
-	column-rule: 1px solid var(--b3-border-color);
+	display: flex;
+	flex-flow: column wrap;
     min-width: 50vw !important;
-    max-height: 480px !important;
+	padding:5px 0px 5px 5px;
+}
+@media screen and (min-width: 1280px){
+	.b3-menu.b3-list.b3-list--background.hint--menu>.b3-list-item--two,.b3-menu.b3-list.b3-list--background.hint--menu>.b3-menu__separator{
+	width:calc(25% - 5px);
+}
+	.b3-menu.b3-list.b3-list--background.hint--menu{
+	max-height: 412px !important;
+	}
+}
+@media screen and (max-width: 1280px) {
+	.b3-menu.b3-list.b3-list--background.hint--menu>.b3-list-item--two,.b3-menu.b3-list.b3-list--background.hint--menu>.b3-menu__separator{
+	width:calc(33.3% - 5px);
+	}
+	.b3-menu.b3-list.b3-list--background.hint--menu{
+	max-height: 540px !important;
+	}
 }
 /*文本框选颜色*/
 ::selection {
