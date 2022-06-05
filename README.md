@@ -2,6 +2,13 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
+### 显示顶栏方式：
+* 把主题文件里的`n-topbar.css`文件拷贝到工作空间`data\widgets`目录里面
+* 此方法适用于：notion-theme、notion-dark和salt主题
+---
+## 2.2.0
+* 更换`/`菜单分栏方式，修复emoji菜单显示效果
+* 加入n-topbar.css文件
 ## 2.1.9
 * 更新预览图&简介图
 * 加入自定义配置css文件
