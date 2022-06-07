@@ -6,6 +6,8 @@
 * 把主题文件里的`n-topbar.css`文件拷贝到工作空间`data\widgets`目录里面
 * 此方法适用于：notion-theme、notion-dark和salt主题
 ---
+## 2.2.1
+* 增加隐藏顶栏动画
 ## 2.2.0
 * 更换`/`菜单分栏方式，修复emoji菜单显示效果
 * 加入n-topbar.css文件
