@@ -279,6 +279,8 @@ body{
 	margin-bottom: -22px;
 	z-index: 99;
 	opacity: 0;
+	transition: opacity 300ms;
+	transition-delay: 500ms;
 }
 .toolbar:hover{
 	opacity: 1;
