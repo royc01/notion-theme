@@ -1,5 +1,3 @@
-/* 自定义配置文件 */
-@import url(/widgets/custom.css);
 /* 显示顶栏 */
 @import url(/widgets/n-topbar.css);
 /* 引入特性 */
@@ -10,6 +8,8 @@
 @import url(style/list2table.css);
 @import url(style/list2board.css);
 @import url(style/ctrlp.css);
+/* 自定义配置文件 */
+@import url(/widgets/custom.css);
 /*-------------------------------------------*/
 @keyframes menu {
 	0% {opacity: 0;}
@@ -17,6 +17,11 @@
           opacity: 0.5;	}
 	100% { transform: scale(1); 
 	 }
+}
+@keyframes statusmsg {
+	0% {max-width:1000px;}
+	80% {max-width:1000px;}
+	100% {max-width:180px;}
 }
 :root {
     /* 主色 */
@@ -47,12 +52,14 @@
     --b3-font-family-math: KaTeX_Math;
 
     /* 线条 */
-    --b3-border-color: rgba(0, 0, 0, .1);
+    --b3-border-color: rgba(0, 0, 0, 0.1);
 
     /* 滚动条 */
     --b3-scroll-color: rgba(211,209,203,.5);
 	--b3-scroll-color-hover: rgba(174,172,166);
 	--b3-scroll-bgcolor: rgba(237, 236, 233);
+
+	--b3-border-scroll: rgba(55, 53, 47, 0.2);
 	
 	--webkit-scrollbar: 10px;
 	--webkit-scrollbar-thumb: 0px;
@@ -180,15 +187,15 @@
 	--b3-dockright-background: rgba(237, 236, 233);
 	--b3-dockleft-color: rgb(55, 53, 47, .5);
 	--b3-dock-background: rgba(237, 236, 233);
-	--b3-dockright-item-active-background: transparent;
-	--b3-dockleft-item-active-background: transparent;
+	--b3-dockright-item-active-background: #fff;
+	--b3-dockleft-item-active-background: #fff;
 	--b3-dock-item-active-color: #eb8383;
-	--b3-dock-item-hover-background: transparent;
+	--b3-dock-item-hover-background: #fff;
 	
-	--b3-dock-item-width: 35px;
-	--b3-dock-item-padding: 3px;
-	--b3-dock-item-margin: 17px 7px;
-	--b3-dock-item-radius: 0px;
+	--b3-dock-item-width: 36px;
+	--b3-dock-item-padding: 5px;
+	--b3-dock-item-margin: 7px 5px 7px 5px;
+	--b3-dock-item-radius: 5px;
 	/* 侧栏面板 */
 	--b3-fn__flex-column-background: rgb(247, 246, 243);
 	--b3-fn__flex-shrink-background: rgb(247, 246, 243);
@@ -231,6 +238,7 @@
 	--b3-img-icons-span: rgba(0, 0, 0, .5);
 	/* 块标 */
 	--b3-gutters-color: rgba(211,209,203);
+	--b3-gutters-background: var(--b3-toolbar-item-hover);
 	/* 弹出工具条字体颜色选择 */
 	--b3-color--square: var(--b3-border-color);
 	/* 任务列表 */
@@ -257,6 +265,8 @@
 	--kb--li--background:#fff;
 	/*ctrlp*/
 	--b3-list-item--meta: rgba(55, 53, 47, 0.3);
+	/*底栏状态*/
+	--b3-status-msg-background: #e0dfda;
 }
 
 /* PDF */
@@ -347,6 +357,9 @@ body{
 	color: var(--b3-dock-item-active-color)!important;
 	background-color:var(--b3-dockright-item-active-background);
 }
+.dock#dockLeft .dock__item:last-child,.dock#dockRight .dock__item:last-child{
+	margin: 7px 5px 20px 5px;
+}
 .dock__item svg{
 	width: 14px;
 }
@@ -361,6 +374,14 @@ body{
 	background-color: var(--b3-fn__flex-column-background);
 	padding: var(--b3-flex-column-padding);
 	min-height: 90% ;
+}
+/*侧栏滚动出现分割线*/
+.layout-tab-container>.fn__flex-column>.fn__flex-1{
+	background: linear-gradient(var(--b3-fn__flex-column-background), transparent 100%),
+				linear-gradient(var(--b3-border-scroll), transparent 100%);
+    background-size: 100% 30px, 100% 1px;
+    background-repeat: no-repeat;
+    background-attachment: local, scroll;
 }
 .fn__flex >.fn__flex-shrink>.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
 	background-color: var(--b3-fn__flex-shrink-background);
@@ -622,7 +643,7 @@ input[type="checkbox" i] {
 }
 .layout__resize--lr:after{
 	background-color: var(--b3-layout-resize);
-	width:1px;
+	width:0px;
 	margin-left:-1px;
 	top: 0px;
 	height:100%;
@@ -943,9 +964,13 @@ input[type="checkbox" i] {
 .protyle-gutters button svg {
     color: var(--b3-gutters-color);
 	padding:0 4px;
+	border-radius:3px;
+}
+.protyle-gutters button[data-type="fold"] svg {
+	padding:0px 6px;
 }
 .protyle-gutters button svg:hover {
-	background: url("img/square.svg") no-repeat center;
+	background-color: var(--b3-gutters-background);
 }
 .protyle-gutters button{
 	padding:4px 0px;
@@ -1564,14 +1589,95 @@ div#historyContainer{
 ::-webkit-scrollbar-thumb{
 	border-radius: var(--webkit-scrollbar-thumb);
 }
+/* 动态加载和调节进度条*/
+.b3-slider{height:24px;}
+.b3-slider::-webkit-slider-runnable-track {
+    height: 4px;
+    background: var(--b3-theme-primary-lighter);
+	
 
+}
+.b3-slider::-webkit-slider-container {
+padding:3px;
+	height: 30px;
+    overflow: hidden;
+}
 
+.b3-slider::-webkit-slider-thumb {
+	transform:unset !important;
+    width: 8px;
+    height: 8px;
+    background-color: var(--b3-theme-background);
+    border: 2px solid transparent;
+    margin-top: -2px;
+    border-image: linear-gradient(var(--b3-theme-primary),var(--b3-theme-primary)) 0 fill / 1 5 1 0 / 0px 0px 0 2000px;
+	box-shadow: 0px 0px 0px 3px var(--b3-theme-primary) ;
+}
+.b3-slider::-webkit-slider-thumb:hover{
+	box-shadow:0px 0px 0px 3px var(--b3-theme-primary),0px 0px 0px 5px var(--b3-theme-primary-lighter);
+	transition:all 500ms;
+}
 
+/*底栏适配调整测试*/
+.status{
+	height:30px;
+	background-color:transparent;
+}
+.status .toolbar__item{
+	margin:  7px 5px 13px 5px;
+	border-radius: 5px;
+	background-color: var(--b3-status-msg-background);
+}
 
+.status .toolbar__item svg{
+	padding:5px;
+	color:var(--b3-dockright-color);
+}
+.body--win32>.fn__flex-1{
+	overflow:visible;
+}
+.dock#dockLeft,
+.dock#dockRight{
+	padding-top:10px;
+	padding-bottom:30px;
+}
 
+.layout#layouts .fn__flex-column>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+	padding-bottom:30px;
+}
+.layout#layouts{
+	margin-bottom:-30px;
+}
 
-
-
-
-
-
+.status__counter:not(:empty){
+	border-radius:5px;
+	background-color:var(--b3-theme-primary);
+	color:#fff;
+	padding-left:10px;
+	margin-right:5px;
+	margin-bottom:5px;
+	opacity:0;
+	transition: opacity 300ms;
+	transition-delay: 3000ms;
+}
+.status__counter:not(:empty) span{
+	color:#fff;
+}
+.status__msg:not(:empty){
+	opacity:0.5;
+	animation: statusmsg 5s ease-in-out;
+	max-width: 180px;
+	padding:2px 5px 5px 5px;
+	font-size:80%;
+	border-radius:5px;
+	background-color:var(--b3-status-msg-background);
+	margin-left:5px;
+	margin-bottom:5px;
+	transition: max-width 300ms,opacity 300ms;
+	transition-delay: 2000ms;
+}
+.status__msg:not(:empty):hover{
+	opacity:1;
+	max-width:400px;
+	transition: max-width 500ms ease-out;
+}
