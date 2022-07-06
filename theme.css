@@ -1639,7 +1639,7 @@ padding:3px;
 .dock#dockLeft,
 .dock#dockRight{
 	padding-top:10px;
-	padding-bottom:30px;
+	padding-bottom:20px;
 }
 
 .layout#layouts .fn__flex-column>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
@@ -1648,7 +1648,6 @@ padding:3px;
 .layout#layouts{
 	margin-bottom:-30px;
 }
-
 .status__counter:not(:empty){
 	border-radius:5px;
 	background-color:var(--b3-theme-primary);
