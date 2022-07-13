@@ -6,6 +6,10 @@
 * 把主题文件里的`n-topbar.css`文件拷贝到工作空间`data\widgets`目录里面
 * 此方法适用于：notion-theme、notion-dark和salt主题
 ---
+## 2.2.4
+* 修复引用单行出现滚动条bug
+* 修复隐藏底栏界面跳动bug
+* 聚焦列表小图标显示问题
 ## 2.2.3
 * 修复搜索跳转偏移bug
 * 修复dark主题dock栏图标位置
