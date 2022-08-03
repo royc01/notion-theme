@@ -86,6 +86,25 @@
     border-radius: 3px;
 }
 
+/* 引用计数 */
+.list[custom-f="kb"] .protyle-attr--refcount{
+	height: 14px;
+    width: 14px;
+	left:-44px;
+	top:9px;
+    padding: 0;
+    line-height: 14px;
+	text-align: center;
+}
 
+.list[custom-f="kb"] .list .protyle-attr--refcount{
+	height: 14px;
+    width: 14px;
+	left:-14px;
+	top:9px;
+    padding: 0;
+    line-height: 14px;
+	text-align: center;
+}
 
 /*————————————————————列表转化看板 END————————————————————*/
