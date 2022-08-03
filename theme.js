@@ -72,6 +72,7 @@ function SubMenu(selectid,selecttype,className = 'b3-menu__submenu') {
   if(selecttype=="NodeTable"){
     node.appendChild(FixWidth(selectid))
     node.appendChild(AutoWidth(selectid))
+	node.appendChild(vHeader(selectid))
 	node.appendChild(Removeth(selectid))
 	node.appendChild(Defaultth(selectid))
   }
@@ -141,6 +142,17 @@ function AutoWidth(selectid){
   button.setAttribute("custom-attr-value","auto")
   button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">自动宽度</span>`
   button.onclick=ViewMonitor
+  return button
+}
+function vHeader(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.onclick=ViewMonitor
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","t")
+  button.setAttribute("custom-attr-value","vbiaotou")
+
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">竖表头样式</span>`
   return button
 }
 function Removeth(selectid){
@@ -235,3 +247,5 @@ function ViewMonitor(event){
 }
 
 setTimeout(()=>ClickMonitor(),1000)
+
+
