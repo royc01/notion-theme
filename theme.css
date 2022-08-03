@@ -8,6 +8,7 @@
 @import url(style/list2table.css);
 @import url(style/list2board.css);
 @import url(style/ctrlp.css);
+@import url(style/bq-callout.css);
 /* 引入网址链接前的图标相关代码 */
 @import url("style/link-icon.css");
 /* 自定义配置文件 */
@@ -129,6 +130,20 @@
     --b3-font-background11: rgb(234, 228, 242);
     --b3-font-background12: rgb(244, 223, 235);
     --b3-font-background13: rgb(251, 228, 228);
+	/*callout*/
+	--b3-bq-background1: rgb(198, 203, 208 , .3);
+    --b3-bq-background2: rgb(225, 225, 225 , .3);
+    --b3-bq-background3: rgb(235, 236, 237 , .3);
+    --b3-bq-background4: rgb(233, 229, 227 , .3);
+	--b3-bq-background5: rgb(246, 225, 205 , .3);
+    --b3-bq-background6: rgb(250, 235, 221 , .3);
+    --b3-bq-background7: rgb(251, 243, 219 , .3);
+	--b3-bq-background8: rgba(221, 237, 226 , .3);
+    --b3-bq-background9: rgb(221, 237, 234 , .3);
+    --b3-bq-background10: rgb(221, 235, 241 , .3);
+    --b3-bq-background11: rgb(234, 228, 242 , .3);
+    --b3-bq-background12: rgb(244, 223, 235 , .3);
+    --b3-bq-background13: rgb(251, 228, 228 , .3);
     /* 动画效果 */
     --b3-transition: all .15s cubic-bezier(0, 0, .2, 1) 0ms;
     --b3-width-transition: width .15s cubic-bezier(0, 0, .2, 1) 0ms;
@@ -1226,15 +1241,6 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 .protyle-wysiwyg [data-node-id].li>.protyle-action--task:hover:after{
 	display:none;
 }
-/* 引述 */
-.protyle-wysiwyg .bq{
-    padding: 0.3em 1em;
-    color: var( --b3-theme-on-background);
-    border-left: 0.25em solid var(--b3-theme-on-background);
-	border-radius:0 3px 3px 0;
-	margin-left:4px;
-    background-color: var(--b3-bq-background);
-}
 /* 表格 */
 .b3-typography table, .protyle-wysiwyg table{
 	font-weight:500;
@@ -1684,7 +1690,6 @@ padding:3px;
 {
 	overflow:visible;
 }
-
 .dock#dockLeft{
 	box-shadow: 0px 30px 0px var(--b3-dock-background);
 }
