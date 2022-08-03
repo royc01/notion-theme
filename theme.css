@@ -8,6 +8,8 @@
 @import url(style/list2table.css);
 @import url(style/list2board.css);
 @import url(style/ctrlp.css);
+/* 引入网址链接前的图标相关代码 */
+@import url("style/link-icon.css");
 /* 自定义配置文件 */
 @import url(/widgets/custom.css);
 /*-------------------------------------------*/
@@ -22,6 +24,20 @@
 	0% {max-width:1000px;}
 	80% {max-width:1000px;}
 	100% {max-width:180px;}
+}
+@keyframes item-focus {
+	0% { transform: scale(.01);
+          opacity: 0.5;	}
+	100% { transform: scale(1); 
+	 }
+}
+@keyframes flex-column{
+	0% { transform: scale(1,.8);
+	transform-origin: 0 0 ;
+          opacity: 0;	}
+	100% { transform: scale(1,1); 
+	transform-origin: 0 0 ;
+	 }
 }
 :root {
     /* 主色 */
@@ -57,12 +73,12 @@
     /* 滚动条 */
     --b3-scroll-color: rgba(211,209,203,.5);
 	--b3-scroll-color-hover: rgba(174,172,166);
-	--b3-scroll-bgcolor: rgba(237, 236, 233);
+	--b3-scroll-bgcolor: transparent;
 
 	--b3-border-scroll: rgba(55, 53, 47, 0.2);
 	
-	--webkit-scrollbar: 10px;
-	--webkit-scrollbar-thumb: 0px;
+	--webkit-scrollbar: 6px;
+	--webkit-scrollbar-thumb: 4px;
     /* 列表 */
     --b3-list-hover: rgba(55, 53, 47, 0.08);
 
@@ -194,7 +210,7 @@
 	
 	--b3-dock-item-width: 36px;
 	--b3-dock-item-padding: 5px;
-	--b3-dock-item-margin: 17px 5px 7px 5px;
+	--b3-dock-item-margin: 7px 5px 7px 5px;
 	--b3-dock-item-radius: 5px;
 	/* 侧栏面板 */
 	--b3-fn__flex-column-background: rgb(247, 246, 243);
@@ -209,8 +225,8 @@
 	--b3-list-background-focus: rgba(55, 53, 47, 0.14);
 	--b3-list-background-more: rgba(108, 106, 101);
 	
-	--b3-flex-column-padding: 6px 0 0 0;
-	--b3-list-item-radius: 0px;
+	--b3-flex-column-padding:6px 0px 4px 0px;
+	--b3-list-item-radius: 3px;
 	/* 大纲数字 */
 	--h1-list-graphic: #eb8383;
 	--h2-list-graphic: #ae9acb;
@@ -357,8 +373,12 @@ body{
 	color: var(--b3-dock-item-active-color)!important;
 	background-color:var(--b3-dockright-item-active-background);
 }
+.dock#dockLeft .dock__item:first-child,.dock#dockRight .dock__item:first-child{
+	margin: 17px 5px 7px 5px;
+}
 .dock#dockLeft .dock__item:last-child,.dock#dockRight .dock__item:last-child{
-	margin: 7px 5px 10px 5px;
+	margin: 7px 5px 40px 5px;
+	bottom:0px;
 }
 .dock__item svg{
 	width: 14px;
@@ -386,6 +406,8 @@ body{
 .fn__flex >.fn__flex-shrink>.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
 	background-color: var(--b3-fn__flex-shrink-background);
 }
+/*侧栏展开动画*/
+#layouts>.fn__flex>.fn__flex-column>.fn__flex>div[data-type=wnd]>.layout-tab-container>.fn__flex-column{animation: flex-column  0.2s ease-in-out;}
 /*面板标题*/
 .file-tree .block__icons{
 	height:46px; 
@@ -436,6 +458,10 @@ body{
 /*面板列表项*/
 .b3-list-item{
 	border-radius:var(--b3-list-item-radius);
+}
+.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column .b3-list-item{
+	margin:0 4px;
+	padding:1px 6px;
 }
 .b3-list-item__arrow{
 	color:var(--b3-list-item-arrow);
@@ -686,9 +712,11 @@ input[type="checkbox" i] {
 	right: 0px;
 	height: 2px;
 	background-color: var(--b3-item-focus);
+	animation: item-focus 0.2s ease-in-out;
 }
 .layout-tab-bar .item:hover{
 	background-color:var(--b3-list-background)!important;
+	transition: all 300ms;
 }
 .layout-tab-bar .item__text{
     padding: 3px; 
@@ -1233,9 +1261,19 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 /* 表头和表行格式一致 */
 .protyle-wysiwyg [data-node-id][custom-t~=biaotou] table th {
     font-weight: normal !important;
-    text-align: left !important;
     color: inherit !important;
     background-color: var(--b3-theme-background) !important;
+}
+/* 竖表头格式 */
+.protyle-wysiwyg [data-node-id][custom-t~=vbiaotou] table th {
+    font-weight: normal !important;
+    color: inherit !important;
+    background-color: var(--b3-theme-background) !important;
+}
+.protyle-wysiwyg [data-node-id][custom-t~=vbiaotou] table tr th:first-child,
+.protyle-wysiwyg [data-node-id][custom-t~=vbiaotou] table tr td:first-child{
+    font-weight: bold !important;
+    background-color: var(--b3-theme-surface) !important;
 }
 /* 标签 */
 .protyle-wysiwyg span[data-type="tag"] {
@@ -1262,7 +1300,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 .protyle-wysiwyg [data-node-id] span[data-type="block-ref"]{
 	font-size: 95%;
 	padding:0px 5px 1px 5px;
-	color:var(--b3-theme-on-background)!important;
+	color:var(--b3-theme-on-background);
 	background-color:var(--b3-block-ref-background);
 	border-bottom: 1px dashed var(--b3-theme-on-surface);
 }
@@ -1445,7 +1483,8 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 /*引用块弹出框*/
 .block__popover--open{
 	border:none;
-	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
+	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+	animation: menu 0.2s ease-in-out;
 }
 .block__edit>.protyle-breadcrumb>.block__icon svg{
 	color:var(--b3-theme-on-surface);
@@ -1593,6 +1632,9 @@ div#historyContainer{
 ::-webkit-scrollbar-thumb{
 	border-radius: var(--webkit-scrollbar-thumb);
 }
+.protyle-content{
+	overflow: overlay;
+}
 /* 动态加载和调节进度条*/
 .b3-slider{height:24px;}
 .b3-slider::-webkit-slider-runnable-track {
@@ -1626,6 +1668,7 @@ padding:3px;
 .status{
 	height:30px;
 	background-color:transparent;
+	margin-top: -30px;
 }
 .status .toolbar__item{
 	margin:  7px 5px 13px 5px;
@@ -1637,22 +1680,11 @@ padding:3px;
 	padding:5px;
 	color:var(--b3-dockright-color);
 }
-.body--win32>.fn__flex-1,#layouts,#layouts>.fn__flex-1
+.body--win32>.fn__flex-1
 {
 	overflow:visible;
 }
-#layouts>.fn__flex:last-child{
-	opacity:0;
-}
-#layouts>.fn__flex-1>.fn__flex-column{
-	box-shadow: 0px 30px 0px var(--b3-fn__flex-column-background);
-}
-#layouts>.fn__flex-1>.fn__flex-shrink{
-	box-shadow: 0px 30px 0px var(--b3-fn__flex-shrink-background);
-}
-#layouts>.fn__flex-1>.layout__center{
-	box-shadow: 0px 30px 0px var(--b3-theme-background);
-}
+
 .dock#dockLeft{
 	box-shadow: 0px 30px 0px var(--b3-dock-background);
 }
@@ -1690,4 +1722,16 @@ padding:3px;
 	opacity:1;
 	max-width:400px;
 	transition: max-width 500ms ease-out;
+}
+
+.layout#layouts .fn__flex-column>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+padding-bottom:30px;}
+
+.status #barFeedback,.status #barLock,.status #barDebug{
+	position:absolute;
+	right:0px;
+}
+.status:hover #barFeedback,.status:hover #barLock,.status:hover #barDebug{
+	position:relative;
+	animation: item-focus 0.2s ease-in-out;
 }
