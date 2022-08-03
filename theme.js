@@ -76,6 +76,20 @@ function SubMenu(selectid,selecttype,className = 'b3-menu__submenu') {
 	node.appendChild(Removeth(selectid))
 	node.appendChild(Defaultth(selectid))
   }
+  if(selecttype=="NodeBlockquote"){
+    node.appendChild(Error(selectid))
+	node.appendChild(Warn(selectid))
+	node.appendChild(Bug(selectid))
+	node.appendChild(Check(selectid))
+	node.appendChild(Light(selectid))
+	node.appendChild(Question(selectid))
+	node.appendChild(Wrong(selectid))
+	node.appendChild(Info(selectid))
+	node.appendChild(Pen(selectid))
+	node.appendChild(Note(selectid))
+	node.appendChild(Bell(selectid))
+    node.appendChild(Defaultbq(selectid))	
+  }
 return node;
 }
 
@@ -176,6 +190,126 @@ function Defaultth(selectid){
   button.onclick=ViewMonitor
   return button
 }
+function Error(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","error")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f6ab"></use></svg><span class="b3-menu__label">禁止</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Warn(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","warn")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-26a0"></use></svg><span class="b3-menu__label">警告</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Bug(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","bug")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f41b"></use></svg><span class="b3-menu__label">bug</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Check(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","check")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-2705"></use></svg><span class="b3-menu__label">正确</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Light(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","light")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f4a1"></use></svg><span class="b3-menu__label">灵感</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Question(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","question")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-2753"></use></svg><span class="b3-menu__label">问题</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Wrong(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","wrong")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-274c"></use></svg><span class="b3-menu__label">错误</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Info(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","info")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-2139"></use></svg><span class="b3-menu__label">信息</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Pen(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","pen")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f58b"></use></svg><span class="b3-menu__label">记录</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Note(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","note")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f4d3"></use></svg><span class="b3-menu__label">汇总</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Bell(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","bell")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f514"></use></svg><span class="b3-menu__label">提醒</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function Defaultbq(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","b")
+  button.setAttribute("custom-attr-value","")
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconRefresh"></use></svg><span class="b3-menu__label">恢复默认样式</span>`
+  button.onclick=ViewMonitor
+  return button
+}
 function MenuSeparator(className = 'b3-menu__separator') {
   let node = document.createElement('button');
   node.className = className;
@@ -213,7 +347,7 @@ function MenuShow() {
       if(selectinfo){
       let selecttype = selectinfo.type
       let selectid = selectinfo.id
-      if(selecttype=="NodeList"||selecttype=="NodeTable"){
+      if(selecttype=="NodeList"||selecttype=="NodeTable"||selecttype=="NodeBlockquote"){
         setTimeout(()=>InsertMenuItem(selectid,selecttype), 0)
       }
     }
