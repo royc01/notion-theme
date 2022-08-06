@@ -10,6 +10,7 @@
 * 竖向搜索结果跳动偏移修复
 * 侧栏大纲样式修改，减少数字对标题的干扰
 * 底栏按钮与状态统一移到右下角，增大左侧显示面积
+* 修复callout在list中的样式
 ## 2.3.1
 * 新增引述块callout样式
 ![image.jpg](https://tva1.sinaimg.cn/large/8ff342a8gy1h4tx557jc6j20xc0m8aby.jpg)
