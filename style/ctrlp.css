@@ -17,6 +17,7 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 	flex-wrap: wrap;
 }
 
+
 /*设置需要占满一行的项目*/
 body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column .search__header,
 body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column>.b3-form__space--small {
@@ -58,6 +59,10 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 		/*width:45vw;*/
 		width: calc(100%);
 		height: calc(50% - 85px) !important;
+	}
+	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column {
+	flex-direction: column !important;
+	flex-wrap: nowrap;
 	}
 }
 
