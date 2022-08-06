@@ -69,7 +69,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background13) inset;
 }
 
-.bq[custom-b~=error]::before {
+.bq[custom-b~=error]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -86,7 +86,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background7) inset;
 }
 
-.bq[custom-b~=warn]::before {
+.bq[custom-b~=warn]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -103,7 +103,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background11) inset;
 }
 
-.bq[custom-b~=bug]::before {
+.bq[custom-b~=bug]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -120,7 +120,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background8) inset;
 }
 
-.bq[custom-b~=check]::before {
+.bq[custom-b~=check]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -137,7 +137,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background6) inset;
 }
 
-.bq[custom-b~=light]::before {
+.bq[custom-b~=light]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -154,7 +154,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background12) inset;
 }
 
-.bq[custom-b~=question]::before {
+.bq[custom-b~=question]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -171,7 +171,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background13) inset;
 }
 
-.bq[custom-b~=wrong]::before {
+.bq[custom-b~=wrong]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -188,7 +188,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background10) inset;
 }
 
-.bq[custom-b~=info]::before {
+.bq[custom-b~=info]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -205,7 +205,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background3) inset;
 }
 
-.bq[custom-b~=pen]::before {
+.bq[custom-b~=pen]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -222,7 +222,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background1) inset;
 }
 
-.bq[custom-b~=note]::before {
+.bq[custom-b~=note]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
@@ -239,7 +239,7 @@
 	box-shadow:0 0 0 2px var(--b3-font-background5) inset;
 }
 
-.bq[custom-b~=bell]::before {
+.bq[custom-b~=bell]::after {
     content: "";
     position: absolute;
 	top: 1.1em;
