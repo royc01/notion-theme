@@ -67,6 +67,7 @@
     background-color: var(--b3-bq-background13);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background13) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=error]::after {
@@ -84,6 +85,7 @@
     background-color: var(--b3-bq-background7);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background7) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=warn]::after {
@@ -101,6 +103,7 @@
     background-color: var(--b3-bq-background11);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background11) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=bug]::after {
@@ -118,6 +121,7 @@
     background-color: var(--b3-bq-background8);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background8) inset;
+	
 }
 
 .bq[custom-b~=check]::after {
@@ -135,6 +139,7 @@
     background-color: var(--b3-bq-background6);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background6) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=light]::after {
@@ -152,6 +157,7 @@
     background-color: var(--b3-bq-background12);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background12) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=question]::after {
@@ -169,6 +175,7 @@
     background-color: var(--b3-bq-background13);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background13) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=wrong]::after {
@@ -186,6 +193,7 @@
     background-color: var(--b3-bq-background10);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background10) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=info]::after {
@@ -203,6 +211,7 @@
     background-color: var(--b3-bq-background3);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background3) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=pen]::after {
@@ -220,6 +229,7 @@
     background-color: var(--b3-bq-background1);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background1) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=note]::after {
@@ -237,6 +247,7 @@
     background-color: var(--b3-bq-background5);
 	border-radius:5px;
 	box-shadow:0 0 0 2px var(--b3-font-background5) inset;
+	left:0.25em;
 }
 
 .bq[custom-b~=bell]::after {
