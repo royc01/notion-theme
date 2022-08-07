@@ -6,6 +6,8 @@
 * 把主题文件里的`n-topbar.css`文件拷贝到工作空间`data\widgets`目录里面
 * 此方法适用于：notion-theme、notion-dark和salt主题
 ---
+## 2.3.3
+* 修复callout在list中左侧导线偏移问题
 ## 2.3.2
 * 竖向搜索结果跳动偏移修复
 * 侧栏大纲样式修改，减少数字对标题的干扰
