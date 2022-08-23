@@ -744,7 +744,9 @@ input[type="checkbox" i] {
 .layout-tab-bar .item--pin{
 	margin-right:8px;
 	padding:0 2px 0 4px;
-	width:24px;
+}
+.layout-tab-bar .item__icon>img, .layout-tab-bar .item__icon>svg{
+	width: 24px;
 }
 .layout-tab-bar .item--pin .item__icon{
 	padding: 4px 0px;
@@ -1640,6 +1642,7 @@ div#historyContainer{
 }
 .protyle-content{
 	overflow: overlay;
+	z-index:2;
 }
 /* 动态加载和调节进度条*/
 .b3-slider{height:24px;}
