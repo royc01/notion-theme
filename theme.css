@@ -1642,7 +1642,7 @@ div#historyContainer{
 }
 .protyle-content{
 	overflow: overlay;
-	z-index:2;
+	z-index:1;
 }
 /* 动态加载和调节进度条*/
 .b3-slider{height:24px;}
