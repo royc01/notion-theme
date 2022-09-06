@@ -712,7 +712,7 @@ input[type="checkbox" i] {
 .layout-tab-bar .item__icon svg{
 	height: 16px;
 }
-.layout-tab-bar .item:not(:last-child){
+.layout-tab-bar .item{
 	box-shadow:none!important;
 }
 .layout__wnd--active .layout-tab-bar .item--focus{
@@ -1642,7 +1642,7 @@ div#historyContainer{
 }
 .protyle-content{
 	overflow: overlay;
-	z-index:1;
+	z-index:2;
 }
 /* 动态加载和调节进度条*/
 .b3-slider{height:24px;}
