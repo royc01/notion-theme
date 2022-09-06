@@ -6,6 +6,8 @@
 * 把主题文件里的`n-topbar.css`文件拷贝到工作空间`data\widgets`目录里面
 * 此方法适用于：notion-theme、notion-dark和salt主题
 ---
+## 2.3.6
+* 适配2.1.13页签
 ## 2.3.5
 * 修复块标不能点击bug
 ## 2.3.4
