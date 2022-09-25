@@ -16,10 +16,9 @@
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
-		<sliceSourceBounds  bottomLeftOrigin="true" height="11" width="11" x="8.5" y="8.5"></sliceSourceBounds>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="12" width="12" x="28" y="8"></sliceSourceBounds>
 	</sfw>
 </metadata>
-<desc>Created with Sketch.</desc>
-<path d="M34,8.5c-3,0-5.5,2.5-5.5,5.5s2.5,5.5,5.5,5.5c3,0,5.5-2.5,5.5-5.5S37,8.5,34,8.5z M34,17.6c-2,0-3.6-1.6-3.6-3.6
-	s1.6-3.6,3.6-3.6s3.6,1.6,3.6,3.6S36,17.6,34,17.6z"/>
+<path d="M34,8c-3.3,0-6,2.7-6,6s2.7,6,6,6s6-2.7,6-6S37.3,8,34,8z M34,17.3c-1.8,0-3.3-1.5-3.3-3.3s1.5-3.3,3.3-3.3s3.3,1.5,3.3,3.3
+	S35.8,17.3,34,17.3z"/>
 </svg>

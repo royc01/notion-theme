@@ -8,7 +8,7 @@
 	bottom:0.5em;
 	border-radius:3px;
 	background-color:var(--h1-list-graphic);
-	opacity:0.3;
+	opacity:0.5;
 }
 .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1>[spellcheck="false"]::after{
 	bottom:0.2em;
@@ -24,7 +24,7 @@
 	bottom:0.76em;
 	border-radius:3px;
 	background-color:var(--h2-list-graphic);
-	opacity:0.3;
+	opacity:0.5;
 	box-shadow: 0.25em 0.25em 0 0 var(--h2-list-graphic);
 }
 .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2>[spellcheck="false"]::after{
@@ -41,7 +41,7 @@
 	bottom:0.62em;
 	border-radius:3px;
 	background-color:var(--h3-list-graphic);
-	opacity:0.3;
+	opacity:0.5;
 	box-shadow: 0.25em 0.25em 0 0 var(--h3-list-graphic),0 0.25em 0 0 var(--h3-list-graphic);
 }
 
@@ -55,7 +55,7 @@
 	bottom:0.68em;
 	border-radius:3px;
 	background-color:var(--h4-list-graphic);
-	opacity:0.3;
+	opacity:0.5;
 	box-shadow: 0.25em 0.25em 0 0 var(--h4-list-graphic),0 0.25em 0 0 var(--h4-list-graphic),0.25em 0 0 0 var(--h4-list-graphic);
 }
 
@@ -69,7 +69,7 @@
 	bottom:0.8em;
 	border-radius:3px;
 	background-color:var(--h5-list-graphic);
-	opacity:0.3;
+	opacity:0.5;
 	box-shadow: 0.25em 0.25em 0 0 var(--h5-list-graphic),0 0.25em 0 0 var(--h5-list-graphic),0.25em 0 0 0 var(--h5-list-graphic),0 -0.25em 0 0 var(--h5-list-graphic);
 }
 
@@ -83,6 +83,6 @@
 	bottom:1em;
 	border-radius:3px;
 	background-color:var(--h6-list-graphic);
-	opacity:0.3;
+	opacity:0.5;
 	box-shadow: 0.25em 0.25em 0 0 var(--h6-list-graphic),0 0.25em 0 0 var(--h6-list-graphic),0.25em 0 0 0 var(--h6-list-graphic),0 -0.25em 0 0 var(--h6-list-graphic),0.25em -0.25em 0 0 var(--h6-list-graphic);
 }
