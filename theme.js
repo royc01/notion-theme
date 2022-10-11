@@ -936,7 +936,7 @@ function collapseExpand_Head_List() {
 
 
 
-/**----------------日历面板----------------
+/*----------------日历面板----------------*/
 function initcalendar() {
   // 把日历图标 放到  搜索图标前面
   var barSearch = document.getElementById("barSearch");
@@ -988,7 +988,7 @@ function initcalendar() {
   // 点击其他区域时，隐藏日历面板
   window.addEventListener("click", hideCalendarPanel, false);
 }
-*/
+
 
 
 
@@ -1881,7 +1881,7 @@ setTimeout(() => {
 
         init()//最近打开文档
 		
-		//initcalendar()//最近打开文档
+		initcalendar()//打开日历
 
         console.log("==============>附加CSS和特性JS_已经执行<==============");
     }

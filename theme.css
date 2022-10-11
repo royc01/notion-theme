@@ -335,9 +335,9 @@ body{
 	border-radius:3px;
 }
 .toolbar__item svg{
-	padding: 5px;
-	height: 12px;
-	width: 12px;	
+	padding: 4px;
+	height: 13px;
+	width: 13px;	
 }
 .toolbar__item:not(.toolbar__item--disabled) svg{
 	color: var(--b3-theme-on-background);
@@ -407,6 +407,9 @@ body{
 }
 .dock__item svg{
 	width: 14px;
+}
+.dock__item {
+	padding-left:6px!important;
 }
 .dock#dockLeft .dock__item:hover,
 .dock#dockRight .dock__item:hover{
@@ -527,9 +530,7 @@ body{
 	color:var(--b3-list-background-more);
 }
 /*新建文档*/
-.b3-list-item__action[data-type='new']{
-	box-shadow: 0px 0px 0px 1px var(--b3-border-color) inset;
-}
+
 /*引用数*/
 .b3-list-item .counter:not(:empty){
 	height: 20px;
@@ -668,6 +669,17 @@ input[type="checkbox" i] {
 .file-tree ul.b3-list.b3-list--background [data-subtype="h6"] svg.b3-list-item__graphic:hover{
 	background-color:var(--h6-list-graphic);
 	opacity:0.2;
+}
+/* 反链面板 */
+.backlinkList>.b3-list>.protyle,.backlinkMList>.b3-list>.protyle{
+	margin:0 4px 4px 4px;
+	border-radius:3px;
+}
+.sy__backlink .b3-text-field{
+	height:24px;
+}
+.sy__backlink .b3-text-field:not(.b3-text-field:focus){
+	box-shadow: inset 0 0 0 1px var(--b3-layout-resize);
 }
 /*分界线*/
 .layout__resize:after{
@@ -1047,8 +1059,9 @@ input[type="checkbox" i] {
 /*块标 */
 .protyle-gutters button svg {
     color: var(--b3-gutters-color);
-	padding:0 4px;
+	padding:0 5px;
 	border-radius:3px;
+	height: 24px;
 }
 .protyle-gutters button[data-type="fold"] svg {
 	padding:0px 6px;
@@ -1096,11 +1109,13 @@ input[type="checkbox" i] {
 	
 }
 
-.protyle-toolbar__item {
-	height:30px;
+.protyle-toolbar__item{
+	height:32px;
     width:30px;
 }
-
+.protyle-toolbar__item:not(.protyle-toolbar__item--current){
+	color:var(--b3-theme-on-background);
+}
 .protyle-toolbar__item[data-type='blockRef']{
 	padding-right:3px;
 	width:31px;
@@ -1296,7 +1311,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 }
 .protyle-wysiwyg [data-node-id][custom-f~=auto] table {
     width: auto !important;
-    white-space: nowrap;
+    white-space: pre;
 }
 /* 表头和表行格式一致 */
 .protyle-wysiwyg [data-node-id][custom-t~=biaotou] table th {
@@ -1732,11 +1747,8 @@ padding:3px;
 	border-radius:5px;
 	background-color:var(--b3-theme-primary);
 	color:#fff;
-	padding-left:10px;
+	padding: 1px 0 0 10px ;
 	margin:0 5px 5px 5px;
-	opacity:0;
-	transition: opacity 300ms;
-	transition-delay: 3000ms;
 	position:relative;
 	right:36px;
 }
@@ -1772,11 +1784,15 @@ padding:3px;
 padding-bottom:30px;}
 
 .status #barFeedback,.status #barLock,.status #barDebug{
-	position:absolute;
+	margin:0;
+	padding:0;
+	width:0px;
 	right:36px;
 }
 .status:hover #barFeedback,.status:hover #barLock,.status:hover #barDebug{
-	position:relative;
+	margin:  7px 5px 13px 5px;
+	padding:2px;
+	width:26px;
 	animation: item-focus 0.2s ease-in-out;
 }
 .status #barHelp{
@@ -1823,13 +1839,16 @@ padding-bottom:30px;}
     content: " ••• ";
     display: inline;
     vertical-align: 15%;
-    font-size: 60%;
+    font-size: 10px;
     color: var(--b3-dock-item-active-color);
     margin-left: 9px;
     border-radius: 4px;
 	background-color: var(--b3-card-error-background);
 	box-shadow: 0px 0px 0px 2px var(--b3-card-error-background) inset;
 	padding:1px 0px 3px 0px;
+	opacity:1;
+	position:unset;
+	float:unset;
 }
 
 

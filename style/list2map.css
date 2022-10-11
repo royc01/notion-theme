@@ -126,11 +126,13 @@
 }
 /*单个子项直线*/
 .protyle-wysiwyg *[custom-f="dt"] .list>.li:first-child:nth-last-child(2)::after{   
+	width: 0px;
+}
+/*单个子项直线对齐修正*/
+.list[custom-f="dt"] .list:has(>.li:first-child:nth-last-child(2))::after{   
 	border-radius:0px; 
-	width: 42px;
-	left:-19px;
+	width: 39px;
 	margin-bottom:-2px;
-	box-shadow: 0px -2px 0px var(--b3-theme-background) inset,0px 2px 0px var(--b3-theme-background);
 }
 /*单子项居中*/
 .protyle-wysiwyg *[custom-f="dt"] .list>.li:first-child:nth-last-child(2){
@@ -159,7 +161,6 @@
     border-top:var(--b3-border-daotu);   
     width: 20px; 
 	height: 0;  
-	z-index:-1;
 }
 /*取消根目录线*/
 div *[custom-f="dt"]>[data-type="NodeListItem"]::before,
