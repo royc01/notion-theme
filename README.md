@@ -6,6 +6,19 @@
 * 把主题文件里的`n-topbar.css`文件拷贝到工作空间`data\widgets`目录里面
 * 此方法适用于：notion-theme、notion-dark和salt主题
 ---
+## 2.4.0
+* 标题折叠后【···】显示bug
+* 导图导线对齐
+* 修改右下角工具展开动画
+* 修正topbar图标显示
+* 调节dock图标大小
+* 调整工具栏样式
+* 调整块标样式
+* 新版反链面板，提及样式适配
+* 修复批注显示问题
+* 表格自动宽度空格bug
+* dark主题代码块行号背景修正
+* 开启notion-light主题日历功能
 ## 2.3.7
 * 引入[UFDXD](https://github.com/UFDXD) HBuilderX-Light主题各种功能
   * 显示文档创建时间
