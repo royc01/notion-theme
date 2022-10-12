@@ -1,11 +1,11 @@
-# Notion配色版主題
+# light dark salt 三合一主题
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
-### 显示顶栏方式：
-* 把主题文件里的`n-topbar.css`文件拷贝到工作空间`data\widgets`目录里面
-* 此方法适用于：notion-theme、notion-dark和salt主题
----
+## 2.5.0
+* 三款主题合并在一起，左上角按钮切换
+* 加入顶栏固定按钮，左上角切换
+* 修复日历路径问题，适配各版本的配色
 ## 2.4.0
 * 标题折叠后【···】显示bug
 * 导图导线对齐

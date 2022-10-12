@@ -24,6 +24,21 @@ function inject(){
   }
 }
 inject()
+
+
+/*----------------------------------创建notion主题工具栏区域----------------------------------*/
+function createnotionToolbar() {
+    var siYuanToolbar = getSiYuanToolbar();
+
+    var notionToolbar = getnotionToolbar();
+    var windowControls = document.getElementById("windowControls");
+
+    if (notionToolbar) siYuanToolbar.removeChild(notionToolbar);
+    notionToolbar = insertCreateBefore(windowControls, "div", "notionToolbar");
+    notionToolbar.style.marginRight = "14px";
+    notionToolbar.style.marginLeft = "11px";
+}
+
   /****************************思源API操作**************************/ 
   async function 设置思源块属性(内容块id, 属性对象) {
     let url = '/api/attr/setBlockAttrs'
@@ -48,7 +63,7 @@ inject()
     return r.code === 0 ? r.data : null
   }
   
- 
+
   /****UI****/
   function ViewSelect(selectid,selecttype){
   let button = document.createElement("button")
@@ -541,6 +556,85 @@ function getDocumentTime(tilteElement) {
 }
 
 
+/**---------------------------------------------------------主题-------------------------------------------------------------- */
+
+function themeButton() {
+    notionThemeToolbarAddButton(
+        "按钮:notion-dark",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"notion-dark主题",
+        "/appearance/themes/notion-theme/img/moon2.svg",
+        "/appearance/themes/notion-theme/img/moon.svg",
+        () => {
+            loadStyle("/appearance/themes/notion-theme/style/topbar/notion-dark.css", "notion-dark主题").setAttribute("topicfilter", "按钮:notion-dark");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("notion-dark主题").remove();
+        },
+        true
+    );
+
+    notionThemeToolbarAddButton(
+        "按钮:salt",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"salt主题",
+        "/appearance/themes/notion-theme/img/salt2.svg",
+        "/appearance/themes/notion-theme/img/salt.svg",
+        () => {
+            loadStyle("/appearance/themes/notion-theme/style/topbar/salt.css", "salt主题").setAttribute("topicfilter", "按钮:salt");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("salt主题").remove();
+        },
+        true
+    );
+}
+
+
+/**---------------------------------------------------------顶栏-------------------------------------------------------------- */
+
+function topbarfixedButton() {
+    notionThemeToolbarAddButton(
+        "topBar",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"topBar固定",
+        "/appearance/themes/notion-theme/img/topbar2.svg",
+        "/appearance/themes/notion-theme/img/topbar.svg",
+        () => {
+            loadStyle("/appearance/themes/notion-theme/style/topbar/top-fixed.css", "顶栏固定").setAttribute("topBarcss", "顶栏固定");
+            qucuFiiter2();
+        },
+        () => {
+            document.getElementById("顶栏固定").remove();
+        },
+        true
+    );
+}
+
+ //去除主题所有滤镜还原按钮状态
+function qucuFiiter() {
+    var Topicfilters = document.querySelectorAll("head [topicfilter]");
+    Topicfilters.forEach(element => {
+        var offNo = localStorage.getItem(element.getAttribute("topicfilter"));
+        if (offNo == "1") {
+            document.getElementById(element.getAttribute("topicfilter")).click();
+            element.remove();
+        }
+    });
+}
+
+function qucuFiiter2() {
+    var Topicfilters2 = document.querySelectorAll("head [topBarcss]");
+    Topicfilters2.forEach(element => {
+        var offNo = localStorage.getItem(element.getAttribute("topBarcss"));
+        if (offNo == "1") {
+            document.getElementById(element.getAttribute("topBarcss")).click();
+            element.remove();
+        }
+    });
+}
 
 /**----------------------------------自动展开悬浮窗折叠列表,展开搜索条目折叠列表,聚焦单独列表-----体验优化----------------------------------*/
 
@@ -594,7 +688,7 @@ function autoOpenList() {
 
 /**----------------------------------列表折叠内容预览查看---------------------------------- */
 function collapsedListPreview() {
-    mousemoveRunFun(collapsedListPreviewEvent, 3000)
+    BodyEventRunFun("mouseover", collapsedListPreviewEvent, 3000)
 }
 
 
@@ -956,7 +1050,7 @@ function initcalendar() {
     data-subtype="widget"
   >
     <div class="iframe-content">
-      <iframe id="calendarPanel" style="visibility:hidden;position: fixed; z-index: 1000; top: 225px; left: 170px;  width: 300px; height: 350px; background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;border:none; border-radius: 5px; transform: translate(-50%, -50%); overflow: auto;" src="/appearance/themes/notion-light/calendar" data-src="/appearance/themes/notion-light/calendar" data-subtype="widget" ></iframe>
+      <iframe id="calendarPanel" style="visibility:hidden;position: fixed; z-index: 1000; top: 225px; left: 170px;  width: 300px; height: 350px; background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;border:none; border-radius: 5px; transform: translate(-50%, -50%); overflow: auto;" src="/appearance/themes/notion-theme/calendar" data-src="/appearance/themes/notion-theme/calendar" data-subtype="widget" ></iframe>
     </div>
   </div>`
   );
@@ -1348,6 +1442,96 @@ async function 解析响应体(response) {
 
 
 //+++++++++++++++++++++++++++++++++辅助API++++++++++++++++++++++++++++++++++++
+
+
+/**
+ * 方便为主题功能添加开关按钮，并选择是否拥有记忆状态
+ * @param {*} ButtonID 按钮ID。
+ * @param {*} ButtonTitle 按钮作用提示文字。
+ * @param {*} NoButtonSvg 按钮激活Svg图标路径
+ * @param {*} OffButtonSvg 按钮未激活Svg图标路径
+ * @param {*} NoClickRunFun 按钮开启执行函数
+ * @param {*} OffClickRunFun 按钮关闭执行函数
+ * @param {*} Memory 是否设置记忆状态 true为是留空或false为不设置记忆状态。
+ */
+function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
+    var notionToolbar = document.getElementById("notionToolbar");
+    if (notionToolbar == null) {
+        var toolbarEdit = document.getElementById("toolbarEdit");
+        var windowControls = document.getElementById("windowControls");
+
+        if (toolbarEdit == null && windowControls != null) {
+            notionToolbar = document.createElement("div");
+            notionToolbar.id = "notionToolbar";
+            notionToolbar.style.marginLeft = "11px";
+            windowControls.parentElement.insertBefore(notionToolbar, windowControls);
+        } else if (toolbarEdit != null) {
+            notionToolbar = insertCreateBefore(toolbarEdit, "div", "notionToolbar");
+            notionToolbar.style.position = "relative";
+            notionToolbar.style.height = "25px";
+            notionToolbar.style.paddingTop = "5px";
+            notionToolbar.style.marginLeft = "11px";
+        }
+    }
+
+    var addButton = addinsertCreateElement(notionToolbar, "div");
+    addButton.style.width = "26px";
+    addButton.style.height = "26px";
+    addButton.style.float = "left";
+	addButton.style.border = "6px solid transparent";
+    addButton.style.margin = "4px 3px";
+    addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
+    addButton.style.backgroundRepeat = "no-repeat";
+    addButton.style.backgroundPosition = "left top";
+    addButton.style.backgroundSize = "100%";
+
+    
+    addButton.id = ButtonID;
+	addButton.setAttribute("class", ButtonTitle);
+	addButton.setAttribute("aria-label", ButtonLabel)
+
+    var offNo = "0";
+
+
+
+    if (Memory == true) {
+        offNo = localStorage.getItem(ButtonID);
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+            localStorage.setItem(ButtonID, "0");
+            NoClickRunFun(addButton);
+            localStorage.setItem(ButtonID, "1");
+        } else if (offNo != "0") {
+            offNo = "0";
+            localStorage.setItem(ButtonID, "0");
+        }
+    }
+
+    AddEvent(addButton, "click", () => {
+
+        if (offNo == "0") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+
+            NoClickRunFun(addButton);
+            if (Memory != null) localStorage.setItem(ButtonID, "1");
+            offNo = "1";
+            return;
+        }
+
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
+            addButton.style.filter = "none";
+            OffClickRunFun(addButton);
+            if (Memory != null) localStorage.setItem(ButtonID, "0");
+            offNo = "0";
+            return;
+        }
+    });
+
+
+}
+
+
 /**
  * 在DIV光标位置插入内容
  * @param {*} content 
@@ -1366,12 +1550,12 @@ function insertContent(content) {
             range.insertNode(frag); //设置选择范围的内容为插入的内容
             var contentRange = range.cloneRange(); //克隆选区
 
-                contentRange.setStartAfter(lastNode); //设置光标位置为插入内容的末尾
-                contentRange.collapse(true); //移动光标位置到末尾
-                sel.removeAllRanges(); //移出所有选区
-                sel.addRange(contentRange); //添加修改后的选区
-    
-                    }
+            contentRange.setStartAfter(lastNode); //设置光标位置为插入内容的末尾
+            contentRange.collapse(true); //移动光标位置到末尾
+            sel.removeAllRanges(); //移出所有选区
+            sel.addRange(contentRange); //添加修改后的选区
+
+        }
     }
 }
 
@@ -1411,9 +1595,9 @@ function getPosition(element) {
  * @param {*} element 
  * @param {*} index 
  */
- function setCursor(element,index) {
-    var codeEl =element.firstChild;
-    var selection= window.getSelection();
+function setCursor(element, index) {
+    var codeEl = element.firstChild;
+    var selection = window.getSelection();
     // 创建新的光标对象
     let range = selection.getRangeAt(0);
     // 光标对象的范围界定为新建的代码节点
@@ -1593,6 +1777,18 @@ function loadScript(url, type = 'module') {
 
 
 
+/**
+ * 得到思源toolbar
+ * @returns 
+ */
+function getSiYuanToolbar() { return document.getElementById("toolbar"); }
+
+/**
+ * 得到notionToolbar
+ * @returns 
+ */
+function getnotionToolbar() { return document.getElementById("notionToolbar"); }
+
 
 
 /**简单判断目前思源是否是手机模式 */
@@ -1606,22 +1802,25 @@ function isPhone() {
  * @param {string} url 样式地址
  * @param {string} id 样式 ID
  */
-function loadStyle(url, id) {
+function loadStyle(url, id, cssName) {
 
     var headElement = document.head;
 
-    if (!id) console.error("未指定外部css文件引入ID");
-
     let style = document.getElementById(id);
-    if (style) headElement.removeChild(style);
+    if (id != null) {
+        if (style) headElement.removeChild(style);
+    }
 
     style = document.createElement('link');
+    if (id != null) style.id = id;
 
-    style.id = id;
+
     style.setAttribute('type', 'text/css');
     style.setAttribute('rel', 'stylesheet');
     style.setAttribute('href', url);
+    if (cssName != null) style.setAttribute("class", cssName);
     headElement.appendChild(style);
+    return style;
 }
 
 /**
@@ -1654,7 +1853,24 @@ function getArrEqual(arr1, arr2) {
     return newArr;
 }
 
-
+/**
+ * 思源吭叽元素属性解析看是否包含那种行级元素类型
+ * @param {} attributes 
+ * @param {*} attribute 
+ * @returns 
+ */
+function attributesContains(attributes, attribute) {
+    if (attribute == true) return;
+    var arr = attributes.split(" ");
+    if (arr.length != 0) {
+        arr.forEach((v) => {
+            if (v == attribute) attribute = true;
+        });
+        return attribute == true ? true : false;
+    } else {
+        return attributes == attribute;
+    }
+}
 /**
  * 间隔执行指定次数的函数(不立即执行)
  * @param {*} time 间隔时间s
@@ -1713,33 +1929,31 @@ function diguiTooALL(element, judgeFun) {
 
 
     digui(element);
+    return target;
 
     function digui(elem) {
         var child = elem.children;
-        if (child.length = 0) return;
+        if (child.length == 0) return;
 
         for (let index = 0; index < child.length; index++) {
             const element2 = child[index];
-
             if (judgeFun(element2)) {
                 target.push(element2);
                 digui(element2);
             } else {
                 digui(element2);
             }
-            return;
         }
-        return target;
     }
 }
 
 /**
- * 递归DOM元素查找深度子级的第一个符合条件的元素
+ * 递归DOM元素查找深度子级的第一个符合条件的元素-子级的子级深度搜索赶紧后在搜索下一个子级
  * @param {*} element 要查找DOM元素
  * @param {*} judgeFun 查找函数 : fun(v) return true or false
  * @returns element
  */
-function diguiTooONE(element, judgeFun) {
+function diguiTooONE_1(element, judgeFun) {
 
     if (element == null) return null;
     if (judgeFun == null) return null;
@@ -1748,7 +1962,7 @@ function diguiTooONE(element, judgeFun) {
 
     function digui(elem) {
         var child = elem.children;
-        if (child.length = 0) return null;
+        if (child.length == 0) return null;
 
         for (let index = 0; index < child.length; index++) {
             const element2 = child[index];
@@ -1759,6 +1973,46 @@ function diguiTooONE(element, judgeFun) {
                 if (item == null) continue;
                 return item;
             }
+        }
+        return null;
+    }
+}
+
+/**
+ * 递归DOM元素查找深度子级的第一个符合条件的元素-同层全部筛选一遍在依次深度搜索。
+ * @param {*} element 要查找DOM元素
+ * @param {*} judgeFun 查找函数 : fun(v) return true or false
+ * @param {*} xianz 限制递归最大次数
+ * @returns element
+ */
+function diguiTooONE_2(element, judgeFun, xianz = 999) {
+
+    if (element == null || element.firstElementChild == null) return null;
+    if (judgeFun == null) return null;
+    var i = xianz <= 0 ? 10 : xianz;
+    return digui(element);
+
+    function digui(elem) {
+
+        if (i <= 0) return null;
+        xianz--;
+
+        var child = elem.children;
+        var newchild = [];
+        for (let index = 0; index < child.length; index++) {
+            const element2 = child[index];
+            if (judgeFun(element2)) {
+                return element2;
+            } else {
+                if (newchild.firstElementChild != null) newchild.push(element2);
+            }
+        }
+
+        for (let index = 0; index < newchild.length; index++) {
+            const element2 = newchild[index];
+            var item = digui(element2);
+            if (item == null) continue;
+            return item;
         }
         return null;
     }
@@ -1774,7 +2028,7 @@ function isFatherFather(element, judgeFun, upTimes) {
     var i = 0;
     for (; ;) {
         if (!element) return null;
-        if (upTimes < 1) return null;
+        if (upTimes < 1 || i >= upTimes) return null;
         if (judgeFun(element)) return element;
         element = element.parentElement;
         i++;
@@ -1794,20 +2048,31 @@ function getFocusedBlock() {
     while (block != null && block.dataset.nodeId == null) block = block.parentElement;
     return block;
 }
-
+/**
+ * 清除选中文本
+ */
+function clearSelections() {
+    if (window.getSelection) {
+        var selection = window.getSelection();
+        selection.removeAllRanges();
+    } else if (document.selection && document.selection.empty) {
+        document.selection.empty();
+    }
+}
 
 /**
- * Body中检测鼠标移动执行
+ * body全局事件频率优化执行
+ * @param {*} eventStr 那种事件如 "mouseover"
  * @param {*} fun(e) 执行函数,e：事件对象
- * @param {*} accurate 精确度：每隔多少毫秒检测一次是否鼠标移动
- * @param {*} delay 检测到鼠标移动后延时执行的ms
+ * @param {*} accurate 精确度：每隔多少毫秒检测一次触发事件执行
+ * @param {*} delay 检测到事件触发后延时执行的ms
  * @param {*} frequency 执行后再延时重复执行几次
  * @param {*} frequencydelay 执行后再延时重复执行之间的延时时间ms
  */
-function mousemoveRunFun(fun, accurate = 100, delay = 0, frequency = 1, frequencydelay = 16) {
+function BodyEventRunFun(eventStr, fun, accurate = 100, delay = 0, frequency = 1, frequencydelay = 16) {
     var isMove = true;
     var _e = null;
-    AddEvent(document.body, "mousemove", (e) => { isMove = true; _e = e })
+    AddEvent(document.body, eventStr, (e) => { isMove = true; _e = e })
     setInterval(() => {
         if (!isMove) return;
         isMove = false;
@@ -1855,6 +2120,71 @@ function c(...data) {
     console.log(data);
 }
 
+/**
+ * 安全While循环
+ * frequency:限制循环次数
+ * 返回值不等于null终止循环
+ */
+function WhileSafety(fun, frequency = 99999) {
+    var i = 0;
+    if (frequency <= 0) {
+        console.log("安全循环次数小于等于0")
+        return;
+    }
+    while (i < frequency) {
+        var _return = fun();
+        if (_return != null || _return != undefined) return _return;
+        i++;
+    }
+}
+/**设置思源块展开 */
+function setBlockfold_0(BlockId) {
+    设置思源块属性(BlockId, { "fold": "0" });
+}
+
+/**设置思源块折叠 */
+function setBlockfold_1(BlockId) {
+    设置思源块属性(BlockId, { "fold": "1" });
+}
+
+/**
+    * 得到光标编辑状态下的显示commonMenu菜单;
+    * @returns 
+    */
+function getcommonMenu_Cursor() {
+    if ((window.getSelection ? window.getSelection() : document.selection.createRange().text).toString().length != 0) return null;
+    var commonMenu = document.querySelector("#commonMenu:not(.fn__none)");
+    if (commonMenu == null) return null;
+    if (commonMenu.firstChild == null) return null;
+    if (commonMenu.children.length < 8) {
+        return commonMenu;
+    }
+    return null;
+}
+
+/**
+    * 得到光标选中编辑状态下的显示commonMenu菜单;
+    * @returns 
+    */
+function getcommonMenu_Cursor2() {
+    if ((window.getSelection ? window.getSelection() : document.selection.createRange().text).toString().length != 0) {
+        return document.querySelector("#commonMenu:not(.fn__none)");
+    };
+    return null;
+}
+
+/**
+ * 得到快选中状态下的显示commonMenu菜单;
+ * @returns 
+ */
+function getcommonMenu_Bolck() {
+    var commonMenu = document.querySelector("#commonMenu:not(.fn__none)");
+    if (commonMenu.children.length < 8) {
+        return commonMenu;
+    }
+    return null;
+}
+
 
 /**++++++++++++++++++++++++++++++++按需调用++++++++++++++++++++++++++++++ */
 
@@ -1863,9 +2193,17 @@ setTimeout(() => {
     if (isPhone()) {
 
         collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
+		
+		themeButton()//主题 
+		
+		topbarfixedButton()//顶栏固定
 
         console.log("==============>附加CSS和特性JS_已经执行<==============");
     } else {
+			
+		themeButton()//主题
+		
+		topbarfixedButton()//顶栏固定
 
         setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
 

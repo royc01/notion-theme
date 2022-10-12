@@ -255,6 +255,7 @@
 	--b3-layout-resize-hover: var(--b3-scroll-color);
 	--flex-width-transition:width 150ms linear; /*调节宽度动画*/
 	--b3-border-fold: rgb(15, 15 , 15, .1);/*折叠边框*/
+	--b3-layout-resize-width: 0px;
 	/* 页签 */
 	--b3-item-focus: rgb(0, 0, 0 ,1);
 	/* 面包屑 */
@@ -423,14 +424,14 @@ body{
 	padding: var(--b3-flex-column-padding);
 	min-height: 90% ;
 }
-/*侧栏滚动出现分割线*/
+/*侧栏滚动出现分割线
 .layout-tab-container>.fn__flex-column>.fn__flex-1{
 	background: linear-gradient(var(--b3-fn__flex-column-background), transparent 100%),
 				linear-gradient(var(--b3-border-scroll), transparent 100%);
     background-size: 100% 30px, 100% 1px;
     background-repeat: no-repeat;
     background-attachment: local, scroll;
-}
+}*/
 .fn__flex >.fn__flex-shrink>.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
 	background-color: var(--b3-fn__flex-shrink-background);
 }
@@ -702,7 +703,7 @@ input[type="checkbox" i] {
 }
 .layout__resize--lr:after{
 	background-color: var(--b3-layout-resize);
-	width:0px;
+	width:var(--b3-layout-resize-width);
 	margin-left:-1px;
 	top: 0px;
 	height:100%;
@@ -1867,3 +1868,4 @@ padding-bottom:30px;}
 	box-shadow: var(--b3-theme-primary-light) 0px 0px 0px 1px, var(--b3-theme-primary-light) 0px 2px 4px;
 	background-color:transparent;
 }
+
