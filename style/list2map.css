@@ -167,4 +167,9 @@ div *[custom-f="dt"]>[data-type="NodeListItem"]::before,
 div *[custom-f="dt"]>[data-type="NodeListItem"]::after{   
 	display: none;
 }
+/*根目录最小宽度，保证块标可点*/
+div *[custom-f="dt"]>[data-type="NodeListItem"]>[data-type="NodeParagraph"]>[spellcheck="false"]{
+	min-width:50px;
+}
+
 /*————————————————————————————————————————————————————————————————————————*/

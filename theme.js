@@ -1231,7 +1231,7 @@ function init() {
     // 历史记录面板
     settingBtn.insertAdjacentHTML(
       "afterend",
-      '<div id="myHistory" style="position:fixed;z-index:1000;top:43%;left:18%;width:30vw;height:74vh;background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; border-radius: 5px; visibility:hidden;transform: translate(-50%, -50%);overflow:auto;padding:10px 27px;"><div style="position:sticky;top:0px;padding-top:10px;margin-bottom:20px;" class="topBar"><input id="history_input"style="margin-left:5px; border:1px solid black ;" type="text" placeholder="搜索历史记录"  size="30"><button id = "showAllHistory"  style="margin-left:5px;">显示全部</button><button id = "clearHistory"  style="position:absolute;right:10px;">清除历史</button></div><div id ="historyContainer"></div></div>'
+      '<div id="myHistory" style="position:absolute;z-index:100;top:43%;left:18%;width:20vw;height:74vh;background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; border-radius: 5px; visibility:hidden;transform: translate(-50%, -50%);overflow:auto;padding:0px 25px 10px 25px;"><div style="position:sticky;top:0px;padding-top:20px;margin-top:-2px;padding-bottom:15px; background-color:var(--b3-theme-background);" class="topBar"><input id="history_input"style="margin-left:5px; border:1px solid black ;" type="text" placeholder="搜索历史记录"  size="30"><button id = "showAllHistory"  style="margin-left:5px;">显示全部</button><button id = "clearHistory"  style="position:absolute;right:10px;">清除历史</button></div><div id ="historyContainer"></div></div>'
     );
   
     let showAllHistoryBtn = document.getElementById("showAllHistory");
@@ -1294,7 +1294,7 @@ function init() {
           const elem_div = document.createElement("div");
           elem_div.className = "historyItem";
           elem_div.style.marginTop = "10px";
-          elem_div.innerHTML = `<span class="historyTimeStamp" style="color: black;margin-right: 2em;">${item_time}</span>
+          elem_div.innerHTML = `<span class="historyTimeStamp" style="color: var(--b3-theme-on-background);margin-right: 2em;">${item_time}</span>
         <span><svg class="history-icon" style="height:16px;width:16px;vertical-align: middle;">${history_item_icon}</svg></span>
         <span style="color:#3481c5;margin-left:5px;cursor: pointer;" data-href="${href}" title="${href}">${item_text}</span>`;
           fragment.appendChild(elem_div);

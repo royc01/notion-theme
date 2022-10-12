@@ -1,11 +1,12 @@
 /* 引述 */
 .protyle-wysiwyg .bq{
-    padding: 0.3em 1em;
     color: var( --b3-theme-on-background);
     border-left: 0.25em solid var(--b3-theme-on-background);
 	border-radius:0 3px 3px 0;
-	margin-left:4px;
     background-color: var(--b3-bq-background);
+}
+.protyle-wysiwyg .bq .p{
+	padding-left:10px;
 }
 /*引述callout第一行样式 */
 .bq[custom-b~=error] .p:first-child,
@@ -32,7 +33,7 @@
 .bq[custom-b~=bell][data-type="NodeHeading"]:first-child {
     font-weight: 700 !important;
     font-size: 1.3em !important;
-    padding: 2px 8px 2px 30px;
+    padding: 2px 8px 2px 40px;
 }
 
 /* 引述callout段落的内边距 */
@@ -58,7 +59,7 @@
 .bq[custom-b~=note] [data-node-id][data-type="NodeHeading"],
 .bq[custom-b~=bell] .p,
 .bq[custom-b~=bell] [data-node-id][data-type="NodeHeading"] {
-    padding-left:30px;
+    padding-left:40px;
 }
 
 /*错误*/
@@ -74,6 +75,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/prohibited.png);
@@ -92,6 +94,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/warning.png);
@@ -110,6 +113,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/bug.png);
@@ -128,6 +132,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/check.png);
@@ -146,6 +151,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/light-bulb.png);
@@ -164,6 +170,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/question.png);
@@ -182,6 +189,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/cross.png);
@@ -200,6 +208,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/info.png);
@@ -218,6 +227,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/pen.png);
@@ -236,6 +246,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/notebook.png);
@@ -254,6 +265,7 @@
     content: "";
     position: absolute;
 	top: 1.1em;
+	margin-left:10px;
 	width: 1.5em;
     height: 1.5em;
 	background-image: url(callout/bell.png);
