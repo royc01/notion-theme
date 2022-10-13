@@ -329,6 +329,15 @@ body{
 	height:35px;
 	margin-bottom: -35px;
 }
+#notionToolbar{
+	transform:translateY(-8px);
+	transition: all 300ms;
+	transition-delay: 500ms;
+}
+.toolbar:hover #notionToolbar{
+	transform:translateY(0px);
+	transition: all 300ms;
+}
 .toolbar__item{
 	margin: 5px 0px 5px 5px ;
 	border-radius:3px;
@@ -338,6 +347,7 @@ body{
 	height: 13px;
 	width: 13px;	
 }
+
 .toolbar__item:not(.toolbar__item--disabled) svg{
 	color: var(--b3-theme-on-background);
 }
@@ -359,6 +369,9 @@ body{
 }
 #closeWindow:hover svg{
 	color: var(--b3-toolbar-closeWindow-svg);
+}
+#drag {
+	line-height:35px;
 }
 
 /* ————————————————————dock栏———————————————————— */
@@ -726,6 +739,7 @@ input[type="checkbox" i] {
 }
 .layout__center .layout-tab-bar:nth-child(2){
 	flex:1;/*填满页签*/
+	min-width:70px;
 }
 .layout__center .layout-tab-bar:nth-child(2) .item{
 	width:20px;
@@ -735,10 +749,10 @@ input[type="checkbox" i] {
 }
 .item__close[data-type="new"] svg{
 	background-color:var(--b3-list-background);
-	height: 10px!important;
-    width: 10px!important;
-    padding: 8px!important;
-	border-radius: 3px!important;
+	height: 12px!important;
+    width: 12px!important;
+    padding: 6px!important;
+	border-radius: 5px!important;
 }
 .item__close[data-type="more"]{
 	position:absolute;
@@ -747,7 +761,7 @@ input[type="checkbox" i] {
 .item__close[data-type="more"] svg{
 	background-color:var(--b3-list-background);
     padding: 8px!important;
-	border-radius: 3px!important;
+	border-radius: 5px!important;
 }
 .layout-tab-bar .item__icon{
 	padding: 4px 2px;
@@ -1049,8 +1063,8 @@ input[type="checkbox" i] {
 .protyle-wysiwyg .h3,.protyle-wysiwyg .h4,
 .protyle-wysiwyg .h5,.protyle-wysiwyg .h6{
 	font-weight:700;
-	margin-top: 1.2em;
-    margin-bottom: .4em;
+	margin-top: 1.2em!important;
+    margin-bottom: .4em!important;
 }
 .protyle-wysiwyg[data-doc-type="NodeDocument"]>[data-type="NodeHeading"]{
 	margin-top: 0em;
@@ -1880,3 +1894,14 @@ padding-bottom:30px;}
 
 
 
+.b3-typography span[data-type~=inline-memo], .protyle-wysiwyg span[data-type~=inline-memo] {
+    background-color: var(--b3-theme-primary-lightest);
+    border-bottom: 2px solid var(--b3-theme-primary);
+}
+.tooltip--memo{
+	font-size:14px;
+	color:VAR(--b3-theme-on-background);
+	background-color:var(--b3-theme-background);
+	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+	padding:10px;
+}

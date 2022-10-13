@@ -1,4 +1,4 @@
-.li[data-subtype="o"] .li[data-subtype="o"] .protyle-action{
+.li[data-subtype="o"] .li[data-subtype="o"] .protyle-action:not(.protyle-action--task){
 	color:transparent;
 }
 .li[data-subtype="o"] .li[data-subtype="o"] .protyle-action::after{
