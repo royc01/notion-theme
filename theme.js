@@ -1,32 +1,96 @@
-  /*****************************评论功能 From langzhou**********************************/
-function inject(){
-  //获取当前主题名称
-  let themeStyle = document.querySelector('#themeStyle')
-  if(themeStyle){
-    let url = themeStyle.getAttribute('href').split('/')
-    let theme = url[url.length - 2]
-    if(!theme){
-      alert("未能获取到主题名称")
-    }else{
-      let script = document.querySelector('#emojiScript')
-      if(script){
-        let js = document.createElement('script')
-            js.setAttribute('src','./appearance/themes/' + theme + '/comment/index.js')
-            js.setAttribute('type','module')
-            js.setAttribute('defer','defer')
-        document.head.insertBefore(js,script)
-      }else{
-        setTimeout(()=>inject(),500)
-      }
-    }
-  }else{
-    setTimeout(()=>inject(),500)
-  }
+window.theme = {};
+
+/**
+ * 加载样式文件
+ * @params {string} href 样式地址
+ * @params {string} id 样式 ID
+ */
+window.theme.loadStyle = function (href, id = null) {
+    let style = document.createElement('link');
+    if (id) style.id = id;
+    style.type = 'text/css';
+    style.rel = 'stylesheet';
+    style.href = href;
+    document.head.appendChild(style);
 }
-inject()
+
+/**
+ * 更新样式文件
+ * @params {string} id 样式文件 ID
+ * @params {string} href 样式文件地址
+ */
+window.theme.updateStyle = function (id, href) {
+    let style = document.getElementById(id);
+    if (style) {
+        style.setAttribute('href', href);
+    }
+    else {
+        window.theme.loadStyle(href, id);
+    }
+}
+
+window.theme.ID_COLOR_STYLE = 'theme-color-style';
+
+/**
+ * 获取主题模式
+ * @return {string} light 或 dark
+ */
+window.theme.themeMode = (() => {
+    /* 根据浏览器主题判断颜色模式 */
+    // switch (true) {
+    //     case window.matchMedia('(prefers-color-scheme: light)').matches:
+    //         return 'light';
+    //     case window.matchMedia('(prefers-color-scheme: dark)').matches:
+    //         return 'dark';
+    //     default:
+    //         return null;
+    // }
+    /* 根据配置选项判断主题 */
+    switch (window.siyuan.config.appearance.mode) {
+        case 0:
+            return 'light';
+        case 1:
+            return 'dark';
+        default:
+            return null;
+    }
+})();
 
 
-/*----------------------------------创建notion主题工具栏区域----------------------------------*/
+/**
+ * 更换主题模式
+ * @params {string} lightStyle 浅色主题配置文件路径
+ * @params {string} darkStyle 深色主题配置文件路径
+ */
+window.theme.changeThemeMode = function (
+    lightStyle,
+    darkStyle,
+) {
+    let href_color = null;
+    switch (window.theme.themeMode) {
+        case 'light':
+            href_color = lightStyle;
+            break;
+        case 'dark':
+        default:
+            href_color = darkStyle;
+            break;
+    }
+    window.theme.updateStyle(window.theme.ID_COLOR_STYLE, href_color);
+}
+
+
+/* 根据当前主题模式加载样式配置文件 */
+window.theme.changeThemeMode(
+    `/appearance/themes/notion-theme/style/topbar/notion-light.css`,
+    `/appearance/themes/notion-theme/style/topbar/notion-dark-mode.css`,
+);
+
+
+
+
+
+/*----------------------------------创建notion主题工具栏区域----------------------------------
 function createnotionToolbar() {
     var siYuanToolbar = getSiYuanToolbar();
 
@@ -37,7 +101,7 @@ function createnotionToolbar() {
     notionToolbar = insertCreateBefore(windowControls, "div", "notionToolbar");
     notionToolbar.style.marginRight = "14px";
     notionToolbar.style.marginLeft = "11px";
-}
+}*/
 
   /****************************思源API操作**************************/ 
   async function 设置思源块属性(内容块id, 属性对象) {
@@ -560,13 +624,13 @@ function getDocumentTime(tilteElement) {
 
 function themeButton() {
     notionThemeToolbarAddButton(
-        "按钮:notion-dark",
+        "buttonnotion-dark",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"notion-dark主题",
         "/appearance/themes/notion-theme/img/moon2.svg",
         "/appearance/themes/notion-theme/img/moon.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/notion-dark.css", "notion-dark主题").setAttribute("topicfilter", "按钮:notion-dark");
+            loadStyle("/appearance/themes/notion-theme/style/topbar/notion-dark.css", "notion-dark主题").setAttribute("topicfilter", "buttonnotion-dark");
             qucuFiiter();
         },
         () => {
@@ -576,13 +640,13 @@ function themeButton() {
     );
 
     notionThemeToolbarAddButton(
-        "按钮:salt",
+        "buttonsalt",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"salt主题",
         "/appearance/themes/notion-theme/img/salt2.svg",
         "/appearance/themes/notion-theme/img/salt.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/salt.css", "salt主题").setAttribute("topicfilter", "按钮:salt");
+            loadStyle("/appearance/themes/notion-theme/style/topbar/salt.css", "salt主题").setAttribute("topicfilter", "buttonsalt");
             qucuFiiter();
         },
         () => {
@@ -1033,9 +1097,9 @@ function collapseExpand_Head_List() {
 /*----------------日历面板----------------*/
 function initcalendar() {
   // 把日历图标 放到  搜索图标前面
-  var barSearch = document.getElementById("barSearch");
+  var barSearch = document.getElementById("barDailyNote");
   barSearch.insertAdjacentHTML(
-    "beforebegin",
+    "afterend",
     '<div id="calendar"class="toolbar__item b3-tooltips b3-tooltips__se" aria-label="日历" ></div>'
   );
   let calendarIcon = document.getElementById("calendar");
@@ -1223,9 +1287,9 @@ function init() {
   
   
     // 【设置】按钮的前面添加一个【历史记录】按钮
-    var settingBtn = document.getElementById("barSetting");
+    var settingBtn = document.getElementById("barHistory");
     settingBtn.insertAdjacentHTML(
-      "beforebegin",
+      "afterend",
       '<div id="history"class="toolbar__item b3-tooltips b3-tooltips__se" aria-label="历史记录" ></div>'
     );
     // 历史记录面板
@@ -1463,26 +1527,18 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
         if (toolbarEdit == null && windowControls != null) {
             notionToolbar = document.createElement("div");
             notionToolbar.id = "notionToolbar";
-            notionToolbar.style.marginLeft = "11px";
             windowControls.parentElement.insertBefore(notionToolbar, windowControls);
         } else if (toolbarEdit != null) {
             notionToolbar = insertCreateBefore(toolbarEdit, "div", "notionToolbar");
             notionToolbar.style.position = "relative";
-            notionToolbar.style.height = "25px";
-            notionToolbar.style.paddingTop = "5px";
-            notionToolbar.style.marginLeft = "11px";
         }
     }
 
     var addButton = addinsertCreateElement(notionToolbar, "div");
-    addButton.style.width = "26px";
-    addButton.style.height = "26px";
     addButton.style.float = "left";
-	addButton.style.border = "6px solid transparent";
-    addButton.style.margin = "4px 3px";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
-    addButton.style.backgroundPosition = "left top";
+	addButton.style.backgroundPosition = "left top";
     addButton.style.backgroundSize = "100%";
 
     
@@ -2220,6 +2276,8 @@ setTimeout(() => {
         init()//最近打开文档
 		
 		initcalendar()//打开日历
+		
+		loadScript("/appearance/themes/notion-theme/comment/index.js");//js批注评论
 
         console.log("==============>附加CSS和特性JS_已经执行<==============");
     }

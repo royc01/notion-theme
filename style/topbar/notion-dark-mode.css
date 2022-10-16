@@ -282,22 +282,3 @@ body{
 	filter: hue-rotate(180deg) invert(90%);
 }
 
-.protyle-wysiwyg .hljs{
-	background-color:#c8c2c8!important;
-	filter: hue-rotate(90deg) invert(100%);
-}
-
-
-[id*=mermaid] line {
-    stroke: #808080!important;
-}
-
-[id*=mermaid] .relation {
-    filter: invert(100%)!important;
-}
-[id*=mermaid] .messageText {
-    stroke: #808080!important;
-}
-[id*=mermaid] .relationshipLine {
-    stroke: #808080!important;
-}
