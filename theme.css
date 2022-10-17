@@ -15,6 +15,7 @@
 @keyframes menu {
 	0% {opacity: 0;}
 	50% { transform: scale(1.01);
+	transform-origin: 0 0 ;
           opacity: 0.5;	}
 	100% { transform: scale(1); 
 	 }
@@ -1416,6 +1417,7 @@ div#historyContainer{
 }
 /* '/'弹出分栏*/
 .hint--menu{
+	animation: menu 0.2s ease-in-out;
 	box-shadow: var(--b3-menu-shadow);
     background-color: var(--b3-theme-background);
 	columns: 50px 4;
@@ -1477,9 +1479,9 @@ div#historyContainer{
 	border-radius: var(--webkit-scrollbar-thumb);
 	background-color:var(--b3-scroll-color);
 }
-.protyle-content{
+/*.protyle-content{
 	overflow: overlay;
-}
+}*/
 /* 动态加载和调节进度条*/
 .b3-slider{height:24px;}
 .b3-slider::-webkit-slider-runnable-track {
