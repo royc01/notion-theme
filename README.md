@@ -2,6 +2,13 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
+## 2.5.3
+* 适配siyuan v2.4.1
+* 调整嵌入块样式
+* dark主题字体灰色调整
+* 顶栏标题水平居中
+* 界面线条微调
+* 优化页签样式
 ## 2.5.2
 * 修复页签上工具【新增】【更多】重叠bug
 * 顶栏右上角切换器动画同步
