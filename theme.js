@@ -663,15 +663,15 @@ function topbarfixedButton() {
     notionThemeToolbarAddButton(
         "topBar",
         "toolbar__item b3-tooltips b3-tooltips__se",
-		"topBar固定",
+		"顶栏隐藏",
         "/appearance/themes/notion-theme/img/topbar2.svg",
         "/appearance/themes/notion-theme/img/topbar.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/top-fixed.css", "顶栏固定").setAttribute("topBarcss", "顶栏固定");
+            loadStyle("/appearance/themes/notion-theme/style/topbar/top-fixed.css", "topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
             qucuFiiter2();
         },
         () => {
-            document.getElementById("顶栏固定").remove();
+            document.getElementById("topbar隐藏").remove();
         },
         true
     );
@@ -2251,8 +2251,6 @@ setTimeout(() => {
         collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
 		
 		themeButton()//主题 
-		
-		topbarfixedButton()//顶栏固定
 
         console.log("==============>附加CSS和特性JS_已经执行<==============");
     } else {

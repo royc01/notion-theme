@@ -2,6 +2,12 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
+## 2.5.4
+* 菜单动画调整
+* 修复dark主题表格线条颜色
+* 调整dark看板背景色
+* 顶栏改为默认显示，点击隐藏
+* 取消编辑器滚动条overlay
 ## 2.5.3
 * 适配siyuan v2.4.1
 * 调整嵌入块样式
