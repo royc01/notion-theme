@@ -3,6 +3,7 @@
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
 ## 2.5.4
+* 下架dark和salt主题
 * 菜单动画调整
 * 修复dark主题表格线条颜色
 * 调整dark看板背景色
