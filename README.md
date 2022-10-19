@@ -3,7 +3,7 @@
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
 ## 2.6.0
-* 【新特性】左右悬浮面板功能
+* 【新特性】左右悬浮面板功能（界面右上角切换）
 * 【新特性】日历可点击创建日记
 * 调整弹出二级菜单间距
 * pdf导出面板错误修复
