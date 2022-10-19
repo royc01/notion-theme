@@ -30,12 +30,12 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column #searchList {
 		float: left;
 		width: 35vw;
-		height: calc(100% - 135px) !important;
+		height: calc(100% - 145px) !important;
 	}
 	/*结果预览自动占满剩余宽度，高度和结果列表等高*/
 	div[data-key] .b3-dialog__container .fn__flex-column #searchPreview {
 		/*width:45vw;*/
-		height: calc(100% - 136px) !important;
+		height: calc(100% - 146px) !important;
 	}
 }
 @media screen and (min-width: 960px) {
@@ -43,12 +43,12 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column .fn__none~#searchList {
 		float: left;
 		width: 35vw;
-		height: calc(100% - 85px) !important;
+		height: calc(100% - 95px) !important;
 	}
 	/*结果预览自动占满剩余宽度，高度和结果列表等高*/
 	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column .fn__none~#searchPreview {
 		/*width:45vw;*/
-		height: calc(100% - 86px) !important;
+		height: calc(100% - 96px) !important;
 	}
 }
 
@@ -94,3 +94,4 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
 	overflow:hidden !important;
 	text-overflow: ellipsis;
 }
+

@@ -1,0 +1,41 @@
+
+.layout__center ~ .fn__flex-column .layout-tab-container>.fn__flex-column.file-tree{
+	background-color:var(--b3-theme-background);
+}
+
+.layout__center ~ .fn__flex-column {
+	opacity:0;
+    transform:scaleX(0.1);
+	transform-origin: 100% 0 ;
+	position:fixed;
+	right:36px;
+	z-index:2;
+	top:80px;
+	bottom:50px;
+	min-height: unset;
+	height:calc(100% - 130px);
+	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
+	border:none;
+	border-radius:5px 0 0 5px;
+	overflow:hidden;
+	transition: all 300ms!important;
+	transition-delay: 500ms!important;
+}
+
+.layout__center ~ .fn__flex-column:hover{
+	opacity:1;
+	transform:scaleX(1);
+	transition: all 300ms!important;
+}
+.layout__center+.layout__resize--lr{
+	width:0px;
+	margin:0;
+}
+
+#dockRight {
+	z-index:2;
+}
+
+#dockLeft.fn__none+#layouts .layout__center ~ .fn__flex-column{
+	right:0px;
+}

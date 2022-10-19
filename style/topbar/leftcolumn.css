@@ -1,0 +1,31 @@
+.fn__flex-shrink .layout-tab-container>.fn__flex-column.file-tree{
+	background-color:var(--b3-theme-background);
+}
+
+.fn__flex-shrink {
+	opacity:0;
+    transform:scaleX(0.1);
+	transform-origin: 0 0 ;
+	position:absolute;
+	z-index:5;
+	top:80px;
+	bottom:50px;
+	min-height: unset;
+	height:calc(100% - 130px);
+	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
+	border:none;
+	border-radius:0 5px 5px 0;
+	overflow:hidden;
+	transition: all 300ms!important;
+	transition-delay: 500ms!important;
+}
+
+.fn__flex-shrink:hover{
+	opacity:1;
+	transform:scaleX(1);
+	transition: all 300ms!important;
+}
+
+#dockLeft {
+	z-index:6;
+}

@@ -668,7 +668,6 @@ function topbarfixedButton() {
         "/appearance/themes/notion-theme/img/topbar.svg",
         () => {
             loadStyle("/appearance/themes/notion-theme/style/topbar/top-fixed.css", "topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
-            qucuFiiter2();
         },
         () => {
             document.getElementById("topbar隐藏").remove();
@@ -677,6 +676,45 @@ function topbarfixedButton() {
     );
 }
 
+/**---------------------------------------------------------左侧面板悬浮-------------------------------------------------------------- */
+
+function leftColumnButton() {
+    notionThemeToolbarAddButton(
+        "leftColumn",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"左侧面板悬浮",
+        "/appearance/themes/notion-theme/img/leftcolumn2.svg",
+        "/appearance/themes/notion-theme/img/leftcolumn.svg",
+        () => {
+            loadStyle("/appearance/themes/notion-theme/style/topbar/leftcolumn.css", "leftColumn悬浮").setAttribute("topBarcss", "leftColumn悬浮");
+        },
+        () => {
+            document.getElementById("leftColumn悬浮").remove();
+        },
+        true
+    );
+}
+
+/**---------------------------------------------------------右侧面板悬浮--------------------------------------------------------------*/
+
+function rightColumnButton() {
+    notionThemeToolbarAddButton(
+        "rightColumn",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"右侧面板悬浮",
+        "/appearance/themes/notion-theme/img/rightcolumn2.svg",
+        "/appearance/themes/notion-theme/img/rightcolumn.svg",
+        () => {
+            loadStyle("/appearance/themes/notion-theme/style/topbar/rightcolumn.css", "rightColumn悬浮").setAttribute("topBarcss", "rightColumn悬浮");
+        },
+        () => {
+            document.getElementById("rightColumn悬浮").remove();
+        },
+        true
+    );
+} 
+
+
  //去除主题所有滤镜还原按钮状态
 function qucuFiiter() {
     var Topicfilters = document.querySelectorAll("head [topicfilter]");
@@ -684,17 +722,6 @@ function qucuFiiter() {
         var offNo = localStorage.getItem(element.getAttribute("topicfilter"));
         if (offNo == "1") {
             document.getElementById(element.getAttribute("topicfilter")).click();
-            element.remove();
-        }
-    });
-}
-
-function qucuFiiter2() {
-    var Topicfilters2 = document.querySelectorAll("head [topBarcss]");
-    Topicfilters2.forEach(element => {
-        var offNo = localStorage.getItem(element.getAttribute("topBarcss"));
-        if (offNo == "1") {
-            document.getElementById(element.getAttribute("topBarcss")).click();
             element.remove();
         }
     });
@@ -2258,6 +2285,10 @@ setTimeout(() => {
 		themeButton()//主题
 		
 		topbarfixedButton()//顶栏固定
+		
+		leftColumnButton()//左侧面板悬浮
+		
+		rightColumnButton()//右侧面板悬浮
 
         setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
 
