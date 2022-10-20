@@ -2,6 +2,8 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
+## 2.6.3
+* 修复悬浮大纲面板跳动问题
 ## 2.6.2
 * 优化隐藏侧栏动画
   * 悬浮侧栏动画时间加快
