@@ -34,7 +34,7 @@
 }
 #dockRight:before{
 	content: "";
-    height: 100%;
+    height:calc(100% - 50px);
 	width:36px;
 	right:-36px;
 	box-shadow: var(--b3-dockright-background) -36px 0px 0px 0px;
