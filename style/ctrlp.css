@@ -2,12 +2,12 @@
 /*放大ctrl+p窗口尺寸*/
 /*不添加[data-key]属性选择器将会同时影响alt+p窗口*/
 body > div[data-key] > .b3-dialog > .b3-dialog__container {
-	width: 80vw !important;
+	width: 90vw !important;
 }
 
 body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column {
 	height: 80vh !important;
-	width: 80vw !important;
+	width: 90vw !important;
 }
 
 /*ctrl+p改造成左右排列*/
@@ -68,7 +68,7 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 
 /*结果预览自动占满剩余宽度*/
 body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn_flex > .fn__flex-column #searchPreview {
-	width: 45vw;
+	width: 55vw;
 }
 
 /* 修复搜索文章不能完整显示的问题 */

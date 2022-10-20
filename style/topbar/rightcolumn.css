@@ -1,6 +1,6 @@
 
 .layout__center ~ .fn__flex-column .layout-tab-container>.fn__flex-column.file-tree{
-	background-color:var(--b3-theme-background);
+	background-color:var(--b3-theme-background)!important;
 }
 
 .layout__center ~ .fn__flex-column {

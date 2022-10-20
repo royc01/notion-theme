@@ -1,8 +1,8 @@
 .fn__flex-shrink .layout-tab-container>.fn__flex-column.file-tree{
-	background-color:var(--b3-theme-background);
+	background-color:var(--b3-theme-background)!important;
 }
 
-.fn__flex-shrink {
+.fn__flex-column.fn__flex-shrink {
 	opacity:0;
     transform:scaleX(0.1);
 	transform-origin: 0 0 ;

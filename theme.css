@@ -5,7 +5,7 @@
 @import url(style/list2map.css);/*列表转导图*/
 @import url(style/list2table.css);/*列表转表格*/
 @import url(style/list2board.css);/*列表转看板*/
-/*@import url(style/ctrlp.css);搜索分栏*/
+@import url(style/ctrlp.css);/*搜索分栏*/
 @import url(style/bq-callout.css);/*引述样式*/
 /* 引入网址链接前的图标相关代码 */
 @import url("style/link-icon.css");
@@ -366,7 +366,7 @@ body{
 }
 #drag {
 	line-height:35px;
-	padding-left:115px!important;
+	padding-left:75px!important;
 }
 
 /* ————————————————————dock栏———————————————————— */
@@ -443,10 +443,10 @@ body{
     background-size: 100% 30px, 100% 1px;
     background-repeat: no-repeat;
     background-attachment: local, scroll;
-}
+}*/
 .fn__flex >.fn__flex-shrink>.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
 	background-color: var(--b3-fn__flex-shrink-background);
-}*/
+}
 /*侧栏展开动画*/
 #layouts>.fn__flex>.fn__flex-column>.fn__flex>div[data-type=wnd]>.layout-tab-container>.fn__flex-column{animation: flex-column  0.2s ease-in-out;}
 /*面板标题*/
@@ -1934,4 +1934,10 @@ padding-bottom:30px;}
 
 .protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"] {
 	padding-left:2px;
+}
+
+
+
+.fn__flex-column #searchList .b3-list-item[data-type='search-item']{
+	margin:0!important;
 }

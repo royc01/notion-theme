@@ -623,7 +623,7 @@ function getDocumentTime(tilteElement) {
 /**---------------------------------------------------------主题-------------------------------------------------------------- */
 
 function themeButton() {
-    notionThemeToolbarAddButton(
+    /*notionThemeToolbarAddButton(
         "buttonnotion-dark",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"notion-dark主题",
@@ -637,7 +637,7 @@ function themeButton() {
             document.getElementById("notion-dark主题").remove();
         },
         true
-    );
+    );*/
 
     notionThemeToolbarAddButton(
         "buttonsalt",
