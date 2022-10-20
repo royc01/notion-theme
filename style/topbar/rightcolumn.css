@@ -29,13 +29,15 @@
 	width:0px;
 	margin:0;
 }
-
+.dock__item {
+	z-index:7;
+}
 #dockRight:before{
 	content: "";
     height: 100%;
 	width:36px;
 	right:-36px;
-	box-shadow: var(--b3-dock-background) -36px 0px 0px 0px;
+	box-shadow: var(--b3-dockright-background) -36px 0px 0px 0px;
 	z-index:2;
     position: absolute;
 }

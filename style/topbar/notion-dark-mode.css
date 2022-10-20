@@ -175,9 +175,9 @@
 	--b3-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
 	--b3-dockright-color: rgba(114, 118, 120);
-	--b3-dockright-background: rgba(230, 230, 230, .1);
+	--b3-dockright-background: #414648;
 	--b3-dockleft-color: rgba(114, 118, 120);
-	--b3-dock-background: rgba(230, 230, 230, .1);
+	--b3-dock-background: #414648;
 	--b3-dockright-item-active-background: rgba(71, 76, 80 );
 	--b3-dockleft-item-active-background: rgba(71, 76, 80 );
 	--b3-dock-item-active-color: #eb8383;
