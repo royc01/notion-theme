@@ -30,12 +30,13 @@
 }
 #dockLeft:before{
 	content: "";
-    height:calc(100% - 50px);
+    height:calc(100% - 35px);
 	width:36px;
 	left:-36px;
 	box-shadow: var(--b3-dock-background) 36px 0px 0px 0px;
 	z-index:6;
     position: absolute;
+	bottom:0px;
 }
 
 #dockLeft.fn__none+#layouts .fn__flex-column.fn__flex-shrink {
