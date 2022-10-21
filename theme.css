@@ -20,6 +20,16 @@
 	100% { transform: scale(1); 
 	 }
 }
+@keyframes shrink{
+	0% {opacity: 0;}
+	20% { transform:translateX(0%);
+		  transform-origin: 0 0 ;
+          opacity: 1;	}
+	80% { transform:translateX(0%);
+		  transform-origin: 0 0 ;
+          opacity: 1;	}
+
+}
 @keyframes statusmsg {
 	0% {max-width:1000px;}
 	80% {max-width:1000px;}
@@ -325,7 +335,9 @@ body{
 	box-shadow: 0px -1px 0px 0px var(--b3-fn__flex-shrink-background) inset;
 }
 
-
+body.body--win32 .toolbar {
+		padding:0;
+}
 #notionToolbar{
 	transform:translateY(0px);
 }
@@ -344,8 +356,7 @@ body{
 .toolbar__item:not(.toolbar__item--disabled) svg{
 	color: var(--b3-theme-on-background);
 }
-
-.toolbar__item:hover{
+.toolbar__item:not(.toolbar__item--disabled):not(.toolbar__item--close):hover, .toolbar__item--active {
 	background-color: var(--b3-toolbar-item-hover);
 }
 #minWindow svg, #restoreWindow svg, #maxWindow svg, #closeWindow svg{
@@ -353,7 +364,10 @@ body{
 	padding: 3px 8px;
 }
 #minWindow, #restoreWindow, #maxWindow, #closeWindow{
-	margin: 6px 5px 4px 0px ;
+	margin: 5px 5px 5px 0px ;
+}
+#windowControls{
+	margin-left:5px;
 }
 .toolbar__item--close{
 		padding: 4px 8px;
@@ -1104,7 +1118,6 @@ input[type="checkbox" i] {
 .protyle-attr--refcount{
 	height: 20px;
     width: 20px;
-	left:1px;
     padding: 0;
     line-height: 20px;
 	text-align: center;
@@ -1941,5 +1954,9 @@ padding-bottom:30px;}
 .fn__flex-column #searchList .b3-list-item[data-type='search-item']{
 	margin:0!important;
 }
+
+
+
+
 
 

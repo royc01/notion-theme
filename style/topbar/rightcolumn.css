@@ -2,19 +2,23 @@
 	background-color:var(--b3-theme-background)!important;
 }
 
+#dockTop+.fn__flex-1{
+	position:relative;
+}
+
 .layout__center ~ .fn__flex-column {
 	opacity:0;
-	transform:translateX(65%);
+	transform:translateX(80%);
 	transform-origin: 100% 0 ;
 	position:absolute;
 	right:0px;
 	z-index:2;
-	top:80px;
+	top:90px;
 	bottom:50px;
 	min-height: unset;
-	height:calc(100% - 130px);
+	height:calc(100% - 140px);
 	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
-	border-right:36px solid transparent;/*增加点击区域*/
+	border-right:37px solid transparent;/*增加点击区域*/
 	border-radius:5px 0 0 5px;
 	overflow:hidden;
 	transition: all 200ms!important;
@@ -29,8 +33,8 @@
 	width:0px;
 	margin:0;
 }
-.dock__item {
-	z-index:7;
+#dockRight .dock__item {
+	z-index:2;
 }
 #dockRight:before{
 	content: "";
@@ -45,4 +49,16 @@
 
 #dockLeft.fn__none+#layouts .layout__center ~ .fn__flex-column{
 	right:-36px;
+}
+
+
+.layout__center ~ .fn__flex-column:has(.file-tree.sy__file.layout__tab--active),
+.layout__center ~ .fn__flex-column:has(.file-tree.sy__inbox.layout__tab--active),
+.layout__center ~ .fn__flex-column:has(.file-tree.sy__tag.layout__tab--active),
+.layout__center ~ .fn__flex-column:has(.file-tree.sy__bookmark.layout__tab--active),
+.layout__center ~ .fn__flex-column:has(.file-tree.sy__outline.layout__tab--active),
+.layout__center ~ .fn__flex-column:has(.file-tree.sy__graph.layout__tab--active),
+.layout__center ~ .fn__flex-column:has(.file-tree.sy__globalGraph.layout__tab--active),
+.layout__center ~ .fn__flex-column:has(.file-tree.sy__backlink.layout__tab--active){
+	animation: shrink 2s ease-in-out;
 }
