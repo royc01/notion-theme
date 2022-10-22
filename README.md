@@ -2,6 +2,8 @@
 
 ![image.png](https://tva1.sinaimg.cn/large/8ff342a8gy1h2wjjwfqm7j20u01d9wjq.jpg)
 ---
+## 2.6.5
+* 【试验特性】把左右悬浮面板按钮移到编辑器中部
 ## 2.6.4
 * 顶栏动画优化，样式微调
 * 悬浮面板向下移

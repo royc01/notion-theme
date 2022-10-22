@@ -279,7 +279,12 @@ body{
 	border: 0px!important;
 }
 
-#notionToolbar {
+#notionToolbar{
 	filter: hue-rotate(180deg) invert(90%);
 }
-
+#rightColumn,#leftColumn{
+	background-color:#d1d5d8!important;
+}
+#shrinkToolbar{
+	filter: hue-rotate(180deg) invert(90%);
+}

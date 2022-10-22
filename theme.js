@@ -93,10 +93,8 @@ window.theme.changeThemeMode(
 /*----------------------------------创建notion主题工具栏区域----------------------------------
 function createnotionToolbar() {
     var siYuanToolbar = getSiYuanToolbar();
-
     var notionToolbar = getnotionToolbar();
     var windowControls = document.getElementById("windowControls");
-
     if (notionToolbar) siYuanToolbar.removeChild(notionToolbar);
     notionToolbar = insertCreateBefore(windowControls, "div", "notionToolbar");
     notionToolbar.style.marginRight = "14px";
@@ -679,11 +677,11 @@ function topbarfixedButton() {
 /**---------------------------------------------------------左侧面板悬浮-------------------------------------------------------------- */
 
 function leftColumnButton() {
-    notionThemeToolbarAddButton(
+    shrinkToolbarAddButton(
         "leftColumn",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"左侧面板悬浮",
-        "/appearance/themes/notion-theme/img/leftcolumn2.svg",
+        "/appearance/themes/notion-theme/img/rightcolumn.svg",
         "/appearance/themes/notion-theme/img/leftcolumn.svg",
         () => {
             loadStyle("/appearance/themes/notion-theme/style/topbar/leftcolumn.css", "leftColumn悬浮").setAttribute("topBarcss", "leftColumn悬浮");
@@ -698,11 +696,11 @@ function leftColumnButton() {
 /**---------------------------------------------------------右侧面板悬浮--------------------------------------------------------------*/
 
 function rightColumnButton() {
-    notionThemeToolbarAddButton(
+    shrinkToolbarAddButton(
         "rightColumn",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"右侧面板悬浮",
-        "/appearance/themes/notion-theme/img/rightcolumn2.svg",
+        "/appearance/themes/notion-theme/img/leftcolumn.svg",
         "/appearance/themes/notion-theme/img/rightcolumn.svg",
         () => {
             loadStyle("/appearance/themes/notion-theme/style/topbar/rightcolumn.css", "rightColumn悬浮").setAttribute("topBarcss", "rightColumn悬浮");
@@ -734,7 +732,7 @@ function autoOpenList() {
     setInterval(() => {
         //找到所有的悬浮窗
         var Preview = document.querySelectorAll("[data-oid]");
-
+	
         //如果发现悬浮窗内首行是折叠列表就展开并打上标记
         if (Preview.length != 0) {
             for (let index = 0; index < Preview.length; index++) {
@@ -1615,6 +1613,76 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
 }
 
 
+
+function shrinkToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
+    var shrinkToolbar = document.getElementById("shrinkToolbar");
+    if (shrinkToolbar == null) {
+        var toolbarEdit = document.getElementById("toolbarEdit");
+        var windowControls = document.querySelector(".layout__center");
+
+        if (toolbarEdit == null && windowControls != null) {
+            shrinkToolbar = document.createElement("div");
+            shrinkToolbar.id = "shrinkToolbar";
+            windowControls.appendChild(shrinkToolbar);
+        } else if (toolbarEdit != null) {
+            shrinkToolbar = insertCreateBefore(toolbarEdit, "div", "shrinkToolbar");
+            shrinkToolbar.style.position = "relative";
+        }
+    }
+
+    var addButton = addinsertCreateElement(shrinkToolbar, "div");
+    addButton.style.float = "left";
+    addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
+    addButton.style.backgroundRepeat = "no-repeat";
+	addButton.style.backgroundPosition = "center";
+    addButton.style.backgroundSize = "100%";
+
+    
+    addButton.id = ButtonID;
+	addButton.setAttribute("class", ButtonTitle);
+	addButton.setAttribute("aria-label", ButtonLabel)
+
+    var offNo = "0";
+
+
+
+    if (Memory == true) {
+        offNo = localStorage.getItem(ButtonID);
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+            localStorage.setItem(ButtonID, "0");
+            NoClickRunFun(addButton);
+            localStorage.setItem(ButtonID, "1");
+        } else if (offNo != "0") {
+            offNo = "0";
+            localStorage.setItem(ButtonID, "0");
+        }
+    }
+
+    AddEvent(addButton, "click", () => {
+
+        if (offNo == "0") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+
+            NoClickRunFun(addButton);
+            if (Memory != null) localStorage.setItem(ButtonID, "1");
+            offNo = "1";
+            return;
+        }
+
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
+            addButton.style.filter = "none";
+            OffClickRunFun(addButton);
+            if (Memory != null) localStorage.setItem(ButtonID, "0");
+            offNo = "0";
+            return;
+        }
+    });
+
+
+}
+
 /**
  * 在DIV光标位置插入内容
  * @param {*} content 
@@ -2311,7 +2379,5 @@ setTimeout(() => {
         console.log("==============>附加CSS和特性JS_已经执行<==============");
     }
 }, 1000);
-
-
 
 

@@ -1960,3 +1960,36 @@ padding-bottom:30px;}
 
 
 
+.layout__center{
+	position:relative;
+}
+#shrinkToolbar{
+	position:absolute;
+	top:45%;
+	width:100%;
+	z-index:99;
+}
+#leftColumn{
+	position:absolute;
+	height:60px;
+	width:15px;
+	padding:0;
+	margin:0;
+	background-color:var(--b3-fn__flex-shrink-background);
+	border-radius:0 3px 3px 0;
+}
+#rightColumn{
+	position:absolute;
+	height:60px;
+	width:15px;
+	right:0px;
+	padding:0;
+	margin:0;
+	background-color:var(--b3-fn__flex-shrink-background);
+	border-radius:3px 0 0 3px;
+}
+#rightColumn:hover{
+	overflow:hidden;
+}
+
+
