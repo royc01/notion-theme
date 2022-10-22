@@ -380,7 +380,7 @@ body.body--win32 .toolbar {
 }
 #drag {
 	line-height:35px;
-	padding-left:75px!important;
+	padding-left:85px!important;
 }
 
 /* ————————————————————dock栏———————————————————— */
@@ -1810,7 +1810,7 @@ padding:3px;
 	padding: 0px 0 0 8px ;
 	margin:0 5px 5px 5px;
 	position:relative;
-	right:36px;
+	right:28px;
 	height:27px;
 	line-height:27px;
 }
@@ -1828,7 +1828,7 @@ padding:3px;
 	transition: max-width 300ms,opacity 300ms;
 	transition-delay: 2000ms;
 	position:relative;
-	right:36px;
+	right:26px;
 	height:27px;
 	line-height:27px;
 }
@@ -1849,7 +1849,7 @@ padding-bottom:30px;}
 
 .status #barHelp{
 	position:relative;
-	right:36px;
+	right:30px;
 }
 
 .status #barDock{
@@ -1988,8 +1988,11 @@ padding-bottom:30px;}
 	background-color:var(--b3-fn__flex-shrink-background);
 	border-radius:3px 0 0 3px;
 }
-#rightColumn:hover{
-	overflow:hidden;
+
+#leftColumn.b3-tooltips::after{
+	left:15px;
 }
 
-
+#rightColumn.b3-tooltips::after{
+	left:-59px;
+}
