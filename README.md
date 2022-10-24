@@ -36,6 +36,30 @@
 　　以上排名不分先后。
 
 　　‍
+## 2.6.6
+
+* callout样式微调
+* 调整块标不被悬浮区域影响
+* 调整附加功能弹出框层级
+* 修复callout的列表样式不正确
+* 修复附加功能弹出框hover和浮动间距（恢复网页版界面drag触发顶栏）
+* 修复关系图全屏模式顶栏
+* 调整关系图标题栏间距
+* 更新主题预览图
+* 更新日历（解决日记模板未正确渲染的问题，**【需要在 main.js 中加载】**）
+
+### 如何修改 `main.js`
+关闭思源
+
+打开 笔记安装目录`\resources\stage\build\app\main.js`
+
+搜索
+
+`t.WYSIWYG=class{constructor(e){this.lastHTMLs={}`
+替换成：
+
+`window._d=n(8469);t.WYSIWYG=class{constructor(e){window._t=e,this.lastHTMLs={}`
+
 
 ## 2.6.5
 
