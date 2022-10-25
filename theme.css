@@ -809,7 +809,7 @@ input[type="checkbox" i] {
 	background-color:var(--b3-list-background);
 }
 .layout-tab-bar .item__text{
-    padding: 4px 8px 4px 11px; 
+    padding: 4px 8px 4px 10px; 
 }
 .layout-tab-bar .item__close{
 	padding: 6px 6px 4px 2px;
@@ -823,10 +823,7 @@ input[type="checkbox" i] {
 	width: 18px;
 }
 .layout-tab-bar .item__icon{
-	height:20px;
-	width: 20px;
-	line-height:20px;
-	align-items: center;
+	padding:4px 0 4px 6px;
 }
 .layout-tab-bar .item--pin .item__icon{
 	padding:4px 2px 2px 3px;
@@ -1963,34 +1960,35 @@ padding-bottom:30px;}
 
 
 
-
 .layout__center{
 	position:relative;
 }
+.layout__center>.fn__flex-1:first-child>.fn__flex-1>.layout-tab-container>.protyle>.protyle-breadcrumb{
+	padding-left:36px;
+}
+.layout__center>div:nth-last-child(2)>.fn__flex-1:first-child  .layout-tab-container>.protyle>.protyle-breadcrumb{
+	padding-right:38px;
+}
 #shrinkToolbar{
 	position:absolute;
-	top:45%;
+	top:60px;
 	width:100%;
 	z-index:10;
 }
 #leftColumn{
 	position:absolute;
-	height:60px;
-	width:15px;
+	height:25px;
+	width:25px;
 	padding:0;
-	margin:0;
-	background-color:var(--b3-fn__flex-shrink-background);
-	border-radius:0 3px 3px 0;
+	margin: 0px 0 0px 8px;
 }
 #rightColumn{
 	position:absolute;
-	height:60px;
-	width:15px;
+	height:25px;
+	width:25px;
 	right:0px;
 	padding:0;
-	margin:0;
-	background-color:var(--b3-fn__flex-shrink-background);
-	border-radius:3px 0 0 3px;
+	margin: 0px 8px 0px 0;
 }
 
 #leftColumn.b3-tooltips::after{
@@ -1998,7 +1996,10 @@ padding-bottom:30px;}
 }
 
 #rightColumn.b3-tooltips::after{
-	left:-59px;
+	left:-48px;
 }
 
 
+#leftColumn:hover,#rightColumn:hover{
+	background-color:var(--b3-fn__flex-shrink-background)
+}

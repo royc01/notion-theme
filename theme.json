@@ -2,7 +2,7 @@
   "name": "notion-theme",
   "author": "Roy",
   "url": "https://github.com/royc01/notion-theme",
-  "version": "2.6.6",
+  "version": "2.6.7",
   "modes": [
     "light",
 	"dark"
