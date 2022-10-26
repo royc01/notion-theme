@@ -2017,6 +2017,9 @@ padding-bottom:30px;}
 .layout__center>div:nth-last-child(1)>.fn__flex-1:first-child  .layout-tab-container>.protyle>.protyle-breadcrumb{
 	padding-right:38px;
 }
+.layout__center .fn__flex:has(>#searchHistoryBtn){
+	margin:2px 30px 2px 0px;
+}
 #shrinkToolbar{
 	position:absolute;
 	top:60px;
