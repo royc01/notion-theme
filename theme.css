@@ -1113,7 +1113,6 @@ input[type="checkbox" i] {
 }
 .protyle-gutters{
 	transition: all 200ms ease-out;
-	z-index:9;
 }
 /*块右上角引用数*/
 .protyle-attr--refcount{

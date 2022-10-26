@@ -8,7 +8,7 @@
 
 .fn__flex-column.fn__flex-shrink {
 	opacity:0;
-	transform:translateX(-80%);
+	transform:translateX(-88%);
 	transform-origin: 0 0 ;
 	position:absolute;
 	z-index:5;
@@ -24,9 +24,19 @@
 	transition: all 200ms!important;
 }
 
-.fn__flex-shrink:hover,#dockLeft:hover+.layouts .fn__flex-column.fn__flex-shrink {
+#dockLeft.fn__none+#layouts .fn__flex-column.fn__flex-shrink {
+	left:-36px;
+	transform:translateX(-80%);
+}
+
+#dockLeft.fn__none+#layouts .fn__flex-column.fn__flex-shrink :hover{
 	opacity:1;
 	transform:translateX(0%);
+	transition: all 300ms!important;
+}
+.fn__flex-shrink:hover,#dockLeft:hover+.layouts .fn__flex-column.fn__flex-shrink {
+	opacity:1;
+	transform:translateX(0%)!important;
 	transition: all 300ms!important;
 }
 #dockLeft .dock__item {
@@ -43,9 +53,7 @@
 	bottom:0px;
 }
 
-#dockLeft.fn__none+#layouts .fn__flex-column.fn__flex-shrink {
-	left:-36px;
-}
+
 
 
 .fn__flex-column.fn__flex-shrink:has(.file-tree.sy__file.layout__tab--active),
