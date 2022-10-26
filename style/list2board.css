@@ -74,7 +74,7 @@
 }
 
 /* ————————————————————去除小竖线———————————————————— */
-.list[custom-f="kb"][data-node-id] .li>:before {
+.list[custom-f="kb"][data-node-id] .li:before {
     display: none;
 }
 

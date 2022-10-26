@@ -113,7 +113,12 @@
 /*上竖线*/
 .protyle-wysiwyg *[custom-f="dt"] .li::before{   
     bottom: 50%;    
-    border-left:var(--b3-border-daotu);   
+    border-left:var(--b3-border-daotu);  
+	left: 0px;
+}
+
+.protyle-wysiwyg *[custom-f="dt"] .li:hover::before{   
+    border-left:var(--b3-border-daotu);  
 }
 /*下竖线*/
 .protyle-wysiwyg *[custom-f="dt"] .li::after{   
