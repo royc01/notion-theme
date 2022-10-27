@@ -114,7 +114,7 @@
                     return { date: "", week: "", markArr: [], DateLinkToNote: {}, textTop: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"], currentNotebook: { name: "", id: null }, notebookList: [], showNotebookList: !1 ,
                         // variable for daily note path
                         dailyNotePath: undefined, monthCurrent: undefined, dayCurrent: undefined,
-                    };`++`
+                    };
                 },
                 created() {
                     var t = new Date();
@@ -166,7 +166,7 @@
                         console.log("[日历插件][info] 读取日历的模板路径：", notePath);
                         // split the notePath to needed path
                         var notePathSplit = notePath.split('/{{') ;  // with 3 element: [/今日速记, now | date "2006/2006.01"}}, now | date "2006.01.02"}} ]
-                        this.dailyNotePath = notePathSplit[0] + '/';  // -> /今日速记/
+                        this.dailyNotePath = notePathSplit[0];  // -> /今日速记/
 
                         var monthPath = notePathSplit[1].replace('now | date "', '').replace('"}}', '');   // -> 2006/2006.01
                         this.monthCurrent = monthPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}');   // -> '${e[0]}/${e[0]}.${e[1]}'
@@ -174,7 +174,7 @@
                         var dayPath = notePathSplit[2].replace('now | date "', '').replace('"}}', ''); // -> 2006.01.02
                         this.dayCurrent = dayPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}').replaceAll('02', '${e[2]}')  // -> '${e[0]}.${e[1]}.${e[2]}'
 
-                        console.log("[日历插件][info] 替换为当前日期的模板变量", this.dailyNotePath +  this.monthCurrent + this.dayCurrent, "其中e为[2021, 10, 27]的当前日期变量");
+                        console.log("[日历插件][info] 替换为当前日期的模板变量", this.dailyNotePath + '/' + this.monthCurrent + '/' + this.dayCurrent, "其中e为[2021, 10, 27]的当前日期变量");
                     },
                     async clickDay(t) {
                         let e = t.split("/"); 
@@ -199,8 +199,9 @@
                             }
 
                             //     r = { notebook: this.currentNotebook.id, path: `/daily note/${e[0]}/${e[1]}/${o}`, markdown: "" },
-                            let r = { notebook: this.currentNotebook.id, path: `${this.dailyNotePath}/${this.monthCurrent}/${this.dayCurrent}`, markdown: "" },
+                            let r = { notebook: this.currentNotebook.id, path: eval('`'+this.dailyNotePath+'/'+this.monthCurrent+'/'+this.dayCurrent+'`'), markdown: "" },
                                 i = await this.request("/api/filetree/createDocWithMd", r);
+                            console.log(r)
                             if (0 === i.code && i.data) {
                                 let t = i.data;
                                 try {
