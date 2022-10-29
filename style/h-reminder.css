@@ -1,3 +1,14 @@
+.protyle-wysiwyg .h1>[spellcheck="false"]:has([data-type="inline-math"]),
+.protyle-wysiwyg .h2>[spellcheck="false"]:has([data-type="inline-math"]),
+.protyle-wysiwyg .h3>[spellcheck="false"]:has([data-type="inline-math"]),
+.protyle-wysiwyg .h4>[spellcheck="false"]:has([data-type="inline-math"]),
+.protyle-wysiwyg .h5>[spellcheck="false"]:has([data-type="inline-math"]),
+.protyle-wysiwyg .h6>[spellcheck="false"]:has([data-type="inline-math"]){
+	white-space:normal;
+}
+
+
+
 .protyle-wysiwyg .h1>[spellcheck="false"]:not(:empty)::after{
 	content:"";
 	position:absolute;
