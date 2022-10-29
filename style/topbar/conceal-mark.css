@@ -1,0 +1,12 @@
+
+.b3-typography [data-type~="mark"], .protyle-wysiwyg [data-type~="mark"]{
+    color: transparent !important;
+    background-color: transparent !important;
+    border-bottom: 0.1em solid var(--b3-theme-on-background)!important;
+	transition: all 300ms;
+}
+.b3-typography [data-type~="mark"]:hover, .protyle-wysiwyg [data-type~="mark"]:hover{
+    background-color: var(--b3-font-background7) !important;
+    color: var(--b3-theme-on-background)!important;
+	transition: all 300ms;
+}

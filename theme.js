@@ -149,6 +149,7 @@ function SubMenu(selectid,selecttype,className = 'b3-menu__submenu') {
   if(selecttype=="NodeTable"){
     node.appendChild(FixWidth(selectid))
     node.appendChild(AutoWidth(selectid))
+	node.appendChild(FullWidth(selectid))
 	node.appendChild(dHeader(selectid))
 	node.appendChild(vHeader(selectid))
 	node.appendChild(Removeth(selectid))
@@ -223,7 +224,7 @@ function FixWidth(selectid){
   button.setAttribute("custom-attr-name","f")
   button.setAttribute("custom-attr-value","")
 
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">页面宽度</span>`
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">自动宽度(换行)</span>`
   return button
 }
 function AutoWidth(selectid){
@@ -232,8 +233,19 @@ function AutoWidth(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","f")
   button.setAttribute("custom-attr-value","auto")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">自动宽度</span>`
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">自动宽度(不换行)</span>`
   button.onclick=ViewMonitor
+  return button
+}
+function FullWidth(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.onclick=ViewMonitor
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","f")
+  button.setAttribute("custom-attr-value","full")
+
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">页面宽度</span>`
   return button
 }
 function dHeader(selectid){
@@ -244,7 +256,7 @@ function dHeader(selectid){
   button.setAttribute("custom-attr-name","t")
   button.setAttribute("custom-attr-value","dongjie")
 
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">冻结表头滚屏</span>`
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconSuper"></use></svg><span class="b3-menu__label">冻结表头滚屏</span>`
   return button
 }
 function vHeader(selectid){
@@ -255,7 +267,7 @@ function vHeader(selectid){
   button.setAttribute("custom-attr-name","t")
   button.setAttribute("custom-attr-value","vbiaotou")
 
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">竖表头样式</span>`
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconSuper"></use></svg><span class="b3-menu__label">竖向表头样式</span>`
   return button
 }
 function Removeth(selectid){
@@ -266,7 +278,7 @@ function Removeth(selectid){
   button.setAttribute("custom-attr-name","t")
   button.setAttribute("custom-attr-value","biaotou")
 
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">取消表头样式</span>`
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconSuper"></use></svg><span class="b3-menu__label">空白表头样式</span>`
   return button
 }
 function Defaultth(selectid){
@@ -275,7 +287,7 @@ function Defaultth(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","t")
   button.setAttribute("custom-attr-value","")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">默认表头样式</span>`
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconSuper"></use></svg><span class="b3-menu__label">恢复表头样式</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -667,6 +679,24 @@ function themeButton() {
     );
 }
 
+/**---------------------------------------------------------挖空-------------------------------------------------------------- */
+
+function concealMarkButton() {
+    notionThemeToolbarAddButton(
+        "topBar",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"挖空",
+        "/appearance/themes/notion-theme/img/conceal2.svg",
+        "/appearance/themes/notion-theme/img/conceal.svg",
+        () => {
+            loadStyle("/appearance/themes/notion-theme/style/topbar/conceal-mark.css", "conceal挖空").setAttribute("topBarcss", "conceal挖空");
+        },
+        () => {
+            document.getElementById("conceal挖空").remove();
+        },
+        true
+    );
+}
 
 /**---------------------------------------------------------顶栏-------------------------------------------------------------- */
 
@@ -1272,7 +1302,7 @@ function init() {
 
   // 标签页容器ul，观测其子元素的变动
   let tab_containers = document.querySelectorAll(
-    "div[data-type='wnd'] > div.fn__flex ul.fn__flex.layout-tab-bar.fn__flex-1"
+    "div[data-type='wnd'] > div.fn__flex ul.fn__flex.layout-tab-bar"
   );
   const config = { attributes: false, childList: true, subtree: false };
 
@@ -1309,7 +1339,7 @@ function init() {
     tabs_observer.disconnect();
     // 重新获取节点
     tab_containers = document.querySelectorAll(
-      "div[data-type='wnd'] > div.fn__flex ul.fn__flex.layout-tab-bar.fn__flex-1"
+      "div[data-type='wnd'] > div.fn__flex ul.fn__flex.layout-tab-bar"
     );
     // 对节点重新进行观测
     for (let tab_container of tab_containers) {
@@ -1331,7 +1361,7 @@ function init() {
   // 历史记录面板
   settingBtn.insertAdjacentHTML(
     "afterend",
-    '<div id="myHistory" style="position:absolute;z-index:100;top:30em;left:23em;width:35em;height:52.8em;background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;visibility:hidden;transform: translate(-50%, -50%);overflow:auto;padding:0px 15px 10px 15px;border-radius: 5px;"><div style="position:sticky;top:0px;padding-top:10px;margin-bottom:20px;background-color:white;z-index: 1;" class="topBar"><input id="history_input" type="text" placeholder="搜索历史记录"  size="20"><button id = "showAllHistory"  style="margin-left:5px;">显示全部</button><button id = "deleteSelectedItem"  style="margin-left:3px;">删除选中项</button><button id = "clearHistory"  style="position:absolute;right:0px;top:16px;">清空历史</button></div><div id ="historyContainer"></div></div>'
+    '<div id="myHistory" style="position:absolute;z-index:100;top:30em;left:23em;width:35em;height:52.8em;background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;visibility:hidden;transform: translate(-50%, -50%);overflow:auto;padding:0px 15px 10px 15px;border-radius: 5px;"><div style="position:sticky;top:0px;padding-top:10px;margin-bottom:20px;z-index: 1;" class="topBar"><input id="history_input" type="text" placeholder="搜索历史记录"  size="20"><button id = "showAllHistory"  style="margin-left:5px;">显示全部</button><button id = "deleteSelectedItem"  style="margin-left:3px;">删除选中项</button><button id = "clearHistory"  style="position:absolute;right:0px;top:16px;">清空历史</button></div><div id ="historyContainer"></div></div>'
   );
 
   let showAllHistoryBtn = document.getElementById("showAllHistory");
@@ -2389,6 +2419,8 @@ setTimeout(() => {
     } else {
 			
 		themeButton();//主题
+		
+		concealMarkButton();//挖空
 		
 		topbarfixedButton();//顶栏固定
 		

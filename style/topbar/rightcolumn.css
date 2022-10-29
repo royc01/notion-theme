@@ -4,6 +4,7 @@
 
 #dockTop+.fn__flex-1{
 	position:relative;
+	overflow:hidden;
 }
 
 .layout__center ~ .fn__flex-column {
