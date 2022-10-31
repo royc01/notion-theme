@@ -683,7 +683,7 @@ function themeButton() {
 
 function concealMarkButton() {
     notionThemeToolbarAddButton(
-        "topBar",
+        "conceal",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"挖空",
         "/appearance/themes/notion-theme/img/conceal2.svg",

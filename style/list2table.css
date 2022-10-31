@@ -50,8 +50,8 @@
     border-top: none;
 }
 /* ————————————————————去除小竖线———————————————————— */
-.list[data-node-id][data-type="NodeList"][custom-f="bg"] .li>:before {
-    display: none;
+.list[data-node-id][data-type="NodeList"][custom-f="bg"] .li:before{
+    display: none!important;
 }
 
 /* ————————————————————设置前面的符号居中对齐———————————————————— */
