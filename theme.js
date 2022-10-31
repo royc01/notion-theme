@@ -697,7 +697,24 @@ function concealMarkButton() {
         true
     );
 }
+/**---------------------------------------------------------挖空-------------------------------------------------------------- */
 
+function tabbarVerticalButton() {
+    notionThemeToolbarAddButton(
+        "tabbarVertical",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"垂直页签",
+        "/appearance/themes/notion-theme/img/vtabbar2.svg",
+        "/appearance/themes/notion-theme/img/vtabbar.svg",
+        () => {
+            loadStyle("/appearance/themes/notion-theme/style/topbar/tab-bar-vertical.css", "tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
+        },
+        () => {
+            document.getElementById("tabbar垂直").remove();
+        },
+        true
+    );
+}
 /**---------------------------------------------------------顶栏-------------------------------------------------------------- */
 
 function topbarfixedButton() {
@@ -2421,6 +2438,8 @@ setTimeout(() => {
 		themeButton();//主题
 		
 		concealMarkButton();//挖空
+		
+		tabbarVerticalButton();//垂直页签
 		
 		topbarfixedButton();//顶栏固定
 		
