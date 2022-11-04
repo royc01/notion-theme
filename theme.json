@@ -1,8 +1,8 @@
 {
-  "name": "notion-theme",
+  "name": "Savor",
   "author": "Roy",
   "url": "https://github.com/royc01/notion-theme",
-  "version": "2.7.2",
+  "version": "3.0.0",
   "modes": [
     "light",
 	"dark"
