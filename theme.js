@@ -82,8 +82,8 @@ window.theme.changeThemeMode = function (
 
 /* 根据当前主题模式加载样式配置文件 */
 window.theme.changeThemeMode(
-    `/appearance/themes/notion-theme/style/topbar/notion-light.css`,
-    `/appearance/themes/notion-theme/style/topbar/notion-dark-mode.css`,
+    `/appearance/themes/Savor/style/topbar/notion-light.css`,
+    `/appearance/themes/Savor/style/topbar/notion-dark-mode.css`,
 );
 
 
@@ -650,10 +650,10 @@ function themeButton() {
         "buttonsalt",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"salt主题",
-        "/appearance/themes/notion-theme/img/salt2.svg",
-        "/appearance/themes/notion-theme/img/salt.svg",
+        "/appearance/themes/Savor/img/salt2.svg",
+        "/appearance/themes/Savor/img/salt.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/salt.css", "salt主题").setAttribute("topicfilter", "buttonsalt");
+            loadStyle("/appearance/themes/Savor/style/topbar/salt.css", "salt主题").setAttribute("topicfilter", "buttonsalt");
             qucuFiiter();
         },
         () => {
@@ -665,10 +665,10 @@ function themeButton() {
         "buttonsugar",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"sugar主题",
-        "/appearance/themes/notion-theme/img/sugar2.svg",
-        "/appearance/themes/notion-theme/img/sugar.svg",
+        "/appearance/themes/Savor/img/sugar2.svg",
+        "/appearance/themes/Savor/img/sugar.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/sugar.css", "sugar主题").setAttribute("topicfilter", "buttonsugar");
+            loadStyle("/appearance/themes/Savor/style/topbar/sugar.css", "sugar主题").setAttribute("topicfilter", "buttonsugar");
             qucuFiiter();
         },
         () => {
@@ -680,10 +680,10 @@ function themeButton() {
         "buttonvinegar",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"vinegar主题",
-        "/appearance/themes/notion-theme/img/moon2.svg",
-        "/appearance/themes/notion-theme/img/moon.svg",
+        "/appearance/themes/Savor/img/moon2.svg",
+        "/appearance/themes/Savor/img/moon.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/vinegar.css", "vinegar主题").setAttribute("topicfilter", "buttonvinegar");
+            loadStyle("/appearance/themes/Savor/style/topbar/vinegar.css", "vinegar主题").setAttribute("topicfilter", "buttonvinegar");
             qucuFiiter();
         },
         () => {
@@ -700,10 +700,10 @@ function concealMarkButton() {
         "conceal",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"挖空",
-        "/appearance/themes/notion-theme/img/conceal2.svg",
-        "/appearance/themes/notion-theme/img/conceal.svg",
+        "/appearance/themes/Savor/img/conceal2.svg",
+        "/appearance/themes/Savor/img/conceal.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/conceal-mark.css", "conceal挖空").setAttribute("topBarcss", "conceal挖空");
+            loadStyle("/appearance/themes/Savor/style/topbar/conceal-mark.css", "conceal挖空").setAttribute("topBarcss", "conceal挖空");
         },
         () => {
             document.getElementById("conceal挖空").remove();
@@ -718,10 +718,10 @@ function tabbarVerticalButton() {
         "tabbarVertical",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"垂直页签",
-        "/appearance/themes/notion-theme/img/vtabbar2.svg",
-        "/appearance/themes/notion-theme/img/vtabbar.svg",
+        "/appearance/themes/Savor/img/vtabbar2.svg",
+        "/appearance/themes/Savor/img/vtabbar.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/tab-bar-vertical.css", "tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
+            loadStyle("/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", "tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
         },
         () => {
             document.getElementById("tabbar垂直").remove();
@@ -736,10 +736,10 @@ function topbarfixedButton() {
         "topBar",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"隐藏按钮",
-        "/appearance/themes/notion-theme/img/topbar2.svg",
-        "/appearance/themes/notion-theme/img/topbar.svg",
+        "/appearance/themes/Savor/img/topbar2.svg",
+        "/appearance/themes/Savor/img/topbar.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/top-fixed.css", "topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
+            loadStyle("/appearance/themes/Savor/style/topbar/top-fixed.css", "topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
         },
         () => {
             document.getElementById("topbar隐藏").remove();
@@ -755,10 +755,10 @@ function leftColumnButton() {
         "leftColumn",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"左侧面板悬浮",
-        "/appearance/themes/notion-theme/img/rightcolumn.svg",
-        "/appearance/themes/notion-theme/img/leftcolumn.svg",
+        "/appearance/themes/Savor/img/rightcolumn.svg",
+        "/appearance/themes/Savor/img/leftcolumn.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/leftcolumn.css", "leftColumn悬浮").setAttribute("topBarcss", "leftColumn悬浮");
+            loadStyle("/appearance/themes/Savor/style/topbar/leftcolumn.css", "leftColumn悬浮").setAttribute("topBarcss", "leftColumn悬浮");
         },
         () => {
             document.getElementById("leftColumn悬浮").remove();
@@ -774,10 +774,10 @@ function rightColumnButton() {
         "rightColumn",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"右侧面板悬浮",
-        "/appearance/themes/notion-theme/img/leftcolumn.svg",
-        "/appearance/themes/notion-theme/img/rightcolumn.svg",
+        "/appearance/themes/Savor/img/leftcolumn.svg",
+        "/appearance/themes/Savor/img/rightcolumn.svg",
         () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/rightcolumn.css", "rightColumn悬浮").setAttribute("topBarcss", "rightColumn悬浮");
+            loadStyle("/appearance/themes/Savor/style/topbar/rightcolumn.css", "rightColumn悬浮").setAttribute("topBarcss", "rightColumn悬浮");
         },
         () => {
             document.getElementById("rightColumn悬浮").remove();
@@ -1900,7 +1900,7 @@ function initcalendar() {
     data-subtype="widget"
   >
     <div class="iframe-content">
-      <iframe id="calendarPanel" style="visibility:hidden;position: fixed; z-index: 1000; top: 225px; left: 170px;  width: 300px; height: 350px; background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;border:none; border-radius: 5px; transform: translate(-50%, -50%); overflow: auto;" src="/appearance/themes/notion-theme/calendar" data-src="/appearance/themes/notion-theme/calendar" data-subtype="widget" ></iframe>
+      <iframe id="calendarPanel" style="visibility:hidden;position: fixed; z-index: 1000; top: 225px; left: 170px;  width: 300px; height: 350px; background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;border:none; border-radius: 5px; transform: translate(-50%, -50%); overflow: auto;" src="/appearance/themes/Savor/calendar" data-src="/appearance/themes/Savor/calendar" data-subtype="widget" ></iframe>
     </div>
   </div>`
   );
@@ -3233,7 +3233,7 @@ setTimeout(() => {
 		
 		initcalendar()//打开日历
 		
-		loadScript("/appearance/themes/notion-theme/comment/index.js");//js批注评论
+		loadScript("/appearance/themes/Savor/comment/index.js");//js批注评论
 
         console.log("==============>附加CSS和特性JS_已经执行<==============");
     }
