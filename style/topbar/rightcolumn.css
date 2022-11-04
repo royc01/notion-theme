@@ -43,7 +43,7 @@
 }
 #dockRight:before{
 	content: "";
-    height:calc(100% - 35px);
+    height:calc(100% - 40px);
 	width:36px;
 	right:-36px;
 	box-shadow: var(--b3-dockright-background) -36px 0px 0px 0px;
@@ -65,3 +65,22 @@
 .layout__center ~ .fn__flex-column:has(.file-tree.sy__backlink.layout__tab--active){
 	animation: shrink 2s ease-in-out;
 }
+
+
+.layout__center:has(~.fn__flex-column[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly{
+  margin-right:230px;
+}
+
+.layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
+  margin-right:230px;
+}
+
+
+.layout__center~.fn__flex-column>.fn__flex:first-child,
+.layout__center~.fn__flex-column>.fn__flex.fn__none+.layout__resize+.fn__flex{
+	padding-top:0px;
+}/*取消侧栏上端间距*/
+
+
+.layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+padding-bottom:0px;}/*取消侧栏下端间距*/

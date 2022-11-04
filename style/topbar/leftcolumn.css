@@ -12,11 +12,11 @@
 	transform-origin: 0 0 ;
 	position:absolute;
 	z-index:5;
-	top:90px;
-	bottom:50px;
+	top:80px;
+	bottom:40px;
 	left:0px;
 	min-height: unset;
-	height:calc(100% - 140px);
+	height:calc(100% - 120px);
 	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
 	border-left:36px solid transparent;/*增加点击区域*/
 	border-radius:0 5px 5px 0;
@@ -44,7 +44,7 @@
 }
 #dockLeft:before{
 	content: "";
-    height:calc(100% - 35px);
+    height:calc(100% - 40px);
 	width:36px;
 	left:-36px;
 	box-shadow: var(--b3-dock-background) 36px 0px 0px 0px;
@@ -66,3 +66,13 @@
 .fn__flex-column.fn__flex-shrink:has(.file-tree.sy__backlink.layout__tab--active){
 	animation: shrink 2s ease-in-out;
 }
+
+
+.fn__flex-shrink ~ .layout__center>div:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
+ margin-left:230px;
+}
+
+.fn__flex-column.fn__flex-shrink>.fn__flex:first-child:not(.fn__none),
+.fn__flex-column.fn__flex-shrink>.fn__flex.fn__none+.layout__resize+.fn__flex{
+	padding-top:0px;
+}/*取消侧栏上端间距*/

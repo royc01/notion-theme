@@ -646,23 +646,7 @@ function getDocumentTime(tilteElement) {
 /**---------------------------------------------------------主题-------------------------------------------------------------- */
 
 function themeButton() {
-    /*notionThemeToolbarAddButton(
-        "buttonnotion-dark",
-        "toolbar__item b3-tooltips b3-tooltips__se",
-		"notion-dark主题",
-        "/appearance/themes/notion-theme/img/moon2.svg",
-        "/appearance/themes/notion-theme/img/moon.svg",
-        () => {
-            loadStyle("/appearance/themes/notion-theme/style/topbar/notion-dark.css", "notion-dark主题").setAttribute("topicfilter", "buttonnotion-dark");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("notion-dark主题").remove();
-        },
-        true
-    );*/
-
-    notionThemeToolbarAddButton(
+		notionThemeToolbarAddButton(
         "buttonsalt",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"salt主题",
@@ -674,6 +658,36 @@ function themeButton() {
         },
         () => {
             document.getElementById("salt主题").remove();
+        },
+        true
+    );
+		notionThemeToolbarAddButton(
+        "buttonsugar",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"sugar主题",
+        "/appearance/themes/notion-theme/img/sugar2.svg",
+        "/appearance/themes/notion-theme/img/sugar.svg",
+        () => {
+            loadStyle("/appearance/themes/notion-theme/style/topbar/sugar.css", "sugar主题").setAttribute("topicfilter", "buttonsugar");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("sugar主题").remove();
+        },
+        true
+    );
+	    notionThemeToolbarAddButton(
+        "buttonvinegar",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"vinegar主题",
+        "/appearance/themes/notion-theme/img/moon2.svg",
+        "/appearance/themes/notion-theme/img/moon.svg",
+        () => {
+            loadStyle("/appearance/themes/notion-theme/style/topbar/vinegar.css", "vinegar主题").setAttribute("topicfilter", "buttonvinegar");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("vinegar主题").remove();
         },
         true
     );
@@ -697,7 +711,7 @@ function concealMarkButton() {
         true
     );
 }
-/**---------------------------------------------------------挖空-------------------------------------------------------------- */
+/**---------------------------------------------------------垂直-------------------------------------------------------------- */
 
 function tabbarVerticalButton() {
     notionThemeToolbarAddButton(
@@ -721,7 +735,7 @@ function topbarfixedButton() {
     notionThemeToolbarAddButton(
         "topBar",
         "toolbar__item b3-tooltips b3-tooltips__se",
-		"顶栏隐藏",
+		"隐藏按钮",
         "/appearance/themes/notion-theme/img/topbar2.svg",
         "/appearance/themes/notion-theme/img/topbar.svg",
         () => {
@@ -737,7 +751,7 @@ function topbarfixedButton() {
 /**---------------------------------------------------------左侧面板悬浮-------------------------------------------------------------- */
 
 function leftColumnButton() {
-    shrinkToolbarAddButton(
+    shrinkLeftAddButton(
         "leftColumn",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"左侧面板悬浮",
@@ -756,7 +770,7 @@ function leftColumnButton() {
 /**---------------------------------------------------------右侧面板悬浮--------------------------------------------------------------*/
 
 function rightColumnButton() {
-    shrinkToolbarAddButton(
+    shrinkRightAddButton(
         "rightColumn",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"右侧面板悬浮",
@@ -784,6 +798,698 @@ function qucuFiiter() {
         }
     });
 }
+/*********************************************************Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版*****START*********************************/
+//感谢Dark+作者，感谢HBuilderX-Light作者。
+//鼠标右键+中键打开移动端新窗口，alt+鼠标中键打来PC端窗口
+function newOpenWindow() {
+
+    let _menuParams = [
+        {
+            label: 'SiYuan',
+            submenu: [
+                {
+                    label: 'About SiYuan',
+                    role: 'about',
+                },
+                { type: 'separator' },
+                { role: 'services' },
+                { type: 'separator' },
+                {
+                    label: 'Hide SiYuan',
+                    role: 'hide',
+                },
+                { role: 'hideOthers' },
+                { role: 'unhide' },
+                { type: 'separator' },
+                {
+                    label: 'Quit SiYuan',
+                    role: 'quit',
+                },
+            ],
+        },
+        {
+            role: 'editMenu',
+            submenu: [
+                { role: 'selectAll' },
+                { role: 'cut' },
+                { role: 'copy' },
+                { role: 'paste' },
+                { role: 'pasteAndMatchStyle', accelerator: 'CmdOrCtrl+Shift+V' },
+                { type: 'separator' },
+                { role: 'toggleSpellChecker' },
+            ],
+        },
+        {
+            role: 'viewMenu',
+            submenu: [
+                { role: 'resetZoom' },
+                { role: 'zoomIn', accelerator: 'CmdOrCtrl+=' },
+                { role: 'zoomOut' },
+            ],
+        },
+        {
+            role: 'windowMenu',
+            submenu: [
+                { role: 'minimize' },
+                { role: 'zoom' },
+                { role: 'togglefullscreen' },
+                { type: 'separator' },
+                { role: 'toggledevtools' },
+                { type: 'separator' },
+                { role: 'front' },
+                { type: 'separator' },
+                { role: 'reload', accelerator: 'F5' },
+                { role: 'forcereload', accelerator: 'CmdOrCtrl+F5' },
+                { role: 'close' },
+                { type: 'separator' },
+                {
+                    label: 'Pinned',
+                    click: (menuItem, browserWindow, event) => {
+                        if (browserWindow) browserWindow.setAlwaysOnTop(!browserWindow.isAlwaysOnTop());
+                    },
+                    type: 'checkbox',
+                    checked: true,
+                    accelerator: 'Alt+Shift+P',
+                },
+            ],
+        },
+    ];
+
+    let _windowParams = {
+        width: 1360, // 窗口宽度
+        height: 768, // 窗口宽度
+        frame: true, // 是否显示边缘框
+        fullscreen: false, // 是否全屏显示
+        alwaysOnTop: false, // 是否置顶显示
+        autoHideMenuBar: true, // 是否隐藏菜单栏(使用 Alt 显示)
+        webPreferences: {
+            nodeIntegration: true, // 是否启用 Node.js 内置模块
+            nativeWindowOpen: true,
+            webSecurity: false, // 是否启用 Web 安全
+        }
+    }
+
+    let _id = /^\d{14}\-[0-9a-z]{7}$/;
+    let _url = /^siyuan:\/\/blocks\/(\d{14}\-[0-9a-z]{7})\/*(?:(?:\?)(\w+=\w+)(?:(?:\&)(\w+=\w+))*)?$/;
+
+
+    function isObject(obj) {
+        return Object.prototype.toString.call(obj) === '[object Object]'
+    }
+    function isArray(arr) {
+        return Array.isArray(arr)
+    }
+    function merge(target, ...arg) {
+        return arg.reduce((acc, cur) => {
+            return Object.keys(cur).reduce((subAcc, key) => {
+                const srcVal = cur[key]
+                if (isObject(srcVal)) {
+                    subAcc[key] = merge(subAcc[key] ? subAcc[key] : {}, srcVal)
+                } else if (isArray(srcVal)) {
+                    // series: []，下层数组直接赋值
+                    subAcc[key] = srcVal.map((item, idx) => {
+                        if (isObject(item)) {
+                            const curAccVal = subAcc[key] ? subAcc[key] : []
+                            return merge(curAccVal[idx] ? curAccVal[idx] : {}, item)
+                        } else {
+                            return item
+                        }
+                    })
+                } else {
+                    subAcc[key] = srcVal
+                }
+                return subAcc
+            }, acc)
+        }, target)
+    }
+    /**
+     * 获得焦点所在的块 ID, 否则获得焦点所在文档的 ID
+     * @return {string} 块 ID 或文档 ID
+     * @return {null} 光标不在块内或文档内
+     */
+    function getFocusedID() {
+        return getFocusedBlockID() || getFocusedDocID() || null;
+    }
+    /**
+     * 获得焦点所在块 ID
+     * @return {string} 块 ID
+     * @return {null} 光标不在块内
+     */
+    function getFocusedBlockID() {
+        let block = getFocusedBlock();
+        if (block) {
+            return block.dataset.nodeId;
+        }
+        else return null;
+    }
+    /**
+     * 获得焦点所在的块
+     * @return {HTMLElement} 光标所在块
+     * @return {null} 光标不在块内
+     */
+    function getFocusedBlock() {
+        let block = window.getSelection()
+            && window.getSelection().focusNode
+            && window.getSelection().focusNode.parentElement; // 当前光标
+        while (block != null && block.dataset.nodeId == null) block = block.parentElement;
+        return block;
+    }
+    /**
+     * 获得焦点所在文档的 ID
+     * @return {string} 文档 ID
+     * @return {null} 没有聚焦的文档
+     */
+    function getFocusedDocID() {
+        let background = getFocusedDocBackground();
+        if (background) {
+            return background.dataset.nodeId;
+        }
+        else return null;
+    }
+    /**
+     * 获得焦点所在文档的背景
+     * @return {HTMLElement} 焦点所在文档的背景
+     * @return {null} 没有聚焦的文档
+     */
+    function getFocusedDocBackground() {
+        return document.querySelector('div.layout__wnd--active div.protyle:not(.fn__none) > div.protyle-content > div.protyle-background')
+            || document.querySelector('#editor > div.protyle-content > div.protyle-background')
+            || null;
+    }
+    /**
+     * 获得目标的块 ID
+     * @params {HTMLElement} target: 目标
+     * @return {string} 块 ID
+     * @return {null} 没有找到块 ID
+     */
+    function getTargetBlockID(target) {
+        let element = target;
+        while (element != null
+            && !(element.localName === 'a' && element.href
+                || element.dataset.href
+                || _id.test(element.dataset.nodeId)
+                || _id.test(element.dataset.oid)
+                || _id.test(element.dataset.id)
+                || _id.test(element.dataset.rootId)
+            )) element = element.parentElement;
+
+        if (element != null) {
+            if (_id.test(element.dataset.nodeId)) return element.dataset.nodeId;
+            if (_id.test(element.dataset.oid)) return element.dataset.oid;
+            if (_id.test(element.dataset.id)) return element.dataset.id;
+            if (_id.test(element.dataset.oid)) return element.dataset.rootId;
+            if (_url.test(element.dataset.href)) return url2id(element.dataset.href);
+            if (_url.test(element.href)) return url2id(element.href);
+            return element.href || element.dataset.href || null;
+        }
+        else return null;
+    }
+    function url2id(url) {
+        let results = _url.exec(url);
+        if (results && results.length >= 2) {
+            return results[1];
+        }
+        return null;
+    }
+
+
+
+    /**
+     * 切换编辑模式
+     * @param {number} mode 0: 只读模式, 1: 编辑模式
+     */
+    function changeEditMode(mode = 0) { // 切换编辑模式
+
+        let toolbarEdit = document.getElementById('toolbarEdit');
+        if (toolbarEdit) {
+            let editable = toolbarEdit.firstElementChild.getAttribute('xlink:href') === '#iconPreview';
+
+            let event = new MouseEvent('click');
+            switch (mode) {
+                case 0:
+                    if (editable) toolbarEdit.dispatchEvent(event);
+                    else return;
+                case 1:
+                    if (!editable) toolbarEdit.dispatchEvent(event);
+                    else return;
+                default:
+                    throw new Error(`/script/utils/misc.js changeEditMode(${mode})`);
+            }
+        }
+    }
+    /**
+     * 跳转到指定块并可选聚焦
+     */
+    function windowjump(id, callback = null) {
+        const editor = document.querySelector('div.protyle-wysiwyg div[data-node-id] div[contenteditable][spellcheck]');
+        if (editor) {
+            let ref = document.createElement("span");
+            ref.setAttribute("data-type", "block-ref");
+            ref.setAttribute("data-subtype", "s");
+            ref.setAttribute("data-id", id);
+            editor.appendChild(ref);
+            ref.click();
+            ref.remove();
+
+            var reg = new RegExp('<[^>]+>', 'gi');  //过滤所有的html标签，不包括内容
+
+            /**更改子窗口标题 */
+            setTimeout(() => {
+                var title = document.querySelector("title");
+                if (id == null) {
+                    title.innerText = "[#] 思源子窗口 - Savor [#]";
+                    return;
+                };
+                titleTxt(id);
+
+                AddEvent(document.body, "click", (e) => {
+                    var title = document.querySelector("title");
+                    var TargetBlockID = getTargetBlockID(e.target);
+                    if (TargetBlockID == null) {
+                        title.innerText = "[#] 思源子窗口 - Savor [#]";
+                        return;
+                    };
+                    titleTxt(TargetBlockID);
+                })
+
+                function titleTxt(TargetBlockID) {
+
+                    以id获取文档聚焦内容(TargetBlockID, (v) => {
+                        var htmltxt = v.content;
+
+                        var element = document.createElement("div");
+                        element.innerHTML = htmltxt;
+
+                        htmltxt = diguiTooONE_1(element, (v) => {
+                            return v.getAttribute("contenteditable") == "true";
+                        })
+
+                        var txt = (htmltxt.innerText).replace(reg, '');
+                        if (txt == "​" || txt == "") {
+                            txt = "[#] 思源子窗口 - Savor [#]";
+                            根据ID获取人类可读路径(TargetBlockID, (v) => {
+                                title.innerText = "[#] " + v.substring(1, v.length) + " [#]";
+                            })
+                            return;
+                        }
+                        if (txt.length > 25) {
+                            title.innerText = "[#] " + txt.substring(0, 25) + "...";
+                        } else {
+                            title.innerText = "[#] " + txt + " [#]";
+                        }
+
+                        element.remove();
+
+                    });
+                }
+            }, 2000)
+
+            if (typeof callback === 'function') setTimeout(callback, 250);
+        }
+        else setTimeout(() => windowjump(id, callback), 250);
+    }
+    /**
+     * 跳转到指定块并聚焦
+     * 问题: 文档名不改变
+     */
+    function focalize(id, callback = null) {
+        // console.log('focalize:', id);
+        const breadcrumbs = document.querySelector('.protyle-breadcrumb>.protyle-breadcrumb__bar');
+        if (breadcrumbs) {
+            let crumb = document.createElement("span");
+            crumb.className = 'protyle-breadcrumb__item';
+            crumb.setAttribute("data-node-id", id);
+            breadcrumbs.appendChild(crumb);
+            crumb.click();
+            // crumb.dispatchEvent(CTRL_CLICK_EVENT);
+            crumb.remove();
+            if (typeof callback === 'function') setTimeout(callback, 250);
+        }
+        else setTimeout(() => focalize(id, callback), 250);
+    }
+    async function windowGoto(id, focus = 0, editable = 0) {
+        // 是否聚焦
+        if (parseInt(focus) === 1 || focus === 'true') focalize(id);
+        else {
+            windowjump(id);
+        }
+
+        // 是否可编辑
+        if (parseInt(editable) === 1 || editable === 'true') setTimeout(() => changeEditMode(1), 0);
+        else setTimeout(() => changeEditMode(0), 0);
+    }
+    async function _jump(...args) {
+        try {
+            await windowGoto(...args);
+        } catch (e) {
+            if (e.message === args[0]) {
+                setTimeout(() => _jump(...args), 250);
+            }
+            else throw e;
+        }
+    }
+    function windowJumpToID() {
+        let url = new URL(window.location.href);
+        let id = url.searchParams.get('id');
+        let focus = url.searchParams.get('focus');
+        let editable = url.searchParams.get('editable');
+        if (_id.test(id)) {
+            setTimeout(() => _jump(id, focus, editable), 0);
+        }
+    }
+    setTimeout(() => {
+        try {
+            if (true) {
+                setTimeout(windowJumpToID, 0);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }, 0);
+
+
+    window.theme = {};
+    /**
+     * 新窗口打开
+     * @mode (string): 打开窗口模式('app', 'desktop', 'mobile')
+     * @url (string): URL
+     * @urlParams (object): URL 参数
+     * @windowParams (object): 窗体参数
+     * @menuTemplate (object): 窗口菜单栏模板
+     * @pathname (string): URL 路径名
+     * @hash (string): URL hash
+     * @consoleMessageCallback (function): 子窗口控制台输出回调
+     * @closeCallback (function): 关闭窗口时的回调函数
+     * @windowEventHandlers (array): 一组窗口的事件处理器
+     * @contentsEventHandlers (array): 一组内容的事件处理器
+     * @return (BrowserWindow): 窗口对象
+     */
+    window.theme.openNewWindow = function (
+        mode = 'mobile',
+        url = window.location.href,
+        urlParams = {},
+        windowParams = {
+            width: 720,
+            height: 480,
+            frame: true, // 是否显示边缘框
+            fullscreen: false, // 是否全屏显示
+        },
+        menuTemplate = null,
+        pathname = null,
+        hash = null,
+        consoleMessageCallback = null,
+        closeCallback = null,
+        windowEventHandlers = [],
+        contentsEventHandlers = [],
+
+    ) {
+        try {
+
+            // 优化思源内部 URL
+            url = window.theme.urlFormat(url);
+
+            // 设置窗口模式
+            if (mode) {
+                switch (mode.toLowerCase()) {
+                    case 'app':
+                        return;
+                    case 'desktop':
+                    case 'mobile':
+                        url.pathname = `/stage/build/${mode.toLowerCase()}/`;
+                        break;
+                    case 'editor':
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (pathname) url.pathname = pathname;
+            if (hash) url.hash = hash;
+            // 设置 URL 参数
+            for (const param in urlParams) {
+                url.searchParams.set(param, urlParams[param]);
+            }
+            // 打开新窗口
+            try {
+                const {
+                    BrowserWindow,
+                    Menu
+                } = require('@electron/remote');
+
+                // 新建窗口(Electron 环境)
+                var newWin = new BrowserWindow(windowParams);
+                const menu = Menu.buildFromTemplate(menuTemplate);
+                console.log(url.href);
+                newWin.setMenu(menu);
+                newWin.loadURL(url.href);
+
+                // REF [Event: 'console-message'​](https://www.electronjs.org/docs/latest/api/web-contents#event-console-message)
+
+                newWin.webContents.on("console-message", (event, level, message, line, sourceId) => {
+                    if (level === 0) {
+                        switch (message) { // 通用的命令
+                            case 'WINDOW-SWITCH-PIN': // 切换窗口置顶状态
+                                // REF [win.setAlwaysOnTop(flag[, level][, relativeLevel])​](https://www.electronjs.org/zh/docs/latest/api/browser-window#winsetalwaysontopflag-level-relativelevel)
+                                newWin.setAlwaysOnTop(!newWin.isAlwaysOnTop());
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    consoleMessageCallback && setTimeout(async () => consoleMessageCallback(newWin, event, level, message, line, sourceId));
+                });
+
+
+                if (mode) {
+                    switch (mode.toLowerCase()) {
+                        case 'editor':
+                        case 'desktop':
+                            newWin.removeMenu(); // 移除窗口的菜单栏
+                            break;
+                        case 'app':
+                        case 'mobile':
+                        default:
+                            break;
+                    }
+                }
+                for (const handler of windowEventHandlers) {
+                    newWin.on(handler.event, (...args) => handler.callback(newWin, ...args));
+                }
+                for (const handler of contentsEventHandlers) {
+                    newWin.webContents.on(handler.event, (...args) => handler.callback(newWin, ...args));
+                }
+                newWin.on('closed', () => {
+                    closeCallback && setTimeout(async () => closeCallback(newWin), 0);
+                    newWin = null;
+                })
+                return newWin;
+            }
+            catch (err) {
+                console.warn(err);
+                // 新建标签页(Web 环境)
+                // window.open(url.href, "_blank");
+                // REF [Window.open() - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)
+                // REF [Window open() 方法 | 菜鸟教程](https://www.runoob.com/jsref/met-win-open.html)
+                newWin = window.open(
+                    url.href,
+                    url.href,
+                    `
+                    popup = true,
+                    width = ${windowParams.width},
+                    height = ${windowParams.height},
+                `,
+                );
+                return newWin;
+            }
+        }
+        catch (err) {
+            console.error(err);
+            return null;
+        }
+    }
+    /**
+     * URL 格式化
+     * @params {string} url: 要格式化的 URL
+     * @reutrn {URL}: URL 对象
+     */
+    window.theme.urlFormat = function (url, ssl = true) {
+        switch (true) { // 格式化 URL
+            case url.startsWith('assets/'):
+            case url.startsWith('widgets/'):
+            case url.startsWith('emojies/'):
+            case url.startsWith('appearance/'):
+            case url.startsWith('export/'):
+                return new URL(`${window.location.origin}/${url}`);
+            case url.startsWith('//'):
+                return new URL(`${ssl ? 'https' : 'http'}:${url}`);
+            case url.startsWith('/'):
+                return new URL(`${window.location.origin}${url}`);
+            case url.startsWith('http://'):
+            case url.startsWith('https://'):
+                return new URL(url);
+            default:
+                return new URL(`${ssl ? 'https' : 'http'}://${url}`);
+        }
+    }
+    window.theme.languageMode = (() => window.siyuan.config.lang)();
+
+    function outfocusOpenAPP(id = getFocusedID(), urlParams = {}) {
+        if (id) {
+
+            urlParams.id = id;
+            urlParams.focus = 0;
+            urlParams.editable = 1;
+
+            _windowParams.width = 1360;
+            _windowParams.height = 768;
+
+            window.theme.openNewWindow(
+                undefined,
+                undefined,
+                urlParams,
+                _windowParams,
+                _menuParams,
+            );
+        }
+    }
+    function outfocusOpenWinPC(id = getFocusedID(), urlParams = {}) {
+        // 打开新窗口
+        if (id) {
+            urlParams.id = id;
+            urlParams.focus = 0;
+            urlParams.editable = 0;
+
+            const windowParams = merge({}, _windowParams, { alwaysOnTop: false })// 关闭置顶
+            windowParams.width = 1536;
+            windowParams.height = 840;
+
+            window.theme.openNewWindow(
+                "desktop",
+                undefined,
+                urlParams,
+                windowParams,
+                _menuParams,
+            );
+        }
+    }
+
+    function infocusOpenAPP(id = getFocusedID(), urlParams = {}) {
+        if (id) {
+
+            urlParams.id = id;
+            urlParams.focus = 1;
+            urlParams.editable = 1;
+
+            _windowParams.width = 1360;
+            _windowParams.height = 768;
+
+            window.theme.openNewWindow(
+                undefined,
+                undefined,
+                urlParams,
+                _windowParams,
+                _menuParams,
+            );
+        }
+    }
+    function infocusOpenWinPC(id = getFocusedID(), urlParams = {}) {
+        // 打开新窗口
+        if (id) {
+            urlParams.id = id;
+            urlParams.focus = 1;
+            urlParams.editable = 0;
+
+            const windowParams = merge({}, _windowParams, { alwaysOnTop: false })// 关闭置顶
+            windowParams.width = 1536;
+            windowParams.height = 840;
+
+            window.theme.openNewWindow(
+                "desktop",
+                undefined,
+                urlParams,
+                windowParams,
+                _menuParams,
+            );
+        }
+    }
+
+
+    function openbrowser(target) {
+        _windowParams.frame = true;
+        window.theme.openNewWindow(
+            'browser',
+            target,
+            undefined,
+            _windowParams,
+            _menuParams,
+        );
+    }
+    async function middleClick(element, OpenWinFun) {
+        let target = getTargetBlockID(element);
+        // 目标非空, 是 ID 或者链接
+        if (target == "null") return;//兼容简单备注
+        if (target) {
+            if (_id.test(target)) {
+                await OpenWinFun(target);
+            } else {
+                // 是链接
+                openbrowser(target);
+            }
+        }
+    }
+
+
+    var flag = false;
+    var flag2 = false;
+    AddEvent(document.body, "mousedown", (e) => {
+        if (!e.shiftKey) {
+            if (!flag && e.button == 2) {
+                flag = true; return;
+            }
+
+            if (flag && e.button == 1) {
+                e.preventDefault()
+                flag2 = true;
+                middleClick(e.target, outfocusOpenAPP); return;
+            }
+            if (e.altKey && e.button == 1) {
+                e.preventDefault()
+                flag2 = true;
+                middleClick(e.target, outfocusOpenWinPC); return;
+            }
+        } else {
+            if (!flag && e.button == 2) {
+                flag = true; return;
+            }
+
+            if (flag && e.button == 1) {
+                e.preventDefault()
+                flag2 = true;
+                middleClick(e.target, infocusOpenAPP); return;
+            }
+            if (e.altKey && e.button == 1) {
+                e.preventDefault()
+                flag2 = true;
+                middleClick(e.target, infocusOpenWinPC); return;
+
+            }
+        }
+    });
+    AddEvent(document.body, "mouseup", (e) => {
+        flag = false;
+        if (flag2) {
+            setTimeout(() => {
+                var commonMenu = document.getElementById("commonMenu");
+                commonMenu.setAttribute("class", "b3-menu fn__none");
+                flag2 = false;
+            }, 0)
+        }
+    })
+}
+/*********************************************************Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版*****END*********************************/
+
+
+
 
 /**----------------------------------自动展开悬浮窗折叠列表,展开搜索条目折叠列表,聚焦单独列表-----体验优化----------------------------------*/
 
@@ -1050,115 +1756,57 @@ function CreatetriggerBlock(e) {
 /**----------------鼠标中键标题、列表文本折叠/展开----------------*/
 function collapseExpand_Head_List() {
     var flag45 = false;
-    setInterval(() => {
+    AddEvent(document.body, "mouseup", () => {
+        flag45 = false;
+    });
 
-        var NodeHeading = null;
-        var NodeListItem = null;
-
-        if (isPhone()) {
-            NodeHeading = document.querySelectorAll('#editor [data-type="NodeHeading"]');
-            NodeListItem = document.querySelectorAll('#editor [data-type="NodeListItem"].li');
-        } else {
-            NodeHeading = [...document.querySelectorAll('.layout-tab-container>.fn__flex-1.protyle:not(.fn__none) [data-type="NodeHeading"]'),
-            ...document.querySelectorAll('[data-oid] [data-type="NodeHeading"]'),
-            ...document.querySelectorAll('#searchPreview [data-type="NodeHeading"]')];
-
-
-            NodeListItem = [...document.querySelectorAll('.layout-tab-container>.fn__flex-1.protyle:not(.fn__none) [data-type="NodeListItem"].li'),
-            ...document.querySelectorAll('[data-oid] [data-type="NodeListItem"].li'),
-            ...document.querySelectorAll('#searchPreview [data-type="NodeListItem"].li')];
-        }
-
-        var H = [];
-
-
-        for (let index = 0; index < NodeHeading.length; index++) {
-            const element = NodeHeading[index];
-            var item = element.parentElement;
-            if (item.className != "li") H.push(element);
-        }
-        for (let index = 0; index < H.length; index++) {
-            const element = H[index].children[0];
-            myRemoveEvent(element, "mousedown", _collapseExpand_NodeListItem);
-            myRemoveEvent(element, "mousedown", _collapseExpand_NodeHeading);
-            AddEvent(element, "mousedown", _collapseExpand_NodeHeading)
-            AddEvent(element, "mouseup", () => { flag45 = false })
-        }
-
-
-        for (let index = 0; index < NodeListItem.length; index++) {
-            const element = NodeListItem[index].children[1].children[0];
-            myRemoveEvent(element, "mousedown", _collapseExpand_NodeHeading);
-            myRemoveEvent(element, "mousedown", _collapseExpand_NodeListItem);
-            AddEvent(element, "mousedown", _collapseExpand_NodeListItem)
-            AddEvent(element, "mouseup", () => { flag45 = false })
-        }
-    }, 3000);
-
-
-
-    function _collapseExpand_NodeHeading(e) {
-        if (e.button == 2) { fflag45lag = true; return }
-        if (flag45 || e.shiftKey || e.altKey || e.button != 1) return;
-        e.preventDefault();
-        protyle_gutters_click(e.target);
-    }
-
-    function _collapseExpand_NodeListItem(e) {
+    AddEvent(document.body, "mousedown", (e) => {
         if (e.button == 2) { flag45 = true; return }
         if (flag45 || e.shiftKey || e.altKey || e.button != 1) return;
-        e.preventDefault();
-        var element = e.target;
-        var i = 0;
-        while (element.getAttribute("contenteditable") == null) {
-            if (i == 999) return;
-            i++;
-            element = element.parentElement;
-        }
-        var elementParentElement = element.parentElement;
+        var target = e.target;
 
-        if (elementParentElement.getAttribute("data-type") == "NodeHeading" && elementParentElement.getAttribute("fold") == 1) {
-            console.log("1");
-            protyle_gutters_click(element);
-        } else {
-            commonMenu_click(elementParentElement.previousElementSibling);
-        }
-
-    }
-
-    function commonMenu_click(element) {
-
-        var elementParentElement = element.parentElement;
-        var data_node_id = elementParentElement.getAttribute("data-node-id");
-        var elementParentElementParentElement = elementParentElement.parentElement;
-
-
-        if (elementParentElementParentElement.className == "protyle-wysiwyg protyle-wysiwyg--attr") {
-            if (elementParentElementParentElement.children[0].getAttribute("data-node-id") == data_node_id) {
-                var i = 0;
-                var item2 = elementParentElementParentElement;
-                while (item2) {
-                    if (i > 99) return;
-                    if (item2.getAttribute("data-oid") != null) return;
-                    item2 = item2.parentElement;
-                    i++;
+        if (target.getAttribute("contenteditable") == null) {
+            isFatherFather(target, (v) => {
+                if (v.getAttribute("contenteditable") != null) {
+                    target = v;
+                    return true;
                 }
-                elementParentElement.setAttribute("foldTag", true);
+                return false;
+            }, 10);
+        }
+
+        var targetParentElement = target.parentElement;
+        if (targetParentElement == null) return;
+
+        //是标题吗？
+        if (targetParentElement != null && targetParentElement.getAttribute("data-type") == "NodeHeading") {
+
+            var targetParentElementParentElement = targetParentElement.parentElement;
+            //标题父元素是列表吗？
+            if (targetParentElementParentElement != null && targetParentElementParentElement.getAttribute("data-type") == "NodeListItem") {
+                e.preventDefault();
+                //列表项实现折叠
+                _collapseExpand_NodeListItem(target);
+            } else {
+                e.preventDefault();
+                //标题块标项实现折叠
+                _collapseExpand_NodeHeading(target);
+            }
+        } else {//是列表
+            var targetParentElementParentElement = targetParentElement.parentElement;
+            if (targetParentElementParentElement != null && targetParentElementParentElement.getAttribute("data-type") == "NodeListItem") {
+                e.preventDefault();
+                //列表项实现折叠
+                _collapseExpand_NodeListItem(target);
             }
         }
+    });
 
-        element.click();
-        var caidan = (document.getElementById("commonMenu")).children;
-        for (let index = 0; index < caidan.length; index++) {
-            const element = caidan[index];
-            var item = element.children;
-            if (item.length != 0 && item[1].innerText == "折叠/展开") element.click();
-        }
-    }
+    //标题，块标实现折叠
+    function _collapseExpand_NodeHeading(element) {
 
-    function protyle_gutters_click(element) {
         var i = 0;
-        while (element.className != "fn__flex-1 protyle" && element.className != "block__edit fn__flex-1 protyle" && element.className != "fn__flex-1 spread-search__preview protyle") {
+        while (element.className != "protyle" && element.className != "fn__flex-1 protyle" && element.className != "block__edit fn__flex-1 protyle" && element.className != "fn__flex-1 spread-search__preview protyle") {
             if (i == 999) return;
             i++;
             element = element.parentElement;
@@ -1167,13 +1815,66 @@ function collapseExpand_Head_List() {
         for (let index = ddddd.length - 1; index >= 0; index--) {
             const element = ddddd[index];
             if (element.className == "protyle-gutters") {
-                var fold = diguiTooONE(element, (v) => { return v.getAttribute("data-type") === "fold"; })
+                var fold = diguiTooONE_1(element, (v) => { return v.getAttribute("data-type") === "fold"; })
                 if (fold != null) fold.click();
                 return;
             }
         }
     }
+
+    //列表，列表项实现折叠
+    function _collapseExpand_NodeListItem(element) {
+
+        //在悬浮窗中第一个折叠元素吗？
+        var SiyuanFloatingWindow = isSiyuanFloatingWindow(element);
+        if (SiyuanFloatingWindow) {
+            var vs = isFatherFather(element, (v) => v.classList.contains("li"), 7);
+            if (vs != null && (vs.previousElementSibling == null)) {
+                var foid = vs.getAttribute("fold");
+                if (foid == null || foid == "0") {//判断是折叠
+                    vs.setAttribute("fold", "1");
+                } else {
+                    vs.setAttribute("fold", "0");
+                }
+                return;
+            }
+        }
+
+
+        var i = 0;
+        while (element.getAttribute("contenteditable") == null) {
+            if (i == 999) return;
+            i++;
+            element = element.parentElement;
+        }
+        var elementParentElement = element.parentElement.parentElement;
+
+        var fold = elementParentElement.getAttribute("fold");
+
+        if (elementParentElement.children.length == 3) return;
+
+        if (fold == null || fold == "0") {
+            setBlockfold_1(elementParentElement.getAttribute("data-node-id"));
+        } else {
+            setBlockfold_0(elementParentElement.getAttribute("data-node-id"));
+        }
+    }
 }
+
+/**
+ * 
+ * @param {*} element 元素是否在思源悬浮窗中
+ * @returns 是返回悬浮窗元素，否返回null
+ */
+function isSiyuanFloatingWindow(element) {
+    return isFatherFather(element, (v) => {
+        if (v.getAttribute("data-oid") != null) {
+            return true;
+        }
+        return false;
+    });
+}
+
 
 
 
@@ -1378,7 +2079,7 @@ function init() {
   // 历史记录面板
   settingBtn.insertAdjacentHTML(
     "afterend",
-    '<div id="myHistory" style="position:absolute;z-index:100;top:30em;left:23em;width:35em;height:52.8em;background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;visibility:hidden;transform: translate(-50%, -50%);overflow:auto;padding:0px 15px 10px 15px;border-radius: 5px;"><div style="position:sticky;top:0px;padding-top:10px;margin-bottom:20px;z-index: 1;" class="topBar"><input id="history_input" type="text" placeholder="搜索历史记录"  size="20"><button id = "showAllHistory"  style="margin-left:5px;">显示全部</button><button id = "deleteSelectedItem"  style="margin-left:3px;">删除选中项</button><button id = "clearHistory"  style="position:absolute;right:0px;top:16px;">清空历史</button></div><div id ="historyContainer"></div></div>'
+    '<div id="myHistory" style="position:fixed;z-index:100;top:30em;left:23em;width:35em;height:52.8em;background-color: var(--b3-theme-background);box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;visibility:hidden;transform: translate(-50%, -50%);overflow:auto;padding:0px 15px 10px 15px;border-radius: 5px;"><div style="position:sticky;top:0px;padding-top:10px;margin-bottom:20px;z-index: 1;" class="topBar"><input id="history_input" type="text" placeholder="搜索历史记录"  size="20"><button id = "showAllHistory"  style="margin-left:5px;">显示全部</button><button id = "deleteSelectedItem"  style="margin-left:3px;">删除选中项</button><button id = "clearHistory"  style="position:absolute;right:0px;top:16px;">清空历史</button></div><div id ="historyContainer"></div></div>'
   );
 
   let showAllHistoryBtn = document.getElementById("showAllHistory");
@@ -1632,12 +2333,12 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
     var notionToolbar = document.getElementById("notionToolbar");
     if (notionToolbar == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("windowControls");
+        var windowControls = document.getElementById("barSearch");
 
         if (toolbarEdit == null && windowControls != null) {
             notionToolbar = document.createElement("div");
             notionToolbar.id = "notionToolbar";
-            windowControls.parentElement.insertBefore(notionToolbar, windowControls);
+            windowControls.parentElement.insertBefore(notionToolbar, barSearch);
         } else if (toolbarEdit != null) {
             notionToolbar = insertCreateBefore(toolbarEdit, "div", "notionToolbar");
             notionToolbar.style.position = "relative";
@@ -1645,11 +2346,11 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
     }
 
     var addButton = addinsertCreateElement(notionToolbar, "div");
-    addButton.style.float = "left";
+    addButton.style.float = "top";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
-	addButton.style.backgroundPosition = "left top";
-    addButton.style.backgroundSize = "100%";
+	addButton.style.backgroundPosition = "left";
+
 
     
     addButton.id = ButtonID;
@@ -1697,25 +2398,25 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
 
 }
 
+/*左侧悬浮*/
 
-
-function shrinkToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
-    var shrinkToolbar = document.getElementById("shrinkToolbar");
-    if (shrinkToolbar == null) {
+function shrinkLeftAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
+    var shrinkLeft = document.getElementById("shrinkLeft");
+    if (shrinkLeft == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.querySelector(".layout__center");
+         var windowControls = document.getElementById("drag");
 
         if (toolbarEdit == null && windowControls != null) {
-            shrinkToolbar = document.createElement("div");
-            shrinkToolbar.id = "shrinkToolbar";
-            windowControls.appendChild(shrinkToolbar);
+            shrinkLeft = document.createElement("div");
+            shrinkLeft.id = "shrinkLeft";
+             windowControls.parentElement.insertBefore(shrinkLeft, windowControls);
         } else if (toolbarEdit != null) {
-            shrinkToolbar = insertCreateBefore(toolbarEdit, "div", "shrinkToolbar");
-            shrinkToolbar.style.position = "relative";
+            shrinkLeft = insertCreateBefore(toolbarEdit, "div", "shrinkLeft");
+            shrinkLeft.style.position = "relative";
         }
     }
 
-    var addButton = addinsertCreateElement(shrinkToolbar, "div");
+    var addButton = addinsertCreateElement(shrinkLeft, "div");
     addButton.style.float = "left";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
@@ -1767,7 +2468,75 @@ function shrinkToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgU
 
 
 }
+/*右侧悬浮*/
+function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
+    var shrinkRight = document.getElementById("shrinkRight");
+    if (shrinkRight == null) {
+        var toolbarEdit = document.getElementById("toolbarEdit");
+         var windowControls = document.getElementById("barSearch");
 
+        if (toolbarEdit == null && windowControls != null) {
+            shrinkRight = document.createElement("div");
+            shrinkRight.id = "shrinkRight";
+             windowControls.parentElement.insertBefore(shrinkRight, windowControls);
+        } else if (toolbarEdit != null) {
+            shrinkRight = insertCreateBefore(toolbarEdit, "div", "shrinkRight");
+            shrinkRight.style.position = "relative";
+        }
+    }
+
+    var addButton = addinsertCreateElement(shrinkRight, "div");
+    addButton.style.float = "left";
+    addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
+    addButton.style.backgroundRepeat = "no-repeat";
+	addButton.style.backgroundPosition = "center";
+    addButton.style.backgroundSize = "80%";
+
+    
+    addButton.id = ButtonID;
+	addButton.setAttribute("class", ButtonTitle);
+	addButton.setAttribute("aria-label", ButtonLabel)
+
+    var offNo = "0";
+
+
+
+    if (Memory == true) {
+        offNo = localStorage.getItem(ButtonID);
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+            localStorage.setItem(ButtonID, "0");
+            NoClickRunFun(addButton);
+            localStorage.setItem(ButtonID, "1");
+        } else if (offNo != "0") {
+            offNo = "0";
+            localStorage.setItem(ButtonID, "0");
+        }
+    }
+
+    AddEvent(addButton, "click", () => {
+
+        if (offNo == "0") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+
+            NoClickRunFun(addButton);
+            if (Memory != null) localStorage.setItem(ButtonID, "1");
+            offNo = "1";
+            return;
+        }
+
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
+            addButton.style.filter = "none";
+            OffClickRunFun(addButton);
+            if (Memory != null) localStorage.setItem(ButtonID, "0");
+            offNo = "0";
+            return;
+        }
+    });
+
+
+}
 /**
  * 在DIV光标位置插入内容
  * @param {*} content 
@@ -2434,6 +3203,9 @@ setTimeout(() => {
 
         console.log("==============>附加CSS和特性JS_已经执行<==============");
     } else {
+		leftColumnButton();//左侧面板悬浮
+		
+		rightColumnButton();//右侧面板悬浮
 			
 		themeButton();//主题
 		
@@ -2442,10 +3214,6 @@ setTimeout(() => {
 		tabbarVerticalButton();//垂直页签
 		
 		topbarfixedButton();//顶栏固定
-		
-		leftColumnButton();//左侧面板悬浮
-		
-		rightColumnButton();//右侧面板悬浮
 
         setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
 
@@ -2458,6 +3226,8 @@ setTimeout(() => {
         collapsedListPreview();//折叠列表内容预览查看
 
         collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
+		
+		newOpenWindow();//Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版
 
         init()//最近打开文档
 		

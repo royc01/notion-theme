@@ -268,18 +268,30 @@
 }
 
 .b3-text-field::-webkit-calendar-picker-indicator {
-    fiilter: invert(1)
+    fiilter: invert(1);
 }
 body{
 	border: 0px!important;
 }
-
+#buttonsalt,#topBar,#conceal,#tabbarVertical,#buttonvinegar,#buttonsugar{
+	background-color:var(--b3-theme-on-background);
+	border:6px solid var(--b3-theme-on-background);
+	border-bottom:0;
+}
+#topBar{
+	border-bottom:6px solid var(--b3-theme-on-background);
+}
 #notionToolbar{
 	filter: hue-rotate(180deg) invert(90%);
 }
 #rightColumn,#leftColumn{
-	background-color:#d1d5d8!important;
-}
-#shrinkToolbar{
 	filter: hue-rotate(180deg) invert(90%);
+}
+#buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover{
+	background-color:#fff;
+}
+
+#buttonsalt{
+		opacity:1;
+	box-shadow:none;
 }

@@ -1,13 +1,13 @@
 :root {
     /* 主色 */
-    --b3-theme-primary: rgb(46, 170, 220);/* 主色 */
-    --b3-theme-primary-light: rgba(46, 170, 220, 0.54);
-    --b3-theme-primary-lighter: rgba(46, 170, 220, 0.38);
-    --b3-theme-primary-lightest: rgba(46, 170, 220, 0.2);
+    --b3-theme-primary: rgb(35, 131, 226);/* 主色 */
+    --b3-theme-primary-light: rgba(35, 131, 226, 0.54);
+    --b3-theme-primary-lighter: rgba(35, 131, 226, 0.38);
+    --b3-theme-primary-lightest: rgba(35, 131, 226, 0.2);
     --b3-theme-secondary: #f3a92f;
-    --b3-theme-background: #2f3437;/* 编辑区背景 */
+    --b3-theme-background: #050505;/* 编辑区背景 */
 	--b3-theme-background-light: rgba(230, 230, 230, .1);
-    --b3-theme-surface:rgba(55, 60, 63);/* 面板主色 */
+    --b3-theme-surface:#0f0f0f;/* 面板主色 */
 	--b3-theme-surface-light: rgba(41, 42, 45, .86);
 	--b3-theme-surface-lighter:rgba(230, 230, 230, .06);
     --b3-theme-error: #d23f31;
@@ -31,7 +31,7 @@
     --b3-border-color: rgba(230, 230, 230, .1);
 
     /* 滚动条 */
-    --b3-scroll-color: rgba(71, 76, 80 );
+    --b3-scroll-color: #0f0f0f;
 	--b3-scroll-color-hover: rgba(104,108,110);
 	--b3-scroll-bgcolor: transparent;
 
@@ -175,24 +175,24 @@
 	--b3-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
 	--b3-dockright-color: rgba(114, 118, 120);
-	--b3-dockright-background: rgba(230, 230, 230, .1);
+	--b3-dockright-background: #050505;
 	--b3-dockleft-color: rgba(114, 118, 120);
-	--b3-dock-background: rgba(230, 230, 230, .1);
-	--b3-dockright-item-active-background: rgba(71, 76, 80 );
-	--b3-dockleft-item-active-background: rgba(71, 76, 80 );
+	--b3-dock-background: #050505;
+	--b3-dockright-item-active-background: #050505;
+	--b3-dockleft-item-active-background: #050505;
 	--b3-dock-item-active-color: #eb8383;
-	--b3-dock-item-hover-background: rgba(71, 76, 80 );
+	--b3-dock-item-hover-background: #050505;
 	
 	--b3-dock-item-width: 36px;
 	--b3-dock-item-padding: 5px;
 	--b3-dock-item-margin: 7px 5px 7px 5px;
 	--b3-dock-item-radius: 5px;
 	/* 侧栏面板 */
-	--b3-fn__flex-column-background: rgba(55, 60, 63);
-	--b3-fn__flex-shrink-background: rgba(55, 60, 63);
-	--b3-block-logo-color: rgba(55, 60, 63);
-	--b3-block-logo-background-color: rgba(114, 118, 120);
-	--b3-block-icon-svg-color: rgba(114, 118, 120);
+	--b3-fn__flex-column-background: rgba(2, 2, 2);
+	--b3-fn__flex-shrink-background: rgba(2, 2, 2);
+	--b3-block-logo-color: rgba(2, 2, 2);
+	--b3-block-logo-background-color: #353535;
+	--b3-block-icon-svg-color: #353535;
 	--b3-block-icon-hover: rgba(255, 255, 255, 0.1 );
 	--b3-block-icon-active: #eb8383;
 	--b3-list-item-arrow: rgba(149, 152, 156);
@@ -200,7 +200,7 @@
 	--b3-list-background-focus: rgba(255, 255, 255, 0.2 );
 	--b3-list-background-more:#c5c7c8;
 	
-	--b3-flex-column-padding:6px 0px 4px 0px;
+	--b3-flex-column-padding:6px 0px 2px 0px;
 	--b3-list-item-radius: 3px;
 	/* 大纲数字 */
 	--h1-list-graphic: #eb8383;
@@ -235,18 +235,18 @@
 	--b3-color--square: var(--b3-border-color);
 	/* 任务列表 */
 	--b3-task-done-color: var(--b3-scroll-color-hover);
-	--b3-task-done-hover: #069ccd;
+	--b3-task-done-hover: #4496e7;
 	/* 引述 */
 	--b3-bq-background: rgba(54, 59, 62);
 	/* 块引用 */
 	--b3-block-ref-background: var(--b3-toolbar-item-hover);
 	/* 代码块 */
-	--b3-linenumber-rows: rgba(61, 66, 69);
+	--b3-linenumber-rows: #0f0f0f;
 	--b3-code-block-hljs: var(--b3-fn__flex-shrink-background);		
 	/*行内代码*/
 	--b3-inline-code:var(--b3-theme-error);
 	/*按钮*/
-	--b3-button: #069ccd;
+	--b3-button: #4496e7;
 	/*pdf*/
 	--b3-toolbarSidebar: #484d50;
 	/*导图*/
@@ -262,43 +262,19 @@
 }
 
 /* PDF */
-.pdfViewer .page canvas,
-.thumbnailImage {
-    filter: grayscale(0%) invert(100%) contrast(100%) brightness(100%) hue-rotate(180deg);
-}
-
 .textLayer,
 .pdf__resize {
     mix-blend-mode: screen;
 }
 
 .b3-text-field::-webkit-calendar-picker-indicator {
-    filter: invert(1)
+    fiilter: invert(1)
 }
 body{
 	border: 0px!important;
 }
 
-#notionToolbar {
-	filter: hue-rotate(180deg) invert(90%);
-}
 
-.protyle-wysiwyg .hljs{
-	background-color:#c8c2c8!important;
-	filter: hue-rotate(90deg) invert(100%);
-}
-
-
-[id*=mermaid] line {
-    stroke: #808080!important;
-}
-
-[id*=mermaid] .relation {
-    filter: invert(100%)!important;
-}
-[id*=mermaid] .messageText {
-    stroke: #808080!important;
-}
-[id*=mermaid] .relationshipLine {
-    stroke: #808080!important;
+.protyle-toolbar {
+    background-color:#0f0f0f;
 }

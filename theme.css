@@ -219,7 +219,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-blur-background: var(--b3-fn__flex-shrink-background);
+	--b3-toolbar-blur-background: var(--b3-theme-background);
 	--b3-toolbar-background: var(--b3-theme-background);
 	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--b3-toolbar-closeWindow-hover: #e81123;
@@ -312,6 +312,8 @@
 	--b3-status-msg-background: #e0dfda;
 }
 
+
+
 /* PDF */
 .textLayer,
 .pdf__resize {
@@ -328,22 +330,20 @@ body{
 /* ————————————————————顶栏———————————————————— */
 .toolbar{
 	background-color: var(--b3-toolbar-background);
-	margin-bottom: -7px;
-	height:35px;
-	z-index:60;
-	opacity: 1;
-	box-shadow: 0px -1px 0px 0px var(--b3-fn__flex-shrink-background) inset;
+	height:40px;
+	z-index:2;
+	margin-bottom: -40px;
 }
 
 body.body--win32 .toolbar {
-		padding:0;
+	padding:0;
 }
 #notionToolbar{
 	transform:translateY(0px);
 }
 
-.toolbar__item{
-	margin: 5px 0px 5px 5px ;
+.toolbar__item:not(.toolbar__item--close){
+	margin: 7px 0px 5px 0px ;
 	border-radius:3px;
 	padding: 3px;
 }
@@ -359,18 +359,19 @@ body.body--win32 .toolbar {
 .toolbar__item:not(.toolbar__item--disabled):not(.toolbar__item--close):hover, .toolbar__item--active {
 	background-color: var(--b3-toolbar-item-hover);
 }
-#minWindow svg, #restoreWindow svg, #maxWindow svg, #closeWindow svg{
+#minWindow svg, #restoreWindow svg, #maxWindow svg{
+	width: 10px!important;
+	padding: 3px 5px;
+}
+ #closeWindow svg{
 	width: 10px!important;
 	padding: 3px 8px;
 }
 #minWindow, #restoreWindow, #maxWindow, #closeWindow{
-	margin: 5px 5px 5px 0px ;
-}
-#windowControls{
-	margin-left:5px;
+	margin:0;
 }
 .toolbar__item--close{
-		padding: 4px 8px;
+	padding: 10px 5px;
 }
 #closeWindow:hover{
 	background-color: var(--b3-toolbar-closeWindow-hover);
@@ -379,10 +380,16 @@ body.body--win32 .toolbar {
 	color: var(--b3-toolbar-closeWindow-svg);
 }
 #drag {
-	line-height:35px;
-	padding-left:85px!important;
+	height: 0;
 }
-
+#toolbarVIP{
+	width: 27px;
+	overflow:hidden;
+	margin: 7px 0px 5px 5px ;
+}
+#toolbarVIP div:before,#toolbarVIP div:after{
+	display:none;
+}
 /* ————————————————————dock栏———————————————————— */
 .dock{
 	background-color: var(--b3-dock-background);
@@ -416,7 +423,7 @@ body.body--win32 .toolbar {
 	background-color:var(--b3-dockright-item-active-background);
 }
 .dock#dockLeft .dock__item:first-child,.dock#dockRight .dock__item:first-child{
-	margin: 17px 5px 7px 5px;
+	margin: 48px 5px 7px 5px;
 }
 .dock#dockRight .dock__item:last-child{
 	margin: 7px 5px 40px 5px;
@@ -450,6 +457,9 @@ body.body--win32 .toolbar {
 	padding: var(--b3-flex-column-padding);
 	min-height: 90% ;
 }
+.fn__flex-shrink:not([style*="width: 0px"]),.layout__center~.fn__flex-column:not([style*="width: 0px"]){
+	min-width:230px;
+}/*侧栏最小宽度*/
 /*侧栏滚动出现分割线
 .layout-tab-container>.fn__flex-column>.fn__flex-1{
 	background: linear-gradient(var(--b3-fn__flex-column-background), transparent 100%),
@@ -465,7 +475,7 @@ body.body--win32 .toolbar {
 #layouts>.fn__flex>.fn__flex-column>.fn__flex>div[data-type=wnd]>.layout-tab-container>.fn__flex-column{animation: flex-column  0.2s ease-in-out;}
 /*面板标题*/
 .file-tree .block__icons{
-	height:46px; 
+	height:34px; 
     padding: 0px 15px;
 }
 .graph.file-tree .block__icons{
@@ -475,9 +485,9 @@ body.body--win32 .toolbar {
 .block__logo svg{
 	width: 12px;
 	height: 12px;
-	padding: 6px;
+	padding: 4px;
 	margin: 0px 10px 0px 0px;
-	border-radius: 5px;
+	border-radius: 3px;
 	color: var(--b3-block-logo-color);
 	background-color: var(--b3-block-logo-background-color);
 }
@@ -658,7 +668,6 @@ input[type="checkbox" i] {
 	margin-left:-16px;
 	margin-right:4px;
     color:transparent;
-	z-index:2;
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h1"] .b3-list-item__toggle::after{
 	content:"❶";
@@ -721,6 +730,9 @@ input[type="checkbox" i] {
 	box-shadow: inset 0 0 0 1px var(--b3-layout-resize);
 }
 /*分界线*/
+.layout__resize{
+	z-index:1;
+}
 .layout__resize:after{
 	background-color: var(--b3-layout-resize);
 }
@@ -728,9 +740,8 @@ input[type="checkbox" i] {
 	background-color: var(--b3-shrink-layout-resize);
 }
 .fn__flex-shrink+.layout__resize--lr:after{
-	background-color:transparent;
-	width:2px;
-	margin-left:-2px;
+	width:1px;
+	margin-left:-1px;
 }
 .layout__resize--lr:hover:after,.layout__resize--lr:active:after{
 	width:2px;
@@ -754,31 +765,52 @@ input[type="checkbox" i] {
 /* ————————————————————页签———————————————————— */
 .layout-tab-bar{
 	padding:0 0 0 8px;
+	position:relative;
 	background-color: var(--b3-theme-background);
+	height: 39px;
+	z-index:2;
+	box-shadow: 0 -1px 0 0 var(--b3-border-color) inset;
+	margin-top:1px;
+}
+/*.fn__flex:has(>.layout-tab-bar):before,.fn__flex:has(>.layout-tab-bar):after{
+	content: "";
+	margin-top:7px;
+    height: 20px;
+    border-left: 1px solid var(--b3-layout-resize);
+	z-index:9;
+}*/
+ul.layout-tab-bar:not(.layout-tab-bar--readonly):before{
+	content: "";
+	position:relative;
+	left:-8px;
+    height: 20px;
+    border-left: 1px solid var(--b3-layout-resize);
+	z-index:9;
+}
+ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
+	content: "";
+	position:relative;
+	right:-6px;
+    height: 20px;
+    border-left: 1px solid var(--b3-layout-resize);
+	z-index:9;
 }
 .layout-tab-bar .item{
-	margin:15px 0px 7px 0px;
+	margin:0px;
 	border-radius: 3px!important;
 	min-height:unset;
 	min-width:unset;
 	overflow:visible;
 }
-
-
 .layout-tab-bar .item__icon svg{
 	height: 16px;
 }
-.layout__wnd--active .layout-tab-bar .item--focus{
-	box-shadow:none!important;
+
+.layout-tab-bar .item--focus:after{
+	background-color:transparent;
 }
-.layout-tab-bar .item--focus:after {
-    content: "";
-    width: 100%;
-    height: 3px;
-    border-radius: 6px;
-	bottom: -7px;
-    position: absolute;
-    background-color: var(--b3-theme-background-light);
+.layout__wnd--active .layout-tab-bar .item--focus{
+	box-shadow:unset!important;
 }
 .layout__wnd--active .layout-tab-bar .item--focus::after{
 	content: '';
@@ -796,7 +828,8 @@ input[type="checkbox" i] {
 	transition: all 300ms;
 }
 .layout-tab-bar .item--readonly{
-	margin:12px 5px 5px 0px;
+	margin:3px 0 0 0;
+	padding:0;
 }
 
 .item__close[data-type="more"] svg{
@@ -811,10 +844,10 @@ input[type="checkbox" i] {
 	background-color:var(--b3-list-background);
 }
 .layout-tab-bar .item__text{
-    padding: 4px 8px 4px 10px; 
+    padding: 0px 8px 0px 10px; 
 }
 .layout-tab-bar .item__close{
-	padding: 6px 6px 4px 2px;
+	padding: 4px 6px 4px 2px;
 }
 
 .layout-tab-bar .item--pin{
@@ -825,20 +858,20 @@ input[type="checkbox" i] {
 	width: 18px;
 }
 .layout-tab-bar svg.item__graphic{
-	width: 24px;
+	width: 72px;
 	height: 24px;
 }
 .layout-tab-bar .item__icon{
 	padding:4px 0 4px 6px;
 }
 .layout-tab-bar .item--pin .item__icon{
-	padding:4px 2px 4px 3px;
+	padding:2px 2px 3px 3px;
 }
 .layout-tab-bar .item--pin .item__text{
-	padding:2px 2px 2px 3px;
+	padding:0px 2px 0px 3px;
 }
 .layout-tab-bar .item--pin .item__graphic{
-	padding:4px 3px 4px 3px;
+	padding:3px 3px 3px 3px;
 	height:16px;
 	width:16px;
 }
@@ -855,12 +888,18 @@ input[type="checkbox" i] {
 	background-color:var(--b3-card-success-background);
 }
 .layout-tab-bar .item__graphic{
-	padding:2px 0 2px 6px;
+	padding:2px 0 0px 6px;
+}
+.layout__center .layout-tab-bar--readonly {
+    min-width: 82px;
+    -webkit-app-region: drag;
+}
+.layout__center .layout-tab-bar .item--readonly .item__close{
+	-webkit-app-region: no-drag;
 }
 /* ————————————————————面包屑———————————————————— */
 .protyle-breadcrumb{
-	padding: 6px 8px 4px 8px;
-	box-shadow: 0px 1px 0px 0px var(--b3-protyle-breadcrumb-shadow) inset;
+	padding: 5px 8px 5px 8px;
 }
 .block__popover .protyle-breadcrumb{
 	padding: 6px 8px 0px 8px;
@@ -904,7 +943,7 @@ input[type="checkbox" i] {
 /* ————————————————————编辑区———————————————————— */
 /*头图、图标、标签*/
 .protyle-background{
-	border-bottom:10px solid transparent !important
+	border-bottom:10px solid transparent !important;
 }
 .protyle-background[style*="30vh"]>.protyle-background__iconw >.protyle-icons,
 .protyle-background[style*="64px"]>.protyle-background__iconw >.protyle-icons,
@@ -1679,9 +1718,13 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	line-height:26px;
 	color:var(--b3-theme-on-surface);
 }
-/*历史面板*/
+/*历史面板,集市*/
+.b3-dialog__container .layout-tab-bar{
+	height:40px;
+	z-index:unset;
+}
 .b3-dialog__container .layout-tab-bar .item{
-	padding: 8px 14px;
+	padding: 4px 0px;
 }
 .b3-dialog__container .layout-tab-bar .item--focus{
 	position:relative;
@@ -1689,7 +1732,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 .b3-dialog__container .layout-tab-bar .item--focus::after{
 	content: '';
 	position: absolute;
-	bottom: -7px;
+	bottom: -5px;
 	left: 0px;
 	right: 0px;
 	height: 2px;
@@ -1724,7 +1767,7 @@ div#historyContainer{
 	 font-size:1.1em;
 	}
 #toolbarViewer{
-	padding:5px 32px 5px 8px;
+	padding:5px 5px 5px 8px;
 	height:40px;
 }
 #viewerContainer{
@@ -1854,7 +1897,7 @@ padding:3px;
 	margin:  7px 5px 13px 5px;
 	border-radius: 5px;
 	background-color: var(--b3-status-msg-background);
-	padding:2px;
+	padding:1px;
 }
 
 .status .toolbar__item svg{
@@ -1871,11 +1914,11 @@ padding:3px;
 	background-color:var(--b3-theme-primary);
 	color:#fff;
 	padding: 0px 0 0 8px ;
-	margin:0 5px 5px 5px;
+	margin:1px 5px 5px 5px;
 	position:relative;
 	right:28px;
-	height:27px;
-	line-height:27px;
+	height:24px;
+	line-height:24px;
 }
 .status__counter:not(:empty) span{
 	color:#fff;
@@ -1887,13 +1930,13 @@ padding:3px;
 	padding: 0px 8px;
 	border-radius:5px;
 	background-color:var(--b3-status-msg-background);
-	margin:0 5px 5px 5px;
+	margin:1px 5px 5px 5px;
 	transition: max-width 300ms,opacity 300ms;
 	transition-delay: 2000ms;
 	position:relative;
 	right:26px;
-	height:27px;
-	line-height:27px;
+	height:24px;
+	line-height:24px;
 }
 .status__msg:not(:empty):before{
 	content: "📢";
@@ -2029,12 +2072,12 @@ padding-bottom:30px;}
 	padding:10px;
 }
 
-#buttonnotion-dark,#buttonsalt,#topBar,#leftColumn,#rightColumn,#conceal,#tabbarVertical{
+#leftColumn,#rightColumn{
 	width:26px;
 	height:26px;
-	margin:4px 0 4px 4px;
+	margin:8px 0 4px 4px;
+	background-color:transparent!important;
 }
-
 
 
 .protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"] {
@@ -2051,7 +2094,7 @@ padding-bottom:30px;}
 
 
 
-.layout__center{
+/*.layout__center{
 	position:relative;
 }
 .layout__center>.fn__flex-1:first-child>.fn__flex-1>.layout-tab-container>.protyle>.protyle-breadcrumb{
@@ -2071,10 +2114,10 @@ padding-bottom:30px;}
 }
 .layout__center .fn__flex:has(>#searchHistoryBtn){
 	margin:2px 30px 2px 0px;
-}
-#shrinkToolbar{
+}*/
+/*#shrinkToolbar{
 	position:absolute;
-	top:60px;
+	top:43px;
 	width:100%;
 	z-index:10;
 }
@@ -2106,6 +2149,139 @@ padding-bottom:30px;}
 #leftColumn:hover,#rightColumn:hover{
 	background-color:var(--b3-fn__flex-shrink-background)
 }
+*/
+
+
+
+
+/*.fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex:first-child{
+	border:50px solid #000;
+}*/
+.fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
+ margin-left:230px;
+}
+
+.layout__center:has(~.fn__flex-column[style*="width: 0px"])>div:nth-last-child(1)>div:nth-last-child(1) .layout-tab-bar.layout-tab-bar--readonly{
+  margin-right:230px;
+}
+.layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
+  margin-right:230px;
+}
+.layout__center:has(~.fn__flex-column[style*="width: 0px"]) .fn__flex-1:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
+  margin-right:230px;
+}
+.layout__center .layout__resize:not(.layout__resize--lr)+.fn__flex .layout-tab-bar.layout-tab-bar--readonly{
+  margin-right:0px!important;
+}
+/*.layout__center:has(~.fn__flex-column[style*="width: 0px"]){
+	border:50px solid #000;
+}*/
+/*.layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex-column>div:nth-last-child(1) .layout-tab-bar.layout-tab-bar--readonly{
+  margin-right:0px;
+}*/
+/*.layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex-1:first-child>.fn__flex-1:first-child .layout-tab-bar.layout-tab-bar--readonly{
+	 margin-right:0px;
+}*/
+
+#notionToolbar{
+	width:26px;
+	height:26px;
+	margin:7px 4px 4px 4px;
+	border-radius:3px;
+	overflow:hidden;
+	background: url("img/setting.svg") no-repeat center; 
+}
+#notionToolbar:hover{
+	overflow:visible;
+	background-color:var(--b3-toolbar-item-hover);
+}
+
+#notionToolbar div{
+	border-radius:0;
+}
+#notionToolbar div:first-child{
+	border-radius:5px 5px 0 0;
+}
+#notionToolbar div:last-child{
+	border-radius:0 0 5px 5px;
+}
+#buttonsalt,#topBar,#conceal,#tabbarVertical,#buttonvinegar,#buttonsugar{
+	height:32px;
+	margin:0;
+	border:6px solid var(--b3-theme-background);
+	border-bottom:0;
+	width:120px;
+	background-color:var(--b3-theme-background);
+}
+#topBar{
+	height:38px;
+	border-bottom:6px solid var(--b3-theme-background);
+}
+#buttonsalt{
+	margin-top:26px;
+}
+#buttonsalt{
+		opacity:0;
+	box-shadow:	rgba(15, 15, 15, 0.05) 0px 0px 0px 1px,
+				rgba(15, 15, 15, 0.05) 0px 32px 0px 1px,
+				rgba(15, 15, 15, 0.05) 0px 64px 0px 1px,
+				rgba(15, 15, 15, 0.05) 0px 96px 0px 1px,
+				rgba(15, 15, 15, 0.05) 0px 128px 0px 1px,
+				rgba(15, 15, 15, 0.05) 0px 160px 0px 1px,
+					
+				rgba(15, 15, 15, 0.1) 0px 3px 6px,
+				rgba(15, 15, 15, 0.1) 0px 35px 6px,
+				rgba(15, 15, 15, 0.1) 0px 67px 6px,
+				rgba(15, 15, 15, 0.1) 0px 99px 6px,
+				rgba(15, 15, 15, 0.1) 0px 131px 6px,
+				rgba(15, 15, 15, 0.1) 0px 163px 6px,
+					
+				rgba(15, 15, 15, 0.2) 0px 9px 24px,
+				rgba(15, 15, 15, 0.2) 0px 41px 24px,
+				rgba(15, 15, 15, 0.2) 0px 73px 24px,
+				rgba(15, 15, 15, 0.2) 0px 105px 24px,
+				rgba(15, 15, 15, 0.2) 0px 137px 24px,
+				rgba(15, 15, 15, 0.2) 0px 169px 24px;
+}
+#notionToolbar:hover #buttonsalt{
+	opacity:1;
+}
+#buttonsalt::after,#topBar::after,#conceal::after,#tabbarVertical::after,#buttonvinegar::after,#buttonsugar::after{
+	font-size:14px;
+	line-height:18px;
+	transform:none;
+	opacity:1;
+	color:#000;
+	background-color:transparent;
+	position:static;
+	margin:0;
+	padding:0 0 0 24px;
+}
+#buttonsalt::before,#topBar::before,#conceal::before,#tabbarVertical::before,#buttonvinegar::before,#buttonsugar::before{
+	display:none;
+}
+
+#buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover{
+	background-color:var(--b3-theme-background-light);
+}
+
+
+.fn__flex-column.fn__flex-shrink>.fn__flex:first-child:not(.fn__none),
+.layout__center~.fn__flex-column>.fn__flex:first-child,
+.fn__flex-column.fn__flex-shrink>.fn__flex.fn__none+.layout__resize+.fn__flex,
+.layout__center~.fn__flex-column>.fn__flex.fn__none+.layout__resize+.fn__flex{
+	padding-top:40px;
+}
+
+
+
+#leftColumn.b3-tooltips::after{
+	left:-40px;
+}
+
+
+
+
 
 
 
