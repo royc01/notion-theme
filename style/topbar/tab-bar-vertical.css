@@ -58,3 +58,9 @@
 .layout__center>.fn__flex-1:first-child>.fn__flex-1>.layout-tab-container>.protyle>.protyle-breadcrumb{
 	padding-left:6px;
 }
+
+.layout-tab-bar{
+	margin-right:0!important;
+	margin-left:0!important;
+}
+}

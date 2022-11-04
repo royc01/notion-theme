@@ -2092,71 +2092,6 @@ padding-bottom:30px;}
 
 
 
-
-
-/*.layout__center{
-	position:relative;
-}
-.layout__center>.fn__flex-1:first-child>.fn__flex-1>.layout-tab-container>.protyle>.protyle-breadcrumb{
-	padding-left:36px;
-}
-.layout__center>.fn__flex-1:first-child>.fn__flex-1>.layout-tab-container #toolbarViewer{
-	padding-left:36px;
-}
-.layout__center>div:nth-child(2)>.fn__flex-1>.layout-tab-container>.protyle>.protyle-breadcrumb{
-	padding-left:36px;
-}
-.layout__center>div:nth-last-child(2)>.fn__flex-1:first-child  .layout-tab-container>.protyle>.protyle-breadcrumb{
-	padding-right:38px;
-}
-.layout__center>div:nth-last-child(1)>.fn__flex-1:first-child  .layout-tab-container>.protyle>.protyle-breadcrumb{
-	padding-right:38px;
-}
-.layout__center .fn__flex:has(>#searchHistoryBtn){
-	margin:2px 30px 2px 0px;
-}*/
-/*#shrinkToolbar{
-	position:absolute;
-	top:43px;
-	width:100%;
-	z-index:10;
-}
-#leftColumn{
-	position:absolute;
-	height:25px;
-	width:25px;
-	padding:0;
-	margin: 0px 0 0px 8px;
-}
-#rightColumn{
-	position:absolute;
-	height:25px;
-	width:25px;
-	right:0px;
-	padding:0;
-	margin: 0px 8px 0px 0;
-}
-
-#leftColumn.b3-tooltips::after{
-	left:15px;
-}
-
-#rightColumn.b3-tooltips::after{
-	left:-48px;
-}
-
-
-#leftColumn:hover,#rightColumn:hover{
-	background-color:var(--b3-fn__flex-shrink-background)
-}
-*/
-
-
-
-
-/*.fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex:first-child{
-	border:50px solid #000;
-}*/
 .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
  margin-left:230px;
 }
@@ -2173,15 +2108,9 @@ padding-bottom:30px;}
 .layout__center .layout__resize:not(.layout__resize--lr)+.fn__flex .layout-tab-bar.layout-tab-bar--readonly{
   margin-right:0px!important;
 }
-/*.layout__center:has(~.fn__flex-column[style*="width: 0px"]){
-	border:50px solid #000;
-}*/
-/*.layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex-column>div:nth-last-child(1) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:0px;
-}*/
-/*.layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex-1:first-child>.fn__flex-1:first-child .layout-tab-bar.layout-tab-bar--readonly{
-	 margin-right:0px;
-}*/
+
+
+
 
 #notionToolbar{
 	width:26px;
