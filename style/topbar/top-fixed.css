@@ -1,3 +1,4 @@
+
 .toolbar{
 	height:30px;
 	margin-bottom: -30px;
@@ -5,9 +6,11 @@
 	transition: all 300ms;
 	transform:translateY(-20px);
 	z-index:5;
+	transition-delay: 500ms;
 }
 
 .toolbar:hover{
+
 	opacity: 1;
 	transform:translateY(0px);
 	transition: all 300ms;
@@ -30,6 +33,7 @@
 #leftColumn,#rightColumn{
 	margin:2px 0 4px 4px;
 }
+
 #notionToolbar{
 	margin:2px 4px 4px 4px;
 }
@@ -50,8 +54,8 @@
 	-webkit-app-region:drag;
 }
 .layout__center:has(~.fn__flex-column[style*="width: 0px"]) .layout-tab-bar--readonly .item--readonly>[data-type="new"]+.fn__flex-1{
-	height:30px;
-	margin-right:200px;
+	height:25px;
+	margin-top:15px;
 }
 #drag{
 	height:36px;

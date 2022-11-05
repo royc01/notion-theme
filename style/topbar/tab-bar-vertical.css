@@ -67,3 +67,16 @@
 .layout__center:has(~.fn__flex-column[style*="width: 0px"]) .layout-tab-bar--readonly .item--readonly>[data-type="new"]+.fn__flex-1{
 	margin-right:0px!important;
 }
+
+
+.item__close[data-type="more"]{
+	padding: 4px 2px 4px 2px;
+}
+
+[data-type="tab-header"] .item__close{
+	position:absolute;
+	right:0px;
+}
+[data-type="tab-header"] .item__text{
+	margin-right:25px;
+}
