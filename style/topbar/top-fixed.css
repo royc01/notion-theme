@@ -10,7 +10,6 @@
 }
 
 .toolbar:hover{
-
 	opacity: 1;
 	transform:translateY(0px);
 	transition: all 300ms;
@@ -47,16 +46,10 @@
 	margin-left:0!important;
 }
 .layout__center .layout-tab-bar--readonly {
-	-webkit-app-region: no-drag;
+	-webkit-app-region: unset;
 }
-.layout-tab-bar--readonly .item--readonly>[data-type="new"]+.fn__flex-1{
-	height:30px;
-	-webkit-app-region:drag;
-}
-.layout__center:has(~.fn__flex-column[style*="width: 0px"]) .layout-tab-bar--readonly .item--readonly>[data-type="new"]+.fn__flex-1{
-	height:25px;
-	margin-top:15px;
-}
+
+
 #drag{
-	height:36px;
+	height:40px;
 }
