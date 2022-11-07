@@ -261,16 +261,16 @@
 }
 
 
-[data-type="navigation"]>.b3-list--background:nth-child(4n-3) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
+.sy__file .b3-list--background:nth-child(4n-3) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
 	color:#f67563;
 }
-[data-type="navigation"]>.b3-list--background:nth-child(4n-2) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
+.sy__file .b3-list--background:nth-child(4n-2) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
 	color:#ff9b1e;
 }
-[data-type="navigation"]>.b3-list--background:nth-child(4n-1) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
+.sy__file .b3-list--background:nth-child(4n-1) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
 	color:#64bbaa;
 }
-[data-type="navigation"]>.b3-list--background:nth-child(4n) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
+.sy__file .b3-list--background:nth-child(4n) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
 	color:#49adbb;
 }
 .protyle-wysiwyg .h1{

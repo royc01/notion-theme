@@ -167,7 +167,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-blur-background: var(--b3-fn__flex-shrink-background);
+	--b3-toolbar-blur-background: var(--b3-theme-background);
 	--b3-toolbar-background: var(--b3-theme-background);
 	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--b3-toolbar-closeWindow-hover: #e81123;
@@ -179,7 +179,7 @@
 	--b3-dock-background: rgb(37, 40, 48);
 	--b3-dockright-item-active-background: #fff;
 	--b3-dockleft-item-active-background: var(--b3-theme-background);
-	--b3-dock-item-active-color: rgb(37, 40, 48);
+	--b3-dock-item-active-color: #eb8383;
 	--b3-dock-item-hover-background: rgb(182, 200, 201);
 	
 	--b3-dock-item-width: 36px;

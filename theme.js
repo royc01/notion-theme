@@ -649,7 +649,7 @@ function themeButton() {
 		notionThemeToolbarAddButton(
         "buttonsalt",
         "toolbar__item b3-tooltips b3-tooltips__se",
-		"salt主题",
+		"Salt 主题",
         "/appearance/themes/Savor/img/salt2.svg",
         "/appearance/themes/Savor/img/salt.svg",
         () => {
@@ -664,7 +664,7 @@ function themeButton() {
 		notionThemeToolbarAddButton(
         "buttonsugar",
         "toolbar__item b3-tooltips b3-tooltips__se",
-		"sugar主题",
+		"Sugar 主题",
         "/appearance/themes/Savor/img/sugar2.svg",
         "/appearance/themes/Savor/img/sugar.svg",
         () => {
@@ -679,7 +679,7 @@ function themeButton() {
 	    notionThemeToolbarAddButton(
         "buttonvinegar",
         "toolbar__item b3-tooltips b3-tooltips__se",
-		"vinegar主题",
+		"Vinegar 主题",
         "/appearance/themes/Savor/img/moon2.svg",
         "/appearance/themes/Savor/img/moon.svg",
         () => {

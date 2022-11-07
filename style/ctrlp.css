@@ -86,12 +86,40 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
 }
 .fn__flex-column #searchList .b3-list-item[data-type='search-item']>.b3-list-item__meta{
 	color:var(--b3-list-item--meta);
-	top:22px;
+	bottom:0px;
 	right:8px;
 	max-width:34vw;
 	position:absolute;
 	white-space:nowrap;
 	overflow:hidden !important;
 	text-overflow: ellipsis;
+}
+
+
+
+
+
+#searchList>[data-type="search-item"],
+#globalSearchList>[data-type="search-item"] {
+    display: block;
+	padding-right:0px;
+}
+
+
+#searchList>[data-type="search-item"]>.b3-list-item__graphic,
+#globalSearchList>[data-type="search-item"]>.b3-list-item__graphic {
+    position: absolute;
+    margin-top: 4px;
+}
+
+#searchList>[data-type="search-item"]>.b3-list-item__text,
+#globalSearchList>[data-type="search-item"]>.b3-list-item__text {
+    margin-left: 20px;
+    max-height: 89px ;
+    padding:6px 0px 5px 5px;
+    overflow-y: auto !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.3;
+    -webkit-box-orient: inherit;
 }
 

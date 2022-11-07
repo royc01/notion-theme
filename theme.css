@@ -1888,16 +1888,17 @@ padding:3px;
 
 /*底栏适配调整测试*/
 .status{
-	height:32px;
+	height:25px;
 	background-color:transparent;
 	margin-top: -30px;
+	margin-bottom:8px;
 	position:absolute;
 	right:0px;
 	bottom:0px;
 	border:0;
 }
 .status .toolbar__item{
-	margin:  7px 5px 13px 5px;
+	margin:  7px 5px 6px 5px;
 	border-radius: 5px;
 	background-color: var(--b3-status-msg-background);
 	padding:1px;
@@ -2098,38 +2099,38 @@ padding-bottom:30px;}
 
 
 .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
- margin-left:230px;
+	margin-left:230px;
 }
 .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
- margin-left:230px;
+	argin-left:230px;
 }
 .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex-1:first-child>.fn__flex-1:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
- margin-left:230px;
+	margin-left:230px;
 }
 .layout__center:has(~.fn__flex-column[style*="width: 0px"])>div:nth-last-child(1)>div:nth-last-child(1) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:230px;
+	margin-right:230px;
 }
 .layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex-1:not(:only-child):first-child>.fn__flex:first-child .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:0px;
+	margin-right:0px;
 }
 .layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:230px;
+	margin-right:230px;
 }
 .layout__center:has(~.fn__flex-column[style*="width: 0px"]) .fn__flex-1:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:230px;
+	margin-right:230px;
 }
 .layout__center .layout__resize:not(.layout__resize--lr)+.fn__flex .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:0px!important;
+	margin-right:0px!important;
 }
 
 .layout__center .fn__flex-1:has(~.layout__resize--lr) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:0px!important;
+	margin-right:0px!important;
 }
 .layout__center .layout__resize--lr+.fn__flex-1 .layout-tab-bar{
-  margin-left:0px!important;
+	margin-left:0px!important;
 }
 .layout__center .fn__flex-column .layout__resize+.fn__flex-1 .layout-tab-bar{
-  margin-left:0px!important;
+	margin-left:0px!important;
 }
 
 
@@ -2162,7 +2163,7 @@ padding-bottom:30px;}
 	margin:0;
 	border:6px solid var(--b3-theme-background);
 	border-bottom:0;
-	width:120px;
+	width:128px;
 	background-color:var(--b3-theme-background);
 }
 #topBar{
@@ -2230,6 +2231,16 @@ padding-bottom:30px;}
 #leftColumn.b3-tooltips::after{
 	left:-40px;
 }
+
+
+.layout__center .file-tree>.block__icons+.b3-list-item{
+	margin-top:-5px!important;
+	opacity:0;
+}/*对齐alt o大纲树*/
+
+
+
+
 
 
 

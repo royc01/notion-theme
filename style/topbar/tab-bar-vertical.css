@@ -16,7 +16,7 @@
 	flex-direction: row;
 }
 .layout-tab-bar:not(.layout-tab-bar--readonly){
-	margin-top:-22px;
+	margin-top:-4px;
 }
 .layout__center [data-type='wnd'][data-id] > .fn__flex:not(.layout-tab-container) {
 	flex-direction: column-reverse;
@@ -79,4 +79,11 @@
 }
 [data-type="tab-header"] .item__text{
 	margin-right:25px;
+}
+
+ul.layout-tab-bar:not(.layout-tab-bar--readonly):before{
+	display:none;
+}
+.layout__resize{
+	z-index:6;
 }
