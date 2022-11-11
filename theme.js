@@ -144,6 +144,7 @@ function SubMenu(selectid,selecttype,className = 'b3-menu__submenu') {
     node.appendChild(GraphView(selectid))
     node.appendChild(TableView(selectid))
 	node.appendChild(kanbanView(selectid))
+	node.appendChild(progressView(selectid))
     node.appendChild(DefaultView(selectid))
   }
   if(selecttype=="NodeTable"){
@@ -202,6 +203,17 @@ function kanbanView(selectid){
   button.setAttribute("custom-attr-value","kb")
 
   button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconMenu"></use></svg><span class="b3-menu__label">转换为看板</span>`
+  button.onclick=ViewMonitor
+  return button
+}
+function progressView(selectid){
+  let button = document.createElement("button")
+  button.className="b3-menu__item"
+  button.setAttribute("data-node-id",selectid)
+  button.setAttribute("custom-attr-name","f")
+  button.setAttribute("custom-attr-value","progress")
+
+  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconMenu"></use></svg><span class="b3-menu__label">进度条任务</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -2162,7 +2174,7 @@ function init() {
         const elem_div = document.createElement("div");
         elem_div.className = "historyItem";
         elem_div.style.marginTop = "10px";
-        elem_div.innerHTML = `<input type="checkbox" class="historyItemCheckbox" style="display: inline-block;margin-right: 5px;width: 16px;height: 16px;position: relative;top: -1px;" data-index=${arrLength-index-1}><span  class="historyTimeStamp" style="color: black;margin-right: 2em;">${item_time}</span>
+        elem_div.innerHTML = `<input type="checkbox" class="historyItemCheckbox" style="display: inline-block;margin-right: 5px;width: 16px;height: 16px;position: relative;top: -1px;" data-index=${arrLength-index-1}><span  class="historyTimeStamp" style="color: var(--b3-theme-on-background);margin-right: 2em;">${item_time}</span>
       <span><svg class="history-icon" style="height:16px;width:16px;vertical-align: middle;">${history_item_icon}</svg></span>
       <span style="color:#3481c5;margin-left:5px;cursor: pointer;" data-href="${href}" title="${href}">${item_text}</span>`;
         fragment.appendChild(elem_div);
@@ -3206,6 +3218,10 @@ setTimeout(() => {
 		leftColumnButton();//左侧面板悬浮
 		
 		rightColumnButton();//右侧面板悬浮
+		
+		init()//最近打开文档
+		
+		initcalendar()//打开日历
 			
 		themeButton();//主题
 		
@@ -3229,10 +3245,6 @@ setTimeout(() => {
 		
 		newOpenWindow();//Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版
 
-        init()//最近打开文档
-		
-		initcalendar()//打开日历
-		
 		loadScript("/appearance/themes/Savor/comment/index.js");//js批注评论
 
         console.log("==============>附加CSS和特性JS_已经执行<==============");
@@ -3331,3 +3343,30 @@ document.addEventListener('mousewheel', e => {
     setTimeout(() => changeFontSize(e.wheelDeltaY), 0);
   }
 }, true);
+
+
+
+
+
+/*任务列表进度条*/
+
+let ws = siyuan.ws.ws
+ws.addEventListener("message", (msg) => {
+    if(msg&&msg.data&&msg.data){
+        if(JSON.parse(msg.data).cmd=="transactions"){
+            document.querySelectorAll(`.protyle-wysiwyg [data-node-id].list[custom-f="progress"]`).forEach(
+                list => {
+                    let checked = list.querySelectorAll(`:scope > div.protyle-task--done`).length
+                    let total = list.querySelectorAll(`:scope > div[data-subtype="t"]`).length
+                    let strong = list.querySelector(`.protyle-attr`)
+					let number = Math.round(checked / total * 100)
+                    console.log(strong,checked, total)
+                    strong?strong.setAttribute("style", `--progress : ${checked / total * 100}%`):null
+					strong?strong.setAttribute("value", number ):null
+                }
+            )
+        
+        }
+    }
+}
+)

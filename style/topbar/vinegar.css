@@ -278,3 +278,13 @@ body{
 .protyle-toolbar {
     background-color:#0f0f0f;
 }
+
+
+#calendarPanel {
+	background-color:#fff!important;
+	filter: hue-rotate(180deg) invert(90%);
+	box-shadow:none!important;
+}
+
+
+

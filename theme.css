@@ -21,13 +21,12 @@
 	 }
 }
 @keyframes shrink{
-	0% {opacity: 0;}
-	20% { transform:translateX(0%);
-		  transform-origin: 0 0 ;
-          opacity: 1;	}
-	80% { transform:translateX(0%);
-		  transform-origin: 0 0 ;
-          opacity: 1;	}
+ 0% { transform:translateX(0%);
+    transform-origin: 0 0 ;
+          opacity: 1; }
+ 80% { transform:translateX(0%);
+    transform-origin: 0 0 ;
+          opacity: 1; }
 
 }
 @keyframes statusmsg {
@@ -363,7 +362,7 @@ body.body--win32 .toolbar {
 	width: 10px!important;
 	padding: 3px 5px;
 }
- #closeWindow svg{
+#closeWindow svg{
 	width: 10px!important;
 	padding: 3px 8px;
 }
@@ -386,10 +385,13 @@ body:has(.layout__empty) .toolbar #drag {
 	height: 40px;
 	line-height: 40px;
 }
-#toolbarVIP{
-	width: 27px;
-	overflow:hidden;
-	margin: 7px 0px 5px 5px ;
+#toolbarVIP:not(:empty){
+ width: 27px;
+ overflow:hidden;
+ margin: 7px 0px 5px 5px ;
+}
+#toolbarVIP:empty{
+ width: 6px;
 }
 #toolbarVIP div:before,#toolbarVIP div:after{
 	display:none;
@@ -2244,6 +2246,41 @@ padding-bottom:30px;}
 
 
 
+
+/*进度条任务列表*/
+
+
+@property --progress {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+}
+
+.protyle-wysiwyg [data-node-id].list[data-subtype="t"][custom-f="progress"]>.li:first-child [contenteditable]+.protyle-attr{
+	border:1px solid var(--b3-scroll-color);
+	border-radius: 25px;
+	width:100%;
+	height:8px;
+	left:-25px;
+	position:absolute;
+}
+
+.protyle-wysiwyg [data-node-id].list[data-subtype="t"] .protyle-attr[style*="--progress"]{
+    content:var(--progress) ;
+    border-radius: 25px;
+	background: linear-gradient(90deg,var(--b3-theme-primary-light) var(--progress), var(--b3-scroll-color) 0); 
+	height:8px;
+    transition: .3s --progress;
+	left:-25px;
+	position:absolute;
+}
+.protyle-wysiwyg [data-node-id].list[data-subtype="t"] .protyle-attr[style*="--progress"]:after{
+	content:attr(value)'%';
+	font-size:16px;
+	position:absolute;
+	top:-10px;
+	right:-40px;
+}
 
 
 

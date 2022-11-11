@@ -8,7 +8,7 @@
 
 .fn__flex-column.fn__flex-shrink {
 	opacity:0;
-	transform:translateX(-88%);
+	transform:translateX(calc(-100% + 36px));
 	transform-origin: 0 0 ;
 	position:absolute;
 	z-index:5;

@@ -2,10 +2,14 @@
 #drag{
 	height:36px;
 }
+.toolbar{
+	z-index:7;
+}
 .layout-tab-bar{
 	padding: 0 4px 0 4px;
 	box-shadow: -1px 0px 0px 0px var(--b3-layout-resize) inset;
 	margin:0;
+	z-index:1;
 }
 .layout__center{
 	padding-top:40px!important;

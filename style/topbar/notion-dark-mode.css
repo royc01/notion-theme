@@ -295,3 +295,11 @@ body{
 		opacity:1;
 	box-shadow:none;
 }
+
+
+#calendarPanel {
+	background-color:#fff!important;
+	filter: hue-rotate(180deg) invert(90%);
+	box-shadow:none!important;
+}
+
