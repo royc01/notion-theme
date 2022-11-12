@@ -9,7 +9,7 @@
 
 .layout__center ~ .fn__flex-column {
 	opacity:0;
-	transform:translateX(calc(100% - 36px));
+	transform:translateX(calc(100% - 20px));
 	transform-origin: 100% 0 ;
 	position:absolute;
 	right:0px;

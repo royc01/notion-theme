@@ -195,7 +195,7 @@
 	--b3-block-icon-hover: var(--b3-list-background);
 	--b3-block-icon-active: #f4614b;
 	--b3-list-item-arrow: rgba(37, 40, 48,0.4);
-	--b3-list-background: rgba(98, 122, 123, 0.1);
+	--b3-list-background: rgba(98, 122, 123, 0.15);
 	--b3-list-background-focus: rgba(98, 122, 123, 0.2);
 	--b3-list-background-more: rgba(37, 40, 48, 0.8);
 	
