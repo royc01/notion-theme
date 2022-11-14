@@ -767,7 +767,7 @@ function leftColumnButton() {
         "leftColumn",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"左侧面板悬浮",
-        "/appearance/themes/Savor/img/rightcolumn.svg",
+        "/appearance/themes/Savor/img/rightcolumn2.svg",
         "/appearance/themes/Savor/img/leftcolumn.svg",
         () => {
             loadStyle("/appearance/themes/Savor/style/topbar/leftcolumn.css", "leftColumn悬浮").setAttribute("topBarcss", "leftColumn悬浮");
@@ -786,7 +786,7 @@ function rightColumnButton() {
         "rightColumn",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"右侧面板悬浮",
-        "/appearance/themes/Savor/img/leftcolumn.svg",
+        "/appearance/themes/Savor/img/leftcolumn2.svg",
         "/appearance/themes/Savor/img/rightcolumn.svg",
         () => {
             loadStyle("/appearance/themes/Savor/style/topbar/rightcolumn.css", "rightColumn悬浮").setAttribute("topBarcss", "rightColumn悬浮");
@@ -2470,7 +2470,7 @@ function shrinkLeftAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL,
 
         if (offNo == "1") {
             addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
-            addButton.style.filter = "none";
+
             OffClickRunFun(addButton);
             if (Memory != null) localStorage.setItem(ButtonID, "0");
             offNo = "0";
@@ -2539,7 +2539,7 @@ function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL
 
         if (offNo == "1") {
             addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
-            addButton.style.filter = "none";
+
             OffClickRunFun(addButton);
             if (Memory != null) localStorage.setItem(ButtonID, "0");
             offNo = "0";

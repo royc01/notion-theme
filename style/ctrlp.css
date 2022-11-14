@@ -64,6 +64,11 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 	flex-direction: column !important;
 	flex-wrap: nowrap;
 	}
+	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column .search__header,
+	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column>.b3-form__space--small {
+	width: unset;
+}
+
 }
 
 /*结果预览自动占满剩余宽度*/

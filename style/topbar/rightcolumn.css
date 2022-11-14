@@ -26,7 +26,7 @@
 }
 #dockLeft.fn__none+#layouts .layout__center ~ .fn__flex-column{
 	right:-36px;
-	transform:translateX(85%);
+	transform:translateX(calc(100% - 56px));
 }
 
 .layout__center ~ .fn__flex-column:hover{
@@ -67,12 +67,15 @@
 }
 
 
-.layout__center:has(~.fn__flex-column[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly{
+.layout__center:has(~.fn__flex-column[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly,
+.layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
   margin-right:230px;
 }
 
-.layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:230px;
+
+#dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly,
+#dockLeft.fn__none+#layouts .layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
+  margin-right:266px;
 }
 
 

@@ -7,8 +7,9 @@
     --b3-theme-secondary: #f3a92f;
     --b3-theme-background: #f9f8f5;/* 编辑区背景 */
     --b3-theme-background-light: #dfe0e1;
-    --b3-theme-surface: rgb(247, 246, 243);/* 面板主色 */
-    --b3-theme-surface-light: rgba(243, 243, 243, .5);
+    --b3-theme-surface: #f4f1eb;/* 面板主色 */
+    --b3-theme-surface-light: #f4f1eb;
+	--b3-theme-surface-lighter: var(--b3-border-color);
     --b3-theme-error: #eb5757;
 
     /* 文字颜色 */
