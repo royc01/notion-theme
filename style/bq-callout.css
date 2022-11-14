@@ -9,6 +9,9 @@
 .protyle-wysiwyg .bq .p{
 	padding-left:10px;
 }
+.list .bq {
+	margin-right:0px!important;
+}/*列表里代码块对齐*/
 /*引述callout第一行样式 */
 .bq[custom-b~=error] .p:first-child,
 .bq[custom-b~=error][data-type="NodeHeading"]:first-child,
