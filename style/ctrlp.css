@@ -25,7 +25,7 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 }
 
 /*窗口宽度大于一定尺寸时候，左右排列*/
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 961px) {
 	/*搜索结果列表占一半宽度，靠左排列*/
 	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column #searchList {
 		float: left;
@@ -38,7 +38,7 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 		height: calc(100% - 146px) !important;
 	}
 }
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 961px) {
 	/*搜索结果列表占一半宽度，靠左排列*/
 	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column .fn__none~#searchList {
 		float: left;
@@ -53,7 +53,7 @@ body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .f
 }
 
 /*窗口宽度小于一定尺寸时候，上下排列*/
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 961px) {
 	body > div[data-key] > .b3-dialog > .b3-dialog__container > div > .fn__flex > .fn__flex-column #searchList {
 		float: left;
 		/*width:45vw;*/
