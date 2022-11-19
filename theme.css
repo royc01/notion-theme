@@ -65,7 +65,7 @@
     /* 文字颜色 */
     --b3-theme-on-primary: #fff;
     --b3-theme-on-secondary: #fff;
-    --b3-theme-on-background: rgb(55, 53, 47);
+    --b3-theme-on-background--b3-theme-on-background: rgb(55, 53, 47);
     --b3-theme-on-surface: rgba(55, 53, 47, 0.6);
     --b3-theme-on-surface-light: rgba(95, 99, 104, .68);
     --b3-theme-on-error: #fff;
@@ -218,8 +218,8 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-blur-background: var(--b3-theme-background);
-	--b3-toolbar-background: var(--b3-theme-background);
+	--b3-toolbar-blur-background: var(--b3-fn__flex-column-background);
+	--b3-toolbar-background: var(--b3-fn__flex-column-background);
 	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--b3-toolbar-closeWindow-hover: #e81123;
 	--b3-toolbar-closeWindow-svg: #fff;
@@ -364,7 +364,7 @@ body.body--win32 .toolbar {
 }
 #closeWindow svg{
 	width: 10px!important;
-	padding: 3px 8px;
+	padding: 4px 8px;
 }
 #minWindow, #restoreWindow, #maxWindow, #closeWindow{
 	margin:0;
@@ -395,6 +395,9 @@ body:has(.layout__empty) .toolbar #drag {
  width: 6px;
 }
 #toolbarVIP div:before,#toolbarVIP div:after{
+	display:none;
+}
+#barTopHelp{
 	display:none;
 }
 /* ————————————————————dock栏———————————————————— */
