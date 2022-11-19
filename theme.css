@@ -1485,7 +1485,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	background-color:var(--b3-font-background7);
 }
 /*块引用*/
-.protyle-wysiwyg [data-node-id] span[data-type="block-ref"]{
+.protyle-wysiwyg [data-node-id] span[data-type*="block-ref"]{
 	font-size: 95%;
 	padding:0px 5px 1px 5px;
 	color:var(--b3-theme-on-background);
