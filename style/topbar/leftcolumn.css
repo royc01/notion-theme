@@ -70,12 +70,12 @@
 
 .fn__flex-shrink ~ .layout__center>div:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
 .fn__flex-shrink ~ .layout__center>div:first-child>.fn__flex-1:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
- margin-left:230px;
+ margin-left:210px;
 }
 
 #dockLeft.fn__none+#layouts .fn__flex-shrink ~ .layout__center>div:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
 #dockLeft.fn__none+#layouts .fn__flex-shrink ~ .layout__center>div:first-child>.fn__flex-1:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
- margin-left:266px;
+ margin-left:246px;
 }
 
 

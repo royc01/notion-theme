@@ -348,8 +348,8 @@ body.body--win32 .toolbar {
 }
 .toolbar__item svg{
 	padding: 4px;
-	height: 13px;
-	width: 13px;	
+	height: 12px;
+	width: 12px;	
 }
 
 .toolbar__item:not(.toolbar__item--disabled) svg{
@@ -468,7 +468,7 @@ body:has(.layout__empty) .toolbar #drag {
 	min-height: 90% ;
 }
 .fn__flex-shrink:not([style*="width: 0px"]),.layout__center~.fn__flex-column:not([style*="width: 0px"]){
-	min-width:230px;
+	min-width:210px;
 }/*侧栏最小宽度*/
 /*侧栏滚动出现分割线
 .layout-tab-container>.fn__flex-column>.fn__flex-1{
@@ -1488,7 +1488,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	background-color:var(--b3-font-background7);
 }
 /*块引用*/
-.protyle-wysiwyg [data-node-id] span[data-type*="block-ref"]{
+.protyle-wysiwyg [data-node-id] span[data-type*="block-ref"]:not([data-type="virtual-block-ref"]){
 	font-size: 95%;
 	padding:0px 5px 1px 5px;
 	color:var(--b3-theme-on-background);
@@ -2086,7 +2086,7 @@ padding-bottom:30px;}
 #leftColumn,#rightColumn{
 	width:26px;
 	height:26px;
-	margin:7px 0 5px 4px;
+	margin:7px 0 5px 0px;
 	background-color:transparent!important;
 }
 #leftColumn:hover,#rightColumn:hover{
@@ -2108,13 +2108,13 @@ padding-bottom:30px;}
 .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
 .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
 .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex-1:first-child>.fn__flex-1:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
-	margin-left:230px;
+	margin-left:210px;
 }
 
 .layout__center:has(~.fn__flex-column[style*="width: 0px"])>div:nth-last-child(1)>div:nth-last-child(1) .layout-tab-bar.layout-tab-bar--readonly,
 .layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly,
 .layout__center:has(~.fn__flex-column[style*="width: 0px"]) .fn__flex-1:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-	margin-right:230px;
+	margin-right:210px;
 }
 .layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex-1:not(:only-child):first-child>.fn__flex:first-child .layout-tab-bar.layout-tab-bar--readonly{
 	margin-right:0px;
@@ -2139,7 +2139,7 @@ padding-bottom:30px;}
 #notionToolbar{
 	width:26px;
 	height:26px;
-	margin:7px 4px 4px 4px;
+	margin:7px 0px 4px 0px;
 	border-radius:3px;
 	overflow:hidden;
 	background: url("img/setting.svg") no-repeat center; 
@@ -2289,11 +2289,11 @@ padding-bottom:30px;}
 #dockLeft.fn__none+#layouts .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
 #dockLeft.fn__none+#layouts .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
 #dockLeft.fn__none+#layouts .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex-1:first-child>.fn__flex-1:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
-	margin-left:266px;
+	margin-left:246px;
 }
 
 #dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column[style*="width: 0px"])>div:nth-last-child(1)>div:nth-last-child(1) .layout-tab-bar.layout-tab-bar--readonly,
 #dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly,
 #dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column[style*="width: 0px"]) .fn__flex-1:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-	margin-right:266px;
+	margin-right:246px;
 }

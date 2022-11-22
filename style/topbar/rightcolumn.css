@@ -69,13 +69,13 @@
 
 .layout__center:has(~.fn__flex-column[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly,
 .layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:230px;
+  margin-right:210px;
 }
 
 
 #dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly,
 #dockLeft.fn__none+#layouts .layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:266px;
+  margin-right:246px;
 }
 
 

@@ -57,7 +57,7 @@
 	border-radius:6px!important;
 }
 .wh_content_item .wh_chose_day {
-	background:#eb8383!important;
+	background:rgba(46, 170, 220, 0.2)!important;
 	border-radius:6px!important;
 }
 .wh_item_date:hover {

@@ -305,3 +305,8 @@
 body{
 	border: 0px!important;
 }
+
+
+.protyle-wysiwyg .h1 span,.protyle-wysiwyg .h2 span,.protyle-wysiwyg .h3 span,.protyle-wysiwyg .h4 span,.protyle-wysiwyg .h5 span,.protyle-wysiwyg .h6 span{
+ color:unset;
+}
