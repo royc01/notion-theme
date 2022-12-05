@@ -102,7 +102,7 @@
 }
 
 /*前继承线*/
-.protyle-wysiwyg *[custom-f="dt"] .li::before{   
+.protyle-wysiwyg *[custom-f="dt"] .li::before,.protyle-wysiwyg *[custom-f="dt"] .li[fold="1"]::before{   
     content: '';   
     position: absolute;  
 	top: 50%;   
@@ -110,6 +110,7 @@
     width: 20px;  
 	height: 50%;     
 }
+
 /*上竖线*/
 .protyle-wysiwyg *[custom-f="dt"] .li::before{   
     bottom: 50%;    
@@ -150,8 +151,8 @@
 }
 /*上框线*/
 .protyle-wysiwyg *[custom-f="dt"] .li:first-child::before{   
-    border-radius:5px 0 0 0 ;    
-}  
+    border-radius:5px 0 0 0 ;
+}
 /*下框线*/
 .protyle-wysiwyg *[custom-f="dt"] .li:nth-last-child(2)::after{   
     border-bottom:var(--b3-border-daotu)!important;    

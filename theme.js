@@ -90,7 +90,6 @@ window.theme.changeThemeMode(
 
 
 
-
 /*----------------------------------创建notion主题工具栏区域----------------------------------
 function createnotionToolbar() {
     var siYuanToolbar = getSiYuanToolbar();
@@ -632,7 +631,7 @@ function creatTimeSpanElement(tilteElement) {
     documentCreatTimeElement.style.marginLeft = "7px";
     documentCreatTimeElement.style.marginBottom = "0px";
     documentCreatTimeElement.style.fontSize = "61%";
-    documentCreatTimeElement.style.color = "#767676";
+    documentCreatTimeElement.style.color = "#bbb9b4";
     return documentCreatTimeElement;
 }
 
@@ -648,7 +647,7 @@ function getDocumentTime(tilteElement) {
         var hour = tS.substring(8, 10);
         var minute = tS.substring(10, 12);
         var second = tS.substring(12, 14);
-        return year + "-" + moon + "-" + day + "  " + hour + ":" + minute + ":" + second;
+        return "Created at "+year + "-" + moon + "-" + day + "  " + hour + ":" + minute + ":" + second;
     } catch (error) {
         return "";
     }
@@ -2416,12 +2415,12 @@ function shrinkLeftAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL,
     var shrinkLeft = document.getElementById("shrinkLeft");
     if (shrinkLeft == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-         var windowControls = document.getElementById("drag");
+         var windowControls = document.querySelector(".fn__flex-shrink");
 
         if (toolbarEdit == null && windowControls != null) {
             shrinkLeft = document.createElement("div");
             shrinkLeft.id = "shrinkLeft";
-             windowControls.parentElement.insertBefore(shrinkLeft, windowControls);
+            windowControls.appendChild(shrinkLeft);
         } else if (toolbarEdit != null) {
             shrinkLeft = insertCreateBefore(toolbarEdit, "div", "shrinkLeft");
             shrinkLeft.style.position = "relative";
@@ -2433,7 +2432,7 @@ function shrinkLeftAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL,
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
 	addButton.style.backgroundPosition = "center";
-    addButton.style.backgroundSize = "80%";
+    addButton.style.backgroundSize = "100%";
 
     
     addButton.id = ButtonID;
@@ -2485,12 +2484,12 @@ function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL
     var shrinkRight = document.getElementById("shrinkRight");
     if (shrinkRight == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-         var windowControls = document.getElementById("barSearch");
+        var windowControls =  document.querySelector(".layout__center ~ .fn__flex-column");
 
         if (toolbarEdit == null && windowControls != null) {
             shrinkRight = document.createElement("div");
             shrinkRight.id = "shrinkRight";
-             windowControls.parentElement.insertBefore(shrinkRight, windowControls);
+            windowControls.appendChild(shrinkRight);
         } else if (toolbarEdit != null) {
             shrinkRight = insertCreateBefore(toolbarEdit, "div", "shrinkRight");
             shrinkRight.style.position = "relative";
@@ -2502,7 +2501,7 @@ function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
 	addButton.style.backgroundPosition = "center";
-    addButton.style.backgroundSize = "80%";
+    addButton.style.backgroundSize = "100%";
 
     
     addButton.id = ButtonID;
@@ -3224,7 +3223,7 @@ setTimeout(() => {
 		initcalendar()//打开日历
 			
 		themeButton();//主题
-		
+					
 		concealMarkButton();//挖空
 		
 		tabbarVerticalButton();//垂直页签
@@ -3232,8 +3231,6 @@ setTimeout(() => {
 		topbarfixedButton();//顶栏固定
 
         setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
-
-        rundynamicUnderline();//为文档标题创建动态下划线
 
         showDocumentCreationDate();//为打开文档标题下面显示文档创建日期
 

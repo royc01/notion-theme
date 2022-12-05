@@ -20,7 +20,7 @@
 	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
 	border-left:36px solid transparent;/*增加点击区域*/
 	border-radius:0 5px 5px 0;
-	overflow:hidden;
+	/*overflow:hidden;*/
 	transition: all 200ms!important;
 }
 
@@ -52,8 +52,9 @@
     position: absolute;
 	bottom:0px;
 }
-
-
+.fn__flex-column.fn__flex-shrink>.fn__flex-1{
+	border-radius:0 5px 5px 0;
+}
 
 
 .fn__flex-column.fn__flex-shrink:has(.file-tree.sy__file.layout__tab--active),

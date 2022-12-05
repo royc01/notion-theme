@@ -7,6 +7,7 @@
 	transform:translateY(-20px);
 	z-index:8;
 	transition-delay: 500ms;
+	border-bottom: 1px solid var(--b3-dockright-background);
 }
 
 .toolbar:hover{

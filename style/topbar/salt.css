@@ -273,3 +273,7 @@
 body{
 	border: 0px!important;
 }
+
+.layout__center+.layout__resize--lr:after{
+	width:1px;
+}
