@@ -19,13 +19,6 @@
     --b3-theme-on-surface-light: rgba(95, 99, 104, .68);
     --b3-theme-on-error: #fff;
 
-    /* 字体 */
-    --b3-font-family:apple-system, BlinkMacSystemFont, "Segoe UI", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif,  "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
-    --b3-font-family-code: "JetBrainsMono-Regular", mononoki, Consolas, "Liberation Mono", Menlo, Courier, monospace, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
-    --b3-font-family-graph: mononoki;
-    --b3-font-family-emoji: "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "Apple Color Emoji", "Twemoji Mozilla", "Noto Color Emoji", "Android Emoji";
-    --b3-font-family-math: KaTeX_Math;
-
     /* 线条 */
     --b3-border-color: rgba(0, 0, 0, .1);
 
@@ -266,9 +259,7 @@
     mix-blend-mode: darken;
 }
 
-.b3-typography div.hljs, .protyle-wysiwyg div.hljs {
-    background-color: #f8f9fa;
-}
+
 
 body{
 	border: 0px!important;
