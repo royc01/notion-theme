@@ -22,6 +22,7 @@
 
    /* 线条 */
     --b3-border-color: rgba(230, 230, 230, .1);
+	--b3-border-color2: rgba(230, 230, 230, .1);
 
     /* 滚动条 */
     --b3-scroll-color: #0f0f0f;

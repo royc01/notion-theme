@@ -48,6 +48,25 @@
 	transform-origin: 0 0 ;
 	 }
 }
+@keyframes rightcolumn{
+	0% {transform:translateX(calc(100% - 20px));
+	}
+	100% {transform:translateX(0%); 
+	 }
+}
+@keyframes leftcolumn{
+	0% { transform:translateX(calc(-100% + 20px));
+	}
+	100% { transform:translateX(0%);
+	 }
+}
+/*@keyframes tabbar{
+	0% {opacity: 0;	
+	}
+	100% {opacity: 1;
+	 }
+}页签动画*/
+
 
 :root {
     /* 主色 */
@@ -79,6 +98,7 @@
 
     /* 线条 */
     --b3-border-color: rgba(0, 0, 0, 0.1);
+	--b3-border-color2: #e5e5e5;
 
     /* 滚动条 */
     --b3-scroll-color: rgba(211,209,203,.5);
@@ -587,9 +607,9 @@ body:has(.layout__empty) .toolbar #drag {
 	visibility: visible!important;
     content: "";  
 	margin:0px -13px 0 10px;
-    border-radius: 50%;
-    width: 0.23em;
-    height: 0.23em;
+    border-radius: 100%;
+    width: 3px;
+    height: 3px;
 	background-color:var(--b3-list-item-arrow);
 }
 .b3-list-item__text{
@@ -659,8 +679,8 @@ input[type="checkbox" i] {
 .sy__outline .b3-list-item__arrow.fn__hidden{
 	visibility: visible!important;
 	opacity: 0.6;
-	width: 0.25em;
-	height: 0.25em;
+	width: 3px;
+	height: 3px;
 	color: transparent;
 	background-color:var(--b3-list-item-arrow);
 	border-radius: 50%;
@@ -792,7 +812,7 @@ input[type="checkbox" i] {
 	background-color: var(--b3-theme-background);
 	height: 40px;
 	z-index:2;
-	/*box-shadow: 0 -1px 0 0 var(--b3-border-color) inset;*/
+	box-shadow: 0 1px 0 0 var(--b3-border-color2);
 
 }
 /*页签前后分割线*/
@@ -925,7 +945,7 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 /* ————————————————————面包屑———————————————————— */
 .protyle-breadcrumb{
 	padding: 4px 8px 5px 8px;
-	border-top: 1px solid var(--b3-border-color);
+	border-top: 1px solid var(--b3-border-color2);
 }
 .block__popover .protyle-breadcrumb{
 	padding: 6px 8px 0px 8px;
@@ -2364,4 +2384,18 @@ padding-bottom:30px;}
 }
 .iframe .protyle-action__drag:after{
 	background-color:var(--b3-theme-on-surface)!important;
+}
+
+
+
+
+
+.sy__backlink .protyle-wysiwyg [data-node-id] [contenteditable] {
+    font-size:90%;
+}
+
+
+.sy__backlink .protyle-breadcrumb__bar:not(:first-child) {
+    margin-top: 18px;
+    border-top: 1px solid var(--b3-border-color);
 }

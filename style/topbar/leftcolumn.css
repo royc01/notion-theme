@@ -1,43 +1,45 @@
-.fn__flex-shrink .layout-tab-container>.fn__flex-column.file-tree{
+/*.fn__flex-shrink .layout-tab-container>.fn__flex-column.file-tree{
 	background-color:var(--b3-theme-background)!important;
-}
+}*/
 
 #dockTop+.fn__flex-1{
 	position:relative;
 }
 
-.fn__flex-column.fn__flex-shrink {
+.fn__flex-column.fn__flex-shrink{
 	opacity:0;
-	transform:translateX(calc(-100% + 20px));
-	transform-origin: 0 0 ;
+	right: calc(100% - 20px);
 	position:absolute;
 	z-index:5;
 	top:80px;
 	bottom:40px;
-	left:0px;
 	min-height: unset;
 	height:calc(100% - 120px);
 	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
 	border-left:36px solid transparent;/*增加点击区域*/
 	border-radius:0 5px 5px 0;
 	/*overflow:hidden;*/
-	transition: all 200ms!important;
 }
 
 #dockLeft.fn__none+#layouts .fn__flex-column.fn__flex-shrink {
-	left:-36px;
-	transform:translateX(calc(-100% + 56px));
+	right: calc(100% - 20px);
+	border-left:0px;
 }
 
 #dockLeft.fn__none+#layouts .fn__flex-column.fn__flex-shrink :hover{
 	opacity:1;
-	transform:translateX(0%);
-	transition: all 300ms!important;
+	right:unset;
+	left:0;
 }
-.fn__flex-shrink:hover,#dockLeft:hover+.layouts .fn__flex-column.fn__flex-shrink {
+
+.fn__flex-shrink:hover{
 	opacity:1;
-	transform:translateX(0%)!important;
-	transition: all 300ms!important;
+	right:unset;
+	left:0;
+	animation:leftcolumn 0.2s ease-in-out;
+}
+.fn__flex-shrink[style*="width: 0px"]:hover{
+	opacity:0;
 }
 #dockLeft .dock__item {
 	z-index:7;
@@ -57,7 +59,7 @@
 }
 
 
-.fn__flex-column.fn__flex-shrink:has(.file-tree.sy__file.layout__tab--active),
+/*.fn__flex-column.fn__flex-shrink:has(.file-tree.sy__file.layout__tab--active),
 .fn__flex-column.fn__flex-shrink:has(.file-tree.sy__inbox.layout__tab--active),
 .fn__flex-column.fn__flex-shrink:has(.file-tree.sy__tag.layout__tab--active),
 .fn__flex-column.fn__flex-shrink:has(.file-tree.sy__bookmark.layout__tab--active),
@@ -66,7 +68,7 @@
 .fn__flex-column.fn__flex-shrink:has(.file-tree.sy__globalGraph.layout__tab--active),
 .fn__flex-column.fn__flex-shrink:has(.file-tree.sy__backlink.layout__tab--active){
 	animation: shrink 2s ease-in-out;
-}
+}*/
 
 
 .fn__flex-shrink ~ .layout__center>div:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
