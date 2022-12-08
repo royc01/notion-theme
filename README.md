@@ -44,6 +44,9 @@
 |增加链滴社区[BryceAndJuly ](https://ld246.com/member/BryceAndJuly)分享的[最近打开文档](https://ld246.com/article/1662697317986) [日历面板](https://ld246.com/article/1662969146166)|[BryceAndJuly](https://ld246.com/member/BryceAndJuly)|
 
 　　以上排名不分先后。
+## 3.1.2
+* 修复导出PDF列表项圆点显示问题
+* 修复右侧悬浮遮挡页签问题
 
 ## 3.1.1
 * 修复悬浮侧栏块标消失问题
