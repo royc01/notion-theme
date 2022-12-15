@@ -37,9 +37,23 @@
 .bq[custom-b~=bell][data-type="NodeHeading"]:first-child {
     font-weight: 700 !important;
     font-size: 1.3em !important;
-    padding: 0px 8px 4px 10px;
+    padding: 0px 8px 4px 32px;
 }
 
+/* 引述callout段落的内边距 */
+.bq[custom-b~=error] .p,
+.bq[custom-b~=warn] .p,
+.bq[custom-b~=bug] .p,
+.bq[custom-b~=check] .p,
+.bq[custom-b~=light] .p,
+.bq[custom-b~=question] .p,
+.bq[custom-b~=wrong] .p,
+.bq[custom-b~=info] .p,
+.bq[custom-b~=pen] .p,
+.bq[custom-b~=note] .p,
+.bq[custom-b~=bell] .p{
+    padding-left:32px;
+}
 /* 引述callout段落的内边距 */
 .bq[custom-b~=error] ,
 .bq[custom-b~=warn] ,
@@ -52,7 +66,7 @@
 .bq[custom-b~=pen] ,
 .bq[custom-b~=note] ,
 .bq[custom-b~=bell] {
-    padding-left:40px;
+    padding-left:8px;
 }
 
 /*错误*/

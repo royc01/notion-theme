@@ -9,8 +9,8 @@
 @import url(style/bq-callout.css);/*引述样式*/
 /* 引入网址链接前的图标相关代码 */
 @import url("style/link-icon.css");
-/* 自定义配置文件 */
-@import url(/widgets/custom.css);
+/* 自定义配置文件 
+@import url(/widgets/custom.css);*/
 /*-------------------------------------------*/
 @keyframes menu {
 	0% {opacity: 0;}
@@ -429,9 +429,6 @@ body:has(.layout__empty) .toolbar #drag {
 #toolbarVIP div:before,#toolbarVIP div:after{
 	display:none;
 }
-#barTopHelp{
-	display:none;
-}
 /* ————————————————————dock栏———————————————————— */
 .dock{
 	background-color: var(--b3-dock-background);
@@ -593,6 +590,7 @@ body:has(.layout__empty) .toolbar #drag {
 	width: 16px;
 	font-size:14px;
 	line-height:22px;
+	padding: 0 3px;
 }
 .b3-list-item__icon svg,.b3-list-item__icon img{
 	margin: 0px;
@@ -600,7 +598,7 @@ body:has(.layout__empty) .toolbar #drag {
 	border-radius: 3px;
 }
 .b3-list-item__graphic{
-	padding: 3px 4px;
+	padding: 3px 3px;
     border-radius: 3px;
 }
 .b3-list-item__toggle.fn__hidden:before {
@@ -691,14 +689,15 @@ input[type="checkbox" i] {
 	background-color: var(--b3-list-item-arrow)!important ;
 }
 /*大纲数字*/
-.file-tree ul.b3-list.b3-list--background [data-subtype="h1"] .b3-list-item__toggle::after,
-.file-tree ul.b3-list.b3-list--background [data-subtype="h2"] .b3-list-item__toggle::after,
-.file-tree ul.b3-list.b3-list--background [data-subtype="h3"] .b3-list-item__toggle::after,
-.file-tree ul.b3-list.b3-list--background [data-subtype="h4"] .b3-list-item__toggle::after,
-.file-tree ul.b3-list.b3-list--background [data-subtype="h5"] .b3-list-item__toggle::after,
-.file-tree ul.b3-list.b3-list--background [data-subtype="h6"] .b3-list-item__toggle::after{
+.file-tree ul.b3-list.b3-list--background [data-subtype="h1"]>span:first-child::after,
+.file-tree ul.b3-list.b3-list--background [data-subtype="h2"]>span:first-child::after,
+.file-tree ul.b3-list.b3-list--background [data-subtype="h3"]>span:first-child::after,
+.file-tree ul.b3-list.b3-list--background [data-subtype="h4"]>span:first-child::after,
+.file-tree ul.b3-list.b3-list--background [data-subtype="h5"]>span:first-child::after,
+.file-tree ul.b3-list.b3-list--background [data-subtype="h6"]>span:first-child::after{
+	visibility: visible!important;
 	position:relative;
-	left:6px;
+	left:4px;
 	border-radius:3px;
 	opacity:0.5;
 	font-size:10px;
@@ -709,33 +708,39 @@ input[type="checkbox" i] {
 .file-tree ul.b3-list.b3-list--background [data-subtype="h4"] svg.b3-list-item__graphic,
 .file-tree ul.b3-list.b3-list--background [data-subtype="h5"] svg.b3-list-item__graphic,
 .file-tree ul.b3-list.b3-list--background [data-subtype="h6"] svg.b3-list-item__graphic{
-	margin-left:-16px;
-	margin-right:4px;
+	margin-left:-19px;
+	margin-right:2px;
     color:transparent;
 }
-.file-tree ul.b3-list.b3-list--background [data-subtype="h1"] .b3-list-item__toggle::after{
+.file-tree ul.b3-list.b3-list--background [data-subtype="h1"]>span:first-child::after{
 	content:"❶";
 	color:var(--h1-list-graphic);
+	pointer-events:none;
 }
-.file-tree ul.b3-list.b3-list--background [data-subtype="h2"] .b3-list-item__toggle::after{
+.file-tree ul.b3-list.b3-list--background [data-subtype="h2"]>span:first-child::after{
 	content:"❷";
 	color:var(--h2-list-graphic);
+	pointer-events:none;
 }
-.file-tree ul.b3-list.b3-list--background [data-subtype="h3"] .b3-list-item__toggle::after{
+.file-tree ul.b3-list.b3-list--background [data-subtype="h3"]>span:first-child::after{
 	content:"❸";
 	color:var(--h3-list-graphic);
+	pointer-events:none;
 }
-.file-tree ul.b3-list.b3-list--background [data-subtype="h4"] .b3-list-item__toggle::after{
+.file-tree ul.b3-list.b3-list--background [data-subtype="h4"]>span:first-child::after{
 	content:"❹";
 	color:var(--h4-list-graphic);
+	pointer-events:none;
 }
-.file-tree ul.b3-list.b3-list--background [data-subtype="h5"] .b3-list-item__toggle::after{
+.file-tree ul.b3-list.b3-list--background [data-subtype="h5"]>span:first-child::after{
 	content:"❺";
 	color:var(--h5-list-graphic);
+	pointer-events:none;
 }
-.file-tree ul.b3-list.b3-list--background [data-subtype="h6"] .b3-list-item__toggle::after{
+.file-tree ul.b3-list.b3-list--background [data-subtype="h6"]>span:first-child::after{
 	content:"❻";
 	color:var(--h6-list-graphic);
+	pointer-events:none;
 }
 
 .file-tree ul.b3-list.b3-list--background [data-subtype="h1"] svg.b3-list-item__graphic:hover{
@@ -2348,8 +2353,7 @@ padding-bottom:30px;}
 	position:absolute;
 	top:40%;
 	z-index:5;
-	right:0;
-	margin-right:-6px;
+	margin-left:calc(100% - 6px);
 	padding:0;
 	background-color:var( --b3-theme-background)!important;
 	transition: opacity 300ms;
@@ -2399,3 +2403,10 @@ padding-bottom:30px;}
     margin-top: 18px;
     border-top: 1px solid var(--b3-border-color);
 }
+
+
+
+
+
+
+
