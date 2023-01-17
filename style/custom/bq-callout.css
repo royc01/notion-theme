@@ -1,0 +1,307 @@
+/* 引述 */
+.protyle-wysiwyg .bq{
+    color: var( --b3-theme-on-background);
+    border-left: 0.25em solid var(--b3-theme-on-background);
+	border-radius:0 3px 3px 0;
+    background-color: var(--b3-bq-background);
+	margin-right:4px;
+}
+.protyle-wysiwyg .bq .p{
+	padding-left:10px;
+}
+.list .bq {
+	margin-right:0px!important;
+}/*列表里代码块对齐*/
+/*引述callout第一行样式 */
+.bq[custom-b~=error] .p:first-child,
+.bq[custom-b~=error][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=warn] .p:first-child,
+.bq[custom-b~=warn][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=bug] .p:first-child,
+.bq[custom-b~=bug][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=check] .p:first-child,
+.bq[custom-b~=check][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=light] .p:first-child,
+.bq[custom-b~=light][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=question] .p:first-child,
+.bq[custom-b~=question][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=wrong] .p:first-child,
+.bq[custom-b~=wrong][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=info] .p:first-child,
+.bq[custom-b~=info][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=pen] .p:first-child,
+.bq[custom-b~=pen][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=note] .p:first-child,
+.bq[custom-b~=note][data-type="NodeHeading"]:first-child,
+.bq[custom-b~=bell] .p:first-child,
+.bq[custom-b~=bell][data-type="NodeHeading"]:first-child {
+    font-weight: 700 !important;
+    font-size: 1.3em !important;
+    padding: 0em 0em 0em 1.7em;
+}
+
+/* 引述callout段落的内边距 */
+.bq[custom-b~=error] .p,
+.bq[custom-b~=warn] .p,
+.bq[custom-b~=bug] .p,
+.bq[custom-b~=check] .p,
+.bq[custom-b~=light] .p,
+.bq[custom-b~=question] .p,
+.bq[custom-b~=wrong] .p,
+.bq[custom-b~=info] .p,
+.bq[custom-b~=pen] .p,
+.bq[custom-b~=note] .p,
+.bq[custom-b~=bell] .p{
+    padding-left:2.2em;
+}
+/* 引述callout段落的内边距 */
+.bq[custom-b~=error] ,
+.bq[custom-b~=warn] ,
+.bq[custom-b~=bug] ,
+.bq[custom-b~=check] ,
+.bq[custom-b~=light] ,
+.bq[custom-b~=question] ,
+.bq[custom-b~=wrong] ,
+.bq[custom-b~=info] ,
+.bq[custom-b~=pen] ,
+.bq[custom-b~=note] ,
+.bq[custom-b~=bell] {
+    padding-left:8px;
+}
+/* 引述callout列表的内边距 */
+.bq[custom-b~=error] .list,
+.bq[custom-b~=warn] .list,
+.bq[custom-b~=bug] .list,
+.bq[custom-b~=check] .list,
+.bq[custom-b~=light] .list,
+.bq[custom-b~=question] .list,
+.bq[custom-b~=wrong] .list,
+.bq[custom-b~=info] .list,
+.bq[custom-b~=pen] .list,
+.bq[custom-b~=note] .list,
+.bq[custom-b~=bell] .list{
+    padding-left:1.6em;
+}
+
+.bq[custom-b~=error] .list .p,
+.bq[custom-b~=warn] .list .p,
+.bq[custom-b~=bug] .list .p,
+.bq[custom-b~=check] .list .p,
+.bq[custom-b~=light] .list .p,
+.bq[custom-b~=question] .list .p,
+.bq[custom-b~=wrong] .list .p,
+.bq[custom-b~=info] .list .p,
+.bq[custom-b~=pen] .list .p,
+.bq[custom-b~=note] .list .p,
+.bq[custom-b~=bell] .list .p{
+    padding-left:0em;
+}
+/*错误*/
+.protyle-wysiwyg [data-node-id][custom-b~=error].bq{
+	border:none;
+    background-color: var(--b3-bq-background13);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background13) inset;
+}
+
+.bq[custom-b~=error]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/prohibited.png);
+	background-size: 100% 100%;
+}
+/*警告*/
+.protyle-wysiwyg [data-node-id][custom-b~=warn].bq{
+	border:none;
+    background-color: var(--b3-bq-background7);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background7) inset;
+}
+
+.bq[custom-b~=warn]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/warning.png);
+	background-size: 100% 100%;
+}
+/*bug*/
+.protyle-wysiwyg [data-node-id][custom-b~=bug].bq{
+	border:none;
+    background-color: var(--b3-bq-background11);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background11) inset;
+}
+
+.bq[custom-b~=bug]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/bug.png);
+	background-size: 100% 100%;
+}
+/*正确*/
+.protyle-wysiwyg [data-node-id][custom-b~=check].bq{
+	border:none;
+    background-color: var(--b3-bq-background8);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background8) inset;
+}
+
+.bq[custom-b~=check]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/check.png);
+	background-size: 100% 100%;
+}
+/*灵感*/
+.protyle-wysiwyg [data-node-id][custom-b~=light].bq{
+	border:none;
+    background-color: var(--b3-bq-background6);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background6) inset;
+}
+
+.bq[custom-b~=light]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/light-bulb.png);
+	background-size: 100% 100%;
+}
+/*问题*/
+.protyle-wysiwyg [data-node-id][custom-b~=question].bq{
+	border:none;
+    background-color: var(--b3-bq-background12);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background12) inset;
+}
+
+.bq[custom-b~=question]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/question.png);
+	background-size: 100% 100%;
+}
+/*错误*/
+.protyle-wysiwyg [data-node-id][custom-b~=wrong].bq{
+	border:none;
+    background-color: var(--b3-bq-background13);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background13) inset;
+}
+
+.bq[custom-b~=wrong]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/cross.png);
+	background-size: 100% 100%;
+}
+/*信息*/
+.protyle-wysiwyg [data-node-id][custom-b~=info].bq{
+	border:none;
+    background-color: var(--b3-bq-background10);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background10) inset;
+}
+
+.bq[custom-b~=info]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/info.png);
+	background-size: 100% 100%;
+}
+/*记录*/
+.protyle-wysiwyg [data-node-id][custom-b~=pen].bq{
+	border:none;
+    background-color: var(--b3-bq-background3);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background3) inset;
+}
+
+.bq[custom-b~=pen]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/pen.png);
+	background-size: 100% 100%;
+}
+/*汇总*/
+.protyle-wysiwyg [data-node-id][custom-b~=note].bq{
+	border:none;
+    background-color: var(--b3-bq-background1);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background1) inset;
+}
+
+.bq[custom-b~=note]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/notebook.png);
+	background-size: 100% 100%;
+}
+/*提醒*/
+.protyle-wysiwyg [data-node-id][custom-b~=bell].bq{
+	border:none;
+    background-color: var(--b3-bq-background5);
+	border-radius:5px;
+	box-shadow:0 0 0 2px var(--b3-font-background5) inset;
+}
+
+.bq[custom-b~=bell]::after {
+    content: "";
+    position: absolute;
+	top: 0.9em;
+	left:0.2em;
+	margin-left:10px;
+	width: 1.5em;
+    height: 1.5em;
+	background-image: url(/appearance/themes/Savor/img/callout/bell.png);
+	background-size: 100% 100%;
+}

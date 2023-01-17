@@ -1,0 +1,103 @@
+/*底栏*/
+.status{
+	height:25px;
+	background-color:transparent;
+	margin-top: -30px;
+	margin-bottom:8px;
+	position:absolute;
+	right:0px;
+	bottom:0px;
+	border:0;
+}
+.status .toolbar__item{
+	margin:  7px;
+	border-radius: 5px;
+	background-color: var(--b3-status-msg-background);
+	padding:2px;
+}
+
+.status .toolbar__item svg{
+	padding:4px;
+	color:var(--b3-dockright-color);
+	width: 13px;
+}
+.body--win32>.fn__flex-1
+{
+	overflow:visible;
+}
+
+.status__counter:not(:empty){
+	border-radius:5px;
+	background-color:var(--b3-theme-primary);
+	color:#fff;
+	padding: 0px 0 0 8px ;
+	margin:0px 7px 7px 7px;
+	position:relative;
+	right:28px;
+	height:26px;
+	line-height:26px;
+}
+.status__counter:not(:empty) span{
+	color:#fff;
+}
+.status__msg:not(:empty){
+	opacity:0.5;
+	animation: statusmsg 5s ease-in-out;
+	max-width: 100px;
+	padding: 0px 8px;
+	border-radius:5px;
+	background-color:var(--b3-status-msg-background);
+	margin:0px 7px 7px 7px;
+	transition: max-width 300ms,opacity 300ms;
+	transition-delay: 2000ms;
+	position:relative;
+	right:21px;
+	height:26px;
+	line-height:26px;
+}
+.status__msg:not(:empty):before{
+	content: "📢";
+	font-size:12px;
+}
+
+.status__msg:not(:empty):hover{
+	opacity:1;
+	max-width:400px;
+	transition: max-width 500ms ease-out;
+}
+
+.layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+padding-bottom:30px;}
+
+
+.status #statusHelp{
+	position:relative;
+	right:35px;
+}
+.status #barDock{
+	position:absolute;
+	right:0px;
+	z-index:8;
+}
+
+.status>.fn__flex-1{
+	position:relative!important;
+	width:0px!important;
+	right:0px;
+	flex:0;
+}
+
+.status #barDock .b3-menu{
+	left:unset!important;
+	right:4px;
+	bottom:30px!important;
+}
+.status #barDock:before{
+	right:unset!important;
+	left: 0px;
+	transform: rotateY(180deg);
+}
+.status #barDock:after{
+	left:unset!important;
+	right:100%;
+}

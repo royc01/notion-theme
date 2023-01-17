@@ -1,0 +1,138 @@
+/* ————————————————————页签———————————————————— */
+.layout-tab-bar{
+	padding:0 0 0 8px;
+	position:relative;
+	background-color: var(--b3-theme-background);
+	height: 40px;
+	z-index:2;
+	box-shadow: 0 1px 0 0 var(--b3-border-color2);
+
+}
+/*页签前后分割线
+ul.layout-tab-bar:not(.layout-tab-bar--readonly):before{
+	content: "";
+	position:relative;
+	left:-8px;
+    height: 20px;
+    border-left: 1px solid var(--b3-layout-resize);
+	z-index:9;
+}
+.layout__center .layout__resize--lr+.fn__flex-1 ul.layout-tab-bar:not(.layout-tab-bar--readonly):before{
+	display:none;
+}*/
+
+ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
+	content: "";
+	position:relative;
+	right:-8px;
+    height: 40px;
+    border-left: 1px solid var(--b3-layout-resize);
+	z-index:9;
+	margin-top: 0px;
+}
+/*———————————————————— */
+.layout-tab-bar .item{
+	margin-right:4px;
+	border-radius: 3px!important;
+	min-height:unset;
+	min-width:unset;
+	overflow:visible;
+}
+.layout-tab-bar .item__icon svg{
+	height: 16px;
+}
+
+.layout-tab-bar .item--focus:after{
+	position: absolute;
+	bottom: -7px;
+}
+.layout__wnd--active .layout-tab-bar .item--focus{
+	box-shadow:none!important;/*取消blur状态页签阴影*/
+}
+.layout__wnd--active .layout-tab-bar .item--focus::after{
+	content: '';
+	position: absolute;
+	bottom: -7px;
+	left: 0px;
+	right: 0px;
+	height: 3px;
+	background-color: var(--b3-item-focus);
+	animation: item-focus 0.2s ease-in-out;
+	overflow:visible;
+}
+.layout-tab-bar .item:not(.item--readonly):hover{
+	background-color:var(--b3-list-background)!important;
+	transition: all 300ms;
+}
+.layout-tab-bar .item--readonly{
+	margin:-4px 2px 0 0;
+	padding:0;
+}
+.layout-tab-bar{
+	border-bottom:none;
+}
+.item__close[data-type="more"] svg{
+    padding: 8px;
+	border-radius: 5px;
+}
+.item__close[data-type="new"] svg{
+    padding: 7px!important;
+	border-radius: 5px;
+}
+.item__close[data-type="more"] svg:hover,.item__close[data-type="new"] svg:hover{
+	background-color:var(--b3-list-background);
+}
+.layout-tab-bar .item__text{
+    padding: 2px 6px 2px 6px; 
+}
+.layout-tab-bar .item__close{
+	padding: 4px 6px 4px 2px;
+}
+
+.layout-tab-bar .item--pin{
+	margin-right:8px!important;
+	padding:2px;
+}
+.layout-tab-bar .item__icon>img, .layout-tab-bar .item__icon>svg{
+	width: 18px;
+}
+.layout-tab-bar svg.item__graphic{
+	padding:0 0 0 4px;
+	width: 24px;
+}
+.layout-tab-bar .item__icon{
+	padding:4px 0 4px 6px;
+}
+.layout-tab-bar .item--pin .item__icon{
+	padding:2px 2px 3px 3px;
+}
+.layout-tab-bar .item--pin .item__text{
+	padding:0px 2px 0px 3px;
+}
+.layout-tab-bar .item--pin .item__graphic{
+	padding:3px 3px 3px 3px;
+	height:16px;
+	width:16px;
+}
+.layout-tab-bar .item--pin:nth-child(4n-3){
+	background-color:var(--b3-card-error-background);
+}
+.layout-tab-bar .item--pin:nth-child(4n-2){
+	background-color:var(--b3-card-warning-background);
+}
+.layout-tab-bar .item--pin:nth-child(4n-1){
+	background-color:var(--b3-card-info-background);
+}
+.layout-tab-bar .item--pin:nth-child(4n){
+	background-color:var(--b3-card-success-background);
+}
+.layout-tab-bar .item__graphic{
+	padding:2px 0 0px 6px;
+}
+.layout__center .layout-tab-bar--readonly {
+    min-width: 82px;
+    -webkit-app-region: drag;
+}
+.layout__center .layout-tab-bar .item--readonly .item__close{
+	-webkit-app-region: no-drag;
+}

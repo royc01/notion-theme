@@ -1,5 +1,4 @@
 
-
 /*.layout__center ~ .fn__flex-column .layout-tab-container>.fn__flex-column.file-tree{
 background-color:var(--b3-theme-background)!important;
 }*/
@@ -19,9 +18,11 @@ background-color:var(--b3-theme-background)!important;
 	min-height: unset;
 	height:calc(100% - 140px);
 	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
-	border-right:36px solid transparent;/*增加点击区域*/
+	border-right:40px solid transparent;/*增加点击区域*/
 	border-radius:5px 0 0 5px;
 	/*overflow:hidden;*/
+	min-height: unset!important;
+	padding-top: unset!important;
 }
 #dockLeft.fn__none+#layouts .layout__center ~ .fn__flex-column{
 	left: calc(100% - 20px);
@@ -36,7 +37,7 @@ background-color:var(--b3-theme-background)!important;
 .layout__center ~ .fn__flex-column:hover{
 	opacity:1;
 	left:unset;
-	right:0;
+	right:0px;
 	animation:rightcolumn 0.2s ease-in-out;
 }
 .layout__center ~ .fn__flex-column[style*="width: 0px"]:hover{
@@ -52,9 +53,9 @@ background-color:var(--b3-theme-background)!important;
 #dockRight:before{
 	content: "";
     height:calc(100% - 40px);
-	width:36px;
-	right:-36px;
-	box-shadow: var(--b3-dockright-background) -36px 0px 0px 0px;
+	width:40px;
+	right:-40px;
+	box-shadow: var(--b3-dockright-background) -40px 0px 0px 0px;
 	z-index:2;
     position: absolute;
 	bottom:0px;
@@ -83,13 +84,13 @@ background-color:var(--b3-theme-background)!important;
 
 .layout__center:has(~.fn__flex-column[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly,
 .layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:210px;
+  margin-right:220px;
 }
 
 
 #dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly,
 #dockLeft.fn__none+#layouts .layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:246px;
+  margin-right:256px;
 }
 
 
@@ -101,3 +102,15 @@ background-color:var(--b3-theme-background)!important;
 
 .layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
 padding-bottom:0px;}/*取消侧栏下端间距*/
+
+
+
+
+
+
+
+
+
+
+
+

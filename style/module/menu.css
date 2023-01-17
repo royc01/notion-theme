@@ -1,0 +1,344 @@
+/* ————————————————————弹出菜单&设置菜单———————————————————— */
+.b3-menu{
+	animation: menu 0.2s ease-in-out;
+	box-shadow: var(--b3-menu-shadow);
+	background-color:var(--b3-theme-background);
+	padding:5px 4px;
+}
+.b3-menu .b3-menu__submenu{
+	padding:5px 4px;
+	background-color:var(--b3-theme-background)!important;
+	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+}
+.b3-menu__item{
+	padding: 0 8px;
+	background-color: var(--b3-theme-background);
+	border-radius:3px;
+}
+.b3-menu__item:hover:not(.b3-menu__item--readonly):not(.b3-menu__item--custom),
+.b3-menu__item--current {
+	background-color:var(--b3-list-background);
+}
+.b3-menu__accelerator{
+	color:var(--b3-scroll-color-hover);
+}/*快捷键提示*/
+.b3-list-item--big{
+	padding: 14px 24px;
+	border-radius: 0px;
+}
+/*快捷键面板*/
+#keymapList .b3-list-item.toggle{
+	margin:0!important;
+}
+#keymapList .b3-list--border>div label:before {
+	left: -14px;
+}
+#keymapList .b3-list--border>div div:before{
+	left: -48px;
+}
+#keymapList .b3-list--border>div div label:before {
+	left: -18px;
+}
+/* 按钮 */
+.b3-button:not(.b3-button--text):not(.b3-button--cancel){
+  font-weight:700;
+  background-color:var(--b3-theme-primary);
+  color: var(--b3-theme-background) !important;
+  border:1px solid rgb(15 15 15 / 10%);
+  box-shadow:rgb(15 15 15 / 10%) 0px 1px 2px;
+}
+
+.b3-button:not(.b3-button--text):not(.b3-button--cancel):hover{
+   background-color:var(--b3-button);
+}
+/* 开关 */
+.b3-switch {
+  height: 14px;
+  width: 26px;
+  padding: 1px;
+  border-radius: 44px;
+  box-sizing: content-box;
+  background: var(--b3-border-color);
+}
+
+.b3-switch::after {
+  border: none;
+  box-shadow: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 44px;
+  background: var(--b3-theme-background);
+  transform: translateX(5px) translateY(4px);
+}
+
+.b3-switch::before {
+  display: none !important;
+}
+
+.b3-switch:checked {
+  background-color: var(--b3-theme-primary);
+}
+
+.b3-switch:checked:after {
+  background: var(--b3-theme-background);
+  transform: translateX(17px) translateY(4px);
+}
+/*属性面板*/
+.b3-dialog__container{
+	background-color: var(--b3-fn__flex-shrink-background);
+}
+/*设置菜单窗口*/
+.b3-dialog__container .fn__flex-column{
+	background-color: var(--b3-theme-background);
+    border-radius: 5px;
+}
+.b3-dialog__container .b3-list--background
+{
+	background-color:var(--b3-fn__flex-shrink-background);
+	border-radius:0 0 0 5px;
+	border-right: 0px;
+
+}
+.fn__flex .b3-label{
+	padding: 20px 0px;
+	margin: 0% 4%;
+}
+.b3-list-item--big .b3-list-item__graphic{
+	height: 15px;
+    width: 15px;
+	color:var(--b3-list-background-more);
+}
+/*引用块弹出框*/
+.block__popover--open{
+	border:none;
+	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+	animation: menu 0.2s ease-in-out;
+}
+.block__edit>.protyle-breadcrumb>.block__icon svg{
+	color:var(--b3-theme-on-surface);
+	width:14px;
+	height:14px;
+	padding: 5px;
+}
+.block__edit>.protyle-breadcrumb>.block__icon{
+	padding: 0px;
+}
+.block__popover--move>.block__icons{
+	padding:0 10px;
+}
+/* 弹出框钉住 */
+.block__icon--active[data-type='pin'] svg{
+    color: var(--b3-theme-primary)!important;
+	transition: all 200ms;
+	transform: rotate(-46deg);
+}
+.block__icon--active{
+	background-color:transparent;
+}
+/* 选择下拉菜单 */
+.b3-select {
+	border: 1px solid var(--b3-border-color);
+	padding: 2px 8px 4px 8px;
+}
+/* 移动文档菜单 */
+#foldList .b3-list-item__icon{
+	padding-left:18px;
+}
+#foldList .b3-list-item__showall{
+	padding-left:3px;
+	height:26px;
+	line-height:26px;
+	color:var(--b3-theme-on-surface);
+}
+/*历史面板,集市*/
+.b3-dialog__container .layout-tab-bar{
+	height:40px;
+	z-index:unset;
+}
+.b3-dialog__container .layout-tab-bar .item{
+	padding: 2px 0px;
+}
+.b3-dialog__container .layout-tab-bar .item--focus{
+	position:relative;
+}
+.b3-dialog__container .layout-tab-bar .item--focus::after{
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0px;
+	right: 0px;
+	height: 2px;
+	background-color:var(--b3-item-focus);
+}
+div#historyContainer{
+	border-top:1px solid var(--b3-border-color);
+}
+/*集市悬浮样式*/
+.b3-card{
+	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+}
+
+.b3-card--current{
+	box-shadow: var(--b3-theme-primary-light) 0px 0px 0px 1px, var(--b3-theme-primary-light) 0px 2px 4px,0px 0px 0px 3px var(--b3-theme-primary-light) inset;
+}
+.b3-card--current .b3-card__info, .b3-card--current .b3-card__actions{
+	background-color:transparent;
+}
+
+.b3-card:hover{
+	box-shadow: var(--b3-theme-primary-light) 0px 0px 0px 1px, var(--b3-theme-primary-light) 0px 2px 4px;
+	background-color:transparent;
+}
+/*pdf*/
+.pdf__outer,#sidebarContainer,#toolbarViewer,#toolbarViewer>.fn__flex-1{
+	background-color:var(--b3-fn__flex-shrink-background);
+}
+
+#toolbarSidebar,#toolbarSidebar>.fn__flex-1{
+	background-color:var(--b3-toolbarSidebar);
+}
+.pdfViewer{
+	background-color:var(--b3-theme-background);
+}
+.b3-color__square{
+	 border-radius: 3px;
+	 width:22px;
+	 height:22px;											   
+	 box-shadow: 0 0 0 1px var(--b3-border-color) inset;
+	 font-weight: 500;
+}
+.b3-color__square[style*="--b3-pdf-background"]::before{
+	 content: "A";
+	 color:var(--b3-theme-on-background);
+	 margin-top:-2px;
+	 font-weight:500;
+	 font-size:1.1em;
+	}
+#toolbarViewer{
+	padding:5px 5px 5px 8px;
+	height:40px;
+}
+#viewerContainer{
+	top:40px;
+}
+
+/* '/'弹出分栏*/
+.hint--menu{
+	animation: menu 0.2s ease-in-out;
+	box-shadow: var(--b3-menu-shadow);
+    background-color: var(--b3-theme-background);
+	columns: 50px 4;
+	column-rule:1px outset var(--b3-border-color);
+    min-width: 50vw !important;
+	padding:5px;
+}
+.hint--menu .b3-list-item{
+	border-radius:3px;
+	margin:0!important;
+	width:100%!important;
+}
+.hint--menu .b3-list-item__text{
+	margin:0 0 0 8px;	
+	color:var(--b3-theme-on-background);
+}
+.hint--menu .b3-list-item__graphic{
+	margin:0px;
+	width:10px;
+	height:12px;
+	border:1px solid var(--b3-border-color);
+}
+.hint--menu>.b3-list-item--two{
+	margin:0;
+}
+@media screen and (min-width: 1280px){
+	.hint--menu>.b3-list-item--two{
+	width:calc(25% - 5px);
+}
+	.hint--menu{
+	max-height: 412px !important;
+	}
+}
+@media screen and (max-width: 1280px) {
+	.hint--menu>.b3-list-item--two{
+	width:calc(33.3% - 5px);
+	}
+	.hint--menu{
+	max-height: 540px !important;
+	}
+}
+.hint--menu:has(>.emojis){
+	columns:unset!important;
+}
+/*文本框选颜色*/
+::selection {
+     background: var( --b3-theme-primary-lightest);
+}
+/*滚动条*/
+::-webkit-scrollbar {
+    width : var(--webkit-scrollbar);
+	height: var(--webkit-scrollbar);
+	background-color:var(--b3-scroll-bgcolor);
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color:var(--b3-scroll-color-hover);
+}
+::-webkit-scrollbar-thumb{
+	border-radius: var(--webkit-scrollbar-thumb);
+	background-color:var(--b3-scroll-color);
+}
+/*.protyle-content{
+	overflow: overlay;
+}*/
+/* 动态加载和调节进度条*/
+.b3-slider{height:24px;}
+.b3-slider::-webkit-slider-runnable-track {
+    height: 4px;
+    background: var(--b3-theme-primary-lighter);
+	
+
+}
+.b3-slider::-webkit-slider-container {
+padding:3px;
+	height: 30px;
+    overflow: hidden;
+}
+
+.b3-slider::-webkit-slider-thumb {
+	transform:unset !important;
+    width: 8px;
+    height: 8px;
+    background-color: var(--b3-theme-background);
+    border: 2px solid transparent;
+    margin-top: -2px;
+    border-image: linear-gradient(var(--b3-theme-primary),var(--b3-theme-primary)) 0 fill / 1 5 1 0 / 0px 0px 0 2000px;
+	box-shadow: 0px 0px 0px 3px var(--b3-theme-primary) ;
+}
+.b3-slider::-webkit-slider-thumb:hover{
+	box-shadow:0px 0px 0px 3px var(--b3-theme-primary),0px 0px 0px 5px var(--b3-theme-primary-lighter);
+	transition:all 500ms;
+}
+
+/*闪卡*/
+.b3-button--error{
+	background-color:var(--b3-font-color12)!important;
+}
+.b3-button--warning{
+	background-color:var(--b3-font-color5)!important;
+}
+.b3-button--info{
+	background-color:var(--b3-font-color8)!important;
+}
+.b3-button--success{
+	background-color:var(--b3-font-color7)!important;
+}
+.b3-dialog__container .fn__flex-column:has(.b3-dialog__cardblock){
+    background-color: transparent;
+}
+.b3-dialog__cardblock .protyle-breadcrumb{
+	border:0;
+}
+.b3-dialog__cardblock{
+	border-radius:5px;
+	border: 1px solid var(--b3-border-color);
+	margin-bottom:10px;
+}

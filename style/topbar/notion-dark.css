@@ -162,8 +162,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-blur-background: var(--b3-theme-background);
-	--b3-toolbar-background: var(--b3-theme-background);
+	--b3-toolbar-blur-background: transparent;
 	--b3-toolbar-item-hover: rgba(255, 255, 255, 0.1);
 	--b3-toolbar-closeWindow-hover: #e81123;
 	--b3-toolbar-closeWindow-svg: #fff;
@@ -177,10 +176,6 @@
 	--b3-dock-item-active-color: #eb8383;
 	--b3-dock-item-hover-background: rgba(71, 76, 80 );
 	
-	--b3-dock-item-width: 36px;
-	--b3-dock-item-padding: 5px;
-	--b3-dock-item-margin: 7px 5px 7px 5px;
-	--b3-dock-item-radius: 5px;
 	/* 侧栏面板 */
 	--b3-fn__flex-column-background: rgba(55, 60, 63);
 	--b3-fn__flex-shrink-background: rgba(55, 60, 63);
@@ -264,9 +259,7 @@
 .b3-text-field::-webkit-calendar-picker-indicator {
     fiilter: invert(1);
 }
-body{
-	border: 0px!important;
-}
+
 #buttonsalt,#topBar,#conceal,#tabbarVertical,#buttonvinegar,#buttonsugar{
 	background-color:var(--b3-theme-on-background);
 	border:6px solid var(--b3-theme-on-background);
