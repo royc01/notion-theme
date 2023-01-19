@@ -162,19 +162,29 @@
                         // console.log("get in ParseNotePath function", this.currentNotebook.id);
                         // parse the notebook path
                         // path: `/daily note/${e[0]}/${e[1]}/${o}` -> default -> /daily note/2022/10/2022-10-29
-                        var notePath = n.data.conf.dailyNoteSavePath;  // notePath = /今日速记/{{now | date "2006/2006.01"}}/{{now | date "2006.01.02"}}
-                        console.log("[日历插件][info] 读取日历的模板路径：", notePath);
-                        // split the notePath to needed path
-                        var notePathSplit = notePath.split('/{{') ;  // with 3 element: [/今日速记, now | date "2006/2006.01"}}, now | date "2006.01.02"}} ]
-                        this.dailyNotePath = notePathSplit[0];  // -> /今日速记/
+                        if (0 === n.code && n.data) {
+                            // test push messages
+                            let success_str = {"msg": "[日历插件][info] 成功读取用户配置", "timeout": 7000};
+                            let print = await this.request("/api/notification/pushMsg", success_str);
 
-                        var monthPath = notePathSplit[1].replace('now | date "', '').replace('"}}', '');   // -> 2006/2006.01
-                        this.monthCurrent = monthPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}');   // -> '${e[0]}/${e[0]}.${e[1]}'
-
-                        var dayPath = notePathSplit[2].replace('now | date "', '').replace('"}}', ''); // -> 2006.01.02
-                        this.dayCurrent = dayPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}').replaceAll('02', '${e[2]}')  // -> '${e[0]}.${e[1]}.${e[2]}'
-
-                        console.log("[日历插件][info] 替换为当前日期的模板变量", this.dailyNotePath + '/' + this.monthCurrent + '/' + this.dayCurrent, "其中e为[2021, 10, 27]的当前日期变量");
+                            var notePath = n.data.conf.dailyNoteSavePath;  // notePath = /今日速记/{{now | date "2006/2006.01"}}/{{now | date "2006.01.02"}}
+                            console.log("[日历插件][info] 读取日历的模板路径：", notePath);
+                            // split the notePath to needed path
+                            var notePathSplit = notePath.split('/{{') ;  // with 3 element: [/今日速记, now | date "2006/2006.01"}}, now | date "2006.01.02"}} ]
+                            this.dailyNotePath = notePathSplit[0];  // -> /今日速记/
+    
+                            var monthPath = notePathSplit[1].replace('now | date "', '').replace('"}}', '');   // -> 2006/2006.01
+                            this.monthCurrent = monthPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}');   // -> '${e[0]}/${e[0]}.${e[1]}'
+    
+                            var dayPath = notePathSplit[2].replace('now | date "', '').replace('"}}', ''); // -> 2006.01.02
+                            this.dayCurrent = dayPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}').replaceAll('02', '${e[2]}')  // -> '${e[0]}.${e[1]}.${e[2]}'
+    
+                            console.log("[日历插件][info] 替换为当前日期的模板变量", this.dailyNotePath + '/' + this.monthCurrent + '/' + this.dayCurrent, "其中e为[2021, 10, 27]的当前日期变量");
+                        }else{
+                            // push error message
+                            let error_str = {"msg": "[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试", "timeout": 7000};
+                            let print = await this.request("/api/notification/pushMsg", error_str);
+                        }
                     },
                     async clickDay(t) {
                         let e = t.split("/");
@@ -193,7 +203,9 @@
                             let t = { notebook: this.currentNotebook.id },
                                 n = await this.request("/api/notebook/getNotebookConf", t);
 
-                            // parse the notebook path
+                            /////////////////////////////
+                            // parse the notebook path //
+                            /////////////////////////////
                             if (typeof this.dailyNotePath == 'undefined') {
                                 this.parseNotePath(n);
                             }
@@ -204,23 +216,39 @@
                             console.log(r)
                             if (0 === i.code && i.data) {
                                 let t = i.data;
+                                console.log(t);
                                 try {
                                     window.open("siyuan://blocks/" + t), (this.DateLinkToNote[o] = "siyuan://blocks/" + t), this.markArr.push(o);
                                     let e = "",
                                         a = await this.request("/api/system/getConf");
-                                    if ((a && a.data.conf.system.workspaceDir ? (e = a.data.conf.system.workspaceDir.replace(/\\/g, "/")) : console.error("获取工作空间目录失败，请手动设置"), 0 === n.code && n.data && n.data.conf)) {
+                                    // if can find workspace directory
+                                    if (a && a.data.conf.system.workspaceDir) {
+                                        // change the e workspace directory
+                                        e = a.data.conf.system.workspaceDir.replace(/\\/g, "/");
+                                    }else{
+                                        // push error message
+                                        let error_str = {"msg": "[日历插件][Error] 获取工作空间目录失败，请手动设置", "timeout": 7000};
+                                        let print = await this.request("/api/notification/pushMsg", error_str);
+                                    }
+
+                                    // ensure can find necessary data
+                                    if ( 0 === n.code && n.data && n.data.conf ) {
                                         let o = n.data.conf,
                                             a = "";
                                         if (o.dailyNoteTemplatePath) {
                                             let n = `${e}/data/templates${o.dailyNoteTemplatePath}`.replace(/\//g, "\\"),
                                                 r = { id: t, path: n },
                                                 i = await this.request("/api/template/render", r);
-                                            i &&
-                                                0 == i.code &&
-                                                ((a = i.data.content),
-                                                setTimeout(() => {
-                                                    (0, window.parent._d.insertHTML)(a, window.parent._t, !0);
-                                                }, 1e3));
+                                            // success get dom from template
+                                            if (i && 0 == i.code && (a = i.data.content)){
+                                                const block_content = {
+                                                    "dataType": "dom",
+                                                    "data": i.data.content,
+                                                    "parentID": t
+                                                },
+                                                bi = await this.request("/api/block/prependBlock", block_content);
+                                                console.log(o, i, block_content, bi)
+                                            }
                                         }
                                     }
                                 } catch (a) {
