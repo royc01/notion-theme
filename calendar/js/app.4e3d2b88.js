@@ -111,7 +111,10 @@
                 name: "App",
                 components: { Calendar: s.a },
                 data() {
-                    return { date: "", week: "", markArr: [], DateLinkToNote: {}, textTop: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], currentNotebook: { name: "", id: null }, notebookList: [], showNotebookList: !1 };
+                    return { date: "", week: "", markArr: [], DateLinkToNote: {}, textTop: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"], currentNotebook: { name: "", id: null }, notebookList: [], showNotebookList: !1 ,
+                        // variable for daily note path
+                        dailyNotePath: undefined, monthCurrent: undefined, dayCurrent: undefined,
+                    };
                 },
                 created() {
                     var t = new Date();
@@ -155,21 +158,50 @@
                                     });
                         });
                     },
+                    async parseNotePath(n) {
+                        // console.log("get in ParseNotePath function", this.currentNotebook.id);
+                        // parse the notebook path
+                        // path: `/daily note/${e[0]}/${e[1]}/${o}` -> default -> /daily note/2022/10/2022-10-29
+                        var notePath = n.data.conf.dailyNoteSavePath;  // notePath = /今日速记/{{now | date "2006/2006.01"}}/{{now | date "2006.01.02"}}
+                        console.log("[日历插件][info] 读取日历的模板路径：", notePath);
+                        // split the notePath to needed path
+                        var notePathSplit = notePath.split('/{{') ;  // with 3 element: [/今日速记, now | date "2006/2006.01"}}, now | date "2006.01.02"}} ]
+                        this.dailyNotePath = notePathSplit[0];  // -> /今日速记/
+
+                        var monthPath = notePathSplit[1].replace('now | date "', '').replace('"}}', '');   // -> 2006/2006.01
+                        this.monthCurrent = monthPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}');   // -> '${e[0]}/${e[0]}.${e[1]}'
+
+                        var dayPath = notePathSplit[2].replace('now | date "', '').replace('"}}', ''); // -> 2006.01.02
+                        this.dayCurrent = dayPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}').replaceAll('02', '${e[2]}')  // -> '${e[0]}.${e[1]}.${e[2]}'
+
+                        console.log("[日历插件][info] 替换为当前日期的模板变量", this.dailyNotePath + '/' + this.monthCurrent + '/' + this.dayCurrent, "其中e为[2021, 10, 27]的当前日期变量");
+                    },
                     async clickDay(t) {
                         let e = t.split("/");
                         (e[1] = e[1].padStart(2, "0")), (e[2] = e[2].padStart(2, "0"));
-                        let o = e.join("-");
+                        // e = [2021, 10, 22]
+
+                        // let o = e.join("-"); // -> 2021-10-22
+                        let o = eval('`'+this.dayCurrent+'`'); // -> 2021-10-22
                         if (this.DateLinkToNote[o])
                             try {
                                 window.open(this.DateLinkToNote[o]);
                             } catch (a) {
-                                console.error(a);
+                                console.log("[日历插件][Error]", a);
                             }
                         else if (this.currentNotebook.id) {
                             let t = { notebook: this.currentNotebook.id },
-                                n = await this.request("/api/notebook/getNotebookConf", t),
-                                r = { notebook: this.currentNotebook.id, path: `/daily note/${e[0]}/${e[1]}/${o}`, markdown: "" },
+                                n = await this.request("/api/notebook/getNotebookConf", t);
+
+                            // parse the notebook path
+                            if (typeof this.dailyNotePath == 'undefined') {
+                                this.parseNotePath(n);
+                            }
+
+                            //     r = { notebook: this.currentNotebook.id, path: `/daily note/${e[0]}/${e[1]}/${o}`, markdown: "" },
+                            let r = { notebook: this.currentNotebook.id, path: eval('`'+this.dailyNotePath+'/'+this.monthCurrent+'/'+this.dayCurrent+'`'), markdown: "" },
                                 i = await this.request("/api/filetree/createDocWithMd", r);
+                            console.log(r)
                             if (0 === i.code && i.data) {
                                 let t = i.data;
                                 try {
@@ -200,13 +232,27 @@
                     async changeDate(t) {
                         await this.$nextTick();
                         let e = document.querySelectorAll(".wh_item_date:not(.wh_other_dayhide)"),
-                            o = document.querySelector(".wh_content_li");
-                        (o = o.innerText),
-                            (o = o.replace(/年|月/g, "-")),
-                            e.forEach((t) => {
-                                let e = (o + t.innerText).split("-");
-                                (e[1] = e[1].padStart(2, "0")), (e[2] = e[2].padStart(2, "0")), (e = e.join("-")), this.AutoMarkDate(e);
-                            });
+                            o = document.querySelector(".wh_content_li"),
+                            nid = { notebook: this.currentNotebook.id },
+                            n = await this.request("/api/notebook/getNotebookConf", nid);
+
+                        (o = o.innerText), // 2022年10月
+                        (o = o.replace(/年|月/g, "-"));  // 2022-10-
+
+                        // parse the notebook path
+                        // console.log(this.dayCurrent);
+                        if (typeof this.dailyNotePath == 'undefined') {
+                            this.parseNotePath(n);
+                        }
+                        // console.log(this.dayCurrent);
+
+                        e.forEach((t) => {
+                            let e = (o + t.innerText).split("-");
+                            (e[1] = e[1].padStart(2, "0")), 
+                            (e[2] = e[2].padStart(2, "0")), 
+                            (e = eval('`'+this.dayCurrent+'`')), 
+                            this.AutoMarkDate(e);
+                        });
                     },
                     async SiYuan_SQL_dailyNote(t) {
                         let e = "/api/query/sql",
@@ -218,12 +264,13 @@
                                     a = t.json();
                                 })
                                 .catch((t) => {
-                                    console.log(t);
+                                    console.log("[日历插件][Error]", t);
                                 }),
                             a
                         );
                     },
                     async AutoMarkDate(t) {
+                        // console.log(t);
                         let e = await this.SiYuan_SQL_dailyNote(t);
                         if (!e.code && e.data.length > 0) {
                             let o = "siyuan://blocks/" + e.data[0].id;
