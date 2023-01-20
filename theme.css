@@ -325,7 +325,7 @@
 	--b3-layout-resize: rgba(230, 229, 225);
 	--b3-shrink-layout-resize: rgba(230, 229, 225);
 	--b3-layout-resize-hover: var(--b3-scroll-color);
-	--flex-width-transition:width 150ms linear; /*调节宽度动画*/
+	/*--flex-width-transition:width 150ms ease-in-out; 调节宽度动画*/
 	--b3-border-fold: rgb(15, 15 , 15, .1);/*折叠边框*/
 	--b3-layout-resize-width: 1px;
 	/* 页签 */

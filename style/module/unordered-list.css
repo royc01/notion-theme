@@ -1,7 +1,7 @@
 [data-subtype="u"]>.li[data-subtype="u"]>.protyle-action svg{
 	color:transparent;
 	width:3px;
-	height:3px;
+	height:3px!important;
 	border-radius: 50%;
 	background-color:var(--b3-theme-on-background);
 	border: 0.1em solid var(--b3-theme-on-background);
