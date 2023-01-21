@@ -111,7 +111,7 @@
                 name: "App",
                 components: { Calendar: s.a },
                 data() {
-                    return { date: "", week: "", markArr: [], DateLinkToNote: {}, textTop: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"], currentNotebook: { name: "", id: null }, notebookList: [], showNotebookList: !1 ,
+                    return { date: "", week: "", markArr: [], DateLinkToNote: {}, textTop: ["一", "二", "三", "四", "五", "六", "日"], currentNotebook: { name: "", id: null }, notebookList: [], showNotebookList: !1 ,
                         // variable for daily note path
                         dailyNotePath: undefined, monthCurrent: undefined, dayCurrent: undefined,
                     };
@@ -120,7 +120,7 @@
                     var t = new Date();
                     this.date = t.getDate();
                     var e = t.getDay(),
-                        o = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+                        o = new Array("星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日");
                     this.week = o[e];
                 },
                 mounted() {
@@ -184,6 +184,7 @@
                             // push error message
                             let error_str = {"msg": "[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试", "timeout": 7000};
                             let print = await this.request("/api/notification/pushMsg", error_str);
+                            console.log("[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试")
                         }
                     },
                     async clickDay(t) {
@@ -268,17 +269,19 @@
                         (o = o.replace(/年|月/g, "-"));  // 2022-10-
 
                         // parse the notebook path
-                        // console.log(this.dayCurrent);
+                        console.log(this.dayCurrent);
                         if (typeof this.dailyNotePath == 'undefined') {
                             this.parseNotePath(n);
                         }
-                        // console.log(this.dayCurrent);
+                        console.log(this.dayCurrent);
 
                         e.forEach((t) => {
                             let e = (o + t.innerText).split("-");
                             (e[1] = e[1].padStart(2, "0")), 
                             (e[2] = e[2].padStart(2, "0")), 
+                            console.log(this.dayCurrent);
                             (e = eval('`'+this.dayCurrent+'`')), 
+                            console.log(e)
                             this.AutoMarkDate(e);
                         });
                     },
