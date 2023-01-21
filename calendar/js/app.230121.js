@@ -1,73 +1,156 @@
-(function (t) {
-    function e(e) {
-        for (var a, i, s = e[0], c = e[1], l = e[2], u = 0, h = []; u < s.length; u++) (i = s[u]), Object.prototype.hasOwnProperty.call(n, i) && n[i] && h.push(n[i][0]), (n[i] = 0);
-        for (a in c) Object.prototype.hasOwnProperty.call(c, a) && (t[a] = c[a]);
-        d && d(e);
-        while (h.length) h.shift()();
-        return r.push.apply(r, l || []), o();
-    }
-    function o() {
-        for (var t, e = 0; e < r.length; e++) {
-            for (var o = r[e], a = !0, s = 1; s < o.length; s++) {
-                var c = o[s];
-                0 !== n[c] && (a = !1);
+(function (modules) {
+    // install a JSONP callback for chunk loading
+    function webpackJsonpCallback(data) {
+        var chunkIds = data[0];
+        var moreModules = data[1];
+        var executeModules = data[2];
+
+        // add "moreModules" to the modules object,
+        // then flag all "chunkIds" as loaded and fire callback
+        var moduleId, chunkId, i = 0, resolves = [];
+        for(;i < chunkIds.length; i++) {
+            chunkId = chunkIds[i];
+            if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+                resolves.push(installedChunks[chunkId][0]);
             }
-            a && (r.splice(e--, 1), (t = i((i.s = o[0]))));
+            installedChunks[chunkId] = 0;
         }
-        return t;
+        for(moduleId in moreModules) {
+            if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+                modules[moduleId] = moreModules[moduleId];
+            }
+        }
+        if(parentJsonpFunction) parentJsonpFunction(data);
+
+        while(resolves.length) {
+            resolves.shift()();
+        }
+
+        // add entry modules from loaded chunk to deferred list
+        deferredModules.push.apply(deferredModules, executeModules || []);
+
+        // run deferred modules when all chunks ready
+        return checkDeferredModules();
+    };
+    function checkDeferredModules() {
+        var result;
+        for(var i = 0; i < deferredModules.length; i++) {
+            var deferredModule = deferredModules[i];
+            var fulfilled = true;
+            for(var j = 1; j < deferredModule.length; j++) {
+                var depId = deferredModule[j];
+                if(installedChunks[depId] !== 0) fulfilled = false;
+            }
+            if(fulfilled) {
+                deferredModules.splice(i--, 1);
+                result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+            }
+        }
+
+        return result;
     }
-    var a = {},
-        n = { app: 0 },
-        r = [];
-    function i(e) {
-        if (a[e]) return a[e].exports;
-        var o = (a[e] = { i: e, l: !1, exports: {} });
-        return t[e].call(o.exports, o, o.exports, i), (o.l = !0), o.exports;
+
+    // The module cache
+    var installedModules = {};
+
+    // object to store loaded and loading chunks
+    // undefined = chunk not loaded, null = chunk preloaded/prefetched
+    // Promise = chunk loading, 0 = chunk loaded
+    var installedChunks = {
+        "app": 0
+    };
+
+    var deferredModules = [];
+
+    // The require function
+    function __webpack_require__(moduleId) {
+
+        // Check if module is in cache
+        if(installedModules[moduleId]) {
+            return installedModules[moduleId].exports;
+        }
+        // Create a new module (and put it into the cache)
+        var module = installedModules[moduleId] = {
+            i: moduleId,
+            l: false,
+            exports: {}
+        };
+
+        // Execute the module function
+        modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+        // Flag the module as loaded
+        module.l = true;
+
+        // Return the exports of the module
+        return module.exports;
     }
-    (i.m = t),
-        (i.c = a),
-        (i.d = function (t, e, o) {
-            i.o(t, e) || Object.defineProperty(t, e, { enumerable: !0, get: o });
-        }),
-        (i.r = function (t) {
-            "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(t, "__esModule", { value: !0 });
-        }),
-        (i.t = function (t, e) {
-            if ((1 & e && (t = i(t)), 8 & e)) return t;
-            if (4 & e && "object" === typeof t && t && t.__esModule) return t;
-            var o = Object.create(null);
-            if ((i.r(o), Object.defineProperty(o, "default", { enumerable: !0, value: t }), 2 & e && "string" != typeof t))
-                for (var a in t)
-                    i.d(
-                        o,
-                        a,
-                        function (e) {
-                            return t[e];
-                        }.bind(null, a)
-                    );
-            return o;
-        }),
-        (i.n = function (t) {
-            var e =
-                t && t.__esModule
-                    ? function () {
-                          return t["default"];
-                      }
-                    : function () {
-                          return t;
-                      };
-            return i.d(e, "a", e), e;
-        }),
-        (i.o = function (t, e) {
-            return Object.prototype.hasOwnProperty.call(t, e);
-        }),
-        (i.p = "/");
-    var s = (window["webpackJsonp"] = window["webpackJsonp"] || []),
-        c = s.push.bind(s);
-    (s.push = e), (s = s.slice());
-    for (var l = 0; l < s.length; l++) e(s[l]);
-    var d = c;
-    r.push([0, "chunk-vendors"]), o();
+
+
+    // expose the modules object (__webpack_modules__)
+    __webpack_require__.m = modules;
+
+    // expose the module cache
+    __webpack_require__.c = installedModules;
+
+    // define getter function for harmony exports
+    __webpack_require__.d = function(exports, name, getter) {
+        if(!__webpack_require__.o(exports, name)) {
+            Object.defineProperty(exports, name, { enumerable: true, get: getter });
+        }
+    };
+
+    // define __esModule on exports
+    __webpack_require__.r = function(exports) {
+        if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+            Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+        }
+        Object.defineProperty(exports, '__esModule', { value: true });
+    };
+
+    // create a fake namespace object
+    // mode & 1: value is a module id, require it
+    // mode & 2: merge all properties of value into the ns
+    // mode & 4: return value when already ns object
+    // mode & 8|1: behave like require
+    __webpack_require__.t = function(value, mode) {
+        if(mode & 1) value = __webpack_require__(value);
+        if(mode & 8) return value;
+        if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+        var ns = Object.create(null);
+        __webpack_require__.r(ns);
+        Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+        if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+        return ns;
+    };
+
+    // getDefaultExport function for compatibility with non-harmony modules
+    __webpack_require__.n = function(module) {
+        var getter = module && module.__esModule ?
+            function getDefault() { return module['default']; } :
+            function getModuleExports() { return module; };
+        __webpack_require__.d(getter, 'a', getter);
+        return getter;
+    };
+
+    // Object.prototype.hasOwnProperty.call
+    __webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+
+    // __webpack_public_path__
+    __webpack_require__.p = "/";
+
+    var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+    var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+    jsonpArray.push = webpackJsonpCallback;
+    jsonpArray = jsonpArray.slice();
+    for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+    var parentJsonpFunction = oldJsonpFunction;
+
+
+    // add entry module to deferred list
+    deferredModules.push([0,"chunk-vendors"]);
+    // run deferred modules when ready
+    return checkDeferredModules();
 })({
     0: function (t, e, o) {
         t.exports = o("56d7");
@@ -75,249 +158,345 @@
     "56d7": function (t, e, o) {
         "use strict";
         o.r(e);
-        var a = o("2b0e"),
-            n = function () {
-                var t = this,
-                    e = t._self._c;
-                return e("div", { attrs: { id: "app" } }, [
-                    e(
-                        "div",
-                        { staticClass: "con" },
-                        [
-                            e("div", { staticClass: "now-data-myself" }, [
-                                e("div", { ref: "today", staticClass: "now-data-myself-time", attrs: { title: "刷新" } }, [t._v(" " + t._s(t.date) + "日 ")]),
-                                e("div", { ref: "week", staticClass: "now-data-myself-week", attrs: { title: t.currentNotebook.name } }, [t._v(" " + t._s(t.week) + " ")]),
-                                t.showNotebookList
-                                    ? e(
-                                          "div",
-                                          { staticClass: "notebooksList", on: { click: t.handleNotebookClick } },
-                                          t._l(t.notebookList, function (o) {
-                                              return e("div", { key: o.id, staticClass: "notebook", attrs: { "data-id": o.id, "data-name": o.name } }, [t._v(" " + t._s(o.name) + " ")]);
-                                          }),
-                                          0
-                                      )
-                                    : t._e(),
-                            ]),
-                            e("Calendar", { ref: "Calendar", attrs: { markDate: t.markArr, textTop: t.textTop }, on: { choseDay: t.clickDay, changeMonth: t.changeDate } }),
-                        ],
-                        1
-                    ),
-                ]);
-            },
-            r = [],
+        var a = o("2b0e");
+
+        // source code line 161 block
+        var render = function () {
+            var _vm = this,
+                _c = _vm._self._c;
+            return _c("div", { attrs: { id: "app" } }, [
+                _c(
+                    "div",
+                    { staticClass: "con" },
+                    [
+                        _c("div", { staticClass: "now-data-myself" }, [
+                            _c("div", { ref: "today", staticClass: "now-data-myself-time", attrs: { title: "刷新" } }, [_vm._v(" " + _vm._s(_vm.date) + "日 ")]),
+                            _c("div", { ref: "week", staticClass: "now-data-myself-week", attrs: { title: _vm.currentNotebook.name } }, [_vm._v(" " + _vm._s(_vm.week) + " ")]),
+                            _vm.showNotebookList
+                                ? _c(
+                                        "div",
+                                        { staticClass: "notebooksList", on: { click: _vm.handleNotebookClick } },
+                                        _vm._l(_vm.notebookList, function (o) {
+                                            return _c("div", { key: o.id, staticClass: "notebook", attrs: { "data-id": o.id, "data-name": o.name } }, [_vm._v(" " + _vm._s(o.name) + " ")]);
+                                        }),
+                                        0
+                                    )
+                                : _vm._e(),
+                        ]),
+                        _c("Calendar", { ref: "Calendar", attrs: { markDate: _vm.markArr, textTop: _vm.textTop }, on: { choseDay: _vm.clickDay, changeMonth: _vm.changeDate } }),
+                    ],
+                    1
+                ),
+            ]);
+        };
+        // end source code line 161 block
+
+        var r = [],
             i = o("be6e"),
-            s = o.n(i),
-            c = {
-                name: "App",
-                components: { Calendar: s.a },
-                data() {
-                    return { date: "", week: "", markArr: [], DateLinkToNote: {}, textTop: ["一", "二", "三", "四", "五", "六", "日"], currentNotebook: { name: "", id: null }, notebookList: [], showNotebookList: !1 ,
-                        // variable for daily note path
-                        dailyNotePath: undefined, monthCurrent: undefined, dayCurrent: undefined,
+            s = o.n(i);
+
+        ///////////////////////////////////
+        // the core code of calendar app //
+        ///////////////////////////////////
+        var c = {
+            name: "App",
+            components: { Calendar: s.a },
+            data() {
+                return { 
+                    date: "", 
+                    week: "", 
+                    markArr: [], 
+                    DateLinkToNote: {}, 
+                    textTop: ["一", "二", "三", "四", "五", "六", "日"], 
+                    currentNotebook: {
+                         name: "", id: null 
+                    }, 
+                    notebookList: [], 
+                    showNotebookList: false ,
+                    
+                    // variable for daily note path
+                    dailyNotePath: undefined, 
+                    monthCurrent: undefined, 
+                    dayCurrent: undefined,
+                };
+            },
+            created() {
+                var now = new Date();
+                this.date = now.getDate();  //得到日期
+                var day = now.getDay();  //得到周几
+                var arr_week = new Array(
+                        "星期一", 
+                        "星期二", 
+                        "星期三", 
+                        "星期四", 
+                        "星期五", 
+                        "星期六", 
+                        "星期日"
+                    );
+                this.week = arr_week[day];
+            },
+            mounted() {
+                this.$refs.today.addEventListener(
+                    "click",
+                    function () {
+                        window.location.reload(!0);
+                    },
+                    false
+                );
+                this.changeDate();
+                this.$refs.week.addEventListener("click", this.handleWeekClick, false);
+                if (localStorage.getItem("calendar_current_notebook")) {
+                    this.currentNotebook = JSON.parse(
+                        localStorage.getItem("calendar_current_notebook")
+                    );
+                } 
+            },
+            methods: {
+                // 选中笔记本
+                handleNotebookClick(e) {
+                    if (e.target.classList.contains("notebook")){
+                        this.currentNotebook.name = e.target.getAttribute("data-name");
+                        this.currentNotebook.id = e.target.getAttribute("data-id");
+                        this.showNotebookList = false;
+                        localStorage.setItem(
+                            "calendar_current_notebook", 
+                            JSON.stringify(this.currentNotebook)
+                        );
                     };
                 },
-                created() {
-                    var t = new Date();
-                    this.date = t.getDate();
-                    var e = t.getDay(),
-                        o = new Array("星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日");
-                    this.week = o[e];
+                // 请求函数——向服务器接口发送请求
+                async request(url, data = null, method = "POST") {
+                    return new Promise((resolve, reject) => {
+                        if ("POST" == method.toUpperCase()) {
+                            fetch(url, { 
+                                method: "POST", 
+                                headers: { 
+                                    "Content-Type": "application/json", 
+                                    Authorization: "Token " 
+                                }, 
+                                body: JSON.stringify(data),
+                            })
+                            .then(
+                                (data) => resolve(data.json()),
+                                (err) => {
+                                    reject(err);
+                                }
+                            )
+                            .catch((err) => {
+                                console.error("请求失败:", err);
+                            });
+                        } 
+                    });
                 },
-                mounted() {
-                    this.$refs.today.addEventListener(
-                        "click",
-                        function () {
-                            window.location.reload(!0);
-                        },
-                        !1
-                    ),
-                        this.changeDate(),
-                        this.$refs.week.addEventListener("click", this.handleWeekClick, !1),
-                        localStorage.getItem("calendar_current_notebook") && (this.currentNotebook = JSON.parse(localStorage.getItem("calendar_current_notebook")));
-                },
-                methods: {
-                    handleNotebookClick(t) {
-                        t.target.classList.contains("notebook") &&
-                            ((this.currentNotebook.name = t.target.getAttribute("data-name")),
-                            (this.currentNotebook.id = t.target.getAttribute("data-id")),
-                            (this.showNotebookList = !1),
-                            localStorage.setItem("calendar_current_notebook", JSON.stringify(this.currentNotebook)));
-                    },
-                    async request(t, e = null, o = "POST") {
-                        return new Promise((a, n) => {
-                            "POST" == o.toUpperCase() &&
-                                fetch(t, { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Token " }, body: JSON.stringify(e) })
-                                    .then(
-                                        (t) => a(t.json()),
-                                        (t) => {
-                                            n(t);
-                                        }
-                                    )
-                                    .catch((t) => {
-                                        console.error("请求失败:", t);
-                                    });
-                        });
-                    },
-                    async parseNotePath(n) {
-                        // console.log("get in ParseNotePath function", this.currentNotebook.id);
-                        // parse the notebook path
-                        // path: `/daily note/${e[0]}/${e[1]}/${o}` -> default -> /daily note/2022/10/2022-10-29
-                        if (0 === n.code && n.data) {
-                            // test push messages
-                            let success_str = {"msg": "[日历插件][info] 成功读取用户配置", "timeout": 7000};
-                            let print = await this.request("/api/notification/pushMsg", success_str);
+                // 新添加功能：解析笔记本路径
+                async parseNotePath(n) {
+                    // console.log("get in ParseNotePath function", this.currentNotebook.id);
+                    // parse the notebook path
+                    // path: `/daily note/${e[0]}/${e[1]}/${o}` -> default -> /daily note/2022/10/2022-10-29
+                    if (0 === n.code && n.data) {
+                        // test push messages
+                        let success_str = {"msg": "[日历插件][info] 成功读取用户配置", "timeout": 7000};
+                        let print = await this.request("/api/notification/pushMsg", success_str);
 
-                            var notePath = n.data.conf.dailyNoteSavePath;  // notePath = /今日速记/{{now | date "2006/2006.01"}}/{{now | date "2006.01.02"}}
-                            console.log("[日历插件][info] 读取日历的模板路径：", notePath);
-                            // split the notePath to needed path
-                            var notePathSplit = notePath.split('/{{') ;  // with 3 element: [/今日速记, now | date "2006/2006.01"}}, now | date "2006.01.02"}} ]
-                            this.dailyNotePath = notePathSplit[0];  // -> /今日速记/
-    
-                            var monthPath = notePathSplit[1].replace('now | date "', '').replace('"}}', '');   // -> 2006/2006.01
-                            this.monthCurrent = monthPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}');   // -> '${e[0]}/${e[0]}.${e[1]}'
-    
-                            var dayPath = notePathSplit[2].replace('now | date "', '').replace('"}}', ''); // -> 2006.01.02
-                            this.dayCurrent = dayPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}').replaceAll('02', '${e[2]}')  // -> '${e[0]}.${e[1]}.${e[2]}'
-    
-                            console.log("[日历插件][info] 替换为当前日期的模板变量", this.dailyNotePath + '/' + this.monthCurrent + '/' + this.dayCurrent, "其中e为[2021, 10, 27]的当前日期变量");
-                        }else{
-                            // push error message
-                            let error_str = {"msg": "[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试", "timeout": 7000};
-                            let print = await this.request("/api/notification/pushMsg", error_str);
-                            console.log("[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试")
+                        var notePath = n.data.conf.dailyNoteSavePath;  // notePath = /今日速记/{{now | date "2006/2006.01"}}/{{now | date "2006.01.02"}}
+                        console.log("[日历插件][info] 读取日历的模板路径：", notePath);
+                        // split the notePath to needed path
+                        var notePathSplit = notePath.split('/{{') ;  // with 3 element: [/今日速记, now | date "2006/2006.01"}}, now | date "2006.01.02"}} ]
+                        this.dailyNotePath = notePathSplit[0];  // -> /今日速记/
+
+                        var monthPath = notePathSplit[1].replace('now | date "', '').replace('"}}', '');   // -> 2006/2006.01
+                        this.monthCurrent = monthPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}');   // -> '${e[0]}/${e[0]}.${e[1]}'
+
+                        var dayPath = notePathSplit[2].replace('now | date "', '').replace('"}}', ''); // -> 2006.01.02
+                        this.dayCurrent = dayPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}').replaceAll('02', '${e[2]}')  // -> '${e[0]}.${e[1]}.${e[2]}'
+
+                        console.log("[日历插件][info] 替换为当前日期的模板变量", this.dailyNotePath + '/' + this.monthCurrent + '/' + this.dayCurrent, "其中e为[2021, 10, 27]的当前日期变量");
+                    }else{
+                        // push error message
+                        let error_str = {"msg": "[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试", "timeout": 7000};
+                        let print = await this.request("/api/notification/pushMsg", error_str);
+                        console.log("[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试")
+                    }
+                },
+                async clickDay(data) {
+                    let arr = data.split("/");
+                    arr[1] = arr[1].padStart(2, "0");
+                    arr[2] = arr[2].padStart(2, "0");
+                    // arr = [2021, 10, 22]
+
+                    // let TempData = e.join("-"); // -> 2021-10-22
+                    let TempData = eval('`'+this.dayCurrent+'`'); // -> 2021-10-22
+
+                    if (this.DateLinkToNote[TempData]) {
+                        try {
+                            window.open(this.DateLinkToNote[TempData]);
+                        } catch (err) {
+                            console.log("[日历插件][Error]", err);
                         }
-                    },
-                    async clickDay(t) {
-                        let e = t.split("/");
-                        (e[1] = e[1].padStart(2, "0")), (e[2] = e[2].padStart(2, "0"));
-                        // e = [2021, 10, 22]
-
-                        // let o = e.join("-"); // -> 2021-10-22
-                        let o = eval('`'+this.dayCurrent+'`'); // -> 2021-10-22
-                        if (this.DateLinkToNote[o])
-                            try {
-                                window.open(this.DateLinkToNote[o]);
-                            } catch (a) {
-                                console.log("[日历插件][Error]", a);
-                            }
-                        else if (this.currentNotebook.id) {
-                            let t = { notebook: this.currentNotebook.id },
-                                n = await this.request("/api/notebook/getNotebookConf", t);
+                    }else{ 
+                        // 标记——点击没有日记文档的日期时
+                        if (this.currentNotebook.id) {
+                            // 获取笔记本配置
+                            let NotebookConfReqBody = { 
+                                notebook: this.currentNotebook.id 
+                            };
+                            let NotebookConf = await this.request(
+                                "/api/notebook/getNotebookConf",
+                                 NotebookConfReqBody
+                            );
 
                             /////////////////////////////
                             // parse the notebook path //
                             /////////////////////////////
                             if (typeof this.dailyNotePath == 'undefined') {
-                                this.parseNotePath(n);
+                                this.parseNotePath(NotebookConf);
                             }
 
-                            //     r = { notebook: this.currentNotebook.id, path: `/daily note/${e[0]}/${e[1]}/${o}`, markdown: "" },
-                            let r = { notebook: this.currentNotebook.id, path: eval('`'+this.dailyNotePath+'/'+this.monthCurrent+'/'+this.dayCurrent+'`'), markdown: "" },
-                                i = await this.request("/api/filetree/createDocWithMd", r);
-                            console.log(r)
-                            if (0 === i.code && i.data) {
-                                let t = i.data;
-                                console.log(t);
+                            // 创建指定日期的空白文档
+                            // old code: r = { notebook: this.currentNotebook.id, path: `/daily note/${e[0]}/${e[1]}/${o}`, markdown: "" },
+                            let createDocWithMdReqBody = { 
+                                notebook: this.currentNotebook.id, 
+                                path: eval('`'+this.dailyNotePath+'/'+this.monthCurrent+'/'+this.dayCurrent+'`'), 
+                                markdown: "", 
+                            };
+                            let res = await this.request(
+                                "/api/filetree/createDocWithMd", 
+                                createDocWithMdReqBody,
+                            );
+                            console.log(createDocWithMdReqBody)
+
+                            // 打开所创建的文档
+                            if (0 === res.code && res.data) {
+                                let DailyNoteID = res.data;
+                                console.log(DailyNoteID);
+
                                 try {
-                                    window.open("siyuan://blocks/" + t), (this.DateLinkToNote[o] = "siyuan://blocks/" + t), this.markArr.push(o);
-                                    let e = "",
-                                        a = await this.request("/api/system/getConf");
+                                    window.open(`siyuan://blocks/${DailyNoteID}`);
+                                    this.DateLinkToNote[TempData] = `siyuan://blocks/${DailyNoteID}`;
+                                    this.markArr.push(TempData);
+
+                                    // 获取工作空间目录
+                                    let workspaceDir = "";
+                                    let systemConf = await this.request("/api/system/getConf");
+
                                     // if can find workspace directory
-                                    if (a && a.data.conf.system.workspaceDir) {
-                                        // change the e workspace directory
-                                        e = a.data.conf.system.workspaceDir.replace(/\\/g, "/");
+                                    if (systemConf && systemConf.data.conf.system.workspaceDir) {
+                                        // change the workspace directory to windows format
+                                        workspaceDir = systemConf.data.conf.system.workspaceDir.replace(/\\/g, "/");
                                     }else{
                                         // push error message
                                         let error_str = {"msg": "[日历插件][Error] 获取工作空间目录失败，请手动设置", "timeout": 7000};
                                         let print = await this.request("/api/notification/pushMsg", error_str);
+                                        console.log("[日历插件][Error] 获取工作空间目录失败，请手动设置");
                                     }
 
                                     // ensure can find necessary data
-                                    if ( 0 === n.code && n.data && n.data.conf ) {
-                                        let o = n.data.conf,
-                                            a = "";
-                                        if (o.dailyNoteTemplatePath) {
-                                            let n = `${e}/data/templates${o.dailyNoteTemplatePath}`.replace(/\//g, "\\"),
-                                                r = { id: t, path: n },
-                                                i = await this.request("/api/template/render", r);
+                                    if ( 0 === NotebookConf.code && NotebookConf.data && NotebookConf.data.conf ) {
+                                        let conf = NotebookConf.data.conf;
+                                        let template_HTML = "";
+
+                                        // 如果设置了日记模板，则进行模板渲染
+                                        if (conf.dailyNoteTemplatePath) {
+                                            let template_path = `${workspaceDir}/data/templates${conf.dailyNoteTemplatePath}`.replace(/\//g, "\\");
+
+                                            let r = { id: DailyNoteID, path: template_path };
+                                            let resp = await this.request("/api/template/render", r);
                                             // success get dom from template
-                                            if (i && 0 == i.code && (a = i.data.content)){
+                                            if (resp && 0 == resp.code && (template_HTML = resp.data.content)){
                                                 const block_content = {
                                                     "dataType": "dom",
-                                                    "data": i.data.content,
-                                                    "parentID": t
+                                                    "data": resp.data.content,
+                                                    "parentID": DailyNoteID
                                                 },
                                                 bi = await this.request("/api/block/prependBlock", block_content);
-                                                console.log(o, i, block_content, bi)
+                                                console.log(conf, resp, block_content, bi)
                                             }
                                         }
                                     }
-                                } catch (a) {
-                                    console.log(a);
+                                } catch (err) {
+                                    console.log(err);
                                 }
                             }
-                        }
-                    },
-                    async changeDate(t) {
-                        await this.$nextTick();
-                        let e = document.querySelectorAll(".wh_item_date:not(.wh_other_dayhide)"),
-                            o = document.querySelector(".wh_content_li"),
-                            nid = { notebook: this.currentNotebook.id },
-                            n = await this.request("/api/notebook/getNotebookConf", nid);
+                        }  // end if (this.currentNotebook.id) {
+                    }
+                    ///
+                },
+                async changeDate(data) {
+                    await this.$nextTick();
+                    let dayArr = document.querySelectorAll(
+                        ".wh_item_date:not(.wh_other_dayhide)"
+                    );
+                    let dateStr = document.querySelector(".wh_content_li"),
+                        nid = { notebook: this.currentNotebook.id },
+                        nb_conf = await this.request("/api/notebook/getNotebookConf", nid);
 
-                        (o = o.innerText), // 2022年10月
-                        (o = o.replace(/年|月/g, "-"));  // 2022-10-
+                    (dateStr = dateStr.innerText), // 2022年10月
+                    (dateStr = dateStr.replace(/年|月/g, "-"));  // 2022-10-
 
-                        // parse the notebook path
-                        console.log(this.dayCurrent);
-                        if (typeof this.dailyNotePath == 'undefined') {
-                            this.parseNotePath(n);
-                        }
-                        console.log(this.dayCurrent);
+                    // parse the notebook path
+                    // console.log(this.dayCurrent);
+                    if (typeof this.dailyNotePath == 'undefined') {
+                        this.parseNotePath(nb_conf);
+                    }
+                    // console.log(this.dayCurrent);
 
-                        e.forEach((t) => {
-                            let e = (o + t.innerText).split("-");
-                            (e[1] = e[1].padStart(2, "0")), 
-                            (e[2] = e[2].padStart(2, "0")), 
-                            console.log(this.dayCurrent);
-                            (e = eval('`'+this.dayCurrent+'`')), 
-                            console.log(e)
-                            this.AutoMarkDate(e);
-                        });
-                    },
-                    async SiYuan_SQL_dailyNote(t) {
-                        let e = "/api/query/sql",
-                            o = { stmt: `select * from blocks  WHERE content LIKE '${t}' AND type = 'd' ORDER BY random() LIMIT 1` },
-                            a = null;
-                        return (
-                            await fetch(e, { body: JSON.stringify(o), method: "POST", headers: { Authorization: "Token " } })
-                                .then(function (t) {
-                                    a = t.json();
-                                })
-                                .catch((t) => {
-                                    console.log("[日历插件][Error]", t);
-                                }),
-                            a
+                    dayArr.forEach((item) => {
+                        let tempStr = (dateStr + item.innerText).split("-");
+                        (tempStr[1] = tempStr[1].padStart(2, "0")), 
+                        (tempStr[2] = tempStr[2].padStart(2, "0")), 
+                        // console.log(this.dayCurrent);
+                        (tempStr = eval('`'+this.dayCurrent+'`')), 
+                        // console.log(tempStr)
+                        this.AutoMarkDate(tempStr);
+                    });
+                },
+                async SiYuan_SQL_dailyNote(t) {
+                    let url = "/api/query/sql",
+                        data = { stmt: `select * from blocks  WHERE content LIKE '${t}' AND type = 'd' ORDER BY random() LIMIT 1` },
+                        resData = null;
+                    return (
+                        await fetch(url, { body: JSON.stringify(data), method: "POST", headers: { Authorization: "Token " } })
+                            .then(function (t) {
+                                resData = t.json();
+                            })
+                            .catch((t) => {
+                                console.log("[日历插件][Error]", t);
+                            }),
+                        resData
+                    );
+                },
+                async AutoMarkDate(data) {
+                    // console.log(t);
+                    let res = await this.SiYuan_SQL_dailyNote(data);
+                    if (!res.code && res.data.length > 0) {
+                        let link = "siyuan://blocks/" + res.data[0].id;
+                        this.DateLinkToNote[data] = link;
+                        this.markArr.push(data);
+                    }
+                },
+                async handleWeekClick() {
+                    this.showNotebookList = !this.showNotebookList;
+                    let lsNotebooks = await this.request("/api/notebook/lsNotebooks");
+                    if (
+                        0 === lsNotebooks.code && 
+                        lsNotebooks.data && 
+                        lsNotebooks.data.notebooks
+                    ) {
+                        this.notebookList = lsNotebooks.data.notebooks.filter(
+                            (item) => item.closed  === false
                         );
-                    },
-                    async AutoMarkDate(t) {
-                        // console.log(t);
-                        let e = await this.SiYuan_SQL_dailyNote(t);
-                        if (!e.code && e.data.length > 0) {
-                            let o = "siyuan://blocks/" + e.data[0].id;
-                            (this.DateLinkToNote[t] = o), this.markArr.push(t);
-                        }
-                    },
-                    async handleWeekClick() {
-                        this.showNotebookList = !this.showNotebookList;
-                        let t = await this.request("/api/notebook/lsNotebooks");
-                        0 === t.code && t.data && t.data.notebooks && (this.notebookList = t.data.notebooks.filter((t) => !1 === t.closed));
-                    },
+                    }
+                    
                 },
             },
+        },
+
+        ///////////////////////////////////////
+        // End the core code of calendar app //
+        ///////////////////////////////////////
             l = c,
             d = (o("d49f"), o("2877")),
-            u = Object(d["a"])(l, n, r, !1, null, null, null),
+            u = Object(d["a"])(l, render, r, !1, null, null, null),
             h = u.exports;
         (a["a"].config.productionTip = !1), new a["a"]({ render: (t) => t(h) }).$mount("#app");
     },
