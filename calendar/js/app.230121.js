@@ -173,9 +173,7 @@
                             _c("div", { ref: "today", staticClass: "now-data-myself-time", attrs: { title: "刷新" } }, [_vm._v(" " + _vm._s(_vm.date) + "日 ")]),
                             _c("div", { ref: "week", staticClass: "now-data-myself-week", attrs: { title: _vm.currentNotebook.name } }, [_vm._v(" " + _vm._s(_vm.week) + " ")]),
                             _vm.showNotebookList
-                                ? _c(
-                                        "div",
-                                        { staticClass: "notebooksList", on: { click: _vm.handleNotebookClick } },
+                                ? _c("div",{ staticClass: "notebooksList", on: { click: _vm.handleNotebookClick } },
                                         _vm._l(_vm.notebookList, function (o) {
                                             return _c("div", { key: o.id, staticClass: "notebook", attrs: { "data-id": o.id, "data-name": o.name } }, [_vm._v(" " + _vm._s(o.name) + " ")]);
                                         }),
@@ -218,6 +216,7 @@
                     dailyNotePath: undefined, 
                     monthCurrent: undefined, 
                     dayCurrent: undefined,
+                    template_path: undefined,
                 };
             },
             created() {
@@ -243,17 +242,13 @@
                     },
                     false
                 );
-                this.changeDate();
                 this.$refs.week.addEventListener("click", this.handleWeekClick, false);
-                if (localStorage.getItem("calendar_current_notebook")) {
-                    this.currentNotebook = JSON.parse(
-                        localStorage.getItem("calendar_current_notebook")
-                    );
-                } 
+                this.init_open_app();
+                this.changeDate();
             },
             methods: {
                 // 选中笔记本
-                handleNotebookClick(e) {
+                async handleNotebookClick(e) {
                     if (e.target.classList.contains("notebook")){
                         this.currentNotebook.name = e.target.getAttribute("data-name");
                         this.currentNotebook.id = e.target.getAttribute("data-id");
@@ -262,6 +257,12 @@
                             "calendar_current_notebook", 
                             JSON.stringify(this.currentNotebook)
                         );
+
+                        // also refersh the template path
+                        this.markArr=[];  // 清除之前的日记缓存
+                        console.log("[日历插件][Info] Switch currentNotebook to [" + this.currentNotebook.name +"]")
+                        await this.parseNotePath();
+                        await this.changeDate();
                     };
                 },
                 // 请求函数——向服务器接口发送请求
@@ -288,18 +289,67 @@
                         } 
                     });
                 },
+                // initialize notebook data
+                async init_open_app(){
+                    // for testing the empty localstorage
+                    // localStorage.removeItem("calendar_current_notebook");
+
+                    if (localStorage.getItem("calendar_current_notebook")) {
+                        this.currentNotebook = JSON.parse(
+                            localStorage.getItem("calendar_current_notebook")
+                        );
+                        console.log("[日历插件][Info] currentNotebook is [" + this.currentNotebook.name +"]");
+                    } else {// 在缓存数据中，找不到选中的笔记本
+                        // 和下面的handleweekclick差不多的，但是直接调用那个函数会有问题，这边重复一下
+                        // 获取所有打开的笔记本列表
+                        let lsNotebooks = await this.request("/api/notebook/lsNotebooks");
+                        if (
+                            0 === lsNotebooks.code && 
+                            lsNotebooks.data && 
+                            lsNotebooks.data.notebooks
+                        ) {
+                            this.notebookList = lsNotebooks.data.notebooks.filter(
+                                (item) => item.closed  === false
+                            );
+                        }
+
+                        // set the first notebook as default, to avoid undefined error
+                        this.currentNotebook.name = this.notebookList[0].name;
+                        this.currentNotebook.id = this.notebookList[0].id;
+                        localStorage.setItem(
+                            "calendar_current_notebook", 
+                            JSON.stringify(this.currentNotebook)
+                        );
+
+                        // print log info
+                        console.log("[日历插件][Info] localStorage['calendar_current_notebook'] is empty, use [", this.currentNotebook.name +"] as default");
+                        let success_str = {"msg": "[日历插件][info] 未在缓存中找到默认笔记本设置，使用笔记本["+ this.currentNotebook.name +"]作为默认，如有需要请点击日历的【星期x】按钮进行切换", "timeout": 7000};
+                        let print = await this.request("/api/notification/pushMsg", success_str);
+                    }
+
+                    // parse the notebook path
+                    // console.log(await this.dayCurrent, this.dailyNotePath);
+                    // if (typeof this.dailyNotePath == 'undefined') {
+                    //     await this.parseNotePath();
+                    // }
+                    // 这段代码在changeData()中有重复的，这边可以省略
+
+                },
                 // 新添加功能：解析笔记本路径
-                async parseNotePath(n) {
+                async parseNotePath() {
                     // console.log("get in ParseNotePath function", this.currentNotebook.id);
                     // parse the notebook path
                     // path: `/daily note/${e[0]}/${e[1]}/${o}` -> default -> /daily note/2022/10/2022-10-29
-                    if (0 === n.code && n.data) {
-                        // test push messages
-                        let success_str = {"msg": "[日历插件][info] 成功读取用户配置", "timeout": 7000};
-                        let print = await this.request("/api/notification/pushMsg", success_str);
+                    let nid = { notebook: this.currentNotebook.id },
+                        nb_conf = await this.request("/api/notebook/getNotebookConf", nid);
 
-                        var notePath = n.data.conf.dailyNoteSavePath;  // notePath = /今日速记/{{now | date "2006/2006.01"}}/{{now | date "2006.01.02"}}
-                        console.log("[日历插件][info] 读取日历的模板路径：", notePath);
+                    if (0 === nb_conf.code && nb_conf.data) {
+                        /////////////////////
+                        // 解析日记模板路径 //
+                        /////////////////////
+                        var notePath = nb_conf.data.conf.dailyNoteSavePath;  // notePath = /今日速记/{{now | date "2006/2006.01"}}/{{now | date "2006.01.02"}}
+                        console.log("[日历插件][info] 成功读取用户配置 | 读取日记本【"+ this.currentNotebook.name +"】的 模板路径 为", notePath);
+
                         // split the notePath to needed path
                         var notePathSplit = notePath.split('/{{') ;  // with 3 element: [/今日速记, now | date "2006/2006.01"}}, now | date "2006.01.02"}} ]
                         this.dailyNotePath = notePathSplit[0];  // -> /今日速记/
@@ -310,19 +360,48 @@
                         var dayPath = notePathSplit[2].replace('now | date "', '').replace('"}}', ''); // -> 2006.01.02
                         this.dayCurrent = dayPath.replaceAll('2006', '${e[0]}').replaceAll('01', '${e[1]}').replaceAll('02', '${e[2]}')  // -> '${e[0]}.${e[1]}.${e[2]}'
 
-                        console.log("[日历插件][info] 替换为当前日期的模板变量", this.dailyNotePath + '/' + this.monthCurrent + '/' + this.dayCurrent, "其中e为[2021, 10, 27]的当前日期变量");
+                        console.log("[日历插件][info] 替换为当前日期的模板变量", this.dailyNotePath + '/' + this.monthCurrent + '/' + this.dayCurrent, "其中e为形如[2021, 10, 27]的当前日期变量");
+
+                        /////////////////////
+                        // 解析日记模板文件 //
+                        /////////////////////
+
+                        // 获取工作空间目录
+                        let workspaceDir = "";
+                        let systemConf = await this.request("/api/system/getConf");
+
+                        // if can find workspace directory
+                        if (systemConf && systemConf.data.conf.system.workspaceDir) {
+                            // change the workspace directory to windows format
+                            workspaceDir = systemConf.data.conf.system.workspaceDir.replace(/\\/g, "/");
+
+                            this.template_path = `${workspaceDir}/data/templates${nb_conf.data.conf.dailyNoteTemplatePath}`.replace(/\//g, "\\");
+                        }else{
+                            // push error message
+                            // 基本上也不会遇到问题
+                            let error_str = {"msg": "[日历插件] 获取工作空间目录失败，请手动设置", "timeout": 7000};
+                            let print = await this.request("/api/notification/pushErrMsg", error_str);
+                            console.log("[日历插件][Error] 获取工作空间目录失败，请手动设置");
+                            this.template_path = undefined;
+                        };
+
+                        // push message for users
+                        let print_str = {"msg": "[日历插件] 成功读取日记本【"+ this.currentNotebook.name +"】的配置", "timeout": 7000};
+                        let print = await this.request("/api/notification/pushMsg", print_str);
                     }else{
                         // push error message
-                        let error_str = {"msg": "[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试", "timeout": 7000};
-                        let print = await this.request("/api/notification/pushMsg", error_str);
-                        console.log("[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试")
+                        // 通常情况下不会进入到这个分支里面，n.data已经在init里面成功获取了
+                        let error_str = {"msg": "[日历插件] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试", "timeout": 7000};
+                        let print = await this.request("/api/notification/pushErrMsg", error_str);
+                        console.log("[日历插件][Error] 读取用户配置失败，请点击日历面板->星期，选择对应的笔记本后再试", nb_conf.data)
                     }
                 },
+                // 点击日历中日期格子
                 async clickDay(data) {
-                    let arr = data.split("/");
-                    arr[1] = arr[1].padStart(2, "0");
-                    arr[2] = arr[2].padStart(2, "0");
-                    // arr = [2021, 10, 22]
+                    let e = data.split("/");
+                    e[1] = e[1].padStart(2, "0");
+                    e[2] = e[2].padStart(2, "0");
+                    // e = [2021, 10, 22]
 
                     // let TempData = e.join("-"); // -> 2021-10-22
                     let TempData = eval('`'+this.dayCurrent+'`'); // -> 2021-10-22
@@ -336,22 +415,6 @@
                     }else{ 
                         // 标记——点击没有日记文档的日期时
                         if (this.currentNotebook.id) {
-                            // 获取笔记本配置
-                            let NotebookConfReqBody = { 
-                                notebook: this.currentNotebook.id 
-                            };
-                            let NotebookConf = await this.request(
-                                "/api/notebook/getNotebookConf",
-                                 NotebookConfReqBody
-                            );
-
-                            /////////////////////////////
-                            // parse the notebook path //
-                            /////////////////////////////
-                            if (typeof this.dailyNotePath == 'undefined') {
-                                this.parseNotePath(NotebookConf);
-                            }
-
                             // 创建指定日期的空白文档
                             // old code: r = { notebook: this.currentNotebook.id, path: `/daily note/${e[0]}/${e[1]}/${o}`, markdown: "" },
                             let createDocWithMdReqBody = { 
@@ -375,42 +438,19 @@
                                     this.DateLinkToNote[TempData] = `siyuan://blocks/${DailyNoteID}`;
                                     this.markArr.push(TempData);
 
-                                    // 获取工作空间目录
-                                    let workspaceDir = "";
-                                    let systemConf = await this.request("/api/system/getConf");
-
-                                    // if can find workspace directory
-                                    if (systemConf && systemConf.data.conf.system.workspaceDir) {
-                                        // change the workspace directory to windows format
-                                        workspaceDir = systemConf.data.conf.system.workspaceDir.replace(/\\/g, "/");
-                                    }else{
-                                        // push error message
-                                        let error_str = {"msg": "[日历插件][Error] 获取工作空间目录失败，请手动设置", "timeout": 7000};
-                                        let print = await this.request("/api/notification/pushMsg", error_str);
-                                        console.log("[日历插件][Error] 获取工作空间目录失败，请手动设置");
-                                    }
-
-                                    // ensure can find necessary data
-                                    if ( 0 === NotebookConf.code && NotebookConf.data && NotebookConf.data.conf ) {
-                                        let conf = NotebookConf.data.conf;
-                                        let template_HTML = "";
-
-                                        // 如果设置了日记模板，则进行模板渲染
-                                        if (conf.dailyNoteTemplatePath) {
-                                            let template_path = `${workspaceDir}/data/templates${conf.dailyNoteTemplatePath}`.replace(/\//g, "\\");
-
-                                            let r = { id: DailyNoteID, path: template_path };
-                                            let resp = await this.request("/api/template/render", r);
-                                            // success get dom from template
-                                            if (resp && 0 == resp.code && (template_HTML = resp.data.content)){
-                                                const block_content = {
-                                                    "dataType": "dom",
-                                                    "data": resp.data.content,
-                                                    "parentID": DailyNoteID
-                                                },
-                                                bi = await this.request("/api/block/prependBlock", block_content);
-                                                console.log(conf, resp, block_content, bi)
-                                            }
+                                    // 如果设置了日记模板，则进行模板渲染
+                                    if (typeof this.template_path !== 'undefined') {
+                                        let r = { id: DailyNoteID, path: this.template_path };
+                                        let resp = await this.request("/api/template/render", r);
+                                        // success get dom from template
+                                        if (resp && 0 == resp.code){
+                                            const block_content = {
+                                                "dataType": "dom",
+                                                "data": resp.data.content,
+                                                "parentID": DailyNoteID
+                                            },
+                                            bi = await this.request("/api/block/prependBlock", block_content);
+                                            // console.log(resp, block_content, bi)
                                         }
                                     }
                                 } catch (err) {
@@ -426,28 +466,28 @@
                     let dayArr = document.querySelectorAll(
                         ".wh_item_date:not(.wh_other_dayhide)"
                     );
-                    let dateStr = document.querySelector(".wh_content_li"),
-                        nid = { notebook: this.currentNotebook.id },
-                        nb_conf = await this.request("/api/notebook/getNotebookConf", nid);
+                    let dateStr = document.querySelector(".wh_content_li");
 
                     (dateStr = dateStr.innerText), // 2022年10月
                     (dateStr = dateStr.replace(/年|月/g, "-"));  // 2022-10-
 
                     // parse the notebook path
-                    // console.log(this.dayCurrent);
-                    if (typeof this.dailyNotePath == 'undefined') {
-                        this.parseNotePath(nb_conf);
+                    // console.log(dateStr);
+                    if (typeof await this.dayCurrent == 'undefined') {
+                        // console.log("get in dayCurrent==undefined judge");
+                        await this.parseNotePath();
                     }
-                    // console.log(this.dayCurrent);
+                    let this_dayCurrent = await this.dayCurrent;
+                    // console.log("def changeDate() this.dayCurrent: ", this.dayCurrent, this_dayCurrent);
 
                     dayArr.forEach((item) => {
-                        let tempStr = (dateStr + item.innerText).split("-");
-                        (tempStr[1] = tempStr[1].padStart(2, "0")), 
-                        (tempStr[2] = tempStr[2].padStart(2, "0")), 
-                        // console.log(this.dayCurrent);
-                        (tempStr = eval('`'+this.dayCurrent+'`')), 
-                        // console.log(tempStr)
-                        this.AutoMarkDate(tempStr);
+                        let e = (dateStr + item.innerText).split("-");
+                        // tempStr = ["2023", "1", "1"]
+                        e[1] = e[1].padStart(2, "0");
+                        e[2] = e[2].padStart(2, "0");
+                        e = eval('`'+this_dayCurrent+'`');
+                        // console.log("def changeDate() this.dayCurrent: in for loops ", this_dayCurrent, e);
+                        this.AutoMarkDate(e);
                     });
                 },
                 async SiYuan_SQL_dailyNote(t) {
@@ -466,8 +506,9 @@
                     );
                 },
                 async AutoMarkDate(data) {
-                    // console.log(t);
+                    // console.log(data)
                     let res = await this.SiYuan_SQL_dailyNote(data);
+                    // console.log(res)
                     if (!res.code && res.data.length > 0) {
                         let link = "siyuan://blocks/" + res.data[0].id;
                         this.DateLinkToNote[data] = link;
