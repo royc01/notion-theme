@@ -1,11 +1,13 @@
-window.theme = {};
+window.Savor = {};
+
+
 
 /**
  * 加载样式文件
  * @params {string} href 样式地址
  * @params {string} id 样式 ID
  */
-window.theme.loadStyle = function (href, id = null) {
+window.Savor.loadStyle = function (href, id = null) {
     let style = document.createElement('link');
     if (id) style.id = id;
     style.type = 'text/css';
@@ -19,23 +21,23 @@ window.theme.loadStyle = function (href, id = null) {
  * @params {string} id 样式文件 ID
  * @params {string} href 样式文件地址
  */
-window.theme.updateStyle = function (id, href) {
+window.Savor.updateStyle = function (id, href) {
     let style = document.getElementById(id);
     if (style) {
         style.setAttribute('href', href);
     }
     else {
-        window.theme.loadStyle(href, id);
+        window.Savor.loadStyle(href, id);
     }
 }
 
-window.theme.ID_COLOR_STYLE = 'theme-color-style';
+window.Savor.ID_COLOR_STYLE = 'theme-color-style';
 
 /**
  * 获取主题模式
  * @return {string} light 或 dark
  */
-window.theme.themeMode = (() => {
+window.Savor.themeMode = (() => {
     /* 根据浏览器主题判断颜色模式 */
     // switch (true) {
     //     case window.matchMedia('(prefers-color-scheme: light)').matches:
@@ -62,12 +64,12 @@ window.theme.themeMode = (() => {
  * @params {string} lightStyle 浅色主题配置文件路径
  * @params {string} darkStyle 深色主题配置文件路径
  */
-window.theme.changeThemeMode = function (
+window.Savor.changeThemeMode = function (
     lightStyle,
     darkStyle,
 ) {
     let href_color = null;
-    switch (window.theme.themeMode) {
+    switch (window.Savor.themeMode) {
         case 'light':
             href_color = lightStyle;
             break;
@@ -76,12 +78,12 @@ window.theme.changeThemeMode = function (
             href_color = darkStyle;
             break;
     }
-    window.theme.updateStyle(window.theme.ID_COLOR_STYLE, href_color);
+    window.Savor.updateStyle(window.Savor.ID_COLOR_STYLE, href_color);
 }
 
 
 /* 根据当前主题模式加载样式配置文件 */
-window.theme.changeThemeMode(
+window.Savor.changeThemeMode(
     `/appearance/themes/Savor/style/topbar/notion-light.css`,
     `/appearance/themes/Savor/style/topbar/notion-dark.css`,
 );
@@ -798,19 +800,19 @@ function rightColumnButton() {
 } 
 
 
- //去除主题所有滤镜还原按钮状态
+//去除主题所有滤镜还原按钮状态
 function qucuFiiter() {
     var Topicfilters = document.querySelectorAll("head [topicfilter]");
     Topicfilters.forEach(element => {
-        var offNo = localStorage.getItem(element.getAttribute("topicfilter"));
+        var offNo = getItem(element.getAttribute("topicfilter"));
         if (offNo == "1") {
             document.getElementById(element.getAttribute("topicfilter")).click();
             element.remove();
         }
     });
 }
-/*********************************************************Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版*****START*********************************/
-//感谢Dark+作者，感谢HBuilderX-Light作者。
+/*********************************************************Dark+新开窗口代码抽取Savor移植魔改便携搬运版*****START*********************************/
+//感谢Dark作者，其他主题作者搬运需附加详情原出处来自Dark+。
 //鼠标右键+中键打开移动端新窗口，alt+鼠标中键打来PC端窗口
 function newOpenWindow() {
 
@@ -1497,7 +1499,7 @@ function newOpenWindow() {
         }
     })
 }
-/*********************************************************Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版*****END*********************************/
+/*********************************************************Dark+新开窗口代码抽取Savor移植魔改便携搬运版*****END*********************************/
 
 
 
@@ -1918,7 +1920,7 @@ function initcalendar() {
 
   let calendarPanel = document.getElementById("calendarPanel");
 
-  calendarIcon.innerHTML = `<svg t="1662957805816" class="icon" viewBox="0 0 35 35" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2374" width="30" height="30"><path d="M13.943 22.171h-0.914c-0.571 0-0.686 0.229-0.686 0.686v0.914c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.457-0.343-0.686-0.8-0.686zM19.086 22.171h-0.914c-0.571 0-0.8 0.229-0.8 0.686v0.914c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.457-0.229-0.686-0.8-0.686zM13.943 17.143h-0.914c-0.571 0-0.686 0.229-0.686 0.686v0.914c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.343-0.686-0.8-0.686zM8.686 22.171h-0.914c-0.571 0-0.686 0.229-0.686 0.686v0.914c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c0-0.457-0.229-0.686-0.8-0.686zM8.686 17.143h-0.914c-0.571 0-0.686 0.229-0.686 0.686v0.914c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c0-0.571-0.229-0.686-0.8-0.686zM13.943 12h-0.914c-0.571 0-0.686 0.229-0.686 0.686v1.029c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.343-0.8-0.8-0.8zM26.857 1.371h-21.714c-3.429 0-5.143 1.714-5.143 5.029v19.2c0 3.314 1.714 5.143 5.143 5.143h21.714c3.429 0 5.143-1.714 5.143-5.143v-19.2c0-3.314-1.714-5.029-5.143-5.029zM28.914 25.6c0 1.371-0.686 2.057-2.057 2.057h-21.714c-1.257 0-2.057-0.686-2.057-2.057v-14.514c0-1.371 0.686-2.057 2.057-2.057h21.714c1.371 0 2.057 0.686 2.057 2.057v14.514zM19.086 17.143h-0.914c-0.571 0-0.8 0.229-0.8 0.686v0.914c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.229-0.686-0.8-0.686zM24.229 12h-0.914c-0.571 0-0.8 0.229-0.8 0.686v1.029c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.229-0.8-0.8-0.8zM24.229 17.143h-0.914c-0.571 0-0.8 0.229-0.8 0.686v0.914c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.229-0.686-0.8-0.686zM19.086 12h-0.914c-0.571 0-0.8 0.229-0.8 0.686v1.029c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.229-0.8-0.8-0.8z"></path></svg>`;
+  calendarIcon.innerHTML = `<svg t="1662957805816" class="icon" viewBox="-3 -3 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2374" width="30" height="30"><path d="M13.943 22.171h-0.914c-0.571 0-0.686 0.229-0.686 0.686v0.914c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.457-0.343-0.686-0.8-0.686zM19.086 22.171h-0.914c-0.571 0-0.8 0.229-0.8 0.686v0.914c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.457-0.229-0.686-0.8-0.686zM13.943 17.143h-0.914c-0.571 0-0.686 0.229-0.686 0.686v0.914c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.343-0.686-0.8-0.686zM8.686 22.171h-0.914c-0.571 0-0.686 0.229-0.686 0.686v0.914c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c0-0.457-0.229-0.686-0.8-0.686zM8.686 17.143h-0.914c-0.571 0-0.686 0.229-0.686 0.686v0.914c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c0-0.571-0.229-0.686-0.8-0.686zM13.943 12h-0.914c-0.571 0-0.686 0.229-0.686 0.686v1.029c0 0.571 0.229 0.686 0.686 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.343-0.8-0.8-0.8zM26.857 1.371h-21.714c-3.429 0-5.143 1.714-5.143 5.029v19.2c0 3.314 1.714 5.143 5.143 5.143h21.714c3.429 0 5.143-1.714 5.143-5.143v-19.2c0-3.314-1.714-5.029-5.143-5.029zM28.914 25.6c0 1.371-0.686 2.057-2.057 2.057h-21.714c-1.257 0-2.057-0.686-2.057-2.057v-14.514c0-1.371 0.686-2.057 2.057-2.057h21.714c1.371 0 2.057 0.686 2.057 2.057v14.514zM19.086 17.143h-0.914c-0.571 0-0.8 0.229-0.8 0.686v0.914c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.229-0.686-0.8-0.686zM24.229 12h-0.914c-0.571 0-0.8 0.229-0.8 0.686v1.029c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.229-0.8-0.8-0.8zM24.229 17.143h-0.914c-0.571 0-0.8 0.229-0.8 0.686v0.914c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.229-0.686-0.8-0.686zM19.086 12h-0.914c-0.571 0-0.8 0.229-0.8 0.686v1.029c0 0.571 0.229 0.686 0.8 0.686h0.914c0.571 0 0.8-0.229 0.8-0.686v-0.914c-0.114-0.571-0.229-0.8-0.8-0.8z"></path></svg>`;
 
   calendarIcon.addEventListener(
     "click",
@@ -2001,21 +2003,64 @@ async function 设置思源块属性(内容块id, 属性对象) {
     }))
 }
 
+async function 获取块属性(内容块id, then = null, obj = null) {
+    let url = '/api/attr/getBlockAttrs'
+    return 向思源请求数据(url, {
+        id: 内容块id
+    }).then((v) => {
+        if (then) then(v.data, obj);
+    })
+}
+
 async function 向思源请求数据(url, data) {
-    let resData = null
-    await fetch(url, {
+    const response = await fetch(url, {
         body: JSON.stringify(data),
         method: 'POST',
         headers: {
             Authorization: `Token ''`,
         }
-    }).then(function (response) { resData = response.json() })
-    return resData
+    });
+    if (response.status === 200)
+        return await response.json();
+    else return null;
 }
 
 async function 解析响应体(response) {
     let r = await response
     return r.code === 0 ? r.data : null
+}
+
+
+async function 获取文件(path, then = null, obj = null) {
+    let url = '/api/file/getFile';
+    await 向思源请求数据(url, {
+        path: path
+    }).then((v) => {
+        if (then) then(v, obj);
+    });
+}
+
+async function 写入文件(path, filedata, then = null, obj = null, isDir = false, modTime = Date.now()) {
+
+    let blob = new Blob([filedata]);
+    let file = new File([blob], path.split('/').pop());
+    let formdata = new FormData();
+    formdata.append("path", path);
+    formdata.append("file", file);
+    formdata.append("isDir", isDir);
+    formdata.append("modTime", modTime);
+    await fetch(
+        "/api/file/putFile", {
+        body: formdata,
+        method: "POST",
+        headers: {
+            Authorization: `Token ""`,
+        },
+    }).then((v) => {
+        setTimeout(() => {
+            if (then) then(obj);
+        }, 200)
+    });
 }
 
 
@@ -2065,15 +2110,15 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
 
 
     if (Memory == true) {
-        offNo = localStorage.getItem(ButtonID);
+        offNo = getItem(ButtonID);
         if (offNo == "1") {
             addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
-            localStorage.setItem(ButtonID, "0");
+            setItem(ButtonID, "0");
             NoClickRunFun(addButton);
-            localStorage.setItem(ButtonID, "1");
+            setItem(ButtonID, "1");
         } else if (offNo != "0") {
             offNo = "0";
-            localStorage.setItem(ButtonID, "0");
+            setItem(ButtonID, "0");
         }
     }
 
@@ -2083,7 +2128,7 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
             addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
 
             NoClickRunFun(addButton);
-            if (Memory != null) localStorage.setItem(ButtonID, "1");
+            if (Memory != null) setItem(ButtonID, "1");
             offNo = "1";
             return;
         }
@@ -2092,7 +2137,7 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
             addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
             addButton.style.filter = "none";
             OffClickRunFun(addButton);
-            if (Memory != null) localStorage.setItem(ButtonID, "0");
+            if (Memory != null) setItem(ButtonID, "0");
             offNo = "0";
             return;
         }
@@ -2239,6 +2284,17 @@ function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL
     });
 
 
+}
+function setItem(key, value) {
+    window.Savor.config[key] = value;
+}
+
+function getItem(key) {
+    return window.Savor.config[key] === undefined ? null : window.Savor.config[key];
+}
+
+function removeItem(key) {
+    delete window.Savor.config[key];
 }
 /**
  * 在DIV光标位置插入内容
@@ -2653,22 +2709,27 @@ function diguiTooALL(element, judgeFun) {
             }
         }
     }
-}
+};
 
 /**
- * 递归DOM元素查找深度子级的第一个符合条件的元素-子级的子级深度搜索赶紧后在搜索下一个子级
- * @param {*} element 要查找DOM元素
- * @param {*} judgeFun 查找函数 : fun(v) return true or false
- * @returns element
- */
-function diguiTooONE_1(element, judgeFun) {
+* 递归DOM元素查找深度子级的第一个符合条件的元素 - 子级的子级深度搜索赶紧后在搜索下一个子级
+* @param {*} element 要查找DOM元素
+* @param {*} judgeFun 查找函数: fun(v) return true or false
+* @returns element
+*/
+function diguiTooONE_1(element, judgeFun, xianz = 999) {
 
     if (element == null) return null;
     if (judgeFun == null) return null;
+    var i = xianz <= 0 ? 10 : xianz;
 
     return digui(element);
 
     function digui(elem) {
+
+        if (i <= 0) return null;
+        i--;
+
         var child = elem.children;
         if (child.length == 0) return null;
 
@@ -2687,12 +2748,12 @@ function diguiTooONE_1(element, judgeFun) {
 }
 
 /**
- * 递归DOM元素查找深度子级的第一个符合条件的元素-同层全部筛选一遍在依次深度搜索。
- * @param {*} element 要查找DOM元素
- * @param {*} judgeFun 查找函数 : fun(v) return true or false
- * @param {*} xianz 限制递归最大次数
- * @returns element
- */
+* 递归DOM元素查找深度子级的第一个符合条件的元素-同层全部筛选一遍在依次深度搜索。
+* @param {*} element 要查找DOM元素
+* @param {*} judgeFun 查找函数 : fun(v) return true or false
+* @param {*} xianz 限制递归最大次数
+* @returns element
+*/
 function diguiTooONE_2(element, judgeFun, xianz = 999) {
 
     if (element == null || element.firstElementChild == null) return null;
@@ -2703,7 +2764,7 @@ function diguiTooONE_2(element, judgeFun, xianz = 999) {
     function digui(elem) {
 
         if (i <= 0) return null;
-        xianz--;
+        i--;
 
         var child = elem.children;
         var newchild = [];
@@ -2756,6 +2817,20 @@ function getFocusedBlock() {
     while (block != null && block.dataset.nodeId == null) block = block.parentElement;
     return block;
 }
+
+
+/**
+ * 获得指定块位于的编辑区
+ * @params {HTMLElement} 
+ * @return {HTMLElement} 光标所在块位于的编辑区
+ * @return {null} 光标不在块内
+ */
+function getTargetEditor(block) {
+    while (block != null && !block.classList.contains('protyle-content')) block = block.parentElement;
+    return block;
+}
+
+
 /**
  * 清除选中文本
  */
@@ -2895,48 +2970,63 @@ function getcommonMenu_Bolck() {
 
 
 /**++++++++++++++++++++++++++++++++按需调用++++++++++++++++++++++++++++++ */
+获取文件("/data/widgets/Savor.config.json", (v) => {
+    let funs = () => {
 
-setTimeout(() => {
+		setTimeout(() => {
 
-    if (isPhone()) {
+			if (isPhone()) {
 
-        collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
+				collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
 		
-		themeButton()//主题 
+				themeButton()//主题 
 
-        console.log("==============>附加CSS和特性JS_已经执行<==============");
-    } else {
-		leftColumnButton();//左侧面板悬浮
-		
-		rightColumnButton();//右侧面板悬浮
-		
-		initcalendar()//打开日历
+			console.log("==============>附加CSS和特性JS_已经执行<==============");
+		} else {
+			leftColumnButton();//左侧面板悬浮
 			
-		themeButton();//主题
-					
-		concealMarkButton();//挖空
-		
-		tabbarVerticalButton();//垂直页签
-		
-		topbarfixedButton();//顶栏固定
+			rightColumnButton();//右侧面板悬浮
+			
+			initcalendar()//打开日历
+				
+			themeButton();//主题
+						
+			concealMarkButton();//挖空
+			
+			tabbarVerticalButton();//垂直页签
+			
+			topbarfixedButton();//顶栏固定
 
-        setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
+			setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
 
-        showDocumentCreationDate();//为打开文档标题下面显示文档创建日期
+			showDocumentCreationDate();//为打开文档标题下面显示文档创建日期
 
-        autoOpenList();//自动展开悬浮窗内折叠列表（第一次折叠）
+			autoOpenList();//自动展开悬浮窗内折叠列表（第一次折叠）
 
-        collapsedListPreview();//折叠列表内容预览查看
+			collapsedListPreview();//折叠列表内容预览查看
 
-        collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
-		
-		newOpenWindow();//Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版
+			collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
+			
+			newOpenWindow();//Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版
 
-		loadScript("/appearance/themes/Savor/comment/index.js");//js批注评论
+			loadScript("/appearance/themes/Savor/comment/index.js");//js批注评论
 
-        console.log("==============>附加CSS和特性JS_已经执行<==============");
+			console.log("==============>附加CSS和特性JS_已经执行<==============");
+		}
+	}, 1000);
     }
-}, 1000);
+    if (v == null) {
+        window.Savor.config = { "Savor": 1 };
+        写入文件("/data/widgets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4), (a) => { funs() });
+    } else {
+        window.Savor.config = v;
+        funs();
+    }
+    setInterval(() => {
+        写入文件("/data/widgets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4));
+    }, 5000)
+});
+
 
 
 
@@ -3057,3 +3147,10 @@ ws.addEventListener("message", (msg) => {
     }
 }
 )
+
+
+
+
+
+
+

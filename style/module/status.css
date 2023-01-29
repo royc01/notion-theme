@@ -5,21 +5,22 @@
 	margin-top: -30px;
 	margin-bottom:8px;
 	position:absolute;
-	right:0px;
 	bottom:0px;
 	border:0;
+	width:100%;
+	padding: 0 4px;
 }
-.status .toolbar__item{
-	margin:  7px;
-	border-radius: 5px;
+.status .toolbar__item:not(.toolbar__item--close) {
+	margin:3px!important;
+	border-radius: 5px!important;
 	background-color: var(--b3-status-msg-background);
-	padding:2px;
+	padding:3px;
 }
 
 .status .toolbar__item svg{
-	padding:4px;
-	color:var(--b3-dockright-color);
-	width: 13px;
+	padding:3px;
+	color:var(--b3-dockright-color)!important;
+	width: 14px;
 }
 .body--win32>.fn__flex-1
 {
@@ -28,30 +29,25 @@
 
 .status__counter:not(:empty){
 	border-radius:5px;
-	background-color:var(--b3-theme-primary);
-	color:#fff;
+	background-color:var(--b3-theme-background);
+	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
 	padding: 0px 0 0 8px ;
-	margin:0px 7px 7px 7px;
-	position:relative;
-	right:28px;
+	margin:0px 12px 7px 7px;
 	height:26px;
 	line-height:26px;
-}
-.status__counter:not(:empty) span{
-	color:#fff;
 }
 .status__msg:not(:empty){
 	opacity:0.5;
 	animation: statusmsg 5s ease-in-out;
-	max-width: 100px;
+	max-width: 140px;
 	padding: 0px 8px;
 	border-radius:5px;
-	background-color:var(--b3-status-msg-background);
-	margin:0px 7px 7px 7px;
+	background-color:var(--b3-theme-background);
+	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+	margin:0px 0px 7px 12px;
 	transition: max-width 300ms,opacity 300ms;
 	transition-delay: 2000ms;
 	position:relative;
-	right:21px;
 	height:26px;
 	line-height:26px;
 }
@@ -63,14 +59,20 @@
 .status__msg:not(:empty):hover{
 	opacity:1;
 	max-width:400px;
-	transition: max-width 500ms ease-out;
+	transition: max-width 300ms ease-out;
 }
 
 .layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
-padding-bottom:30px;}
+	padding-bottom:30px;
+}
+.layout#layouts .fn__flex-shrink>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+	padding-bottom:30px;
+}
+.layout#layouts .fn__flex-shrink>.layout__resize+.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
+	padding-bottom:30px;
+}
 
-
-.status #statusHelp{
+/*.status #statusHelp{
 	position:relative;
 	right:35px;
 }
@@ -100,4 +102,13 @@ padding-bottom:30px;}
 .status #barDock:after{
 	left:unset!important;
 	right:100%;
+}*/
+.status__backgroundtask{
+	margin:0px 0px 7px 7px;
+	padding: 0px 0px 0px 8px;
+	border-radius:5px;
+	background-color:var(--b3-theme-on-primary);
+	height:26px;
+	line-height:26px;
+	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
 }

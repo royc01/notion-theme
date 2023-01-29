@@ -295,9 +295,10 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	 width:22px;
 	 height:22px;
 	 background-color:transparent!important;
+	 font-size:1.3em;
 	 box-shadow: 0 0 0 1px var(--b3-color--square) inset;
 }
-.b3-color__square[style="background-color:var(--b3-font-color1)"]::before{
+/*.b3-color__square[style="background-color:var(--b3-font-color1)"]::before{
 	 color:var(--b3-font-color1);
 }
 .b3-color__square[style="background-color:var(--b3-font-color2)"]::before{
@@ -335,7 +336,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 }
 .b3-color__square[style="background-color:var(--b3-font-color13)"]::before{
 	color:var(--b3-font-color13);
-}
+}*/
 .b3-color__square[data-type="backgroundColor"]{
 	 border-radius: 3px;
 	 width:22px;
@@ -390,11 +391,11 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	 height:32px;
 }
 .protyle-wysiwyg div[fold="1"].li[data-subtype="o"]>.protyle-action--order:after{
-	 background: url("img/square.svg") no-repeat center!important;
+	 background: url("/appearance/themes/Savor/img/square.svg") no-repeat center!important;
 	 transition:none;
 }
 .protyle-wysiwyg [data-node-id].li[data-subtype="o"]>.protyle-action--order:hover:after{
-	 background: url("img/square.svg") no-repeat center!important;
+	 background: url("/appearance/themes/Savor/img/square.svg") no-repeat center!important;
 	 transition:none;
 }
 /* 任务列表 */

@@ -38,7 +38,7 @@
 	bottom:0px;
 }
 .dock#dockLeft .dock__item:last-child{
-	margin: 7px;
+	margin: 7px 7px 40px 7px;
 	bottom:0px;
 }
 .dock__item svg{

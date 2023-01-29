@@ -330,6 +330,9 @@ input[type="checkbox" i] {
 .layout__resize{
 	z-index:1;
 }
+.layout__center + .layout__resize{
+	z-index:2;
+}
 .layout__resize:after{
 	background-color: var(--b3-layout-resize);
 }
@@ -353,10 +356,10 @@ input[type="checkbox" i] {
 	top: 0px;
 	height:100%;
 }
-/*侧栏宽度调整动画*/
+/*侧栏宽度调整动画
 #layouts > .fn__flex-1 > .fn__flex-column,#layouts > .fn__flex-1 > .fn__flex{
     transition: var(--flex-width-transition);
-}
+}*/
 
 /*关系图 */
 .graph.fullscreen{

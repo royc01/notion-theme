@@ -108,8 +108,16 @@
 	100% {opacity: 1;
 	 }
 }页签动画*/
-
-
+@keyframes cloudsuccbg{
+	0% {background:var(--b3-font-background8);} 
+	60% {background:var(--b3-font-background8);} 
+	100% {background:transparent}
+}	
+@keyframes cloudsucc{
+	0% {color:var(--b3-font-color7);} 
+	60% {color:var(--b3-font-color7);} 
+	100% {color:var(--b3-theme-on-background);}
+}	
 :root {
     /* 主色 */
     --b3-theme-primary: rgb(46, 170, 220);/* 主色 */
@@ -325,7 +333,7 @@
 	--b3-layout-resize: rgba(230, 229, 225);
 	--b3-shrink-layout-resize: rgba(230, 229, 225);
 	--b3-layout-resize-hover: var(--b3-scroll-color);
-	--flex-width-transition:width 150ms linear; /*调节宽度动画*/
+	/*--flex-width-transition:width 150ms ease-in-out; 调节宽度动画*/
 	--b3-border-fold: rgb(15, 15 , 15, .1);/*折叠边框*/
 	--b3-layout-resize-width: 1px;
 	/* 页签 */
@@ -391,9 +399,40 @@ body{
 
 
 
+/*.protyle-wysiwyg:not([data-doc-type="NodeDocument"]){
+	animation: menu 0.5s ease-in-out;
+}*/
+
+
+
+
+#barSync[aria-label*="上传"] svg {
+	animation: cloudsucc 3s ease-in;
+}
+
+#barSync[aria-label*="上传"] {
+	animation: cloudsuccbg 3s ease-in;
+}
+#barSync[aria-label*="同步失败"] svg {
+	color:var(--h1-list-graphic);
+}
 
 
 
 
 
 
+
+
+
+.body--window .layout__center .layout-tab-bar--readonly {
+    -webkit-app-region: no-drag;
+}
+
+.body--window .layout-tab-bar .item--readonly{
+	margin-top:-2px;
+}
+
+.body--window .toolbar__window .toolbar__item{
+	padding: 9px;
+}
