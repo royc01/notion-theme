@@ -2287,6 +2287,7 @@ function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL
 }
 function setItem(key, value) {
     window.Savor.config[key] = value;
+    写入文件("/data/widgets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4));
 }
 
 function getItem(key) {
@@ -2295,6 +2296,7 @@ function getItem(key) {
 
 function removeItem(key) {
     delete window.Savor.config[key];
+    写入文件("/data/widgets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4));
 }
 /**
  * 在DIV光标位置插入内容
@@ -2982,38 +2984,38 @@ function getcommonMenu_Bolck() {
 				themeButton()//主题 
 
 			console.log("==============>附加CSS和特性JS_已经执行<==============");
-		} else {
-			leftColumnButton();//左侧面板悬浮
-			
-			rightColumnButton();//右侧面板悬浮
-			
-			initcalendar()//打开日历
-				
-			themeButton();//主题
-						
-			concealMarkButton();//挖空
-			
-			tabbarVerticalButton();//垂直页签
-			
-			topbarfixedButton();//顶栏固定
+            } else {
+                leftColumnButton();//左侧面板悬浮
+                
+                rightColumnButton();//右侧面板悬浮
+                
+                initcalendar()//打开日历
+                    
+                themeButton();//主题
+                            
+                concealMarkButton();//挖空
+                
+                tabbarVerticalButton();//垂直页签
+                
+                topbarfixedButton();//顶栏固定
 
-			setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
+                setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
 
-			showDocumentCreationDate();//为打开文档标题下面显示文档创建日期
+                showDocumentCreationDate();//为打开文档标题下面显示文档创建日期
 
-			autoOpenList();//自动展开悬浮窗内折叠列表（第一次折叠）
+                autoOpenList();//自动展开悬浮窗内折叠列表（第一次折叠）
 
-			collapsedListPreview();//折叠列表内容预览查看
+                collapsedListPreview();//折叠列表内容预览查看
 
-			collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
-			
-			newOpenWindow();//Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版
+                collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
+                
+                newOpenWindow();//Dark+新开窗口代码抽取HBuilderX-Light移植魔改便携搬运版
 
-			loadScript("/appearance/themes/Savor/comment/index.js");//js批注评论
+                loadScript("/appearance/themes/Savor/comment/index.js");//js批注评论
 
-			console.log("==============>附加CSS和特性JS_已经执行<==============");
-		}
-	}, 1000);
+                console.log("==============>附加CSS和特性JS_已经执行<==============");
+            }
+        }, 1000);
     }
     if (v == null) {
         window.Savor.config = { "Savor": 1 };
@@ -3022,9 +3024,9 @@ function getcommonMenu_Bolck() {
         window.Savor.config = v;
         funs();
     }
-    setInterval(() => {
-        写入文件("/data/widgets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4));
-    }, 5000)
+    // setInterval(() => {
+    //     写入文件("/data/widgets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4));
+    // }, 5000)
 });
 
 
@@ -3147,10 +3149,3 @@ ws.addEventListener("message", (msg) => {
     }
 }
 )
-
-
-
-
-
-
-
