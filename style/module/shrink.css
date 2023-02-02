@@ -333,6 +333,9 @@ input[type="checkbox" i] {
 .layout__center + .layout__resize{
 	z-index:2;
 }
+.layout__center .layout__resize--lr{
+	z-index:2;
+}
 .layout__resize:after{
 	background-color: var(--b3-layout-resize);
 }

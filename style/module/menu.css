@@ -25,6 +25,7 @@
 .b3-list-item--big{
 	padding: 14px 24px;
 	border-radius: 0px;
+	margin: 4px 8px;
 }
 /*快捷键面板*/
 #keymapList .b3-list-item.toggle{
@@ -172,6 +173,13 @@
 }
 div#historyContainer{
 	border-top:1px solid var(--b3-border-color);
+}
+/*最近打开文档*/
+[data-key="⌘E"] .fn__hr{
+	background-color: var(--b3-fn__flex-shrink-background);
+}
+[data-key="⌘E"] .b3-list--background.fn__flex-1 .b3-list-item{
+	margin: 2px 8px;
 }
 /*集市悬浮样式*/
 .b3-card{

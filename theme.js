@@ -2181,15 +2181,15 @@ function shrinkLeftAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL,
 
 
     if (Memory == true) {
-        offNo = localStorage.getItem(ButtonID);
+        offNo = getItem(ButtonID);
         if (offNo == "1") {
             addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
-            localStorage.setItem(ButtonID, "0");
+            setItem(ButtonID, "0");
             NoClickRunFun(addButton);
-            localStorage.setItem(ButtonID, "1");
+            setItem(ButtonID, "1");
         } else if (offNo != "0") {
             offNo = "0";
-            localStorage.setItem(ButtonID, "0");
+            setItem(ButtonID, "0");
         }
     }
 
@@ -2199,7 +2199,7 @@ function shrinkLeftAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL,
             addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
 
             NoClickRunFun(addButton);
-            if (Memory != null) localStorage.setItem(ButtonID, "1");
+            if (Memory != null) setItem(ButtonID, "1");
             offNo = "1";
             return;
         }
@@ -2208,7 +2208,7 @@ function shrinkLeftAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL,
             addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
 
             OffClickRunFun(addButton);
-            if (Memory != null) localStorage.setItem(ButtonID, "0");
+            if (Memory != null) setItem(ButtonID, "0");
             offNo = "0";
             return;
         }
@@ -2250,15 +2250,15 @@ function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL
 
 
     if (Memory == true) {
-        offNo = localStorage.getItem(ButtonID);
+        offNo = getItem(ButtonID);
         if (offNo == "1") {
             addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
-            localStorage.setItem(ButtonID, "0");
+            setItem(ButtonID, "0");
             NoClickRunFun(addButton);
-            localStorage.setItem(ButtonID, "1");
+            setItem(ButtonID, "1");
         } else if (offNo != "0") {
             offNo = "0";
-            localStorage.setItem(ButtonID, "0");
+            setItem(ButtonID, "0");
         }
     }
 
@@ -2268,7 +2268,7 @@ function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL
             addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
 
             NoClickRunFun(addButton);
-            if (Memory != null) localStorage.setItem(ButtonID, "1");
+            if (Memory != null) setItem(ButtonID, "1");
             offNo = "1";
             return;
         }
@@ -2277,7 +2277,7 @@ function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL
             addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
 
             OffClickRunFun(addButton);
-            if (Memory != null) localStorage.setItem(ButtonID, "0");
+            if (Memory != null) setItem(ButtonID, "0");
             offNo = "0";
             return;
         }
