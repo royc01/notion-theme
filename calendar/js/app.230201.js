@@ -217,7 +217,7 @@
                     monthCurrent: undefined, 
                     dayCurrent: undefined,
                     template_path: undefined,
-                    config_json_path: "/data/widgets/Calendar.config.json"
+                    config_json_path: "/data/snippets/Calendar.config.json"
                 };
             },
             created() {

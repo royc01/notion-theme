@@ -20,7 +20,7 @@
 
 @import url(/appearance/themes/Savor/style/module/menu.css);/* 菜单、设置相关 */
 
-@import url(/appearance/themes/Savor/style/module/status.css);/* 底栏 */
+/*@import url(/appearance/themes/Savor/style/module/status.css); 底栏 */
 
 
 /* 引入特性 */
@@ -435,4 +435,155 @@ body{
 
 .body--window .toolbar__window .toolbar__item{
 	padding: 9px;
+}
+
+
+
+
+
+
+/*底栏*/
+.status{
+	background-color:transparent;
+	border:0;
+	padding: 0 4px;
+	margin-bottom:5px
+}
+.status .toolbar__item:not(.toolbar__item--close) {
+	margin:3px!important;
+	border-radius: 5px!important;
+	background-color: var(--b3-status-msg-background);
+	padding:4px;
+}
+
+.status .toolbar__item svg{
+	padding:2px 3px;
+	color:var(--b3-dockright-color)!important;
+	width: 12px;
+}
+.body--win32>.fn__flex-1
+{
+	overflow:visible;
+}
+
+.status__counter:not(:empty){
+	border-radius:5px;
+	background-color:var(--b3-theme-background);
+	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+	padding: 0px 4px 0 8px ;
+	margin:4px 12px 0px 7px;
+	height:24px;
+	line-height:24px;
+}
+.status__msg:not(:empty){
+	opacity:0.5;
+	animation: statusmsg 5s ease-in-out;
+	max-width: 140px;
+	padding: 0px 8px;
+	border-radius:5px;
+	background-color:var(--b3-theme-background);
+	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+	margin:4px 0px 0px 12px;
+	transition: max-width 300ms,opacity 300ms;
+	transition-delay: 2000ms;
+	position:relative;
+	height:24px;
+	line-height:24px;
+}
+.status__msg:not(:empty):before{
+	content: "📢";
+	font-size:12px;
+}
+
+.status__msg:not(:empty):hover{
+	opacity:1;
+	max-width:400px;
+	transition: max-width 300ms ease-out;
+}
+
+/*.layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+	padding-bottom:30px;
+}
+.layout#layouts .fn__flex-shrink>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+	padding-bottom:30px;
+}
+.layout#layouts .fn__flex-shrink>.layout__resize+.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
+	padding-bottom:30px;
+}*/
+
+/*.status #statusHelp{
+	position:relative;
+	right:35px;
+}
+.status #barDock{
+	position:absolute;
+	right:0px;
+	z-index:8;
+}
+
+.status>.fn__flex-1{
+	position:relative!important;
+	width:0px!important;
+	right:0px;
+	flex:0;
+}
+
+.status #barDock .b3-menu{
+	left:unset!important;
+	right:4px;
+	bottom:30px!important;
+}
+.status #barDock:before{
+	right:unset!important;
+	left: 0px;
+	transform: rotateY(180deg);
+}
+.status #barDock:after{
+	left:unset!important;
+	right:100%;
+}*/
+.status__backgroundtask{
+	margin:4px 0px 7px 7px;
+	padding: 0px 0px 0px 8px;
+	border-radius:5px;
+	background-color:var(--b3-theme-on-primary);
+	height:24px;
+	line-height:24px;
+	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+}
+
+
+
+
+
+.dock#dockLeft{
+	box-shadow: var(--b3-dock-background) 0px 40px 0px 0px;
+}
+
+.dock#dockRight{
+	box-shadow: var(--b3-dockright-background) 0px 40px 0px 0px;
+}
+.fn__flex-column.fn__flex-shrink{
+	box-shadow: var(--b3-fn__flex-shrink-background) 0px 40px 0px 0px;
+}
+.layout__center+.layout__resize--lr+.fn__flex-column{
+	box-shadow: var(--b3-fn__flex-column-background) 0px 40px 0px 0px;
+}
+#layouts,.layout__center{
+	margin-bottom:-36px;
+}
+#layouts>.fn__flex+.layout__resize+.fn__flex-1{
+	margin-bottom:36px;
+	overflow:visible;
+}
+#dockTop + .fn__flex-1 {
+    overflow: visible;
+}
+
+
+.fn__flex-column.fn__flex-shrink + .layout__resize:after{
+	box-shadow: var(--b3-layout-resize) 0px 40px 0px 0px;
+}
+.layout__center + .layout__resize:after{
+	box-shadow: var(--b3-layout-resize) 0px 40px 0px 0px;
 }

@@ -33,16 +33,9 @@
 .dock#dockLeft .dock__item:first-child,.dock#dockRight .dock__item:first-child{
 	margin: 48px 7px 7px 7px;
 }
-.dock#dockRight .dock__item:last-child{
-	margin: 7px 7px 40px 7px;
-	bottom:0px;
-}
-.dock#dockLeft .dock__item:last-child{
-	margin: 7px 7px 40px 7px;
-	bottom:0px;
-}
+
 .dock__item svg{
-	width: 13px;
+	width: 12px;
 }
 .dock__item {
 	padding-left:7px!important;
