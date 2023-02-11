@@ -121,9 +121,9 @@
 	height:14px;
 	padding: 5px;
 }
-.block__edit>.protyle-breadcrumb>.block__icon{
+/*.block__edit>.protyle-breadcrumb>.block__icon{
 	padding: 0px;
-}
+}*/
 .block__popover--move>.block__icons{
 	padding:0 10px;
 }
@@ -184,6 +184,7 @@ div#historyContainer{
 /*集市悬浮样式*/
 .b3-card{
 	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+	border:none;
 }
 
 .b3-card--current{

@@ -304,10 +304,21 @@ input[type="checkbox" i] {
 	background-color:var(--h6-list-graphic);
 	opacity:0.2;
 }
+
 /* 反链面板 */
 .backlinkList>.b3-list>.protyle,.backlinkMList>.b3-list>.protyle{
-	margin:0 4px 4px 4px;
-	border-radius:3px;
+	margin:0 6px 6px 6px;
+	border-radius:0 0 3px 3px;
+	box-shadow: rgba(15, 15, 15, 0.1) 0px 1px 0px 1px;
+}
+.backlinkList>.b3-list .b3-list-item,.backlinkMList>.b3-list .b3-list-item{
+	margin: 6px!important;
+}
+.backlinkList>.b3-list .b3-list-item:has(+.protyle:not(.fn__none)),.backlinkMList>.b3-list .b3-list-item:has(+.protyle:not(.fn__none)){
+	margin-bottom:0px!important;
+	border-radius:3px 3px 0 0;
+	background-color: var(--b3-dockright-background);
+	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px;
 }
 .sy__backlink .b3-text-field{
 	height:24px;
@@ -325,6 +336,7 @@ input[type="checkbox" i] {
     margin-top: 18px;
     border-top: 1px solid var(--b3-border-color);
 }
+
 
 /*分界线*/
 .layout__resize{

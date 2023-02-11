@@ -1,25 +1,65 @@
-div[data-key='⌘R'] #searchPreview .protyle-content {
-	padding-bottom: 90px;
+
+#searchList{
+	background-color: var(--b3-theme-background);
 }
-.fn__flex-column #searchList .b3-list-item[data-type='search-item']{
+
+
+.fn__flex-column #searchList>.b3-list-item[data-type='search-item']{
 	padding-bottom:20px;
-	border-radius: 0px;
-	box-shadow: 0 1px 0 0 var(--b3-toolbarSidebar) inset;
+	margin: 6px;
+	/*background-color: var(--b3-theme-background);*/
+	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 }
 .fn__flex-column #searchList .b3-list-item[data-type='search-item']>.b3-list-item__meta{
 	color:var(--b3-list-item--meta);
 	bottom:0px;
-	right:8px;
+	left:20px;
 	max-width:34vw;
 	position:absolute;
 	white-space:nowrap;
 	overflow:hidden !important;
 	text-overflow: ellipsis;
 }
+.fn__flex-column #searchList>.b3-list-item+div [data-type='search-item'] .b3-list-item__graphic{
+	height: 10px;
+    width: 10px;
+    padding: 4px;
+    border-radius: 3px;
+    background-color: var(--b3-list-background);
+}
 
+.fn__flex-column #searchList>.b3-list-item:not([data-type='search-item']){
+	border-radius: 4px 4px 0 0;
+	margin: 6px 6px 0px 6px;
+	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px;
+	padding-left:0px;
+}
+.fn__flex-column #searchList>.b3-list-item:not([data-type='search-item']):has(+div.fn__none){
+	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+	border-radius: 4px ;
+}
 
+.fn__flex-column #searchList>.b3-list-item:not([data-type='search-item'])+div [data-type='search-item']{
+	margin: 0 6px;
+	border-radius: 0;
+	box-shadow: rgba(15, 15, 15, 0.1) 1px 0px 0px 0px , rgba(15, 15, 15, 0.1) -1px 0px 0px 0px;
+	padding-left: 30px!important;
+	height:32px;
+}
+.fn__flex-column #searchList>.b3-list-item:not([data-type='search-item'])+div [data-type='search-item']:last-child{
+	border-radius: 0 0 4px 4px;
+	box-shadow: rgba(15, 15, 15, 0.1) 1px 0px 0px 0px , rgba(15, 15, 15, 0.1) -1px 0px 0px 0px, rgba(15, 15, 15, 0.1) 0px 1px 0px 0px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+}
 
-
+/*.fn__flex-column #searchList>.b3-list-item:not([data-type='search-item'])+div [data-type='search-item']>.b3-list-item__text{
+    margin-left: 20px;
+    max-height: 89px ;
+    padding:6px 0px 5px 5px;
+    overflow-y: auto !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.3;
+    -webkit-box-orient: inherit;
+}*/
 
 #searchList>[data-type="search-item"]{
     display: block;
@@ -57,8 +97,4 @@ div[data-key='⌘R'] #searchPreview .protyle-content {
 
 .search__list{
 	padding-top:0;
-}
-
-.search__header{
-	border-top: 1px solid var(--b3-theme-surface-lighter);
 }

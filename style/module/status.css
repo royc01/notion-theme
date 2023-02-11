@@ -1,26 +1,21 @@
 /*底栏*/
 .status{
-	height:25px;
 	background-color:transparent;
-	margin-top: -30px;
-	margin-bottom:8px;
-	position:absolute;
-	bottom:0px;
 	border:0;
-	width:100%;
 	padding: 0 4px;
+	margin-bottom:5px
 }
 .status .toolbar__item:not(.toolbar__item--close) {
 	margin:3px!important;
 	border-radius: 5px!important;
 	background-color: var(--b3-status-msg-background);
-	padding:3px;
+	padding:4px;
 }
 
 .status .toolbar__item svg{
-	padding:3px;
+	padding:2px 3px;
 	color:var(--b3-dockright-color)!important;
-	width: 14px;
+	width: 12px;
 }
 .body--win32>.fn__flex-1
 {
@@ -31,10 +26,10 @@
 	border-radius:5px;
 	background-color:var(--b3-theme-background);
 	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
-	padding: 0px 0 0 8px ;
-	margin:0px 12px 7px 7px;
-	height:26px;
-	line-height:26px;
+	padding: 0px 4px 0 8px ;
+	margin:4px 12px 0px 7px;
+	height:24px;
+	line-height:24px;
 }
 .status__msg:not(:empty){
 	opacity:0.5;
@@ -44,12 +39,12 @@
 	border-radius:5px;
 	background-color:var(--b3-theme-background);
 	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
-	margin:0px 0px 7px 12px;
+	margin:4px 0px 0px 12px;
 	transition: max-width 300ms,opacity 300ms;
 	transition-delay: 2000ms;
 	position:relative;
-	height:26px;
-	line-height:26px;
+	height:24px;
+	line-height:24px;
 }
 .status__msg:not(:empty):before{
 	content: "📢";
@@ -62,7 +57,7 @@
 	transition: max-width 300ms ease-out;
 }
 
-.layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+/*.layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
 	padding-bottom:30px;
 }
 .layout#layouts .fn__flex-shrink>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
@@ -70,7 +65,7 @@
 }
 .layout#layouts .fn__flex-shrink>.layout__resize+.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
 	padding-bottom:30px;
-}
+}*/
 
 /*.status #statusHelp{
 	position:relative;
@@ -104,11 +99,11 @@
 	right:100%;
 }*/
 .status__backgroundtask{
-	margin:0px 0px 7px 7px;
+	margin:4px 0px 7px 7px;
 	padding: 0px 0px 0px 8px;
 	border-radius:5px;
 	background-color:var(--b3-theme-on-primary);
-	height:26px;
-	line-height:26px;
+	height:24px;
+	line-height:24px;
 	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
 }
