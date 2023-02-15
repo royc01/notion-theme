@@ -12,10 +12,7 @@
 .protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"] {
 	padding-left:2px;
 }
-.fn__flex-shrink:hover  #shrinkLeft,.layout__center~.fn__flex-column:hover #shrinkRight{
-	opacity:1;
-	transition: all 300ms;
-}
+
 
 #leftColumn.b3-tooltips::after{
 	left:-40px;
@@ -23,9 +20,6 @@
 
 
 
-.fn__flex-shrink{
- position:relative;
-}
 #shrinkLeft{
 	opacity:0;
 	position:absolute;

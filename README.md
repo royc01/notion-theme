@@ -44,7 +44,10 @@
 
 　　以上排名不分先后。
 
-
+## 3.2.6
+* 调整搜索分组颜色
+* 适配思源v2.7.5
+* 删除主题悬浮侧栏功能
 
 ## 3.2.5
 ![手机端.png](https://tva1.sinaimg.cn/large/8ff342a8gy1hazku6lrwvj216q0u0wj1.jpg)

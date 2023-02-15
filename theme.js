@@ -508,65 +508,6 @@ setTimeout(()=>ClickMonitor(),1000)
 
 
 
-/**----------------------------------为文档标题创建动态下划线---------------------------------- */
-
-function rundynamicUnderline() {
-    setInterval(dynamicUnderline, 500);
-}
-
-function dynamicUnderline() {
-    var AllDocumentTitleElement = getAllDocumentTitleElement();
-
-    for (let index = 0; index < AllDocumentTitleElement.length; index++) {
-        const element = AllDocumentTitleElement[index];
-
-        var line = createLine(element);
-        var txt = getTileTxt(element);
-        var maxWidth = element.offsetWidth;
-
-        var Style = getComputedStyle(element, null);
-        var font = Style.font;
-        var width = getTextWidth(txt, font) + 58;
-
-        if (width < 288) {
-            width = 288;
-        }
-
-        if (width > maxWidth) {
-            width = maxWidth;
-        }
-
-        line.style.width = width + "px";
-    }
-}
-
-
-function createLine(TitleElement) {
-
-    var item = TitleElement.parentElement.children;
-
-    for (let index = 0; index < item.length; index++) {
-        const element = item[index];
-
-        if (element.getAttribute("Line") != null) {
-            return element;
-        }
-    }
-
-    var line = insertCreateAfter(TitleElement, "div");
-    line.setAttribute("Line", "true");
-    line.style.height = "1px";
-    line.style.marginTop = "-2px";
-    line.style.marginBottom = "7px";
-    line.style.backgroundColor = "var(--b3-border-color)";
-    line.style.transition = "all 400ms linear";
-    return line;
-}
-
-
-function getTileTxt(TitleElement) {
-    return TitleElement.innerText;
-}
 
 
 
@@ -679,45 +620,6 @@ function topbarfixedButton() {
     );
 }
 
-/**---------------------------------------------------------左侧面板悬浮-------------------------------------------------------------- */
-
-function leftColumnButton() {
-    shrinkLeftAddButton(
-        "leftColumn",
-        "toolbar__item b3-tooltips b3-tooltips__se",
-		"左侧面板悬浮",
-        "/appearance/themes/Savor/img/rightcolumn2.svg",
-        "/appearance/themes/Savor/img/leftcolumn.svg",
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/leftcolumn.css", "leftColumn悬浮").setAttribute("topBarcss", "leftColumn悬浮");
-        },
-        () => {
-            document.getElementById("leftColumn悬浮").remove();
-        },
-        true
-    );
-}
-
-/**---------------------------------------------------------右侧面板悬浮--------------------------------------------------------------*/
-
-function rightColumnButton() {
-    shrinkRightAddButton(
-        "rightColumn",
-        "toolbar__item b3-tooltips b3-tooltips__se",
-		"右侧面板悬浮",
-        "/appearance/themes/Savor/img/leftcolumn2.svg",
-        "/appearance/themes/Savor/img/rightcolumn.svg",
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/rightcolumn.css", "rightColumn悬浮").setAttribute("topBarcss", "rightColumn悬浮");
-        },
-        () => {
-            document.getElementById("rightColumn悬浮").remove();
-        },
-        true
-    );
-} 
-
-
 //去除主题所有滤镜还原按钮状态
 function qucuFiiter() {
     var Topicfilters = document.querySelectorAll("head [topicfilter]");
@@ -728,7 +630,7 @@ function qucuFiiter() {
             element.remove();
         }
     });
-}
+}																		
 
 
 
@@ -1376,145 +1278,7 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
 
 }
 
-/*左侧悬浮*/
 
-function shrinkLeftAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
-    var shrinkLeft = document.getElementById("shrinkLeft");
-    if (shrinkLeft == null) {
-        var toolbarEdit = document.getElementById("toolbarEdit");
-         var windowControls = document.querySelector(".fn__flex-shrink");
-
-        if (toolbarEdit == null && windowControls != null) {
-            shrinkLeft = document.createElement("div");
-            shrinkLeft.id = "shrinkLeft";
-            windowControls.appendChild(shrinkLeft);
-        } else if (toolbarEdit != null) {
-            shrinkLeft = insertCreateBefore(toolbarEdit, "div", "shrinkLeft");
-            shrinkLeft.style.position = "relative";
-        }
-    }
-
-    var addButton = addinsertCreateElement(shrinkLeft, "div");
-    addButton.style.float = "left";
-    addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
-    addButton.style.backgroundRepeat = "no-repeat";
-	addButton.style.backgroundPosition = "center";
-    addButton.style.backgroundSize = "100%";
-
-    
-    addButton.id = ButtonID;
-	addButton.setAttribute("class", ButtonTitle);
-	addButton.setAttribute("aria-label", ButtonLabel)
-
-    var offNo = "0";
-
-
-
-    if (Memory == true) {
-        offNo = getItem(ButtonID);
-        if (offNo == "1") {
-            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
-            setItem(ButtonID, "0");
-            NoClickRunFun(addButton);
-            setItem(ButtonID, "1");
-        } else if (offNo != "0") {
-            offNo = "0";
-            setItem(ButtonID, "0");
-        }
-    }
-
-    AddEvent(addButton, "click", () => {
-
-        if (offNo == "0") {
-            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
-
-            NoClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "1");
-            offNo = "1";
-            return;
-        }
-
-        if (offNo == "1") {
-            addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
-
-            OffClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "0");
-            offNo = "0";
-            return;
-        }
-    });
-
-
-}
-/*右侧悬浮*/
-function shrinkRightAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
-    var shrinkRight = document.getElementById("shrinkRight");
-    if (shrinkRight == null) {
-        var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls =  document.querySelector(".layout__center ~ .fn__flex-column");
-
-        if (toolbarEdit == null && windowControls != null) {
-            shrinkRight = document.createElement("div");
-            shrinkRight.id = "shrinkRight";
-            windowControls.appendChild(shrinkRight);
-        } else if (toolbarEdit != null) {
-            shrinkRight = insertCreateBefore(toolbarEdit, "div", "shrinkRight");
-            shrinkRight.style.position = "relative";
-        }
-    }
-
-    var addButton = addinsertCreateElement(shrinkRight, "div");
-    addButton.style.float = "left";
-    addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
-    addButton.style.backgroundRepeat = "no-repeat";
-	addButton.style.backgroundPosition = "center";
-    addButton.style.backgroundSize = "100%";
-
-    
-    addButton.id = ButtonID;
-	addButton.setAttribute("class", ButtonTitle);
-	addButton.setAttribute("aria-label", ButtonLabel)
-
-    var offNo = "0";
-
-
-
-    if (Memory == true) {
-        offNo = getItem(ButtonID);
-        if (offNo == "1") {
-            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
-            setItem(ButtonID, "0");
-            NoClickRunFun(addButton);
-            setItem(ButtonID, "1");
-        } else if (offNo != "0") {
-            offNo = "0";
-            setItem(ButtonID, "0");
-        }
-    }
-
-    AddEvent(addButton, "click", () => {
-
-        if (offNo == "0") {
-            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
-
-            NoClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "1");
-            offNo = "1";
-            return;
-        }
-
-        if (offNo == "1") {
-            addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
-
-            OffClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "0");
-            offNo = "0";
-            return;
-        }
-    });
-
-
-}
 function setItem(key, value) {
     window.Savor.config[key] = value;
     写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4));
@@ -2213,9 +1977,6 @@ function getcommonMenu_Bolck() {
 
 				console.log("==============>附加CSS和特性JS_已经执行<==============");
             } else {
-                leftColumnButton();//左侧面板悬浮
-                
-                rightColumnButton();//右侧面板悬浮
                 
                 initcalendar()//打开日历
                     
