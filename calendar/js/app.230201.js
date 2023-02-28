@@ -424,8 +424,8 @@
                         };
 
                         // push message for users
-                        let print_str = {"msg": "[日历插件] 成功读取日记本【"+ this.currentNotebook.name +"】的配置", "timeout": 7000};
-                        let print = await this.request("/api/notification/pushMsg", print_str);
+                        //let print_str = {"msg": "[日历插件] 成功读取日记本【"+ this.currentNotebook.name +"】的配置", "timeout": 7000};
+                       // let print = await this.request("/api/notification/pushMsg", print_str);
                     }else{
                         // push error message
                         // 通常情况下不会进入到这个分支里面，n.data已经在init里面成功获取了
