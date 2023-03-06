@@ -1,13 +1,12 @@
 /* ————————————————————顶栏———————————————————— */
 .toolbar{
 	background-color: transparent;
-	height:40px;
-	z-index:2;
-	margin-bottom: -40px;
-	border-bottom: none;
-    padding: 0 0 0 5px!important;
+	height:32px;
 }
-
+.toolbar__window{
+	background-color: transparent;
+	height:40px;
+}
 /*.toolbar:after{
 	content: '';
 	position: absolute;
@@ -24,17 +23,21 @@
 }*/
 
 .toolbar__item:not(.toolbar__item--close){
-	margin: 7px 7px 5px 0px ;
-	border-radius:3px;
-	padding: 3px;
+	margin: 5px 4px 5px 0px;
+	border-radius:5px;
+	padding: 1px;
 }
-.toolbar__item svg{
+.toolbar__window .toolbar__item:not(.toolbar__item--close){
+	padding: 3px;
+	margin: 7px 4px 7px 0px  
+}
+.toolbar__item svg,.toolbar__window .toolbar__item svg{
 	padding: 3px;
 	height: 14px;
 	width: 14px;	
 }
 
-.toolbar__item:not(.toolbar__item--disabled) svg{
+.toolbar__item:not(.toolbar__item--disabled) svg,.toolbar__window .toolbar__item:not(.toolbar__item--disabled) svg{
 	color: var(--b3-theme-on-background);
 }
 
@@ -47,10 +50,12 @@
 	padding: 3px 5px;
 }
 
-#minWindow, #restoreWindow, #maxWindow, #closeWindow{
+ #restoreWindow, #maxWindow{
 	margin:0;
 }
-
+.toolbar__window #restoreWindow, .toolbar__window #maxWindow{
+	margin: 7px 4px 7px 0px 
+}
 
 #closeWindow svg{
 	width: 10px!important;
@@ -58,9 +63,11 @@
 }
 
 .toolbar__item--close{
-	padding: 10px 7px;
+	padding: 5px 7px;
 }
-
+.toolbar__window .toolbar__item--close{
+	padding: 9px;
+}
 #closeWindow:hover{
 	background-color: var(--b3-toolbar-closeWindow-hover);
 }
@@ -69,16 +76,7 @@
 	color: var(--b3-toolbar-closeWindow-svg);
 }
 
-#drag {
-	height: 15px;
-	margin-bottom: 25px;
-	color: transparent!important;
-}
 
-body:has(.layout__empty) .toolbar #drag {
-	height: 40px;
-	line-height: 40px;
-}/*关闭所有文档后drag高度*/
 
 
 /*#windowAppIcon{
@@ -91,21 +89,16 @@ body:has(.layout__empty) .toolbar #drag {
 	height: 14px;
 	width: 14px;	
 }*/
-#notionToolbar{
-	margin-right:7px!important;
-}
+
 #barSync{
-	margin-left:7px;
+	margin-left:5px;
 }
-#barWorkspace .toolbar__text{
-	line-height:18px;
-}
+
 #barWorkspace {
-	height:26px;
+	height:22px;
 	border-radius:5px;
-	padding:0 5px;
-	margin-left:2px;
-	margin-right:7px;
+	padding:0 3px 0 7px;
+	margin:0px 3px 0 2px;
 	/*background-color:#e16259;*/
 	background: #e16259 linear-gradient(to bottom right, rgba(0,255,0,0), #c54238);
 	/*background-image: linear-gradient(to bottom right , #7A88FF, #7AFFAF);*/
@@ -116,28 +109,20 @@ body:has(.layout__empty) .toolbar #drag {
 	transition: background-color .5s;
 }
 #barWorkspace .toolbar__text{
-	width:16px;
-	line-height:25px;
-	word-break:break-all;
+	line-height:22px;
 	color:var(--b3-theme-background);
-	overflow: hidden;
-	text-overflow : clip;
-	white-space:pre-wrap;
 	text-align:center;
 	font-weight:600;
 	text-transform:uppercase;
 }
 
-/*#barWorkspace .toolbar__svg{
-	display:none;
-}*/
 #barWorkspace .toolbar__svg{
-	display:none;
+	padding:4px;
+	color:var(--b3-theme-background);
+	margin:0px;
 }
 
-#toolbarVIP{
-	display:none;
-}
+
 
 /*只读按钮适配*/
 #barReadonly.toolbar__item--active{

@@ -432,18 +432,15 @@ body{
 
 
 
-.body--window .layout__center .layout-tab-bar--readonly {
-    -webkit-app-region: no-drag;
-}
 
 .body--window .layout-tab-bar .item--readonly{
 	margin-top:-2px;
 }
 
-.body--window .toolbar__window .toolbar__item{
-	padding: 9px;
-}
 
+.body--window .layout-tab-bar{
+	border-bottom: 1px solid var(--b3-theme-background-light);
+}
 
 
 
@@ -456,7 +453,7 @@ body{
 
 
 .dock#dockLeft{
-	box-shadow: var(--b3-dock-background) 0px 40px 0px 0px;
+	box-shadow:  var(--b3-dock-background) 0px 40px 0px 0px;
 }
 
 .dock#dockRight{
@@ -471,14 +468,17 @@ body{
 #layouts{
 	margin-bottom:-36px;
 }
+
 #layouts>.fn__flex+.layout__resize+.fn__flex-1{
 	margin-bottom:36px;
 	overflow:visible;
 }
-#dockTop + .fn__flex-1 {
+#toolbar + .fn__flex-1 {
     overflow: visible;
 }
-
+.fn__flex-column.fn__flex-shrink,.layout__center ~ .fn__flex-column{
+	margin-bottom:35px;
+}
 
 .fn__flex-column.fn__flex-shrink + .layout__resize:after{
 	box-shadow: var(--b3-layout-resize) 0px 40px 0px 0px;
@@ -488,7 +488,7 @@ body{
 }
 
 
-.fn__flex-1:has(~.status.fn__none) .layout__center,.fn__flex-1:has(~.status.fn__none) #layouts{
+.fn__flex-1:has(~.status.fn__none) .fn__flex-column.fn__flex-shrink,.fn__flex-1:has(~.status.fn__none) .layout__center ~ .fn__flex-column,.fn__flex-1:has(~.status.fn__none) #layouts{
 	margin-bottom:0px;
 }
 
@@ -505,36 +505,22 @@ body{
 .fn__flex-shrink.layout--float{
 	min-height: unset;
 	padding-top: 0px;
-	top: 80px!important; 
+	top: 115px!important; 
 	bottom: 40px!important; 
 	box-shadow:  rgba(15, 15, 15, 0.2) 10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  10px -10px 20px -12px; 
 	border-radius:0 5px 5px 0;
 	overflow:hidden;
 }
-.fn__flex-shrink.layout--float ~ .layout__center>div:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
-.fn__flex-shrink.layout--float ~ .layout__center>div:first-child>.fn__flex-1:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
- margin-left:150px;
-}
-#dockLeft.fn__none+#layouts .fn__flex-shrink.layout--float ~ .layout__center>div:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
-#dockLeft.fn__none+#layouts .fn__flex-shrink.layout--float ~ .layout__center>div:first-child>.fn__flex-1:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
- margin-left:190px;
-}
 
 .layout__center ~ .fn__flex-column.layout--float{
 	min-height: unset;
 	padding-top: 0px;
-	top: 80px!important; 
+	top: 115px!important; 
 	bottom: 40px!important; 
 	box-shadow: rgba(15, 15, 15, 0.2) -10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  -10px -10px 20px -12px; 
 	border-radius:5px 0 0 5px;
 	overflow:hidden;
 }
 
-.layout__center:has(~.fn__flex-column.layout--float[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly,
-.layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:190px;
-}
-#dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column.layout--float[style*="width"])>div:nth-last-child(1)>div:nth-last-child(1)  .layout-tab-bar.layout-tab-bar--readonly,
-#dockLeft.fn__none+#layouts .layout__center>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-  margin-right:230px;
-}
+
+

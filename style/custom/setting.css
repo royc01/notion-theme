@@ -1,82 +1,22 @@
 
 #notionToolbar{
-	width:26px;
-	height:26px;
-	margin:8px 0px 4px 0px;
-	border-radius:3px;
-	overflow:hidden;
-	background: url("/appearance/themes/Savor/img/setting.svg") no-repeat center; 
-}
-#notionToolbar:hover{
-	overflow:visible;
-	background-color:var(--b3-toolbar-item-hover);
+	height:22px;
 }
 
-#notionToolbar div{
-	border-radius:0;
-}
-#notionToolbar div:first-child{
-	border-radius:5px 5px 0 0;
-}
-#notionToolbar div:last-child{
-	border-radius:0 0 5px 5px;
-}
+
 #buttonsalt,#topBar,#conceal,#tabbarVertical,#buttonvinegar,#buttonsugar{
-	height:32px;
-	margin:0;
-	border:6px solid var(--b3-theme-background);
-	border-bottom:0;
-	width:128px;
+	height:22px;
+	width:22px!important;
 	background-color:var(--b3-theme-background);
+	display: inline-block;
+	margin: 5px 4px 5px 0px 
 }
-#topBar{
-	height:38px;
-	border-bottom:6px solid var(--b3-theme-background);
-}
-#buttonsalt{
-	margin-top:26px;
-}
-#buttonsalt{
-		opacity:0;
-	box-shadow:	rgba(15, 15, 15, 0.05) 0px 0px 0px 1px,
-				rgba(15, 15, 15, 0.05) 0px 32px 0px 1px,
-				rgba(15, 15, 15, 0.05) 0px 64px 0px 1px,
-				rgba(15, 15, 15, 0.05) 0px 96px 0px 1px,
-				rgba(15, 15, 15, 0.05) 0px 128px 0px 1px,
-				rgba(15, 15, 15, 0.05) 0px 160px 0px 1px,
-					
-				rgba(15, 15, 15, 0.1) 0px 3px 6px,
-				rgba(15, 15, 15, 0.1) 0px 35px 6px,
-				rgba(15, 15, 15, 0.1) 0px 67px 6px,
-				rgba(15, 15, 15, 0.1) 0px 99px 6px,
-				rgba(15, 15, 15, 0.1) 0px 131px 6px,
-				rgba(15, 15, 15, 0.1) 0px 163px 6px,
-					
-				rgba(15, 15, 15, 0.2) 0px 9px 24px,
-				rgba(15, 15, 15, 0.2) 0px 41px 24px,
-				rgba(15, 15, 15, 0.2) 0px 73px 24px,
-				rgba(15, 15, 15, 0.2) 0px 105px 24px,
-				rgba(15, 15, 15, 0.2) 0px 137px 24px,
-				rgba(15, 15, 15, 0.2) 0px 169px 24px;
-}
+
+
 #notionToolbar:hover #buttonsalt{
 	opacity:1;
 }
-#buttonsalt::after,#topBar::after,#conceal::after,#tabbarVertical::after,#buttonvinegar::after,#buttonsugar::after{
-	font-size:14px;
-	line-height:18px;
-	transform:none;
-	opacity:1;
-	color:#000;
-	background-color:transparent;
-	position:static;
-	margin:0;
-	padding:0 0 0 24px;
-}
-#buttonsalt::before,#topBar::before,#conceal::before,#tabbarVertical::before,#buttonvinegar::before,#buttonsugar::before{
-	display:none;
-}
 
 #buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover{
-	background-color:var(--b3-theme-background-light);
+	background-color: var(--b3-toolbar-item-hover);
 }

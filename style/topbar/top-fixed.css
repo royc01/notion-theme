@@ -1,7 +1,7 @@
 
 .toolbar{
-	height:40px;
-	margin-bottom: -40px;
+	height:32px;
+	margin-bottom: -32px;
 	opacity: 0;
 	transition: all 300ms;
 	transform:translateY(-20px);
@@ -27,15 +27,9 @@
 .dock#dockLeft .dock__item:first-child,.dock#dockRight .dock__item:first-child{
 	margin: 8px 7px 7px 7px;
 }
-.dock#dockRight .dock__item:last-child{
-	margin: 7px 7px 40px 7px;
-	bottom:0px;
-}
 
 
-#notionToolbar{
-	margin:8px 4px 4px 4px;
-}
+
 
 
 
@@ -43,13 +37,10 @@
 	margin-right:0!important;
 	margin-left:0!important;
 }
-.layout__center .layout-tab-bar--readonly {
-	-webkit-app-region: unset;
-}
 
 
 #drag{
-	height:40px;
+	height:32px;
 	margin-bottom: 0px;
 }
 

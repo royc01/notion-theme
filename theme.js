@@ -607,7 +607,7 @@ function topbarfixedButton() {
     notionThemeToolbarAddButton(
         "topBar",
         "toolbar__item b3-tooltips b3-tooltips__se",
-		"隐藏按钮",
+		"隐藏顶栏",
         "/appearance/themes/Savor/img/topbar2.svg",
         "/appearance/themes/Savor/img/topbar.svg",
         () => {
@@ -2134,3 +2134,4 @@ ws.addEventListener("message", (msg) => {
     }
 }
 )
+

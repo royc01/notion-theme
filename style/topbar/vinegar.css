@@ -278,27 +278,17 @@ body{
 
 
 #buttonsalt,#topBar,#conceal,#tabbarVertical,#buttonvinegar,#buttonsugar{
-	background-color:var(--b3-theme-on-background);
-	border:6px solid var(--b3-theme-on-background);
-	border-bottom:0;
+	background-color:transparent;
 }
-#topBar{
-	border-bottom:6px solid var(--b3-theme-on-background);
-}
+
 #notionToolbar{
 	filter: hue-rotate(180deg) invert(90%);
-}
-#rightColumn,#leftColumn{
-	filter: hue-rotate(180deg) invert(90%);
+	z-index:2;
 }
 #buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover{
 	background-color:#fff;
 }
 
-#buttonsalt{
-		opacity:1;
-	box-shadow:none;
-}
 
 .layout-tab-container{
 	background-color:unset;

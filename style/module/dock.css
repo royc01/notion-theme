@@ -30,9 +30,7 @@
 	/*color: var(--b3-dock-item-active-color);*/
 	background-color:var(--b3-dockright-item-active-background);
 }
-.dock#dockLeft .dock__item:first-child,.dock#dockRight .dock__item:first-child{
-	margin: 48px 7px 7px 7px;
-}
+
 
 .dock__item svg{
 	width: 12px;

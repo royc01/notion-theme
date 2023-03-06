@@ -2,7 +2,6 @@
 .fn__flex-column.fn__flex-shrink,.layout__center+.layout__resize--lr+.fn__flex-column{
 	background-color: var(--b3-fn__flex-column-background);
 	min-height:90%;
-	padding-top:40px;
 }
 .layout-tab-container>.fn__flex-column {
     padding: var(--b3-flex-column-padding);

@@ -290,7 +290,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	background-color: var(--b3-theme-background);
 }
 /* 弹出工具条字体颜色选择 */
-.b3-color__square[data-type="color"]{
+.color__square[data-type="color"]{
 	 border-radius: 3px;
 	 width:22px;
 	 height:22px;
@@ -337,33 +337,33 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 .b3-color__square[style="background-color:var(--b3-font-color13)"]::before{
 	color:var(--b3-font-color13);
 }*/
-.b3-color__square[data-type="backgroundColor"]{
+.color__square[data-type="backgroundColor"]{
 	 border-radius: 3px;
 	 width:22px;
 	 height:22px;															   
 	 box-shadow: 0 0 0 1px var(--b3-color--square) inset;
 }
-.b3-color__square[data-type="backgroundColor"]::before{
+.color__square[data-type="backgroundColor"]::before{
 	 content: "A";
 	 color:var(--b3-theme-on-background);
 }
-.b3-color__square:hover{
+.color__square:hover{
 	box-shadow: 0 0 0 1px var(--b3-theme-on-background) inset;
 }
-.b3-color__square[style="background-color:var(--b3-font-color1)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color2)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color3)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color4)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color5)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color6)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color7)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color8)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color9)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color10)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color11)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color12)"]::before,
-.b3-color__square[style="background-color:var(--b3-font-color13)"]::before,
-.b3-color__square[data-type="backgroundColor"]::before{
+.color__square[style="background-color:var(--b3-font-color1)"]::before,
+.color__square[style="background-color:var(--b3-font-color2)"]::before,
+.color__square[style="background-color:var(--b3-font-color3)"]::before,
+.color__square[style="background-color:var(--b3-font-color4)"]::before,
+.color__square[style="background-color:var(--b3-font-color5)"]::before,
+.color__square[style="background-color:var(--b3-font-color6)"]::before,
+.color__square[style="background-color:var(--b3-font-color7)"]::before,
+.color__square[style="background-color:var(--b3-font-color8)"]::before,
+.color__square[style="background-color:var(--b3-font-color9)"]::before,
+.color__square[style="background-color:var(--b3-font-color10)"]::before,
+.color__square[style="background-color:var(--b3-font-color11)"]::before,
+.color__square[style="background-color:var(--b3-font-color12)"]::before,
+.color__square[style="background-color:var(--b3-font-color13)"]::before,
+.color__square[data-type="backgroundColor"]::before{
 	content: "A";
 	opacity:1;
 	width:22px;
@@ -618,35 +618,6 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 
 
 
-
-/*编辑器偏移修正*/
-.fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
-.fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
-.fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex-1:first-child>.fn__flex-1:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
-	margin-left:150px;
-}
-
-.layout__center:has(~.fn__flex-column[style*="width: 0px"])>div:nth-last-child(1)>div:nth-last-child(1) .layout-tab-bar.layout-tab-bar--readonly,
-.layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly,
-.layout__center:has(~.fn__flex-column[style*="width: 0px"]) .fn__flex-1:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-	margin-right:190px;
-}
-.layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex-1:not(:only-child):first-child>.fn__flex:first-child .layout-tab-bar.layout-tab-bar--readonly{
-	margin-right:0px;
-}
-.layout__center .layout__resize:not(.layout__resize--lr)+.fn__flex .layout-tab-bar.layout-tab-bar--readonly{
-	margin-right:0px!important;
-}
-
-.layout__center .fn__flex-1:has(~.layout__resize--lr) .layout-tab-bar.layout-tab-bar--readonly{
-	margin-right:0px!important;
-}
-.layout__center .layout__resize--lr+.fn__flex-1 .layout-tab-bar{
-	margin-left:0px!important;
-}
-.layout__center .fn__flex-column .layout__resize+.fn__flex-1 .layout-tab-bar{
-	margin-left:0px!important;
-}
 
 /*关闭边栏侧栏，页签间距修正*/
 #dockLeft.fn__none+#layouts .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),

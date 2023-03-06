@@ -4,8 +4,6 @@
 	position:relative;
 	background-color: var(--b3-theme-background);
 	height: 40px;
-	z-index:2;
-	box-shadow: 0 1px 0 0 var(--b3-border-color2);
 
 }
 /*页签前后分割线
@@ -100,7 +98,7 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 	width: 24px;
 }
 .layout-tab-bar .item__icon{
-	padding:4px 0 4px 4px;
+	padding:0px 0 0px 4px;
 }
 .layout-tab-bar .item--pin .item__icon{
 	padding:2px 2px 3px 3px;
@@ -130,8 +128,4 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 }
 .layout__center .layout-tab-bar--readonly {
     min-width: 82px;
-    -webkit-app-region: drag;
-}
-.layout__center .layout-tab-bar .item--readonly .item__close{
-	-webkit-app-region: no-drag;
 }
