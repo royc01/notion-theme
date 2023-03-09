@@ -258,6 +258,3 @@
 .dock#dockLeft .dock__item:not(.dock__item--active){
 	color:var(--b3-dockright-background);
 }
-#barWorkspace .toolbar__svg{
-	color:var(--b3-list-item-arrow);
-}

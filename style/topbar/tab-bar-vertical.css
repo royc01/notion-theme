@@ -1,12 +1,10 @@
 
-.toolbar{
-	z-index:7;
-}
+
 .layout-tab-bar{
 	padding: 0 4px 0 4px;
 	box-shadow: -1px 0px 0px 0px var(--b3-layout-resize) inset;
 	margin:0;
-	z-index:1;
+	border-bottom: none;
 }
 .layout__center{
 	box-shadow: 0px 39px 0 0px var(--b3-theme-background) inset,0px 40px 0 0px var(--b3-border-color) inset;

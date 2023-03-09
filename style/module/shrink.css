@@ -66,14 +66,13 @@
 /*面板功能*/
 .file-tree .block__icons>.block__icon svg,
 .file-tree .block__icons>.fn__flex>.block__icon svg{
-	padding: 5px;
-	height: 12px;
-    width: 12px;
+	padding: 3px 0.5px;
 	color: var(--b3-block-icon-svg-color);
+	margin:0px 3px
 }
 .file-tree .block__icons>.block__icon,.file-tree .block__icons>.fn__flex>.block__icon{
-	margin:-4px;
 	padding: 0px;
+	margin:-3px;
 }
 .file-tree .block__icons>.fn__flex>.block__icon[type="checkbox"]{
 	margin:0px 0px 0px -8px;
@@ -183,7 +182,9 @@
 	font-weight:600;
 	color:var(--b3-theme-on-background)!important;
 }
-/*标签树*/
+/*书签、标签树*/
+.sy__bookmark>.fn__flex-1>ul>.b3-list-item>.b3-list-item__graphic,
+.sy__bookmark ul ul li>.b3-list-item__graphic,
 .sy__tag>.fn__flex-1>ul>.b3-list-item>.b3-list-item__graphic,
 .sy__tag ul ul li>.b3-list-item__graphic{
 	margin:0 0 0 -6px;
@@ -200,7 +201,7 @@
 }*/
 /*收集箱面板*/
 .sy__inbox .inbox__details{
-	top: 50px;
+	top: 40px;
 }
 input[type="checkbox" i] {
 	margin-left:6px;
@@ -305,6 +306,23 @@ input[type="checkbox" i] {
 }
 
 /* 反链面板 */
+.sy__backlink .block__icons .counter{
+	position:absolute;
+	left:7px;
+	padding: 0px;
+	width:20px;
+	height: 20px;
+	line-height: 20px;
+	color: var(--b3-block-logo-color);
+    background-color: transparent;
+	text-align:center;
+}
+.sy__backlink .block__logo:has(+.listCount:not(.fn__none)) svg{
+	color: transparent;
+}
+.sy__backlink .block__logo:has(+.listMCount:not(.fn__none)) svg{
+	color: transparent;
+}
 .backlinkList>.b3-list>.protyle,.backlinkMList>.b3-list>.protyle{
 	margin:0 6px 6px 6px;
 	border-radius:0 0 3px 3px;

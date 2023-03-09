@@ -65,9 +65,7 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 	margin:4px 3px 0 0;
 	padding:0;
 }
-.layout-tab-bar{
-	border-bottom:none;
-}
+
 .item__close[data-type="more"] svg{
     padding: 8px;
 	border-radius: 5px;

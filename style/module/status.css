@@ -102,7 +102,7 @@
 	margin:4px 0px 7px 7px;
 	padding: 0px 0px 0px 8px;
 	border-radius:5px;
-	background-color:var(--b3-theme-on-primary);
+	background-color:var(--b3-theme-background);
 	height:24px;
 	line-height:24px;
 	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
