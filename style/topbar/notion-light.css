@@ -261,3 +261,6 @@ body{
 
 
 
+#buttonSavor-dark,#buttonvinegar{
+	display:none!important;
+}

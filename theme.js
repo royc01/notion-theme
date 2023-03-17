@@ -1,4 +1,4 @@
-window.Savor = {};
+window.theme = {};
 
 
 
@@ -7,7 +7,7 @@ window.Savor = {};
  * @params {string} href 样式地址
  * @params {string} id 样式 ID
  */
-window.Savor.loadStyle = function (href, id = null) {
+window.theme.loadStyle = function (href, id = null) {
     let style = document.createElement('link');
     if (id) style.id = id;
     style.type = 'text/css';
@@ -21,23 +21,23 @@ window.Savor.loadStyle = function (href, id = null) {
  * @params {string} id 样式文件 ID
  * @params {string} href 样式文件地址
  */
-window.Savor.updateStyle = function (id, href) {
+window.theme.updateStyle = function (id, href) {
     let style = document.getElementById(id);
     if (style) {
         style.setAttribute('href', href);
     }
     else {
-        window.Savor.loadStyle(href, id);
+        window.theme.loadStyle(href, id);
     }
 }
 
-window.Savor.ID_COLOR_STYLE = 'theme-color-style';
+window.theme.ID_COLOR_STYLE = 'theme-color-style';
 
 /**
  * 获取主题模式
  * @return {string} light 或 dark
  */
-window.Savor.themeMode = (() => {
+window.theme.themeMode = (() => {
     /* 根据浏览器主题判断颜色模式 */
     // switch (true) {
     //     case window.matchMedia('(prefers-color-scheme: light)').matches:
@@ -64,12 +64,12 @@ window.Savor.themeMode = (() => {
  * @params {string} lightStyle 浅色主题配置文件路径
  * @params {string} darkStyle 深色主题配置文件路径
  */
-window.Savor.changeThemeMode = function (
+window.theme.changeThemeMode = function (
     lightStyle,
     darkStyle,
 ) {
     let href_color = null;
-    switch (window.Savor.themeMode) {
+    switch (window.theme.themeMode) {
         case 'light':
             href_color = lightStyle;
             break;
@@ -78,12 +78,12 @@ window.Savor.changeThemeMode = function (
             href_color = darkStyle;
             break;
     }
-    window.Savor.updateStyle(window.Savor.ID_COLOR_STYLE, href_color);
+    window.theme.updateStyle(window.theme.ID_COLOR_STYLE, href_color);
 }
 
 
 /* 根据当前主题模式加载样式配置文件 */
-window.Savor.changeThemeMode(
+window.theme.changeThemeMode(
     `/appearance/themes/Savor/style/topbar/notion-light.css`,
     `/appearance/themes/Savor/style/topbar/notion-dark.css`,
 );
@@ -518,10 +518,27 @@ setTimeout(()=>ClickMonitor(),1000)
 /**---------------------------------------------------------主题-------------------------------------------------------------- */
 
 function themeButton() {
+	notionThemeToolbarAddButton(
+        "buttonSavor-light",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"Savor-light 配色",
+		'light',
+        "/appearance/themes/Savor/img/base2.svg",
+        "/appearance/themes/Savor/img/base.svg",
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/notion-light.css", "Savor-light").setAttribute("topicfilter", "buttonSavor-light");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("Savor-light").remove();
+        },
+        true
+    );
 		notionThemeToolbarAddButton(
         "buttonsalt",
         "toolbar__item b3-tooltips b3-tooltips__se",
-		"Salt 主题",
+		"Salt 配色",
+		'light',
         "/appearance/themes/Savor/img/salt2.svg",
         "/appearance/themes/Savor/img/salt.svg",
         () => {
@@ -536,7 +553,8 @@ function themeButton() {
 		notionThemeToolbarAddButton(
         "buttonsugar",
         "toolbar__item b3-tooltips b3-tooltips__se",
-		"Sugar 主题",
+		"Sugar 配色",
+		'light',
         "/appearance/themes/Savor/img/sugar2.svg",
         "/appearance/themes/Savor/img/sugar.svg",
         () => {
@@ -548,12 +566,29 @@ function themeButton() {
         },
         true
     );
+		notionThemeToolbarAddButton(
+        "buttonSavor-dark",
+        "toolbar__item b3-tooltips b3-tooltips__se",
+		"Savor-dark 配色",
+		'dark',
+        "/appearance/themes/Savor/img/base2.svg",
+        "/appearance/themes/Savor/img/base3.svg",
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/notion-dark.css", "Savor-dark").setAttribute("topicfilter", "buttonSavor-dark");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("Savor-dark").remove();
+        },
+        true
+    );
 	    notionThemeToolbarAddButton(
         "buttonvinegar",
         "toolbar__item b3-tooltips b3-tooltips__se",
-		"Vinegar 主题",
+		"Vinegar 配色",
+		'dark',
         "/appearance/themes/Savor/img/moon2.svg",
-        "/appearance/themes/Savor/img/moon.svg",
+        "/appearance/themes/Savor/img/moon3.svg",
         () => {
             loadStyle("/appearance/themes/Savor/style/topbar/vinegar.css", "vinegar主题").setAttribute("topicfilter", "buttonvinegar");
             qucuFiiter();
@@ -568,7 +603,7 @@ function themeButton() {
 /**---------------------------------------------------------挖空-------------------------------------------------------------- */
 
 function concealMarkButton() {
-    notionThemeToolbarAddButton(
+    notionThemeToolplusAddButton(
         "conceal",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"挖空",
@@ -586,7 +621,7 @@ function concealMarkButton() {
 /**---------------------------------------------------------垂直-------------------------------------------------------------- */
 
 function tabbarVerticalButton() {
-    notionThemeToolbarAddButton(
+    notionThemeToolplusAddButton(
         "tabbarVertical",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"垂直页签",
@@ -604,7 +639,7 @@ function tabbarVerticalButton() {
 /**---------------------------------------------------------顶栏-------------------------------------------------------------- */
 
 function topbarfixedButton() {
-    notionThemeToolbarAddButton(
+    notionThemeToolplusAddButton(
         "topBar",
         "toolbar__item b3-tooltips b3-tooltips__se",
 		"隐藏顶栏",
@@ -1209,7 +1244,7 @@ async function 写入文件(path, filedata, then = null, obj = null, isDir = fal
  * @param {*} OffClickRunFun 按钮关闭执行函数
  * @param {*} Memory 是否设置记忆状态 true为是留空或false为不设置记忆状态。
  */
-function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
+function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
     var notionToolbar = document.getElementById("notionToolbar");
     if (notionToolbar == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
@@ -1236,9 +1271,118 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
     addButton.id = ButtonID;
 	addButton.setAttribute("class", ButtonTitle);
 	addButton.setAttribute("aria-label", ButtonLabel)
+	
 
-    var offNo = "0";
+    if (window.theme.themeMode == Mode) {
+        var offNo = '0';
 
+
+        
+        // 如果主题是暗色主题，默认选中样式
+        if (Mode == 'dark') {
+            if (Memory == true) {
+        offNo = getItem(ButtonID);
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+            setItem(ButtonID, "0");
+            NoClickRunFun(addButton);
+            setItem(ButtonID, "1");
+        } else if (offNo != "0") {
+            offNo = "0";
+            setItem(ButtonID, "0");
+        }
+    }
+
+    AddEvent(addButton, "click", () => {
+
+        if (offNo == "0") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+
+            NoClickRunFun(addButton);
+            if (Memory != null) setItem(ButtonID, "1");
+            offNo = "1";
+            return;
+        }
+
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
+            addButton.style.filter = "none";
+            OffClickRunFun(addButton);
+            if (Memory != null) setItem(ButtonID, "0");
+            offNo = "0";
+            return;
+        }
+    });
+        } else {
+    if (Memory == true) {
+        offNo = getItem(ButtonID);
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+            setItem(ButtonID, "0");
+            NoClickRunFun(addButton);
+            setItem(ButtonID, "1");
+        } else if (offNo != "0") {
+            offNo = "0";
+            setItem(ButtonID, "0");
+        }
+    }
+
+    AddEvent(addButton, "click", () => {
+
+        if (offNo == "0") {
+            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+
+            NoClickRunFun(addButton);
+            if (Memory != null) setItem(ButtonID, "1");
+            offNo = "1";
+            return;
+        }
+
+        if (offNo == "1") {
+            addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
+            addButton.style.filter = "none";
+            OffClickRunFun(addButton);
+            if (Memory != null) setItem(ButtonID, "0");
+            offNo = "0";
+            return;
+        }
+    })
+   }
+    }
+
+}
+
+
+function notionThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
+    var notionToolplus = document.getElementById("notionToolplus");
+    if (notionToolplus == null) {
+        var toolbarEdit = document.getElementById("toolbarEdit");
+        var windowControls = document.getElementById("barSearch");
+
+        if (toolbarEdit == null && windowControls != null) {
+            notionToolplus = document.createElement("div");
+            notionToolplus.id = "notionToolplus";
+            windowControls.parentElement.insertBefore(notionToolplus, barSearch);
+        } else if (toolbarEdit != null) {
+            notionToolplus = insertCreateBefore(toolbarEdit, "div", "notionToolplus");
+            notionToolplus.style.position = "relative";
+        }
+    }
+
+    var addButton = addinsertCreateElement(notionToolplus, "div");
+    addButton.style.float = "top";
+    addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
+    addButton.style.backgroundRepeat = "no-repeat";
+	addButton.style.backgroundPosition = "left";
+
+
+    
+    addButton.id = ButtonID;
+	addButton.setAttribute("class", ButtonTitle);
+	addButton.setAttribute("aria-label", ButtonLabel)
+	
+
+	var offNo = '0';
 
 
     if (Memory == true) {
@@ -1273,24 +1417,22 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButto
             offNo = "0";
             return;
         }
-    });
-
+    })
 
 }
 
-
 function setItem(key, value) {
-    window.Savor.config[key] = value;
-    写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4));
+    window.theme.config[key] = value;
+    写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
 }
 
 function getItem(key) {
-    return window.Savor.config[key] === undefined ? null : window.Savor.config[key];
+    return window.theme.config[key] === undefined ? null : window.theme.config[key];
 }
 
 function removeItem(key) {
-    delete window.Savor.config[key];
-    写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4));
+    delete window.theme.config[key];
+    写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
 }
 /**
  * 在DIV光标位置插入内容
@@ -1549,7 +1691,10 @@ function getSiYuanToolbar() { return document.getElementById("toolbar"); }
  */
 function getnotionToolbar() { return document.getElementById("notionToolbar"); }
 
-
+/**简单判断目前思源是否是pc窗口模式 */
+function isPcWindow() {
+    return document.body.classList.contains("body--window");
+}
 
 /**简单判断目前思源是否是手机模式 */
 function isPhone() {
@@ -1965,6 +2110,7 @@ function getcommonMenu_Bolck() {
 }
 
 
+
 /**++++++++++++++++++++++++++++++++按需调用++++++++++++++++++++++++++++++ */
 获取文件("/data/snippets/Savor.config.json", (v) => {
     let funs = () => {
@@ -2003,110 +2149,19 @@ function getcommonMenu_Bolck() {
         }, 1000);
     }
     if (v == null) {
-        window.Savor.config = { "Savor": 1 };
-        写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4), (a) => { funs() });
+        window.theme.config = { "Savor": 1 };
+        写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4), (a) => { funs() });
     } else {
-        window.Savor.config = v;
+        window.theme.config = v;
         funs();
     }
     // setInterval(() => {
-    //     写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.Savor.config, undefined, 4));
+    //     写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
     // }, 5000)
 });
 
 
 
-
-const config = {
-  theme: {
-    regs: {
-      // 正则表达式
-      fontsize: /(?<=\.b3-typography|protyle-wysiwyg|protyle-title\s*\{\s*font-size\s*:\s*)(\d+)(?=px(?:\s+\!important)?(?:\s*;|\}))/,
-    },
-    wheel: {
-      enable: true, // 滚轮功能开关
-      zoom: {
-        enable: true, // 滚轮缩放功能开关
-        threshold: 100, // 滚轮缩放阈值
-        min: 9, // 最小字号(px)
-        max: 72, // 最大字号(px)
-      },
-    },
-    hotkeys: {
-      wheel: {
-        zoom: {
-          // 鼠标滚轮缩放(Ctrl + wheel)
-          enable: true,
-          CtrlCmd: true,
-          WinCtrl: false,
-          Shift: false,
-          Alt: false,
-          type: 'mousewheel',
-        },
-      },
-    },
-  },
-};
-
-/**
-* 设置编辑器字号
-* REF https://github.com/siyuan-note/siyuan/blob/7fbae2f7438a313837218e419468e0b189163c6a/app/src/util/assets.ts#L120-L145
-* @param {number} fontSize 字号
-* @return {number} 设置后的字号
-* @return {null} 没有找到字号
-*/
-function setFontSize(fontSize) {
-  let style = document.getElementById('editorFontSize');
-  if (style) {
-    const height = Math.floor(fontSize * 1.625);
-    style.innerHTML = `
-.b3-typography, .protyle-wysiwyg, .protyle-title {font-size:${fontSize}px !important}
-.b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: ${window.siyuan.config.editor.codeLigatures ? "normal" : "none"} }
-.li > .protyle-action {height:${height + 8}px;line-height: ${height + 8}px}
-.protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5, .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6 {line-height:${height + 8}px;}
-.protyle-wysiwyg [data-node-id].li > .protyle-action:after {height: ${fontSize}px;width: ${fontSize}px;margin:-${fontSize / 2}px 0 0 -${fontSize / 2}px}
-.protyle-wysiwyg [data-node-id].li > .protyle-action svg {height: ${Math.max(14, fontSize - 8)}px}
-.protyle-wysiwyg [data-node-id] [spellcheck="false"] {min-height:${height}px}
-.protyle-wysiwyg .li {min-height:${height + 8}px}
-.protyle-gutters button svg {height:${height}px}
-.protyle-wysiwyg img.emoji, .b3-typography img.emoji {width:${height - 8}px}
-.protyle-wysiwyg .h1 img.emoji, .b3-typography h1 img.emoji {width:${Math.floor(fontSize * 1.75 * 1.25)}px}
-.protyle-wysiwyg .h2 img.emoji, .b3-typography h2 img.emoji {width:${Math.floor(fontSize * 1.55 * 1.25)}px}
-.protyle-wysiwyg .h3 img.emoji, .b3-typography h3 img.emoji {width:${Math.floor(fontSize * 1.38 * 1.25)}px}
-.protyle-wysiwyg .h4 img.emoji, .b3-typography h4 img.emoji {width:${Math.floor(fontSize * 1.25 * 1.25)}px}
-.protyle-wysiwyg .h5 img.emoji, .b3-typography h5 img.emoji {width:${Math.floor(fontSize * 1.13 * 1.25)}px}
-.protyle-wysiwyg .h6 img.emoji, .b3-typography h6 img.emoji {width:${Math.floor(fontSize * 1.25)}px}
-.b3-typography:not(.b3-typography--default), .protyle-wysiwyg,.protyle,.p, .protyle-title, .protyle-title__input{font-family: "${window.siyuan.config.editor.fontFamily}",  "D-DIN","MiSans","quote", "Helvetica Neue", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols" !important;}
-`;
-    return parseInt(config.theme.regs.fontsize.exec(style.innerHTML));
-  }
-  return null;
-}
-
-/* 字号更改 */
-function changeFontSize(delta) {
-  let size = delta / config.theme.wheel.zoom.threshold | 0;
-  let old_size = window.siyuan.config.editor.fontSize;
-  let new_size = Math.max(Math.min(old_size + size, config.theme.wheel.zoom.max), config.theme.wheel.zoom.min);
-  new_size = setFontSize(new_size);
-  if (new_size) window.siyuan.config.editor.fontSize = new_size;
-}
-
-function isEvent(event, key) {
-  return (event.type === key.type
-    && event.altKey === key.Alt
-    && event.shiftKey === key.Shift
-    && (event.ctrlKey || event.metaKey) === key.CtrlCmd
-    && (event.ctrlKey && event.metaKey) === key.WinCtrl
-  )
-}
-
-document.addEventListener('mousewheel', e => {
-  if (isEvent(e, config.theme.hotkeys.wheel.zoom)) {
-    e.stopPropagation();
-    setTimeout(() => changeFontSize(e.wheelDeltaY), 0);
-  }
-}, true);
 
 
 
@@ -2135,3 +2190,17 @@ ws.addEventListener("message", (msg) => {
 }
 )
 
+
+
+window.theme.loadScript = function (src, type = 'module', async = false, defer = false) {
+	let script = document.createElement('script');
+	if (type) script.setAttribute('type', type);
+	if (async) script.setAttribute('async', true);
+	if (defer) script.setAttribute('defer', true);
+	script.setAttribute('src', src);
+	document.head.appendChild(script);
+};
+
+
+// 加载打字机功能
+window.theme.loadScript('/appearance/themes/Savor/js_module/module/typewriter.js');

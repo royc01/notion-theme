@@ -4,7 +4,7 @@
 }
 
 
-#buttonsalt,#topBar,#conceal,#tabbarVertical,#buttonvinegar,#buttonsugar{
+#notionToolbar div,#notionToolplus div{
 	height:22px;
 	width:22px!important;
 	background-color:var(--b3-theme-background);
@@ -13,10 +13,7 @@
 }
 
 
-#notionToolbar:hover #buttonsalt{
-	opacity:1;
-}
 
-#buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover{
+#notionToolbar div:hover,#notionToolplus div:hover{
 	background-color: var(--b3-toolbar-item-hover);
 }

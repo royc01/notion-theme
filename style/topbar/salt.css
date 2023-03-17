@@ -258,3 +258,7 @@
 .dock#dockLeft .dock__item:not(.dock__item--active){
 	color:var(--b3-dockright-background);
 }
+
+#buttonSavor-dark,#buttonvinegar{
+	display:none!important;
+}

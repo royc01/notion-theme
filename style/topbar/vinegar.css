@@ -276,23 +276,23 @@ body{
 }
 
 
-
-#buttonsalt,#topBar,#conceal,#tabbarVertical,#buttonvinegar,#buttonsugar{
-	background-color:transparent;
-}
-
-#notionToolbar{
-	filter: hue-rotate(180deg) invert(90%);
-	z-index:2;
-}
-#buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover{
-	background-color:#fff;
-}
-
-
 .layout-tab-container{
 	background-color:unset;
 }
 .dock__item--active{
 	box-shadow: 0 0 0 1px var(--b3-border-color) inset;
+}
+
+#buttonSavor-light,#buttonsalt,#buttonsugar{
+	display:none!important;
+}
+
+#conceal[style*="conceal.svg"]{
+	background-image: url(/appearance/themes/Savor/img/conceal3.svg)!important;
+}
+#tabbarVertical[style*="vtabbar.svg"]{
+	background-image: url(/appearance/themes/Savor/img/vtabbar3.svg)!important;
+}
+#topBar[style*="topbar.svg"]{
+	background-image: url(/appearance/themes/Savor/img/topbar3.svg)!important;
 }

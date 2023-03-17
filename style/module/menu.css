@@ -41,7 +41,7 @@
 	left: -18px;
 }
 /* 按钮 */
-.b3-button:not(.b3-button--text):not(.b3-button--cancel):not(.b3-button--outline){
+.b3-button:not(.b3-button--text):not(.b3-button--cancel){
   font-weight:700;
   background-color:var(--b3-theme-primary);
   color: var(--b3-theme-background) !important;

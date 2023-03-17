@@ -619,18 +619,6 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 
 
 
-/*关闭边栏侧栏，页签间距修正*/
-#dockLeft.fn__none+#layouts .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
-#dockLeft.fn__none+#layouts .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex:first-child .layout-tab-bar:not(.layout-tab-bar--readonly),
-#dockLeft.fn__none+#layouts .fn__flex-shrink[style*="width: 0px"]~.layout__center>.fn__flex-1:first-child>.fn__flex-1:first-child>.fn__flex-1:first-child .layout-tab-bar:not(.layout-tab-bar--readonly){
-	margin-left:190px;
-}
-
-#dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column[style*="width: 0px"])>div:nth-last-child(1)>div:nth-last-child(1) .layout-tab-bar.layout-tab-bar--readonly,
-#dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column[style*="width: 0px"])>.fn__flex:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly,
-#dockLeft.fn__none+#layouts .layout__center:has(~.fn__flex-column[style*="width: 0px"]) .fn__flex-1:has(~.layout__resize:not(.layout__resize--lr)) .layout-tab-bar.layout-tab-bar--readonly{
-	margin-right:230px;
-}
 
 
 
@@ -653,7 +641,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 }
 
 
-/*确认按钮*/
+/*消息确认按钮*/
 .b3-button--cancel{
 	border-radius: 3px;
     background-color: var(--b3-theme-background);

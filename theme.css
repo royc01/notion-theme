@@ -546,3 +546,17 @@ body{
 .fn__flex-1:has(+#cardPreview) [data-type="card-item"].b3-list-item--focus{
 	background-color: var(--b3-theme-background);
 }
+
+#toolbar-theme-typewriter-switch svg.ft__primary{
+	color:#eb8383;
+}
+
+/*卡包添加按钮*/
+span[data-type="add"] svg{
+	padding:3px 0;
+}
+
+
+#preview .list[custom-f="dt"][data-node-id] .protyle-action svg {
+    left: 2px;
+}
