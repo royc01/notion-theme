@@ -314,14 +314,15 @@ input[type="checkbox" i] {
 	height: 20px;
 	line-height: 20px;
 	color: var(--b3-block-logo-color);
-    background-color: transparent;
+    background-color: var(--b3-block-logo-background-color);
 	text-align:center;
+	border-radius:4px;
 }
-.sy__backlink .block__logo:has(+.listCount:not(.fn__none)) svg{
-	color: transparent;
+.sy__backlink.layout__tab--active  .block__icons .counter{
+	background-color: var(--b3-block-icon-active);
 }
-.sy__backlink .block__logo:has(+.listMCount:not(.fn__none)) svg{
-	color: transparent;
+.sy__backlink .block__icons .counter:hover{
+	background-color: var(--b3-block-logo-background-color)!important;
 }
 .backlinkList>.b3-list>.protyle,.backlinkMList>.b3-list>.protyle{
 	margin:0 6px 6px 6px;

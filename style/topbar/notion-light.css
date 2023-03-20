@@ -178,7 +178,7 @@
 	--b3-fn__flex-column-background: rgb(247, 246, 243);
 	--b3-fn__flex-shrink-background: rgb(247, 246, 243);
 	--b3-block-logo-color: rgb(247, 246, 243);
-	--b3-block-logo-background-color: rgba(55, 53, 47, 0.3);
+	--b3-block-logo-background-color: #bdbcb8;
 	--b3-block-icon-svg-color: rgba(161, 160, 156);
 	--b3-block-icon-hover: rgba(55, 53, 47, 0.08);
 	--b3-block-icon-active: #eb8383;
