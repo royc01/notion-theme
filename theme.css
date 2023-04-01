@@ -527,9 +527,6 @@ body{
 .card__block .protyle-breadcrumb{
 	border-top: 1px solid var(--b3-border-color2);
 }
-.card__action>div{
-	padding-bottom:20px;
-}
 
 /*.b3-dialog__scrim[style*="background"]{
 	background: url("/appearance/themes/Savor/img/1.jpg") repeat!important;
@@ -565,7 +562,5 @@ span[data-type="add"] svg{
 #preview .list[custom-f="dt"][data-node-id] .protyle-action svg {
     left: 2px;
 }
-
-
 
 

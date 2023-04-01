@@ -28,17 +28,15 @@
 	margin: 4px 8px;
 }
 /*快捷键面板*/
+#keymapList .b3-list--background{
+	margin:5px 0;
+	border-radius: 3px;
+}
 #keymapList .b3-list-item.toggle{
 	margin:0!important;
 }
-#keymapList .b3-list--border>div label:before {
-	left: -14px;
-}
-#keymapList .b3-list--border>div div:before{
-	left: -48px;
-}
-#keymapList .b3-list--border>div div label:before {
-	left: -18px;
+#keymapList .b3-list--border .b3-list__panel:before{
+	left: -15px;
 }
 /* 按钮 */
 .b3-button:not(.b3-button--cancel){
@@ -140,6 +138,9 @@
 .b3-select {
 	border: 1px solid var(--b3-border-color);
 	padding: 2px 8px 4px 8px;
+}
+.b3-select:hover{
+	background-color:var(--b3-theme-background);
 }
 /* 移动文档菜单 */
 #foldList .b3-list-item__icon{
@@ -283,6 +284,9 @@ div#historyContainer{
      background: var( --b3-theme-primary-lightest);
 }
 /*滚动条*/
+.protyle-scroll{
+	top: 100px;
+}
 ::-webkit-scrollbar {
     width : var(--webkit-scrollbar);
 	height: var(--webkit-scrollbar);
@@ -299,7 +303,10 @@ div#historyContainer{
 	overflow: overlay;
 }*/
 /* 动态加载和调节进度条*/
-.b3-slider{height:24px;}
+.b3-slider{
+	height:24px;
+	padding:1px;
+}
 .b3-slider::-webkit-slider-runnable-track {
     height: 4px;
     background: var(--b3-theme-primary-lighter);
@@ -307,7 +314,7 @@ div#historyContainer{
 
 }
 .b3-slider::-webkit-slider-container {
-padding:3px;
+	padding:3px;
 	height: 30px;
     overflow: hidden;
 }

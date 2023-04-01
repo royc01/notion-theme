@@ -1,93 +1,93 @@
 [data-subtype="u"]>.li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:3px;
-	height:3px!important;
-	border-radius: 50%;
-	background-color:var(--b3-theme-on-background);
-	border: 0.1em solid var(--b3-theme-on-background);
+
 }
 
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
 	color:transparent;
-	width:3px;
-	height:3px;
+	width:2px;
+	height:2px;
 	border-radius: 50%;
 	background-color:var(--b3-theme-background);
-	border: 0.1em solid var(--b3-theme-on-background);
+	border: 0.15em solid var(--b3-theme-on-background);
+	clip-path: circle(45% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:3px;
-	height:3px;
-	border-radius: 0;
-	background-color:var(--b3-theme-on-background);
+	color: transparent;
+    width: 0.08em;
+    height: 0.08em;
+    border-radius: 0;
+    background-color: var(--b3-theme-on-background);
+	clip-path: circle(100% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:3px;
-	height:3px;
+	color: var(--b3-theme-on-background);
+    width: 0.1em;
+    height: 0.1em;
 	border-radius: 50%;
-	background-color:var(--b3-theme-on-background);
-	border: 0.1em solid var(--b3-theme-on-background);
+	clip-path: circle(45% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
 	color:transparent;
-	width:3px;
-	height:3px;
+	width:2px;
+	height:2px;
 	border-radius: 50%;
 	background-color:var(--b3-theme-background);
-	border: 0.1em solid var(--b3-theme-on-background);
+	border: 0.15em solid var(--b3-theme-on-background);
+	clip-path: circle(45% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:3px;
-	height:3px;
-	border-radius: 0;
-	background-color:var(--b3-theme-on-background);
+	color: transparent;
+    width: 0.08em;
+    height: 0.08em;
+    border-radius: 0;
+    background-color: var(--b3-theme-on-background);
+	clip-path: circle(100% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:3px;
-	height:3px;
+	color: var(--b3-theme-on-background);
+    width: 0.1em;
+    height: 0.1em;
 	border-radius: 50%;
-	background-color:var(--b3-theme-on-background);
-	border: 0.1em solid var(--b3-theme-on-background);
+	clip-path: circle(45% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
 	color:transparent;
-	width:3px;
-	height:3px;
+	width:2px;
+	height:2px;
 	border-radius: 50%;
 	background-color:var(--b3-theme-background);
-	border: 0.1em solid var(--b3-theme-on-background);
+	border: 0.15em solid var(--b3-theme-on-background);
+	clip-path: circle(45% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:3px;
-	height:3px;
-	border-radius: 0;
-	background-color:var(--b3-theme-on-background);
+	color: transparent;
+    width: 0.08em;
+    height: 0.08em;
+    border-radius: 0;
+    background-color: var(--b3-theme-on-background);
+	clip-path: circle(100% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:3px;
-	height:3px;
+	color: var(--b3-theme-on-background);
+    width: 0.1em;
+    height: 0.1em;
 	border-radius: 50%;
-	background-color:var(--b3-theme-on-background);
-	border: 0.1em solid var(--b3-theme-on-background);
+	clip-path: circle(45% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
 	color:transparent;
-	width:3px;
-	height:3px;
+	width:2px;
+	height:2px;
 	border-radius: 50%;
 	background-color:var(--b3-theme-background);
-	border: 0.1em solid var(--b3-theme-on-background);
+	border: 0.15em solid var(--b3-theme-on-background);
+	clip-path: circle(45% at center);
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:3px;
-	height:3px;
-	border-radius: 0;
-	background-color:var(--b3-theme-on-background);
+	color: transparent;
+    width: 0.08em;
+    height: 0.08em;
+    border-radius: 0;
+    background-color: var(--b3-theme-on-background);
+	clip-path: circle(100% at center);
 }

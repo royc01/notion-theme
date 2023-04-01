@@ -1,52 +1,40 @@
 /* ————————————————————编辑区———————————————————— */
 /*头图、图标、标签*/
-.protyle-background{
-	border-bottom:10px solid transparent !important;
+
+.protyle-background__iconw{
+	margin-left:6px;
 }
-.protyle-background[style*="30vh"]>.protyle-background__iconw >.protyle-icons,
-.protyle-background[style*="64px"]>.protyle-background__iconw >.protyle-icons,
-.protyle-background[style*="56px"]>.protyle-background__iconw >.protyle-icons,
-.protyle-background[style*="103px"]>.protyle-background__iconw >.protyle-icons{
-	background-color:transparent;
-	position:absolute;
-	left:0px;
-	margin:0px;
-	opacity:0;
+.protyle-background__icon{
+	margin-bottom:10px;
+	border-radius:5px;
 }
-.protyle-background[style*="30vh"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips,
-.protyle-background[style*="64px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips,
-.protyle-background[style*="56px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips,
-.protyle-background[style*="103px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips{
-	margin-top:80px;
+.protyle-background__icon:not(.fn__none)+.protyle-icons {
+	margin-left:-99px;
+	margin-bottom:-48px;
 }
-.protyle-background[style*="30vh"]>.protyle-background__iconw >.fn__none+.protyle-icons>.b3-tooltips{
-	margin-top:0px;
-}/*没图标的情况下浮动*/
-		
-.protyle-background__iconw {
-	height:auto;
-	width:256px;
-	margin-left:5px;
+.body--window .protyle-background__icon:not(.fn__none)+.protyle-icons {
+	margin:10px 0 -48px -99px;
 }
 .protyle-background__iconw .protyle-icons .b3-tooltips{
 	display:inline-flex;
 	height:28px;
-	border-radius:3px;
-	padding:0 8px 0 6px;
+	border-radius:5px;
+	padding:0 6px 0 0;
+	margin:0 2px;
 	color:var(--b3-icons-tooltips);
 	background-color:transparent;
 }
-.protyle-background__iconw .protyle-icons{
-	background-color:transparent;
-	margin:72px 0 0 0px;
-	height:1px;
-	opacity:0
-}
+
 .protyle-background__iconw .protyle-icons .b3-tooltips svg{
-	width:14px;
-	height:14px;
-	padding:7px 6px 0 0;
-	display:inline-flex
+	width:12px!important;
+	height:12px!important;
+	padding:2px!important;
+	margin:6px!important;
+	display:inline-flex;
+	color: var(--b3-theme-background);
+	background-color: var(--b3-icons-tooltips);
+	border-radius:3px;
+	opacity:0.6;
 }
 .protyle-background__iconw .protyle-icons .b3-tooltips::after{
 	display:inline-flex;
@@ -67,15 +55,7 @@
 .protyle-background__iconw .protyle-icons .b3-tooltips:hover{
 	background-color:var(--b3-icons-tooltips-hover);
 }
-.protyle-background .protyle-background__icon{
-	width:78px;
-	height:78px;
-	font-size:54px;
-	top:calc(30vh - 42px);
-	line-height:78px;
-	text-align:center;
-	border-radius:4px
-	}
+
 .protyle-background .protyle-background__icon svg{
 	width:78px;
 	height:78px
@@ -102,7 +82,7 @@
 .protyle-background__img .protyle-icons .b3-tooltips{
 	display:inline-flex;
 	height:28px;
-	padding:0 10px 0 6px;
+	padding:0 10px 0 6px!important;
 	color:var(--b3-img-icons-tooltips);
 }
 .protyle-background__img .protyle-icons .b3-tooltips svg{
@@ -149,37 +129,32 @@
 
 
 /*文档标签*/
-.protyle-icons{
-	z-index:2;
-}
-.protyle-background__tags{
+
+.b3-chips{
 	right:76px;
-}
-.protyle-background[style*="30vh"]>.protyle-background__tags{
 	float:right;
-	margin-top:30.5vh;
+	z-index:10;
 }
-.protyle-background[style*="103px"]>.protyle-background__tags,.protyle-background[style*="47px"]>.protyle-background__tags{
+.b3-chips .b3-chip{
+	margin: 3px;
+	border-radius: 5px;
+	padding: 3px 6px 4px 6px;
+}
+.b3-chip__close{
+	width:0;
+}
+.b3-chip:hover .b3-chip__close,.b3-chip__close:hover{
+	width:14px;
+}
+.protyle-background[style*="30vh"]>.b3-chips{
 	float:right;
+	margin-top:30vh;
 }
-.protyle-background__tags .item{
-	margin: 11px 10px 4px 0;
-	border-radius:5px;
-	padding:2px 8px;
-	font-size:90%;
-	transition: all 200ms;
-}
-.protyle-background__tags .item:hover{
-	padding:2px 22px 2px 8px;
-	transition:padding 200ms ease-in 0s;
-}
-.protyle-background__tags .item svg{
-	top: 4px;
-    right: 4px;
-	background-color:transparent;
-}
-.protyle-background__tags .item svg:hover{
-	background-color:var(--b3-list-background-focus);
+
+
+.body--window .protyle-background[style*="30vh"]>.b3-chips{
+	float:right;
+	margin-top:24vh;
 }
 /*文档标题块*/
 .protyle-title__input{
@@ -399,9 +374,13 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	 transition:none;
 }
 /* 任务列表 */
-.protyle-task--done{
-    color: var(--b3-task-done-color);
-    text-decoration: line-through;
+.protyle-task--done>div[data-node-id].p{
+	color:unset;
+	text-decoration:unset;
+}
+.protyle-task--done>div[data-node-id].p:nth-child(2){
+    color: var(--b3-theme-on-surface-light)!important;
+    text-decoration: line-through!important;
 }
 .protyle-task--done svg{
     color: var(--b3-theme-primary) !important;
