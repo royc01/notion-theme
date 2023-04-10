@@ -158,7 +158,7 @@ function SubMenu(selectid,selecttype,className = 'b3-menu__submenu') {
 	node.appendChild(Defaultth(selectid))
   }
   if(selecttype=="NodeBlockquote"){
-    node.appendChild(Error(selectid))
+    node.appendChild(quoteError(selectid))
 	node.appendChild(Warn(selectid))
 	node.appendChild(Bug(selectid))
 	node.appendChild(Check(selectid))
@@ -304,7 +304,7 @@ function Defaultth(selectid){
   button.onclick=ViewMonitor
   return button
 }
-function Error(selectid){
+function quoteError(selectid){
   let button = document.createElement("button")
   button.className="b3-menu__item"
   button.setAttribute("data-node-id",selectid)

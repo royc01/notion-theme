@@ -137,7 +137,7 @@
 	visibility: visible!important;
     content: "";  
 	margin:0px -13px 0 10px;
-    border-radius: 100%;
+    clip-path: circle(45% at center);
     width: 3px;
     height: 3px;
 	background-color:var(--b3-list-item-arrow);

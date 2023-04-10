@@ -69,7 +69,7 @@
 	height:100%;
 }
 
-.protyle-wysiwyg *[custom-f="bg"] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
+.protyle-wysiwyg *[custom-f="bg"] .li [data-type="NodeHeading"]>[spellcheck]:after{
 	display:none;
 }/*取消标题层级提示*/
 

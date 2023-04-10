@@ -260,21 +260,12 @@ div#historyContainer{
 .hint--menu>.b3-list-item--two{
 	margin:0;
 }
-@media screen and (min-width: 1280px){
-	.hint--menu>.b3-list-item--two{
-	width:calc(25% - 5px);
-}
-	.hint--menu{
-	max-height: 412px !important;
-	}
-}
+
 @media screen and (max-width: 1280px) {
-	.hint--menu>.b3-list-item--two{
-	width:calc(33.3% - 5px);
-	}
 	.hint--menu{
-	max-height: 540px !important;
-	}
+	columns:unset;
+	min-width: unset !important;
+}
 }
 .hint--menu:has(>.emojis){
 	columns:unset!important;

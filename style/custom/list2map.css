@@ -30,14 +30,14 @@
     margin: 0;
 	flex-shrink:0;/*不压缩宽度*/
 }
-.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
+.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"]>[spellcheck]:after{
 	display:none;
 }/*取消标题层级提示*/
 .protyle-wysiwyg *[custom-f="dt"] .li div{
 	border-right:10px solid transparent;
 }
 /*文字框*/
-.protyle-wysiwyg *[custom-f="dt"] .li div>div[spellcheck="false"]{
+.protyle-wysiwyg *[custom-f="dt"] .li div>div[spellcheck]{
 	margin-left:-8px;
 	padding:5px 0 5px 10px;
 	margin-top:2px;
@@ -46,11 +46,11 @@
 	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 	max-width:15vw;
 }
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"]>[data-node-id]>div[spellcheck="false"]
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"]>[data-node-id]>div[spellcheck]
 {
 	padding:5px 0px 5px 35px;
 }
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"]>[data-node-id]>div[spellcheck="false"]
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"]>[data-node-id]>div[spellcheck]
 {
 	padding:5px 10px 5px 25px;
 }
@@ -170,7 +170,7 @@
 }
 
 /*根目录最小宽度，保证块标可点*/
-div *[custom-f="dt"]>[data-type="NodeListItem"]>[data-type="NodeParagraph"]>[spellcheck="false"]{
+div *[custom-f="dt"]>[data-type="NodeListItem"]>[data-type="NodeParagraph"]>[spellcheck]{
 	min-width:50px;
 }
 

@@ -43,7 +43,7 @@
 
 	padding:5px 0px 7px 30px;
 }
-.protyle-wysiwyg *[custom-f~=kb] .li [data-type="NodeHeading"]>[spellcheck="false"]:after{
+.protyle-wysiwyg *[custom-f~=kb] .li [data-type="NodeHeading"]>[spellcheck]:after{
 	display:none;
 }/*取消标题层级提示*/
 
