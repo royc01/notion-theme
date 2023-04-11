@@ -470,7 +470,7 @@ function MenuShow() {
 
 
 function InsertMenuItem(selectid,selecttype){
-  let commonMenu = document.getElementById("commonMenu")
+  let commonMenu = document.querySelector(".b3-menu__items")
   let  readonly = commonMenu.querySelector(".b3-menu__item--readonly")
   let  selectview = commonMenu.querySelector('[id="viewselect"]')
   if(readonly){
