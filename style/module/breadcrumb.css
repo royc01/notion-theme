@@ -1,7 +1,8 @@
 /* ————————————————————面包屑———————————————————— */
 .protyle-breadcrumb{
-	padding: 6px 8px 6px 8px;
+	padding: 6px 8px 6px 7px;
 	/*border-top: 1px solid var(--b3-border-color2);*/
+	margin-left: 1px;
 }
 .block__popover .protyle-breadcrumb{
 	padding: 6px 8px 0px 8px;
@@ -79,7 +80,6 @@
 	border-radius: 5px;
     background-color: var(--b3-block-icon-active);
     color: var(--b3-theme-background) !important;
-    border: 1px solid rgb(15 15 15 / 10%);
     box-shadow: rgb(15 15 15 / 10%) 0px 1px 2px;
 }
 .block__icon--show[data-type="exit-focus"]:hover{
@@ -88,6 +88,4 @@
 }
 
 
-.block__edit>.protyle-breadcrumb>.block__icon {
-    padding: 5px;
-}
+

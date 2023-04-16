@@ -262,3 +262,6 @@
 #buttonSavor-dark,#buttonvinegar{
 	display:none!important;
 }
+.layout__center+.layout__resize--lr+.fn__flex-column{
+	border-top:0.5px solid var(--b3-border-color);
+}

@@ -230,7 +230,7 @@
     border-radius: 3px;
 	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
 	animation: toolbar 0.2s ease-in-out;
-	
+	border:none;
 }
 
 .protyle-toolbar__item{
@@ -258,11 +258,22 @@ width:36px;
 	margin:0px;
 }
 .protyle-util{
-animation: menu 0.2s ease-in-out;
-box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
-}
-.protyle-util{
+	animation: menu 0.2s ease-in-out;
+	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+	border:none;
 	background-color: var(--b3-theme-background);
+}
+/* 引用弹出搜索菜单 */
+.protyle-hint{
+	padding:0 5px;
+	animation: menu 0.2s ease-in-out;
+	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+	border:none;
+	background-color: var(--b3-theme-background);
+}
+.protyle-hint .b3-list-item{
+	margin:5px 0px;
+	width:100%!important;
 }
 /* 弹出工具条字体颜色选择 */
 .color__square[data-type="color"]{
@@ -271,6 +282,7 @@ box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3p
 	 height:22px;
 	 background-color:transparent!important;
 	 font-size:1.3em;
+	 font-weight: 500;
 	 box-shadow: 0 0 0 1px var(--b3-color--square) inset;
 }
 /*.b3-color__square[style="background-color:var(--b3-font-color1)"]::before{

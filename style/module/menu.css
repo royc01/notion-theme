@@ -3,12 +3,15 @@
 	animation: menu 0.2s ease-in-out;
 	box-shadow: var(--b3-menu-shadow);
 	background-color:var(--b3-theme-background);
-	padding:5px 4px;
+	padding:4px;
+	border:none;
 }
 .b3-menu .b3-menu__submenu{
-	padding:5px 4px;
+	padding:4px;
 	background-color:var(--b3-theme-background)!important;
-	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+	box-shadow: var(--b3-menu-shadow);
+	border:none;
+	margin: 4px 0px;
 }
 .b3-menu__item{
 	padding: 0 8px;
@@ -22,6 +25,9 @@
 .b3-menu__accelerator{
 	color:var(--b3-scroll-color-hover);
 }/*快捷键提示*/
+.b3-menu__label div{
+	margin: 4px 0;
+}
 .b3-list-item--big{
 	padding: 14px 24px;
 	border-radius: 0px;
@@ -117,7 +123,6 @@
 	color:var(--b3-theme-on-surface);
 	width:14px;
 	height:14px;
-	padding: 5px;
 }
 /*.block__edit>.protyle-breadcrumb>.block__icon{
 	padding: 0px;
@@ -239,8 +244,9 @@ div#historyContainer{
     background-color: var(--b3-theme-background);
 	columns: 50px 4;
 	column-rule:1px outset var(--b3-border-color);
-    min-width: 50vw !important;
 	padding:5px;
+	border:none;
+	min-width: 50vw;
 }
 .hint--menu .b3-list-item{
 	border-radius:3px;
@@ -260,15 +266,48 @@ div#historyContainer{
 .hint--menu>.b3-list-item--two{
 	margin:0;
 }
-
+@media screen and (min-width: 1280px){
+	.hint--menu>.b3-list-item--two{
+	width:calc(25% - 5px);
+}
+	.hint--menu{
+	max-height: 412px !important;
+	}
+}
 @media screen and (max-width: 1280px) {
 	.hint--menu{
 	columns:unset;
 	min-width: unset !important;
 }
 }
-.hint--menu:has(>.emojis){
-	columns:unset!important;
+.protyle-hint.hint--menu:has(>.emojis) {
+    min-width: 372px;
+    width: 372px !important;
+}
+.protyle-hint.hint--menu>.emojis {
+    column-span: all;
+    width: 360px!important;
+}
+.emojis__item {
+    height: 32px;
+    line-height: 32px;
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 32px;
+    font-size: 18px;
+    margin: 0 4px 4px 0;
+}
+.emojis__item img, .emojis__item svg.custom-icon {
+    margin: 0;
+    width: 18px;
+	height:18px;
+    padding: 7px;
+	display: block;
+}
+-size: 12px;
 }
 /*文本框选颜色*/
 ::selection {
@@ -295,17 +334,17 @@ div#historyContainer{
 }*/
 /* 动态加载和调节进度条*/
 .b3-slider{
-	height:24px;
-	padding:1px;
+	height:25px;
+	padding:2px;
 }
 .b3-slider::-webkit-slider-runnable-track {
-    height: 4px;
+    height: 3px;
     background: var(--b3-theme-primary-lighter);
 	
 
 }
 .b3-slider::-webkit-slider-container {
-	padding:3px;
+	padding:2px;
 	height: 30px;
     overflow: hidden;
 }
@@ -315,9 +354,9 @@ div#historyContainer{
     width: 8px;
     height: 8px;
     background-color: var(--b3-theme-background);
-    border: 2px solid transparent;
-    margin-top: -2px;
-    border-image: linear-gradient(var(--b3-theme-primary),var(--b3-theme-primary)) 0 fill / 1 5 1 0 / 0px 0px 0 2000px;
+    border: 3px solid transparent;
+    margin-top: -3px;
+    border-image: linear-gradient(var(--b3-theme-primary),var(--b3-theme-primary)) 0 fill / 1 3 1 0 / 0px 0px 0 2000px;
 	box-shadow: 0px 0px 0px 3px var(--b3-theme-primary) ;
 }
 .b3-slider::-webkit-slider-thumb:hover{
