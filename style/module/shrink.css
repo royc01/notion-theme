@@ -415,7 +415,7 @@ input[type="checkbox" i] {
     transition: var(--flex-width-transition);
 }*/
 
-/*关系图 */
+/*关系图 
 .graph.fullscreen{
 	top:40px;
 	overflow:visible!important;
@@ -426,7 +426,7 @@ input[type="checkbox" i] {
 	width: calc(100% - 110px) !important;
 	background-color:var(--b3-fn__flex-column-background);
 	padding-right:0px!important;
-}
+}*/
 .graph__panel[style="right: 0px;"]{
 	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
 }

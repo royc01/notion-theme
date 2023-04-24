@@ -38,6 +38,17 @@
 |增加链滴社区[BryceAndJuly ](https://ld246.com/member/BryceAndJuly)分享的[最近打开文档](https://ld246.com/article/1662697317986) [日历面板](https://ld246.com/article/1662969146166)|[BryceAndJuly](https://ld246.com/member/BryceAndJuly)|
 
 　　以上排名不分先后。
+
+
+## 3.3.6
+* 修复编辑器分栏模式下偏移问题
+* 修复文本框选颜色
+* 修复关系图全屏状态下样式
+* 优化设置界面
+* 修复引用弹出窗口滚动条问题
+* 修改弹窗标题栏背景颜色
+* 修正字体颜色选择样式
+
 ## 3.3.5
 * 优化弹出菜单menu样式
 * 修正斜杠菜单样式

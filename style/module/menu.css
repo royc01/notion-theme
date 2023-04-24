@@ -88,11 +88,8 @@
   background: var(--b3-theme-background);
   transform: translateX(17px) translateY(4px);
 }
-/*属性面板*/
-.b3-dialog__container{
-	background-color: var(--b3-fn__flex-shrink-background);
-}
-/*设置菜单窗口*/
+
+/*设置菜单窗口
 .b3-dialog__container .fn__flex-column{
 	background-color: var(--b3-theme-background);
     border-radius: 5px;
@@ -112,7 +109,7 @@
 	height: 15px;
     width: 15px;
 	color:var(--b3-list-background-more);
-}
+}*/
 /*引用块弹出框*/
 .block__popover--open{
 	border:none;
@@ -307,16 +304,11 @@ div#historyContainer{
     padding: 7px;
 	display: block;
 }
--size: 12px;
-}
 /*文本框选颜色*/
-::selection {
-     background: var( --b3-theme-primary-lightest);
+::selection{
+	background-color:var( --b3-theme-primary-lightest);
 }
 /*滚动条*/
-.protyle-scroll{
-	top: 100px;
-}
 ::-webkit-scrollbar {
     width : var(--webkit-scrollbar);
 	height: var(--webkit-scrollbar);
