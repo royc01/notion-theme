@@ -150,8 +150,6 @@
 }
 #foldList .b3-list-item__showall{
 	padding-left:3px;
-	height:26px;
-	line-height:26px;
 	color:var(--b3-theme-on-surface);
 }
 /*历史面板,集市*/

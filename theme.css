@@ -680,8 +680,7 @@ span[data-type="add"] svg{
 
 
 .b3-dialog__container{
-	border-radius:10px;
-	overflow:hidden;
+	border-radius:5px;
 	border:none;
 }
 .b3-dialog__container .config__panel>.b3-tab-bar::before {
@@ -693,20 +692,15 @@ span[data-type="add"] svg{
 	opacity: 1;
 	color: var(--b3-theme-on-background);
 }
-.b3-dialog__container .config__panel>.b3-tab-bar .b3-form__icon:before{
-	content: '';
-	position:absolute;
-	width:100%;
-    height: 1px;
-    background-color: var(--b3-theme-background-light);
-	z-index:1;
-	opacity:0.5;
-	top:60px;
+
+.b3-dialog__container .config__panel>.b3-tab-bar .b3-form__icon{
+	border-bottom: 1px solid var(--b3-theme-background-light);
+	margin-bottom: 24px;
 }
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-text-field{
 	box-shadow: inset 0 0 0 0px var(--b3-theme-on-surface-light);
 	line-height: 28px;
-	margin-bottom: 40px;
+	margin-bottom: 24px;
 }
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-form__icon-icon{
 	top: 10px;
@@ -723,6 +717,7 @@ span[data-type="add"] svg{
 }
 .b3-dialog__container .config__tab-container{
 	padding-top:40px;
+	border-radius: 0 10px 10px 0;
 }
 
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-list-item{

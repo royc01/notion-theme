@@ -1,24 +1,13 @@
 /* 手机端适配 */
 .toolbar{
-	margin-bottom:0px;
-	padding: 0 6px 0 5px!important;
+	height: 48.5px;
     border-bottom: 1px solid var(--b3-theme-surface-lighter);
-}
-#toolbarName{
-	border-radius: 6px;
-	box-shadow: inset 0 0 0 1px var(--b3-border-color);
-}
-#sidebar .toolbar__icon{
-    height: 14px;
-    width: 14px;
-    padding: 6px;
 }
 .toolbar__text{
 	font-size: 16px;
 }
 .toolbar__icon--active{
-	background-color: var(--b3-block-icon-active);
-	border-radius: 6px;
+	border-radius: 8px;
 }
 .protyle-breadcrumb {
     border-top: none;
@@ -78,10 +67,33 @@
 	padding: 10px 24px 16px 24px;
 	border-bottom: 1px solid var(--b3-border-color2);
 }
+.b3-list--mobile .b3-list-item__toggle{
+	padding: 6px;
+}
+.b3-list--mobile .b3-list-item[data-type="navigation-root"] + ul .b3-list-item__toggle,
+.b3-list--mobile .b3-list--background > ul .b3-list-item__toggle{
+	margin-left: -8px
+}
 
 .b3-list--mobile .b3-list-item{
-	margin: 0 8px 0 4px;
+	margin: 0 4px 0 4px;
 	line-height: 36px;
+}
+.b3-list--mobile .b3-list-item__icon{
+	margin-left: 0px;
+	margin-right: 10px;
+}
+.b3-list--mobile .b3-list-item__action{
+	padding: 10px
+}
+.b3-list--mobile .b3-list-item .counter:not(:empty){
+	height: 24px;
+	line-height: 24px;
+    min-width: 16px;
+    margin: 6px;
+}
+.b3-list--mobile .b3-list-item__graphic{
+	height:16px;
 }
 .b3-list--mobile .toolbar+.fn__flex-1{
 	padding:8px 0;

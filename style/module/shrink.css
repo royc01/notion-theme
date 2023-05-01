@@ -49,6 +49,7 @@
 .file-tree .block__icons{
 	height:30px; 
     padding: 0px 10px 4px 11px;
+	min-height: unset;
 }
 .graph.file-tree .block__icons{
 	padding-top:7px;
