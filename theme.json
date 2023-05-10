@@ -2,10 +2,33 @@
   "name": "Savor",
   "author": "Roy",
   "url": "https://github.com/royc01/notion-theme",
-  "version": "3.3.7",
+  "version": "3.4.0",
+  "displayName": {
+    "default": "Savor",
+    "zh_CN": "写味"
+  },
+  "description": {
+    "default": "You said you couldn’t bear to consume such a feeling.",
+    "zh_CN": "你说你舍不得吃掉这一种感觉。"
+  },
+  "readme": {
+    "default": "README.md",
+    "zh_CN": "README_zh_CN.md"
+  },
+  "i18n": [
+    "en_US",
+    "zh_CN"
+  ],
+  "funding": {
+    "openCollective": "",
+    "patreon": "",
+    "github": "",
+    "custom": [
+      "https://afdian.net/a/Savor"
+    ]
+  },
   "modes": [
     "light",
 	"dark"
   ]
 }
-
