@@ -674,9 +674,6 @@ span[data-type="add"] svg{
 .b3-menu .b3-menu__submenu--row .b3-menu__item:last-child .b3-menu__label>.fn__flex>.color__square{
 	box-shadow:none;
 }
-.b3-menu .b3-menu__submenu--row {
-    width: 425px;
-}
 
 
 .b3-dialog__container{
@@ -708,8 +705,8 @@ span[data-type="add"] svg{
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-text-field:focus{
 	box-shadow: inset 0 0 0 1px var(--b3-theme-primary),0 0 0 3px var(--b3-theme-primary-lightest);
 }
-.b3-dialog__container .config__panel>.b3-tab-bar, .b3-dialog__container .config__tab-container{
-	height: 70vh;
+.b3-dialog__container{
+	height: 70vh!important;
 }
 .b3-dialog__container .config__panel>.b3-tab-bar{
 	padding:22px 12px 0 12px;

@@ -1698,7 +1698,7 @@ function isPcWindow() {
 
 /**简单判断目前思源是否是手机模式 */
 function isPhone() {
-    return document.getElementById("toolbar") == null;
+    return document.getElementById("toolbarEdit") != null && document.getElementById("toolbar") == null;
 }
 
 
@@ -2123,6 +2123,37 @@ function getcommonMenu_Bolck() {
 
 				console.log("==============>附加CSS和特性JS_已经执行<==============");
             } else {
+				const htmlTag = document.querySelector('html');
+				
+                const themeMode = htmlTag.getAttribute('data-theme-mode');
+				
+				if (themeMode == 'light') {
+                    loadsalt = getItem('buttonsalt');
+					loadsugar = getItem('buttonsugar');
+                    if (loadsalt == '1') {
+                        loadStyle(
+                            '/appearance/themes/Savor/style/topbar/salt.css',
+                            'salt主题'
+                        ).setAttribute('topicfilter', 'buttonsalt');
+                    }
+					if (loadsugar == '1') {
+                        loadStyle(
+                            '/appearance/themes/Savor/style/topbar/sugar.css',
+                            'salt主题'
+                        ).setAttribute('topicfilter', 'buttonsugar');
+                    }
+
+                }
+				if (themeMode == 'dark') {
+					loadvinegar = getItem('buttonvinegar');
+                    if (loadvinegar == '1') {
+                        loadStyle(
+                            '/appearance/themes/Savor/style/topbar/vinegar.css',
+                            'vinegar主题'
+                        ).setAttribute('topicfilter', 'buttonvinegar');
+                    }
+                }
+				
                 
                 initcalendar()//打开日历
                     
@@ -2133,7 +2164,7 @@ function getcommonMenu_Bolck() {
                 tabbarVerticalButton();//垂直页签
                 
                 topbarfixedButton();//顶栏固定
-
+ 
                 setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
 
                 autoOpenList();//自动展开悬浮窗内折叠列表（第一次折叠）
@@ -2147,7 +2178,7 @@ function getcommonMenu_Bolck() {
                 console.log("==============>附加CSS和特性JS_已经执行<==============");
             }
         }, 1000);
-    }
+    };
     if (v == null) {
         window.theme.config = { "Savor": 1 };
         写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4), (a) => { funs() });
@@ -2155,9 +2186,6 @@ function getcommonMenu_Bolck() {
         window.theme.config = v;
         funs();
     }
-    // setInterval(() => {
-    //     写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
-    // }, 5000)
 });
 
 

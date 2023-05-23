@@ -137,10 +137,6 @@
 	background-color:transparent;
 }
 /* 选择下拉菜单 */
-.b3-select {
-	border: 1px solid var(--b3-border-color);
-	padding: 2px 8px 4px 8px;
-}
 .b3-select:hover{
 	background-color:var(--b3-theme-background);
 }

@@ -38,3 +38,12 @@
 |增加链滴社区[BryceAndJuly ](https://ld246.com/member/BryceAndJuly)分享的[最近打开文档](https://ld246.com/article/1662697317986) [日历面板](https://ld246.com/article/1662969146166)|[BryceAndJuly](https://ld246.com/member/BryceAndJuly)|
 
 　　以上排名不分先后。
+
+
+## v3.4.1
+* 修复下拉框错位bug
+* 修复超链接删除bug
+* 修复v2.8.9版本设置窗错位问题
+* 修复块标菜单显示问题
+* 修复新窗口题头按钮样式
+* 支持新窗口跟随主窗口配色

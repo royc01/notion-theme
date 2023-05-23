@@ -12,9 +12,7 @@
 	margin-left:-99px;
 	margin-bottom:-48px;
 }
-.body--window .protyle-background__icon:not(.fn__none)+.protyle-icons {
-	margin:10px 0 -48px -99px;
-}
+
 .protyle-background__iconw .protyle-icons .b3-tooltips{
 	display:inline-flex;
 	height:28px;
@@ -504,7 +502,6 @@ width:36px;
 }
 /* 超链接 */
 .protyle-wysiwyg [data-node-id] span[data-type="a"]{
-    padding: 0 2px;
 	color: var(--b3-theme-on-surface);
 	border-bottom:1px solid var(--b3-border-color);
 }
