@@ -1,0 +1,27 @@
+name: Create package.zip 3
+on: 
+  push: 
+    tags:
+      - "*"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Archive Release
+      uses: thedoctor0/zip-release@0.7.1
+      with:
+        type: 'zip'
+        filename: 'package.zip'
+        exclusions: '*.git* /*node_modules/* .editorconfig'
+
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true
+        prerelease: false
+        artifactErrorsFailBuild: true
+        removeArtifacts: false
+        replacesArtifacts: false
+        artifacts: "package.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
