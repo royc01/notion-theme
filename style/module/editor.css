@@ -274,6 +274,14 @@ width:36px;
 	width:100%!important;
 }
 /* 弹出工具条字体颜色选择 */
+.color__square[data-type="style1"]{
+	 border-radius: 3px;
+	 width:22px;
+	 height:22px;
+	 font-size:1.3em;
+	 font-weight: 500;
+	 box-shadow: 0 0 0 1px var(--b3-color--square) inset;
+}
 .color__square[data-type="color"]{
 	 border-radius: 3px;
 	 width:22px;
