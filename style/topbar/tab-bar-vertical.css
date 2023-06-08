@@ -15,6 +15,7 @@
 }
 .layout-tab-bar:not(.layout-tab-bar--readonly){
 	margin-top:-4px;
+	margin-bottom:40px;
 }
 .layout__center [data-type='wnd'][data-id] > .fn__flex:not(.layout-tab-container) {
 	flex-direction: column-reverse;

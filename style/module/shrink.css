@@ -254,31 +254,37 @@ input[type="checkbox" i] {
 	content:"❶";
 	color:var(--h1-list-graphic);
 	pointer-events:none;
+	font-family:"Segoe UI";
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h2"]>span:first-child::after{
 	content:"❷";
 	color:var(--h2-list-graphic);
 	pointer-events:none;
+	font-family:"Segoe UI";
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h3"]>span:first-child::after{
 	content:"❸";
 	color:var(--h3-list-graphic);
 	pointer-events:none;
+	font-family:"Segoe UI";
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h4"]>span:first-child::after{
 	content:"❹";
 	color:var(--h4-list-graphic);
 	pointer-events:none;
+	font-family:"Segoe UI";
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h5"]>span:first-child::after{
 	content:"❺";
 	color:var(--h5-list-graphic);
 	pointer-events:none;
+	font-family:"Segoe UI";
 }
 .file-tree ul.b3-list.b3-list--background [data-subtype="h6"]>span:first-child::after{
 	content:"❻";
 	color:var(--h6-list-graphic);
 	pointer-events:none;
+	font-family:"Segoe UI";
 }
 
 .file-tree ul.b3-list.b3-list--background [data-subtype="h1"] svg.b3-list-item__graphic:hover{

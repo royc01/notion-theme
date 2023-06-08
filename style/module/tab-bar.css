@@ -100,16 +100,12 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 	padding:0px 0 0px 4px;
 }
 .layout-tab-bar .item--pin .item__icon{
-	padding:2px 2px 3px 3px;
+	padding:0px 3px 0px 4px;
 }
 .layout-tab-bar .item--pin .item__text{
 	padding:0px 2px 0px 3px;
 }
-.layout-tab-bar .item--pin .item__graphic{
-	padding:3px 3px 3px 3px;
-	height:16px;
-	width:16px;
-}
+
 .layout-tab-bar .item--pin:nth-child(4n-3){
 	background-color:var(--b3-card-error-background);
 }
