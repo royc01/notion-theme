@@ -102,6 +102,9 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 .layout-tab-bar .item--pin .item__icon{
 	padding:0px 3px 0px 4px;
 }
+.layout-tab-bar .item--pin .item__graphic{
+	padding:4px 0px 4px 0px;
+}
 .layout-tab-bar .item--pin .item__text{
 	padding:0px 2px 0px 3px;
 }

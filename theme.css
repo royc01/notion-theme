@@ -609,6 +609,7 @@ span[data-type="add"] svg{
 	border-radius:5px;
 	border:none;
 }
+@media (min-width: 750px){
 .b3-dialog__container .config__panel>.b3-tab-bar::before {
     display: block;
     content: "⚙ Settings";
@@ -618,7 +619,7 @@ span[data-type="add"] svg{
 	opacity: 1;
 	color: var(--b3-theme-on-background);
 }
-
+}
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-form__icon{
 	border-bottom: 1px solid var(--b3-theme-background-light);
 	margin-bottom: 24px;
@@ -637,9 +638,11 @@ span[data-type="add"] svg{
 /*.b3-dialog__container:not([style*="auto"]){
 	height: 70vh!important;
 }*/
+@media (min-width: 750px){
 .b3-dialog__container .config__panel>.b3-tab-bar{
 	padding:22px 12px 0 12px;
 	width: 240px;
+}
 }
 .b3-dialog__container .config__tab-container{
 	padding-top:40px;
