@@ -249,10 +249,8 @@
 }
 
 
-.fn__flex-column .fn__flex-shrink,.fn__flex >.fn__flex-shrink>.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
-	background-color:var(--b3-fn__flex-shrink-background);
-}
-.layout-tab-container{
+
+.layout__dockr .layout-tab-container {
 	background-color:var(--b3-fn__flex-column-background);
 }
 .dock#dockLeft .dock__item:not(.dock__item--active){

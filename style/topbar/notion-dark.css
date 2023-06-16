@@ -7,7 +7,7 @@
     --b3-theme-secondary: #f3a92f;
     --b3-theme-background: #2f3437;/* 编辑区背景 */
 	--b3-theme-background-light: rgba(230, 230, 230, .1);
-    --b3-theme-surface:rgba(55, 60, 63);/* 面板主色 */
+    --b3-theme-surface:rgb(55, 60, 63);/* 面板主色 */
 	--b3-theme-surface-light: rgba(41, 42, 45, .86);
 	--b3-theme-surface-lighter:rgba(230, 230, 230, .06);
     --b3-theme-error: #e35555;

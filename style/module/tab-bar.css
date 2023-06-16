@@ -86,7 +86,6 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 }
 
 .layout-tab-bar .item--pin{
-	margin-right:8px!important;
 	padding:2px;
 }
 .layout-tab-bar .item__icon>img, .layout-tab-bar .item__icon>svg{

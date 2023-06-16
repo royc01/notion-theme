@@ -42,9 +42,7 @@
     margin: 4px 4px 4px 0px;
 	min-width:150px;
 }
-.layout-tab-bar .item--pin{
-	margin-right: 0px!important;
-}
+
 .layout__wnd--active .layout-tab-bar .item--focus:not(.item--pin){
 	background-color:var(--b3-fn__flex-column-background);
 }

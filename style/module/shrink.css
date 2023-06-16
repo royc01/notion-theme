@@ -1,6 +1,5 @@
 /* ————————————————————侧栏面板———————————————————— */
-.fn__flex-column.fn__flex-shrink,.layout__center+.layout__resize--lr+.fn__flex-column{
-	background-color: var(--b3-fn__flex-column-background);
+.layout__dockl,.layout__dockr{
 	min-height:90%;
 }
 .layout-tab-container>.fn__flex-column {
@@ -40,9 +39,7 @@
     background-repeat: no-repeat;
     background-attachment: local, scroll;
 }*/
-.fn__flex >.fn__flex-shrink>.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
-	background-color: var(--b3-fn__flex-column-background);
-}
+
 /*侧栏展开动画*/
 #layouts>.fn__flex>.fn__flex-column>.fn__flex>div[data-type=wnd]>.layout-tab-container>.fn__flex-column{animation: flex-column  0.2s ease-in-out;}
 /*面板标题*/
