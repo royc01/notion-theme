@@ -1,10 +1,8 @@
 /* ————————————————————顶栏———————————————————— */
 .toolbar{
-	background-color: transparent;
 	height:32px;
 }
 .toolbar__window{
-	background-color: transparent;
 	height:40px;
 }
 /*.toolbar:after{
@@ -44,7 +42,6 @@
 .toolbar__item:not(.toolbar__item--disabled):not(.toolbar__item--close):hover, .toolbar__item--active {
 	background-color: var(--b3-toolbar-item-hover);
 }
-
 #minWindow svg, #restoreWindow svg, #maxWindow svg{
 	width: 10px!important;
 	padding: 3px 5px;
@@ -56,7 +53,9 @@
 .toolbar__window #restoreWindow, .toolbar__window #maxWindow{
 	margin: 7px 4px 7px 0px 
 }
-
+.toolbar__item--win{
+	height:unset;
+}
 #closeWindow svg{
 	width: 10px!important;
 	padding: 4px 8px;
@@ -67,6 +66,7 @@
 }
 .toolbar__window .toolbar__item--close{
 	padding: 9px;
+	height: 40px;
 }
 #closeWindow:hover{
 	background-color: var(--b3-toolbar-closeWindow-hover);

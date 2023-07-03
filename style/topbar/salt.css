@@ -160,7 +160,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-blur-background: transparent;
+	--b3-toolbar-background: var(--b3-theme-background);
 	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--b3-toolbar-closeWindow-hover: #e81123;
 	--b3-toolbar-closeWindow-svg: #fff;
@@ -261,5 +261,5 @@
 	display:none!important;
 }
 .layout__center+.layout__resize--lr+.fn__flex-column{
-	border-top:0.5px solid var(--b3-border-color);
+	border-top:0.5px solid #d8dbdb;
 }

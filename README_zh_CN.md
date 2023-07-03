@@ -38,6 +38,12 @@
 |增加链滴社区[BryceAndJuly ](https://ld246.com/member/BryceAndJuly)分享的[最近打开文档](https://ld246.com/article/1662697317986) [日历面板](https://ld246.com/article/1662969146166)|[BryceAndJuly](https://ld246.com/member/BryceAndJuly)|
 
 　　以上排名不分先后。
+## v3.4.7
+* 调整圆角样式
+* 适配右上角win按钮样式
+* vinegar样式
+* 适配替换背景插件
+* 修复底栏图标样式
 
 ## v3.4.6
 * 修复dark配色错误问题

@@ -606,7 +606,6 @@ span[data-type="add"] svg{
 
 
 .b3-dialog__container{
-	border-radius:5px;
 	border:none;
 }
 @media (min-width: 750px){
@@ -682,3 +681,6 @@ span[data-type="add"] svg{
 
 
 
+.status .toolbar__item{
+	height: 26px;
+}

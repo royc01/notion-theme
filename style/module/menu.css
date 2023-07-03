@@ -3,20 +3,16 @@
 	animation: menu 0.2s ease-in-out;
 	box-shadow: var(--b3-menu-shadow);
 	background-color:var(--b3-theme-background);
-	padding:4px;
 	border:none;
 }
 .b3-menu .b3-menu__submenu{
-	padding:4px;
 	background-color:var(--b3-theme-background)!important;
 	box-shadow: var(--b3-menu-shadow);
 	border:none;
-	margin: 4px 0px;
 }
 .b3-menu__item{
 	padding: 0 8px;
 	background-color: var(--b3-theme-background);
-	border-radius:3px;
 }
 .b3-menu__item:hover:not(.b3-menu__item--readonly):not(.b3-menu__item--custom),
 .b3-menu__item--current {
