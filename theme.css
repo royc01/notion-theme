@@ -684,3 +684,8 @@ span[data-type="add"] svg{
 .status .toolbar__item{
 	height: 26px;
 }
+
+
+.layout-tab-container .card__main{
+	padding-bottom: 35px;
+}
