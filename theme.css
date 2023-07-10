@@ -173,7 +173,8 @@
     --b3-menu-background: #f8f9fa;
 
     /* 提示 */
-    --b3-tooltips-color: rgba(15, 15, 15);
+	--b3-tooltips-color: var(--b3-theme-background);
+	--b3-tooltips-background: var(--b3-theme-on-background);
 
     /* 遮罩 */
     --b3-mask-background: rgba(0, 0, 0, 0.78);
@@ -463,7 +464,7 @@ body{
 	box-shadow: var(--b3-fn__flex-column-background) 0px 40px 0px 0px;
 }
 #layouts{
-	margin-bottom:-36px;
+	margin-bottom:-37px;
 }
 
 #layouts>.fn__flex+.layout__resize+.fn__flex-1{
@@ -608,29 +609,13 @@ span[data-type="add"] svg{
 .b3-dialog__container{
 	border:none;
 }
-@media (min-width: 750px){
-.b3-dialog__container .config__panel>.b3-tab-bar::before {
-    display: block;
-    content: "⚙ Settings";
-    font-size: 18px;
-	font-weight: 600;
-    margin:0 0 18px 14px;
-	opacity: 1;
-	color: var(--b3-theme-on-background);
-}
-}
-.b3-dialog__container .config__panel>.b3-tab-bar .b3-form__icon{
-	border-bottom: 1px solid var(--b3-theme-background-light);
-	margin-bottom: 24px;
-}
+
+
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-text-field{
 	box-shadow: inset 0 0 0 0px var(--b3-theme-on-surface-light);
-	line-height: 28px;
-	margin-bottom: 24px;
+
 }
-.b3-dialog__container .config__panel>.b3-tab-bar .b3-form__icon-icon{
-	top: 10px;
-}
+
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-text-field:focus{
 	box-shadow: inset 0 0 0 1px var(--b3-theme-primary),0 0 0 3px var(--b3-theme-primary-lightest);
 }
@@ -639,13 +624,8 @@ span[data-type="add"] svg{
 }*/
 @media (min-width: 750px){
 .b3-dialog__container .config__panel>.b3-tab-bar{
-	padding:22px 12px 0 12px;
-	width: 240px;
+	padding:8px 12px;
 }
-}
-.b3-dialog__container .config__tab-container{
-	padding-top:40px;
-	border-radius: 0 10px 10px 0;
 }
 
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-list-item{
@@ -655,7 +635,6 @@ span[data-type="add"] svg{
 }
 
 .b3-dialog__container .fn__flex .b3-label{
-	padding: 20px 0px;
 	margin: 0 20px;
 }
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-list-item__graphic{
@@ -688,4 +667,8 @@ span[data-type="add"] svg{
 
 .layout-tab-container .card__main{
 	padding-bottom: 35px;
+}
+
+.block__popover .block__icon[data-type="close"] svg{
+	padding:0 2px;
 }

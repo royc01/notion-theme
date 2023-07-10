@@ -45,7 +45,8 @@
 	background-color:transparent;
 	position:static;
 	margin:0;
-	padding:0
+	padding:0;
+	box-shadow: none;
 }
 .protyle-background .protyle-icons .b3-tooltips input{
 	width:100% !important;

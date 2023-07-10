@@ -38,6 +38,14 @@
 |增加链滴社区[BryceAndJuly ](https://ld246.com/member/BryceAndJuly)分享的[最近打开文档](https://ld246.com/article/1662697317986) [日历面板](https://ld246.com/article/1662969146166)|[BryceAndJuly](https://ld246.com/member/BryceAndJuly)|
 
 　　以上排名不分先后。
+## v3.4.8
+* 适配v2.9.5设置页面
+* 优化题头图按钮样式
+* 优化弹出menu样式
+* 适配v2.9.5 tips
+* 适配v2.9.5面包屑
+* 优化悬浮窗关闭按钮
+
 ## v3.4.7
 * 调整圆角样式
 * 适配右上角win按钮样式

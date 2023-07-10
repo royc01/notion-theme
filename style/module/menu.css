@@ -21,9 +21,7 @@
 .b3-menu__accelerator{
 	color:var(--b3-scroll-color-hover);
 }/*快捷键提示*/
-.b3-menu__label div{
-	margin: 4px 0;
-}
+
 .b3-list-item--big{
 	padding: 14px 24px;
 	border-radius: 0px;

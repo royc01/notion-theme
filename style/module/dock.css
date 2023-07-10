@@ -8,13 +8,13 @@
 	width: var(--b3-dock-item-width);
 }
 .dock#dockLeft .dock__item{
-	padding: var(--b3-dock-item-padding);
+
 	margin: var(--b3-dock-item-margin);
 	border-radius: var(--b3-dock-item-radius);
 	color: var(--b3-dockleft-color);
 }
 .dock#dockRight .dock__item{
-	padding: var(--b3-dock-item-padding);
+
 	margin: var(--b3-dock-item-margin);
 	border-radius: var(--b3-dock-item-radius);
 	color: var(--b3-dockright-color);
