@@ -24,6 +24,7 @@
 	margin: 5px 4px 5px 0px;
 	border-radius:5px;
 	padding: 1px;
+	height: 22px;
 }
 .toolbar__window .toolbar__item:not(.toolbar__item--close){
 	padding: 3px;
@@ -96,17 +97,17 @@
 
 #barWorkspace {
 	height:22px;
-	border-radius:5px;
+	border-radius:6px;
 	padding:0 3px 0 7px;
 	margin:0px 3px 0 2px;
-	/*background-color:#e16259;*/
-	background: #e16259 linear-gradient(to bottom right, rgba(0,255,0,0), #c54238);
+	background-color:#e16259;
+	/*background: #e16259 linear-gradient(to bottom right, rgba(0,255,0,0), #c54238);*/
 	/*background-image: linear-gradient(to bottom right , #7A88FF, #7AFFAF);*/
-	box-shadow: 0px 0.3px 0.7px 0px rgb(0 0 0 / 12%), 0px 1.5px 2.8px 0px rgb(0 0 0 / 7%), 0px 4px 9px 0px rgb(0 0 0 / 5%);
+	/*box-shadow: 0px 0.3px 0.7px 0px rgb(0 0 0 / 12%), 0px 1.5px 2.8px 0px rgb(0 0 0 / 7%), 0px 4px 9px 0px rgb(0 0 0 / 5%);*/
 }
 #barWorkspace:hover{
 	background-color: #b3180d;
-	transition: background-color .5s;
+
 }
 #barWorkspace .toolbar__text{
 	line-height:22px;

@@ -312,7 +312,6 @@ input[type="checkbox" i] {
 /* 反链面板 */
 .sy__backlink .block__icons .counter{
 	position:absolute;
-	left:7px;
 	padding: 0px;
 	width:20px;
 	height: 20px;

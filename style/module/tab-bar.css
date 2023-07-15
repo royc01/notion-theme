@@ -65,6 +65,9 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 	margin:3px 3px 0 0;
 	padding:0;
 }
+.body--window .layout-tab-bar .item--readonly{
+	margin:0;
+}
 .block__icon--show[data-type="more"] svg,.block__icon--show[data-type="new"] svg{
 	width: 10px;
 	height: 10px;

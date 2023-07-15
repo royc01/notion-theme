@@ -39,7 +39,7 @@
 	left: -15px;
 }
 /* 按钮 */
-.b3-button:not(.b3-button--cancel){
+.b3-button:not(.b3-button--cancel):not(.b3-button--outline){
   font-weight:700;
   background-color:var(--b3-theme-primary);
   color: var(--b3-theme-background) !important;
@@ -47,9 +47,10 @@
   box-shadow:rgb(15 15 15 / 10%) 0px 1px 2px;
 }
 
-.b3-button:not(.b3-button--text):not(.b3-button--cancel):hover{
+.b3-button:not(.b3-button--text):not(.b3-button--cancel):not(.b3-button--outline):hover{
    background-color:var(--b3-button);
 }
+
 /* 开关 */
 .b3-switch {
   height: 14px;
@@ -234,7 +235,6 @@ div#historyContainer{
 	min-width: 50vw;
 }
 .hint--menu .b3-list-item{
-	border-radius:3px;
 	margin:0!important;
 	width:100%!important;
 }

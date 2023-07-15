@@ -142,7 +142,7 @@
     --b3-theme-on-primary: #fff;
     --b3-theme-on-secondary: #fff;
     --b3-theme-on-background: rgb(55, 53, 47);
-    --b3-theme-on-surface: rgba(55, 53, 47, 0.6);
+    --b3-theme-on-surface: #84827d;
     --b3-theme-on-surface-light: rgba(95, 99, 104, .68);
     --b3-theme-on-error: #fff;
 
@@ -414,21 +414,6 @@ body{
 
 
 
-#barSync[aria-label*="上传"] svg {
-	animation: cloudsucc 3s ease-in;
-}
-
-#barSync[aria-label*="上传"] {
-	animation: cloudsuccbg 3s ease-in;
-}
-#barSync[aria-label*="同步失败"] svg {
-	color:var(--h1-list-graphic);
-}
-
-
-
-
-
 
 
 
@@ -671,4 +656,13 @@ span[data-type="add"] svg{
 
 .block__popover .block__icon[data-type="close"] svg{
 	padding:0 2px;
+}
+
+
+.layout-tab-container .file-tree.sy__outline{
+	padding-bottom: 35px;
+}
+
+.b3-card--wrap{
+	min-width: 300px;
 }

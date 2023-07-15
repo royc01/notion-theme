@@ -103,6 +103,7 @@
 	position:static;
 	margin:0;
 	padding:0;
+	box-shadow: none;
 }
 
 .protyle-background__img .protyle-icons>span{
@@ -165,8 +166,13 @@
 .protyle-wysiwyg .h3,.protyle-wysiwyg .h4,
 .protyle-wysiwyg .h5,.protyle-wysiwyg .h6{
 	font-weight:700;
-	margin-top: 1.2em!important;
-    margin-bottom: .4em!important;
+	margin-top: 1.2em;
+    margin-bottom: .4em;
+}
+.sb[fold="1"] .h1,.sb[fold="1"] .h2,
+.sb[fold="1"] .h3,.sb[fold="1"] .h4,
+.sb[fold="1"] .h5,.sb[fold="1"] .h6{
+	margin-top: 0em;
 }
 /*.protyle-wysiwyg[data-doc-type="NodeDocument"]>[data-type="NodeHeading"]{
 	margin-top: 0em;
@@ -639,12 +645,11 @@ width:36px;
 
 
 /*消息确认按钮*/
-.b3-button--cancel{
-	border-radius: 3px;
+.b3-button--cancel,.b3-button--outline{
     background-color: var(--b3-theme-background);
-    box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+    box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px;
 }
-.b3-button--cancel:hover{
+.b3-button--cancel:hover,.b3-button--outline:hover{
 	background-color: var(--b3-fn__flex-shrink-background);
-	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px;
 }
