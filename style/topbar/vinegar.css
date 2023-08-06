@@ -162,16 +162,16 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-background: var(--b3-theme-background);
+	--b3-toolbar-background: #0b0b0b;
 	--b3-toolbar-blur-background: transparent;
 	--b3-toolbar-item-hover: rgba(255, 255, 255, 0.1);
 	--b3-toolbar-closeWindow-hover: #e81123;
 	--b3-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
 	--b3-dockright-color: rgba(114, 118, 120);
-	--b3-dockright-background: #050505;
+	--b3-dockright-background: rgb(0, 0, 0, 0);
 	--b3-dockleft-color: rgba(114, 118, 120);
-	--b3-dock-background: #050505;
+	--b3-dock-background: rgb(0, 0, 0, 0);
 	--b3-dockright-item-active-background: #050505;
 	--b3-dockleft-item-active-background: #050505;
 	--b3-dock-item-active-color: #eb8383;
@@ -300,4 +300,8 @@ body{
 
 .layout__dockl,.layout__dockr{
 	background-color:var(--b3-fn__flex-column-background);
+}
+
+#status {
+    background-color: #1c1c1c;
 }

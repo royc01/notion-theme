@@ -161,16 +161,16 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-background: var(--b3-theme-background);
+	--b3-toolbar-background: #2b2f31;
 	--b3-toolbar-blur-background: transparent;
 	--b3-toolbar-item-hover: rgba(255, 255, 255, 0.1);
 	--b3-toolbar-closeWindow-hover: #e81123;
 	--b3-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
 	--b3-dockright-color: rgba(114, 118, 120);
-	--b3-dockright-background: #414648;
+	--b3-dockright-background: rgb(0, 0, 0, 0);
 	--b3-dockleft-color: rgba(114, 118, 120);
-	--b3-dock-background: #414648;
+	--b3-dock-background: rgb(0, 0, 0, 0);
 	--b3-dockright-item-active-background: rgba(71, 76, 80 );
 	--b3-dockleft-item-active-background: rgba(71, 76, 80 );
 	--b3-dock-item-active-color: #eb8383;
@@ -279,4 +279,8 @@
 }
 #topBar[style*="topbar.svg"]{
 	background-image: url(/appearance/themes/Savor/img/topbar3.svg)!important;
+}
+
+#status {
+    background-color: #404548;
 }

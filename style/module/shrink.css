@@ -6,9 +6,9 @@
     padding: var(--b3-flex-column-padding);
 	min-height:90%;
 }
-.fn__flex-shrink:not([style*="width: 0px"]),.layout__center~.fn__flex-column:not([style*="width: 0px"]){
+/*.fn__flex-shrink:not([style*="width: 0px"]),.layout__center~.fn__flex-column:not([style*="width: 0px"]){
 	min-width:210px;
-}/*侧栏最小宽度*/
+}侧栏最小宽度*/
 
 /*.fn__flex-column.fn__flex-shrink:before{
 	content: "";
@@ -40,8 +40,8 @@
     background-attachment: local, scroll;
 }*/
 
-/*侧栏展开动画*/
-#layouts>.fn__flex>.fn__flex-column>.fn__flex>div[data-type=wnd]>.layout-tab-container>.fn__flex-column{animation: flex-column  0.2s ease-in-out;}
+/*侧栏展开动画
+#layouts>.fn__flex>.fn__flex-column>.fn__flex>div[data-type=wnd]>.layout-tab-container>.fn__flex-column{animation: flex-column  0.2s ease-in-out;}*/
 /*面板标题*/
 .file-tree .block__icons{
 	height:30px; 
@@ -53,13 +53,11 @@
 }
 /*面板标题图标*/
 .block__logo svg{
-	width: 12px;
-	height: 12px;
+	width: 13px;
+	height: 13px;
 	padding: 4px;
-	margin: 0px 10px 0px 0px;
-	border-radius: 3px;
-	color: var(--b3-block-logo-color);
-	background-color: var(--b3-block-logo-background-color);
+	margin: 0px 4px 0px 0px;
+	color: var(--b3-theme-on-background);
 }
 /*面板功能*/
 .file-tree .block__icons>.block__icon svg,
@@ -79,10 +77,10 @@
 	background-color: var(--b3-block-icon-hover);
 	border-radius: 3px;
 }
-/*面板标题激活状态*/
+/*面板标题激活状态
 .layout__tab--active .block__logo svg{
 	background-color: var(--b3-block-icon-active);
-}
+}*/
 /*
 .block__icons.block__icons--active>.block__logo,
 .block__icons.block__icons--active>.block__icon svg,
@@ -381,9 +379,6 @@ input[type="checkbox" i] {
 .layout__resize{
 	z-index:1;
 }
-.layout__resize--lr{
-	opacity:0.5;
-}
 .layout__center + .layout__resize{
 	z-index:2;
 }
@@ -398,6 +393,7 @@ input[type="checkbox" i] {
 }
 .fn__flex-shrink+.layout__resize--lr:after,.layout__center+.layout__resize--lr:after{
 	width:1px;
+	/*opacity:0;*/
 }
 .layout__resize--lr:hover:after,.layout__resize--lr:active:after{
 	width:2px;

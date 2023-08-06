@@ -136,9 +136,12 @@
 	z-index:10;
 }
 .b3-chips .b3-chip{
-	margin: 3px;
-	border-radius: 5px;
-	padding: 3px 6px 4px 6px;
+	margin: 15px 3px 3px 3px;
+	border-radius: 6px;
+	padding: 2px 6px 3px 6px;
+}
+.b3-chips .b3-chip:last-child{
+	margin-right: 15px;
 }
 .b3-chip__close{
 	width:0;
@@ -422,12 +425,8 @@ width:36px;
 /* 表格 */
 .b3-typography table, .protyle-wysiwyg table{
 	font-weight:500;
-	border-radius:3px;
-	border:1px solid var(--b3-border-color);
 }
-.b3-typography colgroup, .protyle-wysiwyg colgroup{
-	border-style:hidden;
-}
+
 .protyle-wysiwyg div.table[data-node-id] table {
     width: auto;
 }
@@ -644,12 +643,3 @@ width:36px;
 }
 
 
-/*消息确认按钮*/
-.b3-button--cancel,.b3-button--outline{
-    background-color: var(--b3-theme-background);
-    box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px;
-}
-.b3-button--cancel:hover,.b3-button--outline:hover{
-	background-color: var(--b3-fn__flex-shrink-background);
-	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px;
-}

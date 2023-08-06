@@ -1,15 +1,16 @@
 
 #notionToolbar{
-	height:22px;
+	height:26px;
 }
 
 
 #notionToolbar div,#notionToolplus div{
-	height:22px;
-	width:22px!important;
-	background-color:var(--b3-theme-background);
+	height:26px;
+	width:26px!important;
 	display: inline-block;
-	margin: 5px 4px 5px 0px 
+	margin: 7px 0px;
+	background-size:22px 22px;
+	 background-position: center!important; 
 }
 
 

@@ -2,19 +2,18 @@
 .status{
 	background-color:transparent;
 	border:0;
-	padding: 0 4px;
-	margin-bottom:5px
+	padding: 0 11px;
+	margin-bottom: 12px;
 }
 .status .toolbar__item:not(.toolbar__item--close) {
 	margin:3px!important;
-	border-radius: 5px!important;
-	background-color: var(--b3-status-msg-background);
-	padding:4px;
+	padding:3px;
+	background-color: var(--b3-theme-background);
 }
 
 .status .toolbar__item svg{
-	padding:2px 3px;
-	color:var(--b3-dockright-color)!important;
+	padding:3px 4px;
+	color:var(--b3-dockright-color);
 	width: 12px;
 }
 .body--win32>.fn__flex-1
@@ -25,11 +24,10 @@
 .status__counter:not(:empty){
 	border-radius:5px;
 	background-color:var(--b3-theme-background);
-	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
 	padding: 0px 4px 0 8px ;
-	margin:4px 12px 0px 7px;
-	height:24px;
-	line-height:24px;
+	margin:4px 6px 0px 8px;
+	height:26px;
+	line-height:26px;
 }
 .status__msg:not(:empty){
 	opacity:0.5;
@@ -38,13 +36,12 @@
 	padding: 0px 8px;
 	border-radius:5px;
 	background-color:var(--b3-theme-background);
-	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
-	margin:4px 0px 0px 12px;
+	margin:4px 0px 0px 6px;
 	transition: max-width 300ms,opacity 300ms;
 	transition-delay: 2000ms;
 	position:relative;
-	height:24px;
-	line-height:24px;
+	height:26px;
+	line-height:26px;
 }
 .status__msg:not(:empty):before{
 	content: "📢";
@@ -103,7 +100,6 @@
 	padding: 0px 0px 0px 8px;
 	border-radius:5px;
 	background-color:var(--b3-theme-background);
-	height:24px;
-	line-height:24px;
-	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+	height:26px;
+	line-height:26px;
 }

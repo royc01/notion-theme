@@ -159,17 +159,17 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-background: var(--b3-theme-background);
+	--b3-toolbar-background: rgb(37, 40, 48);
 	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--b3-toolbar-closeWindow-hover: #e81123;
 	--b3-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
 	--b3-dockright-color: rgb(37, 40, 48);
-	--b3-dockright-background: var(--b3-fn__flex-shrink-background);
+	--b3-dockright-background: rgb(0, 0, 0, 0);
 	--b3-dockleft-color: rgb(37, 40, 48);
-	--b3-dock-background: rgb(37, 40, 48);
-	--b3-dockright-item-active-background: #fff;
-	--b3-dockleft-item-active-background: var(--b3-theme-background);
+	--b3-dock-background: rgb(0, 0, 0, 0);
+	--b3-dockright-item-active-background:   var(--b3-theme-background);
+	--b3-dockleft-item-active-background: rgb(215, 224, 224);
 	--b3-dock-item-active-color: #eb8383;
 	--b3-dock-item-hover-background: rgb(182, 200, 201);
 	
@@ -252,13 +252,29 @@
 .layout__dockr .layout-tab-container {
 	background-color:var(--b3-fn__flex-column-background);
 }
-.dock#dockLeft .dock__item:not(.dock__item--active){
-	color:var(--b3-dockright-background);
+.dock#dockLeft .dock__item:not(.dock__item--active),.dock#dockRight .dock__item:not(.dock__item--active){
+	color: var(--b3-theme-background);
 }
 
 #buttonSavor-dark,#buttonvinegar{
 	display:none!important;
 }
-.layout__center+.layout__resize--lr+.fn__flex-column{
-	border-top:0.5px solid #d8dbdb;
+
+#status {
+    background-color: var(--b3-fn__flex-shrink-background);
+}
+.toolbar__item:not(.toolbar__item--disabled) svg, .toolbar__window .toolbar__item:not(.toolbar__item--disabled) svg{
+	color: var(--b3-theme-background);
+}
+#conceal[style*="conceal.svg"]{
+	background-image: url(/appearance/themes/Savor/img/conceal3.svg)!important;
+}
+#tabbarVertical[style*="vtabbar.svg"]{
+	background-image: url(/appearance/themes/Savor/img/vtabbar3.svg)!important;
+}
+#buttonsugar[style*="sugar.svg"]{
+	background-image: url(/appearance/themes/Savor/img/sugar3.svg)!important;
+}
+#buttonSavor-light[style*="base.svg"]{
+	background-image: url(/appearance/themes/Savor/img/base3.svg)!important;
 }

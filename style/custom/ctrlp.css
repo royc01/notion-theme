@@ -91,7 +91,7 @@
     overflow-y: auto !important;
     text-overflow: ellipsis !important;
     line-height: 1.3;
-    -webkit-box-orient: inherit;
+    display: inline-block;
 }
 
 
@@ -112,4 +112,16 @@
 }
 .b3-list-item[data-type="search-new"] kbd{
 	font-family: sans-serif;
+}
+
+#criteria .b3-chips .b3-chip{
+	margin-top: 3px;
+}
+
+#criteria .b3-button--small{
+	padding: 2px 8px;
+	font-size: 14px;
+}
+#criteria+.block__icons{
+	min-height: 36px;
 }

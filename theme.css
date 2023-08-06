@@ -20,7 +20,7 @@
 
 @import url(/appearance/themes/Savor/style/module/menu.css);/* 菜单、设置相关 */
 
-@import url(/appearance/themes/Savor/style/module/status.css);/* 底栏 */
+/*@import url(/appearance/themes/Savor/style/module/status.css);  底栏 */
 
 
 /* 引入特性 */
@@ -311,10 +311,9 @@
 	--b3-dock-item-active-color: #eb8383;
 	--b3-dock-item-hover-background: #fff;
 	
-	--b3-dock-item-width: 40px;
+	--b3-dock-item-width: 34px;
 	--b3-dock-item-padding: 5px;
-	--b3-dock-item-margin: 7px;
-	--b3-dock-item-radius: 5px;
+	--b3-dock-item-margin: 8px 8px 8px 0;
 	/* 侧栏面板 */
 	--b3-fn__flex-column-background: rgb(247, 246, 243);
 	--b3-fn__flex-shrink-background: rgb(247, 246, 243);
@@ -435,32 +434,25 @@ body{
 
 
 
-.dock#dockLeft{
-	box-shadow:  var(--b3-dock-background) 0px 40px 0px 0px;
-}
 
-.dock#dockRight{
-	box-shadow: var(--b3-dockright-background) 0px 40px 0px 0px;
-}
-.fn__flex-column.fn__flex-shrink{
-	box-shadow: var(--b3-fn__flex-shrink-background) 0px 40px 0px 0px;
-}
+
 .layout__center+.layout__resize--lr+.fn__flex-column{
 	box-shadow: var(--b3-fn__flex-column-background) 0px 40px 0px 0px;
 }
 #layouts{
-	margin-bottom:-37px;
+	
+}
+body {
+    background-color:var(--b3-toolbar-background);
 }
 
 #layouts>.fn__flex+.layout__resize+.fn__flex-1{
 	margin-bottom:36px;
 	overflow:visible;
 }
-#toolbar + .fn__flex-1 {
-    overflow: visible;
-}
-.fn__flex-column.fn__flex-shrink,.layout__center ~ .fn__flex-column{
-	margin-bottom:35px;
+
+.layout__center ~ .fn__flex-column{
+	margin-bottom:28px;
 }
 
 .fn__flex-column.fn__flex-shrink + .layout__resize:after{
@@ -493,16 +485,18 @@ body{
 	box-shadow:  rgba(15, 15, 15, 0.2) 10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  10px -10px 20px -12px; 
 	border-radius:0 5px 5px 0;
 	overflow:hidden;
+	left:41px!important;
 }
 
 .layout__center ~ .fn__flex-column.layout--float{
 	min-height: unset;
 	padding-top: 0px;
 	top: 115px!important; 
-	bottom: 40px!important; 
+	bottom: 12px!important; 
 	box-shadow: rgba(15, 15, 15, 0.2) -10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  -10px -10px 20px -12px; 
 	border-radius:5px 0 0 5px;
 	overflow:hidden;
+	right:41px!important;
 }
 
 
@@ -558,15 +552,7 @@ span[data-type="add"] svg{
 .layout__center{
 	position: relative;
 }
-.layout__center:before{
-	content: '';
-	position:absolute;
-	width:100%;
-    height: 0.5px;
-    background-color: var(--b3-theme-background-light);
-	z-index:1;
-	opacity:0.5;
-}
+
 
 .sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar{
 	font-size:80%;
@@ -659,10 +645,160 @@ span[data-type="add"] svg{
 }
 
 
-.layout-tab-container .file-tree.sy__outline{
-	padding-bottom: 35px;
-}
+
 
 .b3-card--wrap{
 	min-width: 300px;
+}
+
+#toolbar + .fn__flex {
+	margin: 0 7px 8px 7px;
+	border-radius:8px;
+}
+
+#layouts{
+	border-radius:6px;
+	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
+}
+
+
+/*.dock#dockLeft:after{
+	content: '';
+	position:absolute;
+	width:1px;
+	left:47px;
+	top:48px;
+    height: calc(100% - 62px); 
+    background-color: var(--b3-theme-background-light);
+	z-index:1;
+}*/
+/*
+.layout__dockl, .layout__dockr {
+    border-radius: 8px;
+    overflow: hidden;
+	margin:8px 0;
+}*/
+
+#status {
+    position: fixed;
+    background-color: var(--b3-toolbar-background);
+    right: 41px;
+    bottom: -4px;
+	border-radius:6px 0 6px 0;
+	height: 26px;
+}
+.b3-typography mark, .b3-typography span[data-type~=mark], .protyle-wysiwyg mark, .protyle-wysiwyg span[data-type~=mark]{
+	background: rgba(255,212,0,0.14);
+    border-bottom: 2px solid rgb(255, 212, 0);
+}
+
+
+/*底栏*/
+.status{
+	border:0;
+	padding: 0 11px 0 0;
+	margin:0 0 12px 0;
+}
+.status .toolbar__item:not(.toolbar__item--close) {
+	margin:3px!important;
+	padding:3px;
+	background-color:rgb(0, 0, 0, 0);
+}
+
+.status .toolbar__item svg{
+	padding:3px 4px;
+	color:var(--b3-dockright-color);
+	width: 12px;
+}
+.body--win32>.fn__flex-1
+{
+	overflow:visible;
+}
+
+.status__counter:not(:empty){
+	border-radius:5px;
+	padding: 0px 4px 0 8px ;
+	margin:0px 6px 0px 0px;
+	height:26px;
+	line-height:26px;
+}
+.status__msg:not(:empty){
+	animation: statusmsg 5s ease-in-out;
+	max-width: 140px;
+	padding: 0px 8px;
+	border-radius:5px;
+	margin:0px;
+	transition: max-width 300ms,opacity 300ms;
+	transition-delay: 2000ms;
+	position:relative;
+	height:26px;
+	line-height:26px;
+}
+.status__msg:not(:empty):before{
+	content: "📢";
+	font-size:12px;
+	padding-right:6px;
+}
+
+.status__msg:not(:empty):hover{
+	max-width:400px;
+	transition: max-width 300ms ease-out;
+}
+
+/*.layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+	padding-bottom:30px;
+}
+.layout#layouts .fn__flex-shrink>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
+	padding-bottom:30px;
+}
+.layout#layouts .fn__flex-shrink>.layout__resize+.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
+	padding-bottom:30px;
+}*/
+
+.status #statusHelp{
+	position:relative;
+	right:12px;
+}
+.status #barDock{
+	position:absolute;
+	right:-3px;
+	z-index:8;
+	color:var(--b3-theme-on-background);
+}
+.status #statusHelp svg,.status #barDock svg{
+	color:var(--b3-theme-on-background);
+}
+.status #barDock:before{
+	right:unset!important;
+	left: 0px;
+	transform: rotateY(180deg);
+}
+.status #barDock:after{
+	left:unset!important;
+	right:100%;
+}
+
+.status>.fn__flex-1{
+	position:relative!important;
+	width:0px!important;
+	right:0px;
+	flex:0;
+}
+
+
+
+.status__backgroundtask{
+	margin:0px 0px 7px 0px;
+	padding: 0px 0px 0px 8px;
+	border-radius:5px;
+	height:26px;
+	line-height:26px;
+}
+
+#status:has(>#barDock[aria-label*="示"]),#status:has(>#barDock[aria-label*="Show Dock"]){
+	right: 7px;
+}
+
+.search__layout .protyle-content .protyle-wysiwyg [data-node-id] span:not(:empty)::before{
+	display: none;
 }

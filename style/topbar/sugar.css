@@ -160,17 +160,17 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-background: var(--b3-theme-background);
+	--b3-toolbar-background: #eeeae3;
 	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--b3-toolbar-closeWindow-hover: #e81123;
 	--b3-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
 	--b3-dockright-color: rgb(55, 53, 47, .5);
-	--b3-dockright-background:#eeeae3;
+	--b3-dockright-background: rgb(0, 0, 0, 0);
 	--b3-dockleft-color: rgb(55, 53, 47, .5);
-	--b3-dock-background: #eeeae3;
-	--b3-dockright-item-active-background: #fff;
-	--b3-dockleft-item-active-background: #fff;
+	--b3-dock-background: rgb(0, 0, 0, 0);
+	--b3-dockright-item-active-background: #f4f1eb;
+	--b3-dockleft-item-active-background: #f4f1eb;
 	--b3-dock-item-active-color: #ff533f;
 	--b3-dock-item-hover-background: #fff;
 	
@@ -274,7 +274,7 @@
 	color:var(--h4-list-graphic);
 }
 .protyle-wysiwyg .h5{
-	color:var(--h5-list-graphic);
+	color:#b6a277;
 }
 .protyle-wysiwyg .h6{
 	color:var(--h6-list-graphic);

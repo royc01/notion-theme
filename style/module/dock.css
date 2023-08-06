@@ -4,48 +4,55 @@
 }
 .dock#dockLeft,
 .dock#dockRight{
-	border: 0px;
 	width: var(--b3-dock-item-width);
+	border: none;
 }
 .dock#dockLeft .dock__item{
-
-	margin: var(--b3-dock-item-margin);
-	border-radius: var(--b3-dock-item-radius);
 	color: var(--b3-dockleft-color);
+	margin: 7px 8px 7px 0;
 }
 .dock#dockRight .dock__item{
-
-	margin: var(--b3-dock-item-margin);
-	border-radius: var(--b3-dock-item-radius);
 	color: var(--b3-dockright-color);
+	margin: 7px 0 7px 8px;
 }
 .dock#dockLeft .dock__item--active{
-	/*color: var(--b3-dock-item-active-color);*/
+	color: var(--b3-theme-on-background);
 	background-color: var(--b3-dockleft-item-active-background);
+	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
 }
 .dock#dockRight{
 	background-color: var(--b3-dockright-background);
 }
 .dock#dockRight .dock__item--active{
-	/*color: var(--b3-dock-item-active-color);*/
+	color: var(--b3-theme-on-background);
 	background-color:var(--b3-dockright-item-active-background);
+	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
 }
 
-
+.dock#dockLeft .dock__item:first-child,.dock#dockRight .dock__item:first-child{
+	margin-top: 0px;
+}
+.dock#dockLeft .dock__item:last-child,.dock#dockRight .dock__item:last-child{
+	margin-bottom: 0px;
+}
 .dock__item svg{
 	width: 12px;
 }
 .dock__item {
-	padding-left:7px!important;
+	padding:6px 7px;
+	border-radius: 6px;
 }
 .dock#dockLeft .dock__item:hover,
 .dock#dockRight .dock__item:hover{
 	background-color: var(--b3-dock-item-hover-background);
 	transition: all 300ms;
+	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
 }
-
+.status .toolbar__item:hover{
+	background-color: var(--b3-dock-item-hover-background)!important;
+}
 /*dock焦点状态*/
 .dock__item--activefocus{
-	background-color:var(--b3-theme-background)!important;
-	color:var(--h1-list-graphic)!important;
+	background-color: #e16259!important;
+	color:var(--b3-theme-background)!important;
 }
