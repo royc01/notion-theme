@@ -6,14 +6,15 @@
 .dock#dockRight{
 	width: var(--b3-dock-item-width);
 	border: none;
+	padding-bottom:8px;
 }
 .dock#dockLeft .dock__item{
 	color: var(--b3-dockleft-color);
-	margin: 7px 8px 7px 0;
+	margin: 7px 0 7px 8px;
 }
 .dock#dockRight .dock__item{
 	color: var(--b3-dockright-color);
-	margin: 7px 0 7px 8px;
+	margin: 7px 8px 7px 0;
 }
 .dock#dockLeft .dock__item--active{
 	color: var(--b3-theme-on-background);

@@ -520,7 +520,7 @@ setTimeout(()=>ClickMonitor(),1000)
 function themeButton() {
 	notionThemeToolbarAddButton(
         "buttonSavor-light",
-        "toolbar__item b3-tooltips b3-tooltips__se",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Savor-light 配色",
 		'light',
         "/appearance/themes/Savor/img/base2.svg",
@@ -536,7 +536,7 @@ function themeButton() {
     );
 		notionThemeToolbarAddButton(
         "buttonsalt",
-        "toolbar__item b3-tooltips b3-tooltips__se",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Salt 配色",
 		'light',
         "/appearance/themes/Savor/img/salt2.svg",
@@ -552,7 +552,7 @@ function themeButton() {
     );
 		notionThemeToolbarAddButton(
         "buttonsugar",
-        "toolbar__item b3-tooltips b3-tooltips__se",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Sugar 配色",
 		'light',
         "/appearance/themes/Savor/img/sugar2.svg",
@@ -568,7 +568,7 @@ function themeButton() {
     );
 		notionThemeToolbarAddButton(
         "buttonSavor-dark",
-        "toolbar__item b3-tooltips b3-tooltips__se",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Savor-dark 配色",
 		'dark',
         "/appearance/themes/Savor/img/base2.svg",
@@ -584,7 +584,7 @@ function themeButton() {
     );
 	    notionThemeToolbarAddButton(
         "buttonvinegar",
-        "toolbar__item b3-tooltips b3-tooltips__se",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Vinegar 配色",
 		'dark',
         "/appearance/themes/Savor/img/moon2.svg",
@@ -605,7 +605,7 @@ function themeButton() {
 function concealMarkButton() {
     notionThemeToolplusAddButton(
         "conceal",
-        "toolbar__item b3-tooltips b3-tooltips__se",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
 		"挖空",
         "/appearance/themes/Savor/img/conceal2.svg",
         "/appearance/themes/Savor/img/conceal.svg",
@@ -623,7 +623,7 @@ function concealMarkButton() {
 function tabbarVerticalButton() {
     notionThemeToolplusAddButton(
         "tabbarVertical",
-        "toolbar__item b3-tooltips b3-tooltips__se",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
 		"垂直页签",
         "/appearance/themes/Savor/img/vtabbar2.svg",
         "/appearance/themes/Savor/img/vtabbar.svg",
@@ -1176,12 +1176,12 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, N
     var notionToolbar = document.getElementById("notionToolbar");
     if (notionToolbar == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("barSearch");
+        var windowControls = document.getElementById("dockRight");
 
         if (toolbarEdit == null && windowControls != null) {
             notionToolbar = document.createElement("div");
             notionToolbar.id = "notionToolbar";
-            windowControls.parentElement.insertBefore(notionToolbar, barSearch);
+            windowControls.children[1].appendChild(notionToolbar);
         } else if (toolbarEdit != null) {
             notionToolbar = insertCreateBefore(toolbarEdit, "div", "notionToolbar");
             notionToolbar.style.position = "relative";
@@ -1192,7 +1192,7 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, N
     addButton.style.float = "top";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
-	addButton.style.backgroundPosition = "left";
+	addButton.style.backgroundPosition = "center";
 
 
     
@@ -1285,12 +1285,12 @@ function notionThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButt
     var notionToolplus = document.getElementById("notionToolplus");
     if (notionToolplus == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("barSearch");
+        var windowControls = document.getElementById("dockRight");
 
         if (toolbarEdit == null && windowControls != null) {
             notionToolplus = document.createElement("div");
             notionToolplus.id = "notionToolplus";
-            windowControls.parentElement.insertBefore(notionToolplus, barSearch);
+            windowControls.children[1].appendChild(notionToolplus);
         } else if (toolbarEdit != null) {
             notionToolplus = insertCreateBefore(toolbarEdit, "div", "notionToolplus");
             notionToolplus.style.position = "relative";
@@ -1301,7 +1301,7 @@ function notionThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButt
     addButton.style.float = "top";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
-	addButton.style.backgroundPosition = "left";
+	addButton.style.backgroundPosition = "center";
 
 
     

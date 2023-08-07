@@ -98,8 +98,8 @@
 	/*background-image: linear-gradient(to bottom right , #7A88FF, #7AFFAF);*/
 	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
 }
-#barWorkspace:hover{
-	background-color: #b3180d;
+#barWorkspace:hover,#barReadonly.toolbar__item--active:hover{
+	background-color: #b3180d!important;
 
 }
 #barWorkspace .toolbar__text{

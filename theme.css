@@ -652,13 +652,14 @@ span[data-type="add"] svg{
 }
 
 #toolbar + .fn__flex {
-	margin: 0 7px 8px 7px;
-	border-radius:8px;
+	background-color:var(--b3-toolbar-background);
 }
 
 #layouts{
+	margin: 0 7px 8px 7px;
 	border-radius:6px;
 	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
+	min-height:90%;
 }
 
 
@@ -801,4 +802,16 @@ span[data-type="add"] svg{
 
 .search__layout .protyle-content .protyle-wysiwyg [data-node-id] span:not(:empty)::before{
 	display: none;
+}
+
+
+
+
+.toolbar__item:has(#tts-content){
+	margin-left:-16px!important;
+	margin-right:16px!important;
+}
+#tts-content{
+	margin:3px;
+	font-size:12px;
 }
