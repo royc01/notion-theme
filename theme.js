@@ -637,6 +637,24 @@ function tabbarVerticalButton() {
     );
 }
 
+/**---------------------------------------------------------顶栏-------------------------------------------------------------- */
+
+function topbarfixedButton() {
+    notionThemeToolplusAddButton(
+        "topBar",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
+		"隐藏顶栏",
+        "/appearance/themes/Savor/img/topbar2.svg",
+        "/appearance/themes/Savor/img/topbar.svg",
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/top-fixed.css", "topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
+        },
+        () => {
+            document.getElementById("topbar隐藏").remove();
+        },
+        true
+    );
+}
 
 //去除主题所有滤镜还原按钮状态
 function qucuFiiter() {
@@ -2088,6 +2106,8 @@ function getcommonMenu_Bolck() {
                 concealMarkButton();//挖空
                 
                 tabbarVerticalButton();//垂直页签
+				
+				topbarfixedButton();//顶栏悬浮
  
                 setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
 

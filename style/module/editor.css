@@ -549,13 +549,16 @@ width:36px;
 	padding: 30px 10px 22px 10px;
 }
 .protyle-wysiwyg[contenteditable="true"] .code-block .protyle-action{
-	padding:6px 3px;
+	padding:4px 3px;
 }
 .code-block .protyle-action .protyle-action__language{
-	height:14px;
-	line-height:12px;
+	height:16px;
+	line-height:14px;
 	border-radius:3px;
-	padding:4px 4px;
+	padding:4px;
+}
+.b3-typography .code-block .protyle-action .protyle-action__language, .protyle-wysiwyg .code-block .protyle-action .protyle-action__language{
+	margin-top: -2px;
 }
 .code-block .protyle-action .protyle-action__language:hover{
 	background-color:var(--b3-list-background);	

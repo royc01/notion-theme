@@ -436,9 +436,9 @@ body{
 
 
 
-.layout__center+.layout__resize--lr+.fn__flex-column{
+/*.layout__center+.layout__resize--lr+.fn__flex-column{
 	box-shadow: var(--b3-fn__flex-column-background) 0px 40px 0px 0px;
-}
+}*/
 #layouts{
 	
 }
@@ -477,28 +477,30 @@ body {
 
 
 
-.fn__flex-shrink.layout--float{
+.layout__dockl.layout--float{
 	min-height: unset;
 	padding-top: 0px;
-	top: 115px!important; 
+	top: 123px!important; 
 	bottom: 40px!important; 
 	box-shadow:  rgba(15, 15, 15, 0.2) 10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  10px -10px 20px -12px; 
 	border-radius:0 5px 5px 0;
 	overflow:hidden;
+}
+.layout__dockl.layout--float[style*="opacity: 1"]{
 	left:41px!important;
 }
-
-.layout__center ~ .fn__flex-column.layout--float{
+.layout__dockr.layout--float{
 	min-height: unset;
 	padding-top: 0px;
-	top: 115px!important; 
+	top: 123px!important; 
 	bottom: 12px!important; 
 	box-shadow: rgba(15, 15, 15, 0.2) -10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  -10px -10px 20px -12px; 
 	border-radius:5px 0 0 5px;
 	overflow:hidden;
+}
+.layout__dockr.layout--float[style*="opacity: 1"]{
 	right:41px!important;
 }
-
 
 
 .card__block .protyle-breadcrumb{
@@ -814,4 +816,14 @@ span[data-type="add"] svg{
 #tts-content{
 	margin:3px;
 	font-size:12px;
+}
+
+#notionToolbar{
+	position:absolute;
+	top:36%;
+	padding-top: 94px;
+}
+#notionToolplus{
+	position:absolute;
+	top:36%;
 }
