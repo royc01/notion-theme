@@ -436,9 +436,9 @@ body{
 
 
 
-/*.layout__center+.layout__resize--lr+.fn__flex-column{
+.layout__dockr{
 	box-shadow: var(--b3-fn__flex-column-background) 0px 40px 0px 0px;
-}*/
+}
 #layouts{
 	
 }
@@ -826,4 +826,8 @@ span[data-type="add"] svg{
 #notionToolplus{
 	position:absolute;
 	top:36%;
+}
+
+body.body--win32 .toolbar{
+	padding: 0 0 0 6px;
 }

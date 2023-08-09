@@ -272,6 +272,9 @@
 #tabbarVertical[style*="vtabbar.svg"]{
 	background-image: url(/appearance/themes/Savor/img/vtabbar3.svg)!important;
 }
+#topBar[style*="topbar.svg"]{
+	background-image: url(/appearance/themes/Savor/img/topbar3.svg)!important;
+}
 #buttonsugar[style*="sugar.svg"]{
 	background-image: url(/appearance/themes/Savor/img/sugar3.svg)!important;
 }
