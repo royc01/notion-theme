@@ -284,3 +284,12 @@
 #status {
     background-color: #404548;
 }
+
+
+#notionToolbar:hover+#notionToolplus,#notionToolplus:hover{
+	height:84px;
+	padding-top:60px;
+}
+#notionToolbar {
+    background: url(/appearance/themes/Savor/img/setting2.svg) no-repeat center;
+}

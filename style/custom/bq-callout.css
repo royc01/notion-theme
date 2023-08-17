@@ -107,7 +107,7 @@
 .bq[custom-b~=error]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -126,7 +126,7 @@
 .bq[custom-b~=warn]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -145,7 +145,7 @@
 .bq[custom-b~=bug]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -164,7 +164,7 @@
 .bq[custom-b~=check]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -183,7 +183,7 @@
 .bq[custom-b~=light]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -202,7 +202,7 @@
 .bq[custom-b~=question]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -221,7 +221,7 @@
 .bq[custom-b~=wrong]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -240,7 +240,7 @@
 .bq[custom-b~=info]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -259,7 +259,7 @@
 .bq[custom-b~=pen]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -278,7 +278,7 @@
 .bq[custom-b~=note]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;
@@ -297,7 +297,7 @@
 .bq[custom-b~=bell]::after {
     content: "";
     position: absolute;
-	top: 0.9em;
+	top: 0.7em;
 	left:0.2em;
 	margin-left:10px;
 	width: 1.5em;

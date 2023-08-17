@@ -20,7 +20,7 @@
 
 @import url(/appearance/themes/Savor/style/module/menu.css);/* 菜单、设置相关 */
 
-/*@import url(/appearance/themes/Savor/style/module/status.css);  底栏 */
+@import url(/appearance/themes/Savor/style/module/status.css);/*  底栏 */
 
 
 /* 引入特性 */
@@ -420,17 +420,6 @@ body{
 
 
 
-.body--window .layout-tab-bar{
-	border-bottom: 1px solid var(--b3-theme-background-light);
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -439,9 +428,7 @@ body{
 .layout__dockr{
 	box-shadow: var(--b3-fn__flex-column-background) 0px 40px 0px 0px;
 }
-#layouts{
-	
-}
+
 body {
     background-color:var(--b3-toolbar-background);
 }
@@ -463,13 +450,12 @@ body {
 }
 
 
-.fn__flex-1:has(~.status.fn__none) .fn__flex-column.fn__flex-shrink,.fn__flex-1:has(~.status.fn__none) .layout__center ~ .fn__flex-column,.fn__flex-1:has(~.status.fn__none) #layouts{
+
+
+.fn__flex-1:has(~.status.fn__none) #layouts .layout__dockr{
 	margin-bottom:0px;
 }
 
-.fn__flex-1:has(~.status.fn__none) #layouts>.fn__flex+.layout__resize+.fn__flex-1{
-	margin-bottom:0px;
-}
 
 
 
@@ -477,30 +463,6 @@ body {
 
 
 
-.layout__dockl.layout--float{
-	min-height: unset;
-	padding-top: 0px;
-	top: 123px!important; 
-	bottom: 40px!important; 
-	box-shadow:  rgba(15, 15, 15, 0.2) 10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  10px -10px 20px -12px; 
-	border-radius:0 5px 5px 0;
-	overflow:hidden;
-}
-.layout__dockl.layout--float[style*="opacity: 1"]{
-	left:41px!important;
-}
-.layout__dockr.layout--float{
-	min-height: unset;
-	padding-top: 0px;
-	top: 123px!important; 
-	bottom: 12px!important; 
-	box-shadow: rgba(15, 15, 15, 0.2) -10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  -10px -10px 20px -12px; 
-	border-radius:5px 0 0 5px;
-	overflow:hidden;
-}
-.layout__dockr.layout--float[style*="opacity: 1"]{
-	right:41px!important;
-}
 
 
 .card__block .protyle-breadcrumb{
@@ -544,7 +506,7 @@ span[data-type="add"] svg{
 
 
 .layout__center .sy__backlink{
-	padding-bottom:37px;
+	padding-bottom:30px;
 }
 
 
@@ -627,15 +589,9 @@ span[data-type="add"] svg{
 }
 
 
-.protyle-scroll{
-	top: 80px;
-}
 
 
 
-.status .toolbar__item{
-	height: 26px;
-}
 
 
 .layout-tab-container .card__main{
@@ -682,152 +638,48 @@ span[data-type="add"] svg{
 	margin:8px 0;
 }*/
 
-#status {
-    position: fixed;
-    background-color: var(--b3-toolbar-background);
-    right: 41px;
-    bottom: -4px;
-	border-radius:6px 0 6px 0;
-	height: 26px;
-}
+
 .b3-typography mark, .b3-typography span[data-type~=mark], .protyle-wysiwyg mark, .protyle-wysiwyg span[data-type~=mark]{
 	background: rgba(255,212,0,0.14);
     border-bottom: 2px solid rgb(255, 212, 0);
 }
 
 
-/*底栏*/
-.status{
-	border:0;
-	padding: 0 11px 0 0;
-	margin:0 0 12px 0;
-}
-.status .toolbar__item:not(.toolbar__item--close) {
-	margin:3px!important;
-	padding:3px;
-	background-color:rgb(0, 0, 0, 0);
-}
-
-.status .toolbar__item svg{
-	padding:3px 4px;
-	color:var(--b3-dockright-color);
-	width: 12px;
-}
-.body--win32>.fn__flex-1
-{
-	overflow:visible;
-}
-
-.status__counter:not(:empty){
-	border-radius:5px;
-	padding: 0px 4px 0 8px ;
-	margin:0px 6px 0px 0px;
-	height:26px;
-	line-height:26px;
-}
-.status__msg:not(:empty){
-	animation: statusmsg 5s ease-in-out;
-	max-width: 140px;
-	padding: 0px 8px;
-	border-radius:5px;
-	margin:0px;
-	transition: max-width 300ms,opacity 300ms;
-	transition-delay: 2000ms;
-	position:relative;
-	height:26px;
-	line-height:26px;
-}
-.status__msg:not(:empty):before{
-	content: "📢";
-	font-size:12px;
-	padding-right:6px;
-}
-
-.status__msg:not(:empty):hover{
-	max-width:400px;
-	transition: max-width 300ms ease-out;
-}
-
-/*.layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
-	padding-bottom:30px;
-}
-.layout#layouts .fn__flex-shrink>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
-	padding-bottom:30px;
-}
-.layout#layouts .fn__flex-shrink>.layout__resize+.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
-	padding-bottom:30px;
-}*/
-
-.status #statusHelp{
-	position:relative;
-	right:12px;
-}
-.status #barDock{
-	position:absolute;
-	right:-3px;
-	z-index:8;
-	color:var(--b3-theme-on-background);
-}
-.status #statusHelp svg,.status #barDock svg{
-	color:var(--b3-theme-on-background);
-}
-.status #barDock:before{
-	right:unset!important;
-	left: 0px;
-	transform: rotateY(180deg);
-}
-.status #barDock:after{
-	left:unset!important;
-	right:100%;
-}
-
-.status>.fn__flex-1{
-	position:relative!important;
-	width:0px!important;
-	right:0px;
-	flex:0;
-}
-
-
-
-.status__backgroundtask{
-	margin:0px 0px 7px 0px;
-	padding: 0px 0px 0px 8px;
-	border-radius:5px;
-	height:26px;
-	line-height:26px;
-}
-
-#status:has(>#barDock[aria-label*="示"]),#status:has(>#barDock[aria-label*="Show Dock"]){
-	right: 7px;
-}
 
 .search__layout .protyle-content .protyle-wysiwyg [data-node-id] span:not(:empty)::before{
 	display: none;
-}
-
-
-
-
-.toolbar__item:has(#tts-content){
-	margin-left:-16px!important;
-	margin-right:16px!important;
-}
-#tts-content{
-	margin:3px;
-	font-size:12px;
-}
-
-#notionToolbar{
-	position:absolute;
-	top:36%;
-	padding-top: 94px;
-}
-#notionToolplus{
-	position:absolute;
-	top:36%;
-}
+}/*取消搜索窗口链接图标*/
 
 body.body--win32 .toolbar{
 	padding: 0 0 0 6px;
+}
+
+
+.body--window #layouts{
+	margin: 0px;
+    border-radius: 0px;
+}
+
+
+.toolbar__window .toolbar__item:not(.toolbar__item--close){
+	padding: 2px;
+	margin: 0 4px 0 0;
+}
+
+.toolbar__window .toolbar__item svg{
+	padding: 4px 6px;
+	height: 13px;
+	width: 13px;	
+}
+.toolbar__window .toolbar__item:not(.toolbar__item--close):hover{
+	background-color: var(--b3-list-background)!important;
+}
+
+
+.textLayer .highlight.selected {
+    background-color: var(--b3-protyle-inline-mark-background);
+}
+
+#findResultsCount{
+	box-shadow:none;
 }

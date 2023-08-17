@@ -11,6 +11,7 @@
     margin: 0px !important;
 	width:100%;
     outline: 1px solid var(--b3-layout-resize);
+	border-radius: 0px;
 }
 
 /* ————————————————————对所有子列表项设置格式———————————————————— */
@@ -18,6 +19,7 @@
 	display: flex;
     outline:  1px solid var(--b3-layout-resize);
     background-color: var(--b3-theme-background);
+	border-radius: 0px;
 }
 
 /* ————————————————————调整每个子列表项右侧边距———————————————————— */

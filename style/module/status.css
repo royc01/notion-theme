@@ -1,14 +1,21 @@
 /*底栏*/
-.status{
-	background-color:transparent;
+#status {
+    position: fixed;
+    background-color: var(--b3-toolbar-background);
+    right: 41px;
+    bottom: -4px;
+	border-radius:6px 0 6px 0;
+	height: 26px;
 	border:0;
-	padding: 0 11px;
-	margin-bottom: 12px;
+	padding: 0 26px 0 0;
+	margin:0 0 12px 0;
+	z-index:10;
 }
+
 .status .toolbar__item:not(.toolbar__item--close) {
 	margin:3px!important;
 	padding:3px;
-	background-color: var(--b3-theme-background);
+	background-color:rgb(0, 0, 0, 0);
 }
 
 .status .toolbar__item svg{
@@ -23,20 +30,17 @@
 
 .status__counter:not(:empty){
 	border-radius:5px;
-	background-color:var(--b3-theme-background);
-	padding: 0px 4px 0 8px ;
-	margin:4px 6px 0px 8px;
+	padding: 0px 0px 0 8px ;
+	margin:0px 2px 0px 0px;
 	height:26px;
 	line-height:26px;
 }
 .status__msg:not(:empty){
-	opacity:0.5;
 	animation: statusmsg 5s ease-in-out;
 	max-width: 140px;
 	padding: 0px 8px;
 	border-radius:5px;
-	background-color:var(--b3-theme-background);
-	margin:4px 0px 0px 6px;
+	margin:0px;
 	transition: max-width 300ms,opacity 300ms;
 	transition-delay: 2000ms;
 	position:relative;
@@ -46,45 +50,26 @@
 .status__msg:not(:empty):before{
 	content: "📢";
 	font-size:12px;
+	padding-right:6px;
 }
 
 .status__msg:not(:empty):hover{
-	opacity:1;
 	max-width:400px;
 	transition: max-width 300ms ease-out;
 }
 
-/*.layout#layouts .fn__flex-column:not(.fn__flex-shrink)>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
-	padding-bottom:30px;
-}
-.layout#layouts .fn__flex-shrink>.fn__flex-1>.fn__flex>.layout-tab-container>.fn__flex-column{
-	padding-bottom:30px;
-}
-.layout#layouts .fn__flex-shrink>.layout__resize+.fn__flex>.fn__flex>.layout-tab-container>.fn__flex-column{
-	padding-bottom:30px;
-}*/
 
-/*.status #statusHelp{
+.status #statusHelp{
 	position:relative;
-	right:35px;
 }
 .status #barDock{
 	position:absolute;
-	right:0px;
+	right:-3px;
 	z-index:8;
+	color:var(--b3-theme-on-background);
 }
-
-.status>.fn__flex-1{
-	position:relative!important;
-	width:0px!important;
-	right:0px;
-	flex:0;
-}
-
-.status #barDock .b3-menu{
-	left:unset!important;
-	right:4px;
-	bottom:30px!important;
+.status #statusHelp svg,.status #barDock svg{
+	color:var(--b3-theme-on-background);
 }
 .status #barDock:before{
 	right:unset!important;
@@ -94,12 +79,43 @@
 .status #barDock:after{
 	left:unset!important;
 	right:100%;
-}*/
+}
+
+.status>.fn__flex-1{
+	position:relative!important;
+	width:0px!important;
+	right:0px;
+	flex:0;
+}
+
+
+
 .status__backgroundtask{
-	margin:4px 0px 7px 7px;
+	margin:0px 0px 7px 0px;
 	padding: 0px 0px 0px 8px;
 	border-radius:5px;
-	background-color:var(--b3-theme-background);
 	height:26px;
 	line-height:26px;
+}
+
+
+.body--window #status{
+	right: -22px;
+	bottom: -12px;
+	border-radius: 6px 0 0 0;
+}
+.fn__flex-1:has(#dockRight.fn__none)~#status{
+	right: 7px;
+}
+.status .toolbar__item{
+	height: 26px;
+}
+
+#status .toolbar__item span{
+	margin:3px;
+	font-size:12px;
+}
+
+#dockBottom:not(.fn__none)+#status{
+	background-color:transparent;
 }

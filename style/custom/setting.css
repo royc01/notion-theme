@@ -1,9 +1,9 @@
-.fn__flex-1:has(>#notionToolbar){
+/*.fn__flex-1:has(>#notionToolbar){
 	overflow: visible;
 }
 #notionToolbar{
 	
-}
+}*/
 /*#notionToolbar,#notionToolplus{
 	position:relative;
 }
@@ -14,7 +14,7 @@
 #notionToolplus{
 	top:calc(50% - 8px);
 	margin-left:1px;
-}*/
+}
 #notionToolbar div,#notionToolplus div{
 	height:26px;
 	width:26px!important;
@@ -25,4 +25,93 @@
 
 #notionToolbar div:hover,#notionToolplus div:hover{
 	background-color: var(--b3-toolbar-item-hover);
+}*/
+
+#notionToolbar{
+	width:26px;
+	height:26px;
+	margin:7px 0px 4px 0px;
+	border-radius:6px;
+	overflow:hidden;
+	background: url("/appearance/themes/Savor/img/setting.svg") no-repeat center; 
+}
+#notionToolplus{
+	height:0px;
+	width:0px;
+	overflow:hidden;
+}
+#notionToolbar:hover{
+	overflow:visible;
+	background-color:var(--b3-toolbar-item-hover);
+}
+#notionToolbar:hover+#notionToolplus,#notionToolplus:hover{
+	height:84px;
+	width:128px;
+	margin-left:-144px;
+	overflow:visible;
+	background-color:var(--b3-theme-background);
+	box-shadow:rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+	z-index:7;
+	border-radius:12px;
+	padding-top:91px;
+	padding-bottom:6px;
+	border:8px solid var(--b3-theme-background);
+}
+#notionToolbar:has(+#notionToolplus:hover){
+	overflow:visible;
+	background-color:var(--b3-toolbar-item-hover);
+}
+/*#notionToolbar div{
+	border-radius:0;
+}
+#notionToolbar div:first-child{
+	border-radius:5px 5px 0 0;
+}
+#notionToolbar div:last-child{
+	border-radius:0 0 5px 5px;
+}*/
+#buttonSavor-light,#buttonSavor-dark,#buttonsalt,#topBar,#conceal,#tabbarVertical,#buttonvinegar,#buttonsugar{
+	height:30px;
+	margin:0 0 0 -110px;
+	border-bottom:none;
+	width:128px;
+	z-index:8;
+	border-radius:8px;
+	background-size:18%;
+}
+#buttonSavor-light,#buttonSavor-dark{
+	margin-top:34px;
+}
+
+
+#buttonSavor-light::after,#buttonSavor-dark::after,#buttonsalt::after,#buttonvinegar::after,#buttonsugar::after,#topBar::after,#conceal::after,#tabbarVertical::after{
+	font-size:14px;
+	line-height:26px;
+	transform:none;
+	opacity:1;
+	color:var(--b3-theme-on-background);
+	background-color:transparent;
+	position:static;
+	margin:0;
+	padding:0 0 0 30px;
+	box-shadow:none;
+}
+#topBar,#conceal,#tabbarVertical{
+	margin:0px;
+}
+
+#buttonSavor-light::before,#buttonSavor-dark::before,#buttonsalt::before,#topBar::before,#conceal::before,#tabbarVertical::before,#buttonvinegar::before,#buttonsugar::before{
+	display:none;
+}
+
+#buttonSavor-light:hover,#buttonSavor-dark:hover,#buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover{
+	background-color:var(--b3-list-background);
+}
+
+
+#notionToolplus{
+	border:8px solid transparent;
+	margin-left:-16px;
+	margin-right:-2px;
+	margin-top:33px;
 }

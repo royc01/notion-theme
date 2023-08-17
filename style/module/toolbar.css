@@ -26,11 +26,8 @@
 	padding: 1px;
 	height: 26px;
 }
-.toolbar__window .toolbar__item:not(.toolbar__item--close){
-	padding: 3px;
-	margin: 7px 4px 7px 0px  
-}
-.toolbar__item svg,.toolbar__window .toolbar__item svg{
+
+.toolbar__item svg{
 	padding: 5px;
 	height: 14px;
 	width: 14px;	
@@ -48,12 +45,7 @@
 	padding: 5px 6px;
 }
 
- #restoreWindow, #maxWindow{
-	margin:0;
-}
-.toolbar__window #restoreWindow, .toolbar__window #maxWindow{
-	margin: 7px 4px 7px 0px 
-}
+
 .toolbar__item--win{
 	height:unset;
 }
@@ -62,13 +54,16 @@
 	padding: 5px 8px;
 	border-radius:5px;
 }
+.toolbar__window #closeWindow svg{
+	padding: 6px 8px;
+}
 
 .toolbar__item--close{
 	padding: 8px 8px 8px 0px;
 	height: 40px;
 }
 .toolbar__window .toolbar__item--close{
-	padding: 9px;
+	padding: 8px 8px 8px 0;
 	height: 40px;
 }
 #closeWindow:hover{
@@ -140,6 +135,7 @@
 	font-weight: 600;
 	font-size:0.8em;
 	color:var(--b3-theme-background);
+	z-index:1;
 }
 #barReadonly.toolbar__item--active:hover{
 	background-color: var(--b3-toolbar-item-hover);

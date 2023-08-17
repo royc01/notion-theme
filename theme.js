@@ -310,7 +310,7 @@ function quoteError(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","error")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f6ab"></use></svg><span class="b3-menu__label">禁止</span>`
+  button.innerHTML=`<span class="b3-menu__label">🚫禁止</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -320,7 +320,7 @@ function Warn(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","warn")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-26a0"></use></svg><span class="b3-menu__label">警告</span>`
+  button.innerHTML=`<span class="b3-menu__label">⚠警告</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -330,7 +330,7 @@ function Bug(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","bug")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f41b"></use></svg><span class="b3-menu__label">bug</span>`
+  button.innerHTML=`<span class="b3-menu__label">🐛bug</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -340,7 +340,7 @@ function Check(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","check")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-2705"></use></svg><span class="b3-menu__label">正确</span>`
+  button.innerHTML=`<span class="b3-menu__label">✅正确</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -350,7 +350,7 @@ function Light(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","light")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f4a1"></use></svg><span class="b3-menu__label">灵感</span>`
+  button.innerHTML=`<span class="b3-menu__label">💡灵感</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -360,7 +360,7 @@ function Question(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","question")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-2753"></use></svg><span class="b3-menu__label">问题</span>`
+  button.innerHTML=`<span class="b3-menu__label">❓问题</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -370,7 +370,7 @@ function Wrong(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","wrong")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-274c"></use></svg><span class="b3-menu__label">错误</span>`
+  button.innerHTML=`<span class="b3-menu__label">❌错误</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -380,7 +380,7 @@ function Info(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","info")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-2139"></use></svg><span class="b3-menu__label">信息</span>`
+  button.innerHTML=`<span class="b3-menu__label">ℹ信息</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -390,7 +390,7 @@ function Pen(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","pen")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f58b"></use></svg><span class="b3-menu__label">记录</span>`
+  button.innerHTML=`<span class="b3-menu__label">🖋记录</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -400,7 +400,7 @@ function Note(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","note")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f4d3"></use></svg><span class="b3-menu__label">汇总</span>`
+  button.innerHTML=`<span class="b3-menu__label">📓汇总</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -410,7 +410,7 @@ function Bell(selectid){
   button.setAttribute("data-node-id",selectid)
   button.setAttribute("custom-attr-name","b")
   button.setAttribute("custom-attr-value","bell")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#icon-1f514"></use></svg><span class="b3-menu__label">提醒</span>`
+  button.innerHTML=`<span class="b3-menu__label">🔔提醒</span>`
   button.onclick=ViewMonitor
   return button
 }
@@ -521,7 +521,7 @@ function themeButton() {
 	notionThemeToolbarAddButton(
         "buttonSavor-light",
         "toolbar__item b3-tooltips b3-tooltips__sw",
-		"Savor-light 配色",
+		"Light 配色",
 		'light',
         "/appearance/themes/Savor/img/base2.svg",
         "/appearance/themes/Savor/img/base.svg",
@@ -569,7 +569,7 @@ function themeButton() {
 		notionThemeToolbarAddButton(
         "buttonSavor-dark",
         "toolbar__item b3-tooltips b3-tooltips__sw",
-		"Savor-dark 配色",
+		"Dark 配色",
 		'dark',
         "/appearance/themes/Savor/img/base2.svg",
         "/appearance/themes/Savor/img/base3.svg",
@@ -1194,12 +1194,12 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, N
     var notionToolbar = document.getElementById("notionToolbar");
     if (notionToolbar == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("dockRight");
+        var windowControls = document.getElementById("windowControls");
 
         if (toolbarEdit == null && windowControls != null) {
             notionToolbar = document.createElement("div");
             notionToolbar.id = "notionToolbar";
-            windowControls.children[1].appendChild(notionToolbar);
+            windowControls.parentElement.insertBefore(notionToolbar, windowControls);
         } else if (toolbarEdit != null) {
             notionToolbar = insertCreateBefore(toolbarEdit, "div", "notionToolbar");
             notionToolbar.style.position = "relative";
@@ -1210,7 +1210,7 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, N
     addButton.style.float = "top";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
-	addButton.style.backgroundPosition = "center";
+	addButton.style.backgroundPosition = "5% 50%";
 
 
     
@@ -1225,18 +1225,18 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, N
 
         
         // 如果主题是暗色主题，默认选中样式
-        if (Mode == 'dark') {
+        if (Mode == 'dark'){
             if (Memory == true) {
-        offNo = getItem(ButtonID);
-        if (offNo == "1") {
-            addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
-            setItem(ButtonID, "0");
-            NoClickRunFun(addButton);
-            setItem(ButtonID, "1");
-        } else if (offNo != "0") {
-            offNo = "0";
-            setItem(ButtonID, "0");
-        }
+			offNo = getItem(ButtonID);
+			if (offNo == "1") {
+				addButton.style.backgroundImage = "url(" + NoButtonSvgURL + ")";
+				setItem(ButtonID, "0");
+				NoClickRunFun(addButton);
+				setItem(ButtonID, "1");
+			} else if (offNo != "0") {
+				offNo = "0";
+				setItem(ButtonID, "0");
+			}
     }
 
     AddEvent(addButton, "click", () => {
@@ -1303,12 +1303,12 @@ function notionThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButt
     var notionToolplus = document.getElementById("notionToolplus");
     if (notionToolplus == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("dockRight");
+        var windowControls = document.getElementById("windowControls");
 
         if (toolbarEdit == null && windowControls != null) {
             notionToolplus = document.createElement("div");
             notionToolplus.id = "notionToolplus";
-            windowControls.children[1].appendChild(notionToolplus);
+            windowControls.parentElement.insertBefore(notionToolplus, windowControls);
         } else if (toolbarEdit != null) {
             notionToolplus = insertCreateBefore(toolbarEdit, "div", "notionToolplus");
             notionToolplus.style.position = "relative";
@@ -1319,7 +1319,7 @@ function notionThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButt
     addButton.style.float = "top";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
-	addButton.style.backgroundPosition = "center";
+	addButton.style.backgroundPosition = "5% 50%";
 
 
     
