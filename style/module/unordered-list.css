@@ -1,93 +1,46 @@
 [data-subtype="u"]>.li[data-subtype="u"]>.protyle-action svg{
+	color:transparent;
+}
 
+[data-subtype="u"]>.li[data-subtype="u"]>.protyle-action::before {
+    font-size: 1.5em;
+    line-height: 1;
+    margin-bottom: 0px;
+	margin-left:13px;
+    font-family: Arial;
+	content: "•";
 }
 
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:2px;
-	height:2px;
-	border-radius: 50%;
-	background-color:var(--b3-theme-background);
-	border: 0.15em solid var(--b3-theme-on-background);
-	clip-path: circle(45% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "◦";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color: transparent;
-    width: 0.08em;
-    height: 0.08em;
-    border-radius: 0;
-    background-color: var(--b3-theme-on-background);
-	clip-path: circle(100% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "▪";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color: var(--b3-theme-on-background);
-    width: 0.1em;
-    height: 0.1em;
-	border-radius: 50%;
-	clip-path: circle(45% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "•";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:2px;
-	height:2px;
-	border-radius: 50%;
-	background-color:var(--b3-theme-background);
-	border: 0.15em solid var(--b3-theme-on-background);
-	clip-path: circle(45% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "◦";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color: transparent;
-    width: 0.08em;
-    height: 0.08em;
-    border-radius: 0;
-    background-color: var(--b3-theme-on-background);
-	clip-path: circle(100% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "▪";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color: var(--b3-theme-on-background);
-    width: 0.1em;
-    height: 0.1em;
-	border-radius: 50%;
-	clip-path: circle(45% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "•";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:2px;
-	height:2px;
-	border-radius: 50%;
-	background-color:var(--b3-theme-background);
-	border: 0.15em solid var(--b3-theme-on-background);
-	clip-path: circle(45% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "◦";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color: transparent;
-    width: 0.08em;
-    height: 0.08em;
-    border-radius: 0;
-    background-color: var(--b3-theme-on-background);
-	clip-path: circle(100% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "▪";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color: var(--b3-theme-on-background);
-    width: 0.1em;
-    height: 0.1em;
-	border-radius: 50%;
-	clip-path: circle(45% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "•";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color:transparent;
-	width:2px;
-	height:2px;
-	border-radius: 50%;
-	background-color:var(--b3-theme-background);
-	border: 0.15em solid var(--b3-theme-on-background);
-	clip-path: circle(45% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "◦";
 }
-[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action svg{
-	color: transparent;
-    width: 0.08em;
-    height: 0.08em;
-    border-radius: 0;
-    background-color: var(--b3-theme-on-background);
-	clip-path: circle(100% at center);
+[data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
+	content: "▪";
 }

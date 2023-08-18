@@ -242,7 +242,7 @@
 	--kbline-boarditem-minwidth: 14rem;/*看板卡片的最小宽度*/
 	--kb--li--background:#fff;
 	/*ctrlp*/
-	--b3-list-item--meta: rgba(37, 40, 48, 0.3);
+	--b3-list-item--meta: #8b8e92;
 	/*底栏状态*/
 	--b3-status-msg-background: #c7d1d1;
 }
@@ -262,3 +262,6 @@
     background-color: var(--b3-fn__flex-shrink-background);
 }
 
+#buttonSavor-light[style*="base"]{
+	background-image: url(/appearance/themes/Savor/img/base.svg)!important;
+}

@@ -245,7 +245,7 @@
 	--kbline-boarditem-minwidth: 14rem;/*看板卡片的最小宽度*/
 	--kb--li--background:rgba(55, 60, 63);
 	/*ctrlp*/
-	--b3-list-item--meta: var(--b3-scroll-color-hover);
+	--b3-list-item--meta: #ebebeb;
 	/*底栏状态*/
 	--b3-status-msg-background: var(--b3-scroll-color);
 }
@@ -292,4 +292,7 @@
 }
 #notionToolbar {
     background: url(/appearance/themes/Savor/img/setting2.svg) no-repeat center;
+}
+#buttonSavor-dark[style*="base"]{
+	background-image: url(/appearance/themes/Savor/img/base2.svg)!important;
 }

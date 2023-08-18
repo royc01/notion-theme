@@ -313,3 +313,6 @@ body{
 #notionToolbar {
     background: url(/appearance/themes/Savor/img/setting2.svg) no-repeat center;
 }
+#buttonSavor-dark[style*="base"]{
+	background-image: url(/appearance/themes/Savor/img/base3.svg)!important;
+}

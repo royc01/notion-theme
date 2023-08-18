@@ -32,7 +32,7 @@
 	height:26px;
 	margin:7px 0px 4px 0px;
 	border-radius:6px;
-	overflow:hidden;
+
 	background: url("/appearance/themes/Savor/img/setting.svg") no-repeat center; 
 }
 #notionToolplus{
@@ -41,7 +41,6 @@
 	overflow:hidden;
 }
 #notionToolbar:hover{
-	overflow:visible;
 	background-color:var(--b3-toolbar-item-hover);
 }
 #notionToolbar:hover+#notionToolplus,#notionToolplus:hover{
@@ -70,14 +69,24 @@
 #notionToolbar div:last-child{
 	border-radius:0 0 5px 5px;
 }*/
-#buttonSavor-light,#buttonSavor-dark,#buttonsalt,#topBar,#conceal,#tabbarVertical,#buttonvinegar,#buttonsugar{
+#buttonSavor-light,#buttonSavor-dark,#buttonsalt,#buttonvinegar,#buttonsugar{
+	margin:0px;
 	height:30px;
-	margin:0 0 0 -110px;
+	left: -110px;
 	border-bottom:none;
 	width:128px;
 	z-index:8;
 	border-radius:8px;
 	background-size:18%;
+	display:none;
+}
+#notionToolbar:has(+#notionToolplus:hover) #buttonSavor-light,#notionToolbar:has(+#notionToolplus:hover) #buttonSavor-dark,
+#notionToolbar:has(+#notionToolplus:hover) #buttonsalt,#notionToolbar:has(+#notionToolplus:hover) #buttonvinegar,
+#notionToolbar:has(+#notionToolplus:hover) #buttonsugar,
+#notionToolbar:hover #buttonSavor-light,#notionToolbar:hover #buttonSavor-dark,
+#notionToolbar:hover #buttonsalt,#notionToolbar:hover #buttonvinegar,
+#notionToolbar:hover #buttonsugar{
+	display:block;
 }
 #buttonSavor-light,#buttonSavor-dark{
 	margin-top:34px;
@@ -98,6 +107,12 @@
 }
 #topBar,#conceal,#tabbarVertical{
 	margin:0px;
+	height:30px;
+	border-bottom:none;
+	width:128px;
+	z-index:8;
+	border-radius:8px;
+	background-size:18%;
 }
 
 #buttonSavor-light::before,#buttonSavor-dark::before,#buttonsalt::before,#topBar::before,#conceal::before,#tabbarVertical::before,#buttonvinegar::before,#buttonsugar::before{

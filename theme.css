@@ -683,3 +683,8 @@ body.body--win32 .toolbar{
 #findResultsCount{
 	box-shadow:none;
 }
+
+.b3-text-field:not(#searchInput), .pcr-app .pcr-interaction .pcr-result,.b3-select{
+	box-shadow: none;
+	background-color: var(--b3-list-background);
+}

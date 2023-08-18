@@ -193,7 +193,7 @@
 .protyle-gutters button svg {
     color: var(--b3-gutters-color);
 	padding:0 5px;
-	border-radius:3px;
+	border-radius:6px;
 	height: 24px!important;
 }
 .protyle-gutters button[data-type="fold"] svg {
