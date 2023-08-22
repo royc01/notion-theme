@@ -159,7 +159,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-background: #c4d2d3;
+	--b3-toolbar-background: rgb(37, 40, 48);
 	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--b3-toolbar-closeWindow-hover: #e81123;
 	--b3-toolbar-closeWindow-svg: #fff;
@@ -261,7 +261,45 @@
 #status {
     background-color: var(--b3-fn__flex-shrink-background);
 }
+.toolbar .toolbar__item:not(.toolbar__item--disabled) svg{
+	color: var(--b3-theme-background);
+}
 
 #buttonSavor-light[style*="base"]{
 	background-image: url(/appearance/themes/Savor/img/base.svg)!important;
+}
+#notionToolbar {
+    background: url(/appearance/themes/Savor/img/setting2.svg) no-repeat center;
+}
+.dock__item:not(.dock__item--active){
+	color: var(--b3-theme-background)!important;
+}
+.dock__item:not(.dock__item--active):hover {
+    color: var(--b3-dockleft-color)!important;
+}
+#dockBottom:not(.fn__none)+#status .toolbar__item svg{
+	color: var(--b3-theme-background)!important;
+}
+#dockBottom:not(.fn__none)+#status .toolbar__item:hover svg{
+	color: var(--b3-dockleft-color)!important;
+}
+#dockBottom:not(.fn__none)+#status .status__counter {
+	color: var(--b3-theme-background)!important;
+}
+
+
+#dockLeft.fn__none+#layouts{
+	border-radius:0px;
+	margin:0;
+}
+.fn__flex-1:has(#dockRight.fn__none)~#status{
+	right: 0px;
+	bottom: -12px;
+	border-radius: 6px 0 0 0;
+}
+
+
+
+.toolbar:has(#topBar[style*="topbar2"])+.fn__flex-1:has(#dockRight.fn__none){
+	margin-top:-8px;
 }

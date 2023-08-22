@@ -137,8 +137,15 @@ function createnotionToolbar() {
   button.appendChild(SubMenu(selectid,selecttype))
   return button
 }
+function SubMenu(selectid,selecttype){
+  let button = document.createElement("button")
+  button.id="viewselectSub"
+  button.className="b3-menu__submenu"
+  button.appendChild(MenuItems(selectid,selecttype))
+  return button
+}
 
-function SubMenu(selectid,selecttype,className = 'b3-menu__submenu') {
+  function MenuItems(selectid,selecttype,className = 'b3-menu__items'){
   let node = document.createElement('div');
   node.className = className;
   if(selecttype=="NodeList"){
@@ -2176,3 +2183,9 @@ window.theme.loadScript = function (src, type = 'module', async = false, defer =
 
 // 加载打字机功能
 window.theme.loadScript('/appearance/themes/Savor/js_module/module/typewriter.js');
+
+
+
+
+
+

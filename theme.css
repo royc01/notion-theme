@@ -452,7 +452,7 @@ body {
 
 
 
-.fn__flex-1:has(~.status.fn__none) #layouts .layout__dockr{
+.fn__flex-1:has(~.status.fn__none) #layouts .layout__dockr,.fn__flex-1:has(~#dockBottom:not(.fn__none)) #layouts .layout__dockr{
 	margin-bottom:0px;
 }
 
@@ -684,7 +684,9 @@ body.body--win32 .toolbar{
 	box-shadow:none;
 }
 
-.b3-text-field:not(#searchInput), .pcr-app .pcr-interaction .pcr-result,.b3-select{
+
+
+.b3-text-field:not(#searchInput):not(.fn__block), .pcr-app .pcr-interaction .pcr-result,.b3-select{
 	box-shadow: none;
 	background-color: var(--b3-list-background);
 }

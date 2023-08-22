@@ -235,30 +235,20 @@
 }
 /* 文字弹出工具条 */
 .protyle-toolbar{
-    border-radius: 3px;
 	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px; 
 	animation: toolbar 0.2s ease-in-out;
 	border:none;
 }
 
 .protyle-toolbar__item{
-	height:32px;
+	height:30px;
     width:30px;
+	padding-top:3px;
 }
 .protyle-toolbar__item:not(.protyle-toolbar__item--current){
 	color:var(--b3-theme-on-background);
 }
-.protyle-toolbar__item[data-type='blockRef']{
-	padding-right:3px;
-	width:31px;
-}
-.protyle-toolbar__item[data-type='font']{
-	width:44px
-}
-.protyle-toolbar__item[data-type='font'] svg{
-margin-left:-10px;
-width:36px;
-}
+
 .protyle-toolbar__item:hover {
 	background-color: var(--b3-toolbar-item-hover);
 }
@@ -402,19 +392,11 @@ width:36px;
 	 transition:none;
 }
 /* 任务列表 */
-.protyle-task--done>div[data-node-id].p{
-	color:unset;
-	text-decoration:unset;
-}
-.protyle-task--done>div[data-node-id].p:nth-child(2){
-    color: var(--b3-theme-on-surface-light)!important;
-    text-decoration: line-through!important;
-}
 .protyle-task--done svg{
-    color: var(--b3-theme-primary) !important;
+    color: var(--b3-theme-primary);
 }
 .protyle-task--done:hover svg{
-    color: var(--b3-task-done-hover) !important;
+    color: var(--b3-task-done-hover);
 }
 .protyle-wysiwyg [data-node-id].li>.protyle-action--task:hover:after{
 	display:none;
@@ -523,6 +505,16 @@ width:36px;
 .protyle-wysiwyg [data-node-id] span[data-type~=a]{
 	color: var(--b3-theme-on-surface);
 	border-bottom:1px solid var(--b3-border-color);
+}
+/*上标链接*/
+.protyle-wysiwyg [data-node-id] span[data-type*="a"][data-type*="sup"],.protyle-wysiwyg [data-node-id] span[data-type*="a"][data-type*="sub"]{
+	font-size:65%;
+	border-radius:5px;
+	padding: 1px 4px 2px 4px;
+	border: 1px solid var(--b3-border-color);
+}
+.protyle-wysiwyg [data-node-id] span[data-type*="a"][data-type*="sup"]:hover,.protyle-wysiwyg [data-node-id] span[data-type*="a"][data-type*="sub"]:hover{
+	border:1px solid var(--b3-theme-on-background);
 }
 .protyle-wysiwyg [data-node-id] span[data-type~=a]:hover{
 	color: var(--b3-theme-on-background);
