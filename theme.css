@@ -654,6 +654,10 @@ body.body--win32 .toolbar{
 	padding: 0 0 0 6px;
 }
 
+body.body--blur .toolbar {
+    background: var(--b3-toolbar-background);
+}
+
 
 .body--window #layouts{
 	margin: 0px;
