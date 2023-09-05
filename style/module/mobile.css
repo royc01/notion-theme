@@ -92,9 +92,7 @@
     min-width: 16px;
     margin: 6px;
 }
-.b3-list--mobile .b3-list-item__graphic{
-	height:16px;
-}
+
 .b3-list--mobile .toolbar+.fn__flex-1{
 	padding:8px 0;
 }
@@ -108,4 +106,10 @@
 
 .protyle-wysiwyg div.table[data-node-id] table {
     white-space: nowrap;
+}
+#status{
+	right:unset;
+	padding:unset;
+	margin:unset;
+	border-radius:unset;
 }
