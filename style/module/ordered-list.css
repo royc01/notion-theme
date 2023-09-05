@@ -1,5 +1,5 @@
 .li[data-subtype="o"] .li[data-subtype="o"] .protyle-action--order{
-	color:transparent;
+	color:transparent!important;
 }
 .li[data-subtype="o"] .li[data-subtype="o"] .protyle-action::after{
 	color:var(--b3-theme-on-background);

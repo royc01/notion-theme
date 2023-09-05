@@ -1,8 +1,9 @@
 /* -----------------------------------------------列表转化为表格------------------------------------------- */
 .list[data-node-id][data-type="NodeList"][custom-f="bg"]{
-	display:table;
+	display:inline-flex;
 	width: calc(100% - 8px);
-	padding:15px 0px 15px 5px;
+	padding:15px 5px 15px 5px;
+	overflow-x: auto;
 }
 /* ————————————————————所有子项目的表格（除去第一列其余的列），包含溢出的空白部分，所以才会有边框—————————————————————— */
 

@@ -470,6 +470,7 @@ input[type="checkbox" i] {
 	border-top:none;
 	height: 32px;
 	padding: 0 40px;
+	background-color: var(--b3-toolbar-background);
 }
 
 #dockBottom .fn__flex-1{

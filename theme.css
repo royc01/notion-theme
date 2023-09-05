@@ -296,7 +296,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-blur-background: transparent;
+	--b3-toolbar-blur-background: var(--b3-toolbar-background);
 	--b3-toolbar-background: var(--b3-fn__flex-column-background);
 	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--b3-toolbar-closeWindow-hover: #e81123;

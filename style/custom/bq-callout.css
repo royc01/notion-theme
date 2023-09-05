@@ -4,7 +4,6 @@
     border-left: 0.25em solid var(--b3-theme-on-background);
 	border-radius:0 3px 3px 0;
     background-color: var(--b3-bq-background);
-	margin-right:4px;
 }
 .protyle-wysiwyg .bq .p{
 	padding-left:10px;

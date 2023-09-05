@@ -379,8 +379,8 @@
 }
 /* 有序列表 */
 .protyle-wysiwyg [data-node-id].li[data-subtype="o"]>.protyle-action--order:after{
-	 padding:4px;
-	 margin:-22px 0 0 -12px;
+	 padding:2px 4px 6px 4px;
+	 margin:-20px 0 0 -12px;
 	 height:32px;
 }
 .protyle-wysiwyg div[fold="1"].li[data-subtype="o"]>.protyle-action--order:after{
