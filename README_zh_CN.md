@@ -38,6 +38,10 @@
 |增加链滴社区[BryceAndJuly ](https://ld246.com/member/BryceAndJuly)分享的[最近打开文档](https://ld246.com/article/1662697317986) [日历面板](https://ld246.com/article/1662969146166)|[BryceAndJuly](https://ld246.com/member/BryceAndJuly)|
 
 　　以上排名不分先后。
+
+## v3.5.10
+* 修复导出pdf默认底色
+  
 ## v3.5.9
 * 修复列表转表格排列方向
 
