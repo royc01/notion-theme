@@ -503,7 +503,9 @@ span[data-type="add"] svg{
 #preview .list[custom-f="dt"][data-node-id] .protyle-action svg {
     left: 2px;
 }
-
+#preview{
+	background-color:var(--b3-theme-background);
+}
 
 .layout__center .sy__backlink{
 	padding-bottom:30px;
