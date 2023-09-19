@@ -1,6 +1,7 @@
 /* ————————————————————顶栏———————————————————— */
 .toolbar{
 	height:40px;
+	overflow:visible;
 }
 .toolbar__window{
 	height:40px;
@@ -112,7 +113,7 @@
 
 
 
-/*只读按钮适配*/
+/*只读按钮适配
 #barReadonly.toolbar__item--active{
 	padding:1px 54px 5px 3px;
 	background-color:#e16259;
@@ -139,4 +140,4 @@
 }
 #barReadonly.toolbar__item--active:hover{
 	background-color: var(--b3-toolbar-item-hover);
-}
+}*/

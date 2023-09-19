@@ -2181,11 +2181,5 @@ window.theme.loadScript = function (src, type = 'module', async = false, defer =
 };
 
 
-// 加载打字机功能
-window.theme.loadScript('/appearance/themes/Savor/js_module/module/typewriter.js');
-
-
-
-
 
 
