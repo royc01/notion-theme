@@ -43,3 +43,8 @@
 .fn__flex-column.fn__flex-shrink,.layout__center+.layout__resize--lr+.fn__flex-column{
 	padding-top:0px;
 }
+
+#toolbar+.fn__flex-1{
+	border-top: 8px solid var(--b3-toolbar-background);
+	margin-top: -7px;
+}

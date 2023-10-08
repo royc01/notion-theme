@@ -406,10 +406,6 @@ body{
 
 
 
-.layout__center .protyle-wysiwyg:not([data-doc-type="NodeDocument"]){
-	animation: focus 0.3s ease-in-out;
-}
-
 
 
 
@@ -429,9 +425,6 @@ body{
 	box-shadow: var(--b3-fn__flex-column-background) 0px 40px 0px 0px;
 }
 
-body {
-    background-color:var(--b3-toolbar-background);
-}
 
 #layouts>.fn__flex+.layout__resize+.fn__flex-1{
 	margin-bottom:36px;
@@ -692,3 +685,5 @@ body.body--win32 .toolbar{
 	box-shadow: none;
 	background-color: var(--b3-list-background);
 }
+
+
