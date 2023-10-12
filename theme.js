@@ -663,6 +663,24 @@ function topbarfixedButton() {
     );
 }
 
+/**---------------------------------------------------------子弹-------------------------------------------------------------- */
+
+function bulletThreading() {
+    notionThemeToolplusAddButton(
+        "bulletThreading",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
+		"列表子弹线",
+        "/appearance/themes/Savor/img/bulletthreading2.svg",
+        "/appearance/themes/Savor/img/bulletthreading.svg",
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/bullet-threading.css", "列表子弹线").setAttribute("bulletThreading", "列表子弹线");
+        },
+        () => {
+            document.getElementById("列表子弹线").remove();
+        },
+        true
+    );
+}
 //去除主题所有滤镜还原按钮状态
 function qucuFiiter() {
     var Topicfilters = document.querySelectorAll("head [topicfilter]");
@@ -2115,6 +2133,8 @@ function getcommonMenu_Bolck() {
                 tabbarVerticalButton();//垂直页签
 				
 				topbarfixedButton();//顶栏悬浮
+				
+				bulletThreading();//子弹线
  
                 setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
 
@@ -2183,3 +2203,52 @@ window.theme.loadScript = function (src, type = 'module', async = false, defer =
 
 
 
+/**
+ * 获得指定块位于的编辑区
+ * @params {HTMLElement}
+ * @return {HTMLElement} 光标所在块位于的编辑区
+ * @return {null} 光标不在块内
+ */
+function getTargetEditor(block) {
+    while (block != null && !block.classList.contains('protyle-wysiwyg')) block = block.parentElement;
+    return block;
+}
+
+/**
+ * 获得焦点所在的块
+ * @return {HTMLElement} 光标所在块
+ * @return {null} 光标不在块内
+ */
+function getFocusedBlock() {
+    if (document.activeElement.classList.contains('protyle-wysiwyg')) {
+        let block = window.getSelection()?.focusNode?.parentElement; // 当前光标
+        while (block != null && block.dataset.nodeId == null) block = block.parentElement;
+        return block;
+    }
+}
+
+function focusHandler() {
+    /* 获取当前编辑区 */
+    let block = getFocusedBlock(); // 当前光标所在块
+    /* 当前块已经设置焦点 */
+    if (block?.classList.contains(`block-focus`)) return;
+
+    /* 当前块未设置焦点 */
+    const editor = getTargetEditor(block); // 当前光标所在块位于的编辑区
+    if (editor) {
+        editor.querySelectorAll(`.block-focus`).forEach((element) => element.classList.remove(`block-focus`));
+        block.classList.add(`block-focus`);
+        // setSelector(block);
+    }
+}
+
+function bulletMain() {
+    // 跟踪当前所在块
+    window.addEventListener('mouseup', focusHandler, true);
+    window.addEventListener('keyup', focusHandler, true);
+}
+
+(async () => {
+    bulletMain();
+    console.log('加载子弹线成功')
+})();

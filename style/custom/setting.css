@@ -44,7 +44,7 @@
 	background-color:var(--b3-toolbar-item-hover);
 }
 #notionToolbar:hover+#notionToolplus,#notionToolplus:hover{
-	height:84px;
+	height:114px;
 	width:128px;
 	margin-left:-144px;
 	overflow:visible;
@@ -93,7 +93,7 @@
 }
 
 
-#buttonSavor-light::after,#buttonSavor-dark::after,#buttonsalt::after,#buttonvinegar::after,#buttonsugar::after,#topBar::after,#conceal::after,#tabbarVertical::after{
+#buttonSavor-light::after,#buttonSavor-dark::after,#buttonsalt::after,#buttonvinegar::after,#buttonsugar::after,#topBar::after,#conceal::after,#tabbarVertical::after,#bulletThreading::after{
 	font-size:14px;
 	line-height:26px;
 	transform:none;
@@ -105,7 +105,7 @@
 	padding:0 0 0 30px;
 	box-shadow:none;
 }
-#topBar,#conceal,#tabbarVertical{
+#topBar,#conceal,#tabbarVertical,#bulletThreading{
 	margin:0px;
 	height:30px;
 	border-bottom:none;
@@ -115,7 +115,7 @@
 	background-size:18%;
 }
 
-#buttonSavor-light::before,#buttonSavor-dark::before,#buttonsalt::before,#topBar::before,#conceal::before,#tabbarVertical::before,#buttonvinegar::before,#buttonsugar::before{
+#buttonSavor-light::before,#buttonSavor-dark::before,#buttonsalt::before,#topBar::before,#conceal::before,#tabbarVertical::before,#buttonvinegar::before,#buttonsugar::before,#bulletThreading::before{
 	display:none;
 }
 

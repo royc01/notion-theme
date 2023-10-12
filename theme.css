@@ -323,7 +323,7 @@
 	--b3-block-icon-hover: rgba(55, 53, 47, 0.08);
 	--b3-block-icon-active: #eb8383;
 	--b3-list-item-arrow: rgba(55, 53, 47, 0.4);
-	--b3-list-background: rgba(55, 53, 47, 0.08);
+	--b3-list-background: #f3f3f3;
 	--b3-list-background-focus: rgba(55, 53, 47, 0.14);
 	--b3-list-background-more: rgba(108, 106, 101);
 	
@@ -681,9 +681,28 @@ body.body--win32 .toolbar{
 
 
 
-.b3-text-field:not(#searchInput):not(.fn__block), .pcr-app .pcr-interaction .pcr-result,.b3-select{
-	box-shadow: none;
+.b3-text-field:not(#searchInput):not(.fn__block){
+	background-color: var(--b3-list-background);
+	line-height:26px;
+}
+
+.pcr-app .pcr-interaction .pcr-result,.b3-select{
+	box-shadow:none;
 	background-color: var(--b3-list-background);
 }
 
 
+.av__cell .b3-chip[data-type="block-more"],.av__cell .b3-chip[data-type="block-ref"]{
+	font-size: 90%;
+	padding: 4px 6px!important;
+	border-radius: 5px;
+    background-color: var(--b3-list-background)!important;
+    color: var(--b3-theme-on-background);
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+	border-bottom:none!important;
+}
+
+
+.protyle-hint .b3-text-field{
+	margin:5px 8px 4px 0px!important;
+}

@@ -185,7 +185,7 @@
 	--b3-block-icon-hover: rgba(255, 255, 255, 0.1 );
 	--b3-block-icon-active: #eb8383;
 	--b3-list-item-arrow: rgba(149, 152, 156);
-	--b3-list-background: rgba(255, 255, 255, 0.1);
+	--b3-list-background: #44494b;
 	--b3-list-background-focus: rgba(255, 255, 255, 0.2 );
 	--b3-list-background-more:#c5c7c8;
 	
@@ -280,14 +280,16 @@
 #topBar[style*="topbar.svg"]{
 	background-image: url(/appearance/themes/Savor/img/topbar3.svg)!important;
 }
-
+#bulletThreading[style*="bulletthreading.svg"]{
+	background-image: url(/appearance/themes/Savor/img/bulletThreading3.svg)!important;
+}
 #status {
     background-color: #404548;
 }
 
 
 #notionToolbar:hover+#notionToolplus,#notionToolplus:hover{
-	height:84px;
+	height:114px;
 	padding-top:60px;
 }
 #notionToolbar {

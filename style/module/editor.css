@@ -273,6 +273,7 @@
 	margin:5px 0px;
 	width:100%!important;
 }
+
 /* 弹出工具条字体颜色选择 */
 .color__square[data-type="style1"]{
 	 border-radius: 3px;
@@ -379,9 +380,9 @@
 }
 /* 有序列表 */
 .protyle-wysiwyg [data-node-id].li[data-subtype="o"]>.protyle-action--order:after{
-	 padding:2px 4px 6px 4px;
-	 margin:-20px 0 0 -12px;
-	 height:32px;
+	 padding:0px 4px 6px 4px;
+	 margin:-1em 0 0 -0.7em;
+	 height:1.6em;
 }
 .protyle-wysiwyg div[fold="1"].li[data-subtype="o"]>.protyle-action--order:after{
 	 background: url("/appearance/themes/Savor/img/square.svg") no-repeat center!important;
@@ -416,7 +417,7 @@
 	background-color:var(--b3-theme-background);
 }
 /*页面宽度*/
-.protyle-wysiwyg [data-node-id][custom-f~=full] table{
+.protyle-wysiwyg div.table[data-node-id][custom-f~=full] table{
 	font-weight:500;
 	width: 100%;
 	display: table;
@@ -424,9 +425,7 @@
 .protyle-wysiwyg [data-node-id][custom-f~=full] colgroup{
 	border-style:unset;
 }
-.protyle-wysiwyg div.table[data-node-id][custom-f~=full] table {
-    width: 100%;
-}
+
 
 /* 自定义表格宽度 */
 /*.protyle-wysiwyg div.table[data-node-id]{
@@ -641,5 +640,8 @@
 .iframe .protyle-action__drag:after{
 	background-color:var(--b3-theme-on-surface)!important;
 }
+
+
+
 
 
