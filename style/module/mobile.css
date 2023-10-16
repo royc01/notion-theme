@@ -12,12 +12,7 @@
 .protyle-breadcrumb {
     border-top: none;
 }
-.protyle-background__img img{
-	height: 24vh;
-}
-.protyle-background--enable[style="min-height: 30vh;"]{
-	min-height: 24vh!important;
-}
+
 .protyle-wysiwyg .h1, .protyle-wysiwyg .h2, .protyle-wysiwyg .h3, .protyle-wysiwyg .h4, .protyle-wysiwyg .h5, .protyle-wysiwyg .h6 {
     font-weight: 700;
     margin-top: .6em!important;
@@ -26,12 +21,7 @@
 [data-doc-type="NodeDocument"]{
 	padding-top:0px!important;
 }
-.protyle-background{
-	padding-bottom: 30px;
-}
-.protyle-background__img .protyle-icons{
-	right: 20px;
-}
+
 .protyle-background__img .protyle-icons .b3-tooltips{
 	padding: 0 2px 0 6px;
 }
@@ -40,25 +30,8 @@
     height: 14px;
     padding: 7px 0 0 0;
 }
-.protyle-background[style*="30vh"]>.protyle-background__iconw >.protyle-icons, .protyle-background[style*="64px"]>.protyle-background__iconw >.protyle-icons, .protyle-background[style*="56px"]>.protyle-background__iconw >.protyle-icons, .protyle-background[style*="103px"]>.protyle-background__iconw >.protyle-icons {
-	left: 80px;
-}
-.protyle-background[style*="30vh"]>.protyle-background__iconw >.protyle-background__icon.fn__none+.protyle-icons, .protyle-background[style*="64px"]>.protyle-background__iconw >.protyle-background__icon.fn__none+.protyle-icons, .protyle-background[style*="56px"]>.protyle-background__iconw >.protyle-background__icon.fn__none+.protyle-icons, .protyle-background[style*="103px"]>.protyle-background__iconw > .protyle-background__icon.fn__none+.protyle-icons {
-	left: 0px;
-}
 
-.protyle-background[style*="30vh"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips, .protyle-background[style*="64px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips, .protyle-background[style*="56px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips, .protyle-background[style*="103px"]>.protyle-background__iconw >.protyle-icons>.b3-tooltips {
-    margin-top: 45px;
-}
-.protyle-background--mobileshow .protyle-background__iconw>.protyle-icons, .protyle-background--mobileshow .protyle-background__img .protyle-icons, .protyle-background--mobileshow .protyle-background__tags .item svg {
-    opacity: 1;
-}
-.protyle-background[style="min-height: 0px;"]{
-	padding-bottom: 0px;
-}
-#keyboardToolbar{
-	height:36px;
-}
+
 
 
 
@@ -112,6 +85,7 @@
 	padding:unset;
 	margin:unset;
 	border-radius:unset;
+	line-height:26px;
 }
 
 
