@@ -137,7 +137,7 @@
 /*单个子项直线对齐修正*/
 .list[custom-f="dt"] .list:has(>.li:first-child:nth-last-child(2))::after{   
 	border-radius:0px; 
-	width: 39px;
+	width: 39px!important;
 	margin-bottom:-2px;
 }
 /*单子项居中*/
@@ -156,7 +156,7 @@
 /*下框线*/
 .protyle-wysiwyg *[custom-f="dt"] .li:nth-last-child(2)::after{   
     border-bottom:var(--b3-border-daotu)!important;    
-    border-radius:0 0 0 5px;    
+    border-radius:0 0 0 5px!important;    
 }
 /*后继承线*/
 .list[custom-f="dt"] .list::after{   
