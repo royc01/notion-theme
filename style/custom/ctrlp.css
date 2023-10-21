@@ -145,9 +145,10 @@
 	border-radius:6px;
 	background-color: var(--b3-list-hover);
 }
-.b3-dialog__body>.fn__flex-column:not(.switch-doc){
+/*.b3-dialog__body>.fn__flex-column:not(.switch-doc){
 	background-color: var(--b3-theme-background);
-}
+	border-radius: var(--b3-border-radius-b);
+}*/
 .search__tip{
 	height:30px;
 	color:var(-b3-)

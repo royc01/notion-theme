@@ -707,9 +707,10 @@ body.body--win32 .toolbar{
 	margin:5px 8px 4px 0px!important;
 }
 
-
-
-
+/*数据库计算浮动定位*/
+.av__row--footer[style*="transform"]{
+	margin-bottom:-16px;
+}
 
 
 
