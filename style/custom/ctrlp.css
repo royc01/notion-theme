@@ -1,4 +1,3 @@
-
 #searchList{
 	background-color: var(--b3-theme-background);
 }
@@ -9,29 +8,35 @@
 	border-bottom: 1px solid var(--b3-theme-surface-lighter);
 }
 .fn__flex-column #searchList>.b3-list-item[data-type='search-item']{
-	padding-bottom:20px;
+	padding-bottom:14px;
 	margin: 6px;
 }
+.fn__flex-column #searchList>.b3-list-item[data-type='search-item']:has(>.b3-list-item__meta.fn__flex){
+	padding-bottom:0px;
+}
 
-.fn__flex-column #searchList .b3-list-item[data-type='search-item']>.b3-list-item__meta{
+.fn__flex-column #searchList .b3-list-item[data-type='search-item']>.b3-list-item__meta--ellipsis{
 	color:var(--b3-list-item--meta);
 	background-color: var(--b3-list-background);
 	font-size: .7rem;
 	line-height: 20px;
 	border-radius:4px;
 	padding:0 4px;
-	bottom:8px;
-	right:8px;
+	margin-right:4px;
 	max-width:34vw;
-	position:absolute;
 	white-space:nowrap;
 	overflow:hidden !important;
 	text-overflow: ellipsis;
 }
+.fn__flex-column #searchList .b3-list-item[data-type='search-item']>.b3-list-item__meta.fn__flex{
+	background-color: transparent;
+	position:relative;
+	left:-4px;
+}
 .fn__flex-column #searchList .b3-list-item--focus[data-type='search-item']>.b3-list-item__meta{
 	background-color: var(--b3-theme-background);
 }
-.fn__flex-column #searchList .b3-list-item[data-type='search-item']>.b3-list-item__meta::before{
+.fn__flex-column #searchList .b3-list-item[data-type='search-item']>.b3-list-item__meta--ellipsis::before{
     font-size: 1em;
     line-height: 1;
 	margin-right:2px;
@@ -80,7 +85,8 @@
 }*/
 
 #searchList>[data-type="search-item"]{
-    display: block;
+	flex-wrap: wrap;
+	justify-content: flex-end;
 	padding-right:0px;
 }
 
@@ -88,6 +94,8 @@
 #searchList>[data-type="search-item"]>.b3-list-item__graphic{
     position: absolute;
     margin-top: 4px;
+	left:4px;
+	top:0px;
 }
 
 #searchList>[data-type="search-item"]>.b3-list-item__graphic+.b3-list-item__graphic{
@@ -107,7 +115,8 @@
     overflow-y: auto !important;
     text-overflow: ellipsis !important;
     line-height: 1.3;
-    display: inline-block;
+	-webkit-line-clamp:unset;
+	flex:1 0 95%;
 }
 
 
