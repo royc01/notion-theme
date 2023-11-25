@@ -105,10 +105,10 @@
 .protyle-wysiwyg *[custom-f="dt"] .li::before,.protyle-wysiwyg *[custom-f="dt"] .li[fold="1"]::before{   
     content: '';   
     position: absolute;  
-	top: 50%;   
+	top: 50%!important;   
     border-top:var(--b3-border-daotu);    
     width: 20px;  
-	height: 50%;     
+	height: 50%!important;      
 }
 
 /*上竖线*/

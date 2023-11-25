@@ -159,35 +159,38 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-background: rgb(37, 40, 48);
-	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
-	--b3-toolbar-closeWindow-hover: #e81123;
-	--b3-toolbar-closeWindow-svg: #fff;
+	--S-toolbar-background: rgb(37, 40, 48);
+	--S-toolbar-blur-background: transparent;
+	--S-toolbar-item-hover: rgba(0, 0, 0, .05);
+	--S-toolbar-barWorkspace-hover:var(--S-dockleft-item-active-background);
+	--S-toolbar-closeWindow-hover: #e81123;
+	--S-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
-	--b3-dockright-color: rgb(37, 40, 48);
-	--b3-dockright-background: rgb(0, 0, 0, 0);
-	--b3-dockleft-color: rgb(37, 40, 48);
-	--b3-dock-background: rgb(0, 0, 0, 0);
-	--b3-dockright-item-active-background:   var(--b3-theme-background);
-	--b3-dockleft-item-active-background: rgb(215, 224, 224);
-	--b3-dock-item-active-color: #eb8383;
-	--b3-dock-item-hover-background: rgb(182, 200, 201);
+	--S-dock-color: rgb(37, 40, 48);
+	--S-dock-background: var(--S-toolbar-background);
+	--S-dockright-item-active-background: var(--b3-theme-background);
+	--S-dockleft-item-active-background: rgb(215, 224, 224);
+	--S-dock-item-active-color: #eb8383;
+	--S-dock-item-hover-background: rgb(182, 200, 201);
+	--S-dock--item--activefocus: #e16259;
+
+	--S-dock-item-width: 34px;
 	
 	/* 侧栏面板 */
-	--b3-fn__flex-column-background: var(--b3-theme-background);
-	--b3-fn__flex-shrink-background: rgb(215, 224, 224);
-	--b3-block-logo-color: #fff;
-	--b3-block-logo-background-color: rgba(37, 40, 48);
-	--b3-block-icon-svg-color: rgba(37, 40, 48,0.4);
-	--b3-block-icon-hover: var(--b3-list-background);
-	--b3-block-icon-active: #f4614b;
-	--b3-list-item-arrow: rgba(37, 40, 48,0.4);
-	--b3-list-background: #dbe2e2;
-	--b3-list-background-focus: rgba(98, 122, 123, 0.2);
-	--b3-list-background-more: rgba(37, 40, 48, 0.8);
+	--S-fn__flex-column-background: var(--b3-theme-background);
+	--S-fn__flex-shrink-background: rgb(215, 224, 224);
+	--S-block-logo-color: var(--b3-theme-on-background);
+	--S-block-logo-background-color: rgba(37, 40, 48);
+	--S-block-icon-svg-color: rgba(37, 40, 48,0.4);
+	--S-block-icon-hover: var(--S-list-background);
+	--S-block-icon-active: #f4614b;
+	--S-list-item-arrow: rgba(37, 40, 48,0.4);
+	--S-list-background: rgba(98, 122, 123, 0.1);
+	--S-list-background-focus: rgba(98, 122, 123, 0.2);
+	--S-list-background-activefocus:  rgba(235, 131, 131, 0.15);
 	
-	--b3-flex-column-padding:6px 0px 2px 0px;
-	--b3-list-item-radius: 3px;
+	--S-flex-column-padding:6px 0px 2px 0px;
+	--S-list-item-radius: 3px;
 	/* 大纲数字 */
 	--h1-list-graphic: #eb8383;
 	--h2-list-graphic: #ae9acb;
@@ -203,20 +206,19 @@
 	--b3-border-fold: rgb(15, 15 , 15, .1);/*折叠边框*/
 	--b3-layout-resize-width: 1px;
 	/* 页签 */
-	--b3-item-focus: rgb(0, 0, 0 ,1);
+	--S-item-focus: rgb(0, 0, 0 ,1);
 	/* 面包屑 */
-	--b3-protyle-breadcrumb-shadow:var(--b3-layout-resize);
-	--b3-protyle-breadcrumb-arrow: rgba(174,172,166);
-	--b3-breadcrumb-svg: rgba(37, 40, 48, 0.8);
+	--S-protyle-breadcrumb-arrow: rgba(174,172,166);
+
 	/* 头图按钮 */
-	--b3-icons-tooltips: rgba(37, 40, 48, 0.5);
-	--b3-icons-tooltips-hover: var(--b3-list-background);
-	--b3-img-icons-tooltips: var(--b3-theme-on-surface);
-	--b3-img-icons-tooltips-bg: var(--b3-theme-background);
-	--b3-img-icons-span: rgba(0, 0, 0, .5);
+	--S-icons-tooltips: rgba(37, 40, 48, 0.5);
+	--S-icons-tooltips-hover: var(--b3-list-background);
+	--S-img-icons-tooltips: var(--b3-theme-on-surface);
+	--S-img-icons-tooltips-bg: var(--b3-theme-background);
+	--S-img-icons-span: rgba(0, 0, 0, .5);
 	/* 块标 */
 	--b3-gutters-color: rgb(182, 200, 201);
-	--b3-gutters-background: var(--b3-toolbar-item-hover);												   
+	--S-gutters-background: var(--bS-toolbar-item-hover);												   
 	/* 弹出工具条字体颜色选择 */
 	--b3-color--square: var(--b3-border-color);
 	/* 任务列表 */
@@ -225,12 +227,12 @@
 	/* 引述 */
 	--b3-bq-background: rgb(215, 224, 224, .5);
 	/* 块引用 */
-	--b3-block-ref-background: var(--b3-toolbar-item-hover);
+	--b3-block-ref-background: var(--S-toolbar-item-hover);
 	/* 代码块 */
-	--b3-linenumber-rows: rgb(215, 224, 224);
-	--b3-code-block-hljs: rgb(215, 224, 224, .5);
+	--S-linenumber-rows: rgb(215, 224, 224);
+	--S-code-block-hljs: rgb(215, 224, 224, .5);
 	/*行内代码*/
-	--b3-inline-code:var(--b3-theme-error);
+	--S-inline-code:var(--b3-theme-error);
 	/*按钮*/
 	--b3-button: rgb(0, 122, 149, 0.7);
 	/*pdf*/
@@ -244,13 +246,13 @@
 	/*ctrlp*/
 	--b3-list-item--meta: #8b8e92;
 	/*底栏状态*/
-	--b3-status-msg-background: #c7d1d1;
+	--S-status-msg-background: #c7d1d1;
 }
 
 
 
 .layout__dockr .layout-tab-container {
-	background-color:var(--b3-fn__flex-column-background);
+	background-color:var(--S-fn__flex-column-background);
 }
 
 
@@ -259,7 +261,7 @@
 }
 
 #status {
-    background-color: var(--b3-fn__flex-shrink-background);
+    background-color: var(--S-fn__flex-shrink-background);
 }
 .toolbar .toolbar__item:not(.toolbar__item--disabled) svg{
 	color: var(--b3-theme-background);
@@ -268,20 +270,20 @@
 #buttonSavor-light[style*="base"]{
 	background-image: url(/appearance/themes/Savor/img/base.svg)!important;
 }
-#notionToolbar {
+#savorToolbar {
     background: url(/appearance/themes/Savor/img/setting2.svg) no-repeat center;
 }
 .dock__item:not(.dock__item--active){
 	color: var(--b3-theme-background)!important;
 }
 .dock__item:not(.dock__item--active):hover {
-    color: var(--b3-dockleft-color)!important;
+    color: var(--S-dock-color)!important;
 }
 #dockBottom:not(.fn__none)+#status .toolbar__item svg{
 	color: var(--b3-theme-background)!important;
 }
 #dockBottom:not(.fn__none)+#status .toolbar__item:hover svg{
-	color: var(--b3-dockleft-color)!important;
+	color: var(--S-dock-color)!important;
 }
 #dockBottom:not(.fn__none)+#status .status__counter {
 	color: var(--b3-theme-background)!important;

@@ -1,21 +1,21 @@
-/*.fn__flex-1:has(>#notionToolbar){
+/*.fn__flex-1:has(>#savorToolbar){
 	overflow: visible;
 }
-#notionToolbar{
+#savorToolbar{
 	
 }*/
-/*#notionToolbar,#notionToolplus{
+/*#savorToolbar,#savorToolplus{
 	position:relative;
 }
-#notionToolbar{
+#savorToolbar{
 	top:calc(50% - 100px);
 	margin-left:1px;
 }
-#notionToolplus{
+#savorToolplus{
 	top:calc(50% - 8px);
 	margin-left:1px;
 }
-#notionToolbar div,#notionToolplus div{
+#savorToolbar div,#savorToolplus div{
 	height:26px;
 	width:26px!important;
 	background-size:22px 22px;
@@ -23,79 +23,79 @@
 
 
 
-#notionToolbar div:hover,#notionToolplus div:hover{
+#savorToolbar div:hover,#savorToolplus div:hover{
 	background-color: var(--b3-toolbar-item-hover);
 }*/
 
-#notionToolbar{
-	width:26px;
-	height:26px;
-	margin:7px 0px 4px 0px;
-	border-radius:6px;
+#savorToolbar{
+	width:24px;
+	height:24px;
+	margin:7px 0px 4px 4px;
+	border-radius:4px;
 
 	background: url("/appearance/themes/Savor/img/setting.svg") no-repeat center; 
 }
-#notionToolplus{
+#savorToolplus{
 	height:0px;
 	width:0px;
 	overflow:hidden;
 }
-#notionToolbar:hover{
-	background-color:var(--b3-toolbar-item-hover);
+#savorToolbar:hover{
+	background-color:var(--S-toolbar-item-hover);
 }
-#notionToolbar:hover+#notionToolplus,#notionToolplus:hover{
-	height:114px;
-	width:128px;
-	margin-left:-144px;
+#savorToolbar:hover+#savorToolplus,#savorToolplus:hover{
+	height:106px;
+	width:120px;
+	margin-left:-136px;
 	overflow:visible;
 	background-color:var(--b3-theme-background);
 	box-shadow:rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
 	z-index:7;
-	border-radius:12px;
+	border-radius:8px;
 	padding-top:91px;
 	padding-bottom:6px;
 	border:8px solid var(--b3-theme-background);
 }
-#notionToolbar:has(+#notionToolplus:hover){
+#savorToolbar:has(+#savorToolplus:hover){
 	overflow:visible;
-	background-color:var(--b3-toolbar-item-hover);
+	background-color:var(--S-toolbar-item-hover);
 }
-/*#notionToolbar div{
+/*#savorToolbar div{
 	border-radius:0;
 }
-#notionToolbar div:first-child{
+#savorToolbar div:first-child{
 	border-radius:5px 5px 0 0;
 }
-#notionToolbar div:last-child{
+#savorToolbar div:last-child{
 	border-radius:0 0 5px 5px;
 }*/
 #buttonSavor-light,#buttonSavor-dark,#buttonsalt,#buttonvinegar,#buttonsugar{
 	margin:0px;
 	height:30px;
-	left: -110px;
+	left: -108px;
 	border-bottom:none;
 	width:128px;
 	z-index:8;
-	border-radius:8px;
+	border-radius:4px;
 	background-size:18%;
 	display:none;
 }
-#notionToolbar:has(+#notionToolplus:hover) #buttonSavor-light,#notionToolbar:has(+#notionToolplus:hover) #buttonSavor-dark,
-#notionToolbar:has(+#notionToolplus:hover) #buttonsalt,#notionToolbar:has(+#notionToolplus:hover) #buttonvinegar,
-#notionToolbar:has(+#notionToolplus:hover) #buttonsugar,
-#notionToolbar:hover #buttonSavor-light,#notionToolbar:hover #buttonSavor-dark,
-#notionToolbar:hover #buttonsalt,#notionToolbar:hover #buttonvinegar,
-#notionToolbar:hover #buttonsugar{
+#savorToolbar:has(+#savorToolplus:hover) #buttonSavor-light,#savorToolbar:has(+#savorToolplus:hover) #buttonSavor-dark,
+#savorToolbar:has(+#savorToolplus:hover) #buttonsalt,#savorToolbar:has(+#savorToolplus:hover) #buttonvinegar,
+#savorToolbar:has(+#savorToolplus:hover) #buttonsugar,
+#savorToolbar:hover #buttonSavor-light,#savorToolbar:hover #buttonSavor-dark,
+#savorToolbar:hover #buttonsalt,#savorToolbar:hover #buttonvinegar,
+#savorToolbar:hover #buttonsugar{
 	display:block;
 }
 #buttonSavor-light,#buttonSavor-dark{
-	margin-top:34px;
+	margin-top:27px;
 }
 
 
 #buttonSavor-light::after,#buttonSavor-dark::after,#buttonsalt::after,#buttonvinegar::after,#buttonsugar::after,#topBar::after,#conceal::after,#tabbarVertical::after,#bulletThreading::after{
 	font-size:14px;
-	line-height:26px;
+	line-height:20px;
 	transform:none;
 	opacity:1;
 	color:var(--b3-theme-on-background);
@@ -106,12 +106,12 @@
 	box-shadow:none;
 }
 #topBar,#conceal,#tabbarVertical,#bulletThreading{
-	margin:0px;
+	margin:-4px 0px 4px -4px;
 	height:30px;
 	border-bottom:none;
 	width:128px;
 	z-index:8;
-	border-radius:8px;
+	border-radius:4px;
 	background-size:18%;
 }
 
@@ -120,13 +120,13 @@
 }
 
 #buttonSavor-light:hover,#buttonSavor-dark:hover,#buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover{
-	background-color:var(--b3-list-background);
+	background-color:var(--S-list-background);
 }
 
 
-#notionToolplus{
+#savorToolplus{
 	border:8px solid transparent;
 	margin-left:-16px;
-	margin-right:-2px;
-	margin-top:33px;
+	margin-right:0px;
+	margin-top:30px;
 }

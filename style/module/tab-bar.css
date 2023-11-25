@@ -1,33 +1,9 @@
 /* ————————————————————页签———————————————————— */
 .layout-tab-bar{
 	padding:0 0 0 8px;
-	position:relative;
-	background-color: var(--b3-theme-background);
 	height: 40px;
-
-}
-/*页签前后分割线
-ul.layout-tab-bar:not(.layout-tab-bar--readonly):before{
-	content: "";
-	position:relative;
-	left:-8px;
-    height: 20px;
-    border-left: 1px solid var(--b3-layout-resize);
-	z-index:9;
-}
-.layout__center .layout__resize--lr+.fn__flex-1 ul.layout-tab-bar:not(.layout-tab-bar--readonly):before{
-	display:none;
 }
 
-ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
-	content: "";
-	position:relative;
-	right:-8px;
-    height: 40px;
-	z-index:9;
-	margin-top: 0px;
-}*/
-/*———————————————————— */
 .layout-tab-bar .item{
 	margin-right:4px;
 	border-radius: 3px!important;
@@ -47,18 +23,11 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 	box-shadow:none!important;/*取消blur状态页签阴影*/
 }
 .layout__wnd--active .layout-tab-bar .item--focus::after{
-	content: '';
-	position: absolute;
-	bottom: -7px;
-	left: 0px;
-	right: 0px;
-	height: 3px;
-	background-color: var(--b3-item-focus);
+	background-color: var(--S-item-focus);
 	animation: item-focus 0.2s ease-in-out;
-	overflow:visible;
 }
 .layout-tab-bar .item:not(.item--readonly):hover{
-	background-color:var(--b3-list-background)!important;
+	background-color:var(--S-list-background)!important;
 	transition: all 300ms;
 }
 .layout-tab-bar .item--readonly{
@@ -79,7 +48,7 @@ ul.layout-tab-bar--readonly .item__close[data-type="more"]:after{
 }
 
 .block__icon--show[data-type="more"]:hover,.block__icon--show[data-type="new"]:hover{
-	background-color:var(--b3-list-background)!important;
+	background-color:var(--S-list-background)!important;
 }
 .layout-tab-bar .item__text{
     padding: 2px 6px 2px 6px; 

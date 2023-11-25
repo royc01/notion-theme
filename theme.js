@@ -84,23 +84,23 @@ window.theme.changeThemeMode = function (
 
 /* 根据当前主题模式加载样式配置文件 */
 window.theme.changeThemeMode(
-    `/appearance/themes/Savor/style/topbar/notion-light.css`,
-    `/appearance/themes/Savor/style/topbar/notion-dark.css`,
+    `/appearance/themes/Savor/style/topbar/savor-light.css`,
+    `/appearance/themes/Savor/style/topbar/savor-dark.css`,
 );
 
 
 
 
 
-/*----------------------------------创建notion主题工具栏区域----------------------------------
-function createnotionToolbar() {
+/*----------------------------------创建savor主题工具栏区域----------------------------------
+function createsavorToolbar() {
     var siYuanToolbar = getSiYuanToolbar();
-    var notionToolbar = getnotionToolbar();
+    var savorToolbar = getsavorToolbar();
     var windowControls = document.getElementById("windowControls");
-    if (notionToolbar) siYuanToolbar.removeChild(notionToolbar);
-    notionToolbar = insertCreateBefore(windowControls, "div", "notionToolbar");
-    notionToolbar.style.marginRight = "14px";
-    notionToolbar.style.marginLeft = "11px";
+    if (savorToolbar) siYuanToolbar.removeChild(savorToolbar);
+    savorToolbar = insertCreateBefore(windowControls, "div", "savorToolbar");
+    savorToolbar.style.marginRight = "14px";
+    savorToolbar.style.marginLeft = "11px";
 }*/
 
   /****************************思源API操作**************************/ 
@@ -159,7 +159,6 @@ function SubMenu(selectid,selecttype){
     node.appendChild(FixWidth(selectid))
     node.appendChild(AutoWidth(selectid))
 	node.appendChild(FullWidth(selectid))
-	node.appendChild(dHeader(selectid))
 	node.appendChild(vHeader(selectid))
 	node.appendChild(Removeth(selectid))
 	node.appendChild(Defaultth(selectid))
@@ -266,17 +265,6 @@ function FullWidth(selectid){
   button.setAttribute("custom-attr-value","full")
 
   button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">页面宽度</span>`
-  return button
-}
-function dHeader(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.onclick=ViewMonitor
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","t")
-  button.setAttribute("custom-attr-value","dongjie")
-
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconSuper"></use></svg><span class="b3-menu__label">冻结表头滚屏</span>`
   return button
 }
 function vHeader(selectid){
@@ -525,7 +513,7 @@ setTimeout(()=>ClickMonitor(),1000)
 /**---------------------------------------------------------主题-------------------------------------------------------------- */
 
 function themeButton() {
-	notionThemeToolbarAddButton(
+	savorThemeToolbarAddButton(
         "buttonSavor-light",
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Light 配色",
@@ -533,7 +521,7 @@ function themeButton() {
         "/appearance/themes/Savor/img/base2.svg",
         "/appearance/themes/Savor/img/base.svg",
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/notion-light.css", "Savor-light").setAttribute("topicfilter", "buttonSavor-light");
+            loadStyle("/appearance/themes/Savor/style/topbar/savor-light.css", "Savor-light").setAttribute("topicfilter", "buttonSavor-light");
             qucuFiiter();
         },
         () => {
@@ -541,7 +529,7 @@ function themeButton() {
         },
         true
     );
-		notionThemeToolbarAddButton(
+		savorThemeToolbarAddButton(
         "buttonsalt",
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Salt 配色",
@@ -557,7 +545,7 @@ function themeButton() {
         },
         true
     );
-		notionThemeToolbarAddButton(
+		savorThemeToolbarAddButton(
         "buttonsugar",
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Sugar 配色",
@@ -573,7 +561,7 @@ function themeButton() {
         },
         true
     );
-		notionThemeToolbarAddButton(
+		savorThemeToolbarAddButton(
         "buttonSavor-dark",
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Dark 配色",
@@ -581,7 +569,7 @@ function themeButton() {
         "/appearance/themes/Savor/img/base2.svg",
         "/appearance/themes/Savor/img/base3.svg",
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/notion-dark.css", "Savor-dark").setAttribute("topicfilter", "buttonSavor-dark");
+            loadStyle("/appearance/themes/Savor/style/topbar/savor-dark.css", "Savor-dark").setAttribute("topicfilter", "buttonSavor-dark");
             qucuFiiter();
         },
         () => {
@@ -589,7 +577,7 @@ function themeButton() {
         },
         true
     );
-	    notionThemeToolbarAddButton(
+	    savorThemeToolbarAddButton(
         "buttonvinegar",
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"Vinegar 配色",
@@ -610,7 +598,7 @@ function themeButton() {
 /**---------------------------------------------------------挖空-------------------------------------------------------------- */
 
 function concealMarkButton() {
-    notionThemeToolplusAddButton(
+    savorThemeToolplusAddButton(
         "conceal",
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"挖空",
@@ -628,7 +616,7 @@ function concealMarkButton() {
 /**---------------------------------------------------------垂直-------------------------------------------------------------- */
 
 function tabbarVerticalButton() {
-    notionThemeToolplusAddButton(
+    savorThemeToolplusAddButton(
         "tabbarVertical",
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"垂直页签",
@@ -647,7 +635,7 @@ function tabbarVerticalButton() {
 /**---------------------------------------------------------顶栏-------------------------------------------------------------- */
 
 function topbarfixedButton() {
-    notionThemeToolplusAddButton(
+    savorThemeToolplusAddButton(
         "topBar",
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"隐藏顶栏",
@@ -666,7 +654,7 @@ function topbarfixedButton() {
 /**---------------------------------------------------------子弹-------------------------------------------------------------- */
 
 function bulletThreading() {
-    notionThemeToolplusAddButton(
+    savorThemeToolplusAddButton(
         "bulletThreading",
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"列表子弹线",
@@ -1215,23 +1203,23 @@ async function 写入文件(path, filedata, then = null, obj = null, isDir = fal
  * @param {*} OffClickRunFun 按钮关闭执行函数
  * @param {*} Memory 是否设置记忆状态 true为是留空或false为不设置记忆状态。
  */
-function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
-    var notionToolbar = document.getElementById("notionToolbar");
-    if (notionToolbar == null) {
+function savorThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
+    var savorToolbar = document.getElementById("savorToolbar");
+    if (savorToolbar == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
         var windowControls = document.getElementById("windowControls");
 
         if (toolbarEdit == null && windowControls != null) {
-            notionToolbar = document.createElement("div");
-            notionToolbar.id = "notionToolbar";
-            windowControls.parentElement.insertBefore(notionToolbar, windowControls);
+            savorToolbar = document.createElement("div");
+            savorToolbar.id = "savorToolbar";
+            windowControls.parentElement.insertBefore(savorToolbar, windowControls);
         } else if (toolbarEdit != null) {
-            notionToolbar = insertCreateBefore(toolbarEdit, "div", "notionToolbar");
-            notionToolbar.style.position = "relative";
+            savorToolbar = insertCreateBefore(toolbarEdit, "div", "savorToolbar");
+            savorToolbar.style.position = "relative";
         }
     }
 
-    var addButton = addinsertCreateElement(notionToolbar, "div");
+    var addButton = addinsertCreateElement(savorToolbar, "div");
     addButton.style.float = "top";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
@@ -1324,23 +1312,23 @@ function notionThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, N
 }
 
 
-function notionThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
-    var notionToolplus = document.getElementById("notionToolplus");
-    if (notionToolplus == null) {
+function savorThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
+    var savorToolplus = document.getElementById("savorToolplus");
+    if (savorToolplus == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
         var windowControls = document.getElementById("windowControls");
 
         if (toolbarEdit == null && windowControls != null) {
-            notionToolplus = document.createElement("div");
-            notionToolplus.id = "notionToolplus";
-            windowControls.parentElement.insertBefore(notionToolplus, windowControls);
+            savorToolplus = document.createElement("div");
+            savorToolplus.id = "savorToolplus";
+            windowControls.parentElement.insertBefore(savorToolplus, windowControls);
         } else if (toolbarEdit != null) {
-            notionToolplus = insertCreateBefore(toolbarEdit, "div", "notionToolplus");
-            notionToolplus.style.position = "relative";
+            savorToolplus = insertCreateBefore(toolbarEdit, "div", "savorToolplus");
+            savorToolplus.style.position = "relative";
         }
     }
 
-    var addButton = addinsertCreateElement(notionToolplus, "div");
+    var addButton = addinsertCreateElement(savorToolplus, "div");
     addButton.style.float = "top";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";
@@ -1657,10 +1645,10 @@ function loadScript(url, type = 'module') {
 function getSiYuanToolbar() { return document.getElementById("toolbar"); }
 
 /**
- * 得到notionToolbar
+ * 得到savorToolbar
  * @returns 
  */
-function getnotionToolbar() { return document.getElementById("notionToolbar"); }
+function getsavorToolbar() { return document.getElementById("savorToolbar"); }
 
 /**简单判断目前思源是否是pc窗口模式 */
 function isPcWindow() {

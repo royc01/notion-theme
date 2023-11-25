@@ -1,16 +1,15 @@
 /* ————————————————————编辑区———————————————————— */
 /*头图、图标、标签*/
 
-.protyle-background__iconw{
-	margin-left:6px;
-}
 .protyle-background__icon{
 	margin-bottom:10px;
 	border-radius:5px;
 }
+
 .protyle-background__icon:not(.fn__none)+.protyle-icons {
 	margin-left:-99px;
 	margin-bottom:-48px;
+	transform:none;
 }
 
 .protyle-background__iconw .protyle-icons .b3-tooltips{
@@ -19,10 +18,9 @@
 	border-radius:5px;
 	padding:0 6px 0 0;
 	margin:0 2px;
-	color:var(--b3-icons-tooltips);
+	color:var(--S-icons-tooltips);
 	background-color:transparent;
 }
-
 .protyle-background__iconw .protyle-icons .b3-tooltips svg{
 	width:12px!important;
 	height:12px!important;
@@ -30,7 +28,7 @@
 	margin:6px!important;
 	display:inline-flex;
 	color: var(--b3-theme-background);
-	background-color: var(--b3-icons-tooltips);
+	background-color: var(--S-icons-tooltips);
 	border-radius:3px;
 	opacity:0.6;
 }
@@ -41,48 +39,33 @@
 	line-height:28px;
 	transform:none;
 	opacity:1;
-	color:var(--b3-icons-tooltips);
+	color:var(--S-icons-tooltips);
 	background-color:transparent;
 	position:static;
 	margin:0;
 	padding:0;
 	box-shadow: none;
 }
-.protyle-background .protyle-icons .b3-tooltips input{
-	width:100% !important;
-}/*上传按钮*/
-.protyle-background__iconw .protyle-icons .b3-tooltips:hover{
-	background-color:var(--b3-icons-tooltips-hover);
-}
 
-.protyle-background .protyle-background__icon svg{
-	width:78px;
-	height:78px
-}
-.protyle-background .protyle-background__icon:hover{
-	background-color:var(--b3-icons-tooltips-hover);
-	opacity:1;
-}
-.protyle-background:hover >.protyle-background__iconw >.protyle-icons{
-	opacity:1
-}
 .protyle-background .protyle-icons  .b3-tooltips::before{
 	border:none
 }/*取消箭头*/
 
-/*头图选项*/
-.protyle-background__img .protyle-icons{
-	background-color:transparent;
-	left: auto;
-	right:max(calc((100% - min(1920px, max(1500px, 46.9vw))) / 2), 103px);
-	opacity:0;
-	border-radius:3px;
+.protyle-background__iconw .protyle-icons .b3-tooltips:hover{
+	background-color:var(--S-icons-tooltips-hover);
 }
+.protyle-background .protyle-background__icon:hover{
+	background-color:var(--S-icons-tooltips-hover);
+	opacity:1;
+}
+
+/*头图选项*/
+
 .protyle-background__img .protyle-icons .b3-tooltips{
 	display:inline-flex;
 	height:28px;
 	padding:0 10px 0 6px!important;
-	color:var(--b3-img-icons-tooltips);
+	color:var(--S-img-icons-tooltips);
 }
 .protyle-background__img .protyle-icons .b3-tooltips svg{
 	width:12px;
@@ -98,7 +81,7 @@
 	transform:none;
 	transition:none;
 	opacity:1;
-	color:var(--b3-img-icons-tooltips);
+	color:var(--S-img-icons-tooltips);
 	background-color:transparent;
 	position:static;
 	margin:0;
@@ -107,25 +90,30 @@
 }
 
 .protyle-background__img .protyle-icons>span{
-	color:var(--b3-img-icons-tooltips);
-	background-color:var(--b3-img-icons-tooltips-bg);
+	color:var(--S-img-icons-tooltips);
+	background-color:var(--S-img-icons-tooltips-bg);
+	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 0.5px;
+}
+.protyle-background__img .protyle-icons{
 	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
-
 }
 .protyle-background__img .protyle-icons .b3-tooltips:hover,.protyle-background__img.protyle-icons>span:hover{
-	background-color:var(--b3-fn__flex-shrink-background);
-	color:var(--b3-img-icons-tooltips);
+	background-color:var(--S-dock-background);
+	color:var(--S-img-icons-tooltips);
 }
 
-.protyle-background__img .protyle-icons>span:not(span[data-type='cancel']):not(span[data-type='confirm']):not(span[data-type='link']):not(span[data-type='random']):not(span[data-type='position']):not(span[data-type='remove']):not(span[style*="relative"])
+.protyle-background__img .protyle-icons>.protyle-icon--text
 {
-	background-color: var(--b3-img-icons-span);
+	background-color: var(--S-img-icons-span);
 	color:var(--b3-theme-background);
 	padding:5px 20px;
 }/*上下移动题图提示语*/
 
 .protyle-background .protyle-background__img:hover .protyle-icons{opacity:1;}
 /*选项块透明度*/
+.protyle-background .protyle-icons .b3-tooltips input{
+	width:100% !important;
+}/*上传按钮*/
 
 
 /*文档标签*/
@@ -137,8 +125,9 @@
 }
 .b3-chips .b3-chip{
 	margin: 15px 3px 3px 3px;
-	border-radius: 6px;
-	padding: 2px 6px 3px 6px;
+	border-radius: 3px;
+	padding: 0px 6px 1px;
+	font-size:90%;
 }
 .b3-chips .b3-chip:last-child{
 	margin-right: 15px;
@@ -153,11 +142,45 @@
 	float:right;
 	margin-top:30vh;
 }
-
-
 .body--window .protyle-background[style*="30vh"]>.b3-chips{
 	float:right;
 	margin-top:24vh;
+}
+.b3-chip.b3-chip--secondary{
+	background-color: var(--b3-font-background6);
+	color: var(--S-chip--secondary);
+}
+.b3-chip.b3-chip--primary{
+	background-color: var(--b3-font-background7);
+	color: var(--S-chip--primary);
+}
+.b3-chip.b3-chip--info{
+	background-color: var(--b3-font-background8);
+	color: var(--S-chip--info);
+}
+.b3-chip.b3-chip--success{
+	background-color: var(--b3-font-background10);
+	color: var(--S-chip--success);
+}
+.b3-chip.b3-chip--warning{
+	background-color: var(--b3-font-background11);
+	color: var(--S-chip--warning);
+}
+.b3-chip.b3-chip--error{
+	background-color: var(--b3-font-background12);
+	color: var(--S-chip--error);
+}
+.b3-chip.b3-chip--pink{
+	background-color: var(--b3-font-background13);
+	color: var(--S-chip--pink);
+}
+
+.protyle-background .b3-chip::before{
+	content: "#";
+	width:10px;
+	height:22px;
+	line-height:22px;
+	font-size:1.1em;
 }
 /*文档标题块*/
 .protyle-title__input{
@@ -177,9 +200,6 @@
 .sb[fold="1"] .h5,.sb[fold="1"] .h6{
 	margin-top: 0em;
 }
-/*.protyle-wysiwyg[data-doc-type="NodeDocument"]>[data-type="NodeHeading"]{
-	margin-top: 0em;
-}*/
 .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
 .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
 .protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
@@ -193,20 +213,44 @@
 .protyle-gutters button svg {
     color: var(--b3-gutters-color);
 	padding:0 5px;
-	border-radius:6px;
+	border-radius:4px;
 	height: 24px!important;
 }
 .protyle-gutters button[data-type="fold"] svg {
 	padding:0px 7px;
 }
-.protyle-gutters button svg:hover {
-	background-color: var(--b3-gutters-background);
+.protyle-gutters button:hover svg {
+	background-color: var(--S-gutters-background);
 }
 .protyle-gutters button{
 	padding:5px 0px;
 }
 .protyle-gutters{
 	transition: all 200ms ease-out;
+}
+/* 无序列表 */
+.protyle-wysiwyg [data-node-id].li>.protyle-action{
+	color: var(--b3-theme-on-background);
+}
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.protyle-action:after, .protyle-wysiwyg [data-node-id].li>.protyle-action:hover:after{
+    background-color: var(--S-list-background)!important;
+}
+/* 有序列表 */
+.protyle-wysiwyg [data-node-id].li[data-subtype="o"]>.protyle-action--order:after{
+	 padding:3px 4px;
+	 margin:-0.75em 0 0 -0.7em;
+	 height:1.1em;
+	 line-height:1.1em;
+}
+/* 任务列表 */
+.protyle-task--done svg{
+    color: var(--b3-theme-primary);
+}
+.protyle-task--done:hover svg{
+    color: var(--b3-task-done-hover);
+}
+.protyle-wysiwyg [data-node-id].li>.protyle-action--task:hover:after{
+	display:none;
 }
 /*块右上角引用数*/
 .protyle-attr--refcount{
@@ -250,7 +294,7 @@
 }
 
 .protyle-toolbar__item:hover {
-	background-color: var(--b3-toolbar-item-hover);
+	background-color: var(--S-toolbar-item-hover);
 }
 .protyle-toolbar__divider{
 	margin:0px;
@@ -292,45 +336,6 @@
 	 font-weight: 500;
 	 box-shadow: 0 0 0 1px var(--b3-color--square) inset;
 }
-/*.b3-color__square[style="background-color:var(--b3-font-color1)"]::before{
-	 color:var(--b3-font-color1);
-}
-.b3-color__square[style="background-color:var(--b3-font-color2)"]::before{
-	 color:var(--b3-font-color2);
-}
-.b3-color__square[style="background-color:var(--b3-font-color3)"]::before{
-	 color:var(--b3-font-color3);
-}
-.b3-color__square[style="background-color:var(--b3-font-color4)"]::before{
-	 color:var(--b3-font-color4);
-}
-.b3-color__square[style="background-color:var(--b3-font-color5)"]::before{
-	 color:var(--b3-font-color5);
-}
-.b3-color__square[style="background-color:var(--b3-font-color6)"]::before{
-	 color:var(--b3-font-color6);
-}
-.b3-color__square[style="background-color:var(--b3-font-color7)"]::before{
-	 color:var(--b3-font-color7);
-}
-.b3-color__square[style="background-color:var(--b3-font-color8)"]::before{
-	 color:var(--b3-font-color8);
-}
-.b3-color__square[style="background-color:var(--b3-font-color9)"]::before{
-	 color:var(--b3-font-color9);
-}
-.b3-color__square[style="background-color:var(--b3-font-color10)"]::before{
-	 color:var(--b3-font-color10);
-}
-.b3-color__square[style="background-color:var(--b3-font-color11)"]::before{
-	 color:var(--b3-font-color11);
-}
-.b3-color__square[style="background-color:var(--b3-font-color12)"]::before{
-	 color:var(--b3-font-color12);
-}
-.b3-color__square[style="background-color:var(--b3-font-color13)"]::before{
-	color:var(--b3-font-color13);
-}*/
 .color__square[data-type="backgroundColor"]{
 	 border-radius: 3px;
 	 width:22px;
@@ -371,40 +376,7 @@
 	font-weight: 500;
 	font-size:1.3em;
 }
-/* 无序列表 */
-.protyle-wysiwyg [data-node-id].li>.protyle-action{
-	color: var(--b3-theme-on-background);
-}
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.protyle-action:after, .protyle-wysiwyg [data-node-id].li>.protyle-action:hover:after{
-    background-color: var(--b3-border-color)!important;
-}
-/* 有序列表 */
-.protyle-wysiwyg [data-node-id].li[data-subtype="o"]>.protyle-action--order:after{
-	 padding:0px 4px 6px 4px;
-	 margin:-1em 0 0 -0.7em;
-	 height:1.6em;
-}
-.protyle-wysiwyg div[fold="1"].li[data-subtype="o"]>.protyle-action--order:after{
-	 background: url("/appearance/themes/Savor/img/square.svg") no-repeat center!important;
-	 transition:none;
-}
-.protyle-wysiwyg [data-node-id].li[data-subtype="o"]>.protyle-action--order:hover:after{
-	 background: url("/appearance/themes/Savor/img/square.svg") no-repeat center!important;
-	 transition:none;
-}
-/* 任务列表 */
-.protyle-task--done svg{
-    color: var(--b3-theme-primary);
-}
-.protyle-task--done:hover svg{
-    color: var(--b3-task-done-hover);
-}
-.protyle-wysiwyg [data-node-id].li>.protyle-action--task:hover:after{
-	display:none;
-}
-/*.protyle-task--done>.protyle-action--task>svg{
-	animation: checkbox 0.2s ease-in;
-}*//*勾选动画*/
+
 /* 表格 */
 .b3-typography table, .protyle-wysiwyg table{
 	font-weight:500;
@@ -425,12 +397,7 @@
 .protyle-wysiwyg [data-node-id][custom-f~=full] colgroup{
 	border-style:unset;
 }
-
-
 /* 自定义表格宽度 */
-/*.protyle-wysiwyg div.table[data-node-id]{
-    width: calc(100% - 8px);
-}*/
 .protyle-wysiwyg div.table[data-node-id][custom-f~=auto] table {
     width: auto;
 }
@@ -444,20 +411,6 @@
     color: inherit !important;
     background-color: var(--b3-theme-background) !important;
 }
-/* 冻结表头样式 */
-.protyle-wysiwyg div.table[data-node-id][custom-t~=dongjie] table {
-  /* 表格滚动条 */
-	display: inline-block;
-	overflow-y: auto!important;
-	max-height: 50vh;
-	width:unset;
-	border-radius:0px;
-}
-.protyle-wysiwyg div.table[data-node-id][custom-t~=dongjie] table > thead {
-	position: sticky;
-	top: 0px;
-	z-index: 1;
-}
 /* 竖表头格式 */
 .protyle-wysiwyg [data-node-id][custom-t~=vbiaotou] table th {
     font-weight: normal !important;
@@ -469,7 +422,6 @@
     font-weight: bold !important;
     background-color: var(--b3-theme-surface) !important;
 }
-
 /* 标签 */
 .protyle-wysiwyg span[data-type="tag"] {
 	font-size: 90%;
@@ -479,17 +431,34 @@
 	border-bottom:none !important; 
 	background-color:var(--b3-font-background7);
 }
-
+.protyle-wysiwyg span[data-type="tag"]::before{
+	content: "#";
+}
 /*块引用*/
+/*.protyle-wysiwyg [data-node-id] span[data-type*="block-ref"][data-subtype="s"]:not([data-type="virtual-block-ref"]):not([data-type*="sup"]):not([data-type*="sub"]){
+	color: var(--b3-theme-primary)!important;
+}
+.protyle-wysiwyg [data-node-id] span[data-type="block-ref"][data-subtype="s"]:not([data-type="virtual-block-ref"]):not([data-type*="sup"]):not([data-type*="sub"])::before {
+    color: var(--b3-theme-on-surface)!important;
+    content: "[["!important;
+	opacity: 0.5;
+}
+
+.protyle-wysiwyg [data-node-id] span[data-type="block-ref"][data-subtype="s"]:not([data-type="virtual-block-ref"]):not([data-type*="sup"]):not([data-type*="sub"])::after {
+    color: var(--b3-theme-on-surface)!important;
+    content: "]]"!important;
+	opacity: 0.5;
+}*/
+
 .protyle-wysiwyg [data-node-id] span[data-type*="block-ref"]:not([data-type="virtual-block-ref"]):not([data-type*="sup"]):not([data-type*="sub"]){
-	font-size: 95%;
+	font-size:95%;
 	padding:0px 5px 1px 5px;
 	color:var(--b3-theme-on-background);
 	background-color:var(--b3-block-ref-background);
 	border-bottom: 1px dashed var(--b3-theme-on-surface);
 }
-.protyle-wysiwyg [data-node-id] span[data-type="block-ref"]:hover{
-	background-color:var(--b3-list-background-focus);
+.protyle-wysiwyg [data-node-id] span[data-type*="block-ref"]:not([data-type="virtual-block-ref"]):not([data-type*="sup"]):not([data-type*="sub"]):hover{
+	background-color:var(--S-list-background-focus);
 }
 /*上标块引*/
 .protyle-wysiwyg [data-node-id] span[data-type*="block-ref"][data-type*="sup"],.protyle-wysiwyg [data-node-id] span[data-type*="block-ref"][data-type*="sub"]{
@@ -497,13 +466,17 @@
 	color:var(--b3-theme-background);
 	background-color:var(--b3-theme-on-background);
 	border-radius:5px;
-	padding: 1px 4px 2px 4px;
+	padding: 1px 3px 2px 3px;
 	border-bottom:none;
 }
 /* 超链接 */
 .protyle-wysiwyg [data-node-id] span[data-type~=a]{
 	color: var(--b3-theme-on-surface);
 	border-bottom:1px solid var(--b3-border-color);
+}
+.protyle-wysiwyg [data-node-id] span[data-type~=a]:hover{
+	color: var(--b3-theme-on-background);
+	border-bottom:1px solid var(--b3-theme-on-background);
 }
 /*上标链接*/
 .protyle-wysiwyg [data-node-id] span[data-type*="a"][data-type*="sup"],.protyle-wysiwyg [data-node-id] span[data-type*="a"][data-type*="sub"]{
@@ -515,10 +488,7 @@
 .protyle-wysiwyg [data-node-id] span[data-type*="a"][data-type*="sup"]:hover,.protyle-wysiwyg [data-node-id] span[data-type*="a"][data-type*="sub"]:hover{
 	border:1px solid var(--b3-theme-on-background);
 }
-.protyle-wysiwyg [data-node-id] span[data-type~=a]:hover{
-	color: var(--b3-theme-on-background);
-	border-bottom:1px solid var(--b3-theme-on-background);
-}
+
 /* 嵌入块 */
 .protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"]{
     color: var( --b3-theme-on-background);
@@ -541,7 +511,7 @@
 	margin-right:0px!important;
 }/*列表里代码块对齐*/
 .b3-typography div.hljs, .protyle-wysiwyg div.hljs {
-	background-color:var(--b3-code-block-hljs);
+	background-color:var(--S-code-block-hljs);
 	padding: 30px 10px 22px 10px;
 }
 .protyle-wysiwyg[contenteditable="true"] .code-block .protyle-action{
@@ -557,19 +527,19 @@
 	margin-top: -2px;
 }
 .code-block .protyle-action .protyle-action__language:hover{
-	background-color:var(--b3-list-background);	
+	background-color:var(--S-list-background);	
 }
 .code-block .protyle-action .protyle-action__copy,.code-block .protyle-action .protyle-action__menu{
 	margin-top:-3px;
-	color:var(--b3-icons-tooltips);
-	background-color:var(--b3-list-background);
+	color:var(--S-icons-tooltips);
+	background-color:var(--S-list-background);
 }
 .code-block .protyle-action .protyle-action__copy:hover,
 .code-block .protyle-action .protyle-action__menu:hover{
-	background-color:var(--b3-list-background-focus);
+	background-color:var(--S-list-background-focus);
 }
 .protyle-linenumber__rows{
-	background-color: var(--b3-linenumber-rows);
+	background-color: var(--S-linenumber-rows);
 	padding: 30px 4px 22px 4px;
 }
 .protyle-wysiwyg [data-node-id][fold="1"]:not(.li):not([data-type="NodeHeading"]).code-block{
@@ -577,11 +547,11 @@
 }
 /*行内代码*/
 .fn__code, .b3-typography code:not(.hljs), .b3-typography span[data-type~=code], .protyle-wysiwyg code:not(.hljs), .protyle-wysiwyg span[data-type~=code]{
-	color:var(--b3-inline-code);
+	color:var(--S-inline-code);
 }
 /*折叠样式*/
 .protyle-wysiwyg div[fold="1"]:not(div[data-type="NodeListItem"]){
-	background-color:var(--b3-fn__flex-shrink-background);
+	background-color:var(--S-fn__flex-shrink-background);
 	border-radius:5px;
 	border:1px solid var(--b3-border-fold);
 }
@@ -598,7 +568,7 @@
   border-radius: 3px;
   padding:2px 6px 4px 6px;
   color: var( --b3-theme-on-background)!important;
-  background-color:var(--b3-toolbar-item-hover);
+  background-color:var(--S-toolbar-item-hover);
 }
 .protyle-wysiwyg span[data-type="file-annotation-ref"]:hover {
   background-color:var(--b3-border-color);
@@ -640,8 +610,3 @@
 .iframe .protyle-action__drag:after{
 	background-color:var(--b3-theme-on-surface)!important;
 }
-
-
-
-
-

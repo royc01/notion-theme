@@ -45,6 +45,6 @@
 }
 
 #toolbar+.fn__flex-1{
-	border-top: 8px solid var(--b3-toolbar-background);
+	border-top: 8px solid var(--S-toolbar-background);
 	margin-top: -7px;
 }

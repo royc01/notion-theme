@@ -1,8 +1,8 @@
-/*底栏*/
+/* ———————————————————— 底栏 ———————————————————— */
 #status {
     position: fixed;
-    background-color: var(--b3-toolbar-background);
-    right: 41px;
+    background-color: var(--S-status-msg-background);
+    right: 42px;
     bottom: -4px;
 	border-radius:6px 0 6px 0;
 	height: 26px;
@@ -87,7 +87,6 @@
 	right:0px;
 	flex:0;
 }
-
 
 
 .status__backgroundtask{

@@ -43,7 +43,7 @@
 }
 
 .layout__wnd--active .layout-tab-bar .item--focus:not(.item--pin){
-	background-color:var(--b3-fn__flex-column-background);
+	background-color:var(--S-fn__flex-column-background);
 }
 
 .layout__wnd--active .layout-tab-bar .item--focus::after,.layout-tab-bar .item--focus:after{
@@ -54,7 +54,7 @@
 	left:unset;
 	height:100%;
 	width: 3px;
-	background-color: var(--b3-item-focus);
+	background-color: var(--S-item-focus);
 	animation: item-focus 0.2s ease-in-out;
 	overflow:visible;
 }

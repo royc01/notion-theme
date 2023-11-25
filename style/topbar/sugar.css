@@ -9,7 +9,7 @@
     --b3-theme-background-light: #dfe0e1;
     --b3-theme-surface: #f4f1eb;/* 面板主色 */
     --b3-theme-surface-light: #f4f1eb;
-	--b3-theme-surface-lighter: var(--b3-border-color);
+	--b3-theme-surface-lighter:rgb(215, 224, 224, .8);
     --b3-theme-error: #eb5757;
 
     /* 文字颜色 */
@@ -17,7 +17,7 @@
     --b3-theme-on-secondary: #fff;
     --b3-theme-on-background: rgb(55, 53, 47);
     --b3-theme-on-surface: #5d5a55;
-    --b3-theme-on-surface-light: rgba(95, 99, 104, .68);
+    --b3-theme-on-surface-light: rgba(55, 53, 47, 0.5);
     --b3-theme-on-error: #fff;
 
     /* 线条 */
@@ -160,32 +160,34 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--b3-toolbar-background: #eeeae3;
-	--b3-toolbar-item-hover: rgba(0, 0, 0, .05);
-	--b3-toolbar-closeWindow-hover: #e81123;
-	--b3-toolbar-closeWindow-svg: #fff;
+	--S-toolbar-background: #eeeae3;
+	--S-toolbar-blur-background: transparent;
+	--S-toolbar-item-hover: rgba(0, 0, 0, .05);
+	--S-toolbar-barWorkspace-hover:var(--S-dockleft-item-active-background);
+	--S-toolbar-closeWindow-hover: #e81123;
+	--S-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
-	--b3-dockright-color: rgb(55, 53, 47, .5);
-	--b3-dockright-background: rgb(0, 0, 0, 0);
-	--b3-dockleft-color: rgb(55, 53, 47, .5);
-	--b3-dock-background: rgb(0, 0, 0, 0);
-	--b3-dockright-item-active-background: #f4f1eb;
-	--b3-dockleft-item-active-background: #f4f1eb;
-	--b3-dock-item-active-color: #ff533f;
-	--b3-dock-item-hover-background: #fff;
+	--S-dock-color: rgb(55, 53, 47, .5);
+	--S-dock-background: rgb(0, 0, 0, 0);
+	--S-dockright-item-active-background: #f4f1eb;
+	--S-dockleft-item-active-background: #f4f1eb;
+	--S-dock-item-active-color: #ff533f;
+	--S-dock-item-hover-background: #fff;
+	--S-dock--item--activefocus: #e16259;
 	
+	--S-dock-item-width: 34px;
 	/* 侧栏面板 */
-	--b3-fn__flex-column-background: #f4f1eb;
-	--b3-fn__flex-shrink-background: #f4f1eb;
-	--b3-block-logo-color: rgb(247, 246, 243);
-	--b3-block-logo-background-color: #2b2f3e;
-	--b3-block-icon-svg-color: rgba(161, 160, 156);
-	--b3-block-icon-hover: rgba(55, 53, 47, 0.08);
-	--b3-block-icon-active: #ff533f;
-	--b3-list-item-arrow: rgba(55, 53, 47, 0.4);
-	--b3-list-background: #e9e9e6;
-	--b3-list-background-focus: rgba(55, 53, 47, 0.08);
-	--b3-list-background-more: rgba(108, 106, 101);
+	--S-fn__flex-column-background: #f4f1eb;
+	--S-fn__flex-shrink-background: #f4f1eb;
+	--S-block-logo-color: rgb(247, 246, 243);
+	--S-block-logo-background-color: #2b2f3e;
+	--S-block-icon-svg-color: rgba(161, 160, 156);
+	--S-block-icon-hover: rgba(55, 53, 47, 0.08);
+	--S-block-icon-active: #ff533f;
+	--S-list-item-arrow: rgba(55, 53, 47, 0.4);
+	--S-list-background: rgba(55, 53, 47, 0.06);
+	--S-list-background-focus: rgba(55, 53, 47, 0.12);
+	--S-list-background-activefocus:  rgba(235, 131, 131, 0.15);
 	
 	--b3-flex-column-padding:6px 0px 2px 0px;
 	--b3-list-item-radius: 3px;
@@ -204,20 +206,18 @@
 	--b3-border-fold: rgb(15, 15 , 15, .1);/*折叠边框*/
 	--b3-layout-resize-width: 1px;
 	/* 页签 */
-	--b3-item-focus: rgb(0, 0, 0 ,1);
+	--S-item-focus: rgb(0, 0, 0 ,1);
 	/* 面包屑 */
-	--b3-protyle-breadcrumb-shadow:var(--b3-layout-resize);
-	--b3-protyle-breadcrumb-arrow: rgba(174,172,166);
-	--b3-breadcrumb-svg: rgba(55, 53, 47, 0.8);
+	--S-protyle-breadcrumb-arrow: rgba(174,172,166);
 	/* 头图按钮 */
-	--b3-icons-tooltips: rgba(55, 53, 47, 0.5);
-	--b3-icons-tooltips-hover: var(--b3-list-background);
-	--b3-img-icons-tooltips: var(--b3-theme-on-surface);
-	--b3-img-icons-tooltips-bg: var(--b3-theme-background);
-	--b3-img-icons-span: rgba(0, 0, 0, .5);
+	--S-icons-tooltips: rgba(55, 53, 47, 0.5);
+	--S-icons-tooltips-hover: var(--b3-list-background);
+	--S-img-icons-tooltips: var(--b3-theme-on-surface);
+	--S-img-icons-tooltips-bg: var(--b3-theme-background);
+	--S-img-icons-span: rgba(0, 0, 0, .5);
 	/* 块标 */
 	--b3-gutters-color: rgba(211,209,203);
-	--b3-gutters-background: var(--b3-toolbar-item-hover);
+	--S-gutters-background: var(--b3-toolbar-item-hover);
 	/* 弹出工具条字体颜色选择 */
 	--b3-color--square: var(--b3-border-color);
 	/* 任务列表 */
@@ -228,10 +228,10 @@
 	/* 块引用 */
 	--b3-block-ref-background: var(--b3-toolbar-item-hover);
 	/* 代码块 */
-	--b3-linenumber-rows: rgba(237, 236, 233);
-	--b3-code-block-hljs: var(--b3-fn__flex-shrink-background);						  
+	--S-linenumber-rows: rgba(237, 236, 233);
+	--S-code-block-hljs: var(--S-fn__flex-shrink-background);						  
 	/*行内代码*/
-	--b3-inline-code:var(--b3-theme-error);
+	--S-inline-code:var(--b3-theme-error);
 	/*按钮*/
 	--b3-button: #069ccd;
 	/*pdf*/
@@ -245,7 +245,7 @@
 	/*ctrlp*/
 	--b3-list-item--meta: #9b9a97;
 	/*底栏状态*/
-	--b3-status-msg-background: #e0dfda;
+	--S-status-msg-background: #e0dfda;
 }
 
 
