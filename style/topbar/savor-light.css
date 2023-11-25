@@ -43,7 +43,7 @@
 	--webkit-scrollbar-thumb: 4px;
 
     /* 列表 */
-    --b3-list-hover: rgba(55, 53, 47, 0.08);
+    --b3-list-hover: rgba(55, 53, 47, 0.06);
     --b3-list-icon-hover: rgba(33, 34, 36, .1);
 
     /* 菜单 */
@@ -211,7 +211,7 @@
 	--S-block-icon-hover: rgba(55, 53, 47, 0.06);
 	--S-list-item-arrow: rgba(55, 53, 47, 0.4);
 	--S-list-background: rgba(55, 53, 47, 0.06);
-	--S-list-background-focus: rgba(55, 53, 47, 0.8);
+	--S-list-background-focus: rgba(55, 53, 47, 0.12);
 	--S-list-background-activefocus:  rgba(235, 131, 131, 0.15);
 	--S-block-icon-active: var(--b3-theme-error);
 	

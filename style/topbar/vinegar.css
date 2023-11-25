@@ -319,3 +319,8 @@ body{
 .b3-menu,.b3-menu__item,.b3-menu .b3-menu__submenu,.hint--menu{
 	background-color: var(--S-dockleft-item-active-background);
 }
+
+.protyle-wysiwyg div.table[data-node-id] table {
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 1px rgba(154, 160, 166, .1);
+}
