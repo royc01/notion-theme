@@ -121,7 +121,6 @@
 .b3-chips{
 	right:76px;
 	float:right;
-	z-index:10;
 }
 .b3-chips .b3-chip{
 	margin: 15px 3px 3px 3px;
