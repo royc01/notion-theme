@@ -6,6 +6,9 @@
     padding: var(--S-flex-column-padding);
 	min-height:90%;
 }
+/*.layout__dockb .layout-tab-container>.fn__flex-column{
+	padding: 6px 2px 2px 2px;
+}*/
 .block__icons~.fn__flex-1{
 	margin-bottom: 0px!important;
 }

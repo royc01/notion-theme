@@ -57,7 +57,7 @@
 	border-top:none;
 	height: 32px;
 	padding: 0 40px;
-	background-color: var(--S-dock-background);
+	background-color: var(--S-toolbar-background);
 }
 
 #dockBottom .fn__flex-1{
