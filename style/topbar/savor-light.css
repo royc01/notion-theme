@@ -10,7 +10,7 @@
     --b3-theme-surface: rgb(251, 251, 250);/* 面板主色 */
     --b3-theme-surface-light: rgba(251, 251, 250, .5);
     --b3-theme-surface-lighter: rgba(230, 229, 225);
-    --b3-theme-error: #eb8383;
+    --b3-theme-error: #eb5757;
 
     /* 文字颜色 */
     --b3-theme-on-primary: #fff;

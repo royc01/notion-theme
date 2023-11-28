@@ -5,35 +5,30 @@
 	background-color:var(--b3-theme-background);
 	border:none;
 	border-radius:6px;
-	padding:4px 0;
+}
+
+.b3-menu__item{
+	background-color: var(--b3-theme-background);
 }
 .b3-menu .b3-menu__submenu{
 	background-color:var(--b3-theme-background);
 	box-shadow: var(--b3-menu-shadow);
 	border:none;
 	border-radius:6px;
-	padding: 4px 0;
-	margin-top:4px;
 }
-.b3-menu__item{
-	padding: 0 8px;
-	background-color: var(--b3-theme-background);
-}
+
 .b3-menu__item:hover:not(.b3-menu__item--readonly):not(.b3-menu__item--custom){
 	background-color:var(--S-list-background);
-	box-shadow: 4px 0 0px var(--S-list-background),-4px 0 0px var(--S-list-background);
 }
 .b3-menu__item--current:not(.b3-menu__item--readonly){
 	background-color:var(--b3-list-hover);
-	box-shadow: 4px 0 0px var(--b3-list-hover),-4px 0 0px var(--b3-list-hover);
 }
+
 .b3-menu__separator{
 	color:var(--b3-scroll-color-hover);
 	box-shadow: 4px 0 0px var(--b3-list-hover),-4px 0 0px var(--b3-list-hover);
 }
-.b3-menu .b3-menu__icon{
-	margin-left:-4px;
-}
+
 .b3-menu .b3-menu__icon--arrow{
 	margin-right:-8px;
 }
@@ -200,7 +195,7 @@
 .b3-text-field{
 	box-shadow: inset 0 0 0 1px var(--S-list-background);
 }
-.b3-text-field:not(#searchInput):not(.fn__block){
+.b3-text-field:not(#searchInput):not(.fn__block):not(.fn__size200){
 	background-color: var(--S-list-background);
 }
 /* 移动文档菜单 */
@@ -239,26 +234,31 @@ div#historyContainer{
 }
 /*已下载页面*/
 .bazaarPanel[data-type="downloaded"] .fn__flex>.fn__space:first-child{
-	width: 16px;
+	width: 11px;
 }
-.bazaarPanel[data-type="downloaded"] .fn__space:has(+[data-type="myPlugin"]){
-	width: 240px;
-	background-color:var(--S-list-background);
-	border-radius:4px;
-	margin-right:-236px;
-}
+
 .bazaarPanel[data-type="downloaded"] .b3-button{
-	background-color:transparent;
+	background-color:var(--S-list-background);
 	height:20px;
 	margin-top:4px;
-	box-shadow:none;
 	padding: 4px 6px;
+	clip-path: inset(-4px );
+	box-shadow: 0 0 0 50px var(--S-list-background);
+	transition:none;
 }
+.bazaarPanel[data-type="downloaded"] [data-type="myPlugin"]{
+	clip-path: inset(-4px round 4px 0 0 4px);
+}
+
+.bazaarPanel[data-type="downloaded"] [data-type="myWidget"]{
+	clip-path: inset(-4px round 0 4px 4px 0);
+}
+
 .bazaarPanel[data-type="downloaded"] .b3-button:not(.b3-button--outline){
 	background-color:var(--b3-theme-background);
 	color:var(--b3-theme-on-background);
 	font-weight: 500;
-	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
+	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12),0 0 0 50px var(--S-list-background);
 }
 [data-type="myWidget"]+.fn__space{
 	width: 16px;

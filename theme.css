@@ -57,7 +57,7 @@
     --b3-theme-surface: rgb(251, 251, 250);/* 面板主色 */
     --b3-theme-surface-light: rgba(251, 251, 250, .5);
     --b3-theme-surface-lighter: rgba(230, 229, 225);
-    --b3-theme-error: #eb8383;
+    --b3-theme-error: #eb5757;
 
     /* 文字颜色 */
     --b3-theme-on-primary: #fff;
@@ -389,8 +389,15 @@
 .layout__center ~ .fn__flex-column{
 	margin-bottom:28px;
 }
-.layout__dockr{
-	box-shadow: var(--S-fn__flex-column-background) 0px 40px 0px 0px;
+.layout__dockl,.layout__dockr {
+    box-shadow: var(--S-fn__flex-column-background) 0px 40px 0px 0px;
+}
+.fn__flex-1:has(~.status.fn__none) #layouts .layout__dockr,.fn__flex-1:has(~#dockBottom:not(.fn__none)) #layouts .layout__dockr{
+	margin-bottom:0px;
+}/*当关闭底栏或者包含底部面板的时候左侧面板去除下间距*/
+
+#layouts:has(>.layout__dockb.layout--float) .layout__dockr,#layouts:has(>.layout__dockb.layout--float) .layout__dockl{
+	margin-bottom:28px!important;
 }
 
 
@@ -531,9 +538,11 @@ span[data-type="add"] svg{
 
 
 
+.toolbar--browser #barWorkspace{
+	margin-left: 8px;
+}
 
 
 
 
-
-
+	
