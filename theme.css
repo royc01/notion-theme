@@ -396,7 +396,7 @@
 	margin-bottom:0px;
 }/*当关闭底栏或者包含底部面板的时候左侧面板去除下间距*/
 
-#layouts:has(>.layout__dockb.layout--float) .layout__dockr,#layouts:has(>.layout__dockb.layout--float) .layout__dockl{
+#layouts:has(>.layout__dockb.layout--float:not([style*="height: 0px"])) .layout__dockr,#layouts:has(>.layout__dockb.layout--float:not([style*="height: 0px"])) .layout__dockl{
 	margin-bottom:28px!important;
 }
 
@@ -544,5 +544,8 @@ span[data-type="add"] svg{
 
 
 
-
+.av__mask .b3-text-field:not(#searchInput):not(.fn__block):not(.fn__size200){
+	background-color: var(--b3-theme-background);
+	line-height:24px;
+}
 	
