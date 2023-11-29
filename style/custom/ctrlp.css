@@ -97,11 +97,11 @@
 
 #searchList>[data-type="search-item"]>.b3-list-item__graphic+.b3-list-item__graphic{
     position: absolute;
-    margin-top: 4px;
-	margin-left: 20px;
+    margin-top: 8px;
+	margin-left: 22px;
 }
 #searchList>[data-type="search-item"]>.b3-list-item__graphic+.b3-list-item__graphic+.b3-list-item__text{
-	margin-left: 40px;
+	text-indent: 20px;
 }
 
 
