@@ -4,7 +4,7 @@
     background-color: var(--S-status-msg-background);
     right: 42px;
     bottom: -4px;
-	border-radius:6px 0 6px 0;
+	border-radius:6px;
 	height: 26px;
 	border:0;
 	padding: 0 26px 0 0;
@@ -60,16 +60,26 @@
 
 
 .status #statusHelp{
-	position:relative;
-}
-.status #barDock{
 	position:absolute;
 	right:-3px;
 	z-index:8;
-	color:var(--b3-theme-on-background);
 }
-.status #statusHelp svg,.status #barDock svg{
-	color:var(--b3-theme-on-background);
+.status #barDock{
+	border-radius:6px;
+	position:absolute;
+	right:-37px;
+	z-index:8;
+    background-color: var(--S-status-barDock);
+    box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
+}
+.status #barDock:hover{
+	background-color: var(--S-status-barDock-hover)!important;
+}
+.status #statusHelp svg{
+	color:var(--S-dock--item--activefocus);
+}
+.status #barDock svg{
+	color:var(--b3-theme-background);
 }
 .status #barDock:before{
 	right:unset!important;
@@ -103,9 +113,7 @@
 	bottom: -12px;
 	border-radius: 6px 0 0 0;
 }
-.fn__flex-1:has(#dockRight.fn__none)~#status{
-	right: 7px;
-}
+
 .status .toolbar__item{
 	height: 26px;
 }

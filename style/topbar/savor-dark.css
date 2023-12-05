@@ -247,6 +247,8 @@
 	--b3-list-item--meta: #ebebeb;
 	/*底栏状态*/
 	--S-status-msg-background:#404548;
+	--S-status-barDock: var(--b3-theme-on-background);
+	--S-status-barDock-hover: #d4d4d4;
 	
 	/*数据库*/
 	--S-font-color13: var(--b3-theme-on-background);

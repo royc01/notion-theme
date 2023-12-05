@@ -2,10 +2,16 @@
 .dock{
 	background-color: var(--S-dock-background);
 }
-.dock#dockLeft,.dock#dockRight{
+
+.dock#dockLeft{
 	width: var(--S-dock-item-width);
 	border: none;
 	padding-bottom:8px;
+}
+.dock#dockRight{
+	width: var(--S-dock-item-width);
+	border: none;
+	padding-bottom:42px;
 }
 .dock#dockLeft .dock__item{
 	color: var(--S-dock-color);

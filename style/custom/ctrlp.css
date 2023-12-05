@@ -1,12 +1,7 @@
 #searchList{
 	background-color: var(--b3-theme-background);
 }
-.search__layout--row {
-    border-top: none;
-}
-.search__layout{
-	border-bottom: 1px solid var(--b3-theme-surface-lighter);
-}
+
 .fn__flex-column #searchList>.b3-list-item[data-type='search-item']{
 	padding-bottom:4px;
 	margin: 6px;

@@ -247,6 +247,8 @@
 	--b3-list-item--meta: #8b8e92;
 	/*底栏状态*/
 	--S-status-msg-background: #c7d1d1;
+	--S-status-barDock: var(--S-fn__flex-shrink-background);
+	--S-status-barDock-hover: #ccd5d5;
 }
 
 
@@ -279,7 +281,7 @@
 .dock__item:not(.dock__item--active):hover {
     color: var(--S-dock-color)!important;
 }
-#dockBottom:not(.fn__none)+#status .toolbar__item svg{
+#dockBottom:not(.fn__none)+#status .toolbar__item:not(#barDock) svg{
 	color: var(--b3-theme-background)!important;
 }
 #dockBottom:not(.fn__none)+#status .toolbar__item:hover svg{
@@ -294,13 +296,16 @@
 	border-radius:0px;
 	margin:0;
 }
-.fn__flex-1:has(#dockRight.fn__none)~#status{
-	right: 0px;
+/*.fn__flex-1:has(#dockRight.fn__none)~#status{
+	right: 34px;
 	bottom: -12px;
-	border-radius: 6px 0 0 0;
+}*/
+.status #barDock svg{
+	color:var(--b3-theme-on-background);
 }
-
-
+.status .toolbar__item:hover{
+	background-color:var(--S-toolbar-item-hover)!important;
+}
 
 .toolbar:has(#topBar[style*="topbar2"])+.fn__flex-1:has(#dockRight.fn__none){
 	margin-top:-8px;

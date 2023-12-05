@@ -331,6 +331,8 @@
 	
 	/*底栏状态*/
 	--S-status-msg-background: #f1f1f0;
+	--S-status-barDock: var(--b3-theme-on-background);
+	--S-status-barDock-hover: rgba(55, 53, 47, 0.8);
 	
 	/*标签*/
 	--S-chip--secondary:rgb(73, 41, 14);
@@ -385,23 +387,48 @@
 }
 
 
-
-.layout__center ~ .fn__flex-column{
+/*.layout__dockr {
+    box-shadow: var(--S-fn__flex-column-background) 0px 40px 0px 0px;
 	margin-bottom:28px;
 }
-.layout__dockl,.layout__dockr {
-    box-shadow: var(--S-fn__flex-column-background) 0px 40px 0px 0px;
-}
-.fn__flex-1:has(~.status.fn__none) #layouts .layout__dockr,.fn__flex-1:has(~#dockBottom:not(.fn__none)) #layouts .layout__dockr{
+.fn__flex-1:has(~.status.fn__none) #layouts .layout__dockr,.fn__flex-1:has(~#dockBottom:not(.fn__none)) #layouts .beforelayout__dockr{
 	margin-bottom:0px;
 }/*当关闭底栏或者包含底部面板的时候左侧面板去除下间距*/
 
-#layouts:has(>.layout__dockb.layout--float:not([style*="height: 0px"])) .layout__dockr,#layouts:has(>.layout__dockb.layout--float:not([style*="height: 0px"])) .layout__dockl{
+/*#layouts:has(>.layout__dockb.layout--float:not([style*="height: 0px"])) .layout__dockr,#layouts:has(>.layout__dockb.layout--float:not([style*="height: 0px"])) .layout__dockl{
 	margin-bottom:28px!important;
+}*/
+.layout__dockl>.fn__flex:not(.fn__none)+.layout__resize.fn__none,.layout__dockr>.fn__flex:not(.fn__none)+.layout__resize.fn__none{
+	padding-top:28px;
+	margin-top:-2px;
+	margin-bottom:0px;
+	display:block!important;
+	pointer-events: none;
+	background-color: var(--S-fn__flex-column-background);
 }
 
+.layout__dockl .layout__resize.fn__none:after,.layout__dockr .layout__resize.fn__none:after{
+	background-color: var(--S-fn__flex-column-background);
+}
+.layout__resize+.fn__flex .block__icons~.fn__flex-1:not(.backlinkList){
+	padding-bottom:28px;
+}
+.backlinkMList.fn__flex-1[style*="none"]{
+	min-height:28px;
+	padding-bottom:0px!important;
+}
 
-
+.status.fn__none{
+	display:block!important;
+	bottom:-1px!important;
+	background-color:transparent!important;
+}
+.status.fn__none div:not(#barDock){
+	display:none;
+}
+#dockBottom:not(.fn__none)+#status #barDock{
+	bottom:28px;
+}
 /*卡包添加按钮*/
 span[data-type="add"] svg{
 	padding:3px 0;
