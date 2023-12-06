@@ -195,7 +195,7 @@
 .b3-text-field{
 	box-shadow: inset 0 0 0 1px var(--S-list-background);
 }
-.b3-text-field:not(#searchInput):not(.fn__block):not(.fn__size200){
+.b3-text-field:not(#searchInput):not(.fn__block):not(.fn__size200):not(#simpleSearchInput){
 	background-color: var(--S-list-background);
 }
 /* 移动文档菜单 */

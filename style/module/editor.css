@@ -225,7 +225,7 @@
 	padding:5px 0px;
 }
 .protyle-gutters{
-	transition: all 200ms ease-out;
+	transition: top 150ms ease-out;
 }
 /* 无序列表 */
 .protyle-wysiwyg [data-node-id].li>.protyle-action{

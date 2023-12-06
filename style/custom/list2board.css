@@ -10,7 +10,7 @@
 	padding-bottom:50px;
 }
 /* ————————————————————所有子项目的表格（除去第一列其余的列），包含溢出的空白部分，所以才会有边框—————————————————————— */
-.protyle-wysiwyg *[custom-f~=kb] .li .list{
+.protyle-wysiwyg *[custom-f~=kb]>.li>.list{
     min-width: var(--kbline-boarditem-minwidth);
     border-radius: 3px;
     transform: translate(-30px, 0);
@@ -19,9 +19,9 @@
 
 /* ————————————————————对所有子列表项设置格式———————————————————— */
 
-.protyle-wysiwyg *[custom-f~=kb] .li .li{
+.protyle-wysiwyg *[custom-f~=kb]>.li>.list>.li{
     border-radius: 3px;
-    padding: 0.4em 0 0.1em 0 ;
+    padding: 0.4em 0.4em 0.1em 0 ;
     margin-bottom: 6px; 
 	background-color:var(--kb--li--background);
 	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
@@ -33,7 +33,7 @@
 {
 	min-width: var(--kbline-boarditem-minwidth);
     border-radius: 3px;
-	padding:9px 0px 11px 30px;
+	padding:9px 10px 11px 30px;
 	left:-30px;
     margin-bottom: 10px;
 }
@@ -79,10 +79,9 @@
 }
 
 /* 对除了第一层之外的子列表 .protyle-action 移动 */
-.protyle-wysiwyg *[custom-f~=kb] .li .list .protyle-action{
+.protyle-wysiwyg *[custom-f~=kb]>.li>.list>.li>.protyle-action{
     position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
+    top: 5px;
     border-radius: 3px;
 }
 
