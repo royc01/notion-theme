@@ -49,10 +49,6 @@
 	padding-left:0px;
 	background-color: var(--S-list-background);
 }
-.fn__flex-column #searchList>.b3-list-item:not([data-type='search-item']):has(+div.fn__none){
-	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
-	border-radius: 4px ;
-}
 
 .fn__flex-column #searchList>.b3-list-item:not([data-type='search-item'])+div [data-type='search-item']{
 	margin: 0px;

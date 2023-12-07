@@ -387,17 +387,7 @@
 }
 
 
-/*.layout__dockr {
-    box-shadow: var(--S-fn__flex-column-background) 0px 40px 0px 0px;
-	margin-bottom:28px;
-}
-.fn__flex-1:has(~.status.fn__none) #layouts .layout__dockr,.fn__flex-1:has(~#dockBottom:not(.fn__none)) #layouts .beforelayout__dockr{
-	margin-bottom:0px;
-}/*当关闭底栏或者包含底部面板的时候左侧面板去除下间距*/
 
-/*#layouts:has(>.layout__dockb.layout--float:not([style*="height: 0px"])) .layout__dockr,#layouts:has(>.layout__dockb.layout--float:not([style*="height: 0px"])) .layout__dockl{
-	margin-bottom:28px!important;
-}*/
 .layout__dockl>.fn__flex:not(.fn__none)+.layout__resize.fn__none,.layout__dockr>.fn__flex:not(.fn__none)+.layout__resize.fn__none{
 	padding-top:28px;
 	margin-top:-2px;
@@ -429,13 +419,16 @@
 #dockBottom:not(.fn__none)+#status #barDock{
 	bottom:28px;
 }
+.layout__dockb.layout--float{
+	z-index:9!important;
+}
 /*卡包添加按钮*/
 span[data-type="add"] svg{
 	padding:3px 0;
 }
 
-.fn__flex:has(>#cardPreview){
-	border-top: 1px solid var(--b3-border-color2);
+[data-key="viewCards"] .block__icons{
+	border-bottom: 1px solid var(--b3-border-color);
 }
 
 [data-type="card-item"]{
@@ -571,8 +564,7 @@ span[data-type="add"] svg{
 
 
 
-.av__mask .b3-text-field:not(#searchInput):not(.fn__block):not(.fn__size200){
+.av__mask .b3-text-field:not(#searchInput):not(.fn__block):not(.fn__size200):not(#simpleSearchInput){
 	background-color: var(--b3-theme-background);
-	line-height:24px;
 }
 	

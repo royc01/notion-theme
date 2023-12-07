@@ -296,10 +296,7 @@
 	border-radius:0px;
 	margin:0;
 }
-/*.fn__flex-1:has(#dockRight.fn__none)~#status{
-	right: 34px;
-	bottom: -12px;
-}*/
+
 .status #barDock svg{
 	color:var(--b3-theme-on-background);
 }
@@ -307,6 +304,3 @@
 	background-color:var(--S-toolbar-item-hover)!important;
 }
 
-.toolbar:has(#topBar[style*="topbar2"])+.fn__flex-1:has(#dockRight.fn__none){
-	margin-top:-8px;
-}

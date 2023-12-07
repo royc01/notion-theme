@@ -597,7 +597,7 @@
 	margin-top:-5px!important;
 	opacity:0;
 }/*对齐alt o大纲树*/
-.layout__center .layout-tab-container:has(.sy__outline){
+.layout__center .sy__outline{
 	background-color:var(--b3-theme-background);
 }
 

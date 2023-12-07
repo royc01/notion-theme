@@ -40,7 +40,7 @@
 .protyle-breadcrumb__item:first-child>svg.popover__block{
 	color:transparent!important;
 }
-.protyle-breadcrumb__item:first-child:has(+.protyle-breadcrumb__arrow)::before{
+.protyle-breadcrumb>.protyle-breadcrumb__bar .protyle-breadcrumb__item:first-child::before{
 	content:"📄";
 	margin-right:-14px;
 }

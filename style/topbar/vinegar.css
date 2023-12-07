@@ -304,12 +304,11 @@ body{
 }
 
 
-#savorToolbar:hover+#savorToolplus,#savorToolplus:hover{
-	height:114px;
-	padding-top:60px;
+#savorToolbar:after{
+	height:188px;
 }
 #savorToolbar {
-    background: url(/appearance/themes/Savor/img/setting2.svg) no-repeat center;
+    background: url(/appearance/themes/Savor/img/setting2.svg) no-repeat top;
 }
 #buttonSavor-dark[style*="base"]{
 	background-image: url(/appearance/themes/Savor/img/base3.svg)!important;

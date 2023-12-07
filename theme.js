@@ -1313,22 +1313,22 @@ function savorThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, No
 
 
 function savorThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoButtonSvgURL, OffButtonSvgURL, NoClickRunFun, OffClickRunFun, Memory) {
-    var savorToolplus = document.getElementById("savorToolplus");
+    var savorToolplus = document.getElementById("savorToolbar");
     if (savorToolplus == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
         var windowControls = document.getElementById("windowControls");
 
         if (toolbarEdit == null && windowControls != null) {
             savorToolplus = document.createElement("div");
-            savorToolplus.id = "savorToolplus";
+            savorToolplus.id = "savorToolbar";
             windowControls.parentElement.insertBefore(savorToolplus, windowControls);
         } else if (toolbarEdit != null) {
-            savorToolplus = insertCreateBefore(toolbarEdit, "div", "savorToolplus");
+            savorToolplus = insertCreateBefore(toolbarEdit, "div", "savorToolbar");
             savorToolplus.style.position = "relative";
         }
     }
 
-    var addButton = addinsertCreateElement(savorToolplus, "div");
+    var addButton = addinsertCreateElement(savorToolbar, "div");
     addButton.style.float = "top";
     addButton.style.backgroundImage = "url(" + OffButtonSvgURL + ")";
     addButton.style.backgroundRepeat = "no-repeat";

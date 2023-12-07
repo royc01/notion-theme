@@ -1,75 +1,35 @@
-/*.fn__flex-1:has(>#savorToolbar){
-	overflow: visible;
-}
-#savorToolbar{
-	
-}*/
-/*#savorToolbar,#savorToolplus{
-	position:relative;
-}
-#savorToolbar{
-	top:calc(50% - 100px);
-	margin-left:1px;
-}
-#savorToolplus{
-	top:calc(50% - 8px);
-	margin-left:1px;
-}
-#savorToolbar div,#savorToolplus div{
-	height:26px;
-	width:26px!important;
-	background-size:22px 22px;
-}
-
-
-
-#savorToolbar div:hover,#savorToolplus div:hover{
-	background-color: var(--b3-toolbar-item-hover);
-}*/
 
 #savorToolbar{
 	width:24px;
-	height:24px;
+	height:100px;
 	margin:7px 0px 4px 4px;
 	border-radius:4px;
-
-	background: url("/appearance/themes/Savor/img/setting.svg") no-repeat center; 
-}
-#savorToolplus{
-	height:0px;
-	width:0px;
 	overflow:hidden;
+	background: url("/appearance/themes/Savor/img/setting.svg") no-repeat top; 
+	position:relative;
 }
+
 #savorToolbar:hover{
+	overflow:visible;
 	background-color:var(--S-toolbar-item-hover);
 }
-#savorToolbar:hover+#savorToolplus,#savorToolplus:hover{
-	height:106px;
-	width:120px;
-	margin-left:-136px;
-	overflow:visible;
+#savorToolbar:after{
+	content: "";
 	background-color:var(--b3-theme-background);
+	position:absolute;
+	width:136px;
+	height:218px;
+	top:22px;
+	left:-112px;
+	z-index:5;
+	border-radius:6px;
 	box-shadow:rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
-	z-index:7;
-	border-radius:8px;
-	padding-top:91px;
-	padding-bottom:6px;
-	border:8px solid var(--b3-theme-background);
+	display:none;
 }
-#savorToolbar:has(+#savorToolplus:hover){
-	overflow:visible;
-	background-color:var(--S-toolbar-item-hover);
+#savorToolbar:hover:after{
+	display:block;
 }
-/*#savorToolbar div{
-	border-radius:0;
-}
-#savorToolbar div:first-child{
-	border-radius:5px 5px 0 0;
-}
-#savorToolbar div:last-child{
-	border-radius:0 0 5px 5px;
-}*/
-#buttonSavor-light,#buttonSavor-dark,#buttonsalt,#buttonvinegar,#buttonsugar{
+#buttonSavor-light,#buttonSavor-dark,#buttonsalt,#buttonvinegar,#buttonsugar,#topBar,#conceal,#tabbarVertical,#bulletThreading{
 	margin:0px;
 	height:30px;
 	left: -108px;
@@ -80,12 +40,11 @@
 	background-size:18%;
 	display:none;
 }
-#savorToolbar:has(+#savorToolplus:hover) #buttonSavor-light,#savorToolbar:has(+#savorToolplus:hover) #buttonSavor-dark,
-#savorToolbar:has(+#savorToolplus:hover) #buttonsalt,#savorToolbar:has(+#savorToolplus:hover) #buttonvinegar,
-#savorToolbar:has(+#savorToolplus:hover) #buttonsugar,
 #savorToolbar:hover #buttonSavor-light,#savorToolbar:hover #buttonSavor-dark,
 #savorToolbar:hover #buttonsalt,#savorToolbar:hover #buttonvinegar,
-#savorToolbar:hover #buttonsugar{
+#savorToolbar:hover #buttonsugar,#savorToolbar:hover #topBar,
+#savorToolbar:hover #conceal,#savorToolbar:hover #tabbarVertical,
+#savorToolbar:hover #bulletThreading{
 	display:block;
 }
 #buttonSavor-light,#buttonSavor-dark{
@@ -105,15 +64,7 @@
 	padding:0 0 0 30px;
 	box-shadow:none;
 }
-#topBar,#conceal,#tabbarVertical,#bulletThreading{
-	margin:-4px 0px 4px -4px;
-	height:30px;
-	border-bottom:none;
-	width:128px;
-	z-index:8;
-	border-radius:4px;
-	background-size:18%;
-}
+
 
 #buttonSavor-light::before,#buttonSavor-dark::before,#buttonsalt::before,#topBar::before,#conceal::before,#tabbarVertical::before,#buttonvinegar::before,#buttonsugar::before,#bulletThreading::before{
 	display:none;
