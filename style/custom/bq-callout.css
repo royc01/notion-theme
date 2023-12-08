@@ -104,15 +104,12 @@
 }
 
 .bq[custom-b~=error]::after {
-    content: "";
+    content: "🚫";
     position: absolute;
-	top: 0.7em;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/prohibited.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }
 /*警告*/
 .protyle-wysiwyg [data-node-id][custom-b~=warn].bq{
@@ -123,15 +120,12 @@
 }
 
 .bq[custom-b~=warn]::after {
-    content: "";
+    content: "⚠";
     position: absolute;
-	top: 0.7em;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/warning.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }
 /*bug*/
 .protyle-wysiwyg [data-node-id][custom-b~=bug].bq{
@@ -142,15 +136,12 @@
 }
 
 .bq[custom-b~=bug]::after {
-    content: "";
-    position: absolute;
-	top: 0.7em;
+    content: "🐛";
+	position: absolute;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/bug.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }
 /*正确*/
 .protyle-wysiwyg [data-node-id][custom-b~=check].bq{
@@ -161,15 +152,12 @@
 }
 
 .bq[custom-b~=check]::after {
-    content: "";
-    position: absolute;
-	top: 0.7em;
+    content: "✅";
+	position: absolute;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/check.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }
 /*灵感*/
 .protyle-wysiwyg [data-node-id][custom-b~=light].bq{
@@ -180,15 +168,12 @@
 }
 
 .bq[custom-b~=light]::after {
-    content: "";
-    position: absolute;
-	top: 0.7em;
+    content: "💡";
+	position: absolute;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/light-bulb.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }
 /*问题*/
 .protyle-wysiwyg [data-node-id][custom-b~=question].bq{
@@ -199,15 +184,12 @@
 }
 
 .bq[custom-b~=question]::after {
-    content: "";
-    position: absolute;
-	top: 0.7em;
+    content: "❓";
+	position: absolute;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/question.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }
 /*错误*/
 .protyle-wysiwyg [data-node-id][custom-b~=wrong].bq{
@@ -218,15 +200,12 @@
 }
 
 .bq[custom-b~=wrong]::after {
-    content: "";
-    position: absolute;
-	top: 0.7em;
+    content: "❌";
+	position: absolute;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/cross.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }
 /*信息*/
 .protyle-wysiwyg [data-node-id][custom-b~=info].bq{
@@ -237,15 +216,12 @@
 }
 
 .bq[custom-b~=info]::after {
-    content: "";
-    position: absolute;
-	top: 0.7em;
+    content: "ℹ";
+	position: absolute;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/info.png);
-	background-size: 100% 100%;
+	font-size:1.5em;
 }
 /*记录*/
 .protyle-wysiwyg [data-node-id][custom-b~=pen].bq{
@@ -256,15 +232,12 @@
 }
 
 .bq[custom-b~=pen]::after {
-    content: "";
-    position: absolute;
-	top: 0.7em;
+    content: "🖋";
+	position: absolute;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/pen.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }
 /*汇总*/
 .protyle-wysiwyg [data-node-id][custom-b~=note].bq{
@@ -275,15 +248,12 @@
 }
 
 .bq[custom-b~=note]::after {
-    content: "";
-    position: absolute;
-	top: 0.7em;
+    content: "📓";
+	position: absolute;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/notebook.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }
 /*提醒*/
 .protyle-wysiwyg [data-node-id][custom-b~=bell].bq{
@@ -294,13 +264,10 @@
 }
 
 .bq[custom-b~=bell]::after {
-    content: "";
-    position: absolute;
-	top: 0.7em;
+    content: "🔔";
+	position: absolute;
+	top: 0.12em;
 	left:0.2em;
 	margin-left:10px;
-	width: 1.5em;
-    height: 1.5em;
-	background-image: url(/appearance/themes/Savor/img/callout/bell.png);
-	background-size: 100% 100%;
+	font-size:1.5em
 }

@@ -290,6 +290,6 @@
 	display:none!important;
 }
 
-#buttonSavor-light[style*="base"]{
-	background-image: url(/appearance/themes/Savor/img/base.svg)!important;
+#buttonSavor-light.button_off{
+	background:var(--S-Savor-light-off);
 }

@@ -480,14 +480,3 @@ div#historyContainer{
 .b3-button--success{
 	background-color:var(--b3-font-color7)!important;
 }
-.b3-dialog__container .fn__flex-column:has(.b3-dialog__cardblock){
-    background-color: transparent;
-}
-.b3-dialog__cardblock .protyle-breadcrumb{
-	border:0;
-}
-.b3-dialog__cardblock{
-	border-radius:5px;
-	border: 1px solid var(--b3-border-color);
-	margin-bottom:10px;
-}

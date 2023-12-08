@@ -1,11 +1,62 @@
+#buttonSavor-light.button_off{
+	background:var(--S-Savor-light-off);
+}
+#buttonsalt.button_on{
+	background:var(--S-salt-on);
+}
+#buttonsalt.button_off{
+	background:var(--S-salt-off);
+}
+#buttonsugar.button_on{
+	background:var(--S-sugar-on);
+}
+#buttonsugar.button_off{
+	background:var(--S-sugar-off);
+}
+#buttonSavor-dark.button_on{
+	background:var(--S-Savor-dark-on);
+}
+#buttonSavor-dark.button_off{
+	background:var(--S-Savor-dark-off);
+}
+#buttonvinegar.button_on{
+	background:var(--S-vinegar-on);
+}
+#buttonvinegar.button_off{
+	background:var(--S-vinegar-off);
+}
+#conceal.button_on{
+	background:var(--S-conceal-on);
+}
+#conceal.button_off{
+	background:var(--S-conceal-off);
+}
+#tabbarVertical.button_on{
+	background:var(--S-tabbarVertical-on);
+}
+#tabbarVertical.button_off{
+	background:var(--S-tabbarVertical-off);
+}
+#topBar.button_on{
+	background:var(--S-topBar-on);
+}
+#topBar.button_off{
+	background:var(--S-topBar-off);
+}
+#bulletThreading.button_on{
+	background:var(--S-bulletThreading-on);
+}
+#bulletThreading.button_off{
+	background:var(--S-bulletThreading-off);
+}
 
 #savorToolbar{
 	width:24px;
-	height:100px;
+	height:24px;
 	margin:7px 0px 4px 4px;
 	border-radius:4px;
 	overflow:hidden;
-	background: url("/appearance/themes/Savor/img/setting.svg") no-repeat top; 
+	background:var(--S-settings);
 	position:relative;
 }
 
@@ -38,15 +89,8 @@
 	z-index:8;
 	border-radius:4px;
 	background-size:18%;
-	display:none;
 }
-#savorToolbar:hover #buttonSavor-light,#savorToolbar:hover #buttonSavor-dark,
-#savorToolbar:hover #buttonsalt,#savorToolbar:hover #buttonvinegar,
-#savorToolbar:hover #buttonsugar,#savorToolbar:hover #topBar,
-#savorToolbar:hover #conceal,#savorToolbar:hover #tabbarVertical,
-#savorToolbar:hover #bulletThreading{
-	display:block;
-}
+
 #buttonSavor-light,#buttonSavor-dark{
 	margin-top:27px;
 }
@@ -63,6 +107,7 @@
 	margin:0;
 	padding:0 0 0 30px;
 	box-shadow:none;
+	filter: none;
 }
 
 
@@ -70,8 +115,8 @@
 	display:none;
 }
 
-#buttonSavor-light:hover,#buttonSavor-dark:hover,#buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover{
-	background-color:var(--S-list-background);
+#buttonSavor-light:hover,#buttonSavor-dark:hover,#buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover,#bulletThreading:hover{
+	background-color:var(--S-list-background)!important;
 }
 
 

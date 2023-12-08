@@ -269,11 +269,6 @@ body{
 }
 
 
-#calendarPanel {
-	background-color:#fff!important;
-	filter: hue-rotate(180deg) invert(90%);
-	box-shadow:none!important;
-}
 
 
 .layout-tab-container{
@@ -287,18 +282,7 @@ body{
 	display:none!important;
 }
 
-#conceal[style*="conceal.svg"]{
-	background-image: url(/appearance/themes/Savor/img/conceal3.svg)!important;
-}
-#tabbarVertical[style*="vtabbar.svg"]{
-	background-image: url(/appearance/themes/Savor/img/vtabbar3.svg)!important;
-}
-#topBar[style*="topbar.svg"]{
-	background-image: url(/appearance/themes/Savor/img/topbar3.svg)!important;
-}
-#bulletThreading[style*="bulletthreading.svg"]{
-	background-image: url(/appearance/themes/Savor/img/bulletThreading3.svg)!important;
-}
+
 .layout__dockl,.layout__dockr{
 	background-color:var(--b3-fn__flex-column-background);
 }
@@ -307,14 +291,12 @@ body{
 #savorToolbar:after{
 	height:188px;
 }
-#savorToolbar {
-    background: url(/appearance/themes/Savor/img/setting2.svg) no-repeat top;
-}
-#buttonSavor-dark[style*="base"]{
-	background-image: url(/appearance/themes/Savor/img/base3.svg)!important;
-}
 
 
 .b3-menu,.b3-menu__item,.b3-menu .b3-menu__submenu,.hint--menu{
 	background-color: var(--S-dockleft-item-active-background);
+}
+
+#buttonSavor-dark.button_off{
+	background:var(--S-Savor-dark-off);
 }
