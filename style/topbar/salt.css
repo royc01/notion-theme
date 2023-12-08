@@ -305,3 +305,10 @@
 #buttonSavor-light.button_off{
 	background:var(--S-Savor-light-off);
 }
+
+.layout__dockl>.fn__flex:not(.fn__none)+.layout__resize.fn__none{
+	background-color: var(--S-fn__flex-shrink-background);
+}
+.layout__dockl .layout__resize.fn__none:after{
+	background-color: var(--S-fn__flex-shrink-background);
+}

@@ -480,3 +480,6 @@ div#historyContainer{
 .b3-button--success{
 	background-color:var(--b3-font-color7)!important;
 }
+.card__main.fullscreen{
+	z-index:11;
+}
