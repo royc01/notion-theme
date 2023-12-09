@@ -2,14 +2,14 @@
   "name": "Savor",
   "author": "Roy",
   "url": "https://github.com/royc01/notion-theme",
-  "version": "3.7.8",
+  "version": "3.8.0",
   "displayName": {
     "default": "Savor",
     "zh_CN": "写味"
   },
   "description": {
     "default": "You said you couldn’t bear to consume such a feeling.",
-    "zh_CN": "写味主题重制预览版，优化大量细节，重新出发。"
+    "zh_CN": "写味主题重制正式版发布，继续深度优化流畅度。"
   },
   "readme": {
     "default": "README.md",
