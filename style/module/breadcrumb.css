@@ -36,22 +36,22 @@
 }
 
 
-
-.protyle-breadcrumb__item:first-child>svg.popover__block{
-	color:transparent!important;
-}
 .protyle-breadcrumb>.protyle-breadcrumb__bar .protyle-breadcrumb__item:first-child::before{
 	content:"📄";
 	margin-right:-14px;
 }
-.protyle-breadcrumb__item:not(:first-child)>svg.popover__block{
+.protyle-breadcrumb__item>svg.popover__block{
 	height: 10px;
     width: 10px;
 	padding:4px;
 	border-radius:3px;
 	background-color: var(--S-list-background);
 }
-
+.protyle-breadcrumb>.protyle-breadcrumb__bar .protyle-breadcrumb__item:first-child>svg.popover__block{
+	color:transparent!important;
+	padding:2px;
+	background-color: transparent;
+}
 /*退出聚焦按钮 */
 .protyle-breadcrumb__icon[data-type="exit-focus"]{
 	font-weight: 700;

@@ -398,11 +398,10 @@
 }
 /* 自定义表格宽度 */
 .protyle-wysiwyg div.table[data-node-id][custom-f~=auto] table {
-    width: auto;
+    width: max-content;
 }
 .protyle-wysiwyg [data-node-id][custom-f~=auto] table {
-    width: auto !important;
-    white-space: pre;
+    width: max-content !important;
 }
 /* 表头和表行格式一致 */
 .protyle-wysiwyg [data-node-id][custom-t~=biaotou] table th {

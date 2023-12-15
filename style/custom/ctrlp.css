@@ -61,7 +61,9 @@
 	border-radius: 0 0 4px 4px;
 	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
 }
-
+.search__empty{
+	box-shadow:none!important;
+}
 /*.fn__flex-column #searchList>.b3-list-item:not([data-type='search-item'])+div [data-type='search-item']>.b3-list-item__text{
     margin-left: 20px;
     max-height: 89px ;
