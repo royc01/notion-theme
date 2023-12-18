@@ -246,17 +246,12 @@
 	background-color: var(--S-block-logo-background-color)!important;
 }
 .backlinkList>.b3-list>.protyle,.backlinkMList>.b3-list>.protyle{
-	margin:-30px 5px 6px 5px;
+	margin:-2px 5px 6px 5px;	
 	border-radius:3px 3px 6px 6px;
-	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12),0 0 1px rgba(0,0,0,.2);
-	padding-top:28px;
-	background-color: transparent;
-	pointer-events: none;
+	box-shadow: 0 -28px 0 var(--b3-list-hover),0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12),0 0 1px rgba(0,0,0,.2);
 }
-
-.backlinkList>.b3-list>.protyle>.protyle-content,.backlinkMList>.b3-list>.protyle>.protyle-content{
-	background-color: var(--b3-theme-background);
-	pointer-events: auto;
+.sy__backlink.layout__tab--active .b3-list-item--focus+.protyle{
+	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12),0 0 1px rgba(0,0,0,.2);
 }
 .sy__backlink .b3-list--background{
 	padding-top:2px;
