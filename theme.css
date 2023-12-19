@@ -505,7 +505,7 @@ span[data-type="add"] svg{
 	font-size: 90%;
 	padding: 2px 3px!important;
 	border-radius: 3px;
-    background-color: var(--S-list-background)!important;
+    background-color: var(--b3-theme-background)!important;
     color: var(--b3-theme-on-background);
     box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 	border-bottom:none!important;
