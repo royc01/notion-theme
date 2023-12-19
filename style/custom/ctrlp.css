@@ -157,10 +157,6 @@
 	background-color: var(--b3-theme-background);
 	border-radius: var(--b3-border-radius-b);
 }*/
-.search__tip{
-	height:30px;
-	color:var(-b3-)
-}
 
 
 .protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"]>.protyle-action svg{
