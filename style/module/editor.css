@@ -109,7 +109,7 @@
 	padding:5px 20px;
 }/*上下移动题图提示语*/
 
-.protyle-background .protyle-background__img:hover .protyle-icons{opacity:1;}
+.protyle-background--enable .protyle-background__img:hover .protyle-icons{opacity:1;}
 /*选项块透明度*/
 .protyle-background .protyle-icons .b3-tooltips input{
 	width:100% !important;
