@@ -61,17 +61,15 @@
 /* 底dock栏 */
 .dock#dockBottom{
 	border-top:none;
-	height: 32px;
+	height: unset;
 	padding: 0 40px;
 	background-color: var(--S-toolbar-background);
 }
 
-#dockBottom .fn__flex-1{
-	flex: 0;
-}
 #dockBottom .dock__item{
 	margin: 0 7px 7px 0;
 	padding: 6px 7px;
+	height: 14px;
 }
 .dock#dockBottom .dock__item--active{
 	color: var(--b3-theme-on-background);
@@ -85,7 +83,7 @@
 }
 
 .layout__dockb.layout--float{
-	bottom:40px!important;
+	bottom:74px!important;
 	margin-left:41px;
 	margin-right:41px;
 	border-radius:6px;
@@ -94,6 +92,11 @@
 }
 .layout__dockb.layout--float[style*="bottom: 26px"]{
 	bottom:8px!important;
+	margin-left:8px;
+	margin-right:8px;
+}
+.layout__dockb.layout--float[style*="bottom: 59px"]{
+	bottom:40px!important;
 	margin-left:8px;
 	margin-right:8px;
 }

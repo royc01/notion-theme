@@ -1,6 +1,6 @@
 
 
-.layout-tab-bar{
+.fn__flex:not(.av__views) > .layout-tab-bar{
 	padding: 0 4px 0 4px;
 	box-shadow: -1px 0px 0px 0px var(--b3-layout-resize) inset;
 	margin:0;
@@ -13,42 +13,42 @@
 	display: flex;
 	flex-direction: row;
 }
-.layout-tab-bar:not(.layout-tab-bar--readonly){
+.fn__flex:not(.av__views) > .layout-tab-bar:not(.layout-tab-bar--readonly){
 	margin-top:-4px;
 }
 .layout__center [data-type='wnd'][data-id] > .fn__flex:not(.layout-tab-container) {
 	flex-direction: column-reverse;
 }
 
-.layout__center [data-type='wnd'][data-id] .layout-tab-bar {
+.layout__center [data-type='wnd'][data-id] .fn__flex:not(.av__views) > .layout-tab-bar {
 	display: block;
 	flex: 1;
 }
-.layout__center [data-type='wnd'][data-id] .layout-tab-bar .item .item__icon{
+.layout__center [data-type='wnd'][data-id] .fn__flex:not(.av__views) > .layout-tab-bar .item .item__icon{
 	padding: 6px;
 }
-.layout__center [data-type='wnd'][data-id] .layout-tab-bar .item__graphic{
+.layout__center [data-type='wnd'][data-id] .fn__flex:not(.av__views) > .layout-tab-bar .item__graphic{
 	padding-left: 8px;
 }
-.layout__center [data-type='wnd'][data-id] .layout-tab-bar .item .item__text {
+.layout__center [data-type='wnd'][data-id] .fn__flex:not(.av__views) > .layout-tab-bar .item .item__text {
 	text-align: unset;
 	padding-left: 6px;
 }
-.layout__center [data-type='wnd'][data-id] .layout-tab-bar.layout-tab-bar--readonly {
+.layout__center [data-type='wnd'][data-id] .fn__flex:not(.av__views) > .layout-tab-bar.layout-tab-bar--readonly {
 	flex: initial;
 }
-.layout-tab-bar .item {
+.fn__flex:not(.av__views) > .layout-tab-bar .item {
     margin: 4px 4px 4px 0px;
 	min-width:150px;
 }
-.item--readonly{
+.fn__flex:not(.av__views) .item--readonly{
 	margin-right:0px!important;
 }
 .layout__wnd--active .layout-tab-bar .item--focus:not(.item--pin){
 	background-color:var(--S-fn__flex-column-background);
 }
 
-.layout__wnd--active .layout-tab-bar .item--focus::after,.layout-tab-bar .item--focus:after{
+.layout__wnd--active .fn__flex:not(.av__views) > .layout-tab-bar .item--focus::after,.fn__flex:not(.av__views) > .layout-tab-bar .item--focus:after{
 	content: '';
 	position: absolute;
 	right: -7px;
@@ -60,7 +60,7 @@
 	animation: item-focus 0.2s ease-in-out;
 	overflow:visible;
 }
-.layout-tab-bar .item__text.fn__none{
+.fn__flex:not(.av__views) .layout-tab-bar .item__text.fn__none{
 	display:inherit!important;
 }
 
@@ -87,7 +87,7 @@ ul.layout-tab-bar:not(.layout-tab-bar--readonly):before,ul.layout-tab-bar--reado
 #shrinkLeft,#shrinkRight{
 	z-index:7;
 }
-.layout-tab-bar .item--pin, .layout-tab-bar  .item{
+.fn__flex:not(.av__views) > .layout-tab-bar .item--pin,.fn__flex:not(.av__views) > .layout-tab-bar  .item{
 	padding:0;
 	min-height:32px;
 }

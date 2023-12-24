@@ -413,19 +413,11 @@
 
 
 
-.layout__dockl>.fn__flex:not(.fn__none)+.layout__resize.fn__none,.layout__dockr>.fn__flex:not(.fn__none)+.layout__resize.fn__none{
-	padding-top:28px;
-	margin-top:-2px;
-	margin-bottom:0px;
-	display:block!important;
-	pointer-events: none;
-	background-color: var(--S-fn__flex-column-background);
-}
 
 .layout__dockl .layout__resize.fn__none:after,.layout__dockr .layout__resize.fn__none:after{
 	background-color: var(--S-fn__flex-column-background);
 }
-.layout__resize+.fn__flex .block__icons~.fn__flex-1:not(.backlinkList){
+.layout__dockr .layout__resize+.fn__flex .block__icons~.fn__flex-1:not(.backlinkList){
 	padding-bottom:28px;
 }
 .backlinkMList.fn__flex-1[style*="none"]{
@@ -442,7 +434,7 @@
 	display:none;
 }
 #dockBottom:not(.fn__none)+#status #barDock{
-	bottom:28px;
+	bottom:64px;
 }
 .layout__dockb.layout--float{
 	z-index:9!important;
@@ -596,3 +588,16 @@ span[data-type="add"] svg{
 
 
 
+#dockBottom [data-title]{
+	margin: 0 7px 40px 0;
+}
+#dockBottom.fn__none{
+	display: flex !important;
+}
+#dockBottom.fn__none [data-title]{
+	margin: 0 7px 7px 0;
+	opacity: 0;
+}
+#dockBottom.fn__none .dock__item--pin{
+	display: none;
+}

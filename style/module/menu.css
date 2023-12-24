@@ -42,7 +42,7 @@
 .b3-list-item--big{
 	padding: 14px 24px;
 	border-radius: 0px;
-	margin: 4px 8px;
+	margin: 4px 8px;	
 }
 
 .b3-dialog__container{
@@ -73,9 +73,6 @@
 	margin:4px 8px;
 }
 
-.b3-dialog__container .fn__flex .b3-label{
-	margin: 0 20px;
-}
 .b3-dialog__container .config__panel>.b3-tab-bar .b3-list-item__graphic{
 	color: var(--b3-theme-on-surface);
 }
@@ -95,7 +92,7 @@
 	left: -15px;
 }
 /* 按钮 */
-.b3-button--outline,.b3-button:not(.b3-button--cancel),#searchInclude.b3-button:not(.b3-button--cancel){
+.b3-button--outline,.b3-button:not(.b3-button--cancel):not(data-type="av-add-bottom"),#searchInclude.b3-button:not(.b3-button--cancel){
 	font-weight:700;
 	background-color:var(--b3-button);
 	color: var(--b3-theme-background);
