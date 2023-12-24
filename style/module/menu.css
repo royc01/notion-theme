@@ -92,7 +92,7 @@
 	left: -15px;
 }
 /* 按钮 */
-.b3-button--outline,.b3-button:not(.b3-button--cancel):not(data-type="av-add-bottom"),#searchInclude.b3-button:not(.b3-button--cancel){
+.b3-button--outline,.b3-button:not(.b3-button--cancel):not([data-type="av-add-bottom"]),#searchInclude.b3-button:not(.b3-button--cancel){
 	font-weight:700;
 	background-color:var(--b3-button);
 	color: var(--b3-theme-background);
