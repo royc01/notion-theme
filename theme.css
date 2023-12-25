@@ -434,9 +434,7 @@
 .status.fn__none div:not(#barDock){
 	display:none;
 }
-#dockBottom:not(.fn__none)+#status #barDock{
-	bottom:64px;
-}
+
 .layout__dockb.layout--float{
 	z-index:9!important;
 }
@@ -585,13 +583,13 @@ span[data-type="add"] svg{
 .av__mask .b3-text-field:not(#searchInput):not(.fn__block):not(.fn__size200):not(#simpleSearchInput){
 	background-color: var(--b3-theme-background);
 }
-
-
-
-
-#dockBottom [data-title]{
-	margin: 0 7px 40px 0;
+.av__mask .b3-text-field:not(.b3-text-field--text):focus{
+	box-shadow:var(--b3-menu-shadow);
 }
+
+
+
+
 #dockBottom.fn__none{
 	display: flex !important;
 }
@@ -602,7 +600,10 @@ span[data-type="add"] svg{
 	padding:0px;
 }
 #dockBottom.fn__none .dock__item--active{
-	margin: 0 7px 7px 0;
+	opacity: 0;	
+}
+#dockBottom:has(.dock__item--active) .dock__item--pin[aria-label="钉住"],#dockBottom:has(.dock__item--active) .dock__item--pin[aria-label="Pin"]{
+	margin: 0 7px 40px 0;
 }
 #dockBottom.fn__none .dock__item--pin{
 	display: none;
@@ -610,9 +611,12 @@ span[data-type="add"] svg{
 #dockBottom:not(.fn__none):has(+.status.fn__none) [data-title]{
 	margin: 0 7px 7px 0;
 }
+#dockBottom.fn__none:has(+.status.fn__none) .dock__item--active{
+	display: none;
+}
 #dockBottom:not(.fn__none)+#status.fn__none #barDock{
 	bottom:-7px;
 }	
-#dockBottom.fn__none .fn__flex-1{
+#dockBottom .fn__flex-1{
 	flex: 0;
 }
