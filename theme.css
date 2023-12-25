@@ -429,6 +429,7 @@
 	display:block!important;
 	bottom:-1px!important;
 	background-color:transparent!important;
+	padding:0px!important;
 }
 .status.fn__none div:not(#barDock){
 	display:none;
