@@ -594,10 +594,24 @@ span[data-type="add"] svg{
 #dockBottom.fn__none{
 	display: flex !important;
 }
-#dockBottom.fn__none [data-title]{
-	margin: 0 7px 7px 0;
+#dockBottom.fn__none [data-title]:not(.dock__item--active){
+	margin: 0 7px 0px 0;
 	opacity: 0;
+	height:0px;
+	padding:0px;
+}
+#dockBottom.fn__none .dock__item--active{
+	margin: 0 7px 7px 0;
 }
 #dockBottom.fn__none .dock__item--pin{
 	display: none;
+}
+#dockBottom:not(.fn__none):has(+.status.fn__none) [data-title]{
+	margin: 0 7px 7px 0;
+}
+#dockBottom:not(.fn__none)+#status.fn__none #barDock{
+	bottom:-7px;
+}	
+#dockBottom.fn__none .fn__flex-1{
+	flex: 0;
 }
