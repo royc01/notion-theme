@@ -97,6 +97,8 @@
 }
 .layout__dockb.layout--float[style*="bottom: 59px"]{
 	bottom:40px!important;
+}
+#dockLeft.fn__none + .layout .layout__dockb.layout--float[style*="bottom: 59px"]{
 	margin-left:8px;
 	margin-right:8px;
 }
