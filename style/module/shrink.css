@@ -299,9 +299,6 @@ v.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar{
 	font-size:80%;
 	min-height: 24px;
 }
-.sy__backlink .protyle-breadcrumb__item,.sy__backlink  .protyle-breadcrumb__icon{
-	padding: 3px;
-}
 
 .sy__backlink .protyle-breadcrumb__item>svg.popover__block {
     height: 10px;

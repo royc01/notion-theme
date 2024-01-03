@@ -14,72 +14,72 @@
     justify-content: center;
 }
 
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o2;
     content: counter(o2,lower-latin)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o3;
     content: counter(o3,lower-roman)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o1;
     content: counter(o1,decimal)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o2;
     content: counter(o2,lower-latin)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o3;
     content: counter(o3,lower-roman)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o1;
     content: counter(o1,decimal)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o2;
     content: counter(o2,lower-latin)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o3;
     content: counter(o3,lower-roman)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o1;
     content: counter(o1,decimal)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o2;
     content: counter(o2,lower-latin)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o3;
     content: counter(o3,lower-roman)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o1;
     content: counter(o1,decimal)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o2;
     content: counter(o2,lower-latin)".";
 	position:absolute;
 }
-.list[data-subtype="o"]>.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
+.li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"] .li[data-subtype="o"]>.protyle-action::after{
     counter-increment: o3;
     content: counter(o3,lower-roman)".";
 	position:absolute;

@@ -432,6 +432,12 @@
 .protyle-wysiwyg span[data-type="tag"]::before{
 	content: "#";
 }
+.export-img span[data-type="tag"]::before{
+	content: "";
+}
+.protyle-wysiwyg span[data-type="tag"]:first-child:before{
+	content: "#";
+}
 /*块引用*/
 /*.protyle-wysiwyg [data-node-id] span[data-type*="block-ref"][data-subtype="s"]:not([data-type="virtual-block-ref"]):not([data-type*="sup"]):not([data-type*="sub"]){
 	color: var(--b3-theme-primary)!important;

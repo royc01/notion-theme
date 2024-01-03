@@ -417,7 +417,7 @@
 .layout__dockl .layout__resize.fn__none:after,.layout__dockr .layout__resize.fn__none:after{
 	background-color: var(--S-fn__flex-column-background);
 }
-.layout__dockr .layout__resize+.fn__flex .block__icons~.fn__flex-1:not(.backlinkList){
+.layout__dockr .fn__flex .block__icons~.fn__flex-1:not(.backlinkList){
 	padding-bottom:28px;
 }
 .backlinkMList.fn__flex-1[style*="none"]{
@@ -480,7 +480,7 @@ span[data-type="add"] svg{
 }
 
 .b3-typography mark, .b3-typography span[data-type~=mark], .protyle-wysiwyg mark, .protyle-wysiwyg span[data-type~=mark]{
-	background: rgba(255,212,0,0.14);
+	background: rgba(255,212,0,0.14)!important;
     border-bottom: 2px solid rgb(255, 212, 0);
 }
 
@@ -619,4 +619,18 @@ span[data-type="add"] svg{
 }	
 #dockBottom .fn__flex-1{
 	flex: 0;
+}
+
+
+
+
+
+.card__block--hidemark span[data-type~=mark]::before {
+    content: " [...] ";
+	font-weight:500;
+}
+.card__block--hidemark span[data-type~=mark]{
+	border:none!important;
+	font-size: 0px!important;
+	padding:0!important;
 }

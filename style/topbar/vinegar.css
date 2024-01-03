@@ -228,7 +228,7 @@
 	/* 引述 */
 	--b3-bq-background: rgba(54, 59, 62);
 	/* 块引用 */
-	--b3-block-ref-background: var(--b3-toolbar-item-hover);
+	--b3-block-ref-background: var(--S-toolbar-item-hover);
 	/* 代码块 */
 	--S-linenumber-rows: #0f0f0f;
 	--S-code-block-hljs: var(--S-fn__flex-shrink-background);		
