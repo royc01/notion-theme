@@ -183,7 +183,7 @@
 	--S-fn__flex-shrink-background: #202020;
 	--S-block-logo-color:var(--b3-theme-on-background);
 	--S-block-logo-background-color: #303030;
-	--S-block-icon-svg-color: #1c1c1c;
+	--S-block-icon-svg-color: rgba(255, 255, 255, 0.2 );
 	--S-block-icon-hover: rgba(255, 255, 255, 0.1 );
 	--S-block-icon-active: #eb8383;
 	--S-list-item-arrow: rgba(149, 152, 156);
