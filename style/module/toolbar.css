@@ -1,13 +1,10 @@
 /* ————————————————————顶栏———————————————————— */
 .toolbar{
 	border: none;
-	height:40px;
 	overflow:visible;
 	background-color: var(--S-toolbar-background);
 }
-.toolbar__window{
-	height:40px;
-}
+
 
 .toolbar__item:not(.toolbar__item--disabled) svg,.toolbar__window .toolbar__item:not(.toolbar__item--disabled) svg{
 	color: var(--b3-theme-on-background);
@@ -40,12 +37,12 @@
 }
 
 .toolbar__item--close{
-	padding: 8px 8px 8px 0px;
-	height: 40px;
+	padding: 6px 6px 8px 0px;
+	height: 36px;
 }
 #closeWindow svg{
 	width: 11px!important;
-	padding: 5px 8px;
+	padding: 5px 7px;
 	border-radius:5px;
 }
 #closeWindow:hover{

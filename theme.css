@@ -634,3 +634,12 @@ span[data-type="add"] svg{
 	font-size: 0px!important;
 	padding:0!important;
 }
+
+
+
+
+
+
+body.body--win32 .fullscreen>.protyle-breadcrumb{
+	padding: 0 108px 0 8px;
+}

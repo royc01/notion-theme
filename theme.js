@@ -507,7 +507,7 @@ function themeButton() {
 		"Light 配色",
 		'light',
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/savor-light.css", "theme-color-style-avor-light").setAttribute("topicfilter", "buttonSavor-light");
+            loadStyle("/appearance/themes/Savor/style/topbar/savor-light.css", "theme-color-style-Savor-light").setAttribute("topicfilter", "buttonSavor-light");
             qucuFiiter();
         },
         () => {
