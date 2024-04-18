@@ -10,6 +10,7 @@
 	min-height:unset;
 	min-width:unset;
 	overflow:visible;
+	height: 26px;
 }
 .layout-tab-bar .item__icon svg{
 	height: 16px;
@@ -52,6 +53,7 @@
 }
 .layout-tab-bar .item__text{
     padding: 2px 6px 2px 6px; 
+	-webkit-mask-image:none;
 }
 .layout-tab-bar .item__close{
 	padding: 4px 6px 4px 2px;

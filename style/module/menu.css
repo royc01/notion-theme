@@ -34,7 +34,6 @@
 }
 .b3-menu__accelerator{
 	color:var(--b3-scroll-color-hover);
-	margin-right:-4px;
 }/*快捷键提示*/
 .b3-menu__accelerator:has(+.b3-menu__icon--arrow){
 	margin-right: 4px;
@@ -236,7 +235,7 @@ div#historyContainer{
 
 .config-bazaar__panel[data-type="downloaded"] .b3-button{
 	background-color:var(--S-list-background);
-	height:20px;
+	height:24px;
 	margin-top:4px;
 	padding: 4px 6px;
 	clip-path: inset(-4px );
@@ -258,6 +257,18 @@ div#historyContainer{
 	color:var(--b3-theme-on-background);
 	font-weight: 700;
 	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12),0 0 0 50px var(--S-list-background);
+}
+.config-bazaar__panel[data-type="downloaded"] .b3-button[data-type="install-all"]{
+	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
+	margin-top: 0px;
+	background-color: #ee6f5b;
+	color: #fff;
+}
+.config-bazaar__panel [data-type="myWidget"] ~ .b3-form__icon .b3-text-field{
+	padding: 6px 8px;
+}
+.config-bazaar__panel [data-type="myWidget"] ~ .b3-form__icon .b3-form__icon-icon{
+	top: 8px;
 }
 [data-type="myWidget"]+.fn__space{
 	width: 16px;

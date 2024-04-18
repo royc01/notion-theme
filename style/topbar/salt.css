@@ -172,9 +172,6 @@
 	--S-dockleft-item-active-background: rgb(215, 224, 224);
 	--S-dock-item-active-color: #eb8383;
 	--S-dock-item-hover-background: rgb(182, 200, 201);
-	--S-dock--item--activefocus: #e16259;
-
-	--S-dock-item-width: 34px;
 	
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: var(--b3-theme-background);

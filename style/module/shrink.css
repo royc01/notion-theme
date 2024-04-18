@@ -3,7 +3,6 @@
 	min-height:90%;
 }
 .layout-tab-container>.fn__flex-column {
-    padding: var(--S-flex-column-padding);
 	min-height:90%;
 }
 /*.layout__dockb .layout-tab-container>.fn__flex-column{
@@ -15,7 +14,7 @@
 /*面板标题*/
 .file-tree .block__icons{
 	height:28px; 
-    padding: 0px 10px 6px 11px;
+    padding: 6px 10px 6px 11px;
 	min-height: unset;
 }
 .graph.file-tree .block__icons{

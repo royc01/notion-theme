@@ -34,8 +34,6 @@
 
 @import url(/appearance/themes/Savor/style/custom/bq-callout.css);/*引述转换样式*/
 
-@import url(/appearance/themes/Savor/style/custom/link-icon.css);/* 引入网址链接前的图标相关代码 */
-
 @import url(/appearance/themes/Savor/style/custom/progress.css);/* 进度条任务列表 */
 
 @import url(/appearance/themes/Savor/style/custom/list-fold.css);/* 折叠块悬浮弹窗 */
@@ -248,9 +246,9 @@
 	--S-dockleft-item-active-background: var(--b3-theme-background);
 	--S-dock-item-active-color: var(--b3-theme-on-background);
 	--S-dock-item-hover-background: var(--b3-theme-background);
-	--S-dock--item--activefocus: #e16259;
+	--S-dock--item--activefocus: #ee6f5b;
 	
-	--S-dock-item-width: 34px;
+	--S-dock-item-width: 28px;
 	
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: rgb(251, 251, 250);
@@ -414,7 +412,7 @@
 
 
 #layouts{
-	margin: 0 8px 8px;
+	margin: 0 4px 4px;
 	border-radius:6px;
 	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
 	min-height:90%;
@@ -429,7 +427,7 @@
 .layout__dockr .fn__flex .block__icons~.fn__flex-1:not(.backlinkList){
 	padding-bottom:28px;
 }
-.backlinkMList.fn__flex-1[style*="none"]{
+.backlinkMList.fn__flex-1[style*="height"]{
 	min-height:28px;
 	padding-bottom:0px!important;
 }
@@ -510,8 +508,18 @@ span[data-type="add"] svg{
     box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 	border-bottom:none!important;
 }
-
-
+.av__header .layout-tab-bar .item__graphic{
+	padding: 6px 4px 4px 7px;
+}
+.av__views .block__icon svg{
+	width: 14px;
+}
+[data-type="av-search-icon"] +div{
+	font-size: 90%;
+}
+[data-type="av-search-icon"] +div svg{
+	right: 5px;
+}
 .protyle-hint .b3-text-field{
 	margin:5px 8px 4px 0px!important;
 }
@@ -522,7 +530,8 @@ span[data-type="add"] svg{
 }
 .av__panel .b3-menu .b3-chips input {
 	height: 24px;
-	margin:3px -3px 6px -3px;
+	margin:3px 0px 6px 0px;
+	border-radius: 5px;
 }
 .custom-attr__avvalue .b3-chip,.av__cell .b3-chip{
 	border-radius:3px;
@@ -651,3 +660,49 @@ span[data-type="add"] svg{
 
 body.body--win32 .fullscreen>.protyle-breadcrumb{
 	padding: 0 108px 0 8px;
+}
+
+
+
+[data-type=downloaded-update] .config-bazaar__title{
+	margin-bottom: 5px;
+	padding-bottom: 11px;
+}
+.config-bazaar__panel[data-type=downloaded] .config-bazaar__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 0px;
+    width: auto;
+	margin-right: 16px;
+}
+.config-bazaar__panel[data-type=downloaded] .config-bazaar__content .b3-card {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+	margin: 16px 0 0 16px;
+	box-shadow: none;
+    border: 1px solid var(--b3-border-color);
+}
+.config-bazaar__panel[data-type=downloaded] .b3-card__info{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.config-bazaar__panel[data-type=downloaded] .b3-card__desc{
+	display: block;
+}
+.config-bazaar__panel[data-type=downloaded] .b3-card__actions{
+	position: absolute;
+	top: 70px;
+	right: 0px;
+}
+
+.config-bazaar__title{
+	background-color: var(--b3-theme-background);
+	backdrop-filter:none;
+}
+
+
+
+.av__title{
+	padding: 5px 0px 5px 8px;
+}

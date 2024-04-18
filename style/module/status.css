@@ -2,19 +2,19 @@
 #status {
     position: fixed;
     background-color: var(--S-status-msg-background);
-    right: 42px;
-    bottom: -4px;
+    right: 32px;
+    bottom: -8px;
 	border-radius:6px;
-	height: 26px;
+	height: 24px;
 	border:0;
-	padding: 0 26px 0 0;
+	padding: 0 20px 0 0;
 	margin:0 0 12px 0;
 	z-index:10;
 }
 
 .status .toolbar__item:not(.toolbar__item--close) {
-	margin:3px!important;
-	padding:3px;
+	margin:0px!important;
+	padding:2px;
 	background-color:rgb(0, 0, 0, 0);
 }
 
@@ -61,13 +61,13 @@
 
 .status #statusHelp{
 	position:absolute;
-	right:-3px;
+	right:0px;
 	z-index:8;
 }
 .status #barDock{
 	border-radius:6px;
 	position:absolute;
-	right:-37px;
+	right:-28px;
 	z-index:8;
     background-color: var(--S-status-barDock);
     box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
@@ -103,7 +103,7 @@
 	margin:0px 0px 7px 0px;
 	padding: 0px 0px 0px 8px;
 	border-radius:5px;
-	height:26px;
+	height:24px;
 	line-height:26px;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .status .toolbar__item{
-	height: 26px;
+	height: 24px;
 }
 
 #status .toolbar__item span{

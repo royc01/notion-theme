@@ -174,9 +174,7 @@
 	--S-dockleft-item-active-background: rgba(71, 76, 80 );
 	--S-dock-item-active-color: #eb8383;
 	--S-dock-item-hover-background: rgba(71, 76, 80 );
-	--S-dock--item--activefocus: #e16259;
 
-	--S-dock-item-width: 34px;
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: rgba(55, 60, 63);
 	--S-fn__flex-shrink-background: rgba(55, 60, 63);

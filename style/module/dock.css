@@ -15,11 +15,11 @@
 }
 .dock#dockLeft .dock__item{
 	color: var(--S-dock-color);
-	margin: 7px 0 7px 8px;
+	margin: 7px 0 7px 4px;
 }
 .dock#dockRight .dock__item{
 	color: var(--S-dock-color);
-	margin: 7px 8px 7px 0;
+	margin: 7px 4px 7px 0;
 }
 .dock#dockLeft .dock__item--active{
 	color: var(--b3-theme-on-background);
@@ -42,7 +42,7 @@
 	width: 12px;
 }
 .dock__item {
-	padding:6px 7px;
+	padding:5px 6px;
 	border-radius: 6px;
 }
 .dock#dockLeft .dock__item:hover,

@@ -173,9 +173,7 @@
 	--S-dockleft-item-active-background: #f4f1eb;
 	--S-dock-item-active-color: #ff533f;
 	--S-dock-item-hover-background: #fff;
-	--S-dock--item--activefocus: #e16259;
-	
-	--S-dock-item-width: 34px;
+
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: #f4f1eb;
 	--S-fn__flex-shrink-background: #f4f1eb;

@@ -118,23 +118,23 @@
 
 /*文档标签*/
 
-.b3-chips{
+.protyle-background .b3-chips{
 	right:76px;
 	float:right;
 }
-.b3-chips .b3-chip{
+.protyle-background .b3-chips .b3-chip{
 	margin: 15px 3px 3px 3px;
 	border-radius: 3px;
 	padding: 0px 6px 1px;
 	font-size:90%;
 }
-.b3-chips .b3-chip:last-child{
+.protyle-background .b3-chips .b3-chip:last-child{
 	margin-right: 15px;
 }
-.b3-chip__close{
+.protyle-background .b3-chip__close{
 	width:0;
 }
-.b3-chip:hover .b3-chip__close,.b3-chip__close:hover{
+.protyle-background .b3-chip:hover .b3-chip__close,.b3-chip__close:hover{
 	width:14px;
 }
 .protyle-background[style*="30vh"]>.b3-chips{
