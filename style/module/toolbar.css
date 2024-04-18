@@ -1,13 +1,10 @@
 /* ————————————————————顶栏———————————————————— */
 .toolbar{
 	border: none;
-	height:40px;
 	overflow:visible;
 	background-color: var(--S-toolbar-background);
 }
-.toolbar__window{
-	height:40px;
-}
+
 
 .toolbar__item:not(.toolbar__item--disabled) svg,.toolbar__window .toolbar__item:not(.toolbar__item--disabled) svg{
 	color: var(--b3-theme-on-background);
@@ -40,12 +37,12 @@
 }
 
 .toolbar__item--close{
-	padding: 8px 8px 8px 0px;
-	height: 40px;
+	padding: 6px 6px 8px 0px;
+	height: 36px;
 }
 #closeWindow svg{
 	width: 11px!important;
-	padding: 5px 8px;
+	padding: 5px 7px;
 	border-radius:5px;
 }
 #closeWindow:hover{
@@ -66,7 +63,7 @@
 	height:24px;
 	border-radius:6px;
 	padding:0 3px 0 8px;
-	margin:0px 3px;
+	margin:0px;
 	background-color: #ee6f5b;
 	/*background:url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path fill='rgba(255, 255, 255, 1)' d='M13.2 10.8l-3.733 3.733v7.467l3.733-3.733v-7.467z'/><path fill='rgba(59, 62, 67, 1)' d='M13.2 10.8v7.467l2.8 2.8v-7.467z'/><path fill='rgba(59, 62, 67, 1)' d='M18.8 10.8v0 7.467l3.733 3.733v-7.467z'/><path fill='rgba(255, 255, 255, 1)' d='M16 13.6v7.467l2.8-2.8v-7.467z'/></svg>") no-repeat left -2px top -5px #ee6f5b;*/
 	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);                               

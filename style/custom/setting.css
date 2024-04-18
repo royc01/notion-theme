@@ -53,7 +53,7 @@
 #savorToolbar{
 	width:24px;
 	height:24px;
-	margin:7px 0px 4px 4px;
+	margin:3px 0px 4px 4px;
 	border-radius:4px;
 	overflow:hidden;
 	background:var(--S-settings);

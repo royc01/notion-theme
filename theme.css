@@ -161,7 +161,16 @@
     /* 下拉菜单 */
     --b3-select-background: url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M12.8,15.6l4-4.1c0.2-0.2,0.2-0.4,0.2-0.6c0-0.5-0.4-0.9-0.9-0.9c-0.3,0-0.5,0.1-0.6,0.3L12,13.9l-3.4-3.6C8.3,10.1,8.1,10,7.9,10C7.4,10,7,10.4,7,10.9c0,0.2,0.1,0.4,0.2,0.6l4,4.1c0.2,0.2,0.4,0.3,0.7,0.3C12.3,15.9,12.5,15.8,12.8,15.6z'/></svg>") no-repeat right 2px center var(--b3-theme-background);
 
-    /* 阴影 */
+
+
+	--h1-r-graphic: url("data:image/svg+xml;utf8,<svg fill='rgba(235, 131, 131, 0.4)' height='24' viewBox='0 0 32 32' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M4.8 29.714v0c-1.371 0-2.514-1.143-2.514-2.514v0c0-1.371 1.143-2.514 2.514-2.514v0c1.371 0 2.514 1.143 2.514 2.514v0c0.114 1.371-1.029 2.514-2.514 2.514z'/></svg>") no-repeat  center;
+	--h2-r-graphic: url("data:image/svg+xml;utf8,<svg fill='rgba(174, 154, 203, 0.5)' height='24' viewBox='0 0 32 32' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M11.429 25.143c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM4.571 18.286c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286z'/></svg>") no-repeat  center;
+	--h3-r-graphic: url("data:image/svg+xml;utf8,<svg fill='rgba(125, 181, 205, 0.5)' height='24' viewBox='0 0 32 32' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M4.571 25.143c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM4.571 18.286c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM11.429 25.143c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286z'/></svg>") no-repeat  center;
+	--h4-r-graphic: url("data:image/svg+xml;utf8,<svg fill='rgba(113, 167, 150, 0.5)' height='24' viewBox='0 0 32 32' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M4.571 25.143c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM4.571 18.286c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM11.429 25.143c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM11.429 22.857c1.257 0 2.286-1.029 2.286-2.286s-1.029-2.286-2.286-2.286-2.286 1.029-2.286 2.286 1.029 2.286 2.286 2.286z'/></svg>") no-repeat  center;
+	--h5-r-graphic: url("data:image/svg+xml;utf8,<svg fill='rgba(220, 191, 97, 0.5)' height='24' viewBox='0 0 32 32' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M4.571 18.286c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM11.429 22.857c1.257 0 2.286-1.029 2.286-2.286s-1.029-2.286-2.286-2.286-2.286 1.029-2.286 2.286 1.029 2.286 2.286 2.286zM4.571 25.143c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM11.429 25.143c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM4.571 11.429c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286z'/></svg>") no-repeat  center;
+	--h6-r-graphic: url("data:image/svg+xml;utf8,<svg fill='rgba(221, 163, 106, 0.5)' height='24' viewBox='0 0 32 32' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M4.571 25.143c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM4.571 18.286c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM4.571 11.429c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM11.429 18.286c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM11.429 25.143c-1.257 0-2.286 1.029-2.286 2.286s1.029 2.286 2.286 2.286 2.286-1.029 2.286-2.286-1.029-2.286-2.286-2.286zM11.429 16c1.257 0 2.286-1.029 2.286-2.286s-1.029-2.286-2.286-2.286-2.286 1.029-2.286 2.286 1.029 2.286 2.286 2.286z'/></svg>") no-repeat  center;
+
+	/* 阴影 */
     --b3-point-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
     --b3-dialog-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
 	--b3-menu-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
@@ -515,58 +524,58 @@ span[data-type="add"] svg{
 	height: 24px;
 	margin:3px -3px 6px -3px;
 }
-.av__cell .b3-chip{
+.custom-attr__avvalue .b3-chip,.av__cell .b3-chip{
 	border-radius:3px;
 }
-.av__cell .b3-chip[style*="color1)"],.av__panel .b3-chip[style*="color1)"],[data-name="av-col-option"] .color__square[style*="color1)"]{
+.custom-attr__avvalue .b3-chip[style*="color1)"],.av__cell .b3-chip[style*="color1)"],.av__panel .b3-chip[style*="color1)"],[data-name="av-col-option"] .color__square[style*="color1)"]{
 	background-color:var(--b3-font-background13)!important;
 	color:var(--S-font-color13)!important;
 }
-.av__cell .b3-chip[style*="color2)"],.av__panel .b3-chip[style*="color2)"],[data-name="av-col-option"] .color__square[style*="color2)"]{
+.custom-attr__avvalue .b3-chip[style*="color2)"],.av__cell .b3-chip[style*="color2)"],.av__panel .b3-chip[style*="color2)"],[data-name="av-col-option"] .color__square[style*="color2)"]{
 	background-color:var(--b3-font-background12)!important;
 	color:var(--S-font-color12)!important;
 }
-.av__cell .b3-chip[style*="color3)"],.av__panel .b3-chip[style*="color3)"],[data-name="av-col-option"] .color__square[style*="color3)"]{
+.custom-attr__avvalue .b3-chip[style*="color3)"],.av__cell .b3-chip[style*="color3)"],.av__panel .b3-chip[style*="color3)"],[data-name="av-col-option"] .color__square[style*="color3)"]{
 	background-color:var(--b3-font-background11)!important;
 	color:var(--S-font-color11)!important;
 }
-.av__cell .b3-chip[style*="color4)"],.av__panel .b3-chip[style*="color4)"],[data-name="av-col-option"] .color__square[style*="color4)"]{
+.custom-attr__avvalue .b3-chip[style*="color4)"],.av__cell .b3-chip[style*="color4)"],.av__panel .b3-chip[style*="color4)"],[data-name="av-col-option"] .color__square[style*="color4)"]{
 	background-color:var(--b3-font-background10)!important;
 	color:var(--S-font-color10)!important;
 }
-.av__cell .b3-chip[style*="color5)"],.av__panel .b3-chip[style*="color5)"],[data-name="av-col-option"] .color__square[style*="color5)"]{
+.custom-attr__avvalue .b3-chip[style*="color5)"],.av__cell .b3-chip[style*="color5)"],.av__panel .b3-chip[style*="color5)"],[data-name="av-col-option"] .color__square[style*="color5)"]{
 	background-color:var(--b3-font-background9)!important;
 	color:var(--S-font-color9)!important;
 }
-.av__cell .b3-chip[style*="color6)"],.av__panel .b3-chip[style*="color6)"],[data-name="av-col-option"] .color__square[style*="color6)"]{
+.custom-attr__avvalue .b3-chip[style*="color6)"],.av__cell .b3-chip[style*="color6)"],.av__panel .b3-chip[style*="color6)"],[data-name="av-col-option"] .color__square[style*="color6)"]{
 	background-color:var(--b3-font-background8)!important;
 	color:var(--S-font-color8)!important;
 }
-.av__cell .b3-chip[style*="color7)"],.av__panel .b3-chip[style*="color7)"],[data-name="av-col-option"] .color__square[style*="color7)"]{
+.custom-attr__avvalue .b3-chip[style*="color7)"],.av__cell .b3-chip[style*="color7)"],.av__panel .b3-chip[style*="color7)"],[data-name="av-col-option"] .color__square[style*="color7)"]{
 	background-color:var(--b3-font-background7)!important;
 	color:var(--S-font-color7)!important;
 }
-.av__cell .b3-chip[style*="color8)"],.av__panel .b3-chip[style*="color8)"],[data-name="av-col-option"] .color__square[style*="color8)"]{
+.custom-attr__avvalue .b3-chip[style*="color8)"],.av__cell .b3-chip[style*="color8)"],.av__panel .b3-chip[style*="color8)"],[data-name="av-col-option"] .color__square[style*="color8)"]{
 	background-color:var(--b3-font-background6)!important;
 	color:var(--S-font-color6)!important;
 }
-.av__cell .b3-chip[style*="color9)"],.av__panel .b3-chip[style*="color9)"],[data-name="av-col-option"] .color__square[style*="color9)"]{
+.custom-attr__avvalue .b3-chip[style*="color9)"],.av__cell .b3-chip[style*="color9)"],.av__panel .b3-chip[style*="color9)"],[data-name="av-col-option"] .color__square[style*="color9)"]{
 	background-color:var(--b3-font-background5)!important;
 	color:var(--S-font-color5)!important;
 }
-.av__cell .b3-chip[style*="color10)"],.av__panel .b3-chip[style*="color10)"],[data-name="av-col-option"] .color__square[style*="color10)"]{
+.custom-attr__avvalue .b3-chip[style*="color10)"],.av__cell .b3-chip[style*="color10)"],.av__panel .b3-chip[style*="color10)"],[data-name="av-col-option"] .color__square[style*="color10)"]{
 	background-color:var(--b3-font-background4)!important;
 	color:var(--S-font-color4)!important;
 }
-.av__cell .b3-chip[style*="color11)"],.av__panel .b3-chip[style*="color11)"],[data-name="av-col-option"] .color__square[style*="color11)"]{
+.custom-attr__avvalue .b3-chip[style*="color11)"],.av__cell .b3-chip[style*="color11)"],.av__panel .b3-chip[style*="color11)"],[data-name="av-col-option"] .color__square[style*="color11)"]{
 	background-color:var(--b3-font-background3)!important;
 	color:var(--S-font-color3)!important;
 }
-.av__cell .b3-chip[style*="color12)"],.av__panel .b3-chip[style*="color12)"],[data-name="av-col-option"] .color__square[style*="color12)"]{
+.custom-attr__avvalue .b3-chip[style*="color12)"],.av__cell .b3-chip[style*="color12)"],.av__panel .b3-chip[style*="color12)"],[data-name="av-col-option"] .color__square[style*="color12)"]{
 	background-color:var(--b3-font-background2)!important;
 	color:var(--S-font-color2)!important;
 }
-.av__cell .b3-chip[style*="color13)"],.av__panel .b3-chip[style*="color13)"],[data-name="av-col-option"] .color__square[style*="color13)"]{
+.custom-attr__avvalue .b3-chip[style*="color13)"],.av__cell .b3-chip[style*="color13)"],.av__panel .b3-chip[style*="color13)"],[data-name="av-col-option"] .color__square[style*="color13)"]{
 	background-color:var(--b3-font-background1)!important;
 	color:var(--S-font-color1)!important;
 }
@@ -634,3 +643,14 @@ span[data-type="add"] svg{
 	font-size: 0px!important;
 	padding:0!important;
 }
+
+
+
+
+
+
+body.body--win32 .fullscreen>.protyle-breadcrumb{
+	padding: 0 108px 0 8px;
+}
+
+
