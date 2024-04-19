@@ -706,3 +706,8 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 .av__title{
 	padding: 5px 0px 5px 8px;
 }
+
+#configBazaarDownloaded .b3-list--empty{
+	padding-top: 20px;
+}
+

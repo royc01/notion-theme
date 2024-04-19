@@ -186,7 +186,28 @@
 	font-weight:700;
 	font-size: 40px;
 }
-
+/*h1~6标题间距*/
+.protyle-wysiwyg .h1,.protyle-wysiwyg .h2,
+.protyle-wysiwyg .h3,.protyle-wysiwyg .h4,
+.protyle-wysiwyg .h5,.protyle-wysiwyg .h6{
+	font-weight:700;
+	margin-top: 1.2em;
+    margin-bottom: .4em;
+}
+.sb[fold="1"] .h1,.sb[fold="1"] .h2,
+.sb[fold="1"] .h3,.sb[fold="1"] .h4,
+.sb[fold="1"] .h5,.sb[fold="1"] .h6{
+	margin-top: 0em;
+}
+.protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h1,
+.protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h2,
+.protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h3,
+.protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h4,
+.protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h5,
+.protyle-wysiwyg [data-node-id].li > .protyle-action ~ .h6{
+	margin-top: 0em!important;
+    margin-bottom: 0.2em!important;
+}
 /*块标*/ 
 .protyle-gutters button svg {
     color: var(--b3-gutters-color);
