@@ -5,45 +5,29 @@
 	margin-bottom:10px;
 	border-radius:5px;
 }
-
-.protyle-background__icon:not(.fn__none)+.protyle-icons {
-	margin-left:-99px;
-	margin-bottom:-48px;
+.protyle-background__icon:not(.fn__none)+.b3-chips{
+	margin-left:80px;
+	margin-top:-40px;
 	transform:none;
 }
 
-.protyle-background__iconw .protyle-icons .b3-tooltips{
-	display:inline-flex;
-	height:28px;
-	border-radius:5px;
-	padding:0 6px 0 0;
-	margin:0 2px;
-	color:var(--S-icons-tooltips);
-	background-color:transparent;
+.protyle-background__action .b3-button{
+	box-shadow: none;
+	padding: 4px 6px;
+	margin-top: 0px;
 }
-.protyle-background__iconw .protyle-icons .b3-tooltips svg{
-	width:12px!important;
-	height:12px!important;
-	padding:2px!important;
-	margin:6px!important;
-	display:inline-flex;
+.protyle-background__action .b3-button svg{
+	width:12px;
+	height:12px;
+	padding:2px;
 	color: var(--b3-theme-background);
 	background-color: var(--S-icons-tooltips);
 	border-radius:3px;
 	opacity:0.6;
 }
-.protyle-background__iconw .protyle-icons .b3-tooltips::after{
-	display:inline-flex;
-	height:28px;
-	font-size:12px;
-	line-height:28px;
-	transform:none;
-	opacity:1;
-	color:var(--S-icons-tooltips);
-	background-color:transparent;
-	position:static;
-	margin:0;
-	padding:0;
+.protyle-background__action .b3-button:hover{
+	background-color:var(--S-dock-background);
+	color:var(--S-img-icons-tooltips);
 	box-shadow: none;
 }
 
@@ -117,13 +101,31 @@
 
 
 /*文档标签*/
-
-.protyle-background .b3-chips{
-	right:76px;
-	float:right;
+.protyle-background__ia .b3-chips .b3-button{
+	box-shadow: none;
+	color: var(--b3-theme-background);
+	background-color: var(--S-icons-tooltips);
+	width: 22px;
+	height: 22px;
+	overflow: hidden;
+	font-size: 0;
+	opacity: 0.2;
+	border-radius: 3px;
 }
+.protyle-background__ia .b3-chips .b3-button:hover{
+	opacity: 0.3;
+}
+.protyle-background__ia .b3-chips .b3-button svg{
+	margin-right: 1px;
+}
+.protyle-background__ia .b3-chips .fn__space{
+	width: 2px;
+}
+.protyle-background__ia .b3-chips{
+}
+
 .protyle-background .b3-chips .b3-chip{
-	margin: 15px 3px 3px 3px;
+	margin: 3px;
 	border-radius: 3px;
 	padding: 0px 6px 1px;
 	font-size:90%;
@@ -434,9 +436,6 @@
 }
 .export-img span[data-type="tag"]::before{
 	content: "";
-}
-.protyle-wysiwyg span[data-type="tag"]:first-child:before{
-	content: "#";
 }
 /*块引用*/
 /*.protyle-wysiwyg [data-node-id] span[data-type*="block-ref"][data-subtype="s"]:not([data-type="virtual-block-ref"]):not([data-type*="sup"]):not([data-type*="sub"]){
