@@ -511,9 +511,6 @@ span[data-type="add"] svg{
 .av__header .layout-tab-bar .item__graphic{
 	padding: 6px 4px 4px 7px;
 }
-.av__views .block__icon svg{
-	width: 14px;
-}
 [data-type="av-search-icon"] +div{
 	font-size: 90%;
 }
