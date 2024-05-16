@@ -21,12 +21,11 @@
 	padding-top:7px;
 }
 /*面板标题图标*/
-.block__logo svg{
-	width: 13px;
-	height: 13px;
-	padding: 4px;
-	margin: 0px 4px 0px 0px;
-	color: var(--S-block-logo-color);
+.block__logo:not([data-type="back"]) svg{
+	display: none;
+}
+.block__logo{
+	font-weight: 600;
 }
 /*面板功能按钮*/
 .file-tree .block__icons>.block__icon svg{
@@ -131,7 +130,7 @@
 
 /*大纲面板*/
 .sy__outline>.b3-list-item>.b3-list-item__graphic{
-	padding-left: 8px;
+	padding-left: 4px;
 }
 
 /*大纲数字*/
@@ -224,11 +223,10 @@
 
 /* 反链面板 */
 .sy__backlink .block__icons .counter{
-	position:absolute;
-	padding: 0px;
-	width:20px;
-	height: 20px;
-	line-height: 20px;
+	width:18px;
+	height: 18px;
+	line-height: 18px;
+	padding: 0;
 	color: var(--b3-theme-background);
     background-color: var(--S-block-logo-background-color);
 	text-align:center;
@@ -247,7 +245,7 @@
 .backlinkList>.b3-list>.protyle,.backlinkMList>.b3-list>.protyle{
 	margin:-2px 5px 6px 5px;	
 	border-radius:3px 3px 6px 6px;
-	box-shadow: 0 -28px 0 var(--b3-list-hover),0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12),0 0 1px rgba(0,0,0,.2);
+	box-shadow: 0 -28px 0 var(--b3-list-hover),0 4px 9px rgba(0,0,0,.05),0 0 1px rgba(0,0,0,.2);
 }
 .sy__backlink.layout__tab--active .b3-list-item--focus+.protyle{
 	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12),0 0 1px rgba(0,0,0,.2);
@@ -283,7 +281,7 @@
     margin-bottom: 16px;
 }
 .sy__backlink .protyle-wysiwyg {
-    padding: 2px 6px 6px 6px !important;
+    padding: 2px 6px 6px 4px !important;
 }
 
 
@@ -379,4 +377,12 @@ v.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar{
 	margin-left:-1px;
 	top: 0px;
 	height:100%;
+}*/
+
+.layout__dockl.layout--float{
+	margin-left:5px;
+}
+
+.layout__dockr.layout--float{
+	margin-right:5px;
 }

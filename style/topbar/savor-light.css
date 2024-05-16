@@ -192,13 +192,12 @@
 	--S-toolbar-closeWindow-svg: #fff;
 	
 	/* dock栏 */
-	--S-dock-color: rgb(55, 53, 47, .5);
-	--S-dock-background:  #f1f1f0;
+	--S-dock-color: rgb(55, 53, 47, .3);
+	--S-dock-background:  rgb(251, 251, 250);
 	--S-dockright-item-active-background: var(--b3-theme-background);
 	--S-dockleft-item-active-background: var(--b3-theme-background);
 	--S-dock-item-active-color: var(--b3-theme-on-background);
 	--S-dock-item-hover-background: var(--b3-theme-background);
-	
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: rgb(251, 251, 250);
 	--S-fn__flex-shrink-background: rgb(251, 251, 250);

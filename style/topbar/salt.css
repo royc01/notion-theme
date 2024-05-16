@@ -166,8 +166,8 @@
 	--S-toolbar-closeWindow-hover: #e81123;
 	--S-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
-	--S-dock-color: rgb(37, 40, 48);
-	--S-dock-background: var(--S-toolbar-background);
+	--S-dock-color: rgba(37, 40, 48, .3);
+	--S-dock-background: rgb(215, 224, 224);
 	--S-dockright-item-active-background: var(--b3-theme-background);
 	--S-dockleft-item-active-background: rgb(215, 224, 224);
 	--S-dock-item-active-color: #eb8383;
@@ -270,9 +270,7 @@
 }
 
 
-.dock__item:not(.dock__item--active){
-	color: var(--b3-theme-background)!important;
-}
+
 .dock__item:not(.dock__item--active):hover {
     color: var(--S-dock-color)!important;
 }
@@ -308,4 +306,7 @@
 }
 .layout__dockl .layout__resize.fn__none:after{
 	background-color: var(--S-fn__flex-shrink-background);
+}
+.dock#dockRight{
+    background-color: var(--S-fn__flex-column-background);
 }

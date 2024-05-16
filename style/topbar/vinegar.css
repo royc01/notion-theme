@@ -270,9 +270,6 @@ body{
 
 
 
-.dock__item--active{
-	box-shadow: 0 0 0 1px var(--b3-border-color) inset;
-}
 
 #buttonSavor-light,#buttonsalt,#buttonsugar{
 	display:none!important;

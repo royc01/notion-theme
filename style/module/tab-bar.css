@@ -32,7 +32,7 @@
 	transition: all 300ms;
 }
 .layout-tab-bar .item--readonly{
-	margin:3px 3px 0 0;
+	margin:7px 3px 0 0;
 	padding:0;
 }
 .body--window .layout-tab-bar .item--readonly{

@@ -248,7 +248,7 @@
 	--S-dock-item-hover-background: var(--b3-theme-background);
 	--S-dock--item--activefocus: #ee6f5b;
 	
-	--S-dock-item-width: 28px;
+	--S-dock-item-width: 32px;
 	
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: rgb(251, 251, 250);
@@ -406,16 +406,17 @@
 
 /* 中心结构*/
 
-#toolbar + .fn__flex {
+body {
 	background-color:var(--S-toolbar-background);
 }
 
 
-#layouts{
+#toolbar + .fn__flex{
 	margin: 0 4px 4px;
-	border-radius:6px;
+	border-radius:8px;
 	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
-	min-height:90%;
+	overflow: hidden;
+	background-color: var(--S-fn__flex-column-background);
 }
 
 
@@ -434,14 +435,14 @@
 
 .status.fn__none{
 	display:block!important;
-	bottom:-1px!important;
-	background-color:transparent!important;
 	padding:0px!important;
 }
 .status.fn__none div:not(#barDock){
 	display:none;
 }
-
+.status.fn__none #barDock{
+	right: 4px!important;
+}
 .layout__dockb.layout--float{
 	z-index:9!important;
 }
@@ -511,9 +512,7 @@ span[data-type="add"] svg{
 .av__header .layout-tab-bar .item__graphic{
 	padding: 6px 4px 4px 7px;
 }
-.av__views .block__icon svg{
-	width: 14px;
-}
+
 [data-type="av-search-icon"] +div{
 	font-size: 90%;
 }
@@ -585,7 +584,7 @@ span[data-type="add"] svg{
 	color:var(--S-font-color2)!important;
 }
 .custom-attr__avvalue .b3-chip[style*="color13)"],.av__cell .b3-chip[style*="color13)"],.av__panel .b3-chip[style*="color13)"],[data-name="av-col-option"] .color__square[style*="color13)"]{
-	background-color:var(--b3-font-background1)!important;
+	background-color:transparent!important;
 	color:var(--S-font-color1)!important;
 }
 
@@ -710,4 +709,6 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 #configBazaarDownloaded .b3-list--empty{
 	padding-top: 20px;
 }
+
+
 
