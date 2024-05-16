@@ -130,14 +130,14 @@
 }
 
 .b3-switch::after {
-  border: none;
-  box-shadow: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 44px;
-  background: var(--b3-theme-background);
-  transform: translateX(5px) translateY(4px);
-}
+	border: none;
+	box-shadow: none;
+	width: 13px;
+	height: 13px;
+	border-radius: 44px;
+	background: var(--b3-theme-background);
+	transform: translateX(5px) translateY(5px);
+  }
 
 .b3-switch::before {
   display: none !important;
@@ -149,7 +149,7 @@
 
 .b3-switch:checked:after {
   background: var(--b3-theme-background);
-  transform: translateX(17px) translateY(4px);
+  transform: translateX(18px) translateY(5px);
 }
 /*引用块弹出框*/
 .block__popover--open{
