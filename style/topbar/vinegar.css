@@ -162,7 +162,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--S-toolbar-background: #151515;
+	--S-toolbar-background: #202020;
 	--S-toolbar-blur-background: transparent;
 	--S-toolbar-item-hover: rgba(255, 255, 255, 0.1);
 	--S-toolbar-barWorkspace-hover:var(--S-list-background);
@@ -170,7 +170,7 @@
 	--S-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
 	--S-dock-color: rgba(114, 118, 120);
-	--S-dock-background: rgb(0, 0, 0, 0);
+	--S-dock-background: #202020;
 	--S-dockright-item-active-background:#202020;
 	--S-dockleft-item-active-background:#202020;
 	--S-dock-item-active-color: #eb8383;

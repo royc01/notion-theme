@@ -1,84 +1,60 @@
 /* ————————————————————dock栏———————————————————— */
 .dock{
 	background-color: var(--S-dock-background);
-}
-/*.dock--vertical{
-	height: calc(100% - 28px);
-}*/
-.dock#dockLeft,.dock#dockRight{
+	border: none!important;
+	&.dock--vertical{
 	width: var(--S-dock-item-width);
-	margin: 0px;
-	/*background-color: var(--S-toolbar-background);*/
-	/*border-radius: 6px;*/
-}
-.dock#dockRight{
-	padding-bottom:26px;
-}
-.dock#dockLeft .dock__item,.dock#dockRight .dock__item{
-	color: var(--S-dock-color);
-	margin: 17px 5px;
-}
-.dock#dockLeft .dock__item--active,.dock#dockRight .dock__item--active{
-	color: var(--b3-theme-on-background);
-	background-color: transparent;
+	}
+	&#dockRight{
+		padding-bottom:26px;
+	}
+	&#dockBottom{
+		height: unset;
+		background-color: var(--S-status-msg-background);
+		.dock__item{
+			margin: 3px 7px 3px 0;
+			padding: 3px;
+			height: 14px;
+		}
+	}
+	& .dock__item{
+		color: var(--S-dock-color);
+		margin: 12px 7px;
+		padding:3px ;
+		svg{
+			width: 13px;
+		}
+		&:first-child{
+			margin-top: 14px;
+		}
+		&:last-child{
+			margin-bottom: 6px;
+		}
+		&:hover{
+			color: var(--b3-theme-on-background);
+			background-color: transparent;
+		}
+		&.dock__item--activefocus{
+			background-color: var(--S-dock--item--activefocus)!important;
+			color:var(--b3-theme-background)!important;
+		}/*dock焦点状态*/
+	}
+	& .dock__item--active{
+		color: var(--S-dock-background);
+		background-color: var(--b3-theme-on-background);
+	}
 }
 
 .b3-list-item__toggle{
 	margin-left: -4px;
 }
-.dock#dockLeft .dock__item:first-child,.dock#dockRight .dock__item:first-child{
-	margin-top: 14px;
-}
-.dock#dockLeft .dock__item:last-child,.dock#dockRight .dock__item:last-child{
-	margin-bottom: 8px;
-}
-.dock__item svg{
-	width: 13px;
-}
-.dock__item {
-	padding:0 4px ;
-	border-radius: 6px;
-}
-.dock#dockLeft .dock__item:hover,
-.dock#dockRight .dock__item:hover{
-	color: var(--b3-theme-on-background);
-	background-color: transparent;
-}
 
-/*dock焦点状态*/
-.dock__item--activefocus{
-	background-color: transparent!important;
-	color:var(--S-dock--item--activefocus)!important;
-}
 
 /* 底dock栏 */
-.dock#dockBottom{
-	border-top:none;
-	height: unset;
-	padding: 0 40px;
-	background-color: var(--S-toolbar-background);
-}
-
-#dockBottom .dock__item{
-	margin: 0 7px 7px 0;
-	padding: 6px 7px;
-	height: 14px;
-}
-.dock#dockBottom .dock__item--active{
-	color: var(--b3-theme-on-background);
-    background-color: var(--S-dockleft-item-active-background);
-    box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
-}
-.dock#dockBottom .dock__item:hover{
-    background-color: var(--S-dock-item-hover-background);
-    transition: all 300ms;
-    box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
-}
-
 .layout__dockb.layout--float{
-	bottom:74px!important;
-	margin-left:41px;
-	margin-right:41px;
+	bottom:60px!important;
+	margin-left:32px;
+	margin-right:32px;
 	border-radius:6px;
 	overflow:hidden;
 	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
@@ -94,4 +70,22 @@
 #dockLeft.fn__none + .layout .layout__dockb.layout--float[style*="bottom: 59px"]{
 	margin-left:8px;
 	margin-right:8px;
+}
+#dockBottom:has(.dock__item--active) .dock__item--pin[aria-label="钉住"],#dockBottom:has(.dock__item--active) .dock__item--pin[aria-label="Pin"]{
+	margin: 0 7px 40px 0;
+}
+#dockBottom.fn__none .dock__item--pin{
+	display: none;
+}
+#dockBottom:not(.fn__none):has(+.status.fn__none) [data-title]{
+	margin: 0 7px 7px 0;
+}
+#dockBottom.fn__none:has(+.status.fn__none) .dock__item--active{
+	display: none;
+}
+#dockBottom:not(.fn__none)+#status.fn__none #barDock{
+	bottom:-7px;
+}	
+#dockBottom .fn__flex-1{
+	flex: 0;
 }

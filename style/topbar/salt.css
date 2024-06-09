@@ -22,6 +22,9 @@
     /* 线条 */
     --b3-border-color: rgba(0, 0, 0, .1);
 
+    --b3-toolbar-color: var(--b3-theme-background);
+    --b3-toolbar-background: var(--S-toolbar-background);
+
     /* 滚动条 */
     --b3-scroll-color: rgba(98, 122, 123, 0.14);
 	--b3-scroll-color-hover: rgba(98, 122, 123 ,0.6);
@@ -209,7 +212,7 @@
 
 	/* 头图按钮 */
 	--S-icons-tooltips: rgba(37, 40, 48, 0.5);
-	--S-icons-tooltips-hover: var(--b3-list-background);
+	--S-icons-tooltips-hover: var(--S-list-background);
 	--S-img-icons-tooltips: var(--b3-theme-on-surface);
 	--S-img-icons-tooltips-bg: var(--b3-theme-background);
 	--S-img-icons-span: rgba(0, 0, 0, .5);
@@ -271,9 +274,6 @@
 
 
 
-.dock__item:not(.dock__item--active):hover {
-    color: var(--S-dock-color)!important;
-}
 #dockBottom:not(.fn__none)+#status .toolbar__item:not(#barDock) svg{
 	color: var(--b3-theme-background)!important;
 }
@@ -309,4 +309,11 @@
 }
 .dock#dockRight{
     background-color: var(--S-fn__flex-column-background);
+}
+
+.layout-tab-bar .item:hover:not(.item--focus):not(.item--readonly) .item__text,.layout__wnd--active .layout-tab-bar .item--focus:hover>.item__text{
+    color:var(--b3-theme-background);
+}
+.block__icon:hover:not([disabled]):not(.ft__primary), .block__icon--active {
+    color:var(--b3-theme-background);
 }

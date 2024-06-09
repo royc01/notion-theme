@@ -161,7 +161,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--S-toolbar-background: #2b2f31;
+	--S-toolbar-background: rgba(55, 60, 63);
 	--S-toolbar-blur-background: transparent;
 	--S-toolbar-item-hover: rgba(255, 255, 255, 0.1);
 	--S-toolbar-barWorkspace-hover:var(--S-list-background);
@@ -169,7 +169,7 @@
 	--S-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
 	--S-dock-color: rgba(114, 118, 120);
-	--S-dock-background: rgb(0, 0, 0, 0);
+	--S-dock-background: rgba(55, 60, 63);
 	--S-dockright-item-active-background: rgba(71, 76, 80 );
 	--S-dockleft-item-active-background: rgba(71, 76, 80 );
 	--S-dock-item-active-color: #eb8383;
@@ -291,7 +291,7 @@
 }
 
 #savorToolbar:after{
-	height:188px;
+	height:158px;
 }
 
 .b3-menu,.b3-menu__item,.b3-menu .b3-menu__submenu,.hint--menu{

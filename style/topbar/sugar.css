@@ -160,7 +160,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--S-toolbar-background: #eeeae3;
+	--S-toolbar-background: #f4f1eb;
 	--S-toolbar-blur-background: transparent;
 	--S-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--S-toolbar-barWorkspace-hover:var(--S-dockleft-item-active-background);
@@ -168,7 +168,7 @@
 	--S-toolbar-closeWindow-svg: #fff;
 	/* dock栏 */
 	--S-dock-color: rgb(55, 53, 47, .3);
-	--S-dock-background: rgb(0, 0, 0, 0);
+	--S-dock-background: #f4f1eb;
 	--S-dockright-item-active-background: #f4f1eb;
 	--S-dockleft-item-active-background: #f4f1eb;
 	--S-dock-item-active-color: #ff533f;
@@ -209,7 +209,7 @@
 	--S-protyle-breadcrumb-arrow: rgba(174,172,166);
 	/* 头图按钮 */
 	--S-icons-tooltips: rgba(55, 53, 47, 0.5);
-	--S-icons-tooltips-hover: var(--b3-list-background);
+	--S-icons-tooltips-hover: var(--S-list-background);
 	--S-img-icons-tooltips: var(--b3-theme-on-surface);
 	--S-img-icons-tooltips-bg: var(--b3-theme-background);
 	--S-img-icons-span: rgba(0, 0, 0, .5);
@@ -243,7 +243,7 @@
 	/*ctrlp*/
 	--b3-list-item--meta: #9b9a97;
 	/*底栏状态*/
-	--S-status-msg-background: #e0dfda;
+	--S-status-msg-background: #eeeae3;
 }
 
 

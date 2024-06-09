@@ -609,10 +609,10 @@ function tabbarVerticalButton() {
 /**---------------------------------------------------------顶栏-------------------------------------------------------------- */
 
 function topbarfixedButton() {
-    savorThemeToolplusAddButton(
+    savorPluginsAddButton(
         "topBar",
         "toolbar__item b3-tooltips b3-tooltips__sw",
-		"隐藏顶栏",
+		"展开插件",
         () => {
             loadStyle("/appearance/themes/Savor/style/topbar/top-fixed.css", "theme-color-style-topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
         },
@@ -1158,6 +1158,14 @@ async function 写入文件(path, filedata, then = null, obj = null, isDir = fal
         }, 200)
     });
 }
+//添加空白div//
+var savordragElement = document.createElement("div");
+savordragElement.id = "savordrag";
+var barForwardElement = document.getElementById("barForward");
+var parentElement = barForwardElement.parentNode;
+parentElement.insertBefore(savordragElement, barForwardElement.nextSibling);
+savordragElement.style.cssText = "flex: 1; app-region: drag;"; 
+
 
 
 //+++++++++++++++++++++++++++++++++辅助API++++++++++++++++++++++++++++++++++++
@@ -1179,10 +1187,10 @@ function savorThemeToolbarAddButton(ButtonID, ButtonTitle , ButtonLabel, Mode, N
         var toolbarEdit = document.getElementById("toolbarEdit");
         var windowControls = document.getElementById("windowControls");
 
-        if (toolbarEdit == null && windowControls != null) {
+        if (toolbarEdit == null && barPlugins != null) {
             savorToolbar = document.createElement("div");
             savorToolbar.id = "savorToolbar";
-            windowControls.parentElement.insertBefore(savorToolbar, windowControls);
+            barPlugins.parentElement.insertBefore(savorToolbar, windowControls);
         } else if (toolbarEdit != null) {
             savorToolbar = insertCreateBefore(toolbarEdit, "div", "savorToolbar");
             savorToolbar.style.position = "relative";
@@ -1279,12 +1287,12 @@ function savorThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClick
     var savorToolplus = document.getElementById("savorToolbar");
     if (savorToolplus == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("windowControls");
+        var barPlugins = document.getElementById("barPlugins");
 
         if (toolbarEdit == null && windowControls != null) {
             savorToolplus = document.createElement("div");
             savorToolplus.id = "savorToolbar";
-            windowControls.parentElement.insertBefore(savorToolplus, windowControls);
+            barPlugins.parentElement.insertBefore(savorToolplus, barPlugins);
         } else if (toolbarEdit != null) {
             savorToolplus = insertCreateBefore(toolbarEdit, "div", "savorToolbar");
             savorToolplus.style.position = "relative";
@@ -1337,6 +1345,70 @@ function savorThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClick
     })
 
 }
+
+function savorPluginsAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClickRunFun, OffClickRunFun, Memory) {
+    var savorPlugins = document.getElementById("savorPlugins");
+    if (savorPlugins == null) {
+        var toolbarEdit = document.getElementById("toolbarEdit");
+        var barPlugins = document.getElementById("barPlugins");
+
+        if (toolbarEdit == null && windowControls != null) {
+            savorPlugins = document.createElement("div");
+            savorPlugins.id = "savorPlugins";
+            barPlugins.parentElement.insertBefore(savorPlugins, barPlugins);
+        } else if (toolbarEdit != null) {
+            savorPlugins = insertCreateBefore(toolbarEdit, "div", "savorPlugins");
+            savorPlugins.style.position = "relative";
+        }
+    }
+
+    var addButton = addinsertCreateElement(savorPlugins, "div");
+    addButton.style.float = "top";
+
+
+    
+    addButton.id = ButtonID;
+	addButton.setAttribute("class", ButtonTitle + " button_off");
+	addButton.setAttribute("aria-label", ButtonLabel)
+	
+
+	var offNo = '0';
+
+
+    if (Memory == true) {
+        offNo = getItem(ButtonID);
+        if (offNo == "1") {
+			addButton.setAttribute("class", ButtonTitle + " button_on");
+            setItem(ButtonID, "0");
+            NoClickRunFun(addButton);
+            setItem(ButtonID, "1");
+        } else if (offNo != "0") {
+            offNo = "0";
+            setItem(ButtonID, "0");
+        }
+    }
+
+    AddEvent(addButton, "click", () => {
+
+        if (offNo == "0") {
+			addButton.setAttribute("class", ButtonTitle + " button_on");
+            NoClickRunFun(addButton);
+            if (Memory != null) setItem(ButtonID, "1");
+            offNo = "1";
+            return;
+        }
+
+        if (offNo == "1") {
+			addButton.setAttribute("class", ButtonTitle + " button_off");
+            OffClickRunFun(addButton);
+            if (Memory != null) setItem(ButtonID, "0");
+            offNo = "0";
+            return;
+        }
+    })
+
+}
+
 
 function setItem(key, value) {
     window.theme.config[key] = value;
@@ -2176,6 +2248,13 @@ window.destroyTheme = () => {
     }); 
     // 删除切换按钮
 	document.querySelector("#savorToolbar").remove();
+    // 删除空白
+    document.querySelector("#savordrag").remove();
+    // 删除插件展开按钮
+    document.querySelector("#savorPlugins").remove();
 	// 删除列表转导图功能
     window.removeEventListener('mouseup', MenuShow);
 };
+
+
+

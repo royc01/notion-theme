@@ -234,6 +234,7 @@
 	/* 顶栏 */
 	--b3-toolbar-blur-background: var(--S-toolbar-background);
 	--S-toolbar-background: #f1f1f0;
+	--S-toolbar-item: var(--b3-theme-on-background);
 	--S-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--S-toolbar-barWorkspace-hover: rgba(55, 53, 47, 0.05);
 	--S-toolbar-closeWindow-hover: #e81123;
@@ -248,7 +249,7 @@
 	--S-dock-item-hover-background: var(--b3-theme-background);
 	--S-dock--item--activefocus: #ee6f5b;
 	
-	--S-dock-item-width: 32px;
+	--S-dock-item-width: 33px;
 	
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: rgb(251, 251, 250);
@@ -275,8 +276,8 @@
 	--h6-list-graphic: #dda36a;
 	
 	/* 线条 */
-	--b3-layout-resize: rgba(230, 229, 225);
-	--b3-shrink-layout-resize: rgba(230, 229, 225);
+	--b3-layout-resize: rgba(230, 229, 225,0.1);
+	--b3-shrink-layout-resize: rgba(230, 229, 225,1);
 	--b3-layout-resize-hover: var(--b3-scroll-color);
 	--flex-width-transition:width 150ms linear; /*调节宽度动画*/
 	--b3-border-fold: rgb(15, 15 , 15, .1);/*折叠边框*/
@@ -365,6 +366,16 @@
 	--S-font-color2: rgb(50, 48, 44);
 	--S-font-color1: rgb(50, 48, 44);
 	
+	/*顶栏插件颜色*/
+	--S-Plugin-bg1: #e6e6e6;
+	--S-Plugin-c1: #7f7f7f;
+	--S-Plugin-bg2: #ffeccc;
+	--S-Plugin-c2: #8a6f42;
+	--S-Plugin-bg3: #ffe0e0;
+	--S-Plugin-c3: #6f3e3e;
+	--S-Plugin-bg4: #d7dfe9;
+	--S-Plugin-c4: #455464;
+
 	/*savor功能按钮*/
 	--S-Savor-light-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z'/></svg>") no-repeat left 0px top -2px;
 	--S-Savor-light-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z'/></svg>") no-repeat left 0px top -2px;
@@ -387,8 +398,8 @@
 	--S-tabbarVertical-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z'/></svg>") no-repeat left 0px top -2px;
 	--S-tabbarVertical-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z'/></svg>") no-repeat left 0px top -2px;
 	
-	--S-topBar-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z'/></svg>") no-repeat left 0px top -2px;
-	--S-topBar-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z'/></svg>") no-repeat left 0px top -2px;
+	--S-topBar-on:url("data:image/svg+xml;utf8,<svg fill='rgb(255, 255, 255)' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -11px top -13px;
+	--S-topBar-off:url("data:image/svg+xml;utf8,<svg fill='rgb(255, 255, 255)' height='32' viewBox='0 0 24 24' width='32' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left -11px top -13px;
 	
 	--S-bulletThreading-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z'/></svg>") no-repeat left 0px top -2px;
 	--S-bulletThreading-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z'/></svg>") no-repeat left 0px top -2px;
@@ -406,18 +417,8 @@
 
 /* 中心结构*/
 
-body {
-	background-color:var(--S-toolbar-background);
-}
 
 
-#toolbar + .fn__flex{
-	margin: 0 4px 4px;
-	border-radius:8px;
-	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
-	overflow: hidden;
-	background-color: var(--S-fn__flex-column-background);
-}
 
 
 
@@ -607,36 +608,7 @@ span[data-type="add"] svg{
 
 
 
-#dockBottom.fn__none{
-	display: flex !important;
-}
-#dockBottom.fn__none [data-title]:not(.dock__item--active){
-	margin: 0 7px 0px 0;
-	opacity: 0;
-	height:0px;
-	padding:0px;
-}
-#dockBottom.fn__none .dock__item--active{
-	opacity: 0;	
-}
-#dockBottom:has(.dock__item--active) .dock__item--pin[aria-label="钉住"],#dockBottom:has(.dock__item--active) .dock__item--pin[aria-label="Pin"]{
-	margin: 0 7px 40px 0;
-}
-#dockBottom.fn__none .dock__item--pin{
-	display: none;
-}
-#dockBottom:not(.fn__none):has(+.status.fn__none) [data-title]{
-	margin: 0 7px 7px 0;
-}
-#dockBottom.fn__none:has(+.status.fn__none) .dock__item--active{
-	display: none;
-}
-#dockBottom:not(.fn__none)+#status.fn__none #barDock{
-	bottom:-7px;
-}	
-#dockBottom .fn__flex-1{
-	flex: 0;
-}
+
 
 
 
@@ -709,6 +681,106 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 #configBazaarDownloaded .b3-list--empty{
 	padding-top: 20px;
 }
+
+.layout__dockl,.layout__dockr{
+    padding-top: 38px;
+}
+#dockLeft,#dockRight{
+	padding-top: 35px;
+}
+
+
+
+
+
+
+	
+.layout__resize{
+	z-index: 3;
+}
+
+.fn__flex-shrink+.layout__resize--lr:after, .layout__center+.layout__resize--lr:after {
+    height: calc( 100% - 38px );
+	top:38px
+}
+
+
+.layout__center .layout__resize:not(.layout__resize--lr)+.fn__flex .layout-tab-bar{
+	background-color: var(--S-toolbar-background);
+}
+
+
+/*--------合并顶栏页签--------*/
+.layout__dockl~.layout__center,.layout__dockl.layout--float~.layout__center{ 
+	.fn__flex-1:first-child{
+	&, & > &, & > & > & {
+		>[data-type="wnd"]>.fn__flex{
+			margin-left: 1px;
+			transition: all 200ms;
+			}
+		}
+	}
+}
+.layout__dockl[style*="width: 0px"]~.layout__center,.layout__dockl.layout--float~.layout__center{ 
+	.fn__flex-1:first-child{
+	&, & > &, & > & > & {
+		>[data-type="wnd"]>.fn__flex{
+			margin-left: 180px;
+			transition: all 200ms;
+			}
+		}
+	}
+}
+
+.layout__center:has(~.layout__dockr[style*="width: 0px"]),.layout__center:has(~.layout__dockr.layout--float){
+	.fn__flex-1:first-child{
+	&, & > &, & > & > & {
+		>[data-type="wnd"]>.fn__flex{
+			margin-right: 300px;
+			transition: all 200ms;
+			}
+		}
+	}
+}
+.layout__center .fn__flex-1:has(+.layout__resize--lr)>[data-type="wnd"]>.fn__flex{
+	margin-right: 0px!important;
+}
+.layout__center .layout__resize--lr+.fn__flex-column .fn__flex-1>[data-type="wnd"]>.fn__flex{
+	margin-left: 0px!important;
+}
+
+
+
+
+
+
+#savorToolbar,#savorToolbar::after{
+	pointer-events: visibleFill;
+	app-region: no-drag;
+}
+
+
+#savorPlugins{
+	width: 22px;
+	z-index:8;
+	margin-top: 2px;
+	margin-left: 2px;
+	padding: 0px;
+}
+#topBar{
+	padding: 0px;
+	margin-left: -2px;
+	width: 18px;
+	height: 18px;
+	margin-top: 8px;
+	border-radius: 50%;
+}
+#topBar.button_off:hover{
+	background:var(--S-topBar-off);
+	background-color: #ee6f5b;
+	transition: none;
+}
+
 
 
 

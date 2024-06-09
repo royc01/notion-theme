@@ -1,49 +1,7 @@
-
-.toolbar{
-	height:38px;
-	margin:7px 7px -38px 7px;
-	opacity: 0;
-	transition: all 300ms;
-	transform:translateY(-32px);
-	z-index:8;
-	transition-delay: 500ms;
-	border-radius:8px;
-	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
+body:not(.body--mobile,.body--window)>#toolbar [data-position]{
+	margin-right: 2px;
+	border-radius: 6px;
 }
-
-.toolbar:hover{
-	opacity: 1;
-	transform:translateY(0px);
-	transition: all 300ms;
-}
-
-.fn__flex-column.fn__flex-shrink>.fn__flex:first-child:not(.fn__none),
-.layout__center~.fn__flex-column>.fn__flex:first-child,
-.fn__flex-column.fn__flex-shrink>.fn__flex.fn__none+.layout__resize+.fn__flex,
-.layout__center~.fn__flex-column>.fn__flex.fn__none+.layout__resize+.fn__flex{
-	padding-top:0px;
-}
-
-
-
-
-
-
-.layout-tab-bar {
-	margin-right:0!important;
-	margin-left:0!important;
-}
-
-
-#drag{
-	height:32px;
-	margin-bottom: 0px;
-}
-
-.fn__flex-column.fn__flex-shrink,.layout__center+.layout__resize--lr+.fn__flex-column{
-	padding-top:0px;
-}
-
-#toolbar+.fn__flex-1{
-	margin-top: -3px;
+body:not(.body--mobile,.body--window)>#toolbar [data-position]:hover{
+	margin-right: 2px;
 }
