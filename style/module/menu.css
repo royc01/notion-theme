@@ -5,8 +5,11 @@
 	background-color:var(--b3-theme-background);
 	border:none;
 	border-radius:6px;
+	padding: 4px 0;
 }
-
+.b3-menu__items{
+	padding: 0 4px;
+}
 .b3-menu__item{
 	background-color: var(--b3-theme-background);
 }
@@ -15,6 +18,7 @@
 	box-shadow: var(--b3-menu-shadow);
 	border:none;
 	border-radius:6px;
+	padding: 4px 0;
 }
 
 .b3-menu__item:hover:not(.b3-menu__item--readonly):not(.b3-menu__item--custom){

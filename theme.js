@@ -1355,7 +1355,7 @@ function savorPluginsAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClickRunFun
         if (toolbarEdit == null && windowControls != null) {
             savorPlugins = document.createElement("div");
             savorPlugins.id = "savorPlugins";
-            barPlugins.parentElement.insertBefore(savorPlugins, barPlugins);
+            barPlugins.appendChild(savorPlugins);
         } else if (toolbarEdit != null) {
             savorPlugins = insertCreateBefore(toolbarEdit, "div", "savorPlugins");
             savorPlugins.style.position = "relative";

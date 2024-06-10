@@ -784,3 +784,21 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 
 
 
+
+
+
+
+
+
+#savordrag.fn__none{
+	display:flex!important;
+}
+
+#savorPlugins{
+	position: fixed;
+	top: 0px;
+	margin-left: -30px;
+}
+#barPlugins{
+	margin-left: 30px;
+}

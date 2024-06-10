@@ -160,7 +160,7 @@
 	
 	/* 自定义结构配色 */
 	/* 顶栏 */
-	--S-toolbar-background: #f4f1eb;
+	--S-toolbar-background: #eeeae3;
 	--S-toolbar-blur-background: transparent;
 	--S-toolbar-item-hover: rgba(0, 0, 0, .05);
 	--S-toolbar-barWorkspace-hover:var(--S-dockleft-item-active-background);

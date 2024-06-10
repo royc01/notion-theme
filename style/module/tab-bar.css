@@ -16,11 +16,17 @@
 		}
 		&[data-type="tab-header"]{
 			pointer-events: visibleFill;
-			padding: 0 8px;
+			padding: 0 6px;
 			min-height: 38px;
 			border-radius: 0px;
 			&.item--focus{
 				background-color: var(--b3-theme-background);
+				&:after{
+					display: none;
+				}
+				& .item__text{
+					font-weight:700;
+				}
 			}
 		}
 	}

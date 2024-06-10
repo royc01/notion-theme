@@ -28,15 +28,15 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		&:hover{
 			margin-right: -2px;
 		}
-		&:not(.fn__none)~#barPlugins::after{
+		&:not(.fn__none)~#barPlugins::before{
 			content: counter(plugin-counter);
-			position:absolute;
-			right:240px;
+			position: fixed;
 			top:9px;
+			margin-left: -32px;
 			border-radius: 50%;
 			background-color: #ee6f5b;
 			color: #fff;
-			width: 20px;
+			width: 20px;	
 			height: 20px;
 			line-height: 20px;
 			text-align: center;
