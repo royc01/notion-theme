@@ -1,0 +1,7 @@
+body:not(.body--mobile,.body--window)>#toolbar [data-position]{
+	margin-right: 2px;
+	border-radius: 6px;
+}
+body:not(.body--mobile,.body--window)>#toolbar [data-position]:hover{
+	margin-right: 2px;
+}

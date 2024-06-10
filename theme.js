@@ -606,13 +606,29 @@ function tabbarVerticalButton() {
     );
 }
 
+/**---------------------------------------------------------插件-------------------------------------------------------------- */
+
+function SpluginButton() {
+    savorPluginsAddButton(
+        "Splugin",
+        "toolbar__item b3-tooltips b3-tooltips__sw",
+		"展开插件",
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/Splugin.css", "theme-color-style-plugin隐藏").setAttribute("Splugin", "plugin隐藏");
+        },
+        () => {
+            document.getElementById("theme-color-style-plugin隐藏").remove();
+        },
+        true
+    );
+}
 /**---------------------------------------------------------顶栏-------------------------------------------------------------- */
 
 function topbarfixedButton() {
-    savorPluginsAddButton(
+    savorThemeToolplusAddButton(
         "topBar",
         "toolbar__item b3-tooltips b3-tooltips__sw",
-		"展开插件",
+		"顶栏合并",
         () => {
             loadStyle("/appearance/themes/Savor/style/topbar/top-fixed.css", "theme-color-style-topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
         },
@@ -622,7 +638,6 @@ function topbarfixedButton() {
         true
     );
 }
-
 /**---------------------------------------------------------子弹-------------------------------------------------------------- */
 
 function bulletThreading() {
@@ -2149,6 +2164,8 @@ function getcommonMenu_Bolck() {
                 concealMarkButton();//挖空
                 
                 tabbarVerticalButton();//垂直页签
+
+                SpluginButton();//展开插件
 				
 				topbarfixedButton();//顶栏悬浮
 				

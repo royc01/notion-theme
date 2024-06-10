@@ -39,7 +39,9 @@
 }
 #topBar.button_on{
 	background:var(--S-topBar-on);
-	background-color: #ee6f5b;
+}
+#topBar.button_off{
+	background:var(--S-topBar-off);
 }
 #bulletThreading.button_on{
 	background:var(--S-bulletThreading-on);
@@ -71,7 +73,7 @@
 	background-color:var(--b3-theme-background);
 	position:absolute;
 	width:136px;
-    height: 188px;
+    height: 218px;
     top: 23px;
 	left:-112px;
 	z-index:5;
@@ -82,7 +84,7 @@
 #savorToolbar:hover:after{
 	display:block;
 }
-#buttonSavor-light,#buttonSavor-dark,#buttonsalt,#buttonvinegar,#buttonsugar,#conceal,#tabbarVertical,#bulletThreading{
+#buttonSavor-light,#buttonSavor-dark,#buttonsalt,#buttonvinegar,#buttonsugar,#topBar,#conceal,#tabbarVertical,#bulletThreading{
 	margin:0px;
 	height:30px;
 	left: -108px;
@@ -98,7 +100,7 @@
 }
 
 
-#buttonSavor-light::after,#buttonSavor-dark::after,#buttonsalt::after,#buttonvinegar::after,#buttonsugar::after,#conceal::after,#tabbarVertical::after,#bulletThreading::after{
+#buttonSavor-light::after,#buttonSavor-dark::after,#buttonsalt::after,#buttonvinegar::after,#buttonsugar::after,#topBar::after,#conceal::after,#tabbarVertical::after,#bulletThreading::after{
 	font-size:14px;
 	line-height:20px;
 	transform:none;
@@ -113,11 +115,11 @@
 }
 
 
-#buttonSavor-light::before,#buttonSavor-dark::before,#buttonsalt::before,#conceal::before,#tabbarVertical::before,#buttonvinegar::before,#buttonsugar::before,#bulletThreading::before{
+#buttonSavor-light::before,#buttonSavor-dark::before,#buttonsalt::before,#topBar::before,#conceal::before,#tabbarVertical::before,#buttonvinegar::before,#buttonsugar::before,#bulletThreading::before{
 	display:none;
 }
 
-#buttonSavor-light:hover,#buttonSavor-dark:hover,#buttonsalt:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover,#bulletThreading:hover{
+#buttonSavor-light:hover,#buttonSavor-dark:hover,#buttonsalt:hover,#topBar:hover,#conceal:hover,#tabbarVertical:hover,#buttonvinegar:hover,#buttonsugar:hover,#bulletThreading:hover{
 	background-color:var(--S-list-background)!important;
 }
 

@@ -24,9 +24,6 @@
 		svg{
 			width: 13px;
 		}
-		&:first-child{
-			margin-top: 14px;
-		}
 		&:last-child{
 			margin-bottom: 6px;
 		}
