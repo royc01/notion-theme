@@ -191,6 +191,7 @@
 	--S-toolbar-closeWindow-hover: #e81123;
 	--S-toolbar-closeWindow-svg: #fff;
 	
+    --S-topfixed-background: var(--b3-theme-on-background);
 	/* dock栏 */
 	--S-dock-color: rgb(55, 53, 47, .3);
 	--S-dock-background:  rgb(247, 247, 245);

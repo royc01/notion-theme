@@ -168,6 +168,8 @@
 	--S-toolbar-barWorkspace-hover:var(--S-dockleft-item-active-background);
 	--S-toolbar-closeWindow-hover: #e81123;
 	--S-toolbar-closeWindow-svg: #fff;
+
+
 	/* dock栏 */
 	--S-dock-color: rgba(37, 40, 48, .3);
 	--S-dock-background: rgb(215, 224, 224);
@@ -176,6 +178,7 @@
 	--S-dock-item-active-color: #eb8383;
 	--S-dock-item-hover-background: rgb(182, 200, 201);
 	
+    --S-topfixed-background: var(--b3-theme-background);
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: var(--b3-theme-background);
 	--S-fn__flex-shrink-background: rgb(215, 224, 224);
@@ -311,9 +314,3 @@
     background-color: var(--S-fn__flex-column-background);
 }
 
-.layout-tab-bar .item:hover:not(.item--focus):not(.item--readonly) .item__text,.layout__wnd--active .layout-tab-bar .item--focus:hover>.item__text{
-    color:var(--b3-theme-background);
-}
-.block__icon:hover:not([disabled]):not(.ft__primary), .block__icon--active {
-    color:var(--b3-theme-background);
-}

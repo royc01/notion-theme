@@ -1,5 +1,6 @@
 body:not(.body--mobile,.body--window)>#toolbar{
 	z-index: 2;
+	height: 38px;
 	margin-bottom: -38px;
 	pointer-events: none;
 	counter-reset:plugin-counter;
@@ -70,12 +71,14 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	padding-top: 38px;
 }
 .layout-tab-bar{
+	padding-left: 0px;
 	& .item{
+		pointer-events: visibleFill;
 		&[data-type="tab-header"]{
 			pointer-events: visibleFill;
 			app-region: no-drag;
 			padding: 0 6px;
-			min-height: 38px;
+			min-height: 39px;
 			border-radius: 0px;
 			&.item--focus{
 				background-color: var(--b3-theme-background);
@@ -201,4 +204,18 @@ body:not(.body--mobile,.body--window)>#toolbar{
 
 .layout__center .layout__resize:not(.layout__resize--lr)+.fn__flex .layout-tab-bar{
 	background-color: var(--S-toolbar-background);
+}
+
+
+
+.layout-tab-bar .item:hover:not(.item--focus):not(.item--readonly) .item__text,.layout__wnd--active .layout-tab-bar .item--focus:hover>.item__text{
+    color:var(--S-topfixed-background);
+}
+.layout-tab-bar .block__icon:hover:not([disabled]):not(.ft__primary), .layout-tab-bar .block__icon--active {
+    color:var(--S-topfixed-background);
+}
+
+
+#savorToolbar{
+	margin:6px 0px 4px 4px;
 }

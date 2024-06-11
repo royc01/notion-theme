@@ -3,7 +3,6 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	overflow:visible;
 	background-color: var(--S-toolbar-background);
 	border:none;
-	height: 38px;
     z-index: 2;
 }
 
