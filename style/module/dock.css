@@ -40,6 +40,10 @@
 		color: var(--S-dock-background);
 		background-color: var(--b3-theme-on-background);
 	}
+	& .dock__item--active:hover{
+		color: var(--S-dock-background);
+		background-color: var(    --S-dock-item-active-background-hover);
+	}
 }
 
 .b3-list-item__toggle{

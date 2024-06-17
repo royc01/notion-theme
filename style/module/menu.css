@@ -382,10 +382,10 @@ div#historyContainer{
 	padding:5px;
 	border:none;
 	min-width: 50vw;
-	border-radius: 6px;
+	border-radiucs: 6px;
 }
 .hint--menu>div{
-	columns: 50px 4;
+	column-width: 180px;
 	column-rule:1px outset var(--b3-border-color);
 	/*column-fill:auto;
 	max-height: 402px !important;*/
@@ -415,7 +415,7 @@ div#historyContainer{
 	width:calc(25% - 5px);
 }
 	.hint--menu{
-	max-height: 412px !important;
+	max-height: 600px !important;
 	}
 }
 @media screen and (max-width: 1280px) {

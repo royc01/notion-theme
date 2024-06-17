@@ -94,6 +94,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		& .item--readonly{
 		margin:7px 0 0 7px;
 		padding:0;
+		pointer-events: none;
 		&>.fn__flex-1{
 			display: none;
 		}
@@ -187,6 +188,16 @@ body:not(.body--mobile,.body--window)>#toolbar{
 
 .layout__center:has(~.layout__dockr[style*="width: 0px"]),.layout__center:has(~.layout__dockr.layout--float){
 	.fn__flex-1:first-child{
+	&, & > &, & > & > & {
+		>[data-type="wnd"]>.fn__flex{
+			margin-right: 300px;
+			transition: all 200ms;
+			}
+		}
+	}
+}
+.layout__center:has(~.layout__dockr[style*="width: 0px"]),.layout__center:has(~.layout__dockr.layout--float){
+	> .layout__resize--lr + .fn__flex-column > .fn__flex-1:first-child{
 	&, & > &, & > & > & {
 		>[data-type="wnd"]>.fn__flex{
 			margin-right: 300px;

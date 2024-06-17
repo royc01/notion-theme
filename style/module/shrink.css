@@ -325,9 +325,6 @@ v.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar{
 }
 
 /*分界线*/
-.layout__resize{
-	z-index:1;
-}
 .layout__center + .layout__resize{
 	z-index:2;
 }
