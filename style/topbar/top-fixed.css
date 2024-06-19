@@ -28,7 +28,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 				content: counter(plugin-counter);
 				position: fixed;
 				top:9px;
-				margin-left: -32px;
+				margin-left: -34px;
 				border-radius: 50%;
 				background-color: #ee6f5b;
 				color: #fff;
@@ -112,20 +112,18 @@ body:not(.body--mobile,.body--window)>#toolbar{
 }
 #barPlugins{
 	margin-left: 30px;
+	pointer-events: none!important;
 }
-
+#barPlugins svg{
+	pointer-events: visibleFill;
+}
 #savordrag.fn__none{
 	display:flex!important;
 }
 #savorPlugins{
 	display: flex;
-	width: 22px;
+	width: 0px;
 	z-index:8;
-	margin-top: 2px;
-	padding: 0px;
-	position: fixed;
-	top: 0px;
-	margin-left: -30px;
 }
 #savordrag{
 	display: block!important;
@@ -145,10 +143,10 @@ body:not(.body--mobile,.body--window)>#toolbar{
 }
 #Splugin{
 	padding: 0px;
-	margin-left: -2px;
-	width: 18px;
-	height: 18px;
-	margin-top: 8px;
+	margin-left: -54px;
+	width: 20px;
+	height: 20px;
+	margin-top: 3px;
 	border-radius: 50%;
 }
 #Splugin.button_off:hover{

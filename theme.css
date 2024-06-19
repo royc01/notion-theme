@@ -429,14 +429,17 @@
 .layout__dockl .layout__resize.fn__none:after,.layout__dockr .layout__resize.fn__none:after{
 	background-color: var(--S-fn__flex-column-background);
 }
-.layout__dockr .fn__flex .block__icons~.fn__flex-1:not(.backlinkList){
-	padding-bottom:28px;
+.layout__dockr:not(.layout--float)  .fn__flex .block__icons~.fn__flex-1:not(.backlinkList){
+	padding-bottom:22px;
 }
-.backlinkMList.fn__flex-1[style*="height"]{
-	min-height:28px;
+.layout__dockr:not(.layout--float) .backlinkMList.fn__flex-1[style*="height"]{
+	min-height:22px;
 	padding-bottom:0px!important;
 }
-
+.backlinkMList[style*="height:0px"] .b3-list--empty{
+	color: transparent;
+	padding: 0px;
+}
 .status.fn__none{
 	display:block!important;
 	padding:0px!important;
