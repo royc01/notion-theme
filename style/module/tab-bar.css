@@ -8,7 +8,6 @@
 		min-width:unset;
 		overflow:visible;
 		height: 26px;
-		padding: 2px 0px 2px 0px;
 		& .item__text{
 			padding: 2px 6px 2px 6px; 
 			-webkit-mask-image:none;
@@ -34,15 +33,15 @@
 }
 
 .layout-tab-bar .item--pin{
-	padding:2px;
+	padding: 0px 2px;
 	& .item__icon{
-		padding:0px 3px 0px 4px;
+		padding: 0px 3px 0px 4px;
 	}
 	& .item__graphic{
-		padding:4px;
+		padding: 4px;
 	}
 	& .item__text{
-		padding:0px 2px 0px 3px;
+		padding: 0px 2px 0px 3px;
 	}
 	&:nth-child(4n-3){
 		background-color:var(--b3-card-error-background);
