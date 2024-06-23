@@ -8,6 +8,7 @@
 		min-width:unset;
 		overflow:visible;
 		height: 26px;
+		padding: 2px 0px 2px 0px;
 		& .item__text{
 			padding: 2px 6px 2px 6px; 
 			-webkit-mask-image:none;
