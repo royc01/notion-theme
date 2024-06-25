@@ -1,6 +1,6 @@
 /* ————————————————————页签———————————————————— */
 .layout-tab-bar{
-	height: 39px;
+	height: 38px;
 	padding-left: 5px;
 	& .item{
 		border-radius: 3px;
@@ -8,17 +8,14 @@
 		min-width:unset;
 		overflow:visible;
 		height: 26px;
+		margin:0 3px;
 		& .item__text{
-			padding: 2px 6px 2px 6px; 
+			padding: 2px 6px; 
 			-webkit-mask-image:none;
 		}
 		& .item__close{
 			padding: 4px 6px 4px 2px;
 		}
-	}
-	& .item--focus:after{
-		position: absolute;
-		bottom: -7px;
 	}
 	& .item:not(.item--readonly):hover{
 		background-color:var(--S-list-background)!important;
@@ -27,21 +24,23 @@
 		margin:7px 0 0 7px;		
 	}
 }
-
-.layout__wnd--active .layout-tab-bar .item--focus::after{
-	background-color: var(--S-item-focus);
+.layout-tab-bar .item--focus:after{
+	background-color: transparent;
+	box-shadow: var(--b3-theme-background-light) 0px 6px 0px;
 }
-
+.layout__wnd--active .layout-tab-bar .item--focus::after{
+	background-color: transparent;
+	box-shadow: var(--S-item-focus) 0px 6px 0px;
+}
+body.body--blur .layout__wnd--active .layout-tab-bar .item--focus{
+	box-shadow: none!important;
+}
 .layout-tab-bar .item--pin{
-	padding:2px;
 	& .item__icon{
-		padding:0px 3px 0px 4px;
+		padding:0px 5px;
 	}
 	& .item__graphic{
 		padding:4px;
-	}
-	& .item__text{
-		padding:0px 2px 0px 3px;
 	}
 	&:nth-child(4n-3){
 		background-color:var(--b3-card-error-background);
