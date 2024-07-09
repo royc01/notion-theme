@@ -4,6 +4,7 @@
 	.protyle-background__icon{
 		margin-bottom:10px;
 		border-radius:5px;
+		font-size: 60px;
 		&:not(.fn__none)+.b3-chips{
 			margin-left:80px;
 			margin-top:-40px;

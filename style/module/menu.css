@@ -134,13 +134,12 @@
 }
 
 .b3-switch::after {
-	border: none;
 	box-shadow: none;
-	width: 13px;
-	height: 13px;
+	width: 14px;
+	height: 14px;
 	border-radius: 44px;
 	background: var(--b3-theme-background);
-	transform: translateX(5px) translateY(5px);
+	transform: translateX(6px) translateY(5px);
   }
 
 .b3-switch::before {
@@ -153,7 +152,7 @@
 
 .b3-switch:checked:after {
   background: var(--b3-theme-background);
-  transform: translateX(18px) translateY(5px);
+  transform: translateX(17px) translateY(5px);
 }
 /*引用块弹出框*/
 .block__popover--open{
@@ -474,7 +473,7 @@ div#historyContainer{
 
 .b3-slider::-webkit-slider-runnable-track {
     height: 2px;
-	background-color: var(--S-status-msg-background)!important;
+	background-color: var(--S-Plugin-bg1)!important;
 }
 .b3-slider::-webkit-slider-thumb {
 	transform:unset !important;
@@ -482,11 +481,17 @@ div#historyContainer{
     height: 7px;
 	margin-top: -2px;
     background-color: var(--b3-theme-background)!important;
-	box-shadow: 0px 0px 0px 3px var(--S-status-msg-background)!important;
+	box-shadow: 0px 0px 0px 3px var(--S-Plugin-bg1)!important;
+}
+.b3-slider.fn__size200::-webkit-slider-runnable-track {
+	background-color: var(--b3-theme-primary)!important;
+}
+.b3-slider.fn__size200::-webkit-slider-thumb {
+	box-shadow: 0px 0px 0px 3px var(--b3-theme-primary)!important;
 }
 .b3-slider::-webkit-slider-thumb:hover{
 	box-shadow:0px 0px 0px 3px var(--b3-theme-primary),0px 0px 0px 5px var(--b3-theme-primary-lighter)!important;
-	transition:all 500ms;
+	transition:all 300ms;
 }
 
 /*闪卡*/

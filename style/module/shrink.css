@@ -44,7 +44,7 @@
 	margin-left:-4px;
 	height: 22px;
 	width: 16px;
-	font-size:14px;
+	font-size:12px;
 	line-height:22px;
 	padding: 0 3px;
 }
@@ -325,7 +325,7 @@ v.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar{
 }
 
 /*分界线*/
-
+* 
 .layout__resize:after{
 	background-color: var(--b3-layout-resize);
 }

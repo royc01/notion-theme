@@ -670,55 +670,6 @@ function qucuFiiter() {
 
 
 
-/**----------------------------------自动展开悬浮窗折叠列表,展开搜索条目折叠列表,聚焦单独列表-----体验优化----------------------------------*/
-
-function autoOpenList() {
-
-    setInterval(() => {
-        //找到所有的悬浮窗
-        var Preview = document.querySelectorAll("[data-oid]");
-	
-        //如果发现悬浮窗内首行是折叠列表就展开并打上标记
-        if (Preview.length != 0) {
-            for (let index = 0; index < Preview.length; index++) {
-                const element = Preview[index];
-                var item = element.children[1].children;
-
-                for (let index = 0; index < item.length; index++) {
-                    var obj = item[index].children[1]
-                    if (obj == null) continue;
-                    const element = obj.children[0].children[0];
-                    if (element == null) continue;
-                    if (element.className != "li") continue;//判断是否是列表
-                    if (element.getAttribute("foldTag") != null) continue;//判断是否存在标记
-                    if (element.getAttribute("foid") == 0) continue;//判断是折叠
-
-                    element.setAttribute("fold", 0);
-                    element.setAttribute("foldTag", true);
-                }
-            }
-        }
-
-        var searchPreview = document.querySelector("#searchPreview [data-doc-type='NodeListItem'].protyle-wysiwyg.protyle-wysiwyg--attr>div:nth-child(1)");
-        if (searchPreview != null && searchPreview.getAttribute("data-type") == "NodeListItem" && searchPreview.getAttribute("fold") == 1) {
-            if (searchPreview.getAttribute("foldTag") != null) return;//判断是否存在标记
-            searchPreview.setAttribute("fold", 0);
-            searchPreview.setAttribute("foldTag", true);
-        }
-
-        var contentLIst = document.querySelectorAll(".layout-tab-container>.fn__flex-1.protyle:not(.fn__none) [data-doc-type='NodeListItem'].protyle-wysiwyg.protyle-wysiwyg--attr>div:nth-child(1)");
-        for (let index = 0; index < contentLIst.length; index++) {
-            const element = contentLIst[index];
-            if (element != null && element.getAttribute("data-type") == "NodeListItem" && element.getAttribute("fold") == 1) {
-                if (element.getAttribute("foldTag") != null) return;//判断是否存在标记
-                element.setAttribute("fold", 0);
-                element.setAttribute("foldTag", true);
-            }
-        }
-
-    }, 500)
-}
-
 
 /**----------------------------------列表折叠内容预览查看---------------------------------- */
 function collapsedListPreview() {
@@ -2173,8 +2124,6 @@ function getcommonMenu_Bolck() {
  
                 setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
 
-                autoOpenList();//自动展开悬浮窗内折叠列表（第一次折叠）
-
                 collapsedListPreview();//折叠列表内容预览查看
 
                 collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
@@ -2183,7 +2132,7 @@ function getcommonMenu_Bolck() {
 
                 console.log("==============>附加CSS和特性JS_已经执行<==============");
             }
-        }, 1000);
+        }, 100);
     };
     if (v == null) {
         window.theme.config = { "Savor": 1 };

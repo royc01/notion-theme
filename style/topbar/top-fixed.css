@@ -15,7 +15,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		&  [data-position]{
 			margin: 0px;
 			margin-right: -16px;
-			border: 2px solid var(--b3-toolbar-background);
+			border: 2px solid var(--S-toolbar-background);
 			border-radius: 50%;
 			box-sizing: content-box;
 			height: 13px;
@@ -127,7 +127,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 #savordrag.fn__none{
 	display:flex!important;
 }
-#savorPlugins{
+[data-position] ~ #savorPlugins{
 	display: flex;
 	width: 0px;
 	z-index:8;
