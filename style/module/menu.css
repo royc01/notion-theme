@@ -130,16 +130,18 @@
   background: var(--b3-border-color);
   transition-property: background-color,filter;
   transition-duration: .3s;
-  box-sizing: border-box;
+  border: none;
 }
 
 .b3-switch::after {
 	box-shadow: none;
-	width: 14px;
-	height: 14px;
+	width: 18px;
+	height: 18px;
 	border-radius: 44px;
 	background: var(--b3-theme-background);
-	transform: translateX(6px) translateY(5px);
+	transform: translateX(5px);
+	top: 0px;
+	border: 3px solid var(--b3-theme-surface-lighter);
   }
 
 .b3-switch::before {
@@ -152,7 +154,7 @@
 
 .b3-switch:checked:after {
   background: var(--b3-theme-background);
-  transform: translateX(17px) translateY(5px);
+  transform: translateX(17px);
 }
 /*引用块弹出框*/
 .block__popover--open{
