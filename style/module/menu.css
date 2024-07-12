@@ -139,7 +139,7 @@
 	height: 18px;
 	border-radius: 44px;
 	background: var(--b3-theme-background);
-	transform: translateX(5px);
+	transform: translateX(4px);
 	top: 0px;
 	border: 3px solid var(--b3-theme-surface-lighter);
   }

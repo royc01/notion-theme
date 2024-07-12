@@ -1,7 +1,7 @@
 /* ————————————————————面包屑———————————————————— */
 .protyle-breadcrumb{
 	padding: 6px 10px 7px 8px;
-	.protyle-breadcrumb__item{
+	&>.protyle-breadcrumb__bar .protyle-breadcrumb__item{
 		&:hover{
 			background-color: var(--S-list-background);
 		}
@@ -9,6 +9,7 @@
 			&::before{
 				content:"📄";
 				margin-right:-14px;
+				font-size: 12px;
 			}
 			&>svg.popover__block{
 				color:transparent!important;

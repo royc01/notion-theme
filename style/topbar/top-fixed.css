@@ -127,7 +127,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 #savordrag.fn__none{
 	display:flex!important;
 }
-[data-position] ~ #savorPlugins{
+[data-menu]:not(.fn__none) ~ #savorPlugins{
 	display: flex;
 	width: 0px;
 	z-index:8;

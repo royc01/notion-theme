@@ -690,8 +690,9 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 	padding-top: 20px;
 }
 
-
-
+.layout__center .av__views .layout-tab-bar{
+	background-color:transparent;
+}
 
 
 
@@ -707,3 +708,22 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 .block__popover .protyle-wysiwyg>[data-node-id].li[fold="1"]>div:nth-child(3):not(.protyle-attr){
 	display: block;
 }
+
+
+/*#layouts{
+	margin-left: -34px;
+	margin-right: -34px;
+}
+.dock#dockLeft,.dock#dockRight{
+	z-index: 1;
+	background-color: transparent;
+}
+.layout__dockl>.fn__flex .layout-tab-container{
+	padding-left: 34px;
+}
+.layout__dockr>.fn__flex .layout-tab-container{
+	padding-right: 34px;
+}
+.layout__dockl[style="width: 0px;"],.layout__dockr[style="width: 0px;"]{
+	width: 34px!important;
+}*/

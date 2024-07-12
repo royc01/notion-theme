@@ -20,16 +20,16 @@
 	& .dock__item{
 		color: var(--S-dock-color);
 		margin: 12px 7px;
-		padding:3px ;
+		padding:4px ;
 		svg{
-			width: 13px;
+			width: 11px;
+			height: 11px;
 		}
 		&:last-child{
 			margin-bottom: 6px;
 		}
 		&:hover{
 			color: var(--b3-theme-on-background);
-			background-color: transparent;
 		}
 		&.dock__item--activefocus{
 			background-color: var(--S-dock--item--activefocus)!important;
@@ -37,12 +37,12 @@
 		}/*dock焦点状态*/
 	}
 	& .dock__item--active{
-		color: var(--S-dock-background);
-		background-color: var(--b3-theme-on-background);
+		color: var(--b3-theme-on-background);
+		background-color: var(--S-dock-item-active-background-hover);
 	}
 	& .dock__item--active:hover{
-		color: var(--S-dock-background);
-		background-color: var(    --S-dock-item-active-background-hover);
+		color: var(--b3-theme-on-background);
+		background-color: var(--S-dock-item-active-background-hover);
 	}
 }
 
