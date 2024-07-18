@@ -428,14 +428,7 @@ div#historyContainer{
 	min-width: unset !important;
 }
 }
-.protyle-hint.hint--menu:has(>.emojis) {
-    min-width: 372px;
-    width: 372px !important;
-}
-.protyle-hint.hint--menu>.emojis {
-    column-span: all;
-    width: 360px!important;
-}
+
 .emojis__item {
     height: 32px;
     line-height: 32px;
@@ -445,7 +438,7 @@ div#historyContainer{
     align-items: center;
     padding: 0;
     width: 32px;
-    font-size: 18px;
+    font-size: 20px;
     margin: 0 4px 4px 0;
 }
 .emojis__item img, .emojis__item svg.custom-icon {
@@ -454,6 +447,9 @@ div#historyContainer{
 	height:18px;
     padding: 7px;
 	display: block;
+}
+.emojis__item:hover{
+	font-size: 24px;
 }
 /*文本框选颜色*/
 ::selection{

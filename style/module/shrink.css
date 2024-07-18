@@ -263,15 +263,17 @@
 .sy__backlink .protyle-wysiwyg {
     padding: 2px 6px 6px 4px !important;
 }
-
-
-.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar>span:last-child>.protyle-breadcrumb__text{
-    opacity: 0;
+.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar>span:last-child{
+	background-color: transparent;
+	&>.protyle-breadcrumb__text{
+		opacity: 0;
+	}
+	&:hover>.protyle-breadcrumb__text{
+		opacity: 1;
+		transition: all 200ms;
+	}
 }
-.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar>span:last-child:hover>.protyle-breadcrumb__text{
-    opacity: 1;
-	transition: all 200ms;
-}
+
 v.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar{
 	font-size:80%;
 	min-height: 24px;

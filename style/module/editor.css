@@ -455,7 +455,6 @@
 /* 嵌入块 */
 .protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"]{
     color: var( --b3-theme-on-background);
-    background-color: var(--b3-theme-surface-light);
 	border-radius:0 5px 5px 0;
 }
 /* 命名，别名，备注*/
