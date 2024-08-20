@@ -38,7 +38,7 @@
 .b3-list-item__arrow{
 	color:var(--S-list-item-arrow);
 	padding:5px;
-	border-radius: 3px;
+	border-radius: 4px;
 }
 .b3-list-item__icon{
 	margin-left:-4px;
@@ -54,11 +54,8 @@
 .b3-list-item--hide-action .b3-list-item__action{
 	padding: 0 3px;
 	margin-left: 4px;
-	border-radius: 3px;
+	border-radius: 4px;
 	color: var(--b3-list-background-more);
-}
-.layout__tab--active .b3-list--background .b3-list-item--focus{
-	background-color: var(--S-list-background-activefocus);
 }
 .layout__tab--active .b3-list--background .b3-list-item--focus{
 	background-color: var(--S-list-background-activefocus);
@@ -103,7 +100,6 @@
 	border-radius: 3px;
 	padding: 0 4px;
 	margin-left: 4px;
-	box-shadow: 0 0 0 0.5px var(--b3-border-color) inset;
 }
 /*书签、标签树*/
 .sy__bookmark,.sy__tag {
@@ -217,7 +213,7 @@
 	background-color: var(--S-block-icon-active);
 }
 
-.sy__backlink .protyle-wysiwyg [data-node-id].li>.list {
+/*.sy__backlink .protyle-wysiwyg [data-node-id].li>.list {
     padding-left: 0px!important;
 }/*反链列表间距收窄*/
 
@@ -306,8 +302,8 @@ v.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar{
 	padding-top: 0px;
 	top: 123px!important; 
 	bottom: 40px!important; 
-	box-shadow:  rgba(15, 15, 15, 0.2) 10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  10px -10px 20px -12px; 
-	border-radius:0 5px 5px 0;
+	box-shadow:  rgba(15, 15, 15, 0.2) 10px 16px 20px -12px, rgba(15, 15, 15, 0.2)  10px -10px 20px -12px;
+	border-radius:0 8px 8px 0;
 	overflow:hidden;
 }
 .layout__dockl.layout--float[style*="left: 34px"]{
@@ -318,8 +314,8 @@ v.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar{
 	padding-top: 0px;
 	top: 123px!important; 
 	bottom: 40px!important; 
-	box-shadow: rgba(15, 15, 15, 0.2) -10px 16px 20px -12px, rgba(15, 15, 15, 0.05)  -10px -10px 20px -12px; 
-	border-radius:5px 0 0 5px;
+	box-shadow: rgba(15, 15, 15, 0.2) -10px 16px 20px -12px, rgba(15, 15, 15, 0.2)  -10px -10px 20px -12px; 
+	border-radius:8px 0 0 8px;
 	overflow:hidden;
 }
 .layout__dockr.layout--float[style*="right: 34px"]{
@@ -333,6 +329,9 @@ v.sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar{
 }
 .layout__dockl .layout__resize:after,.layout__dockr .layout__resize:after{
 	background-color: var(--b3-shrink-layout-resize);
+}
+.layout__dockl .layout__resize:hover:after,.layout__dockr .layout__resize:hover:after{
+	height:2px;
 }
 .fn__flex-shrink+.layout__resize--lr:after,.layout__center+.layout__resize--lr:after{
 	width:1px;

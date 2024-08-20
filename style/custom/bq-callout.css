@@ -1,0 +1,95 @@
+/* 引述 */
+.protyle-wysiwyg .bq{
+    color: var( --b3-theme-on-background);
+    border-left: 0.25em solid var(--b3-theme-on-background);
+    /*box-shadow: -2px 0px 0px 5px var(--b3-bq-background) inset,  6px 0px 0px 0px var(--b3-theme-on-background) inset;*/
+    background-color: var(--b3-bq-background);
+    border-radius: 0 4px 4px 0;
+}
+.protyle-wysiwyg .bq .p{
+	padding-left:12px;
+}
+.list .bq {
+	margin-right:0px!important;
+}/*列表里代码块对齐*/
+.bq .bq{
+    margin-left:1px
+}
+.bq[style*="background1)"]{
+	border: none;
+    background-color: var(--b3-bq-background1)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background1) inset;
+}
+.bq[style*="background2"]{
+	border: none;
+    background-color: var(--b3-bq-background2)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background2) inset;
+}
+.bq[style*="background3"]{
+	border: none;
+    background-color: var(--b3-bq-background3)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background3) inset;
+}
+.bq[style*="background4"]{
+	border: none;
+    background-color: var(--b3-bq-background4)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background4) inset;
+}
+.bq[style*="background5"]{
+	border: none;
+    background-color: var(--b3-bq-background5)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background5) inset;
+}
+.bq[style*="background6"]{
+	border: none;
+    background-color: var(--b3-bq-background6)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background6) inset;
+}
+.bq[style*="background7"]{
+	border: none;
+    background-color: var(--b3-bq-background7)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background7) inset;
+}
+.bq[style*="background8"]{
+	border: none;
+    background-color: var(--b3-bq-background8)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background8) inset;
+}
+.bq[style*="background9"]{
+	border: none;
+    background-color: var(--b3-bq-background9)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background9) inset;
+}
+.bq[style*="background10"]{
+	border: none;
+    background-color: var(--b3-bq-background10)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background10) inset;
+}
+.bq[style*="background11"]{
+	border: none;
+    background-color: var(--b3-bq-background11)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background11) inset;
+}
+.bq[style*="background12"]{
+	border: none;
+    background-color: var(--b3-bq-background12)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background12) inset;
+}
+.bq[style*="background13"]{
+	border: none;
+    background-color: var(--b3-bq-background13)!important;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px var(--b3-font-background13) inset;
+}

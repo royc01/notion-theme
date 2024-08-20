@@ -333,9 +333,10 @@
 	bottom:-5px;
 	margin-right:unset;
 	border-bottom-color:transparent;
-	margin-top:-1px;
+	margin-top:0px;
 	font-weight: 500;
 	font-size:1.3em;
+	line-height: 22px;
 }
 
 /* 表格 */
@@ -472,9 +473,9 @@
 .list .code-block {
 	margin-right:0px!important;
 }/*列表里代码块对齐*/
-.b3-typography div.hljs, .protyle-wysiwyg div.hljs {
+.b3-typography .code-block, .protyle-wysiwyg .code-block {
 	background-color:var(--S-code-block-hljs);
-	padding: 30px 10px 22px 10px;
+	padding: 34px 10px 22px 10px;
 }
 .protyle-wysiwyg[contenteditable="true"] .code-block .protyle-action{
 	padding:4px 3px;
@@ -487,6 +488,7 @@
 }
 .b3-typography .code-block .protyle-action .protyle-action__language, .protyle-wysiwyg .code-block .protyle-action .protyle-action__language{
 	margin-top: -2px;
+	margin-left: 0px;
 }
 .code-block .protyle-action .protyle-action__language:hover{
 	background-color:var(--S-list-background);	
@@ -500,10 +502,10 @@
 .code-block .protyle-action .protyle-action__menu:hover{
 	background-color:var(--S-list-background-focus);
 }
-.protyle-linenumber__rows{
+/*.protyle-linenumber__rows{
 	background-color: var(--S-linenumber-rows);
 	padding: 30px 4px 22px 4px;
-}
+}*/
 .protyle-wysiwyg [data-node-id][fold="1"]:not(.li):not([data-type="NodeHeading"]).code-block{
 	height: 2.2em;
 }

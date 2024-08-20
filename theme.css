@@ -32,12 +32,17 @@
 
 @import url(/appearance/themes/Savor/style/custom/ctrlp.css);/* 搜索分栏*/
 
+@import url(/appearance/themes/Savor/style/custom/bq-callout.css);/*引述样式*/
+
 @import url(/appearance/themes/Savor/style/custom/progress.css);/* 进度条任务列表 */
 
 @import url(/appearance/themes/Savor/style/custom/list-fold.css);/* 折叠块悬浮弹窗 */
 
 @import url(/appearance/themes/Savor/style/custom/setting.css);/* 自定义功能按钮 */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @font-face {
     font-family: 'Twitter Emoji';
@@ -70,7 +75,7 @@
     --b3-theme-on-error: #fff;
 
     /* 字体 */
-    --b3-font-family: apple-system, BlinkMacSystemFont,"Helvetica Neue", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif, 'Twitter Emoji', "Apple Color Emoji", "Noto Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
+    --b3-font-family: Roboto, "Noto Sans SC", sans-serif, apple-system, BlinkMacSystemFont,"Helvetica Neue", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif, 'Twitter Emoji', "Apple Color Emoji", "Noto Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
     --b3-font-family-protyle: var(--b3-font-family);
     --b3-font-family-code: "JetBrainsMono-Regular", mononoki, Consolas, "Liberation Mono", Menlo, Courier, monospace, var(--b3-font-family);
     --b3-font-family-graph: mononoki;
@@ -246,14 +251,14 @@
 	
 	/* dock栏 */
 	--S-dock-color: rgb(55, 53, 47, .5);
-	--S-dock-background:  #f1f1f0;
+	--S-dock-background:  var(--S-fn__flex-column-background);
 	--S-dockright-item-active-background: var(--b3-theme-background);
 	--S-dockleft-item-active-background: var(--b3-theme-background);
 	--S-dock-item-active-color: var(--b3-theme-on-background);
 	--S-dock-item-hover-background: var(--b3-theme-background);
 	--S-dock--item--activefocus: #ee6f5b;
 	
-	--S-dock-item-width: 33px;
+	--S-dock-item-width: 32px;
 	
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: rgb(251, 251, 250);
@@ -264,7 +269,7 @@
 	--S-block-icon-hover: rgba(55, 53, 47, 0.06);
 	--S-list-item-arrow: rgba(55, 53, 47, 0.4);
 	--S-list-background: rgba(55, 53, 47, 0.06);
-	--S-list-background-focus: rgba(55, 53, 47, 0.12);
+	--S-list-background-focus: rgba(55, 53, 47, 0.8);
 	--S-list-background-activefocus:  rgba(235, 131, 131, 0.15);
 	--S-block-icon-active: var(--b3-theme-error);
 	
@@ -708,25 +713,37 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 }
 
 
-/*#layouts{
-	margin-left: -34px;
-	margin-right: -34px;
+#layouts{
+	margin-left: -36px;
+	margin-right: -36px;
 }
 .dock#dockLeft,.dock#dockRight{
 	z-index: 1;
 	background-color: transparent;
 }
 .layout__dockl>.fn__flex .layout-tab-container{
-	padding-left: 34px;
+	padding-left: 36px;
 }
 .layout__dockr>.fn__flex .layout-tab-container{
-	padding-right: 34px;
+	padding-right: 36px;
 }
-.layout__dockl[style="width: 0px;"],.layout__dockr[style="width: 0px;"]{
-	width: 34px!important;
-}*/
-
-
+.layout__dockl[style*="width: 0px;"],.layout__dockr[style*="width: 0px;"]{
+	width: 36px!important;
+}
+#layouts:has(.layout__dockl.layout--float){
+	margin-left: 0px;
+}
+#layouts:has(.layout__dockr.layout--float){
+	margin-right: 0px;
+}
+.layout__dockl.layout--float>.fn__flex .layout-tab-container{
+	padding-left: 0px;
+	background-color: var(--b3-theme-background);
+}
+.layout__dockr.layout--float>.fn__flex .layout-tab-container{
+	padding-right: 0px;
+	background-color: var(--b3-theme-background);
+}
 /*[data-type="navigation-root"] .b3-list-item__toggle{
 	display: none;
 }*/
@@ -735,4 +752,12 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 
 .config-keymap .b3-list--border .b3-list__panel{
 	margin-left: 28px;
+}
+
+
+/*
+.dock__item--space{
+	background-color: #f0f0ee;
+	margin: 0 0px 7px 7px;
+	border-radius: 5px;
 }

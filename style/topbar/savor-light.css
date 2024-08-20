@@ -43,7 +43,7 @@
 	--webkit-scrollbar-thumb: 0px;
 
     /* 列表 */
-    --b3-list-hover: rgba(55, 53, 47, 0.06);
+    --b3-list-hover: rgba(55, 53, 47, 0.05);
     --b3-list-icon-hover: rgba(33, 34, 36, .1);
 
     /* 菜单 */
@@ -199,7 +199,7 @@
 	--S-dockleft-item-active-background: var(--b3-theme-background);
 	--S-dock-item-active-color: var(--b3-theme-on-background);
 	--S-dock-item-hover-background: var(--b3-theme-background);
-    --S-dock-item-active-background-hover: rgba(55, 53, 47, 0.1);
+    --S-dock-item-active-background-hover: var(--b3-theme-background);
 	/* 侧栏面板 */
 	--S-fn__flex-column-background: rgb(247, 247, 245);
 	--S-fn__flex-shrink-background: rgb(247, 247, 245);
@@ -209,12 +209,12 @@
 	--S-block-icon-hover: rgba(55, 53, 47, 0.06);
 	--S-list-item-arrow: rgba(55, 53, 47, 0.4);
 	--S-list-background: rgba(55, 53, 47, 0.06);
-	--S-list-background-focus: rgba(55, 53, 47, 0.12);
+	--S-list-background-focus: rgba(55, 53, 47, 0.09);
 	--S-list-background-activefocus:  rgba(235, 131, 131, 0.15);
 	--S-block-icon-active: var(--b3-theme-error);
 	
 	--S-flex-column-padding:6px 0px 2px 0px;
-	--S-list-item-radius: 3px;
+	--S-list-item-radius: 6px;
 	
 	/* 大纲数字 */
 	--h1-list-graphic: #eb8383;
@@ -257,7 +257,7 @@
 	--b3-task-done-hover: #069ccd;
 	
 	/* 引述 */
-	--b3-bq-background: rgba(249, 249, 250);
+	--b3-bq-background: rgba(55, 53, 47, 0.03);
 	
 	/* 块引用 */
 	--b3-block-ref-background: var(--S-toolbar-item-hover);
