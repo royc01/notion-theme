@@ -287,11 +287,6 @@
 }
 
 
-#dockLeft.fn__none+#layouts{
-	border-radius:0px;
-	margin:0;
-}
-
 .status #barDock svg{
 	color:var(--b3-theme-on-background);
 }
