@@ -138,8 +138,11 @@
 
 /*文档标题块*/
 .protyle-title__input{
-	font-weight:700;
+	font-weight:800;
 	font-size: 40px;
+}
+.protyle-title__input:empty:after{
+	color: var(--b3-border-scroll);
 }
 /*h1~6标题间距*/
 .protyle-wysiwyg .h1,.protyle-wysiwyg .h2,
@@ -416,7 +419,7 @@
 
 .protyle-wysiwyg [data-node-id] span[data-type*="block-ref"]:not([data-type="virtual-block-ref"]):not([data-type*="sup"]):not([data-type*="sub"]):not(.av__celltext--ref){
 	font-size:95%;
-	padding:0px 5px 1px 5px;
+	padding:2px 3px 1px 3px;
 	color:var(--b3-theme-on-background);
 	background-color:var(--b3-block-ref-background);
 	border-bottom: 1px dashed var(--b3-theme-on-surface);

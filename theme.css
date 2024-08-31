@@ -514,10 +514,10 @@ span[data-type="add"] svg{
 /*数据库*/
 .av__cell .b3-chip[data-type="block-more"],.av__cell .b3-chip[data-type="block-ref"]{
 	font-size: 90%;
-	padding: 2px 3px!important;
-	border-radius: 3px;
+	padding: 3.5px 4px!important;
+	border-radius: 5px;
     background-color: var(--b3-theme-background)!important;
-    color: var(--b3-theme-on-background);
+    color: var(--b3-theme-on-surface);
     box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 	border-bottom:none!important;
 }
@@ -713,7 +713,7 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 }
 
 
-#layouts{
+body:not(.body--window) #layouts{
 	margin-left: -36px;
 	margin-right: -36px;
 }
@@ -760,4 +760,9 @@ body.body--win32 .fullscreen>.protyle-breadcrumb{
 	background-color: #f0f0ee;
 	margin: 0 0px 7px 7px;
 	border-radius: 5px;
+}*/
+
+.toolbar__window .toolbar__item{
+	padding: 13px 14.25px;
 }
+

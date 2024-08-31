@@ -14,7 +14,17 @@
 			-webkit-mask-image:none;
 		}
 		& .item__close{
-			padding: 4px 6px 4px 2px;
+			padding: 4px 2px 4px 2px;
+			svg{
+				height: 12px;
+				width: 12px;
+			}
+		}
+		&.item.item--focus .item__close svg{
+			opacity: 0;
+		}
+		&.item.item--focus:hover .item__close svg{
+			opacity: 1;
 		}
 	}
 	& .item:not(.item--readonly):hover{
