@@ -13,29 +13,41 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		display: none;
 		}
 		&  [data-position]{
-			margin: 0px;
-			margin-right: -16px;
-			border: 2px solid var(--S-toolbar-background);
+			margin:38px 0 0 223px;
+			margin-right: -215px;
 			border-radius: 50%;
 			box-sizing: content-box;
-			height: 13px;
-			padding: 4px;
+			height: 4px;
+			width: 4px;
+			padding: 2px;
 			counter-increment: plugin-counter;
-		&:hover{
-				margin-right: -2px;
+			& svg{
+				height: 12px;
+				width: 12px;
+				opacity: 0;
+			}
+			&:hover{
+				height: 12px;
+				width: 12px;
+				padding: 4px;
+				svg{
+					opacity: 1;
+				}
 			}
 		&:not(.fn__none)~#barPlugins::before{
 				content: counter(plugin-counter);
 				position: fixed;
 				top:9px;
 				margin-left: -34px;
-				border-radius: 50%;
+				border-radius: 6px;
 				background-color: #ee6f5b;
 				color: #fff;
 				width: 20px;	
 				height: 20px;
 				line-height: 20px;
 				text-align: center;
+				font-size: 14px;
+				font-weight: 500;
 			}
 		}
 	&  [data-position="left"]:nth-child(4n-3),&  [data-position="right"]:nth-child(4n-1){
@@ -153,6 +165,9 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	height: 20px;
 	margin-top: 3px;
 	border-radius: 50%;
+	&::after{
+		right: -58px;
+	}
 }
 #Splugin.button_off:hover{
 	background:var(--S-Splugin-off);

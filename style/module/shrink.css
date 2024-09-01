@@ -19,7 +19,9 @@
 			margin:-2px;
 			border-radius: 3px;
 			svg{
-				padding: 3px 0px;
+				height: 12px;
+				width: 12px;
+				padding: 4px 1px;
 				color: var(--S-block-icon-svg-color);
 				margin:0px 3px
 			}
@@ -52,10 +54,14 @@
 	color:var(--b3-theme-on-surface);
 }
 .b3-list-item--hide-action .b3-list-item__action{
-	padding: 0 3px;
+	padding: 0 4px;
 	margin-left: 4px;
 	border-radius: 4px;
 	color: var(--b3-list-background-more);
+	svg{
+		height: 12px;
+    	width: 12px;
+	}
 }
 .layout__tab--active .b3-list--background .b3-list-item--focus{
 	background-color: var(--S-list-background-activefocus);

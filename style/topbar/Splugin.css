@@ -1,7 +1,11 @@
 body:not(.body--mobile,.body--window)>#toolbar [data-position]{
-	margin-right: 2px!important;
+	margin: 42px 0 0 230px!important;
+	margin-right: -221.5px!important;
+	height: 12px!important;
+	width: 12px!important;
+	padding: 4px!important;
 	border-radius: 6px!important;
-}
-body:not(.body--mobile,.body--window)>#toolbar [data-position]:hover{
-	margin-right: 2px!important;
+	svg{
+		opacity: 1!important;
+	}
 }
