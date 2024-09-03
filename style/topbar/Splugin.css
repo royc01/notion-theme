@@ -1,6 +1,6 @@
-body:not(.body--mobile,.body--window)>#toolbar [data-position]{
-	margin: 42px 0 0 230px!important;
-	margin-right: -221.5px!important;
+body:not(.body--mobile,.body--window)>#toolbar #savorToolbar:has(>#topBar.button_on)~.toolbar__item[data-position]{
+	margin: 42px 0 0 226px !important;
+    margin-right: -218.5px !important;
 	height: 12px!important;
 	width: 12px!important;
 	padding: 4px!important;

@@ -214,7 +214,7 @@
 	--S-img-icons-span: rgba(0, 0, 0, .5);
 	/* 块标 */
 	--b3-gutters-color: rgba(211,209,203);
-	--S-gutters-background: var(--b3-toolbar-item-hover);
+	--S-gutters-background: var(--S-toolbar-item-hover);
 	/* 弹出工具条字体颜色选择 */
 	--b3-color--square: var(--b3-border-color);
 	/* 任务列表 */
@@ -223,7 +223,7 @@
 	/* 引述 */
 	--b3-bq-background: #f4f1eb;
 	/* 块引用 */
-	--b3-block-ref-background: var(--b3-toolbar-item-hover);
+	--b3-block-ref-background: var(--S-toolbar-item-hover);
 	/* 代码块 */
 	--S-linenumber-rows: rgba(237, 236, 233);
 	--S-code-block-hljs: var(--S-fn__flex-shrink-background);						  

@@ -1017,12 +1017,12 @@ function savorThemeToolbarAddButton(ButtonID, ButtonTitle , ButtonLabel, Mode, N
     var savorToolbar = document.getElementById("savorToolbar");
     if (savorToolbar == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("windowControls");
+        var barBack = document.getElementById("barBack");
 
-        if (toolbarEdit == null && windowControls != null) {
+        if (toolbarEdit == null && barBack != null) {
             savorToolbar = document.createElement("div");
             savorToolbar.id = "savorToolbar";
-            windowControls.parentElement.insertBefore(savorToolbar, windowControls);
+            barBack.parentElement.insertBefore(savorToolbar, barBack);
         } else if (toolbarEdit != null) {
             savorToolbar = insertCreateBefore(toolbarEdit, "div", "savorToolbar");
             savorToolbar.style.position = "relative";
@@ -1182,12 +1182,12 @@ function savorPluginsAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClickRunFun
     var savorPlugins = document.getElementById("savorPlugins");
     if (savorPlugins == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var barCommand = document.getElementById("barCommand");
+        var windowControls = document.getElementById("windowControls");
 
-        if (toolbarEdit == null && barCommand != null) {
+        if (toolbarEdit == null && windowControls != null) {
             savorPlugins = document.createElement("div");
             savorPlugins.id = "savorPlugins";
-            barCommand.parentElement.insertBefore(savorPlugins, barCommand);
+            windowControls.parentElement.insertBefore(savorPlugins, windowControls);
         } else if (toolbarEdit != null) {
             savorPlugins = insertCreateBefore(toolbarEdit, "div", "savorPlugins");
             savorPlugins.style.position = "relative";
