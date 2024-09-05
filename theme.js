@@ -1182,12 +1182,12 @@ function savorPluginsAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClickRunFun
     var savorPlugins = document.getElementById("savorPlugins");
     if (savorPlugins == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("windowControls");
+        var barPlugins = document.getElementById("barPlugins");
 
-        if (toolbarEdit == null && windowControls != null) {
+        if (toolbarEdit == null && barPlugins != null) {
             savorPlugins = document.createElement("div");
             savorPlugins.id = "savorPlugins";
-            windowControls.parentElement.insertBefore(savorPlugins, windowControls);
+            barPlugins.parentElement.insertBefore(savorPlugins, barPlugins);
         } else if (toolbarEdit != null) {
             savorPlugins = insertCreateBefore(toolbarEdit, "div", "savorPlugins");
             savorPlugins.style.position = "relative";

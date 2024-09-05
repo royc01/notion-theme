@@ -34,11 +34,11 @@ body:not(.body--mobile,.body--window)>#toolbar{
 					opacity: 1;
 				}
 			}
-		&:not(.fn__none)~#barPlugins::before{
+		&:not(.fn__none)~#savorPlugins::before{
 				content: counter(plugin-counter);
 				position: fixed;
 				top: 8px;
-				margin-left: -30px;
+				margin-left: 6px;
 				border-radius: 6px;
 				background-color: #ee6f5b;
 				color: #fff;
@@ -75,7 +75,10 @@ body:not(.body--mobile,.body--window)>#toolbar{
 			}
 	}
 }
-
+body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser [data-position]{
+	margin: 38px 0 0 135px;
+	margin-right: -125px;
+}
 .layout__dockl,.layout__dockr{
     padding-top: 38px;
 }
@@ -160,10 +163,11 @@ body:not(.body--mobile,.body--window)>#toolbar{
 }
 #Splugin{
 	padding: 0px;
-    margin-left: -133px;
-    width: 16px;
-    height: 16px;
-    margin-bottom: 5px;
+    margin-left: 6px;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 4px;
+	border-radius: 6px;
 	&::after{
 		right: -58px;
 	}
@@ -178,7 +182,9 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	pointer-events: visibleFill;
 	app-region: no-drag;
 }
-
+#savorPlugins:has(>#Splugin:hover):before,#savorPlugins:has(>#Splugin.button_on):before{
+	opacity: 0;
+}
 
 
 /*--------合并顶栏页签--------*/
