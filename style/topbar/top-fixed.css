@@ -242,7 +242,7 @@ body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser [data-position]{
 
 
 
-.layout-tab-bar .item:hover:not(.item--focus):not(.item--readonly) .item__text,.layout__wnd--active .layout-tab-bar .item--focus:hover>.item__text{
+.layout__center .layout-tab-bar .item[data-type="tab-header"]:hover:not(.item--focus):not(.item--readonly) .item__text,.layout__center .layout__wnd--active .layout-tab-bar .item--focus[data-type="tab-header"]:hover>.item__text{
     color:var(--S-topfixed-background);
 }
 .layout-tab-bar .block__icon:hover:not([disabled]):not(.ft__primary), .layout-tab-bar .block__icon--active {
