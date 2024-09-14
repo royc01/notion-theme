@@ -994,8 +994,13 @@ async function 写入文件(path, filedata, then = null, obj = null, isDir = fal
 var savordragElement = document.createElement("div");
 savordragElement.id = "savordrag";
 var barForwardElement = document.getElementById("barForward");
-var parentElement = barForwardElement.parentNode;
-parentElement.insertBefore(savordragElement, barForwardElement.nextSibling);
+if (barForwardElement !== null) {
+    var parentElement = barForwardElement.parentNode;
+    parentElement.insertBefore(savordragElement, barForwardElement.nextSibling);
+    // 进行其他操作
+} else {
+    console.error("元素不存在");
+}
 savordragElement.style.cssText = "flex: 1; app-region: drag;"; 
 
 
@@ -1017,12 +1022,12 @@ function savorThemeToolbarAddButton(ButtonID, ButtonTitle , ButtonLabel, Mode, N
     var savorToolbar = document.getElementById("savorToolbar");
     if (savorToolbar == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var barBack = document.getElementById("barBack");
+        var windowControls = document.getElementById("windowControls");
 
         if (toolbarEdit == null && barBack != null) {
             savorToolbar = document.createElement("div");
             savorToolbar.id = "savorToolbar";
-            barBack.parentElement.insertBefore(savorToolbar, barBack);
+            windowControls.parentElement.insertBefore(savorToolbar, windowControls);
         } else if (toolbarEdit != null) {
             savorToolbar = insertCreateBefore(toolbarEdit, "div", "savorToolbar");
             savorToolbar.style.position = "relative";

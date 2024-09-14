@@ -53,11 +53,10 @@
 #savorToolbar{
 	width:24px;
 	height:24px;
-	margin:4px 0px 4px 4px;
+	margin:4px 0px 4px 2px;
 	border-radius:4px;
 	background:var(--S-settings);
-	position:absolute;
-	right: 96px;
+	position:relative;
 }
 .toolbar--browser #savorToolbar{
 	right: 4px;

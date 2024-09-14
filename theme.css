@@ -785,9 +785,3 @@ body:not(.body--window) #layouts{
 	padding: 13px 14.25px;
 }
 
-
-
-body:not(.body--mobile,.body--window)>#toolbar #windowControls{
-	margin-left: 24px;
-}
-
