@@ -747,7 +747,6 @@ body:not(.body--window) #layouts{
 }
 .layout__dockl[style*="width: 0px;"],.layout__dockr[style*="width: 0px;"]{
 	width: 36px!important;
-	background-color: var(--b3-theme-background);
 }
 #layouts:has(.layout__dockl.layout--float){
 	margin-left: 0px;
@@ -784,4 +783,6 @@ body:not(.body--window) #layouts{
 .toolbar__window .toolbar__item{
 	padding: 13px 14.25px;
 }
-
+.body--win32>.fn__flex-1 {
+    background-color: var(--b3-theme-background);
+}

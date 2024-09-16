@@ -321,20 +321,18 @@ div#historyContainer{
 	margin-top: -13px;
 }
 .b3-card{
-	box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+	box-shadow: none;
 	border:none;
+	border-radius: 8px;
 }
 
-.b3-card--current{
-	box-shadow: var(--b3-theme-primary-light) 0px 0px 0px 1px, var(--b3-theme-primary-light) 0px 2px 4px,0px 0px 0px 3px var(--b3-theme-primary-light) inset;
-}
-.b3-card--current .b3-card__info, .b3-card--current .b3-card__actions{
-	background-color:transparent;
-}
-
-.b3-card:hover{
+.b3-card--current{	
 	box-shadow: var(--b3-theme-primary-light) 0px 0px 0px 1px, var(--b3-theme-primary-light) 0px 2px 4px;
+}
+.b3-card:hover{
+	box-shadow: rgba(15, 15, 15, 0.04) 0px 0px 0px 1px, rgba(15, 15, 15, 0.03) 0px 3px 6px, rgba(15, 15, 15, 0.06) 0px 9px 24px;
 	background-color:transparent;
+	transform: none;
 }
 /*pdf*/
 .pdf__outer,#sidebarContainer,#toolbarViewer,#toolbarViewer>.fn__flex-1{

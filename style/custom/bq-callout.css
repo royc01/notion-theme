@@ -5,9 +5,7 @@
     /*box-shadow: -2px 0px 0px 5px var(--b3-bq-background) inset,  6px 0px 0px 0px var(--b3-theme-on-background) inset;*/
     background-color: var(--b3-bq-background);
     border-radius: 0 4px 4px 0;
-}
-.protyle-wysiwyg .bq .p{
-	padding-left:12px;
+    padding-left: 10px;
 }
 .list .bq {
 	margin-right:0px!important;
