@@ -12,7 +12,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	& #drag,& #toolbarVIP{
 		display: none;
 		}
-		&  [data-position]{
+		&  [data-position]:not(.fn__none){
 			margin: 38px 6px 0 0px;
 			border-radius: 50%;
 			box-sizing: content-box;

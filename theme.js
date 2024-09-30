@@ -320,7 +320,7 @@ function MenuShow() {
 
 function InsertMenuItem(selectid,selecttype){
   let commonMenu = document.querySelector("#commonMenu .b3-menu__items")
-  let  readonly = commonMenu.querySelector(".b3-menu__item--readonly")
+  let  readonly = commonMenu.querySelector('[data-id="updateAndCreatedAt"]')
   let  selectview = commonMenu.querySelector('[id="viewselect"]')
   if(readonly){
     if(!selectview){

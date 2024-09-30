@@ -184,9 +184,7 @@
 	transition: all 200ms;
 	transform: rotate(-46deg);
 }
-.block__icon--active{
-	background-color:transparent;
-}
+
 /* 选择下拉菜单 */
 .b3-select{
 	box-shadow: inset 0 0 0 1px var(--S-list-background);
