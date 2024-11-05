@@ -328,8 +328,9 @@
 .protyle-wysiwyg div.table[data-node-id] table {
     width: auto;
 }
+
 .b3-typography table tr:nth-child(even) td, .protyle-wysiwyg table tr:nth-child(even) td{
-	background-color:var(--b3-theme-background);
+	background-color:transparent;
 }
 /*页面宽度*/
 .protyle-wysiwyg div.table[data-node-id][custom-f~=full] table{

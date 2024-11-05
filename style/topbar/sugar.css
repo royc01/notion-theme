@@ -219,7 +219,7 @@
 	--b3-task-done-color: var(--b3-scroll-color-hover);
 	--b3-task-done-hover: #069ccd;
 	/* 引述 */
-	--b3-bq-background: #f4f1eb;
+	--b3-bq-background: #f6f4ef;
 	/* 块引用 */
 	--b3-block-ref-background: var(--S-toolbar-item-hover);
 	/* 代码块 */

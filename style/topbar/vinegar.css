@@ -222,7 +222,7 @@
 	--b3-task-done-color: var(--b3-scroll-color-hover);
 	--b3-task-done-hover: #4496e7;
 	/* 引述 */
-	--b3-bq-background: rgba(54, 59, 62);
+	--b3-bq-background: #1c1c1c;
 	/* 块引用 */
 	--b3-block-ref-background: var(--S-toolbar-item-hover);
 	/* 代码块 */
