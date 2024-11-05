@@ -284,64 +284,39 @@
 }
 
 /* 弹出工具条字体颜色选择 */
+.protyle-font>div:not(.fn__hr--small):not(.fn__flex){
+	margin-left: 4px;
+}
+.protyle-font>.fn__flex:first-child{
+	margin-left: 4px;
+}
 .color__square[data-type="style1"]{
-	 border-radius: 3px;
-	 width:22px;
-	 height:22px;
-	 font-size:1.3em;
-	 font-weight: 500;
-	 box-shadow: 0 0 0 1px var(--b3-color--square) inset;
+	border-radius: 4px;
+	font-size:1.4em;
+	font-weight: 600;
+	box-shadow: 0 0 0 1px var(--b3-color--square) inset;
 }
 .color__square[data-type="color"]{
-	 border-radius: 3px;
-	 width:22px;
-	 height:22px;
-	 background-color:transparent!important;
-	 font-size:1.3em;
-	 font-weight: 500;
-	 box-shadow: 0 0 0 1px var(--b3-color--square) inset;
+	border-radius: 4px;
+	background-color:transparent!important;
+	font-size:1.4em;
+	font-weight: 600;
+	box-shadow: 0 0 0 1px var(--b3-color--square) inset;
 }
 .color__square[data-type="backgroundColor"]{
-	 border-radius: 3px;
-	 width:22px;
-	 height:22px;															   
-	 box-shadow: 0 0 0 1px var(--b3-color--square) inset;
+	border-radius: 4px;														   
+	box-shadow: 0 0 0 1px var(--b3-color--square) inset;
 }
-.color__square[data-type="backgroundColor"]::before{
-	 content: "A";
-	 color:var(--b3-theme-on-background);
-}
-.color__square:hover{
-	box-shadow: 0 0 0 1px var(--b3-theme-on-background) inset;
-}
-.color__square[style="background-color:var(--b3-font-color1)"]::before,
-.color__square[style="background-color:var(--b3-font-color2)"]::before,
-.color__square[style="background-color:var(--b3-font-color3)"]::before,
-.color__square[style="background-color:var(--b3-font-color4)"]::before,
-.color__square[style="background-color:var(--b3-font-color5)"]::before,
-.color__square[style="background-color:var(--b3-font-color6)"]::before,
-.color__square[style="background-color:var(--b3-font-color7)"]::before,
-.color__square[style="background-color:var(--b3-font-color8)"]::before,
-.color__square[style="background-color:var(--b3-font-color9)"]::before,
-.color__square[style="background-color:var(--b3-font-color10)"]::before,
-.color__square[style="background-color:var(--b3-font-color11)"]::before,
-.color__square[style="background-color:var(--b3-font-color12)"]::before,
-.color__square[style="background-color:var(--b3-font-color13)"]::before,
 .color__square[data-type="backgroundColor"]::before{
 	content: "A";
-	opacity:1;
-	width:22px;
-	height:22px;
-	transform:unset;
-	right:unset;
-	bottom:-5px;
-	margin-right:unset;
-	border-bottom-color:transparent;
-	margin-top:0px;
-	font-weight: 500;
-	font-size:1.3em;
-	line-height: 22px;
+	font-weight: 600;
+	font-size:1em;
+	color:var(--b3-theme-on-background);
 }
+.color__square:hover:not(.color__square--list),.protyle-font__style:hover{
+	box-shadow: 0 0 0 1px var(--b3-color--square) inset, 0 0 0 4px var(--S-list-background);
+}
+
 
 /* 表格 */
 .b3-typography table, .protyle-wysiwyg table{
