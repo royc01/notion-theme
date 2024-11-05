@@ -376,7 +376,10 @@ div#historyContainer{
 	padding:5px;
 	border:none;
 	min-width: 50vw;
-	border-radiucs: 6px;
+	border-radius: 6px;
+}
+.hint--menu:has(>.emojis){
+	min-width: unset;
 }
 .hint--menu>div{
 	column-width: 180px;
@@ -460,6 +463,7 @@ div#historyContainer{
 ::-webkit-scrollbar-thumb{
 	border-radius: var(--webkit-scrollbar-thumb);
 	background-color:var(--b3-scroll-color);
+	box-shadow: none;
 }
 
 .b3-slider::-webkit-slider-runnable-track {

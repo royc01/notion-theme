@@ -1,9 +1,10 @@
 body:not(.body--mobile,.body--window)>#toolbar{
-	z-index: 2;
+	z-index: 3;
 	height: 38px;
 	margin-bottom: -38px;
 	pointer-events: none;
 	counter-reset:plugin-counter;
+	background-color: transparent;
     app-region: drag;
 	& .toolbar__item {
 		pointer-events: visibleFill;
@@ -13,71 +14,16 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		display: none;
 		}
 		&  [data-position]:not(.fn__none){
-			margin: 38px 6px 0 0px;
-			border-radius: 50%;
-			box-sizing: content-box;
-			height: 4px;
-			width: 4px;
-			padding: 2px;
-			position: absolute;
-			right: 42px;
 			counter-increment: plugin-counter;
+			visibility: hidden;
+			padding: 4px;
+			height: 20px;
+			border-radius: 6px;
+			box-shadow: 0px 5px 0px 4px var(--S-toolbar-background),0px -5px 0px 4px var(--S-toolbar-background);
 			& svg{
 				height: 12px;
 				width: 12px;
-				opacity: 0;
-			}
-			&:hover{
-				height: 12px;
-				width: 12px;
-				padding: 4px;
-				margin-right: -1px;
-				svg{
-					opacity: 1;
 				}
-			}
-			& ~ &{
-				right: 70px;
-			}
-			& ~ & ~ &{
-				right: 98px;
-			}
-			& ~ & ~ & ~ &{
-				right: 126px;
-			}
-			& ~ & ~ & ~ & ~ &{
-				right: 154px;
-			}
-			& ~ & ~ & ~ & ~ & ~ &{
-				right: 182px;
-			}
-			& ~ & ~ & ~ & ~ & ~ & ~ &{
-				right: 210px;
-			}
-			& ~ & ~ & ~ & ~ & ~ & ~ & ~ &{
-				right: 238px;
-			}
-			& ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &{
-				right: 266px;
-			}
-			& ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &{
-				right: 294px;
-			}
-			& ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &{
-				right: 322px;
-			}
-			& ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &{
-				right: 350px;
-			}
-			& ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &{
-				right: 378px;
-			}
-			& ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &{
-				right: 406px;
-			}
-			& ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ &{
-				right: 434px;
-			}
 		&:not(.fn__none)~#savorPlugins::before{
 				content: counter(plugin-counter);
 				position: fixed;

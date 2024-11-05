@@ -14,12 +14,5 @@ body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser #savorToolbar:ha
 	margin-right: -135.5px !important;
 }*/
 body:not(.body--mobile,.body--window)>#toolbar [data-position]{
-	height: unset!important;
-	width: unset!important;
-	border-radius: 6px!important;
-	margin-right: 2px!important;
-	padding: 4px!important;
-	svg{
-		opacity: 1!important;
-	}
+	visibility: visible!important;
 }

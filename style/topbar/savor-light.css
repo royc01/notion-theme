@@ -38,9 +38,7 @@
 	--b3-scroll-bgcolor: rgba(55, 53, 47, 0.06);
 
 	--b3-border-scroll: rgba(55, 53, 47, 0.2);
-	
-	--webkit-scrollbar: 6px;
-	--webkit-scrollbar-thumb: 0px;
+
 
     /* 列表 */
     --b3-list-hover: rgba(55, 53, 47, 0.05);

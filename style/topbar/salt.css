@@ -9,6 +9,7 @@
     --b3-theme-background-light: #dfe0e1;
     --b3-theme-surface:rgb(215, 224, 224);/* 面板主色 */
     --b3-theme-surface-light: rgb(215, 224, 224, .5);
+    --b3-theme-surface-lighter: rgba(149, 167, 167, .3);
     --b3-theme-error: #eb5757;
 
     /* 文字颜色 */
@@ -32,8 +33,6 @@
 
 	--b3-border-scroll: rgba(55, 53, 47, 0.2);
 	
-	--webkit-scrollbar: 6px;
-	--webkit-scrollbar-thumb: 4px;
     /* 列表 */
     --b3-list-hover: rgba(98, 122, 123, 0.1);
 

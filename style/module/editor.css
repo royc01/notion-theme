@@ -347,11 +347,13 @@
 .b3-typography table, .protyle-wysiwyg table{
 	font-weight:500;
 }
-
+.b3-typography table thead, .protyle-wysiwyg table thead{
+	background-color:var(--b3-theme-surface);
+}
 .protyle-wysiwyg div.table[data-node-id] table {
     width: auto;
 }
-.protyle-wysiwyg table tbody tr td{
+.b3-typography table tr:nth-child(even) td, .protyle-wysiwyg table tr:nth-child(even) td{
 	background-color:var(--b3-theme-background);
 }
 /*页面宽度*/

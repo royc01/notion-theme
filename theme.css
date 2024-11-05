@@ -119,8 +119,8 @@
 
 	--b3-border-scroll: rgba(55, 53, 47, 0.2);
 	
-	--webkit-scrollbar: 6px;
-	--webkit-scrollbar-thumb: 4px;
+	--webkit-scrollbar: 8px;
+	--webkit-scrollbar-thumb: 0px;
 
     /* 列表 */
     --b3-list-hover: rgba(55, 53, 47, 0.08);
@@ -530,6 +530,9 @@ span[data-type="add"] svg{
 
 
 /*数据库*/
+.av__celltext--ref{
+	font-weight:700;
+}
 .av__cell .b3-chip[data-type="block-more"],.av__cell .b3-chip[data-type="block-ref"]{
 	font-size: 90%;
 	padding: 3.5px 4px!important;
@@ -784,7 +787,7 @@ body:not(.body--window) #layouts{
 	padding: 13px 14.25px;
 }
 .body--win32>.fn__flex-1 {
-    background-color: var(--b3-theme-background);
+	background-color: var(--S-toolbar-background);
 }
 
 
