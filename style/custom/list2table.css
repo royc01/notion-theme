@@ -21,6 +21,7 @@
     outline:  1px solid var(--b3-layout-resize);
     background-color: var(--b3-theme-background);
 	border-radius: 0px;
+    flex-direction: unset;
 }
 
 /* ————————————————————调整每个子列表项右侧边距———————————————————— */

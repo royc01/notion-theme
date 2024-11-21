@@ -38,7 +38,8 @@
     --b3-menu-background: #27282a;
 
     /* 提示 */
-
+	--b3-tooltips-background: #494e51;
+	--b3-tooltips-color: var(--b3-theme-on-background);
     /* 遮罩 */
     --b3-mask-background: rgba(0, 0, 0, 0.78);
 

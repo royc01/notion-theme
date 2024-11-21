@@ -1,11 +1,11 @@
 /* 引述 */
 .protyle-wysiwyg .bq{
     color: var( --b3-theme-on-background);
-    border-left: 0.25em solid var(--b3-theme-on-background);
-    /*box-shadow: -2px 0px 0px 5px var(--b3-bq-background) inset,  6px 0px 0px 0px var(--b3-theme-on-background) inset;*/
-    background-color: var(--b3-bq-background);
-    border-radius: 0 4px 4px 0;
-    padding-left: 10px;
+    background-color: transparent;
+}
+.protyle-wysiwyg .bq:before{
+    width: .2em;
+    background-color: var(--b3-theme-on-background);
 }
 .list .bq {
 	margin-right:0px!important;
@@ -18,60 +18,90 @@
     background-color: var(--b3-bq-background1)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background1) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background2"]{
 	border: none;
     background-color: var(--b3-bq-background2)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background2) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background3"]{
 	border: none;
     background-color: var(--b3-bq-background3)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background3) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background4"]{
 	border: none;
     background-color: var(--b3-bq-background4)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background4) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background5"]{
 	border: none;
     background-color: var(--b3-bq-background5)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background5) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background6"]{
 	border: none;
     background-color: var(--b3-bq-background6)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background6) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background7"]{
 	border: none;
     background-color: var(--b3-bq-background7)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background7) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background8"]{
 	border: none;
     background-color: var(--b3-bq-background8)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background8) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background9"]{
 	border: none;
     background-color: var(--b3-bq-background9)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background9) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background10"]{
 	border: none;
     background-color: var(--b3-bq-background10)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background10) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background11"]{
 	border: none;
@@ -84,10 +114,16 @@
     background-color: var(--b3-bq-background12)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background12) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background13"]{
 	border: none;
     background-color: var(--b3-bq-background13)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background13) inset;
+    &:before{
+        display: none;
+    }
 }

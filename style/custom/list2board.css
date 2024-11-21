@@ -4,6 +4,7 @@
 {
     display: flex;
 }
+
 .protyle-wysiwyg *[custom-f~=kb].list[data-node-index]{
 	width:100%!important;
 	overflow-x:auto;/*溢出滚动*/

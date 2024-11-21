@@ -352,7 +352,10 @@
 .protyle-wysiwyg [data-node-id][custom-t~=biaotou] table th {
     font-weight: normal !important;
     color: inherit !important;
-    background-color: var(--b3-theme-background) !important;
+    background-color: transparent!important;
+}
+.protyle-wysiwyg [data-node-id][custom-t~=biaotou] table thead {
+	background-color: transparent!important;
 }
 /* 竖表头格式 */
 .protyle-wysiwyg [data-node-id][custom-t~=vbiaotou] table th {
@@ -437,8 +440,7 @@
 
 /* 嵌入块 */
 .protyle-wysiwyg [data-node-id].render-node[data-type="NodeBlockQueryEmbed"]{
-    color: var( --b3-theme-on-background);
-	border-radius:0 5px 5px 0;
+    border: 2px dashed var(--b3-theme-surface-lighter);
 }
 /* 命名，别名，备注*/
 .protyle-attr--name,.protyle-attr--alias,.protyle-attr--memo{
@@ -448,10 +450,6 @@
 	width:auto;
 }
 /*代码块*/
-.code-block {
-	margin-left:4px!important;
-	margin-right:4px!important;
-}
 .list .code-block {
 	margin-right:0px!important;
 }/*列表里代码块对齐*/

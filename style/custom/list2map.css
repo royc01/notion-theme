@@ -22,6 +22,7 @@
 /*文字设置居中*/
 .protyle-wysiwyg *[custom-f="dt"] .li {
 	display: flex;
+	flex-direction: unset;
 }
 .protyle-wysiwyg *[custom-f="dt"] .li .p,.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"] {
 	display: flex;

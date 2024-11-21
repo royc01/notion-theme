@@ -255,15 +255,12 @@
     border-top: 1px dashed var(--b3-border-color);
 }
 
-.sy__backlink .protyle-wysiwyg>[data-node-id] {
-    margin:0 10px 0 24px;
-}
 
 .sy__backlink .protyle-wysiwyg>[data-node-id]:last-child {
     margin-bottom: 16px;
 }
 .sy__backlink .protyle-wysiwyg {
-    padding: 2px 6px 6px 4px !important;
+    padding: 2px 6px 6px 16px !important;
 }
 .sy__backlink .protyle-wysiwyg .protyle-breadcrumb__bar>span:last-child{
 	background-color: transparent;
