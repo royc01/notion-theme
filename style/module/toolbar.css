@@ -3,7 +3,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	overflow:visible;
 	background-color: var(--S-toolbar-background);
 	border:none;
-    z-index: 2;
+    z-index: 3;
 }
 
 .toolbar__item:not(.toolbar__item--disabled):not(.toolbar__item--close):hover, .toolbar__item--active {
