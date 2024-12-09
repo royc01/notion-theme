@@ -1,0 +1,95 @@
+/* ————————————————————中心———————————————————— */
+.layout__resize:not(.layout__resize--lr) {
+    margin: -0.5px 0;
+    &:after{
+        height: 5px;
+        top: 0px;
+        border-radius: 3px;
+        background-color: var(--Sv-layout--resize);
+    }
+    &:hover:after{
+        background-color: var(--Sv-layout--resize-hover);
+    }
+}
+.layout__resize--lr {
+    margin: 0 -0.5px;
+    &:after{
+        width: 5px;
+        border-radius: 3px;
+        background-color: var(--Sv-layout--resize);
+    }
+    &:hover:after{
+        background-color: var(--Sv-layout--resize-hover);
+    }
+}
+
+#toolbar + .fn__flex{
+    background-color: var(--Sv-toolbar-background);
+}
+#layouts{
+    min-height: 90%;
+    background-color: var(--Sv-toolbar-background);
+    margin: 0 5px 5px 5px;
+    .layout__center .layout-tab-container{
+        border-radius: 6px;
+    }
+}
+
+#savordrag{
+	display: none;
+}
+#savorPlugins{
+	display: none;
+}
+
+.layout__dockl, .layout__dockr{
+    min-height: 90%;
+}
+
+
+
+.body--window {
+    .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
+        .item:not(.item--readonly) {
+            margin: 0 10px 0px -5px;
+        }
+        & .item--readonly {
+            .block__icon {
+                padding: 7px;
+                margin-bottom: 4px;
+            }
+        }
+    }
+    .toolbar__window .toolbar__item{
+        padding: 7px;
+        margin: 3px;
+        border-radius: 6px;
+        &#closeWindow{
+            width: 40px;
+            margin: 3px 1px;
+            &.toolbar__item--close{
+                padding: 2px 6px;
+            }
+            svg{
+                width: 12px!important;
+                height: 12px!important;
+                padding: 8px;
+                border-radius: 6px;
+            }
+            &:hover{
+            background-color: rgba(0, 0, 0, 0);
+            svg{
+                color: var(--Sv-toolbar-closeWindow-svg);
+                background: var(--Sv-toolbar-closeWindow-hover);
+            }
+            }
+        }
+    }
+    #status {
+        right: 8px;
+        padding: 0 24px 0 0;
+        #statusHelp {
+            right: 0px;
+        }
+    }
+}

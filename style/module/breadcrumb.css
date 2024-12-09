@@ -3,7 +3,7 @@
 	padding: 6px 10px 7px 8px;
 	&>.protyle-breadcrumb__bar .protyle-breadcrumb__item{
 		&:hover{
-			background-color: var(--S-list-background);
+			background-color: var(--Sv-breadcrumb-hover);
 		}
 		&:first-child{
 			&::before{
@@ -12,8 +12,8 @@
 				font-size: 12px;
 			}
 			&>svg.popover__block{
-				color:transparent!important;
-				padding:2px;
+                padding:2px;
+				color:transparent;		
 				background-color: transparent;
 			}
 		}	
@@ -22,17 +22,17 @@
 			width: 10px;
 			padding:4px;
 			border-radius:3px;
-			background-color: var(--S-list-background);
+			background-color: var(--Sv-breadcrumb-hover);
 		}
 	}
 	.protyle-breadcrumb__item--active{
 	background-color: transparent;
 		&:hover{
-			background-color: var(--S-list-background);
+			background-color: var(--Sv-breadcrumb-hover)    ;
 		}
 		&:not(:first-child)>svg{
-			color: var(--b3-theme-background) ;
-			background-color: var(--b3-theme-error)!important;
+			color: var(--Sv-breadcrumb-active-color) ;
+			background-color: var(--Sv-breadcrumb-active)!important;
 		}
 	}
 	.protyle-breadcrumb__text{
@@ -44,21 +44,24 @@
 		height: 13px;
 		margin-top:1px;
 		transform: rotate(22deg);
-		border-left: 1px solid var(--S-protyle-breadcrumb-arrow);
+		border-left: 1px solid var(--Sv-breadcrumb-arrow);
 	}
 }
 
-
+/*只读按钮*/
+[aria-label="解除锁定"],[aria-label="Make doc writable"]{
+    background-color: var(--Sv-breadcrumb-hover);
+}
 /*退出聚焦按钮 */
 .protyle-breadcrumb__icon[data-type="exit-focus"]{
 	font-weight: 700;
 	border-radius: 6px;
-    background-color: var(--b3-theme-error);
-    color: var(--b3-theme-background) !important;
+    background-color: var(--Sv-breadcrumb-active);
+    color: var(--Sv-breadcrumb-active-color) !important;
     box-shadow: rgb(15 15 15 / 10%) 0px 1px 2px;
 	height:24px;
 	&:hover{
-		background-color:var(--b3-font-color12)!important;
+		background-color:var( --Sv-breadcrumb-active-hover)!important;
 	}
 	
 }

@@ -23,6 +23,7 @@
 .protyle-wysiwyg *[custom-f="dt"] .li {
 	display: flex;
 	flex-direction: unset;
+	margin: 0;
 }
 .protyle-wysiwyg *[custom-f="dt"] .li .p,.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"] {
 	display: flex;
@@ -125,8 +126,7 @@
 /*下竖线*/
 .protyle-wysiwyg *[custom-f="dt"] .li::after{   
     content: '';   
-    position: absolute;  
-	bottom: 50%;   
+    position: absolute;   
     border-left:var(--b3-border-daotu);  
     width: 20px;  
 	height: 50%; 
@@ -188,7 +188,9 @@ div *[custom-f="dt"]>[data-type="NodeListItem"].li::after{
 
 
 
-
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"]>.protyle-action svg{
+	color:unset;
+}
 
 
 

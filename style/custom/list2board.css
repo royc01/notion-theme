@@ -3,20 +3,22 @@
 .protyle-wysiwyg .list[custom-f~=kb][data-node-id][data-type="NodeList"]
 {
     display: flex;
+    flex-direction: row;
+    min-width: 200px;
 }
 
-.protyle-wysiwyg *[custom-f~=kb].list[data-node-index]{
-	width:100%!important;
-	overflow-x:auto;/*溢出滚动*/
-	padding-bottom:50px;
-}
+
 /* ————————————————————所有子项目的表格（除去第一列其余的列），包含溢出的空白部分，所以才会有边框—————————————————————— */
 .protyle-wysiwyg *[custom-f~=kb]>.li>.list{
     min-width: var(--kbline-boarditem-minwidth);
     border-radius: 3px;
-    transform: translate(-30px, 0);
 }
-
+.protyle-wysiwyg *[custom-f~=kb]>.li{
+    min-width: 200px;
+    >[data-node-id]{
+        margin-left: 8px;
+    }
+}
 
 /* ————————————————————对所有子列表项设置格式———————————————————— */
 
@@ -27,6 +29,10 @@
 	background-color:var(--kb--li--background);
 	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 }
+.protyle-wysiwyg *[custom-f="kb"] .li {
+    display: flex;
+    margin: 0;
+}
 
 /*只处理每个列表的第一行*/
 .protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(2),
@@ -35,7 +41,6 @@
 	min-width: var(--kbline-boarditem-minwidth);
     border-radius: 3px;
 	padding:9px 10px 11px 30px;
-	left:-30px;
     margin-bottom: 10px;
 }
 .protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(2)[data-type="NodeHeading"],

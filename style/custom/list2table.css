@@ -11,17 +11,18 @@
     padding: 0px;
     margin: 0px !important;
 	width:100%;
-    outline: 1px solid var(--b3-layout-resize);
+    outline: 1px solid var(--b3-border-color);
 	border-radius: 0px;
 }
 
 /* ————————————————————对所有子列表项设置格式———————————————————— */
 .protyle-wysiwyg *[custom-f="bg"] .li {
 	display: flex;
-    outline:  1px solid var(--b3-layout-resize);
+    outline:  1px solid var(--b3-border-color);
     background-color: var(--b3-theme-background);
 	border-radius: 0px;
     flex-direction: unset;
+    margin: 0;
 }
 
 /* ————————————————————调整每个子列表项右侧边距———————————————————— */
@@ -48,7 +49,7 @@
 }
 .protyle-wysiwyg *[custom-f="bg"] .li>.list>.li {
     outline: none !important;
-    border-top:1px solid var(--b3-layout-resize);
+    border-top:1px solid var(--b3-border-color);
 }
 .protyle-wysiwyg *[custom-f="bg"] .li>.list>.li:first-of-type {
     border-top: none;

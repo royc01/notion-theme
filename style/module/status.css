@@ -1,126 +1,70 @@
-/* ———————————————————— 底栏 ———————————————————— */
+/* ————————————————————底栏———————————————————— */
 #status {
     position: fixed;
-    background-color: var(--S-status-msg-background);
-    right: 0px;
-    bottom: 0px;
-	border-radius:6px 0px 0px 0px;
+    background-color: var(--Sv-status-msg-background);
+    right: 42px;
+    bottom: 9px;
+	border-radius:6px;
 	height: 24px;
 	border:0;
-	padding: 0 52px 0 0;
+	padding: 0 48px 0 0;
 	margin:0;
 	z-index:10;
+    .toolbar__item:not(.toolbar__item--close) {
+        padding:2px;
+        height: 24px;
+        background-color:rgb(0, 0, 0, 0);
+        svg{
+            padding:3px 4px;
+            width: 12px;
+        }
+        & span{
+            margin:3px;
+            font-size:12px;
+        }
+    }
+    #barDock{
+        position:absolute;
+        right:-2px;
+        /*background-color: var(--Sv-status-barDock);
+        box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);*/
+    }
+    #statusHelp{
+        position:absolute;
+        right:22px;
+    }
+    .status__counter:not(:empty){
+        border-radius:5px;
+        padding: 0px 0px 0 2px ;
+        margin:0px 2px 0px 0px;
+        height:24px;
+        line-height:24px;
+    }
+    .status__msg:not(:empty){
+        padding: 0px 8px;
+        border-radius:5px;
+        margin:0px;
+        position:relative;
+        height:24px;
+        line-height:24px;
+    }
+    .status__msg:not(:empty):before{
+        content: "📢";
+        font-size:12px;
+        padding-right:6px;
+    }
+    .status__backgroundtask{
+        margin:0px 0px 7px 0px;
+        padding: 0px 0px 0px 2px;
+        border-radius:5px;
+        height:26px;
+        line-height:26px;
+    }
 }
 
-.status .toolbar__item:not(.toolbar__item--close) {
-	margin:0px!important;
-	padding:2px;
-	background-color:rgb(0, 0, 0, 0);
-}
-
-.status .toolbar__item svg{
-	padding:3px 4px;
-	color:var(--b3-dockright-color);
-	width: 12px;
-}
-.body--win32>.fn__flex-1
-{
-	overflow:visible;
-}
-
-.status__counter:not(:empty){
-	border-radius:5px;
-	padding: 0px 0px 0 8px ;
-	margin:0px 2px 0px 0px;
-	height:26px;
-	line-height:26px;
-}
-.status__msg:not(:empty){
-	animation: statusmsg 5s ease-in-out;
-	max-width: 140px;
-	padding: 0px 8px;
-	border-radius:5px;
-	margin:0px;
-	transition: max-width 300ms,opacity 300ms;
-	transition-delay: 2000ms;
-	position:relative;
-	height:26px;
-	line-height:26px;
-}
-.status__msg:not(:empty):before{
-	content: "📢";
-	font-size:12px;
-	padding-right:6px;
-}
-
-.status__msg:not(:empty):hover{
-	max-width:400px;
-	transition: max-width 300ms ease-out;
-}
-
-
-.status #statusHelp{
-	position:absolute;
-	right:28px;
-	z-index:8;
-}
-.status #barDock{
-	border-radius:6px;
-	position:absolute;
-	right:4px;
-	z-index:8;
-    /*background-color: var(--S-status-barDock);
-    box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);*/
-}
-/*.status #barDock:hover{
-	background-color: var(--S-status-barDock-hover)!important;
-}*/
-.status #statusHelp svg{
-	color:var(--S-dock--item--activefocus);
-}
-.status #barDock svg{
-	color:var(--S-dock--item--activefocus);
-}
-.status #barDock:before{
-	right:unset!important;
-	left: 0px;
-	transform: rotateY(180deg);
-}
-.status #barDock:after{
-	left:unset!important;
-	right:100%;
-}
-
-.status>.fn__flex-1{
-	position:relative!important;
-	width:0px!important;
-	right:0px;
-	flex:0;
-}
-
-
-.status__backgroundtask{
-	margin:0px 0px 7px 0px;
-	padding: 0px 0px 0px 8px;
-	border-radius:5px;
-	height:24px;
-	line-height:26px;
-}
-
-
-.body--window #status{
-	right: -22px;
-	border-radius: 6px 0 0 0;
-}
-
-.status .toolbar__item{
-	height: 24px;
-}
-
-#status .toolbar__item span{
-	margin:3px;
-	font-size:12px;
-}
+.fn__flex-1:has(>.dock--vertical.fn__none) ~ #status{
+    right: 8px;
+}/*边栏隐藏后底栏移动*/
 
 #dockBottom:not(.fn__none)+#status{
 	background-color:transparent;

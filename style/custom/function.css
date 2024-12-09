@@ -1,0 +1,74 @@
+#buttonSavor-light.button_off{
+	background:var(--Sv-Savor-light-off);
+}
+#buttonsalt.button_on{
+	background:var(--Sv-salt-on);
+}
+#buttonsalt.button_off{
+	background:var(--Sv-salt-off);
+}
+#buttonsugar.button_on{
+	background:var(--Sv-sugar-on);
+}
+#buttonsugar.button_off{
+	background:var(--Sv-sugar-off);
+}
+#buttonSavor-dark.button_on{
+	background:var(--Sv-Savor-dark-on);
+}
+#buttonSavor-dark.button_off{
+	background:var(--Sv-Savor-dark-off);
+}
+#buttonvinegar.button_on{
+	background:var(--Sv-vinegar-on);
+}
+#buttonvinegar.button_off{
+	background:var(--Sv-vinegar-off);
+}
+#conceal.button_on{
+	background:var(--Sv-conceal-on);
+}
+#conceal.button_off{
+	background:var(--Sv-conceal-off);
+}
+#tabbarVertical.button_on{
+	background:var(--Sv-tabbarVertical-on);
+}
+#tabbarVertical.button_off{
+	background:var(--Sv-tabbarVertical-off);
+}
+#topBar.button_on{
+	background:var(--Sv-topBar-on);
+}
+#topBar.button_off{
+	background:var(--Sv-topBar-off);
+}
+#bulletThreading.button_on{
+	background:var(--Sv-bulletThreading-on);
+}
+#bulletThreading.button_off{
+	background:var(--Sv-bulletThreading-off);
+}
+
+
+#savorToolbar{
+	border-bottom: 1px solid var(--b3-theme-surface-lighter);
+	margin: 0 4px 4px 4px;
+	padding-bottom: 4px;
+	.b3-menu__item{
+		height:30px;
+		&:after{
+			content: attr(aria-label);
+			line-height: 30px;
+			padding:0 0 0 27px;
+		}
+		&:hover{
+			background-color: var(--Sv-list-background)!important;
+		}
+	}
+}
+
+
+#commonMenu:not([data-name="barmode"]) #savorToolbar{
+	display:none;
+}

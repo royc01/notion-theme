@@ -16,7 +16,7 @@
     --b3-theme-on-primary: #fff;
     --b3-theme-on-secondary: #fff;
     --b3-theme-on-background: rgb(55, 53, 47);
-    --b3-theme-on-surface: #5d5a55;
+    --b3-theme-on-surface: #8d8983;
     --b3-theme-on-surface-light: rgba(55, 53, 47, 0.5);
     --b3-theme-on-error: #fff;
 
@@ -156,91 +156,45 @@
     --b3-pdf-background6: var(--b3-font-background11);
     --b3-pdf-background7: var(--b3-font-background13);
 	
-	/* 自定义结构配色 */
-	/* 顶栏 */
-	--S-toolbar-background: #eeeae3;
-	--S-toolbar-blur-background: transparent;
-	--S-toolbar-item-hover: rgba(0, 0, 0, .05);
-	--S-toolbar-barWorkspace-hover:var(--S-dockleft-item-active-background);
-	--S-toolbar-closeWindow-hover: #e81123;
-	--S-toolbar-closeWindow-svg: #fff;
-	/* dock栏 */
-	--S-dock-color: rgb(55, 53, 47, .3);
-	--S-dock-background: #f4f1eb;
-	--S-dockright-item-active-background: #f4f1eb;
-	--S-dockleft-item-active-background: #f4f1eb;
-	--S-dock-item-active-color: #ff533f;
-	--S-dock-item-hover-background: #fff;
 
-	/* 侧栏面板 */
-	--S-fn__flex-column-background: #f4f1eb;
-	--S-fn__flex-shrink-background: #f4f1eb;
-	--S-block-logo-color: rgb(55, 53, 47);
-	--S-block-logo-background-color: #2b2f3e;
-	--S-block-icon-svg-color: rgba(161, 160, 156);
-	--S-block-icon-hover: rgba(55, 53, 47, 0.08);
-	--S-block-icon-active: #ff533f;
-	--S-list-item-arrow: rgba(55, 53, 47, 0.4);
-	--S-list-background: rgba(55, 53, 47, 0.06);
-	--S-list-background-focus: rgba(55, 53, 47, 0.12);
-	--S-list-background-activefocus:  rgba(235, 131, 131, 0.15);
+
+    /* ————————————————————  自定义结构配色  ———————————————————— */
+
+	/* 顶栏 */
+    --Sv-toolbar-background: #eeeae3;
+
+	/* dock栏 */
+	--Sv-dock-item-color: rgba(55, 53, 47, 0.4);
 	
-	--b3-flex-column-padding:6px 0px 2px 0px;
-	/* 大纲数字 */
-	--h1-list-graphic: #eb8383;
-	--h2-list-graphic: #ae9acb;
-	--h3-list-graphic: #7db5cd;
-	--h4-list-graphic: #71a796;
-	--h5-list-graphic: #dcbf61;
-	--h6-list-graphic: #dda36a;
-	/* 线条 */
-	--b3-layout-resize: rgba(230, 229, 225);
-	--b3-shrink-layout-resize: rgba(230, 229, 225);
-	--b3-layout-resize-hover: var(--b3-scroll-color);
-	--flex-width-transition:width 150ms linear; /*调节宽度动画*/
-	--b3-border-fold: rgb(15, 15 , 15, .1);/*折叠边框*/
-	--b3-layout-resize-width: 1px;
-	/* 页签 */
-	--S-item-focus: rgb(0, 0, 0 ,1);
-	/* 面包屑 */
-	--S-protyle-breadcrumb-arrow: rgba(174,172,166);
-	/* 头图按钮 */
-	--S-icons-tooltips: rgba(55, 53, 47, 0.5);
-	--S-icons-tooltips-hover: var(--S-list-background);
-	--S-img-icons-tooltips: var(--b3-theme-on-surface);
-	--S-img-icons-tooltips-bg: var(--b3-theme-background);
-	--S-img-icons-span: rgba(0, 0, 0, .5);
-	/* 块标 */
-	--b3-gutters-color: rgba(211,209,203);
-	--S-gutters-background: var(--S-toolbar-item-hover);
-	/* 弹出工具条字体颜色选择 */
-	--b3-color--square: var(--b3-border-color);
-	/* 任务列表 */
-	--b3-task-done-color: var(--b3-scroll-color-hover);
-	--b3-task-done-hover: #069ccd;
-	/* 引述 */
-	--b3-bq-background: #f6f4ef;
-	/* 块引用 */
-	--b3-block-ref-background: var(--S-toolbar-item-hover);
-	/* 代码块 */
-	--S-linenumber-rows: rgba(237, 236, 233);
-	--S-code-block-hljs: var(--S-fn__flex-shrink-background);						  
-	/*行内代码*/
-	--S-inline-code:var(--b3-theme-error);
-	/*按钮*/
-	--b3-button: #069ccd;
-	/*pdf*/
-	--b3-toolbarSidebar: rgba(237, 236, 233); 
-	/*导图*/
-	--b3-border-daotu: 2px solid #ffb8b8;
-	--b3-block-daotu:#FFF;
-	/*看板*/
-	--kbline-boarditem-minwidth: 14rem;/*看板卡片的最小宽度*/
-	--kb--li--background:#fff;
-	/*ctrlp*/
-	--b3-list-item--meta: #9b9a97;
-	/*底栏状态*/
-	--S-status-msg-background: #eeeae3;
+	/* 侧栏面板 */
+    --Sv-block-icon-svg-color: rgba(55, 53, 47, .5);
+
+    /* 底栏 */
+    --Sv-status-msg-background: #eeeae3;
+    
+    /* 滚动条 */
+	--Sv-scroll-color: #e5e1d9;
+	--Sv-scroll-color-hover: #c7c3bb;
+    
+    /* 代码块 */
+    --Sv-code-block-background: #f0ede7;
+
+    /* —————— 设置界面 —————— */
+    --Sv--dialog-tab-bar: var(--b3-theme-surface);
+
+    /* 集市界面 */
+    --Sv-bazaar-focus: #f1eee9;
+    --Sv-bazaar-item: #eeebe5;
+
+    /* 合并顶栏插件收缩颜色 */
+    --Sv-plugin-off-bg: #e0dbd2;
+    --Sv-plugin-b-off-bg: #d9d1c4;
+    --Sv-plugin-b-off-bg-hover: #e8e3db;
+    
+    /*——————————————————————————— 收缩按钮 ——————————————————————————*/
+    --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(144, 140, 134)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
+    --Sv-Splugin-off:url("data:image/svg+xml;utf8,<svg fill='rgb(144, 140, 134)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -10px top -6px;
+    /*——————————————————————————————————————————————————————————————*/
 }
 
 
@@ -260,7 +214,7 @@
 	color:var(--h1-list-graphic);
 }
 .protyle-wysiwyg .h2{
-	color:var(--h2-list-graphic);
+	color: #8a7da0;
 }
 .protyle-wysiwyg .h3{
 	color:var(--h3-list-graphic);
@@ -286,5 +240,5 @@
 }
 
 #buttonSavor-light.button_off{
-	background:var(--S-Savor-light-off);
+	background:var(--Sv-Savor-light-off);
 }

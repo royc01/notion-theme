@@ -24,7 +24,7 @@
     --b3-border-color: rgba(0, 0, 0, .1);
 
     --b3-toolbar-color: var(--b3-theme-background);
-    --b3-toolbar-background: var(--S-toolbar-background);
+    --b3-toolbar-background: var(--Sv-toolbar-background);
 
     /* 滚动条 */
     --b3-scroll-color: rgba(98, 122, 123, 0.14);
@@ -82,20 +82,7 @@
     --b3-font-background11: rgb(234, 228, 242);
     --b3-font-background12: rgb(244, 223, 235);
     --b3-font-background13: rgb(251, 228, 228);
-	/*callout*/
-	--b3-bq-background1: rgb(198, 203, 208 , .5);
-    --b3-bq-background2: rgb(225, 225, 225 , .5);
-    --b3-bq-background3: rgb(235, 236, 237 , .5);
-    --b3-bq-background4: rgb(233, 229, 227 , .5);
-	--b3-bq-background5: rgb(246, 225, 205 , .5);
-    --b3-bq-background6: rgb(250, 235, 221 , .5);
-    --b3-bq-background7: rgb(251, 243, 219 , .5);
-	--b3-bq-background8: rgba(221, 237, 226 , .5);
-    --b3-bq-background9: rgb(221, 237, 234 , .5);
-    --b3-bq-background10: rgb(221, 235, 241 , .5);
-    --b3-bq-background11: rgb(234, 228, 242 , .5);
-    --b3-bq-background12: rgb(244, 223, 235 , .5);
-    --b3-bq-background13: rgb(251, 228, 228 , .5);
+
     /* 动画效果 */
     --b3-transition: all .15s cubic-bezier(0, 0, .2, 1) 0ms;
     --b3-width-transition: width .15s cubic-bezier(0, 0, .2, 1) 0ms;
@@ -159,151 +146,60 @@
     --b3-pdf-background6: var(--b3-font-background11);
     --b3-pdf-background7: var(--b3-font-background13);
 	
-	/* 自定义结构配色 */
-	/* 顶栏 */
-	--S-toolbar-background: rgb(37, 40, 48);
-	--S-toolbar-blur-background: transparent;
-	--S-toolbar-item-hover: rgba(0, 0, 0, .05);
-	--S-toolbar-barWorkspace-hover:var(--S-dockleft-item-active-background);
-	--S-toolbar-closeWindow-hover: #e81123;
-	--S-toolbar-closeWindow-svg: #fff;
+    /* ————————————————————  自定义结构配色  ———————————————————— */
 
+	/* 顶栏 */
+    --Sv-toolbar-background:/*#9ca8a8;*/rgb(37, 40, 48);
 
 	/* dock栏 */
-	--S-dock-color: rgba(37, 40, 48, .3);
-	--S-dock-background: rgb(215, 224, 224);
-	--S-dockright-item-active-background: var(--b3-theme-background);
-	--S-dockleft-item-active-background: rgb(215, 224, 224);
-	--S-dock-item-active-color: #eb8383;
-	--S-dock-item-hover-background: rgb(182, 200, 201);
+	--Sv-dock-item-color: var(--b3-theme-background);
 	
-    --S-topfixed-background: var(--b3-theme-background);
 	/* 侧栏面板 */
-	--S-fn__flex-column-background: var(--b3-theme-background);
-	--S-fn__flex-shrink-background: rgb(215, 224, 224);
-	--S-block-logo-color: var(--b3-theme-on-background);
-	--S-block-logo-background-color: rgba(37, 40, 48);
-	--S-block-icon-svg-color: rgba(37, 40, 48,0.4);
-	--S-block-icon-hover: var(--S-list-background);
-	--S-block-icon-active: #f4614b;
-	--S-list-item-arrow: rgba(37, 40, 48,0.4);
-	--S-list-background: rgba(98, 122, 123, 0.1);
-	--S-list-background-focus: rgba(98, 122, 123, 0.2);
-	--S-list-background-activefocus:  rgba(235, 131, 131, 0.15);
-	
-	--S-flex-column-padding:6px 0px 2px 0px;
-	/* 大纲数字 */
-	--h1-list-graphic: #eb8383;
-	--h2-list-graphic: #ae9acb;
-	--h3-list-graphic: #7db5cd;
-	--h4-list-graphic: #71a796;
-	--h5-list-graphic: #dcbf61;
-	--h6-list-graphic: #dda36a;
-	/* 线条 */
-	--b3-layout-resize: #d8dbdb;
-	--b3-shrink-layout-resize: var(--b3-scroll-color);
-	--b3-layout-resize-hover: var(--b3-scroll-color-hover);
-	--flex-width-transition:width 150ms linear; /*调节宽度动画*/
-	--b3-border-fold: rgb(15, 15 , 15, .1);/*折叠边框*/
-	--b3-layout-resize-width: 1px;
-	/* 页签 */
-	--S-item-focus: rgb(0, 0, 0 ,1);
-	/* 面包屑 */
-	--S-protyle-breadcrumb-arrow: rgba(174,172,166);
+    --Sv-block-icon-svg-color: rgba(55, 53, 47, .5);
+    --Sv-layout--resize-hover: #b9cfcf68;
 
-	/* 头图按钮 */
-	--S-icons-tooltips: rgba(37, 40, 48, 0.5);
-	--S-icons-tooltips-hover: var(--S-list-background);
-	--S-img-icons-tooltips: var(--b3-theme-on-surface);
-	--S-img-icons-tooltips-bg: var(--b3-theme-background);
-	--S-img-icons-span: rgba(0, 0, 0, .5);
-	/* 块标 */
-	--b3-gutters-color: rgb(182, 200, 201);
-	--S-gutters-background: var(--bS-toolbar-item-hover);												   
-	/* 弹出工具条字体颜色选择 */
-	--b3-color--square: var(--b3-border-color);
-	/* 任务列表 */
-	--b3-task-done-color: var(--b3-scroll-color-hover);
-	--b3-task-done-hover: rgb(0, 122, 149, 0.7);
-	/* 引述 */
-	--b3-bq-background: rgb(215, 224, 224, .5);
-	/* 块引用 */
-	--b3-block-ref-background: var(--S-toolbar-item-hover);
-	/* 代码块 */
-	--S-linenumber-rows: rgb(215, 224, 224);
-	--S-code-block-hljs: rgb(215, 224, 224, .5);
-	/*行内代码*/
-	--S-inline-code:var(--b3-theme-error);
-	/*按钮*/
-	--b3-button: rgb(0, 122, 149, 0.7);
-	/*pdf*/
-	--b3-toolbarSidebar: rgb(182, 200, 201);
-	/*导图*/
-	--b3-border-daotu: 2px solid #ffb8b8;
-	--b3-block-daotu:#FFF;
-	/*看板*/
-	--kbline-boarditem-minwidth: 14rem;/*看板卡片的最小宽度*/
-	--kb--li--background:#fff;
-	/*ctrlp*/
-	--b3-list-item--meta: #8b8e92;
-	/*底栏状态*/
-	--S-status-msg-background: #c7d1d1;
-	--S-status-barDock: var(--S-fn__flex-shrink-background);
-	--S-status-barDock-hover: #ccd5d5;
-	
-	
-	--S-settings:url("data:image/svg+xml;utf8,<svg fill='rgb(240, 244, 244)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 21.2h-6c-0.4 0-0.667-0.267-0.667-0.667 0-0.267 0.267-0.533 0.667-0.533h6c0.267-1.067 1.2-1.867 2.4-1.867 1.067 0 2.133 0.8 2.4 1.867h1.067c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-1.067c-0.267 1.067-1.2 1.867-2.4 1.867s-2.133-0.8-2.4-2v0zM17.2 20.667c0 0.667 0.533 1.2 1.2 1.2s1.2-0.533 1.2-1.2c0-0.667-0.533-1.2-1.2-1.2s-1.2 0.533-1.2 1.2zM11.867 14.667h-1.867c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h1.867c0.267-1.067 1.2-1.867 2.4-1.867 1.067 0 2.133 0.8 2.4 1.867h5.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-5.333c-0.267 1.067-1.2 1.867-2.4 1.867-1.067-0.133-2-0.8-2.4-1.867zM13.067 14c0 0.667 0.533 1.2 1.2 1.2s1.2-0.533 1.2-1.2-0.533-1.2-1.2-1.2c-0.667 0-1.2 0.533-1.2 1.2z'/></svg>") no-repeat left -4px top -4px;
+    /* 底栏 */
+    --Sv-status-msg-background: #c2d0d0;
+    
+    /* 滚动条 */
+	--Sv-scroll-color: #cdd6d6;
+	--Sv-scroll-color-hover: #cbe4e4;
+
+    /* 表格 */
+    --Sv-table-thead: rgb(231, 236, 236);
+
+    /* 代码块 */
+    --Sv-code-block-background: rgb(231, 236, 236);
+
+    /* —————— 设置界面 —————— */
+    --Sv--dialog-tab-bar: var(--b3-theme-surface);
+
+    /* 集市界面 */
+    --Sv-bazaar-focus: #e5ebeb;
+    --Sv-bazaar-item: #d7e0e0;
+
+    /* 合并顶栏插件收缩颜色 */
+    --Sv-plugin-off-bg: #383a41;
+    --Sv-plugin-b-off-bg: #252830;
+    --Sv-plugin-b-off-bg-hover: #2f333c;
+
+    /*——————————————————————————— 收缩按钮 ——————————————————————————*/
+    --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(37, 40, 48)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
+    --Sv-Splugin-off:url("data:image/svg+xml;utf8,<svg fill='rgb(215, 224, 224)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -10px top -6px;
+    /*——————————————————————————————————————————————————————————————*/
+
 }
 
 
 
-.layout__dockr .layout-tab-container {
-	background-color:var(--S-fn__flex-column-background);
-}
 
 
 #buttonSavor-dark,#buttonvinegar{
 	display:none!important;
 }
 
-#status {
-    background-color: var(--S-fn__flex-shrink-background);
-}
-.toolbar .toolbar__item:not(.toolbar__item--disabled) svg{
-	color: var(--b3-theme-background);
-}
-
-
-
-#dockBottom:not(.fn__none)+#status .toolbar__item:not(#barDock) svg{
-	color: var(--b3-theme-background)!important;
-}
-#dockBottom:not(.fn__none)+#status .toolbar__item:hover svg{
-	color: var(--S-dock-color)!important;
-}
-#dockBottom:not(.fn__none)+#status .status__counter {
-	color: var(--b3-theme-background)!important;
-}
-
-
-.status #barDock svg{
-	color:var(--b3-theme-on-background);
-}
-.status .toolbar__item:hover{
-	background-color:var(--S-toolbar-item-hover)!important;
-}
 
 #buttonSavor-light.button_off{
-	background:var(--S-Savor-light-off);
+	background:var(--Sv-Savor-light-off);
 }
 
-.layout__dockl>.fn__flex:not(.fn__none)+.layout__resize.fn__none{
-	background-color: var(--S-fn__flex-shrink-background);
-}
-.layout__dockl .layout__resize.fn__none:after{
-	background-color: var(--S-fn__flex-shrink-background);
-}
-
-.toolbar__window .toolbar__item{
-    color: var(--b3-theme-on-background);
-}

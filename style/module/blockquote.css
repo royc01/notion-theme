@@ -1,21 +1,18 @@
 /* 引述 */
 .protyle-wysiwyg .bq{
-    color: var( --b3-theme-on-background);
+    color: var(--Sv-bq-color);
     background-color: transparent;
 }
 .protyle-wysiwyg .bq:before{
     width: .2em;
-    background-color: var(--b3-theme-on-background);
+    background-color: var(--Sv-bq-color);
 }
 .list .bq {
 	margin-right:0px!important;
 }/*列表里代码块对齐*/
-.bq .bq{
-    margin-left:1px
-}
 .bq[style*="background1)"]{
 	border: none;
-    background-color: var(--b3-bq-background1)!important;
+    background-color: var(--Sv-bq-background1)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background1) inset;
     &:before{
@@ -24,7 +21,7 @@
 }
 .bq[style*="background2"]{
 	border: none;
-    background-color: var(--b3-bq-background2)!important;
+    background-color: var(--Sv-bq-background2)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background2) inset;
     &:before{
@@ -33,7 +30,7 @@
 }
 .bq[style*="background3"]{
 	border: none;
-    background-color: var(--b3-bq-background3)!important;
+    background-color: var(--Sv-bq-background3)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background3) inset;
     &:before{
@@ -42,7 +39,7 @@
 }
 .bq[style*="background4"]{
 	border: none;
-    background-color: var(--b3-bq-background4)!important;
+    background-color: var(--Sv-bq-background4)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background4) inset;
     &:before{
@@ -51,7 +48,7 @@
 }
 .bq[style*="background5"]{
 	border: none;
-    background-color: var(--b3-bq-background5)!important;
+    background-color: var(--Sv-bq-background5)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background5) inset;
     &:before{
@@ -60,7 +57,7 @@
 }
 .bq[style*="background6"]{
 	border: none;
-    background-color: var(--b3-bq-background6)!important;
+    background-color: var(--Sv-bq-background6)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background6) inset;
     &:before{
@@ -69,7 +66,7 @@
 }
 .bq[style*="background7"]{
 	border: none;
-    background-color: var(--b3-bq-background7)!important;
+    background-color: var(--Sv-bq-background7)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background7) inset;
     &:before{
@@ -78,7 +75,7 @@
 }
 .bq[style*="background8"]{
 	border: none;
-    background-color: var(--b3-bq-background8)!important;
+    background-color: var(--Sv-bq-background8)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background8) inset;
     &:before{
@@ -87,7 +84,7 @@
 }
 .bq[style*="background9"]{
 	border: none;
-    background-color: var(--b3-bq-background9)!important;
+    background-color: var(--Sv-bq-background9)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background9) inset;
     &:before{
@@ -96,7 +93,7 @@
 }
 .bq[style*="background10"]{
 	border: none;
-    background-color: var(--b3-bq-background10)!important;
+    background-color: var(--Sv-bq-background10)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background10) inset;
     &:before{
@@ -105,13 +102,13 @@
 }
 .bq[style*="background11"]{
 	border: none;
-    background-color: var(--b3-bq-background11)!important;
+    background-color: var(--Sv-bq-background11)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background11) inset;
 }
 .bq[style*="background12"]{
 	border: none;
-    background-color: var(--b3-bq-background12)!important;
+    background-color: var(--Sv-bq-background12)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background12) inset;
     &:before{
@@ -120,7 +117,7 @@
 }
 .bq[style*="background13"]{
 	border: none;
-    background-color: var(--b3-bq-background13)!important;
+    background-color: var(--Sv-bq-background13)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background13) inset;
     &:before{

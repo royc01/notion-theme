@@ -9,7 +9,7 @@
 	--b3-theme-background-light: rgba(230, 230, 230, .1);
     --b3-theme-surface:rgb(55, 60, 63);/* 面板主色 */
 	--b3-theme-surface-light: rgba(41, 42, 45, .86);
-	--b3-theme-surface-lighter:rgba(230, 230, 230, .06);
+	--b3-theme-surface-lighter:rgba(230, 230, 230, .12);
     --b3-theme-error: #e35555;
 
     /* 文字颜色 */
@@ -81,20 +81,7 @@
     --b3-font-background11: rgb(68, 63, 87);
     --b3-font-background12: rgb(83, 59, 76);
     --b3-font-background13: rgb(89, 65, 65);
-	/*callout*/
-	--b3-bq-background1: rgb(35, 38, 40 , .3);
-    --b3-bq-background2: rgb(63, 68, 71 , .3);
-    --b3-bq-background3: rgb(69, 75, 78 , .3);
-    --b3-bq-background4: rgb(67, 64, 64 , .3);
-	--b3-bq-background5: rgb(89, 74, 58 , .3);
-    --b3-bq-background6: rgb(89, 79, 59 , .3);
-    --b3-bq-background7: rgb(89, 86, 59 , .3);
-	--b3-bq-background8: rgba(53, 76, 75 , .3);
-    --b3-bq-background9: rgb(54, 79, 84 , .3);
-    --b3-bq-background10: rgb(54, 73, 84 , .3);
-    --b3-bq-background11: rgb(68, 63, 87 , .3);
-    --b3-bq-background12: rgb(83, 59, 76 , .3);
-    --b3-bq-background13: rgb(89, 65, 65 , .3);
+
     /* 动画效果 */
     --b3-transition: all .15s cubic-bezier(0, 0, .2, 1) 0ms;
     --b3-width-transition: width .15s cubic-bezier(0, 0, .2, 1) 0ms;
@@ -159,120 +146,164 @@
     --b3-pdf-background7: var(--b3-font-background13);
 	
 	/* 自定义结构配色 */
-	/* 顶栏 */
-	--S-toolbar-background: rgba(55, 60, 63);
-	--S-toolbar-blur-background: transparent;
-	--S-toolbar-item-hover: rgba(255, 255, 255, 0.1);
-	--S-toolbar-barWorkspace-hover:var(--S-list-background);
-	--S-toolbar-closeWindow-hover: #e81123;
-	--S-toolbar-closeWindow-svg: #fff;
-	/* dock栏 */
-	--S-dock-color: rgba(114, 118, 120);
-	--S-dock-background: rgba(55, 60, 63);
-	--S-dockright-item-active-background: rgba(71, 76, 80 );
-	--S-dockleft-item-active-background: rgba(71, 76, 80 );
-	--S-dock-item-active-color: #eb8383;
-	--S-dock-item-hover-background: rgba(71, 76, 80 );
-	--S-dock-item-active-background-hover: rgba(235, 235, 235, 0.1);
 
-	/* 侧栏面板 */
-	--S-fn__flex-column-background: rgba(55, 60, 63);
-	--S-fn__flex-shrink-background: rgba(55, 60, 63);
-	--S-block-logo-color:var(--b3-theme-on-background);
-	--S-block-logo-background-color: rgba(114, 118, 120);
-	--S-block-icon-svg-color: rgba(114, 118, 120);
-	--S-block-icon-hover: rgba(255, 255, 255, 0.1 );
-	--S-block-icon-active: #eb8383;
-	--S-list-item-arrow: rgba(149, 152, 156);
-	--S-list-background: #44494b;
-	--S-list-background-focus: rgba(255, 255, 255, 0.2 );
-	--S-list-background-activefocus:  rgba(235, 131, 131, 0.15);
-	
-	--b3-flex-column-padding:6px 0px 2px 0px;
-	--b3-list-item-radius: 3px;
-	/* 大纲数字 */
-	--h1-list-graphic: #eb8383;
-	--h2-list-graphic: #ae9acb;
-	--h3-list-graphic: #7db5cd;
-	--h4-list-graphic: #71a796;
-	--h5-list-graphic: #dcbf61;
-	--h6-list-graphic: #dda36a;
-	/* 线条 */
-	--b3-layout-resize: rgba(230, 230, 230, .1);
-	--b3-shrink-layout-resize: rgba(230, 230, 230, .1);
-	--b3-layout-resize-hover: var(--b3-scroll-color);
-	--flex-width-transition:width 150ms linear; /*调节宽度动画*/
-	--b3-border-fold: rgba(114, 118, 120);/*折叠边框*/
-	--b3-layout-resize-width: 1px;
-	/* 页签 */
-	--S-item-focus: rgba(255, 255, 255 ,0.2);
-	/* 面包屑 */
-	--S-protyle-breadcrumb-arrow: rgba(174,172,166);
-	/* 头图按钮 */
-	--S-icons-tooltips: var(--b3-theme-on-surface);
-	--S-icons-tooltips-hover: var(--b3-list-background);
-	--S-img-icons-tooltips: var(--b3-theme-on-surface);
-	--S-img-icons-tooltips-bg: var(--b3-theme-background);
-	--S-img-icons-span: rgba(255, 255, 255, .5);
-	/* 块标 */
-	--b3-gutters-color: var(--b3-scroll-color);
-	--S-gutters-background: var(--b3-border-color);												   
-	/* 弹出工具条字体颜色选择 */
-	--b3-color--square: var(--b3-border-color);
-	/* 任务列表 */
-	--b3-task-done-color: var(--b3-scroll-color-hover);
-	--b3-task-done-hover: #069ccd;
-	/* 引述 */
-	--b3-bq-background: rgba(50, 55, 58, 1);
-	/* 块引用 */
-	--b3-block-ref-background: var(--S-toolbar-item-hover);
-	/* 代码块 */
-	--S-linenumber-rows: rgba(61, 66, 69);
-	--S-code-block-hljs: var(--S-fn__flex-shrink-background);		
-	/*行内代码*/
-	--S-inline-code:var(--b3-theme-error);
-	/*按钮*/
-	--b3-button: #069ccd;
-	/*pdf*/
-	--b3-toolbarSidebar: #484d50;
 	/*导图*/
 	--b3-border-daotu: 2px solid rgba(69, 74, 77);
 	--b3-block-daotu:var(--b3-theme-surface-light);
 	/*看板*/
 	--kbline-boarditem-minwidth: 14rem;/*看板卡片的最小宽度*/
 	--kb--li--background:rgba(55, 60, 63);
-	/*ctrlp*/
-	--b3-list-item--meta: #ebebeb;
-	/*底栏状态*/
-	--S-status-msg-background:#404548;
-	--S-status-barDock: var(--b3-theme-on-background);
-	--S-status-barDock-hover: #d4d4d4;
+
 	
 	/*数据库*/
-	--S-font-color13: var(--b3-theme-on-background);
-	--S-font-color12: var(--b3-theme-on-background);
-	--S-font-color11: var(--b3-theme-on-background);
-	--S-font-color10: var(--b3-theme-on-background);
-	--S-font-color9: var(--b3-theme-on-background);
-	--S-font-color8: var(--b3-theme-on-background);
-	--S-font-color7: var(--b3-theme-on-background);
-	--S-font-color6: var(--b3-theme-on-background);
-	--S-font-color5: var(--b3-theme-on-background);
-	--S-font-color4: var(--b3-theme-on-background);
-	--S-font-color3: var(--b3-theme-on-background);
-	--S-font-color2: var(--b3-theme-on-background);
-	--S-font-color1: var(--b3-theme-on-background);
+	--Sv-font-color13: var(--b3-theme-on-background);
+	--Sv-font-color12: var(--b3-theme-on-background);
+	--Sv-font-color11: var(--b3-theme-on-background);
+	--Sv-font-color10: var(--b3-theme-on-background);
+	--Sv-font-color9: var(--b3-theme-on-background);
+	--Sv-font-color8: var(--b3-theme-on-background);
+	--Sv-font-color7: var(--b3-theme-on-background);
+	--Sv-font-color6: var(--b3-theme-on-background);
+	--Sv-font-color5: var(--b3-theme-on-background);
+	--Sv-font-color4: var(--b3-theme-on-background);
+	--Sv-font-color3: var(--b3-theme-on-background);
+	--Sv-font-color2: var(--b3-theme-on-background);
+	--Sv-font-color1: var(--b3-theme-on-background);
 	
 
-	--S-conceal-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z'/></svg>") no-repeat left 0px top -2px;
+	--Sv-conceal-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z'/></svg>") no-repeat left 0px top -2px;
 	
-	--S-tabbarVertical-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z'/></svg>") no-repeat left 0px top -2px;
+	--Sv-tabbarVertical-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z'/></svg>") no-repeat left 0px top -2px;
 	
-	--S-topBar-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z'/></svg>") no-repeat left 0px top -2px;
+	--Sv-topBar-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z'/></svg>") no-repeat left 0px top -2px;
 	
-	--S-bulletThreading-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z'/></svg>") no-repeat left 0px top -2px;
+	--Sv-bulletThreading-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z'/></svg>") no-repeat left 0px top -2px;
 	
-	--S-settings:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 21.2h-6c-0.4 0-0.667-0.267-0.667-0.667 0-0.267 0.267-0.533 0.667-0.533h6c0.267-1.067 1.2-1.867 2.4-1.867 1.067 0 2.133 0.8 2.4 1.867h1.067c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-1.067c-0.267 1.067-1.2 1.867-2.4 1.867s-2.133-0.8-2.4-2v0zM17.2 20.667c0 0.667 0.533 1.2 1.2 1.2s1.2-0.533 1.2-1.2c0-0.667-0.533-1.2-1.2-1.2s-1.2 0.533-1.2 1.2zM11.867 14.667h-1.867c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h1.867c0.267-1.067 1.2-1.867 2.4-1.867 1.067 0 2.133 0.8 2.4 1.867h5.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-5.333c-0.267 1.067-1.2 1.867-2.4 1.867-1.067-0.133-2-0.8-2.4-1.867zM13.067 14c0 0.667 0.533 1.2 1.2 1.2s1.2-0.533 1.2-1.2-0.533-1.2-1.2-1.2c-0.667 0-1.2 0.533-1.2 1.2z'/></svg>") no-repeat left -4px top -4px;
+	--Sv-settings:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 21.2h-6c-0.4 0-0.667-0.267-0.667-0.667 0-0.267 0.267-0.533 0.667-0.533h6c0.267-1.067 1.2-1.867 2.4-1.867 1.067 0 2.133 0.8 2.4 1.867h1.067c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-1.067c-0.267 1.067-1.2 1.867-2.4 1.867s-2.133-0.8-2.4-2v0zM17.2 20.667c0 0.667 0.533 1.2 1.2 1.2s1.2-0.533 1.2-1.2c0-0.667-0.533-1.2-1.2-1.2s-1.2 0.533-1.2 1.2zM11.867 14.667h-1.867c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h1.867c0.267-1.067 1.2-1.867 2.4-1.867 1.067 0 2.133 0.8 2.4 1.867h5.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-5.333c-0.267 1.067-1.2 1.867-2.4 1.867-1.067-0.133-2-0.8-2.4-1.867zM13.067 14c0 0.667 0.533 1.2 1.2 1.2s1.2-0.533 1.2-1.2-0.533-1.2-1.2-1.2c-0.667 0-1.2 0.533-1.2 1.2z'/></svg>") no-repeat left -4px top -4px;
+
+	--b3-select-background: url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M12.8,15.6l4-4.1c0.2-0.2,0.2-0.4,0.2-0.6c0-0.5-0.4-0.9-0.9-0.9c-0.3,0-0.5,0.1-0.6,0.3L12,13.9l-3.4-3.6C8.3,10.1,8.1,10,7.9,10C7.4,10,7,10.4,7,10.9c0,0.2,0.1,0.4,0.2,0.6l4,4.1c0.2,0.2,0.4,0.3,0.7,0.3C12.3,15.9,12.5,15.8,12.8,15.6z'/></svg>") no-repeat right 2px center #44494b;
+
+	/* ————————————————————  自定义结构配色  ———————————————————— */
+
+	/* 顶栏 */
+    --Sv-toolbar-background: #262c2f;
+
+	/* dock栏 */
+	--Sv-dock-item-color: #afb1b2;
+	
+	/* 侧栏面板 */
+	--Sv-list-item-arrow: rgba(149, 152, 156);
+    --Sv-block-icon-svg-color: #afb1b2;
+	--Sv-list-background: rgba(255, 255, 255, 0.1 );
+	--Sv-list-focus-hover: rgba(255, 255, 255, 0.2 );
+	--Sv-layout--resize-hover: #9c9c9c68;
+
+	/* 页签 */
+	--Sv-tab-bar-item-background: #2b3134;
+
+    /* 底栏 */
+    --Sv-status-msg-background: #2a2f32;
+    
+    /* 滚动条 */
+	--Sv-scroll-color: #404649;
+	--Sv-scroll-color-hover: #585f63;
+
+	/* 代码块 */
+    --Sv-code-block-background: rgb(55, 60, 63);
+
+	/* 行内代码 */
+	--Sv-inline-code: #ff9c9c;
+
+    /* —————— 设置界面 —————— */
+    --Sv--dialog-tab-bar: var(--b3-theme-surface);
+	--Sv-button-cancel: #4b5053;
+	--Sv-menu-accelerator: rgba(255, 255, 255, 0.3);
+
+    /* 集市界面 */
+    --Sv-bazaar-focus: #3d4346;
+    --Sv-bazaar-item: #373c3f;
+	--Sv-card--current: #522e30;
+
+	/* 文档标签 */
+	--Sv-chip--secondary-color: var(--b3-theme-on-background);
+	--Sv-chip--secondary-bg: var(--b3-font-background6);
+	--Sv-chip--primary-color: var(--b3-theme-on-background);
+	--Sv-chip--primary-bg: var(--b3-font-background7);
+	--Sv-chip--info-color: var(--b3-theme-on-background);
+	--Sv-chip--info-bg: var(--b3-font-background8);
+	--Sv-chip--success-color: var(--b3-theme-on-background);
+	--Sv-chip--success-bg: var(--b3-font-background10);
+	--Sv-chip--warning-color: var(--b3-theme-on-background);
+	--Sv-chip--warning-bg: var(--b3-font-background11);
+	--Sv-chip--error-color: var(--b3-theme-on-background);
+	--Sv-chip--error-bg: var(--b3-font-background12);
+	--Sv-chip--pink-color: var(--b3-theme-on-background);
+	--Sv-chip--pink-bg: var(--b3-font-background13);
+
+	/* 字体颜色选择 工具条 */
+	--Sv-protyle-toolbar-color: var(--b3-theme-on-background);
+	--Sv-protyle-util-bg: var(--b3-theme-background);
+
+	--Sv-color-d-shadow: #474747;
+	--Sv-color1-shadow: #474747;
+	--Sv-color2-shadow: #4f5254;
+	--Sv-color3-shadow: #614b41;
+	--Sv-color4-shadow: #7f5122;
+	--Sv-color5-shadow: #564221;
+	--Sv-color6-shadow: #716224;
+	--Sv-color7-shadow: #27564d;
+	--Sv-color8-shadow: #295965;
+	--Sv-color9-shadow: #264456;
+	--Sv-color10-shadow: #4d376c;
+	--Sv-color11-shadow: #712b51;
+	--Sv-color12-shadow: #803a35;
+	--Sv-color13-shadow: #702a29;
+
+	--Sv-bg-d-shadow: #474747;
+	--Sv-bg1-shadow: #565d62;
+	--Sv-bg2-shadow: #828a8e;
+	--Sv-bg3-shadow: #778084;
+	--Sv-bg4-shadow: #747070;
+	--Sv-bg5-shadow: #937f67;
+	--Sv-bg6-shadow: #938668;
+	--Sv-bg7-shadow: #938f68;
+	--Sv-bg8-shadow: #5f8180;
+	--Sv-bg9-shadow: #61868c;
+	--Sv-bg10-shadow: #617d8c;
+	--Sv-bg11-shadow: #766e90;
+	--Sv-bg12-shadow: #8b6881;
+	--Sv-bg13-shadow: #937171;
+	
+	--Sv-style1-d-shadow: #474747;
+	--Sv-error-shadow: #6b4b4b;
+	--Sv-warning-shadow: #806b4d;
+	--Sv-info-shadow: #536b7d;
+	--Sv-success-shadow: #5c705d;
+
+	/* 引述块颜色 */
+	--Sv-bq-background1: rgb(35, 38, 40 , .3);
+	--Sv-bq-background2: rgb(63, 68, 71 , .3);
+	--Sv-bq-background3: rgb(69, 75, 78 , .3);
+	--Sv-bq-background4: rgb(67, 64, 64 , .3);
+	--Sv-bq-background5: rgb(89, 74, 58 , .3);
+	--Sv-bq-background6: rgb(89, 79, 59 , .3);
+	--Sv-bq-background7: rgb(89, 86, 59 , .3);
+	--Sv-bq-background8: rgba(53, 76, 75 , .3);
+	--Sv-bq-background9: rgb(54, 79, 84 , .3);
+	--Sv-bq-background10: rgb(54, 73, 84 , .3);
+	--Sv-bq-background11: rgb(68, 63, 87 , .3);
+	--Sv-bq-background12: rgb(83, 59, 76 , .3);
+	--Sv-bq-background13: rgb(89, 65, 65 , .3);
+
+    /* 合并顶栏插件收缩颜色 */
+    --Sv-plugin-off-bg: #2f3437;
+    --Sv-plugin-b-off-bg: #262c2f;
+    --Sv-plugin-b-off-bg-hover: #393e41;
+
+    /*——————————————————————————— 收缩按钮 ——————————————————————————*/
+    --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
+    --Sv-Splugin-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -10px top -6px;
+    /*——————————————————————————————————————————————————————————————*/
 }
 
 /* PDF */
@@ -281,24 +312,14 @@
     mix-blend-mode: screen;
 }
 
-.b3-text-field::-webkit-calendar-picker-indicator {
-    fiilter: invert(1);
+.protyle-toolbar{
+	background-color: var(--b3-theme-surface);
 }
-
-
 #buttonSavor-light,#buttonsalt,#buttonsugar{
 	display:none!important;
 }
 
-#savorToolbar:after{
-	height:188px;
-}
-
-.b3-menu,.b3-menu__item,.b3-menu .b3-menu__submenu,.hint--menu{
-	background-color: var(--S-fn__flex-column-background);
-}
-
 
 #buttonSavor-dark.button_on,#buttonSavor-dark.button_off{
-	background:var(--S-Savor-dark-on);
+	background:var(--Sv-Savor-dark-on);
 }

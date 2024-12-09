@@ -369,7 +369,7 @@ setTimeout(()=>ClickMonitor(),1000)
 function themeButton() {
 	savorThemeToolbarAddButton(
         "buttonSavor-light",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
+        "b3-menu__item",
 		"Light 配色",
 		'light',
         () => {
@@ -383,7 +383,7 @@ function themeButton() {
     );
 		savorThemeToolbarAddButton(
         "buttonsalt",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
+        "b3-menu__item",
 		"Salt 配色",
 		'light',
         () => {
@@ -397,7 +397,7 @@ function themeButton() {
     );
 		savorThemeToolbarAddButton(
         "buttonsugar",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
+        "b3-menu__item",
 		"Sugar 配色",
 		'light',
         () => {
@@ -411,7 +411,7 @@ function themeButton() {
     );
 		savorThemeToolbarAddButton(
         "buttonSavor-dark",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
+        "b3-menu__item",
 		"Dark 配色",
 		'dark',
         () => {
@@ -425,7 +425,7 @@ function themeButton() {
     );
 	    savorThemeToolbarAddButton(
         "buttonvinegar",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
+        "b3-menu__item",
 		"Vinegar 配色",
 		'dark',
         () => {
@@ -444,7 +444,7 @@ function themeButton() {
 function concealMarkButton() {
     savorThemeToolplusAddButton(
         "conceal",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
+        "b3-menu__item",
 		"挖空",
         () => {
             loadStyle("/appearance/themes/Savor/style/topbar/conceal-mark.css", "theme-color-style-conceal挖空").setAttribute("topBarcss", "conceal挖空");
@@ -460,7 +460,7 @@ function concealMarkButton() {
 function tabbarVerticalButton() {
     savorThemeToolplusAddButton(
         "tabbarVertical",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
+        "b3-menu__item",
 		"垂直页签",
         () => {
             loadStyle("/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", "theme-color-style-tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
@@ -493,7 +493,7 @@ function SpluginButton() {
 function topbarfixedButton() {
     savorThemeToolplusAddButton(
         "topBar",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
+        "b3-menu__item",
 		"顶栏合并",
         () => {
             loadStyle("/appearance/themes/Savor/style/topbar/top-fixed.css", "theme-color-style-topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
@@ -509,7 +509,7 @@ function topbarfixedButton() {
 function bulletThreading() {
     savorThemeToolplusAddButton(
         "bulletThreading",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
+        "b3-menu__item",
 		"列表子弹线",
         () => {
             loadStyle("/appearance/themes/Savor/style/topbar/bullet-threading.css", "theme-color-style-列表子弹线").setAttribute("bulletThreading", "列表子弹线");
@@ -1022,7 +1022,7 @@ function savorThemeToolbarAddButton(ButtonID, ButtonTitle , ButtonLabel, Mode, N
     var savorToolbar = document.getElementById("savorToolbar");
     if (savorToolbar == null) {
         var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("windowControls");
+        var windowControls = document.querySelector("#commonMenu .b3-menu__items")
 
         if (toolbarEdit == null && barBack != null) {
             savorToolbar = document.createElement("div");
@@ -1034,7 +1034,7 @@ function savorThemeToolbarAddButton(ButtonID, ButtonTitle , ButtonLabel, Mode, N
         }
     }
 
-    var addButton = addinsertCreateElement(savorToolbar, "div");
+    var addButton = addinsertCreateElement(savorToolbar, "button");
     addButton.style.float = "top";
 
 
@@ -1136,7 +1136,7 @@ function savorThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClick
         }
     }
 
-    var addButton = addinsertCreateElement(savorToolbar, "div");
+    var addButton = addinsertCreateElement(savorToolbar, "button");
     addButton.style.float = "top";
 
 
@@ -1986,10 +1986,10 @@ function getcommonMenu_Bolck() {
                 concealMarkButton();//挖空
                 
                 tabbarVerticalButton();//垂直页签
-
-                SpluginButton();//展开插件
 				
 				topbarfixedButton();//顶栏悬浮
+
+                SpluginButton();//展开插件
 				
 				bulletThreading();//子弹线
  

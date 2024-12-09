@@ -13,6 +13,11 @@ body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser #savorToolbar:ha
 	margin: 42px 0 0 143px !important;
 	margin-right: -135.5px !important;
 }*/
-body:not(.body--mobile,.body--window)>#toolbar [data-position]{
-	visibility: visible!important;
+body:not(.body--mobile, .body--window) > #toolbar {
+    & [data-position]:not(.fn__none) {
+	padding: 0px!important;
+	height: 20px!important;
+	width: 0px!important;
+	box-shadow:none;
+}
 }
