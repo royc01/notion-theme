@@ -15,19 +15,19 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		}
     &  [data-position]:not(.fn__none){
         counter-increment: plugin-counter;
+		visibility: hidden;
         padding: 4px!important;
         height: 20px!important;
         width: 20px!important;
         border-radius: 3px!important;
         margin-top: 1px;
         box-shadow: 6px 0px 0px 4px var(--Sv-plugin-off-bg),0px 0px 0px 4px var(--Sv-plugin-off-bg);
-        transition: all 200ms;
         background-color: var(--Sv-plugin-off-bg);
         & svg{
             height: 12px;
             width: 12px;
             }
-    &:not(.fn__none)~#savorPlugins #Splugin.button_on{
+    &:not(.fn__none)~#savorPlugins #Splugin.button_off{
             width: 28px!important;
             background:var(--Sv-Splugin-on);
             background-color: var(--Sv-plugin-on-bg);
@@ -156,7 +156,7 @@ body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser [data-position]{
 	}
 }
 
-#Splugin.button_off{
+#Splugin.button_on{
     width: 18px!important;
     border-radius: 0 6px 6px 0!important;
     box-shadow: 0 0 0 2px inset var(--Sv-plugin-off-bg);
