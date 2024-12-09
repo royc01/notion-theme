@@ -463,6 +463,15 @@ function tabbarVerticalButton() {
         "b3-menu__item",
 		"垂直页签",
         () => {
+            // 启用垂直页签时,先检查并关闭顶栏合并
+            let topbarFixed = document.getElementById("theme-color-style-topbar隐藏");
+            if (topbarFixed) {
+                // 找到顶栏合并按钮并触发点击以关闭它
+                let topbarBtn = document.getElementById("topBar");
+                if (topbarBtn) topbarBtn.click();
+            }
+            
+            // 然后启用垂直页签
             loadStyle("/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", "theme-color-style-tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
         },
         () => {
@@ -496,6 +505,15 @@ function topbarfixedButton() {
         "b3-menu__item",
 		"顶栏合并",
         () => {
+            // 启用顶栏合并时,先检查并关闭垂直页签
+            let verticalTab = document.getElementById("theme-color-style-tabbar垂直");
+            if (verticalTab) {
+                // 找到垂直页签按钮并触发点击以关闭它
+                let verticalBtn = document.getElementById("tabbarVertical");
+                if (verticalBtn) verticalBtn.click();
+            }
+            
+            // 然后启用顶栏合并
             loadStyle("/appearance/themes/Savor/style/topbar/top-fixed.css", "theme-color-style-topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
         },
         () => {

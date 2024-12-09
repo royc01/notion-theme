@@ -239,6 +239,7 @@
 
 .sy__backlink{
     background-color: var(--Sv-backlink-background);
+	overflow: hidden;
     .block__icons,.backlinkList,.backlinkMList{
         background-color: var(--Sv-backlink-list);
         &>.b3-list>.protyle{
