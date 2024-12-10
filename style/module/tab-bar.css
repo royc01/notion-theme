@@ -2,7 +2,7 @@
 .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
     background-color: var(--Sv-tab-bar-background);
     border: none;
-    height: 37px;
+    height: 38px;
     .item:not(.item--readonly){
         min-height: 33px;
         border-radius: 6px;
@@ -18,7 +18,7 @@
         &.item--focus{
             background-color: var(--Sv-tab-bar-item-background-focus);
             border-radius: 6px 6px 0 0;
-            box-shadow:  0 5px 0 0 var(--Sv-tab-bar-item-background-focus);
+            box-shadow:  0 6px 0 0 var(--Sv-tab-bar-item-background-focus);
             &:before{
                 left: -10px !important;
                 bottom: -5px !important;
@@ -59,7 +59,7 @@
         }
     }
     &:has(>.item--focus:first-child){
-        box-shadow:  0 5px 0 0  var(--Sv-tab-bar-item-background-focus);
+        box-shadow:  0 6px 0 0  var(--Sv-tab-bar-item-background-focus);
     }
     .item--pin{
         min-width: 30px;

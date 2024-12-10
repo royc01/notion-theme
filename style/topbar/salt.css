@@ -7,7 +7,7 @@
     --b3-theme-secondary: #f3a92f;
     --b3-theme-background:rgb(240, 244, 244);/* 编辑区背景 */
     --b3-theme-background-light: #dfe0e1;
-    --b3-theme-surface:rgb(215, 224, 224);/* 面板主色 */
+    --b3-theme-surface:rgb(226, 233, 233);/* 面板主色 */
     --b3-theme-surface-light: rgb(215, 224, 224, .5);
     --b3-theme-surface-lighter: rgba(149, 167, 167, .3);
     --b3-theme-error: #eb5757;
@@ -150,13 +150,15 @@
 
 	/* 顶栏 */
     --Sv-toolbar-background:/*#9ca8a8;*/rgb(37, 40, 48);
+    --Sv-fixed-item: var(--Sv-dock-item-color);
 
 	/* dock栏 */
-	--Sv-dock-item-color: var(--b3-theme-background);
+    --Sv-dock-background: #d2dada;
 	
 	/* 侧栏面板 */
     --Sv-block-icon-svg-color: rgba(55, 53, 47, .5);
     --Sv-layout--resize-hover: #b9cfcf68;
+    --Sv-float-background: #c5d1d1;
 
     /* 底栏 */
     --Sv-status-msg-background: #c2d0d0;
@@ -203,3 +205,16 @@
 	background:var(--Sv-Savor-light-off);
 }
 
+#toolbar + .fn__flex{
+    background-color: var(--Sv-dock-background)!important;
+}
+.layout__center .fn__flex-column>.fn__flex>.layout-tab-bar {
+    background-color: transparent!important;
+}
+#layouts{
+    background-color: var(--Sv-dock-background)!important;
+    margin: 5px!important;
+}
+.dock.dock--vertical .dock__item:first-child {
+    margin-top: 5px !important;
+}

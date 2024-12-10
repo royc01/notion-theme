@@ -9,6 +9,9 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	& .toolbar__item {
 		pointer-events: visibleFill;
 		app-region: no-drag;
+		& svg{
+			color: var(--Sv-fixed-item);
+		}
 	}
 	& #drag,& #toolbarVIP{
 		display: none;
@@ -65,7 +68,7 @@ body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser [data-position]{
 	margin: 38px 0 0 135px;
 	margin-right: -125px;
 }
-.layout__dockl,.layout__dockr{
+.layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
     padding-top: 38px;
 }
 #dockLeft,#dockRight{
@@ -74,7 +77,7 @@ body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser [data-position]{
 .layout-tab-bar{
 	padding-left: 0px;
     min-width: 63px;
-	& .item{
+	& .item:not(.item--full){
 		margin-bottom:-1px!important;
 		pointer-events: visibleFill;
 		&[data-type="tab-header"]{
@@ -230,3 +233,4 @@ body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser [data-position]{
     height: calc( 100% - 38px );
     border-radius: 6px;
 }
+

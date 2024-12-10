@@ -473,14 +473,83 @@ function tabbarVerticalButton() {
             
             // 然后启用垂直页签
             loadStyle("/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", "theme-color-style-tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
+
+            // 添加调整宽度的拖动条
+            addResizeHandle();
         },
         () => {
+            // 移除垂直页签样式
             document.getElementById("theme-color-style-tabbar垂直").remove();
+            // 移除拖动条
+            let resizeHandle = document.getElementById("vertical-resize-handle");
+            if (resizeHandle) resizeHandle.remove();
+            // 重置宽度
+            document.documentElement.style.removeProperty('--custom-tab-width');
         },
         true
     );
 }
-
+// 添加拖动调整宽度的功能
+function addResizeHandle() {
+    if (document.getElementById("vertical-resize-handle")) return;
+    
+    const resizeHandle = document.createElement('div');
+    resizeHandle.id = 'vertical-resize-handle';
+    resizeHandle.style.cssText = `
+        position: absolute;
+        right: -5px;
+        top: 0;
+        bottom: 0;
+        border-radius: 10px;
+        width: 4px;
+        background-color: transparent;
+        cursor: col-resize;
+        z-index: 8;
+        transform: translateZ(0); /* 启用硬件加速 */
+    `;
+    
+    document.querySelector('.layout__center .fn__flex.layout-tab-bar').appendChild(resizeHandle);
+    
+    let startX, startWidth;
+    let rafId = null; // requestAnimationFrame ID
+    
+    function startResize(e) {
+        e.preventDefault(); // 防止文本选中
+        startX = e.clientX;
+        startWidth = parseInt(document.documentElement.style.getPropertyValue('--custom-tab-width') || '150');
+        
+        // 添加拖动时的类，用于临时禁用过渡动画
+        document.documentElement.classList.add('resizing');
+        
+        window.addEventListener('mousemove', resize, { passive: true }); // 使用 passive 监听
+        window.addEventListener('mouseup', stopResize, { once: true }); // 使用 once 自动解绑
+    }
+    
+    function resize(e) {
+        // 使用 requestAnimationFrame 优化性能
+        if (rafId) cancelAnimationFrame(rafId);
+        
+        rafId = requestAnimationFrame(() => {
+            const width = startWidth + (e.clientX - startX);
+            if (width >= 100 && width <= 400) {
+                document.documentElement.style.setProperty('--custom-tab-width', `${width}px`);
+            }
+        });
+    }
+    
+    function stopResize() {
+        // 移除拖动类，恢复过渡动画
+        document.documentElement.classList.remove('resizing');
+        window.removeEventListener('mousemove', resize);
+        
+        if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+        }
+    }
+    
+    resizeHandle.addEventListener('mousedown', startResize);
+}
 /**---------------------------------------------------------插件-------------------------------------------------------------- */
 
 function SpluginButton() {

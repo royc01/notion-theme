@@ -26,7 +26,7 @@
 #toolbar + .fn__flex{
     background-color: var(--Sv-toolbar-background);
 }
-#layouts{
+body:not(.body--mobile,.body--window) #layouts{
     min-height: 90%;
     background-color: var(--Sv-toolbar-background);
     margin: 0 5px 5px 5px;
@@ -51,12 +51,12 @@
 .body--window {
     .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
         .item:not(.item--readonly) {
-            margin: 0 10px 0px -5px;
+            margin: 2px 10px 0px 0px;
         }
         & .item--readonly {
+            min-height: 37px;
             .block__icon {
                 padding: 7px;
-                margin-bottom: 4px;
             }
         }
     }
