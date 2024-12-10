@@ -161,11 +161,11 @@
     --Sv-float-background: #c5d1d1;
 
     /* 底栏 */
-    --Sv-status-msg-background: #c2d0d0;
+    --Sv-status-msg-background: #d1d8d8;
     
     /* 滚动条 */
-	--Sv-scroll-color: #cdd6d6;
-	--Sv-scroll-color-hover: #cbe4e4;
+	--Sv-scroll-color: #d7e0e0;
+	--Sv-scroll-color-hover: #bfcaca;
 
     /* 表格 */
     --Sv-table-thead: rgb(231, 236, 236);

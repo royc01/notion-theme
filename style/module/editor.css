@@ -20,7 +20,7 @@
 		}
 	}
 	.b3-button{
-		box-shadow: none;
+		box-shadow: none!important;
 		padding: 4px 6px;
 		margin-top: 0px;
         font-weight: 500;
@@ -80,14 +80,15 @@
 
 /*文档标签*/
 .protyle-background__ia{
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
     .protyle-background__icon:not(.fn__none)+.b3-chips__doctag{
-        margin-top: -42px;
+        margin-left: 12px;
+    }
+    .protyle-background__action .b3-button{
+        margin: 0 8px 8px 0;
     }
     .b3-chips__doctag{
-    float: right;
-    .protyle-background__action{
-        opacity: 1;
-    }
 	& .b3-button{
 		box-shadow: none;
 		background-color: var(--Sv-background-icon-hover);
