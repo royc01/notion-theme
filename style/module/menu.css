@@ -287,9 +287,9 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-            .b3-card__desc{
+            /*.b3-card__desc{
                 display: block;
-            }
+            }*/
             .b3-card__actions{
                 position: absolute;
                 top: 70px;
@@ -303,7 +303,6 @@
         gap: 0px;
         width: auto;
         margin-top: 0px;
-        margin-right: 6px;
         margin-bottom: 6px;
         .b3-card {
             display: grid;
@@ -318,19 +317,6 @@
         .b3-card--current{
             background-color: var(--Sv-card--current);
             box-shadow: var(--Sv-card-current-shadow);
-        }
-        .b3-card__info{
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .b3-card__desc{
-            display: block;
-        }
-        .b3-card__actions{
-            position: absolute;
-            top: 70px;
-            right: 0px;
         }
         .b3-cards>.fn__flex-1{
             margin-left: 6px!important;

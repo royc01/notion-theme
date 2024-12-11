@@ -210,9 +210,7 @@
 #toolbar + .fn__flex{
     background-color: var(--Sv-dock-background)!important;
 }
-.layout__center .fn__flex-column>.fn__flex>.layout-tab-bar {
-    background-color: transparent!important;
-}
+
 #layouts{
     background-color: var(--Sv-dock-background)!important;
 }

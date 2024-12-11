@@ -425,7 +425,7 @@
      --Sv-bazaar-focus: #f3f3f3;
      --Sv-bazaar-item: #e8e8e8;
      --Sv-card--current: #fff5f3;
-     --Sv-card-current-shadow: #eb8383 0px 0px 0px 1px;
+     --Sv-card-current-shadow: #eb838393 0px 0px 0px 2px;
  
      /* 菜单 */
      --Sv-menu-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;

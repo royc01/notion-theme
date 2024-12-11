@@ -223,6 +223,7 @@
     --Sv-bazaar-focus: #3d4346;
     --Sv-bazaar-item: #373c3f;
 	--Sv-card--current: #522e30;
+	--Sv-card-current-shadow: #eb838393 0px 0px 0px 2px;
 
 	/* 文档标签 */
 	--Sv-chip--secondary-color: var(--b3-theme-on-background);

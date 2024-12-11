@@ -1,6 +1,6 @@
 /* ———————————————————页签———————————————————— */
 .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
-    background-color: var(--Sv-tab-bar-background);
+    background-color: transparent;
     border: none;
     height: 38px;
     .item:not(.item--readonly){

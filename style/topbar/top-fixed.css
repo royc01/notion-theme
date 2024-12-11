@@ -60,10 +60,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
         }
     }
 }
-body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser [data-position]{
-	margin: 38px 0 0 135px;
-	margin-right: -125px;
-}
+
 .layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
     padding-top: 38px;
 }
@@ -113,7 +110,7 @@ body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser [data-position]{
 		}
 	}	
 }
-.layout__center .layout-tab-bar{
+.layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
 	z-index: 2;
 	pointer-events: none;
 	background-color:var(--Sv-toolbar-background);
