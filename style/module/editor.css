@@ -6,9 +6,9 @@
         border-radius: 6px;
         width: calc(100% - 10px);
     }
-	.protyle-background__icon{
-		margin-bottom:10px;
-		border-radius:6px;
+    .protyle-background__icon:not(.fn__none){
+        margin-right: 12px;
+        border-radius:6px;
 		/*&:not(.fn__none)+.b3-chips{
 			margin-left:80px;
 			margin-top:-40px;
@@ -82,9 +82,6 @@
 .protyle-background__ia{
     display: flex;
     align-items: center; /* 垂直居中对齐 */
-    .protyle-background__icon:not(.fn__none)+.b3-chips__doctag{
-        margin-left: 12px;
-    }
     .protyle-background__action .b3-button{
         margin: 0 8px 8px 0;
     }

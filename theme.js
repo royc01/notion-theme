@@ -2181,4 +2181,5 @@ window.destroyTheme = () => {
 };
 
 
-
+siyuan.storage["local-images"].folder = '1F4C1'
+siyuan.storage["local-images"].note = '1F5C3'

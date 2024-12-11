@@ -142,7 +142,10 @@
 }/*保留收集箱详情返回箭头*/
 
 
-
+/*大纲面板*/
+.layout__dockr .sy__outline>.fn__flex-1{
+    padding-bottom: 28px!important;
+}
 /*大纲面板数字*/
 .sy__outline ul.b3-list.b3-list--background{
 	& [data-subtype*="h"]{
