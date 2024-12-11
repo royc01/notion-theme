@@ -349,6 +349,8 @@
 
     /* —————— 编辑器 —————— */
     --Sv-title-input-empty: rgba(55, 53, 47, 0.2);
+    --Sv-layout-margin: 0 5px 5px 5px;
+    --Sv-layout-margin-fixed: 0 5px 5px 5px;
     /* 列表 */
     --Sv-protyle-action-color: var(--b3-theme-on-background);
     --Sv-protyle-action-hover: var(--Sv-list-background);
