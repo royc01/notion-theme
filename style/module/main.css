@@ -42,7 +42,7 @@ body:not(.body--mobile,.body--window) #layouts{
 	display: none;
 }
 
-.layout__dockl, .layout__dockr{
+.layout__dockl:not(.layout--float), .layout__dockr:not(.layout--float){
     min-height: 90%;
 }
 
