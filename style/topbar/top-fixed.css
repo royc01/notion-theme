@@ -1,17 +1,13 @@
 body:not(.body--mobile,.body--window)>#toolbar{
-	z-index: 3;
+	z-index: 2;
 	height: 38px;
 	margin-bottom: -38px;
 	pointer-events: none;
 	counter-reset:plugin-counter;
-	background-color: transparent;
     app-region: drag;
 	& .toolbar__item {
 		pointer-events: visibleFill;
 		app-region: no-drag;
-		& svg{
-			color: var(--Sv-fixed-item);
-		}
 	}
 	& #drag,& #toolbarVIP{
 		display: none;
@@ -233,4 +229,6 @@ body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser [data-position]{
     height: calc( 100% - 38px );
     border-radius: 6px;
 }
-
+body:not(.body--mobile,.body--window) #layouts{
+    margin: var(--Sv-layout-margin-fixed);
+}
