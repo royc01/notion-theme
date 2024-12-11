@@ -29,7 +29,7 @@
 body:not(.body--mobile,.body--window) #layouts{
     min-height: 90%;
     background-color: var(--Sv-toolbar-background);
-    margin: 0 5px 5px 5px;
+    margin: var(--Sv-layout-margin);
     .layout__center .layout-tab-container{
         border-radius: 6px;
     }
