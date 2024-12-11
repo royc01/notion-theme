@@ -21,16 +21,6 @@
      --b3-theme-on-surface-light: rgba(95, 99, 104, .68);
      --b3-theme-on-error: #fff;
  
-     /* 字体 */
-     /* Windows 斜体遮挡添加 "Segoe UI" 字体 https://github.com/siyuan-note/siyuan/issues/11841 */
-     --b3-font-family: Roboto, 'Twitter Emoji', "Noto Sans SC", sans-serif, apple-system, BlinkMacSystemFont,"Helvetica Neue", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Microsoft Yahei", sans-serif, "Apple Color Emoji", "Noto Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
-     --b3-font-family-protyle: var(--b3-font-family);
-     --b3-font-family-code: "JetBrainsMono-Regular", mononoki, Consolas, "Liberation Mono", Menlo, Courier, monospace, var(--b3-font-family);
-     --b3-font-family-graph: mononoki;
-     --b3-font-family-emoji: 'Twitter Emoji', "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "Apple Color Emoji", "Noto Color Emoji", "Android Emoji";
-     --b3-font-family-math: KaTeX_Math;
-     --b3-font-size: 14px;
- 
      /* 顶部工具栏 */
      --b3-toolbar-background: var(--b3-theme-surface);
      --b3-toolbar-blur-background: #fcfcfc;
