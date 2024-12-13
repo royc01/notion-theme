@@ -31,7 +31,7 @@ window.theme.updateStyle = function (id, href) {
     }
 }
 
-window.theme.ID_COLOR_STYLE = 'theme-color-style';
+window.theme.ID_COLOR_STYLE = 'Sv-theme-color';
 
 /**
  * 获取主题模式
@@ -373,11 +373,11 @@ function themeButton() {
 		"Light 配色",
 		'light',
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/savor-light.css", "theme-color-style-Savor-light").setAttribute("topicfilter", "buttonSavor-light");
+            loadStyle("/appearance/themes/Savor/style/topbar/savor-light.css", "Sv-theme-color-Savor-light").setAttribute("topicfilter", "buttonSavor-light");
             qucuFiiter();
         },
         () => {
-            document.getElementById("theme-color-style-Savor-light").remove();
+            document.getElementById("Sv-theme-color-Savor-light").remove();
         },
         true
     );
@@ -387,11 +387,11 @@ function themeButton() {
 		"Salt 配色",
 		'light',
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/salt.css", "theme-color-style-salt主题").setAttribute("topicfilter", "buttonsalt");
+            loadStyle("/appearance/themes/Savor/style/topbar/salt.css", "Sv-theme-color-salt主题").setAttribute("topicfilter", "buttonsalt");
             qucuFiiter();
         },
         () => {
-            document.getElementById("theme-color-style-salt主题").remove();
+            document.getElementById("Sv-theme-color-salt主题").remove();
         },
         true
     );
@@ -401,11 +401,11 @@ function themeButton() {
 		"Sugar 配色",
 		'light',
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/sugar.css", "theme-color-style-sugar主题").setAttribute("topicfilter", "buttonsugar");
+            loadStyle("/appearance/themes/Savor/style/topbar/sugar.css", "Sv-theme-color-sugar主题").setAttribute("topicfilter", "buttonsugar");
             qucuFiiter();
         },
         () => {
-            document.getElementById("theme-color-style-sugar主题").remove();
+            document.getElementById("Sv-theme-color-sugar主题").remove();
         },
         true
     );
@@ -415,11 +415,11 @@ function themeButton() {
 		"Dark 配色",
 		'dark',
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/savor-dark.css", "theme-color-style-Savor-dark").setAttribute("topicfilter", "buttonSavor-dark");
+            loadStyle("/appearance/themes/Savor/style/topbar/savor-dark.css", "Sv-theme-color-Savor-dark").setAttribute("topicfilter", "buttonSavor-dark");
             qucuFiiter();
         },
         () => {
-            document.getElementById("theme-color-style-Savor-dark").remove();
+            document.getElementById("Sv-theme-color-Savor-dark").remove();
         },
         true
     );
@@ -429,11 +429,11 @@ function themeButton() {
 		"Vinegar 配色",
 		'dark',
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/vinegar.css", "theme-color-style-vinegar主题").setAttribute("topicfilter", "buttonvinegar");
+            loadStyle("/appearance/themes/Savor/style/topbar/vinegar.css", "Sv-theme-color-vinegar主题").setAttribute("topicfilter", "buttonvinegar");
             qucuFiiter();
         },
         () => {
-            document.getElementById("theme-color-style-vinegar主题").remove();
+            document.getElementById("Sv-theme-color-vinegar主题").remove();
         },
         true
     );
@@ -447,10 +447,10 @@ function concealMarkButton() {
         "b3-menu__item",
 		"挖空",
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/conceal-mark.css", "theme-color-style-conceal挖空").setAttribute("topBarcss", "conceal挖空");
+            loadStyle("/appearance/themes/Savor/style/topbar/conceal-mark.css", "Sv-theme-color-conceal挖空").setAttribute("topBarcss", "conceal挖空");
         },
         () => {
-            document.getElementById("theme-color-style-conceal挖空").remove();
+            document.getElementById("Sv-theme-color-conceal挖空").remove();
         },
         true
     );
@@ -464,7 +464,7 @@ function tabbarVerticalButton() {
 		"垂直页签",
         () => {
             // 启用垂直页签时,先检查并关闭顶栏合并
-            let topbarFixed = document.getElementById("theme-color-style-topbar隐藏");
+            let topbarFixed = document.getElementById("Sv-theme-color-topbar隐藏");
             if (topbarFixed) {
                 // 找到顶栏合并按钮并触发点击以关闭它
                 let topbarBtn = document.getElementById("topBar");
@@ -472,14 +472,14 @@ function tabbarVerticalButton() {
             }
             
             // 然后启用垂直页签
-            loadStyle("/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", "theme-color-style-tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
+            loadStyle("/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", "Sv-theme-color-tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
 
             // 添加调整宽度的拖动条
             addResizeHandle();
         },
         () => {
             // 移除垂直页签样式
-            document.getElementById("theme-color-style-tabbar垂直").remove();
+            document.getElementById("Sv-theme-color-tabbar垂直").remove();
             // 移除拖动条
             let resizeHandle = document.getElementById("vertical-resize-handle");
             if (resizeHandle) resizeHandle.remove();
@@ -558,10 +558,10 @@ function SpluginButton() {
         "toolbar__item b3-tooltips b3-tooltips__sw",
 		"收缩/展开插件",
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/Splugin.css", "theme-color-style-plugin隐藏").setAttribute("Splugin", "plugin隐藏");
+            loadStyle("/appearance/themes/Savor/style/topbar/Splugin.css", "Sv-theme-color-plugin隐藏").setAttribute("Splugin", "plugin隐藏");
         },
         () => {
-            document.getElementById("theme-color-style-plugin隐藏").remove();
+            document.getElementById("Sv-theme-color-plugin隐藏").remove();
         },
         true
     );
@@ -575,7 +575,7 @@ function topbarfixedButton() {
 		"顶栏合并",
         () => {
             // 启用顶栏合并时,先检查并关闭垂直页签
-            let verticalTab = document.getElementById("theme-color-style-tabbar垂直");
+            let verticalTab = document.getElementById("Sv-theme-color-tabbar垂直");
             if (verticalTab) {
                 // 找到垂直页签按钮并触发点击以关闭它
                 let verticalBtn = document.getElementById("tabbarVertical");
@@ -583,10 +583,10 @@ function topbarfixedButton() {
             }
             
             // 然后启用顶栏合并
-            loadStyle("/appearance/themes/Savor/style/topbar/top-fixed.css", "theme-color-style-topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
+            loadStyle("/appearance/themes/Savor/style/topbar/top-fixed.css", "Sv-theme-color-topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
         },
         () => {
-            document.getElementById("theme-color-style-topbar隐藏").remove();
+            document.getElementById("Sv-theme-color-topbar隐藏").remove();
         },
         true
     );
@@ -599,10 +599,10 @@ function bulletThreading() {
         "b3-menu__item",
 		"列表子弹线",
         () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/bullet-threading.css", "theme-color-style-列表子弹线").setAttribute("bulletThreading", "列表子弹线");
+            loadStyle("/appearance/themes/Savor/style/topbar/bullet-threading.css", "Sv-theme-color-列表子弹线").setAttribute("bulletThreading", "列表子弹线");
         },
         () => {
-            document.getElementById("theme-color-style-列表子弹线").remove();
+            document.getElementById("Sv-theme-color-列表子弹线").remove();
         },
         true
     );
@@ -1090,6 +1090,86 @@ if (barForwardElement !== null) {
 }
 savordragElement.style.cssText = "flex: 1; app-region: drag;"; 
 
+
+
+
+//添加底栏右间距*/
+function initStatusRight() {
+    let rafId = null;
+    let statusRight = null;
+    let dockr = null;
+    let dockRight = null;
+    
+    // 更新宽度的函数 - 使用缓存的DOM引用
+    const updateWidth = () => {
+        if (!statusRight || !dockr) return;
+        
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+            const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 33 : 0;
+            statusRight.style.width = dockr.classList.contains('layout--float') 
+                ? `${dockRightWidth}px` 
+                : `${dockr.offsetWidth + 15 + dockRightWidth}px`;
+        });
+    };
+
+    // 合并的 Observer
+    const observer = new MutationObserver((mutations) => {
+        // 初始化阶段
+        if (!statusRight) {
+            const status = document.querySelector('.status');
+            dockr = document.querySelector('.layout__dockr');
+            dockRight = document.querySelector('#dockRight');
+            
+            if (status && dockr && !document.querySelector('.statusRight')) {
+                statusRight = Object.assign(document.createElement('div'), {
+                    className: 'statusRight'
+                });
+                status.appendChild(statusRight);
+                
+                // 开始观察布局变化
+                new ResizeObserver(updateWidth).observe(dockr);
+                
+                // 改为观察父元素
+                observer.disconnect();
+                if (dockRight && dockRight.parentElement) {
+                    observer.observe(dockRight.parentElement, {
+                        childList: true,
+                        attributes: true,
+                        attributeFilter: ['class'],
+                        subtree: true
+                    });
+                }
+                
+                updateWidth();
+                return;
+            }
+        }
+        
+        // 更新阶段 - 只在必要时更新引用和触发重绘
+        for (const mutation of mutations) {
+            if (mutation.type === 'childList') {
+                const newDockRight = document.querySelector('#dockRight');
+                if (dockRight !== newDockRight) {
+                    dockRight = newDockRight;
+                    updateWidth();
+                    break;
+                }
+            } else if (mutation.type === 'attributes' && mutation.target.id === 'dockRight') {
+                updateWidth();
+                break;
+            }
+        }
+    });
+
+    // 开始观察
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+}
+
+setTimeout(initStatusRight, 0);
 
 
 //+++++++++++++++++++++++++++++++++辅助API++++++++++++++++++++++++++++++++++++
@@ -2046,13 +2126,13 @@ function getcommonMenu_Bolck() {
                     if (loadsalt == '1') {
                         loadStyle(
                             '/appearance/themes/Savor/style/topbar/salt.css',
-                            'salt主题'
+                            'Sv-theme-color-salt主题'
                         ).setAttribute('topicfilter', 'buttonsalt');
                     }
 					if (loadsugar == '1') {
                         loadStyle(
                             '/appearance/themes/Savor/style/topbar/sugar.css',
-                            'salt主题'
+                            'Sv-theme-color-sugar主题'
                         ).setAttribute('topicfilter', 'buttonsugar');
                     }
 
@@ -2062,7 +2142,7 @@ function getcommonMenu_Bolck() {
                     if (loadvinegar == '1') {
                         loadStyle(
                             '/appearance/themes/Savor/style/topbar/vinegar.css',
-                            'vinegar主题'
+                            'Sv-theme-color-vinegar主题'
                         ).setAttribute('topicfilter', 'buttonvinegar');
                     }
                 }
@@ -2166,7 +2246,7 @@ function bulletMain() {
 
 window.destroyTheme = () => { 
     // 删除主题加载的额外样式
-    var Sremove = document.querySelectorAll('[id^="theme-color-style"]');  
+    var Sremove = document.querySelectorAll('[id^="Sv-theme-color"]');  
     Sremove.forEach(function(Sremove) {  
         Sremove.parentNode.removeChild(Sremove);  
     }); 
@@ -2178,6 +2258,8 @@ window.destroyTheme = () => {
     document.querySelector("#savorPlugins").remove();
 	// 删除列表转导图功能
     window.removeEventListener('mouseup', MenuShow);
+    // 删除底栏间隙
+	document.querySelector(".statusRight").remove();
 };
 
 

@@ -142,10 +142,7 @@
 }/*保留收集箱详情返回箭头*/
 
 
-/*大纲面板*/
-.layout__dockr .sy__outline>.fn__flex-1{
-    padding-bottom: 28px!important;
-}
+
 /*大纲面板数字*/
 .sy__outline ul.b3-list.b3-list--background{
 	& [data-subtype*="h"]{
@@ -245,14 +242,16 @@
 	overflow: hidden;
     .block__icons,.backlinkList,.backlinkMList{
         background-color: var(--Sv-backlink-list);
+		border-radius:6px;
         &>.b3-list>.protyle{
 	    margin:-4px 5px 5px 5px;	
 	    border-radius:6px;
         box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px;
         }
     }
-    .backlinkList{
+    .backlinkList,.backlinkMList{
         border-radius: 0 0 6px 6px;
+		box-shadow: 0 -4px 0 var(--Sv-backlink-list);
         +.block__icons{
             margin-top: 5px;
             border-radius: 6px 6px 0 0;
@@ -297,14 +296,14 @@
 /*.layout__dockr .block__icons~.fn__flex-1 {
     padding-bottom: 22px!important;
 }避开底栏间距*/
-
+/*
 .layout__dockr:not(.layout--float) .backlinkMList.fn__flex-1[style*="height:0px"] {
     min-height: 22px;
     .b3-list{
         display: none;
         padding: 0px;
     }
-}
+}*/
 
 
 /* 关系图右侧筛选 */

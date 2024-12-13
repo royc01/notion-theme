@@ -170,8 +170,12 @@
     --Sv-block-icon-svg-color: rgba(55, 53, 47, .5);
 
     /* 底栏 */
-    --Sv-status-msg-background: #eeeae3;
-    
+    --Sv-status-msg-background: #f0eee9;
+    --Sv-status-barDock: var(--Sv-dock-item-active-background);
+    --Sv-status-barDock-color: var(--Sv-dock--item--activefocus-color);
+    --Sv-status-item-hover: #e4e1d8;
+    /* 页签 */
+    --Sv-tab-bar-item-background: #f4f1eb;
     /* 滚动条 */
 	--Sv-scroll-color: #e5e1d9;
 	--Sv-scroll-color-hover: #c7c3bb;

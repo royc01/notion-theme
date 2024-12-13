@@ -163,7 +163,13 @@
     --Sv-backlink-background: #d2dada;
 
     /* 底栏 */
-    --Sv-status-msg-background: #d1d8d8;
+    --Sv-status-msg-background: #dce3e3;
+    --Sv-status-barDock: var(--Sv-dock-item-active-background);
+    --Sv-status-barDock-color: var(--Sv-dock--item--activefocus-color);
+    --Sv-status-item-hover: #d1d7d7;
+
+    /* 页签 */
+    --Sv-tab-bar-item-background: #dce3e3;
     
     /* 滚动条 */
 	--Sv-scroll-color: #d7e0e0;
@@ -186,6 +192,7 @@
     --Sv-plugin-off-bg: #383a41;
     --Sv-plugin-b-off-bg: #252830;
     --Sv-plugin-b-off-bg-hover: #2f333c;
+    --Sv-fixed-item-text: #9fa4a7;
 
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/
     --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(37, 40, 48)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;

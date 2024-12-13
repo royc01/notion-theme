@@ -13,6 +13,9 @@
 	&#dockRight{
 		.dock__item{
 			margin: 5px 5px 5px 0px;
+			&:last-child{
+				margin: 5px 5px 38px 0px;
+			}
 		}
 	}
 	&#dockBottom{

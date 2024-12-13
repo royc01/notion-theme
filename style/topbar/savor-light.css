@@ -234,11 +234,14 @@
      --Sv-backlink-list: var(--b3-theme-surface);
  
      /* 底栏 */
-     --Sv-status-msg-background: #eeeeec;
- 
+     --Sv-status-msg-background: rgb(244, 244, 243);
+     --Sv-status-barDock: var(--Sv-dock-item-active-background);
+     --Sv-status-barDock-color: var(--Sv-dock--item--activefocus-color);
+     --Sv-status-item-hover: rgb(230, 230, 227);
+
      /* 页签 */
      --Sv-tab-bar-background: var(--Sv-toolbar-background);
-     --Sv-tab-bar-item-background: var(--b3-theme-surface);
+     --Sv-tab-bar-item-background: rgb(246, 246, 242);
      --Sv-tab-bar-item-background-hover: var(--b3-theme-background);
      --Sv-tab-bar-item-background-focus: var(--b3-theme-background);
  
@@ -446,6 +449,14 @@
      --webkit-scrollbar: 8px;
      --webkit-scrollbar-thumb: 4px;
      --Sv--slider-thumb: var(--b3-theme-surface-lighter);
+
+    /* 合并顶栏插件收缩颜色 */
+    --Sv-plugin-off-bg: #e5e5e0;
+    --Sv-plugin-b-off-bg: #d8d8d3;
+    --Sv-plugin-b-off-bg-hover: #dddddd;
+    --Sv-plugin-on-bg: var(--Sv-tab-bar-item-background);
+    --Sv-plugin-counter: var(--Sv-barWorkspace-background);
+    --Sv-fixed-item-text: var(--b3-theme-on-surface);
 }
 
 /* PDF */

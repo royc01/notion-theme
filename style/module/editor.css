@@ -623,6 +623,10 @@
 	padding:0 3px;
 	width:auto;
 }
+/* 下划线 */
+.b3-typography u, .b3-typography span[data-type~=u], .protyle-wysiwyg u, .protyle-wysiwyg span[data-type~=u] {
+    border-bottom: 2px solid;
+}
 /*代码块*/
 .code-block {
     background-color: var(--Sv-code-block-background)!important;
