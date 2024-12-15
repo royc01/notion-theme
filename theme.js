@@ -1106,10 +1106,10 @@ function initStatusRight() {
         
         if (rafId) cancelAnimationFrame(rafId);
         rafId = requestAnimationFrame(() => {
-            const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 33 : 0;
+            const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 36 : 0;
             statusRight.style.width = dockr.classList.contains('layout--float') 
                 ? `${dockRightWidth}px` 
-                : `${dockr.offsetWidth + 8 + dockRightWidth}px`;
+                : `${dockr.offsetWidth + 5 + dockRightWidth}px`;
         });
     };
 
