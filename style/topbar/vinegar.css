@@ -188,7 +188,7 @@
 	--Sv-tab-bar-item-background: #161515;
 
     /* 底栏 */
-    --Sv-status-msg-background: #252525;
+    --Sv-status-msg-background:  var(--b3-theme-background);
     --Sv-status-barDock: var(--Sv-dock-item-active-background);
     --Sv-status-barDock-color: var(--Sv-dock--item--activefocus-color);
     --Sv-status-item-hover: #373737;

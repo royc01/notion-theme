@@ -3,21 +3,62 @@
     position: fixed;
     background-color: transparent;
     right: 0px;
-    bottom: 9px;
+    bottom: 5px;
 	height: 24px;
 	border:0;
 	margin:0;
 	z-index:10;
     pointer-events: none;
+    &::before {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background-color: transparent;
+        border-radius: 50%;
+        box-shadow: 6px 6px 0 var(--Sv-dock-background);
+        position: absolute;
+        bottom: 0px;
+        left: -18px;
+        z-index: -2;
+    }
     .toolbar__item:hover {
         background-color: var(--Sv-status-item-hover)!important;
     }
-    &>div:not(.statusRight,#barDock){
+    &>div:not(.statusRight){
         background-color:var(--Sv-status-msg-background);
-        box-shadow: 8px 0 0 var(--Sv-status-msg-background);
         margin-left: -2px;
         border-radius:4px;
         pointer-events:visibleFill;
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: var(--Sv-status-msg-background); 
+            z-index: -2; 
+            box-shadow: 0 -5px 0 var(--Sv-dock-background);
+        }
+        &:nth-last-child(2)::before {
+            border-radius:0 6px 6px 0;
+            box-shadow: 5px 0 0 0 var(--Sv-status-msg-background),5px 0 0 5px var(--Sv-dock-background);
+        }
+        &:nth-last-child(2)::after{
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: transparent;
+            border-radius: 50%;
+            box-shadow: 6px 6px 0 var(--Sv-dock-background);
+            position: absolute;
+            top: -17px!important;
+            right: -4px;
+            z-index: -5;
+        }
         }
     .toolbar__item:not(.toolbar__item--close) {
         padding:2px;
@@ -31,20 +72,29 @@
             font-size:12px;
         }
     }
-    #barDock{
+    /*#barDock{
         position:fixed;
         right:3px;
         bottom: 3px;
         height: 28px;
         width: 28px;
         padding: 4px;
-        background-color: var(--Sv-status-barDock);
+        background-color: var(--Os-status-barDock);
         pointer-events:visibleFill;
         box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px;
         /*background-color: var(--Sv-status-barDock);
         box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);*/
-        & svg{
-            color: var(--Sv-status-barDock-color);
+        /*& svg{
+            color: var(--Os-status-barDock-color);
+        }
+    }*/
+    #barDock{
+        color: var(--Sv-status-barDock-color);
+        &::before{
+            width: calc(100% + 10px);
+            left: -5px;
+            border-radius: 6px;
+            box-shadow: 0 0 0 5px var(--Sv-dock-background);
         }
     }
     #statusHelp svg{
@@ -52,36 +102,41 @@
     }
     .status__counter:not(:empty),.status__backgroundtask,.status__msg{
         padding: 0px 4px;
-        margin:0px 4px 0px 0px;
+        margin:0px;
         height:24px;
         line-height:24px;
-        box-shadow: 6px 0 0 var(--Sv-status-msg-background),-4px 0 0 var(--Sv-status-msg-background)!important;
     }
-    .status__msg:empty{
-        opacity: 0;
-    }
-    .status__msg:not(:empty):before{
-        content: "📢";
+    .status__msg:not(:empty)::after{
+        content: "📢"!important;
         font-size:12px;
-        padding-right:6px;
+        padding:0 6px;
+        position: absolute;
+        left: 0px;
+    }
+    .status__msg{
+        overflow: unset!important;
+    }
+    .status__msg:not(:empty){
+        padding-left: 26px!important;
     }
 }
 
 
-#dockBottom:not(.fn__none)+#status{
+
+#dockBottom:not(.fn__none)+#status{     
 	background-color:transparent;
 }
 
 .status.fn__none{
     display: flex!important;
-    &>div:not(#barDock){
+    &>div:not(#barDock,.statusRight){
         display: none;
     }
-}
+}/*隐藏底栏保留停靠栏按钮*/
 
-.statusRight{
-    min-width: 43px;
-    &[style="width: 48px;"]{
-        width: 43px!important;
-    }
+.statusRight[style="width: 41px;"]{
+    width: 34px!important;
+}
+.statusRight[style="width: 8px;"]{
+    width: 1px!important;
 }

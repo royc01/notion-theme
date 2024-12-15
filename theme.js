@@ -1109,7 +1109,7 @@ function initStatusRight() {
             const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 33 : 0;
             statusRight.style.width = dockr.classList.contains('layout--float') 
                 ? `${dockRightWidth}px` 
-                : `${dockr.offsetWidth + 15 + dockRightWidth}px`;
+                : `${dockr.offsetWidth + 8 + dockRightWidth}px`;
         });
     };
 
@@ -2182,63 +2182,43 @@ function getcommonMenu_Bolck() {
 });
 
 
-
-
-
-
-
-
-
-
-/**
- * 获得指定块位于的编辑区
- * @params {HTMLElement}
- * @return {HTMLElement} 光标所在块位于的编辑区
- * @return {null} 光标不在块内
- */
-function getTargetEditor(block) {
-    while (block != null && !block.classList.contains('protyle-wysiwyg')) block = block.parentElement;
-    return block;
-}
-
-/**
- * 获得焦点所在的块
- * @return {HTMLElement} 光标所在块
- * @return {null} 光标不在块内
- */
-function getFocusedBlock() {
-    if (document.activeElement.classList.contains('protyle-wysiwyg')) {
-        let block = window.getSelection()?.focusNode?.parentElement; // 当前光标
-        while (block != null && block.dataset.nodeId == null) block = block.parentElement;
-        return block;
+/* 子弹线 */
+allListItemNode = []
+  document.addEventListener('selectionchange', () => {
+    const selection = window.getSelection()
+    if (!selection.rangeCount) {
+      return
     }
-}
-
-function focusHandler() {
-    /* 获取当前编辑区 */
-    let block = getFocusedBlock(); // 当前光标所在块
-    /* 当前块已经设置焦点 */
-    if (block?.classList.contains(`block-focus`)) return;
-
-    /* 当前块未设置焦点 */
-    const editor = getTargetEditor(block); // 当前光标所在块位于的编辑区
-    if (editor) {
-        editor.querySelectorAll(`.block-focus`).forEach((element) => element.classList.remove(`block-focus`));
-        block.classList.add(`block-focus`);
-        // setSelector(block);
+    const range = selection?.getRangeAt(0)
+    const startNode = range?.startContainer
+    let currentNode = startNode
+    allListItemNode.forEach((node) => {
+      node.classList.remove('en_item_bullet_actived')
+      node.classList.remove('en_item_bullet_line')
+    })
+    allListItemNode = []
+    while (currentNode) {
+      if (currentNode?.dataset?.type === 'NodeListItem') {
+        allListItemNode.push(currentNode)
+      }
+      currentNode = currentNode.parentElement
     }
-}
+    for (let i = 0; i < allListItemNode.length - 1; i++) {
+      const currentNode = allListItemNode[i]
+      const currentRect = currentNode.getBoundingClientRect()
 
-function bulletMain() {
-    // 跟踪当前所在块
-    window.addEventListener('mouseup', focusHandler, true);
-    window.addEventListener('keyup', focusHandler, true);
-}
+      const nextNode = allListItemNode[i + 1]
+      const nextRect = nextNode.getBoundingClientRect()
+      const height = currentRect.top - nextRect.top
 
-(async () => {
-    bulletMain();
-    console.log('加载子弹线成功')
-})();
+      currentNode.style.setProperty('--en-bullet-line-height', `${height}px`)
+      currentNode.classList.add('en_item_bullet_line')
+    }
+    allListItemNode.forEach((node) => {
+      node.classList.add('en_item_bullet_actived')
+    })
+  })
+
 
 
 

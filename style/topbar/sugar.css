@@ -170,7 +170,7 @@
     --Sv-block-icon-svg-color: rgba(55, 53, 47, .5);
 
     /* 底栏 */
-    --Sv-status-msg-background: #f0eee9;
+    --Sv-status-msg-background:  var(--b3-theme-background);
     --Sv-status-barDock: var(--Sv-dock-item-active-background);
     --Sv-status-barDock-color: var(--Sv-dock--item--activefocus-color);
     --Sv-status-item-hover: #e4e1d8;

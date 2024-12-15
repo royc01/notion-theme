@@ -163,7 +163,7 @@
     --Sv-backlink-background: #d2dada;
 
     /* 底栏 */
-    --Sv-status-msg-background: #dce3e3;
+    --Sv-status-msg-background:  var(--b3-theme-background);
     --Sv-status-barDock: var(--Sv-dock-item-active-background);
     --Sv-status-barDock-color: var(--Sv-dock--item--activefocus-color);
     --Sv-status-item-hover: #d1d7d7;

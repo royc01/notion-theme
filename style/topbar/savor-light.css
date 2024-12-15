@@ -234,7 +234,7 @@
      --Sv-backlink-list: var(--b3-theme-surface);
  
      /* 底栏 */
-     --Sv-status-msg-background: rgb(244, 244, 243);
+     --Sv-status-msg-background: var(--b3-theme-background);
      --Sv-status-barDock: var(--Sv-dock-item-active-background);
      --Sv-status-barDock-color: var(--Sv-dock--item--activefocus-color);
      --Sv-status-item-hover: rgb(230, 230, 227);
