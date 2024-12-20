@@ -35,7 +35,7 @@
     --b3-list-hover: rgba(230, 230, 230, .05);
 
     /* 菜单 */
-    --b3-menu-background: #27282a;
+    --b3-menu-background: rgb(55, 60, 63);
 
     /* 提示 */
 	--b3-tooltips-background: #494e51;
@@ -221,6 +221,7 @@
     --Sv--dialog-tab-bar: var(--b3-theme-surface);
 	--Sv-button-cancel: #4b5053;
 	--Sv-menu-accelerator: rgba(255, 255, 255, 0.3);
+	--Sv-menu-background: rgb(64, 70, 73);
 
     /* 集市界面 */
     --Sv-bazaar-focus: #3d4346;
@@ -318,13 +319,48 @@
 }
 
 .protyle-toolbar{
-	background-color: var(--b3-theme-surface);
+	background-color: var(--Sv-menu-background);
 }
-#buttonSavor-light,#buttonsalt,#buttonsugar{
+#buttonSavor-light,#buttonsalt,#buttonsugar,#buttonforest,#buttonflower,#buttonwind{
 	display:none!important;
 }
 
 
-#buttonSavor-dark.button_on,#buttonSavor-dark.button_off{
+#buttonSavor-dark.button_off{
 	background:var(--Sv-Savor-dark-on);
+}
+
+
+#buttonSavor-dark::before{
+    content: "";
+    position: absolute;
+    width: 132px;
+    height: 62px;
+    left: 0px;
+    background-color: rgba(241, 165, 154, 0.1);
+    z-index: -5;
+    border-radius: 6px;
+}
+#buttonocean::before{
+    content: "";
+    position: absolute;
+    width: 132px;
+    height: 62px;
+    left: 0px;
+    background-color: rgba(129, 172, 146, 0.1);
+    z-index: -5;
+    border-radius: 6px;
+}
+#conceal::before{
+    content: "";
+    position: absolute;
+    width: 132px;
+    height: 123px;
+    left: 0px;
+    background-color: rgba(152, 152, 152, 0.1);
+    z-index: -5;
+    border-radius: 6px;
+}
+#buttonvinegar,#buttonmountain{
+    margin-bottom: 5px;
 }

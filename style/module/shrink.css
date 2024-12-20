@@ -1,7 +1,7 @@
 /* ————————————————————侧栏面板———————————————————— */
 .layout__dockl,.layout__dockr,.layout__dockb{
     .layout-tab-container{
-        border-radius: 6px;
+        border-radius: var(--Sv-layout-radius);
         .layout__tab--active{
            /* background-color: var(--Sv-dock-item-activefocus-background)!important;
             box-shadow: 0px 0px 0px 2px rgba(235, 131, 131, 0.1) inset, 0px 0px 0px 2px rgba(235, 131, 131, 0.1) inset;*/
@@ -74,9 +74,11 @@
             line-height: 20px;
             text-align: center;
             min-width: 12px;
-            border-radius: 3px;
+            border-radius: 6px;
             padding: 0 4px;
             margin-left: 4px;
+			color: var(--Sv-list-counter-color);
+			background-color: var(--Sv-list-counter);
         }
 	}
 }
@@ -99,7 +101,6 @@
 }
 .b3-list-item__icon{
 	margin-left:-4px;
-	font-size:12px;
 	padding: 0 3px;
     border-radius: 4px;
     &:hover{
@@ -253,7 +254,7 @@
         border-radius: 0 0 6px 6px;
 		box-shadow: 0 -4px 0 var(--Sv-backlink-list);
         +.block__icons{
-            margin-top: 5px;
+            margin-top: var(--Sv-backlink-top);
             border-radius: 6px 6px 0 0;
         }
     }

@@ -341,7 +341,6 @@
      --Sv-block-ref-color: var(--b3-theme-on-background); 
      --Sv-block-ref-background: var(--Sv-list-background);
      --Sv-block-ref-background-hover: var(--Sv-list-focus-hover);
-     --Sv-block-ref-bottom: var(--b3-theme-on-surface);
      --Sv-block-ref-su: var(--b3-theme-background);
      
      /* 超链接 */
@@ -468,11 +467,47 @@
 
 
 
-#buttonSavor-dark,#buttonvinegar{
+#buttonSavor-dark,#buttonvinegar,#buttonocean,#buttonmountain{
 	display:none!important;
 }
 
 
-#buttonSavor-light.button_on,#buttonSavor-light.button_off{
+#buttonSavor-light.button_off{
 	background:var(--Sv-Savor-light-on);
+}
+
+
+
+#buttonSavor-light::before{
+    content: "";
+    position: absolute;
+    width: 121px;
+    height: 92px;
+    left: 0px;
+    background-color: rgba(152, 55, 40, 0.05);
+    z-index: -5;
+    border-radius: 6px;
+}
+#buttonforest::before{
+    content: "";
+    position: absolute;
+    width: 121px;
+    height: 92px;
+    left: 0px;
+    background-color: rgba(29, 107, 62, 0.05);
+    z-index: -5;
+    border-radius: 6px;
+}
+#conceal::before{
+    content: "";
+    position: absolute;
+    width: 121px;
+    height: 123px;
+    left: 0px;
+    background-color: rgba(105, 105, 105, 0.05);
+    z-index: -5;
+    border-radius: 6px;
+}
+#buttonsugar,#buttonwind{
+    margin-bottom: 5px;
 }

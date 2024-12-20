@@ -1,6 +1,6 @@
 /* ————————————————————中心———————————————————— */
 .layout__resize:not(.layout__resize--lr) {
-    margin: -0.5px 0;
+    margin: var(--Sv-layout--resize-margin);
     &:after{
         height: 5px;
         top: 0px;
@@ -13,6 +13,7 @@
 }
 .layout__resize--lr {
     margin: 0 -0.5px;
+    width: var(--Sv-layout-resize-lr-width);
     &:after{
         width: 5px;
         border-radius: 3px;
@@ -31,7 +32,7 @@ body:not(.body--mobile,.body--window) #layouts{
     background-color: var(--Sv-toolbar-background);
     margin: var(--Sv-layout-margin);
     .layout__center .layout-tab-container{
-        border-radius: 6px;
+        border-radius: var(--Sv-center-radius);
     }
 }
 

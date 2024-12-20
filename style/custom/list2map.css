@@ -44,7 +44,7 @@
 	padding:5px 0 5px 10px;
 	margin-top:2px;
 	background-color:var(--b3-block-daotu);
-	border-radius:3px;
+	border-radius:8px;
 	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 	max-width:15vw;
 }
@@ -152,12 +152,12 @@
 }
 /*上框线*/
 .protyle-wysiwyg *[custom-f="dt"] .li:first-child::before{   
-    border-radius:5px 0 0 0 ;
+    border-radius:8px 0 0 0 ;
 }
 /*下框线*/
 .protyle-wysiwyg *[custom-f="dt"] .li:nth-last-child(2)::after{   
     border-bottom:var(--b3-border-daotu)!important;    
-    border-radius:0 0 0 5px!important;    
+    border-radius:0 0 0 8px!important;    
 }
 /*后继承线*/
 .list[custom-f="dt"] .list::after{   

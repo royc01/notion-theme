@@ -330,17 +330,36 @@ function InsertMenuItem(selectid,selecttype){
   }
 }
 
-function ViewMonitor(event){
-  let id = event.currentTarget.getAttribute("data-node-id")
-  let attrName = 'custom-'+event.currentTarget.getAttribute("custom-attr-name")
-  let attrValue = event.currentTarget.getAttribute("custom-attr-value")
-  let blocks = document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${id}"]`)
-  if(blocks){
-    blocks.forEach(block=>block.setAttribute(attrName,attrValue))
-  }
-  let attrs={}
-    attrs[attrName] =attrValue
-  设置思源块属性(id,attrs)
+function ViewMonitor(event) {
+    let id = event.currentTarget.getAttribute("data-node-id");
+    let attrName = 'custom-' + event.currentTarget.getAttribute("custom-attr-name");
+    let attrValue = event.currentTarget.getAttribute("custom-attr-value");
+    let blocks = document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${id}"]`);
+    
+    // 如果当前块之前有任何transform数据，都应该清除
+    const positions = JSON.parse(localStorage.getItem('dt-positions') || '{}');
+    if (positions[id]) {
+        delete positions[id];
+        localStorage.setItem('dt-positions', JSON.stringify(positions));
+        
+        // 清除transform样式和其他相关属性
+        blocks.forEach(block => {
+            const listItems = block.querySelectorAll(':scope > [data-type="NodeListItem"]');
+            listItems.forEach(listItem => {
+                listItem.style.transform = '';
+                listItem.style.cursor = '';
+                listItem.removeAttribute('data-draggable');
+            });
+        });
+    }
+    
+    // 原有的属性设置逻辑
+    if (blocks) {
+        blocks.forEach(block => block.setAttribute(attrName, attrValue));
+    }
+    let attrs = {};
+    attrs[attrName] = attrValue;
+    设置思源块属性(id, attrs);
 }
 
 setTimeout(()=>ClickMonitor(),1000)
@@ -409,6 +428,48 @@ function themeButton() {
         },
         true
     );
+    savorThemeToolbarAddButton(
+        "buttonforest",
+        "b3-menu__item",
+		"Forest 配色",
+		'light',
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/forest.css", "Sv-theme-color-forest主题").setAttribute("topicfilter", "buttonforest");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("Sv-theme-color-forest主题").remove();
+        },
+        true
+    );
+    savorThemeToolbarAddButton(
+        "buttonflower",
+        "b3-menu__item",
+		"Flower 配色",
+		'light',
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/flower.css", "Sv-theme-color-flower主题").setAttribute("topicfilter", "buttonflower");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("Sv-theme-color-flower主题").remove();
+        },
+        true
+    );
+    savorThemeToolbarAddButton(
+        "buttonwind",
+        "b3-menu__item",
+		"Wind 配色",
+		'light',
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/wind.css", "Sv-theme-color-wind主题").setAttribute("topicfilter", "buttonwind");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("Sv-theme-color-wind主题").remove();
+        },
+        true
+    );
 		savorThemeToolbarAddButton(
         "buttonSavor-dark",
         "b3-menu__item",
@@ -434,6 +495,34 @@ function themeButton() {
         },
         () => {
             document.getElementById("Sv-theme-color-vinegar主题").remove();
+        },
+        true
+    );
+    savorThemeToolbarAddButton(
+        "buttonocean",
+        "b3-menu__item",
+		"Ocean 配色",
+		'dark',
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/ocean.css", "Sv-theme-color-ocean主题").setAttribute("topicfilter", "buttonocean");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("Sv-theme-color-ocean主题").remove();
+        },
+        true
+    );
+    savorThemeToolbarAddButton(
+        "buttonmountain",
+        "b3-menu__item",
+		"Mountain 配色",
+		'dark',
+        () => {
+            loadStyle("/appearance/themes/Savor/style/topbar/mountain.css", "Sv-theme-color-mountain主题").setAttribute("topicfilter", "buttonmountain");
+            qucuFiiter();
+        },
+        () => {
+            document.getElementById("Sv-theme-color-mountain主题").remove();
         },
         true
     );
@@ -607,8 +696,12 @@ function bulletThreading() {
         true
     );
 }
-//去除主题所有滤镜还原按钮状态
+function updateWidth() {
+    // 更新宽度的逻辑
+}
+
 function qucuFiiter() {
+    // 去除主题所有滤镜还原按钮状态
     var Topicfilters = document.querySelectorAll("head [topicfilter]");
     Topicfilters.forEach(element => {
         var offNo = getItem(element.getAttribute("topicfilter"));
@@ -617,8 +710,10 @@ function qucuFiiter() {
             element.remove();
         }
     });
-}																		
-
+    
+    // 更新 .statusRight 宽度
+    updateWidth(); // 调用 updateWidth 函数
+}
 
 
 
@@ -1093,23 +1188,27 @@ savordragElement.style.cssText = "flex: 1; app-region: drag;";
 
 
 
-//添加底栏右间距*/
+
+// 添加底栏右间距
 function initStatusRight() {
     let rafId = null;
     let statusRight = null;
     let dockr = null;
     let dockRight = null;
-    
+
     // 更新宽度的函数 - 使用缓存的DOM引用
     const updateWidth = () => {
         if (!statusRight || !dockr) return;
-        
+
         if (rafId) cancelAnimationFrame(rafId);
         rafId = requestAnimationFrame(() => {
             const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 36 : 0;
+            const resizeWidth = dockr.offsetWidth > 0 
+                ? (document.querySelector('.layout__resize--lr') ? document.querySelector('.layout__resize--lr').offsetWidth : 0) 
+                : 0; 
             statusRight.style.width = dockr.classList.contains('layout--float') 
                 ? `${dockRightWidth}px` 
-                : `${dockr.offsetWidth + 5 + dockRightWidth}px`;
+                : `${dockr.offsetWidth + resizeWidth + dockRightWidth}px`; // 使用动态宽度
         });
     };
 
@@ -1120,7 +1219,7 @@ function initStatusRight() {
             const status = document.querySelector('.status');
             dockr = document.querySelector('.layout__dockr');
             dockRight = document.querySelector('#dockRight');
-            
+
             if (status && dockr && !document.querySelector('.statusRight')) {
                 statusRight = Object.assign(document.createElement('div'), {
                     className: 'statusRight'
@@ -1148,14 +1247,7 @@ function initStatusRight() {
         
         // 更新阶段 - 只在必要时更新引用和触发重绘
         for (const mutation of mutations) {
-            if (mutation.type === 'childList') {
-                const newDockRight = document.querySelector('#dockRight');
-                if (dockRight !== newDockRight) {
-                    dockRight = newDockRight;
-                    updateWidth();
-                    break;
-                }
-            } else if (mutation.type === 'attributes' && mutation.target.id === 'dockRight') {
+            if (mutation.type === 'childList' || (mutation.type === 'attributes' && mutation.target.id === 'dockRight')) {
                 updateWidth();
                 break;
             }
@@ -2168,6 +2260,135 @@ function getcommonMenu_Bolck() {
 
                 //loadScript("/appearance/themes/Savor/comment/index.js");js批注评论
 
+                // 只在dragDebounce未定义时才声明
+                if (typeof window.dragDebounce === 'undefined') {
+                    // 防抖函数
+                    window.dragDebounce = (fn, delay = 16) => {
+                        let timer = null;
+                        return (...args) => {
+                            if (timer) cancelAnimationFrame(timer);
+                            timer = requestAnimationFrame(() => fn(...args));
+                        };
+                    };
+
+                    // 初始化拖拽功能
+                    function initDraggable(element) {
+                        // 找到所有直接子列表项
+                        const listItems = element.querySelectorAll(':scope > [data-type="NodeListItem"]');
+                        if (!listItems.length) return;
+                        
+                        listItems.forEach(listItem => {
+                            if (listItem.hasAttribute('data-draggable')) return;
+                            listItem.setAttribute('data-draggable', 'true');
+                            
+                            let startX, startY, initialTransform;
+                            let scale = 1;
+                            
+                            const onMouseDown = e => {
+                                if (e.target.getAttribute('contenteditable') === 'true') {
+                                    return;
+                                }
+                                
+                                e.preventDefault();
+                                listItem.style.cursor = 'grabbing';
+                                
+                                initialTransform = new DOMMatrix(getComputedStyle(listItem).transform);
+                                startX = e.clientX - initialTransform.m41;
+                                startY = e.clientY - initialTransform.m42;
+                                
+                                document.addEventListener('mousemove', onMouseMove);
+                                document.addEventListener('mouseup', onMouseUp, { once: true });
+                            };
+                            
+                            const onMouseMove = window.dragDebounce(e => {
+                                const x = e.clientX - startX;
+                                const y = e.clientY - startY;
+                                updateTransform(x, y, scale);
+                            });
+                            
+                            const onMouseUp = () => {
+                                listItem.style.cursor = 'grab';
+                                document.removeEventListener('mousemove', onMouseMove);
+                            };
+                            
+                            const onWheel = e => {
+                                if (e.target.getAttribute('contenteditable') === 'true') {
+                                    return;
+                                }
+                                
+                                if (!e.altKey) return;
+                                e.preventDefault();
+                                
+                                const delta = e.deltaY;
+                                const scaleChange = delta > 0 ? 0.9 : 1.1;
+                                scale = Math.min(Math.max(scale * scaleChange, 0.1), 5);
+                                
+                                const transform = new DOMMatrix(getComputedStyle(listItem).transform);
+                                updateTransform(transform.m41, transform.m42, scale);
+                            };
+                            
+                            const updateTransform = (x, y, scale) => {
+                                listItem.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+                                
+                                const id = element.getAttribute('data-node-id');
+                                const itemId = listItem.getAttribute('data-node-id'); // 获取列表项的ID
+                                const positions = JSON.parse(localStorage.getItem('dt-positions') || '{}');
+                                if (!positions[id]) positions[id] = {};
+                                positions[id][itemId] = { // 使用列表项ID作为key存储位置信息
+                                    transform: listItem.style.transform,
+                                    scale: scale
+                                };
+                                localStorage.setItem('dt-positions', JSON.stringify(positions));
+                            };
+                            
+                            listItem.style.cursor = 'grab';
+                            listItem.addEventListener('mousedown', onMouseDown);
+                            listItem.addEventListener('wheel', onWheel, { passive: false });
+                            
+                            // 恢复保存的位置
+                            const id = element.getAttribute('data-node-id');
+                            const itemId = listItem.getAttribute('data-node-id');
+                            const positions = JSON.parse(localStorage.getItem('dt-positions') || '{}');
+                            if (positions[id]?.[itemId]) {
+                                listItem.style.transform = positions[id][itemId].transform;
+                                scale = positions[id][itemId].scale || 1;
+                            }
+                        });
+                    }
+
+                    // DOM观察器
+                    function initObserver() {
+                        const observer = new MutationObserver(mutations => {
+                            mutations.forEach(mutation => {
+                                if (mutation.type === 'attributes') {
+                                    if (mutation.target.getAttribute('custom-f') === 'dt') {
+                                        initDraggable(mutation.target);
+                                    }
+                                } else if (mutation.type === 'childList') {
+                                    mutation.addedNodes.forEach(node => {
+                                        if (node.getAttribute?.('custom-f') === 'dt') {
+                                            initDraggable(node);
+                                        }
+                                        node.querySelectorAll?.('[custom-f="dt"]')?.forEach(initDraggable);
+                                    });
+                                }
+                            });
+                        });
+                        
+                        observer.observe(document.body, {
+                            childList: true,
+                            subtree: true,
+                            attributes: true,
+                            attributeFilter: ['custom-f']
+                        });
+                        
+                        document.querySelectorAll('[custom-f="dt"]').forEach(initDraggable);
+                    }
+
+                    // 启动观察器
+                    initObserver();
+                }
+
                 console.log("==============>附加CSS和特性JS_已经执行<==============");
             }
         }, 100);
@@ -2245,3 +2466,7 @@ window.destroyTheme = () => {
 
 siyuan.storage["local-images"].folder = '1F4C1'
 siyuan.storage["local-images"].note = '1F5C3'
+
+
+
+

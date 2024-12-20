@@ -7,11 +7,11 @@ body:not(.body--mobile,.body--window)>#toolbar{
         height: 28px;
         width: 28px;
         padding: 7px;
-        border-radius:6px;
+        border-radius: var(--Sv-dock-item-radius);
     }
     #barWorkspace/*工作空间*/ {
         height:28px;
-        border-radius:6px;
+        border-radius: var(--Sv-dock-item-radius);
         padding:0 3px 0 10px;
         margin:0px 3px 0px 1px	;
         background-color: var(--Sv-barWorkspace-background);

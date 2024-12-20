@@ -9,17 +9,17 @@
 	margin:0;
 	z-index:10;
     pointer-events: none;
-    &::before {/*前端文档圆角*/
+    &::before {/*左端文档圆角*/
         content: "";
         display: inline-block;
-        width: 12px;
-        height: 12px;
+        width: 20px;
+        height: 20px;
         background-color: transparent;
-        border-radius: 50%;
+        border-radius: var(--Sv-status-radius);
         box-shadow: 6px 6px 0 var(--Sv-dock-background);
         position: absolute;
         bottom: 0px;
-        left: -19px;
+        left: -28px;
         z-index: -2;
     }
     &>div:not(.statusRight){
@@ -46,11 +46,11 @@
             &::before{/*底栏左端圆弧*/
                 opacity: 1;
                 position: absolute;
-                width: calc(100% + 10px);
+                width: calc(100% + 16px);
                 border:none;
-                left: -5px;
+                left: -6px;
                 bottom: 0px;
-                border-radius: 6px;
+                border-radius: var(--Sv-status-radius);
                 box-shadow: 0 0 0 5px var(--Sv-dock-background);
                 transition: none;
                 transform:none;
@@ -64,14 +64,12 @@
             position: absolute;
             z-index: -2;
             display: inline-block;
-            width: 12px;
+            width: 14px;
             height: 24px;
             bottom: 0px;
-            left: -14px;
+            left: -15px;
             background-color: transparent;
-            border-radius: 50%;
-            box-shadow: 6px 6px 0 var(--Sv-dock-background);
-            border-radius:0 6px 6px 0;
+            border-radius:var(--Sv-status-radius-r);
             box-shadow: 5px 0 0 0 var(--Sv-status-msg-background),5px 0 0 5px var(--Sv-dock-background);
         }
         &::after{/*右端文档圆角*/
@@ -79,12 +77,12 @@
             position: absolute;
             z-index: -5;
             display: inline-block;
-            width: 10px;
-            height: 10px;
-            top: -15px!important;
-            left: -7px;
+            width: 20px;
+            height: 20px;
+            top: -25px!important;
+            left: -16px;
             background-color: transparent;
-            border-radius: 50%;
+            border-radius: var(--Sv-status-radius);
             box-shadow: 5px 5px 0 var(--Sv-dock-background);
         }
 
@@ -144,14 +142,4 @@
     &>div:not(#barDock,.statusRight){
         display: none;
     }
-}
-
-.statusRight[style="width: 41px;"]{
-    width: 36px!important;
-}
-.statusRight[style="width: 5px;"]{
-    width: 3px!important;
-}
-.statusRight[style="width: 0px;"]{
-    width: 3px!important;
 }

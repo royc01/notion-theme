@@ -2,36 +2,37 @@
 
 .protyle-wysiwyg .list[custom-f~=kb][data-node-id][data-type="NodeList"]
 {
-    display: flex;
+    display: grid;
     flex-direction: row;
-    min-width: 200px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 
 /* ————————————————————所有子项目的表格（除去第一列其余的列），包含溢出的空白部分，所以才会有边框—————————————————————— */
-.protyle-wysiwyg *[custom-f~=kb]>.li>.list{
-    min-width: var(--kbline-boarditem-minwidth);
-    border-radius: 3px;
-}
+
 .protyle-wysiwyg *[custom-f~=kb]>.li{
     min-width: 200px;
+    background-color: var(--Sv-list-background);
+    padding: 8px 8px 2px 8px;
+    margin-right: 10px;
+    border-radius: 8px;
     >[data-node-id]{
-        margin-left: 8px;
+        margin-left: 0px;
+        margin-bottom: 8px;
     }
 }
 
 /* ————————————————————对所有子列表项设置格式———————————————————— */
 
 .protyle-wysiwyg *[custom-f~=kb]>.li>.list>.li{
-    border-radius: 3px;
-    padding: 0.4em 0.4em 0.1em 0 ;
-    margin-bottom: 6px; 
-	background-color:var(--kb--li--background);
-	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+    border-radius: 6px;
+    padding: 0.4em 0.4em 0.4em 0 ;
+    background-color: var(--b3-theme-background);
+	box-shadow: rgba(15, 15, 15, 0.02) 0px 0px 0px 1px, rgba(15, 15, 15, 0.05) 0px 2px 4px;
+    margin-bottom: 8px;
 }
 .protyle-wysiwyg *[custom-f="kb"] .li {
     display: flex;
-    margin: 0;
 }
 
 /*只处理每个列表的第一行*/
@@ -40,42 +41,57 @@
 {
 	min-width: var(--kbline-boarditem-minwidth);
     border-radius: 3px;
-	padding:9px 10px 11px 30px;
-    margin-bottom: 10px;
+	padding:9px 10px 11px 38px;
 }
 .protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(2)[data-type="NodeHeading"],
 .protyle-wysiwyg .sb>*[custom-f~=kb] > div > div:nth-child(2)[data-type="NodeHeading"]
 {
 
-	padding:5px 0px 7px 30px;
+	padding:9px 10px 7px 38px;
 }
 .protyle-wysiwyg *[custom-f~=kb] .li [data-type="NodeHeading"]>[spellcheck]:after{
 	display:none;
 }/*取消标题层级提示*/
 
 /*标题行循环颜色*/
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-3) > div:nth-child(2),
-.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-3) > div:nth-child(2){
-    background-color:var(--b3-card-error-background);
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-3) > .protyle-action,
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-3) > .protyle-action{
+    color:var(--b3-font-color13);
+    & + [data-node-id]{
+        background-color:var(--b3-font-background13);
+        border-radius: 6px;
+    }
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-2) > div:nth-child(2),
-.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-2) > div:nth-child(2){
-    background-color:var(--b3-card-warning-background);
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-2) > .protyle-action,
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-2) > .protyle-action{
+    color:var(--b3-font-color5);
+    & + [data-node-id]{
+        background-color:var(--b3-font-background6);
+        border-radius: 6px;
+    }
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-1) > div:nth-child(2),
-.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-1) > div:nth-child(2){
-    background-color:var(--b3-card-info-background);
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-1) > .protyle-action,
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-1) > .protyle-action{
+    color:var(--b3-font-color9);
+    & + [data-node-id]{
+        background-color:var(--b3-font-background10);
+        border-radius: 6px;
+    }
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n) > div:nth-child(2),
-.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n) > div:nth-child(2){
-    background-color:var(--b3-card-success-background);
+.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n) > .protyle-action,
+.protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n) > .protyle-action{
+    color:var(--b3-font-color7);
+    & + [data-node-id]{
+        background-color:var(--b3-font-background8);
+        border-radius: 6px;
+    }
 }
 
 /*只处理每个列表第一行的点*/
 .protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(1),
 .protyle-wysiwyg .sb>*[custom-f~=kb] > div > div:nth-child(1)
 {
-    transform: translate(4px,5px);
+    transform: translate(8px, 13px);
 	z-index:2;
 }
 

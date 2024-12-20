@@ -1,3 +1,6 @@
+#buttonSavor-light.button_on{
+	background:var(--Sv-Savor-light-on);
+}
 #buttonSavor-light.button_off{
 	background:var(--Sv-Savor-light-off);
 }
@@ -49,7 +52,36 @@
 #bulletThreading.button_off{
 	background:var(--Sv-bulletThreading-off);
 }
-
+#buttonforest.button_on{
+	background:var(--Sv-Forest-on);
+}
+#buttonforest.button_off{
+	background:var(--Sv-Forest-off);
+}
+#buttonflower.button_on{
+	background:var(--Sv-Flower-on);
+}
+#buttonflower.button_off{
+	background:var(--Sv-Flower-off);
+}
+#buttonwind.button_on{
+	background:var(--Sv-Wind-on);
+}
+#buttonwind.button_off{
+	background:var(--Sv-Wind-off);
+}
+#buttonocean.button_on{
+	background:var(--Sv-Ocean-on);
+}
+#buttonocean.button_off{
+	background:var(--Sv-Ocean-off);
+}
+#buttonmountain.button_on{
+	background:var(--Sv-Mountain-on);
+}
+#buttonmountain.button_off{
+	background:var(--Sv-Mountain-off);
+}
 
 #savorToolbar{
 	border-bottom: 1px solid var(--b3-theme-surface-lighter);

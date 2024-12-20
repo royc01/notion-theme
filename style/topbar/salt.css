@@ -37,7 +37,7 @@
     --b3-list-hover: rgba(98, 122, 123, 0.1);
 
     /* 菜单 */
-    --b3-menu-background: #f8f9fa;
+    --b3-menu-background: rgb(226, 233, 233);
 
     /* 提示 */
 
@@ -183,6 +183,7 @@
 
     /* —————— 设置界面 —————— */
     --Sv--dialog-tab-bar: var(--b3-theme-surface);
+    --Sv-button-background-hover: rgb(2, 106, 129);
 
     /* 集市界面 */
     --Sv-bazaar-focus: #e5ebeb;
