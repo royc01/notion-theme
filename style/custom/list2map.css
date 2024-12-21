@@ -6,10 +6,11 @@
 	transition: all 0.5s;
 } 
 .protyle-wysiwyg *[custom-f="dt"].list{
-	width:100%-50!important;
 	overflow-x:auto;/*溢出滚动*/
-	padding-bottom:30px!important;
-	margin:10px 4px;
+	padding:60px 30px!important;
+	margin:10px 0px;
+	border: 1px solid var(--Sv-fold-border);
+	background: radial-gradient(var(--Sv-list-background) 1.5px, transparent 1px) 0 0 / 20px 20px;
 }
 /*子项设偏移调整*/
 .protyle-wysiwyg *[custom-f="dt"] [data-node-id].li>[data-node-id]{

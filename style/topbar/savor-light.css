@@ -453,7 +453,6 @@
     --Sv-plugin-off-bg: #e5e5e0;
     --Sv-plugin-b-off-bg: #d8d8d3;
     --Sv-plugin-b-off-bg-hover: #dddddd;
-    --Sv-plugin-on-bg: var(--Sv-tab-bar-item-background);
     --Sv-plugin-counter: var(--Sv-barWorkspace-background);
     --Sv-fixed-item-text: var(--b3-theme-on-surface);
 }

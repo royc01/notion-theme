@@ -101,6 +101,7 @@
 }
 .b3-list-item__icon{
 	margin-left:-4px;
+	font-size:12px;
 	padding: 0 3px;
     border-radius: 4px;
     &:hover{

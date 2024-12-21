@@ -59,6 +59,7 @@
         }
     .statusRight{
         position: relative;
+        margin-left: 5px;
         &::before {/*底栏右端圆弧*/
             content: "";
             position: absolute;
@@ -67,22 +68,22 @@
             width: 14px;
             height: 24px;
             bottom: 0px;
-            left: -15px;
-            background-color: transparent;
+            left: -18px;
+            background-color: var(--Sv-status-msg-background);
             border-radius:var(--Sv-status-radius-r);
-            box-shadow: 5px 0 0 0 var(--Sv-status-msg-background),5px 0 0 5px var(--Sv-dock-background);
+            box-shadow: 5px 0 0 0 var(--Sv-status-msg-background),3px 0 0 5px var(--Sv-dock-background),8px -5px 0 0px var(--Sv-dock-background);
         }
         &::after{/*右端文档圆角*/
             content: "";
             position: absolute;
             z-index: -5;
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            top: -25px!important;
-            left: -16px;
+            width: 30px;
+            height: 30px;
+            top: -35px!important;
+            left: -29px;
             background-color: transparent;
-            border-radius: var(--Sv-status-radius);
+            border-radius: var(--Sv-status-radius-t);
             box-shadow: 5px 5px 0 var(--Sv-dock-background);
         }
 

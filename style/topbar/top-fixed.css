@@ -195,7 +195,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	.fn__flex-1:first-child{
 	&, & > &, & > & > & {
 		>[data-type="wnd"]>.fn__flex{
-			margin-left: 180px;
+			margin-left: 160px;
 			transition: all 200ms;
 			}
 		}
@@ -241,3 +241,10 @@ body:not(.body--mobile,.body--window)>#toolbar{
 body:not(.body--mobile,.body--window) #layouts{
     margin: var(--Sv-layout-margin-fixed);
 }
+
+
+
+.layout__resize--lr:after {
+        top: 38px;
+        height: calc(100% - 38px);
+}	

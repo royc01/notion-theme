@@ -1202,7 +1202,7 @@ function initStatusRight() {
 
         if (rafId) cancelAnimationFrame(rafId);
         rafId = requestAnimationFrame(() => {
-            const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 36 : 0;
+            const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 33 : 0;
             const resizeWidth = dockr.offsetWidth > 0 
                 ? (document.querySelector('.layout__resize--lr') ? document.querySelector('.layout__resize--lr').offsetWidth : 0) 
                 : 0; 
@@ -2464,8 +2464,8 @@ window.destroyTheme = () => {
 };
 
 
-siyuan.storage["local-images"].folder = '1F4C1'
-siyuan.storage["local-images"].note = '1F5C3'
+//siyuan.storage["local-images"].folder = '1F4C1'
+//siyuan.storage["local-images"].note = '1F5C3'
 
 
 

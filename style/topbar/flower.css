@@ -244,6 +244,7 @@
     --Sv-status-barDock-color: #ff5f40;
     --Sv-status-item-hover: #d9d4e4;
     --Sv-status-radius-r: 0 10px 10px 0;
+    --Sv-status-radius-t: 0 0 10px 0;
 
     /* 页签 */
     --Sv-tab-bar-item-background: var(--b3-theme-surface);

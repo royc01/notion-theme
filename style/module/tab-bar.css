@@ -76,6 +76,7 @@
         position: absolute;
         top: 0px;
         left: -20px;
+        pointer-events: none;
         }
     }
     .item--readonly {

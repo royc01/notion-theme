@@ -310,6 +310,7 @@
     --Sv-status-msg-background: #eeeeec;
     --Sv-status-radius-r: 0 6px 6px 0;
     --Sv-status-radius: var(--Sv-dock-item-radius);
+    --Sv-status-radius-t: 0 0 6px 0;
 
     /* 页签 */
     --Sv-tab-bar-background: var(--Sv-toolbar-background);
@@ -541,7 +542,7 @@
     --Sv-plugin-off-bg: #e5e5e0;
     --Sv-plugin-b-off-bg: #d8d8d3;
     --Sv-plugin-b-off-bg-hover: #dddddd;
-    --Sv-plugin-on-bg: var(--Sv-tab-bar-item-background);
+    --Sv-plugin-on-bg: var(--Sv-toolbar-item-hover);
     --Sv-plugin-counter: var(--Sv-barWorkspace-background);
 
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/

@@ -250,6 +250,7 @@
     --Sv-status-barDock-color: #9d80ec;
     --Sv-status-item-hover: #e3e7e0;
     --Sv-status-radius-r: 0 10px 10px 0;
+    --Sv-status-radius-t: 0 0 10px 0;
 
     /* 页签 */
     --Sv-tab-bar-background: var(--Sv-toolbar-background);
@@ -385,7 +386,6 @@
     --Sv-plugin-off-bg: #e1e4df;
     --Sv-plugin-b-off-bg: #d8d8d3;
     --Sv-plugin-b-off-bg-hover: #dddddd;
-    --Sv-plugin-on-bg: var(--Sv-tab-bar-item-background);
     --Sv-plugin-counter: var(--b3-theme-on-background);
 
 
