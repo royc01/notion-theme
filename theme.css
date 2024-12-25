@@ -44,10 +44,8 @@
 
 @font-face {
     font-family: 'Twitter Emoji';
-    font-style: normal;
-    font-weight: 700;
     font-display: swap;
-    src: url("font/Twemoji.ttf");
+    src: url("font/Twemoji.woff2") format("woff2");
 }
 
 :root {
@@ -74,12 +72,11 @@
     --b3-theme-on-error: #fff;
 
     /* 字体 */
-    /* Windows 斜体遮挡添加 "Segoe UI" 字体 https://github.com/siyuan-note/siyuan/issues/11841 */
-    --b3-font-family: BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", "Hiragino Sans", arial, sans-serif, 'Twitter Emoji',emojis;
+    --b3-font-family: BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", "Hiragino Sans", arial, sans-serif, 'Twitter Emoji'/*,emojis*/;
     --b3-font-family-protyle: var(--b3-font-family);
     --b3-font-family-code: "JetBrainsMono-Regular", mononoki, Consolas, "Liberation Mono",'Twitter Emoji', var(--b3-font-family);
     --b3-font-family-graph: arial;
-    --b3-font-family-emoji: 'Twitter Emoji',"Emojis Additional", emojis;
+    --b3-font-family-emoji: 'Twitter Emoji'/*,"Emojis Additional", emojis*/;
     --b3-font-family-math: KaTeX_Math;
     --b3-font-size: 14px;
 
@@ -606,15 +603,15 @@
 
 /* 微软字体斜体会被相邻背景遮挡，将 arial 放置其前 https://github.com/siyuan-note/siyuan/issues/11841；"Segoe UI" 和 Noto-COLRv1-2.047 冲突，故移除。 */
 :root:lang(zh_CN) {
-    --b3-font-family: BlinkMacSystemFont, Helvetica, "PingFang SC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Source Han Sans SC", arial, 'Twitter Emoji',"Microsoft Yahei", sans-serif, emojis;
+    --b3-font-family: BlinkMacSystemFont, Helvetica, "PingFang SC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Source Han Sans SC", arial, 'Twitter Emoji',"Microsoft Yahei", sans-serif/*, emojis*/;
 }
 
 :root:lang(zh_CHT) {
-    --b3-font-family: BlinkMacSystemFont, Helvetica, "PingFang SC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Source Han Sans SC", arial, 'Twitter Emoji',"Microsoft Yahei", sans-serif, emojis;
+    --b3-font-family: BlinkMacSystemFont, Helvetica, "PingFang SC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Source Han Sans SC", arial, 'Twitter Emoji',"Microsoft Yahei", sans-serif/*, emojis*/;
 }
 
 :root:lang(ja_JP) {
-    --b3-font-family: BlinkMacSystemFont, Helvetica, "PingFang SC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Source Han Sans SC", arial, 'Twitter Emoji',"Microsoft Yahei", sans-serif, emojis;
+    --b3-font-family: BlinkMacSystemFont, Helvetica, "PingFang SC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Source Han Sans SC", arial, 'Twitter Emoji',"Microsoft Yahei", sans-serif/*, emojis*/;
 }
 
 

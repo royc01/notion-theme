@@ -1204,7 +1204,7 @@ function initStatusRight() {
         rafId = requestAnimationFrame(() => {
             const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 33 : 0;
             const resizeWidth = dockr.offsetWidth > 0 
-                ? (document.querySelector('.layout__resize--lr') ? document.querySelector('.layout__resize--lr').offsetWidth : 0) 
+                ? (document.querySelector('.layout__center + .layout__resize--lr') ? document.querySelector('.layout__center + .layout__resize--lr').offsetWidth : 0) 
                 : 0; 
             statusRight.style.width = dockr.classList.contains('layout--float') 
                 ? `${dockRightWidth}px` 
@@ -2215,6 +2215,9 @@ function getcommonMenu_Bolck() {
 				if (themeMode == 'light') {
                     loadsalt = getItem('buttonsalt');
 					loadsugar = getItem('buttonsugar');
+                    loadforest = getItem('buttonforest');
+                    loadflower = getItem('buttonflower');
+                    loadwind = getItem('buttonwind');
                     if (loadsalt == '1') {
                         loadStyle(
                             '/appearance/themes/Savor/style/topbar/salt.css',
@@ -2227,15 +2230,46 @@ function getcommonMenu_Bolck() {
                             'Sv-theme-color-sugar主题'
                         ).setAttribute('topicfilter', 'buttonsugar');
                     }
-
+                    if (loadforest == '1') {
+                        loadStyle(
+                            '/appearance/themes/Savor/style/topbar/forest.css',
+                            'Sv-theme-color-forest主题'
+                        ).setAttribute('topicfilter', 'buttonforest');
+                    }
+                    if (loadflower == '1') {
+                        loadStyle(
+                            '/appearance/themes/Savor/style/topbar/flower.css',
+                            'Sv-theme-color-flower主题'
+                        ).setAttribute('topicfilter', 'buttonflower');
+                    }
+                    if (loadwind == '1') {
+                        loadStyle(
+                            '/appearance/themes/Savor/style/topbar/wind.css',
+                            'Sv-theme-color-wind主题'
+                        ).setAttribute('topicfilter', 'buttonwind');
+                    }
                 }
 				if (themeMode == 'dark') {
 					loadvinegar = getItem('buttonvinegar');
+                    loadocean = getItem('buttonocean');
+                    loadmountain = getItem('buttonmountain');
                     if (loadvinegar == '1') {
                         loadStyle(
                             '/appearance/themes/Savor/style/topbar/vinegar.css',
                             'Sv-theme-color-vinegar主题'
                         ).setAttribute('topicfilter', 'buttonvinegar');
+                    }
+                    if (loadocean == '1') {
+                        loadStyle(
+                            '/appearance/themes/Savor/style/topbar/ocean.css',
+                            'Sv-theme-color-ocean主题'
+                        ).setAttribute('topicfilter', 'buttonvinegar');
+                    }
+                    if (loadvinegar == '1') {
+                        loadStyle(
+                            '/appearance/themes/Savor/style/topbar/mountain.css',
+                            'Sv-theme-color-mountain主题'
+                        ).setAttribute('topicfilter', 'buttonmountain');
                     }
                 }
 				

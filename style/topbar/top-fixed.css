@@ -201,6 +201,16 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		}
 	}
 }
+#dockLeft.fn__none+#layouts .layout__dockl[style*="width: 0px"]~.layout__center,.layout__dockl.layout--float~.layout__center{ 
+	.fn__flex-1:first-child{
+	&, & > &, & > & > & {
+		>[data-type="wnd"]>.fn__flex{
+			margin-left: 190px;
+			transition: all 200ms;
+			}
+		}
+	}
+}
 
 .layout__center:has(~.layout__dockr[style*="width: 0px"]),.layout__center:has(~.layout__dockr.layout--float){
 	.fn__flex-1:first-child{
