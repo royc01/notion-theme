@@ -123,6 +123,3 @@
 	background-color: var(--b3-theme-primary-lightest)!important;
 }
 
-.layout__center .fn__flex:has(.item--focus:first-child) .layout-tab-container{
-    border-top-left-radius: 0px!important;
-}
