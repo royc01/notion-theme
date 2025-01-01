@@ -12,8 +12,8 @@
     >.fn__flex-column{
 	/*面板标题*/
 	.block__icons{
-		height:28px; 
-		padding: 6px 10px 6px 15px;
+		height:33px; 
+		padding: 0px 8px 0px 11px;
 		min-height: unset;
 		/*面板标题图标*/
 		.block__logo{

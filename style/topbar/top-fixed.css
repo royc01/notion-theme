@@ -1,9 +1,10 @@
 body:not(.body--mobile,.body--window)>#toolbar{
-	z-index: 2;
+	z-index: 3;
 	height: 38px;
 	margin-bottom: -38px;
 	pointer-events: none;
 	counter-reset:plugin-counter;
+	background-color: transparent;
     app-region: drag;
 	& .toolbar__item {
 		pointer-events: visibleFill;
@@ -81,7 +82,6 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		&[data-type="tab-header"]{
 			pointer-events: visibleFill;
 			app-region: no-drag;
-			min-height: 27px!important;
 			&.item--focus{
 				background-color: var(--b3-theme-background);
 				margin-bottom:-6px!important;
@@ -127,6 +127,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	pointer-events: none;
 	background-color:var(--Sv-toolbar-background);
 	border: none;
+	height: 38px;
 	&.layout-tab-bar--readonly{
 		flex:none;
 	}
@@ -182,7 +183,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 
 
 /*--------合并顶栏页签--------*/
-.layout__dockl~.layout__center,.layout__dockl.layout--float~.layout__center{ 
+/*.layout__dockl~.layout__center,.layout__dockl.layout--float~.layout__center{ 
 	.fn__flex-1:first-child{
 	&, & > &, & > & > & {
 		>[data-type="wnd"]>.fn__flex{
@@ -231,13 +232,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 			}
 		}
 	}
-}
-.layout__center .fn__flex-1:has(+.layout__resize--lr)>[data-type="wnd"]>.fn__flex{
-	margin-right: 0px!important;
-}
-.layout__center .layout__resize--lr+.fn__flex-column .fn__flex-1>[data-type="wnd"]>.fn__flex{
-	margin-left: 0px!important;
-}
+}*/
 
 
 .layout-tab-container:has(.layout__empty){

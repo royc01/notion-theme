@@ -1,4 +1,4 @@
-.en_item_bullet_line {
+.en_item_bullet_line:not(.protyle-wysiwyg--select) {
 
     &::after {
       content: '';

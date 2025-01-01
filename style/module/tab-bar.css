@@ -2,33 +2,38 @@
 .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
     background-color: transparent;
     border: none;
-    height: 38px;
+    height: 33px;
+    overflow: visible;
     .item:not(.item--readonly){
-        min-height: 33px;
+        min-height: 28px;
         border-radius: var(--Sv-tab-bar-item-radius);
         background-color: var(--Sv-tab-bar-item-background);
         margin-bottom: 5px;
-        padding-right: 8px;
+        padding-right: 5px;
         overflow: unset !important;
-        transition: none;
         box-shadow: -6px 0 0 0 var(--Sv-dock-background) inset;
-
+        &:last-child{
+            box-shadow: -8px 0 0 0 var(--Sv-dock-background) inset;
+        }
+        & .item__icon{
+            padding: 3px 0 3px 7px;
+        }
         &:hover{
             background-color: var(--Sv-tab-bar-item-background-hover); 
         }
         &.item--focus{
             background-color: var(--Sv-tab-bar-item-background-focus);
             border-radius: var(--Sv-tab-bar-item--focus-radius);
-            min-height: 33px;
+            min-height: 27px;
             margin-bottom: 0px;
-            padding: 0px 8px 5px 0px;
+            padding: 0px 5px 5px 0px;
             &:before{
                 left: -20px !important;
                 bottom: 0px !important;
                 clip-path: inset(50% -5px 0 50%);
             }
             &:after{
-                right: -15px;
+                right: -14px;
                 bottom: 0px !important;
                 clip-path: inset(50% 50% 0 -5px);
             }
@@ -50,6 +55,11 @@
                 &::after{
                     display: none;
                 }
+            }
+            &:first-child:before{
+                left: -10px !important;
+                bottom: -5px !important;
+                background-color: var(--Sv-tab-bar-item-background-focus);
             }
                 & .item__text {
                     font-weight: 700;
@@ -80,11 +90,11 @@
         }
     }
     .item--readonly {
-        min-height: 32px;
+        min-height: 28px;
         padding: 0;
         .block__icon{
         background-color: var(--Sv-tab-bar-item-background);
-        padding: 9.5px;
+        padding: 7px;
         border-radius: var(--Sv-tab-bar-item-radius);
         &:hover{
             background-color:var(--Sv-tab-bar-item-background-focus);

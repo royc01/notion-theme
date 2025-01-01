@@ -1,6 +1,6 @@
 /* ————————————————————面包屑———————————————————— */
 .protyle-breadcrumb{
-	padding: 6px 10px 7px 8px;
+	padding: 3px 6px 3px 6px;
 	&>.protyle-breadcrumb__bar .protyle-breadcrumb__item{
 		&:hover{
 			background-color: var(--Sv-breadcrumb-hover);

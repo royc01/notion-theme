@@ -580,8 +580,10 @@ function tabbarVerticalButton() {
 }
 // 添加拖动调整宽度的功能
 function addResizeHandle() {
+    // 如果已经存在 resize handle，直接返回
     if (document.getElementById("vertical-resize-handle")) return;
-    
+
+    // 创建 resize handle
     const resizeHandle = document.createElement('div');
     resizeHandle.id = 'vertical-resize-handle';
     resizeHandle.style.cssText = `
@@ -594,49 +596,49 @@ function addResizeHandle() {
         background-color: transparent;
         cursor: col-resize;
         z-index: 8;
-        transform: translateZ(0); /* 启用硬件加速 */
     `;
-    
+
+    // 将 resize handle 添加到 DOM
     document.querySelector('.layout__center .fn__flex.layout-tab-bar').appendChild(resizeHandle);
-    
+
     let startX, startWidth;
-    let rafId = null; // requestAnimationFrame ID
-    
-    function startResize(e) {
+    let isResizing = false; // 标记是否正在调整大小
+
+    // 开始调整大小
+    const startResize = (e) => {
         e.preventDefault(); // 防止文本选中
         startX = e.clientX;
-        startWidth = parseInt(document.documentElement.style.getPropertyValue('--custom-tab-width') || '150');
-        
+        startWidth = parseInt(document.documentElement.style.getPropertyValue('--custom-tab-width') || '150', 10);
+        isResizing = true;
+
         // 添加拖动时的类，用于临时禁用过渡动画
         document.documentElement.classList.add('resizing');
-        
-        window.addEventListener('mousemove', resize, { passive: true }); // 使用 passive 监听
-        window.addEventListener('mouseup', stopResize, { once: true }); // 使用 once 自动解绑
-    }
-    
-    function resize(e) {
-        // 使用 requestAnimationFrame 优化性能
-        if (rafId) cancelAnimationFrame(rafId);
-        
-        rafId = requestAnimationFrame(() => {
-            const width = startWidth + (e.clientX - startX);
-            if (width >= 100 && width <= 400) {
-                document.documentElement.style.setProperty('--custom-tab-width', `${width}px`);
-            }
-        });
-    }
-    
-    function stopResize() {
+
+        // 使用 passive 和 once 优化事件监听器
+        window.addEventListener('mousemove', resize, { passive: true });
+        window.addEventListener('mouseup', stopResize, { once: true });
+    };
+
+    // 调整大小
+    const resize = (e) => {
+        if (!isResizing) return;
+
+        const width = startWidth + (e.clientX - startX);
+        if (width >= 100 && width <= 400) {
+            document.documentElement.style.setProperty('--custom-tab-width', `${width}px`);
+        }
+    };
+
+    // 停止调整大小
+    const stopResize = () => {
+        isResizing = false;
+
         // 移除拖动类，恢复过渡动画
         document.documentElement.classList.remove('resizing');
         window.removeEventListener('mousemove', resize);
-        
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
-        }
-    }
-    
+    };
+
+    // 绑定事件
     resizeHandle.addEventListener('mousedown', startResize);
 }
 /**---------------------------------------------------------插件-------------------------------------------------------------- */
@@ -1191,77 +1193,100 @@ savordragElement.style.cssText = "flex: 1; app-region: drag;";
 
 // 添加底栏右间距
 function initStatusRight() {
-    let rafId = null;
     let statusRight = null;
     let dockr = null;
     let dockRight = null;
+    let resizeElement = null;
+    let status = null;
 
-    // 更新宽度的函数 - 使用缓存的DOM引用
-    const updateWidth = () => {
-        if (!statusRight || !dockr) return;
-
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(() => {
-            const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 33 : 0;
-            const resizeWidth = dockr.offsetWidth > 0 
-                ? (document.querySelector('.layout__center + .layout__resize--lr') ? document.querySelector('.layout__center + .layout__resize--lr').offsetWidth : 0) 
-                : 0; 
-            statusRight.style.width = dockr.classList.contains('layout--float') 
-                ? `${dockRightWidth}px` 
-                : `${dockr.offsetWidth + resizeWidth + dockRightWidth}px`; // 使用动态宽度
-        });
+    // 缓存 DOM 元素
+    const cacheElements = () => {
+        status = document.querySelector('#status');
+        statusRight = document.querySelector('.statusRight');
+        dockr = document.querySelector('.layout__dockr');
+        dockRight = document.querySelector('#dockRight');
+        resizeElement = document.querySelector('.layout__center + .layout__resize--lr');
     };
 
-    // 合并的 Observer
-    const observer = new MutationObserver((mutations) => {
-        // 初始化阶段
-        if (!statusRight) {
-            const status = document.querySelector('.status');
-            dockr = document.querySelector('.layout__dockr');
-            dockRight = document.querySelector('#dockRight');
+    // 更新宽度和样式的函数
+    const updateWidth = () => {
+        if (!status || !statusRight || !dockr) return;
 
-            if (status && dockr && !document.querySelector('.statusRight')) {
-                statusRight = Object.assign(document.createElement('div'), {
-                    className: 'statusRight'
+        // 检查 .protyle 是否为 .protyle.fullscreen
+        const isFullscreen = document.querySelector('.protyle.fullscreen') !== null;
+
+        if (isFullscreen) {
+            // 如果是全屏模式，设置 .statusRight 的宽度为 0
+            statusRight.style.width = '0px';
+            // 设置 #status 的 right 为 -5px，bottom 为 0px
+            status.style.right = '-5px';
+            status.style.bottom = '0px';
+            return;
+        }
+
+        // 非全屏模式下，恢复 #status 的默认样式
+        status.style.right = '';
+        status.style.bottom = '';
+
+        // 计算 .statusRight 的宽度
+        const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 33 : 0;
+        const resizeWidth = dockr.offsetWidth > 0 && resizeElement ? resizeElement.offsetWidth : 0;
+        const totalWidth = dockr.classList.contains('layout--float') 
+            ? dockRightWidth 
+            : dockr.offsetWidth + resizeWidth + dockRightWidth;
+
+        statusRight.style.width = `${totalWidth}px`;
+    };
+
+    // 初始化函数
+    const init = () => {
+        cacheElements();
+        if (!statusRight && dockr && dockRight && status) {
+            statusRight = Object.assign(document.createElement('div'), {
+                className: 'statusRight'
+            });
+            status.appendChild(statusRight);
+
+            // 观察 dockr 的尺寸变化
+            new ResizeObserver(updateWidth).observe(dockr);
+
+            // 观察 dockRight 的类变化
+            new MutationObserver(updateWidth).observe(dockRight, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+
+            // 观察 .protyle 的类变化，以检测全屏模式
+            const protyleElement = document.querySelector('.protyle');
+            if (protyleElement) {
+                new MutationObserver(updateWidth).observe(protyleElement, {
+                    attributes: true,
+                    attributeFilter: ['class']
                 });
-                status.appendChild(statusRight);
-                
-                // 开始观察布局变化
-                new ResizeObserver(updateWidth).observe(dockr);
-                
-                // 改为观察父元素
-                observer.disconnect();
-                if (dockRight && dockRight.parentElement) {
-                    observer.observe(dockRight.parentElement, {
-                        childList: true,
-                        attributes: true,
-                        attributeFilter: ['class'],
-                        subtree: true
-                    });
-                }
-                
-                updateWidth();
-                return;
             }
-        }
-        
-        // 更新阶段 - 只在必要时更新引用和触发重绘
-        for (const mutation of mutations) {
-            if (mutation.type === 'childList' || (mutation.type === 'attributes' && mutation.target.id === 'dockRight')) {
-                updateWidth();
-                break;
-            }
-        }
-    });
 
-    // 开始观察
+            // 初始更新宽度和样式
+            updateWidth();
+        }
+    };
+
+    // 首次尝试初始化
+    init();
+
+    // 使用 MutationObserver 等待正确时机
+    const observer = new MutationObserver(init);
     observer.observe(document.body, {
         childList: true,
         subtree: true
     });
 }
 
-setTimeout(initStatusRight, 0);
+// 确保在 DOM 加载完成后执行
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStatusRight);
+} else {
+    initStatusRight();
+}
 
 
 //+++++++++++++++++++++++++++++++++辅助API++++++++++++++++++++++++++++++++++++
@@ -2503,4 +2528,124 @@ window.destroyTheme = () => {
 
 
 
+/*顶栏合并*/
+function initTabBarsMargin() {
+    let rafId = null;
+    let tabBar = null;
+    let dockl = null;
+    let dockr = null;
+    let topBarButton = null;
+    let dockVertical = null;
 
+    // 缓存 DOM 元素
+    const cacheElements = () => {
+        tabBar = document.querySelector('.layout__center .layout-tab-bar');
+        dockl = document.querySelector('.layout__dockl');
+        dockr = document.querySelector('.layout__dockr');
+        topBarButton = document.querySelector('#topBar');
+        dockVertical = document.querySelector('.dock--vertical');
+    };
+
+    // 更新边距的函数
+    const updateMargins = () => {
+        if (!tabBar || !dockl || !dockr || !topBarButton) return;
+
+        const isTopBarActive = topBarButton.classList.contains('button_on');
+        if (!isTopBarActive) {
+            // 如果顶栏合并未激活，重置所有边距
+            tabBar.style.marginLeft = '0px';
+            document.querySelectorAll('.layout__center .layout-tab-bar--readonly').forEach(tabBar => {
+                tabBar.style.marginRight = '0px';
+            });
+            return;
+        }
+
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+            const isDockVerticalHidden = dockVertical?.classList.contains('fn__none');
+            const leftMargin = isDockVerticalHidden ? '193px' : '160px';
+            const rightMargin = isDockVerticalHidden ? '293px' : '260px';
+
+            // 处理左侧边距
+            const docklWidth = dockl.offsetWidth;
+            const isFloatingL = dockl.classList.contains('layout--float');
+            tabBar.style.marginLeft = (docklWidth === 0 || isFloatingL) ? leftMargin : '0px';
+
+            // 处理右侧边距
+            const dockrWidth = dockr.offsetWidth;
+            const isFloatingR = dockr.classList.contains('layout--float');
+            const marginRightValue = (dockrWidth === 0 || isFloatingR) ? rightMargin : '0px';
+
+            // 首先重置所有 readonly tab bars 的右边距
+            const allReadonlyTabBars = document.querySelectorAll('.layout__center .layout-tab-bar--readonly');
+            allReadonlyTabBars.forEach(tabBar => {
+                tabBar.style.marginRight = '0px';
+            });
+
+            // 检查是否存在 layout__resize
+            const resizers = document.querySelectorAll('.layout__center .layout__resize:not(.layout__resize--lr)');
+            if (resizers.length === 0) {
+                // 没有分栏时，设置最后一个 readonly tab bar 的右边距
+                const lastReadonlyTabBar = allReadonlyTabBars[allReadonlyTabBars.length - 1];
+                if (lastReadonlyTabBar) {
+                    lastReadonlyTabBar.style.marginRight = marginRightValue;
+                }
+            } else {
+                // 有分栏时，为每个 resize 前面的最后一个 readonly tab bar 设置右边距
+                resizers.forEach(resizer => {
+                    let prevElement = resizer.previousElementSibling;
+                    if (!prevElement) return;
+
+                    const prevReadonlyTabBars = prevElement.querySelectorAll('.layout-tab-bar--readonly');
+                    if (prevReadonlyTabBars.length > 0) {
+                        prevReadonlyTabBars[prevReadonlyTabBars.length - 1].style.marginRight = marginRightValue;
+                    }
+                });
+            }
+        });
+    };
+
+    // 初始化函数
+    const init = () => {
+        cacheElements();
+        if (tabBar && dockl && dockr && topBarButton) {
+            // 观察两侧 dock 的尺寸变化
+            new ResizeObserver(updateMargins).observe(dockl);
+            new ResizeObserver(updateMargins).observe(dockr);
+
+            // 观察顶栏合并按钮的类变化
+            new MutationObserver(updateMargins).observe(topBarButton, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+
+            // 观察 dock--vertical 的类变化
+            if (dockVertical) {
+                new MutationObserver(updateMargins).observe(dockVertical, {
+                    attributes: true,
+                    attributeFilter: ['class']
+                });
+            }
+
+            // 初始更新边距
+            updateMargins();
+        }
+    };
+
+    // 首次尝试初始化
+    init();
+
+    // 使用 MutationObserver 等待正确时机
+    const observer = new MutationObserver(init);
+    observer.observe(document, {
+        childList: true,
+        subtree: true
+    });
+}
+
+// 确保在 DOM 加载完成后执行
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTabBarsMargin);
+} else {
+    initTabBarsMargin();
+}
