@@ -158,6 +158,12 @@
         .config__tab-wrap{
             margin: 5px 10px 5px 5px;
             border-radius: 6px;
+            /*.config__tab-container .fn__flex-1{
+                font-weight: 600;
+                .b3-label__text{
+                    font-weight: 400!important;
+                }
+            }*/
             .fn__hr--b:not(.resize__move){
                 height: 11px;
             }

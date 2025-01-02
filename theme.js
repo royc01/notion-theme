@@ -546,25 +546,33 @@ function concealMarkButton() {
 }
 /**---------------------------------------------------------垂直-------------------------------------------------------------- */
 
+
+let outlineObserverCleanup = null; // 用于存储清理函数
+
 function tabbarVerticalButton() {
     savorThemeToolplusAddButton(
         "tabbarVertical",
         "b3-menu__item",
-		"垂直页签",
+        "垂直页签",
         () => {
-            // 启用垂直页签时,先检查并关闭顶栏合并
+            // 启用垂直页签时，先检查并关闭顶栏合并
             let topbarFixed = document.getElementById("Sv-theme-color-topbar隐藏");
             if (topbarFixed) {
                 // 找到顶栏合并按钮并触发点击以关闭它
                 let topbarBtn = document.getElementById("topBar");
                 if (topbarBtn) topbarBtn.click();
             }
-            
+
             // 然后启用垂直页签
             loadStyle("/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", "Sv-theme-color-tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
 
             // 添加调整宽度的拖动条
             addResizeHandle();
+
+            // 启用 outline 面板监听
+            if (!outlineObserverCleanup) {
+                outlineObserverCleanup = observeOutline();
+            }
         },
         () => {
             // 移除垂直页签样式
@@ -574,6 +582,12 @@ function tabbarVerticalButton() {
             if (resizeHandle) resizeHandle.remove();
             // 重置宽度
             document.documentElement.style.removeProperty('--custom-tab-width');
+
+            // 清理 outline 面板监听
+            if (outlineObserverCleanup) {
+                outlineObserverCleanup();
+                outlineObserverCleanup = null;
+            }
         },
         true
     );
@@ -596,30 +610,16 @@ function addResizeHandle() {
         background-color: transparent;
         cursor: col-resize;
         z-index: 8;
+        transition: background-color 0.2s ease;
     `;
 
     // 将 resize handle 添加到 DOM
     document.querySelector('.layout__center .fn__flex.layout-tab-bar').appendChild(resizeHandle);
 
     let startX, startWidth;
-    let isResizing = false; // 标记是否正在调整大小
+    let isResizing = false;
 
-    // 开始调整大小
-    const startResize = (e) => {
-        e.preventDefault(); // 防止文本选中
-        startX = e.clientX;
-        startWidth = parseInt(document.documentElement.style.getPropertyValue('--custom-tab-width') || '150', 10);
-        isResizing = true;
-
-        // 添加拖动时的类，用于临时禁用过渡动画
-        document.documentElement.classList.add('resizing');
-
-        // 使用 passive 和 once 优化事件监听器
-        window.addEventListener('mousemove', resize, { passive: true });
-        window.addEventListener('mouseup', stopResize, { once: true });
-    };
-
-    // 调整大小
+    // 使用 requestAnimationFrame 优化性能
     const resize = (e) => {
         if (!isResizing) return;
 
@@ -629,18 +629,126 @@ function addResizeHandle() {
         }
     };
 
-    // 停止调整大小
-    const stopResize = () => {
-        isResizing = false;
+    // 开始调整大小
+    const startResize = (e) => {
+        e.preventDefault();
+        startX = e.clientX;
+        startWidth = parseInt(document.documentElement.style.getPropertyValue('--custom-tab-width') || '150', 10);
+        isResizing = true;
 
-        // 移除拖动类，恢复过渡动画
-        document.documentElement.classList.remove('resizing');
-        window.removeEventListener('mousemove', resize);
+        // 添加拖动时的类，用于临时禁用过渡动画
+        document.documentElement.classList.add('resizing');
+
+        // 改变拖动条颜色
+        resizeHandle.style.backgroundColor = 'var(--b3-theme-primary)';
+
+        // 使用 requestAnimationFrame 优化 mousemove
+        const onMouseMove = (e) => requestAnimationFrame(() => resize(e));
+        const onMouseUp = () => {
+            isResizing = false;
+            document.documentElement.classList.remove('resizing');
+            resizeHandle.style.backgroundColor = 'transparent';
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseup', onMouseUp);
+        };
+
+        window.addEventListener('mousemove', onMouseMove, { passive: true });
+        window.addEventListener('mouseup', onMouseUp, { once: true });
     };
 
     // 绑定事件
     resizeHandle.addEventListener('mousedown', startResize);
 }
+
+
+// 加入监听文档类型
+// observeOutline 函数，支持监听多个元素
+const observeOutline = () => {
+    const processedElements = new Set();
+    let rafId = null;
+
+    // 需要监听的元素选择器
+    const selectors = [
+        '.fn__flex-column.sy__outline',
+        '.fn__flex-column.sy__backlink',
+        '.fn__flex-column.sy__graph',
+        '.fn__flex-1[data-timeout]'
+    ];
+
+    // 处理单个元素
+    const handleElement = (element) => {
+        if (processedElements.has(element)) return;
+
+        const wndElement = element.closest('[data-type="wnd"]');
+        if (wndElement && !wndElement.classList.contains('tab-horizontal')) {
+            wndElement.classList.add('tab-horizontal');
+            processedElements.add(element);
+        }
+    };
+
+    // 批量处理元素
+    const processBatch = () => {
+        if (rafId) {
+            cancelAnimationFrame(rafId);
+        }
+
+        rafId = requestAnimationFrame(() => {
+            selectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(handleElement);
+            });
+        });
+    };
+
+    // 创建观察器实例
+    const observer = new MutationObserver((mutations) => {
+        let shouldProcess = false;
+
+        for (const mutation of mutations) {
+            // 检查新增的节点
+            if (mutation.addedNodes.length > 0) {
+                shouldProcess = true;
+                break;
+            }
+
+            // 检查属性变化
+            if (mutation.type === 'attributes' && 
+                selectors.some(selector => mutation.target.matches(selector))) {
+                shouldProcess = true;
+                break;
+            }
+        }
+
+        if (shouldProcess) {
+            processBatch();
+        }
+    });
+
+    // 配置观察选项
+    const config = {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class']
+    };
+
+    // 开始观察
+    observer.observe(document.body, config);
+
+    // 初始处理
+    processBatch();
+
+    // 返回清理函数
+    return () => {
+        if (rafId) {
+            cancelAnimationFrame(rafId);
+        }
+        observer.disconnect();
+        processedElements.clear();
+        document.querySelectorAll('.tab-horizontal').forEach(el => {
+            el.classList.remove('tab-horizontal');
+        });
+    };
+};
 /**---------------------------------------------------------插件-------------------------------------------------------------- */
 
 function SpluginButton() {
@@ -2646,6 +2754,9 @@ window.destroyTheme = () => {
 
 //siyuan.storage["local-images"].folder = '1F4C1'
 //siyuan.storage["local-images"].note = '1F5C3'
+
+
+
 
 
 

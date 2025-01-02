@@ -188,12 +188,9 @@ body:not(.body--mobile,.body--window)>#toolbar{
 
 
 
-.layout-tab-container:has(.layout__empty){
-    background-color:transparent;
-}
 .layout__empty{
-    margin-top: 38px;
     height: calc( 100% - 38px );
+    border-top: 38px solid var(--Sv-toolbar-background);
     border-radius: 6px;
 }
 body:not(.body--mobile,.body--window) #layouts{

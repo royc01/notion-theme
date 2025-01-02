@@ -2,7 +2,7 @@
     --custom-tab-width: 150px;
 }
 
-body:not(.body--mobile,.body--window) .fn__flex:not(.av__views){
+body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizontal) .fn__flex:not(.av__views){
     & > .layout-tab-bar{
 	margin:0; 
 	border-bottom: none;
@@ -18,6 +18,10 @@ body:not(.body--mobile,.body--window) .fn__flex:not(.av__views){
         margin:0 0 5px 0!important;
         max-width:unset;
         box-shadow: none;
+        & .item__close{
+            position:absolute;
+            right:0px;
+        }
         &.item--focus {
             box-shadow: 6px 0 0 0 var(--Sv-tab-bar-item-background-focus)!important;
             border-radius: 6px 0 0 6px!important;
@@ -34,14 +38,14 @@ body:not(.body--mobile,.body--window) .fn__flex:not(.av__views){
         margin-left: 0px!important;
     }
 }
-body:not(.body--mobile,.body--window)  .layout__center [data-type='wnd'][data-id] {
+body:not(.body--mobile,.body--window)  .layout__center [data-type='wnd'][data-id]:not(.tab-horizontal){
 	display: flex;
 	flex-direction: row;
     & > .fn__flex:not(.layout-tab-container) {
         flex-direction: column-reverse;
     }
 }
-body:not(.body--mobile,.body--window) .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar {
+body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]:not(.tab-horizontal)>.fn__flex>.layout-tab-bar {
     width: var(--custom-tab-width);
     transition: width 0.3s ease;
 }
@@ -51,39 +55,7 @@ body:not(.body--mobile,.body--window) .layout__center .fn__flex-column>.fn__flex
 
 
 
-[data-type="tab-header"] .item__close{
-	position:absolute;
-	right:0px;
-}
 
-
-
-.layout__center [data-type="wnd"][data-id]:has(.file-tree.sy__outline),
-.layout__center [data-type="wnd"][data-id]:has(.fn__flex-1[data-timeout]),
-.layout__center [data-type="wnd"][data-id]:has(.file-tree.sy__backlink),
-.layout__center [data-type="wnd"][data-id]:has(.file-tree.sy__graph){
-	flex-direction: column;
-    & > .fn__flex:not(.layout-tab-container) {
-        flex-direction: row;
-        & > .layout-tab-bar:not(.layout-tab-bar--readonly){
-            display: flex;
-            & .item--focus {
-            border-radius: 6px 6px 0 0!important;   
-            box-shadow: 0 5px 0 0 var(--Sv-tab-bar-item-background-focus)!important;  
-         }
-         & .item:not(.item--readonly) {
-            margin: 0 5px 5px 0px !important;
-            .item__text{
-                margin-right: 20px;
-            }
-        }
-    }
-         .layout-tab-bar--readonly{
-            width: unset;
-         }
-    
-    }
-}
 
 #vertical-resize-handle:hover{
     background-color: var(--Sv-layout--resize-hover)!important;

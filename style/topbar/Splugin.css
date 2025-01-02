@@ -1,18 +1,3 @@
-/*body:not(.body--mobile,.body--window)>#toolbar #savorToolbar:has(>#topBar.button_on)~.toolbar__item[data-position]{
-	margin: 42px 0 0 226px !important;
-    margin-right: -218.5px !important;
-	height: 12px!important;
-	width: 12px!important;
-	padding: 4px!important;
-	border-radius: 6px!important;
-	svg{
-		opacity: 1!important;
-	}
-}
-body:not(.body--mobile,.body--window)>#toolbar.toolbar--browser #savorToolbar:has(>#topBar.button_on)~.toolbar__item[data-position]{
-	margin: 42px 0 0 143px !important;
-	margin-right: -135.5px !important;
-}*/
 body:not(.body--mobile, .body--window) > #toolbar {
     & [data-position]:not(.fn__none) {
 	/*padding: 0px!important;

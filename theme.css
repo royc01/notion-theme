@@ -636,6 +636,13 @@
 
 
 
+
+
+
+
+
+
+
 .config__panel .config__tab-wrap .config__tab-container .b3-label :where(.fn__flex-1,.fn__block,.fn__flex-center):not(.ft__on-surface,.b3-button,.b3-form__icon,.fn__size200,ul,input):first-child, .config__panel .config__tab-wrap .config__tab-container :where(.b3-label,.config__ite)::first-line {
     font-weight: 600;
 }
@@ -649,7 +656,5 @@
 }
 
 .config__tab-container .b3-label:not(.b3-label--inner) {
-    padding: 0;
-    margin: 16px 24px 32px;
     box-shadow: 0 15px 0 0 var(--b3-theme-background), 0 15.5px 0 0 var(--b3-border-color);
 }

@@ -96,3 +96,10 @@ body:not(.body--mobile,.body--window) #layouts{
 }
 
 
+.layout__center{
+    .sy__outline,.sy__graph,.sy__backlink,[data-timeout]{
+            & .block__icons,& .fn__flex-1{
+        background-color: var(--b3-theme-background);
+    }
+} 
+}
