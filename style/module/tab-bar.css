@@ -2,18 +2,32 @@
 .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
     background-color: transparent;
     border: none;
-    height: 33px;
-    overflow: visible;
+    height: 40px;
+    margin-bottom: -7px;
+    /*overflow: visible;这个不能加*/
     .item:not(.item--readonly){
         min-height: 28px;
         border-radius: var(--Sv-tab-bar-item-radius);
         background-color: var(--Sv-tab-bar-item-background);
-        margin-bottom: 5px;
+        margin-bottom: 12px;
         padding-right: 5px;
         overflow: unset !important;
         box-shadow: -6px 0 0 0 var(--Sv-dock-background) inset;
+        &:not(.item--focus)::before {
+            content: "" ;
+            display: inline-block ;
+            width: 20px;
+            height: 20px;
+            background-color: transparent ;
+            border-radius: 2px;
+            --Sv-tab-bar-readonly-shadow: 4px -2px 0 var(--Sv-dock-background);
+            position: absolute;
+            top: 0px;
+            left: -24px;
+            pointer-events: none;
+            }
         &:last-child{
-            box-shadow: -8px 0 0 0 var(--Sv-dock-background) inset;
+            box-shadow: -6px 0 0 0 var(--Sv-dock-background) inset;
         }
         & .item__icon{
             padding: 3px 0 3px 7px;
@@ -24,18 +38,17 @@
         &.item--focus{
             background-color: var(--Sv-tab-bar-item-background-focus);
             border-radius: var(--Sv-tab-bar-item--focus-radius);
-            min-height: 27px;
-            margin-bottom: 0px;
+            margin-bottom: 7px;
             padding: 0px 5px 5px 0px;
             &:before{
                 left: -20px !important;
                 bottom: 0px !important;
-                clip-path: inset(50% -5px 0 50%);
+                clip-path: inset(50% -5px -7px 50%);
             }
             &:after{
                 right: -14px;
                 bottom: 0px !important;
-                clip-path: inset(50% 50% 0 -5px);
+                clip-path: inset(50% 50% -5px -7px);
             }
             &:before,&:after{
                 content: "";
@@ -50,17 +63,6 @@
                 z-index: 2;
                 box-shadow:  0 0 0 24px var(--Sv-tab-bar-item-background-focus);
             }
-            &:last-child{
-                box-shadow: none;
-                &::after{
-                    display: none;
-                }
-            }
-            &:first-child:before{
-                left: -10px !important;
-                bottom: -5px !important;
-                background-color: var(--Sv-tab-bar-item-background-focus);
-            }
                 & .item__text {
                     font-weight: 700;
                 }
@@ -70,8 +72,9 @@
     &.layout-tab-bar--readonly{
         background-color: var(--Sv-dock-background);
         border-radius: var(--Sv-tab-bar-item-radius);
+        height: 33px;
         padding-left: 6px;
-        margin-left: -8px;
+        margin-left: -6px;
         overflow: visible;
         z-index: 2;
 
@@ -123,7 +126,7 @@
         }
     }
     .item__close{
-        padding: 5px 8px 5px 0;
+        padding: 5px 6px 5px 0;
         svg {
             border-radius: 3px;
         }

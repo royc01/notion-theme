@@ -72,21 +72,26 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	padding-left: 0px;
     min-width: 60px;
 	& .item:not(.item--readonly){
-		margin-bottom:-1px!important;
+		margin-bottom:7px!important;
 		pointer-events: visibleFill;
 		background-color: transparent;
 		box-shadow: -5px 0 0 0 var(--Sv-toolbar-background) inset;
 		& .item__text{
 			color: var(--Sv-fixed-item-text);
 		}
+        &:last-child{
+            box-shadow: none;
+        }
 		&[data-type="tab-header"]{
 			pointer-events: visibleFill;
 			app-region: no-drag;
+            &:not(.item--focus)::before{
+                box-shadow: 4px -2px 0 var(--Sv-toolbar-background);
+            }
 			&.item--focus{
 				background-color: var(--b3-theme-background);
-				margin-bottom:-6px!important;
+				margin-bottom:2px!important;
 				& .item__text{
-					font-weight:700;
 					color: var(--b3-theme-on-background);
 				}
 			}
@@ -116,6 +121,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	}
 	&.layout-tab-bar--readonly{
 		background-color: var(--Sv-toolbar-background);
+        height: 38px;
 	&::before {
 		top: 5px;
 		box-shadow: 6px -6px 0 var(--Sv-toolbar-background);
@@ -125,9 +131,8 @@ body:not(.body--mobile,.body--window)>#toolbar{
 .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
 	z-index: 2;
 	pointer-events: none;
-	background-color:var(--Sv-toolbar-background);
 	border: none;
-	height: 38px;
+	height: 45px;
 	&.layout-tab-bar--readonly{
 		flex:none;
 	}

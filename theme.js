@@ -2500,35 +2500,7 @@ allListItemNode = []
   })
 
 
-
-
-/** 清除样式 **/
-
-window.destroyTheme = () => { 
-    // 删除主题加载的额外样式
-    var Sremove = document.querySelectorAll('[id^="Sv-theme-color"]');  
-    Sremove.forEach(function(Sremove) {  
-        Sremove.parentNode.removeChild(Sremove);  
-    }); 
-    // 删除切换按钮
-	document.querySelector("#savorToolbar").remove();
-    // 删除空白
-    document.querySelector("#savordrag").remove();
-    // 删除插件展开按钮
-    document.querySelector("#savorPlugins").remove();
-	// 删除列表转导图功能
-    window.removeEventListener('mouseup', MenuShow);
-    // 删除底栏间隙
-	document.querySelector(".statusRight").remove();
-};
-
-
-//siyuan.storage["local-images"].folder = '1F4C1'
-//siyuan.storage["local-images"].note = '1F5C3'
-
-
-
-/*顶栏合并*/
+  /*顶栏合并*/
 function initTabBarsMargin() {
     let rafId = null;
     let tabBar = null;
@@ -2649,3 +2621,31 @@ if (document.readyState === 'loading') {
 } else {
     initTabBarsMargin();
 }
+
+
+/** 清除样式 **/
+
+window.destroyTheme = () => { 
+    // 删除主题加载的额外样式
+    var Sremove = document.querySelectorAll('[id^="Sv-theme-color"]');  
+    Sremove.forEach(function(Sremove) {  
+        Sremove.parentNode.removeChild(Sremove);  
+    }); 
+    // 删除切换按钮
+	document.querySelector("#savorToolbar").remove();
+    // 删除空白
+    document.querySelector("#savordrag").remove();
+    // 删除插件展开按钮
+    document.querySelector("#savorPlugins").remove();
+	// 删除列表转导图功能
+    window.removeEventListener('mouseup', MenuShow);
+    // 删除底栏间隙
+	document.querySelector(".statusRight").remove();
+};
+
+
+//siyuan.storage["local-images"].folder = '1F4C1'
+//siyuan.storage["local-images"].note = '1F5C3'
+
+
+

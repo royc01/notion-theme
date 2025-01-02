@@ -633,3 +633,23 @@
 :root:lang(ja_JP) {
     --b3-font-family: Roboto, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", "Hiragino Sans", "Yu Gothic UI", arial, sans-serif, emojis;
 }
+
+
+
+.config__panel .config__tab-wrap .config__tab-container .b3-label :where(.fn__flex-1,.fn__block,.fn__flex-center):not(.ft__on-surface,.b3-button,.b3-form__icon,.fn__size200,ul,input):first-child, .config__panel .config__tab-wrap .config__tab-container :where(.b3-label,.config__ite)::first-line {
+    font-weight: 600;
+}
+.config__panel .config__tab-wrap .config__tab-container .config-query .fn__flex-1, .config__panel .config__tab-wrap .config__tab-container .b3-label__text, .config__panel .config__tab-wrap .config__tab-container .b3-label :where(a,code,.ft__on-surface):not(.b3-button--outline) {
+    font-weight: 400 !important;
+}
+
+.b3-tab-bar .b3-list-item--focus .b3-list-item__text{
+    font-weight: 600;
+    color: var(--b3-theme-on-background)!important;
+}
+
+.config__tab-container .b3-label:not(.b3-label--inner) {
+    padding: 0;
+    margin: 16px 24px 32px;
+    box-shadow: 0 15px 0 0 var(--b3-theme-background), 0 15.5px 0 0 var(--b3-border-color);
+}
