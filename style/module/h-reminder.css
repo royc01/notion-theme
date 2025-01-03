@@ -1,11 +1,3 @@
-/*.protyle-wysiwyg .h1>[spellcheck]:has([data-type="inline-math"]),
-.protyle-wysiwyg .h2>[spellcheck]:has([data-type="inline-math"]),
-.protyle-wysiwyg .h3>[spellcheck]:has([data-type="inline-math"]),
-.protyle-wysiwyg .h4>[spellcheck]:has([data-type="inline-math"]),
-.protyle-wysiwyg .h5>[spellcheck]:has([data-type="inline-math"]),
-.protyle-wysiwyg .h6>[spellcheck]:has([data-type="inline-math"]){
-	white-space:normal;
-}*/
 
 
 .protyle-wysiwyg .h1>[spellcheck]:not(:empty)::after{
@@ -38,3 +30,6 @@
 
 
 
+.protyle-wysiwyg [data-type="NodeHeading"]>[spellcheck]{
+	white-space:unset;
+}

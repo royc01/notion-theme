@@ -4,13 +4,10 @@
 
 [data-subtype="u"]>.li[data-subtype="u"]>.protyle-action::before {
     font-size: 1.5em;
-    line-height: 1;
-    margin-bottom: 0px;
-	margin-left:13px;
     font-family: Arial;
 	content: "•";
+	position: absolute;
 }
-
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
 	content: "◦";
 }

@@ -134,13 +134,7 @@
 }
 /*单个子项直线*/
 .protyle-wysiwyg *[custom-f="dt"] .list>.li:first-child:nth-last-child(2)::after{   
-	width: 0px;
-}
-/*单个子项直线对齐修正*/
-.list[custom-f="dt"] .list:has(>.li:first-child:nth-last-child(2))::after{   
-	border-radius:0px; 
-	width: 39px!important;
-	margin-bottom:-2px;
+	border-radius:0px!important;
 }
 /*单子项居中*/
 .protyle-wysiwyg *[custom-f="dt"] .list>.li:first-child:nth-last-child(2){

@@ -14,36 +14,7 @@
     margin-left: 9px;
     border-radius: 4px;
 	background-color: var(--b3-card-error-background);
-	padding:3px 2px;
-	opacity:1;
-	position:unset;
-	float:unset;
-}
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h1>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h1>[spellcheck]:has(>[data-type="inline-math"])),
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h2>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h2>[spellcheck]:has(>[data-type="inline-math"])),
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h3>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h3>[spellcheck]:has(>[data-type="inline-math"])),
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h4>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h4>[spellcheck]:has(>[data-type="inline-math"])),
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h5>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h5>[spellcheck]:has(>[data-type="inline-math"])),
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h6>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h6>[spellcheck]:has(>[data-type="inline-math"])),
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.p>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.p>[spellcheck]:has(>[data-type="inline-math"])){
-	white-space:normal;
-}
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h1>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h1>[spellcheck]:has(>[data-type="inline-math"]))::after,
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h2>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h2>[spellcheck]:has(>[data-type="inline-math"]))::after,
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h3>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h3>[spellcheck]:has(>[data-type="inline-math"]))::after,
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h4>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h4>[spellcheck]:has(>[data-type="inline-math"]))::after,
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h5>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h5>[spellcheck]:has(>[data-type="inline-math"]))::after,
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h6>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h6>[spellcheck]:has(>[data-type="inline-math"]))::after,
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.p>[spellcheck]:has(>[data-type="inline-math"]):not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.p>[spellcheck]:has(>[data-type="inline-math"]))::after{
-    content: " ••• ";
-    display: inline;
-    vertical-align: 15%;
-    font-size: 10px;
-    color: var(--Sv-dock-item-active-color);
-    margin-left: 9px;
-    border-radius: 4px;
-	background-color: var(--b3-card-error-background);
-	padding:1px 3px 3px 3px;
+	padding:3px 4px;
 	opacity:1;
 	position:unset;
 	float:unset;

@@ -136,6 +136,9 @@
         border: none;
         border-radius: 10px;
         background-color: var(--Sv--dialog-container);
+        .b3-label:not(.b3-label--inner) {
+            box-shadow: 0 15px 0 0 var(--b3-theme-background), 0 15.5px 0 0 var(--b3-border-color);
+        }
         .b3-tab-bar{
             margin: 5px;
             background-color: var(--Sv--dialog-tab-bar);
@@ -150,6 +153,10 @@
                 &.b3-list-item--focus:hover{
                 background-color: var(--Sv-list-focus-hover)!important;
                 }
+                &.b3-list-item--focus .b3-list-item__text{
+                    font-weight: 600;
+                    color: var(--b3-theme-on-background)!important;
+                }
             }
             .b3-list-item__graphic{
                 color: var(--Sv-list-item-color)
@@ -158,12 +165,14 @@
         .config__tab-wrap{
             margin: 5px 10px 5px 5px;
             border-radius: 6px;
-            /*.config__tab-container .fn__flex-1{
+            .config__tab-container {
+            & .b3-label :where(.fn__flex-1,.fn__block,.fn__flex-center):not(.ft__on-surface,.b3-button,.b3-form__icon,.fn__size200,ul,input):first-child,& :where(.b3-label,.config__ite)::first-line{
                 font-weight: 600;
-                .b3-label__text{
-                    font-weight: 400!important;
-                }
-            }*/
+            }
+            & .config-query .fn__flex-1, & .b3-label__text, & .b3-label :where(a,code,.ft__on-surface):not(.b3-button--outline) {
+                font-weight: 400 !important;
+            }
+        }
             .fn__hr--b:not(.resize__move){
                 height: 11px;
             }
@@ -398,9 +407,9 @@
     background-color: var(--b3-theme-background);
 	padding:5px;
 	border:none;
-	min-width: 50vw;
 	border-radius: 6px;
     &>div{
+        min-width: 50vw;
         column-width: 180px;
         column-rule:1px outset var(--b3-border-color);
         /*column-fill:auto;
@@ -424,7 +433,7 @@
         box-shadow:none;
     }
 }
-.hint--menu:has(>.emojis){
+.hint--menu>.emojis{
 	min-width: unset;
 }
 
@@ -443,13 +452,9 @@
 	.hint--menu>div{
 	columns:unset;
 }
-	.hint--menu{
-	columns:unset;
-	min-width: unset !important;
-}
 }
 .emojis{
-    width: 366px;
+    width: 366px!important;
 }
 .emojis__panel{
     padding-right: 0px;
