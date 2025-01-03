@@ -1,3 +1,4 @@
+(function () {
 window.theme = {};
 
 
@@ -547,9 +548,10 @@ function concealMarkButton() {
 /**---------------------------------------------------------垂直-------------------------------------------------------------- */
 
 
-let outlineObserverCleanup = null; // 用于存储清理函数
 
 function tabbarVerticalButton() {
+    let outlineObserverCleanup = null; // 将变量移到函数作用域中
+
     savorThemeToolplusAddButton(
         "tabbarVertical",
         "b3-menu__item",
@@ -2757,6 +2759,4 @@ window.destroyTheme = () => {
 
 
 
-
-
-
+})();
