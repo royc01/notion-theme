@@ -26,6 +26,9 @@
             left: -24px;
             pointer-events: none;
             }
+        &:not(.item--focus) .item__text {
+            letter-spacing: 0.1px; 
+        }
         &:last-child{
             box-shadow: -6px 0 0 0 var(--Sv-dock-background) inset;
         }

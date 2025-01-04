@@ -136,9 +136,9 @@
         border: none;
         border-radius: 10px;
         background-color: var(--Sv--dialog-container);
-        .b3-label:not(.b3-label--inner) {
+        /*.b3-label:not(.b3-label--inner) {
             box-shadow: 0 15px 0 0 var(--b3-theme-background), 0 15.5px 0 0 var(--b3-border-color);
-        }
+        }这个影响太多 暂时不能加*/
         .b3-tab-bar{
             margin: 5px;
             background-color: var(--Sv--dialog-tab-bar);
