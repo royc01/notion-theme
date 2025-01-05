@@ -5,6 +5,7 @@
     display: grid;
     flex-direction: row;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    margin-bottom: 10px;
 }
 
 
@@ -15,6 +16,8 @@
     background-color: var(--Sv-list-background);
     padding: 8px 8px 2px 8px;
     margin-right: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
     border-radius: 8px;
     >[data-node-id]{
         margin-left: 0px;
@@ -36,14 +39,20 @@
 }
 
 /*只处理每个列表的第一行*/
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(2),
+.protyle-wysiwyg .list[custom-f~=kb] > div > div:nth-child(2),
 .protyle-wysiwyg .sb>*[custom-f~=kb] > div > div:nth-child(2)
 {
 	min-width: var(--kbline-boarditem-minwidth);
     border-radius: 3px;
 	padding:9px 10px 11px 38px;
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(2)[data-type="NodeHeading"],
+.list[custom-f~=kb] > [data-subtype="o"][data-type="NodeListItem"] {
+    &::after {
+        left: 18px;
+        top: 17px;
+    }
+}
+.protyle-wysiwyg .list[custom-f~=kb] > div > div:nth-child(2)[data-type="NodeHeading"],
 .protyle-wysiwyg .sb>*[custom-f~=kb] > div > div:nth-child(2)[data-type="NodeHeading"]
 {
 
@@ -54,7 +63,7 @@
 }/*取消标题层级提示*/
 
 /*标题行循环颜色*/
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-3) > .protyle-action,
+.protyle-wysiwyg .list[custom-f~=kb] > div:nth-child(4n-3) > .protyle-action,
 .protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-3) > .protyle-action{
     color:var(--b3-font-color13);
     & + [data-node-id]{
@@ -62,7 +71,7 @@
         border-radius: 6px;
     }
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-2) > .protyle-action,
+.protyle-wysiwyg .list[custom-f~=kb] > div:nth-child(4n-2) > .protyle-action,
 .protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-2) > .protyle-action{
     color:var(--b3-font-color5);
     & + [data-node-id]{
@@ -70,7 +79,7 @@
         border-radius: 6px;
     }
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n-1) > .protyle-action,
+.protyle-wysiwyg .list[custom-f~=kb] > div:nth-child(4n-1) > .protyle-action,
 .protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n-1) > .protyle-action{
     color:var(--b3-font-color9);
     & + [data-node-id]{
@@ -78,7 +87,7 @@
         border-radius: 6px;
     }
 }
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div:nth-child(4n) > .protyle-action,
+.protyle-wysiwyg .list[custom-f~=kb] > div:nth-child(4n) > .protyle-action,
 .protyle-wysiwyg .sb>*[custom-f~=kb] > div:nth-child(4n) > .protyle-action{
     color:var(--b3-font-color7);
     & + [data-node-id]{
@@ -88,7 +97,7 @@
 }
 
 /*只处理每个列表第一行的点*/
-.protyle-wysiwyg *[custom-f~=kb][data-node-index] > div > div:nth-child(1),
+.protyle-wysiwyg .list[custom-f~=kb] > div > div:nth-child(1),
 .protyle-wysiwyg .sb>*[custom-f~=kb] > div > div:nth-child(1)
 {
     transform: translate(8px, 13px);

@@ -217,3 +217,17 @@
 }
 
 
+[data-key="dialog-searchtype"] .b3-dialog__content{
+    display: grid;
+    gap: 0px 50px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    .b3-label{
+        border-bottom:none;
+    }
+    .fn__flex-1:last-child{
+        overflow: visible;
+        .b3-label__text{
+        margin-right: -100px; 
+        padding: 16px 24px;
+    } } 
+}

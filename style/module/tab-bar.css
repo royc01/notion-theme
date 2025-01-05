@@ -34,6 +34,10 @@
         }
         & .item__icon{
             padding: 3px 0 3px 7px;
+            &>img,&>svg{
+                height: 15px;
+                width: 15px;
+            }
         }
         &:hover{
             background-color: var(--Sv-tab-bar-item-background-hover); 

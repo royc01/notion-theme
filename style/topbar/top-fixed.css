@@ -71,10 +71,12 @@ body:not(.body--mobile,.body--window)>#toolbar{
 .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
 	padding-left: 0px;
     min-width: 60px;
+    & .item:not(.item--readonly):not(.item--pin){
+        background-color: transparent;
+        }
 	& .item:not(.item--readonly){
 		margin-bottom:7px!important;
 		pointer-events: visibleFill;
-		background-color: transparent;
 		box-shadow: -5px 0 0 0 var(--Sv-toolbar-background) inset;
 		& .item__text{
 			color: var(--Sv-fixed-item-text);
