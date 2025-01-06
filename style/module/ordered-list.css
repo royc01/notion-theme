@@ -1,19 +1,6 @@
 .list[data-subtype="o"]{
 	counter-reset: o1 0 o2 0 o3 0;
 }
-[data-node-index]>[data-subtype="o"][data-type="NodeListItem"]{
-    &::after{
-      content:attr(data-marker)!important;
-      color:var(--b3-theme-on-background);
-      position: absolute;
-      left: 9px;
-      top: 3px;
-      pointer-events: none;
-    }
-      & >.protyle-action{
-      color: transparent!important;
-    }
-  }
 .li[data-subtype="o"]{
     & & .protyle-action--order{
         color:transparent!important;

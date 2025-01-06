@@ -30,6 +30,25 @@
 
 
 
-.protyle-wysiwyg [data-type="NodeHeading"]>[spellcheck]{
-	white-space:unset;
+.protyle-wysiwyg{
+    .h1,.h2,.h3,.h4,.h5,.h6{
+        & > [spellcheck] {
+            padding-right: 0.5em;
+            position: relative;
+            display: inline-block;
+            white-space: pre-wrap;  
+            &:not(:empty)::after {
+                content: "";
+                position: absolute;
+                right: -0.8em;
+                top: 50%;
+                transform: translateY(-55%);
+                height: 1.2em;
+                width: 1.2em;
+                background-size: 100% 100%;
+                display: inline-block;
+                pointer-events: none;
+            }
+        }
+    }
 }

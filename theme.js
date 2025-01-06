@@ -2611,10 +2611,9 @@ allListItemNode = []
 
 
   /*顶栏合并*/
-function initTabBarsMargin() {
+  function initTabBarsMargin() {
     let rafId = null;
     let tabBar = null;
-    let dockl = null;
     let dockr = null;
     let topBarButton = null;
     let dockVertical = null;
@@ -2622,7 +2621,6 @@ function initTabBarsMargin() {
     // 缓存 DOM 元素
     const cacheElements = () => {
         tabBar = document.querySelector('.layout__center .layout-tab-bar');
-        dockl = document.querySelector('.layout__dockl');
         dockr = document.querySelector('.layout__dockr');
         topBarButton = document.querySelector('#topBar');
         dockVertical = document.querySelector('.dock--vertical');
@@ -2630,12 +2628,11 @@ function initTabBarsMargin() {
 
     // 更新边距的函数
     const updateMargins = () => {
-        if (!tabBar || !dockl || !dockr || !topBarButton) return;
+        if (!tabBar || !dockr || !topBarButton) return;
 
         const isTopBarActive = topBarButton.classList.contains('button_on');
         if (!isTopBarActive) {
             // 如果顶栏合并未激活，重置所有边距
-            tabBar.style.marginLeft = '0px';
             document.querySelectorAll('.layout__center .layout-tab-bar--readonly').forEach(tabBar => {
                 tabBar.style.marginRight = '0px';
             });
@@ -2645,13 +2642,7 @@ function initTabBarsMargin() {
         if (rafId) cancelAnimationFrame(rafId);
         rafId = requestAnimationFrame(() => {
             const isDockVerticalHidden = dockVertical?.classList.contains('fn__none');
-            const leftMargin = isDockVerticalHidden ? '193px' : '160px';
             const rightMargin = isDockVerticalHidden ? '293px' : '260px';
-
-            // 处理左侧边距
-            const docklWidth = dockl.offsetWidth;
-            const isFloatingL = dockl.classList.contains('layout--float');
-            tabBar.style.marginLeft = (docklWidth === 0 || isFloatingL) ? leftMargin : '0px';
 
             // 处理右侧边距
             const dockrWidth = dockr.offsetWidth;
@@ -2690,9 +2681,8 @@ function initTabBarsMargin() {
     // 初始化函数
     const init = () => {
         cacheElements();
-        if (tabBar && dockl && dockr && topBarButton) {
-            // 观察两侧 dock 的尺寸变化
-            new ResizeObserver(updateMargins).observe(dockl);
+        if (tabBar && dockr && topBarButton) {
+            // 观察右侧 dock 的尺寸变化
             new ResizeObserver(updateMargins).observe(dockr);
 
             // 观察顶栏合并按钮的类变化

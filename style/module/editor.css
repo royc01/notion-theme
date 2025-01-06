@@ -202,7 +202,7 @@
 .protyle-wysiwyg [data-node-id].li>.protyle-action{
 	color: var(--Sv-protyle-action-color);
 }
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.protyle-action:after, .protyle-wysiwyg [data-node-id].li>.protyle-action:hover:after{
+.protyle-wysiwyg [data-node-id].li[fold="1"]:not([data-subtype="o"].en_item_bullet_actived)>.protyle-action:after, .protyle-wysiwyg [data-node-id].li>.protyle-action:hover:after{
     background-color: var(--Sv-protyle-action-hover)!important;
 }
 /* 有序列表 */

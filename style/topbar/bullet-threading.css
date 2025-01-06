@@ -5,20 +5,21 @@
     box-sizing: border-box;
     width: 32px;
     height: calc(var(--en-bullet-line-height) - 1px) !important;
-    border-left: 3px solid var(--b3-theme-primary);
-    border-bottom: 3px solid var(--b3-theme-primary);
+    border-left: 2px solid var(--b3-theme-primary);
+    border-bottom: 2px solid var(--b3-theme-primary);
     border-bottom-left-radius: 8px;
     position: absolute;
-    top: calc(var(--en-bullet-line-height) * -1 + 20px) !important;
+    top: calc(var(--en-bullet-line-height) * -1 + 19px) !important;
     left: -18px
   }
 }
 [data-type="NodeList"][data-subtype="u"] .en_item_bullet_actived {
   & > .protyle-action {
           color: var(--b3-theme-background)!important;
-      &::after{
-          background-color: var(--b3-theme-primary) !important;
-          transform: scale(0.5);
+      &::before{
+          color: var(--b3-theme-primary) !important;
+          content: "•"!important;
+          font-size: 2em!important;
       }
       &:hover::after{
           background-color: var(--Sv-button-background-hover) !important;
@@ -33,20 +34,16 @@
     box-sizing: border-box;
     width: 24px;
     height: calc(var(--en-bullet-line-height) - 8px) !important;
-    border-left: 3px solid  var(--b3-theme-primary);
-    border-bottom: 3px solid  var(--b3-theme-primary);
+    border-left: 2px solid  var(--b3-theme-primary);
+    border-bottom: 2px solid  var(--b3-theme-primary);
     border-bottom-left-radius: 8px;
     position: absolute;
-    top: calc(var(--en-bullet-line-height) * -1 + 26px) !important;
+    top: calc(var(--en-bullet-line-height) * -1 + 25px) !important;
     left: -18px
   }
 }
-[data-node-index]>[data-subtype="o"][data-type="NodeListItem"].en_item_bullet_actived::after{
-  color:var(--b3-theme-background)!important;
-}
 [data-type="NodeList"][data-subtype="o"] .en_item_bullet_actived > .protyle-action{
     &::after{
-    color:var(--b3-theme-background)!important;
     background-color: var(--b3-theme-primary) !important;
     }
     &:hover::after{
@@ -64,11 +61,11 @@
   box-sizing: border-box;
   width: 30px;
   height: calc(var(--en-bullet-line-height) - 4px) !important;
-  border-left: 3px solid var(--b3-theme-primary);
-  border-bottom: 3px solid var(--b3-theme-primary);
+  border-left: 2px solid var(--b3-theme-primary);
+  border-bottom: 2px solid var(--b3-theme-primary);
   border-bottom-left-radius: 8px;
   position: absolute;
-  top: calc(var(--en-bullet-line-height) * -1 + 22px) !important;
+  top: calc(var(--en-bullet-line-height) * -1 + 21px) !important;
   left: -18px
   }
 }

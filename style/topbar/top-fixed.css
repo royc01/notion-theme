@@ -218,3 +218,26 @@ body:not(.body--mobile,.body--window) #layouts{
 .dock--vertical{
     box-shadow:0 38px 0 0 var(--Sv-toolbar-background) inset;
 }
+
+/* 左侧间距 */
+.layout--float,.layout__dockl[style*="width: 0"]{
+    & ~ .layout__center [data-type="wnd"]>.fn__flex{
+        margin-left: 160px;
+        transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
+    }
+    & ~ .layout__center .layout__resize + .fn__flex-1 [data-type="wnd"]>.fn__flex{
+        margin-left: 0!important;
+    }
+}
+
+.dock--vertical.fn__none + #layouts {
+    .layout--float,.layout__dockl[style*="width: 0"]{
+        & ~ .layout__center [data-type="wnd"]>.fn__flex{
+            margin-left: 193px;
+            transition: none;
+        }
+    }
+}
+.layout__center [data-type="wnd"]>.fn__flex{
+    transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
+}
