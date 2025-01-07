@@ -33,6 +33,7 @@ body:not(.body--mobile,.body--window) #layouts{
     margin: var(--Sv-layout-margin);
     .layout__center .layout-tab-container{
         border-radius: var(--Sv-center-radius);
+        background-color: transparent;
     }
 }
 

@@ -131,6 +131,7 @@
 .b3-dialog{
     .b3-dialog__scrim{
     background-color: var(--Sv--dialog-scrim);
+    backdrop-filter: blur(2px);
     }
     .b3-dialog__container{
         border: none;

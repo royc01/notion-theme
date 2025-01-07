@@ -257,11 +257,13 @@
         height:28px;
         width:28px;
         margin: 2px;
-        color: var(--Sv-protyle-toolbar-color);
         border-radius: 4px;
         padding: 1px 6px 0px 6px;
         &:hover{
             background-color: var(--Sv-background-icon-hover);
+        }
+        &:not(.protyle-toolbar__item--current){
+            color: var(--Sv-protyle-toolbar-color);
         }
     }
 }

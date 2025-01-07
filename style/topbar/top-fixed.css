@@ -77,7 +77,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	& .item:not(.item--readonly){
 		margin-bottom:7px!important;
 		pointer-events: visibleFill;
-		box-shadow: -5px 0 0 0 var(--Sv-toolbar-background) inset;
+		box-shadow: -6px 0 0 0 var(--Sv-toolbar-background) inset;
 		& .item__text{
 			color: var(--Sv-fixed-item-text);
 		}
@@ -104,7 +104,6 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	}
 		& .item--readonly{
 		padding: 0px;
-        margin-top: 1px;
 		pointer-events: none;
 		height: 36px;
 		&>.fn__flex-1{
@@ -192,7 +191,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 
 .layout__empty{
     height: calc( 100% - 38px );
-    border-top: 38px solid var(--Sv-toolbar-background);
+    margin-top: 38px;
     border-radius: 6px;
 }
 body:not(.body--mobile,.body--window) #layouts{
@@ -221,23 +220,25 @@ body:not(.body--mobile,.body--window) #layouts{
 
 /* 左侧间距 */
 .layout--float,.layout__dockl[style*="width: 0"]{
-    & ~ .layout__center [data-type="wnd"]>.fn__flex{
-        margin-left: 160px;
-        transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
+    & ~ .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
+        margin-left: 150px;
+        padding-left: 10px;
+        transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms,padding-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
     }
-    & ~ .layout__center .layout__resize + .fn__flex-1 [data-type="wnd"]>.fn__flex{
+    & ~ .layout__center .layout__resize + .fn__flex-1 [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
         margin-left: 0!important;
+        padding-left: 0px!important;
     }
 }
 
 .dock--vertical.fn__none + #layouts {
     .layout--float,.layout__dockl[style*="width: 0"]{
-        & ~ .layout__center [data-type="wnd"]>.fn__flex{
-            margin-left: 193px;
+        & ~ .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
+            margin-left: 183px;
             transition: none;
         }
     }
 }
-.layout__center [data-type="wnd"]>.fn__flex{
-    transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
+.layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
+    transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms,padding-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
 }

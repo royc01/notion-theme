@@ -415,7 +415,6 @@
  
  
      /* —————— 设置、搜索界面 —————— */
-     --Sv--dialog-scrim: rgba(0, 0, 0, 0.78);
      --Sv--dialog-container: var(--b3-theme-background);
      --Sv--dialog-tab-bar: rgb(247, 247, 247);
  
