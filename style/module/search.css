@@ -2,17 +2,14 @@
 .b3-dialog--open[data-key="dialog-search"] .b3-dialog__container,
 .b3-dialog--open[data-key="dialog-replace"] .b3-dialog__container,
 .b3-dialog--open[data-key="dialog-globalsearch"] .b3-dialog__container{
-	box-shadow: none;
-	background-color: unset;
-    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
+	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 5px 10px, rgba(15, 15, 15, 0.2) 0px 15px 40px;
     .fn__flex-column{
         display: flex;
         flex-direction: column; 
         & > .block__icons {
             order: 2; 
             min-height: 28px;
-            background-color: var(--Sv-search-result-tip);
-            border-radius: 0 0 10px 10px;
+            background-color: var(--Sv-list-background);
         }
         .b3-form__icon.search__header{
             order: 1; 
@@ -71,8 +68,6 @@
     }
 	#criteria {
         order: 3; 
-		margin-top: 10px;
-		border-radius: 10px 10px 0 0;
         border-top:none;
         .search__list{
             padding-top:0;
