@@ -1,9 +1,10 @@
 body:not(.body--mobile, .body--window) > #toolbar {
-    & [data-position]:not(.fn__none) {
+    &>[data-position]:not(.fn__none) {
 	/*padding: 0px!important;
 	height: 20px!important;
 	width: 20px!important;
 	box-shadow:none;*/
-	visibility: visible !important;
+	width: 28px!important;
+	opacity: 1!important;
 }
 }

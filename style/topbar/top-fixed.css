@@ -13,21 +13,17 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	& #drag,& #toolbarVIP{
 		display: none;
 		}
-    &  [data-position]:not(.fn__none){
+    &  .toolbar__item:not(#barWorkspace,#closeWindow)[data-position]:not(.fn__none){
         counter-increment: plugin-counter;
-		visibility: hidden;
-        padding: 4px!important;
-        height: 20px!important;
-        width: 20px!important;
-        border-radius: 3px!important;
-        margin-top: 1px;
-        box-shadow: 6px 0px 0px 4px var(--Sv-plugin-off-bg),0px 0px 0px 4px var(--Sv-plugin-off-bg);
+        box-shadow: 12px 0px 0px 0px var(--Sv-plugin-off-bg);
         background-color: var(--Sv-plugin-off-bg);
-        & svg{
-            height: 12px;
-            width: 12px;
-            }
-    &:not(.fn__none)~#savorPlugins #Splugin.button_off{
+        width: 0px;
+        opacity: 0;
+        transition: all 200ms ease;
+        &:hover{
+            background-color: var(--Sv-toolbar-item-hover);
+        }
+        &:not(.fn__none)~#barPlugins>#savorPlugins #Splugin.button_off{
             width: 28px!important;
             background:var(--Sv-Splugin-on);
             background-color: var(--Sv-plugin-on-bg);
@@ -61,7 +57,13 @@ body:not(.body--mobile,.body--window)>#toolbar{
         }
     }
 }
-
+#barPlugins:hover:has(#savorPlugins:hover) {
+    background-color: transparent;
+    color: var(--b3-toolbar-color);
+}
+#barPlugins{
+    margin-left: 18px;
+}
 .layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
     padding-top: 38px;
 }
@@ -138,21 +140,15 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		flex:none;
 	}
 }
-#barPlugins{
-	margin-left: 18px;
-	pointer-events: none!important;
-}
-#barPlugins svg{
-	pointer-events: visibleFill;
-}
+
 #savordrag.fn__none{
 	display:flex!important;
 }
-[data-menu]:not(.fn__none) ~ #savorPlugins{
+[data-menu]:not(.fn__none) ~ #barPlugins>#savorPlugins{
 	display: flex;
 	width: 0px;
 	z-index:8;
-    margin-left: 4px;
+    margin-left: -36px;
 }
 #savordrag{
 	display: block!important;

@@ -143,4 +143,7 @@
     &>div:not(#barDock,.statusRight){
         display: none;
     }
+    #barDock::before{
+        left: -8px!important;
+    }
 }

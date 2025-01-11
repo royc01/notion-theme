@@ -51,17 +51,37 @@ body:not(.body--mobile,.body--window) #layouts{
 
 
 .body--window {
-    .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
+    .layout__center .fn__flex-column{
+        background-color: var(--Sv-toolbar-background);
+    & > .fn__flex > .layout-tab-bar {
+        border-radius: 6px 0 0 6px;
+        margin-top:7px;
+        background-color: transparent;
         .item:not(.item--readonly) {
-            margin: 2px 10px 0px 0px;
+            margin-bottom:7px!important;
+            pointer-events: visibleFill;
+            box-shadow: -6px 0 0 0 var(--Sv-toolbar-background) inset;
         }
-        & .item--readonly {
-            min-height: 37px;
-            .block__icon {
-                padding: 7px;
+        & .item--readonly{
+            height: 28px;
+            & .block__icon--show{
+                background-color: transparent;
+                &[data-type="new"]{
+                    margin-right: 6px;
+                }
+                &:hover {
+                    background-color: var(--Sv-tab-bar-item-background-focus);
+                }
             }
         }
+        &.layout-tab-bar--readonly{
+            background-color: var(--Sv-toolbar-background);
+        &::before {
+            box-shadow: 6px -6px 0 var(--Sv-toolbar-background);
+        }
     }
+    }
+}
     .toolbar__window .toolbar__item{
         padding: 7px;
         margin: 3px;
@@ -88,8 +108,8 @@ body:not(.body--mobile,.body--window) #layouts{
         }
     }
     #status {
-        right: 8px;
-        padding: 0 24px 0 0;
+        right: -7px;
+        bottom: 0px;
         #statusHelp {
             right: 0px;
         }
