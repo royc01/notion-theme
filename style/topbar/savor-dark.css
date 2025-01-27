@@ -1,16 +1,8 @@
 :root {
     /* 主色 */
     --b3-theme-primary: rgb(46, 170, 220);/* 主色 */
-    --b3-theme-primary-light: rgba(46, 170, 220, 0.54);
-    --b3-theme-primary-lighter: rgba(46, 170, 220, 0.38);
-    --b3-theme-primary-lightest: rgba(46, 170, 220, 0.2);
-    --b3-theme-secondary: #f3a92f;
-    --b3-theme-background: #2f3437;/* 编辑区背景 */
-	--b3-theme-background-light: rgba(230, 230, 230, .1);
-    --b3-theme-surface:rgb(55, 60, 63);/* 面板主色 */
-	--b3-theme-surface-light: rgba(41, 42, 45, .86);
-	--b3-theme-surface-lighter:rgba(230, 230, 230, .12);
-    --b3-theme-error: #e35555;
+    --b3-theme-surface:oklch(30.61% 0.0087 233.95);/* 面板主色 */
+    --b3-theme-surface-lighter:  oklch(from var(--b3-theme-surface) calc(l*1.5) c h );
 
     /* 文字颜色 */
     --b3-theme-on-primary: #fff;
@@ -34,11 +26,9 @@
     /* 列表 */
     --b3-list-hover: rgba(230, 230, 230, .05);
 
-    /* 菜单 */
-    --b3-menu-background: rgb(55, 60, 63);
 
     /* 提示 */
-	--b3-tooltips-background: #494e51;
+	--b3-tooltips-background:  oklch(from var(--b3-theme-surface) calc(l*1.5) c h );
 	--b3-tooltips-color: var(--b3-theme-on-background);
     /* 遮罩 */
     --b3-mask-background: rgba(0, 0, 0, 0.78);
@@ -68,19 +58,6 @@
     --b3-font-color12: rgb(255, 115, 105);
 	--b3-font-color13: rgb(223, 84, 82);
     
-	--b3-font-background1: rgb(35, 38, 40);
-    --b3-font-background2: rgb(63, 68, 71);
-    --b3-font-background3: rgb(69, 75, 78);
-    --b3-font-background4: rgb(67, 64, 64);
-	--b3-font-background5: rgb(89, 74, 58);
-    --b3-font-background6: rgb(89, 79, 59);
-    --b3-font-background7: rgb(89, 86, 59);
-	--b3-font-background8: rgba(53, 76, 75);
-    --b3-font-background9: rgb(54, 79, 84);
-    --b3-font-background10: rgb(54, 73, 84);
-    --b3-font-background11: rgb(68, 63, 87);
-    --b3-font-background12: rgb(83, 59, 76);
-    --b3-font-background13: rgb(89, 65, 65);
 
     /* 动画效果 */
     --b3-transition: all .15s cubic-bezier(0, 0, .2, 1) 0ms;
@@ -91,28 +68,6 @@
     --b3-dialog-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 	--b3-menu-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
 
-    /* 图表颜色 */
-    --b3-graph-p-point: #076f7e;
-    --b3-graph-heading-point: #660e7a;
-    --b3-graph-math-point: #80FFA5;
-    --b3-graph-code-point: #00DDFF;
-    --b3-graph-table-point: #37A2FF;
-    --b3-graph-list-point: #FF0087;
-    --b3-graph-todo-point: #FFBF00;
-    --b3-graph-olist-point: #b3005f;
-    --b3-graph-listitem-point: #f65b00;
-    --b3-graph-bq-point: #8d48e3;
-    --b3-graph-super-point: #dd79ff;
-    --b3-graph-doc-point: #202124;
-    --b3-graph-tag-point: #dbf32f;
-    --b3-graph-asset-point: #05c091;
-    --b3-graph-line: #5f6368;
-    --b3-graph-ref-line: #d23f31;
-    --b3-graph-tag-line: #5f6b06;
-    --b3-graph-tag-tag-line: #dbf32f;
-    --b3-graph-asset-line: #037457;
-    --b3-graph-hl-point: #f3a92f;
-    --b3-graph-hl-line: #4285f4;
 
     /* 编辑器搜索颜色 */
     --b3-protyle-search-background: #32593c;
@@ -155,20 +110,20 @@
 	--kb--li--background:rgba(55, 60, 63);
 
 	
-	/*数据库*/
-	--Sv-font-color13: var(--b3-theme-on-background);
-	--Sv-font-color12: var(--b3-theme-on-background);
-	--Sv-font-color11: var(--b3-theme-on-background);
-	--Sv-font-color10: var(--b3-theme-on-background);
-	--Sv-font-color9: var(--b3-theme-on-background);
-	--Sv-font-color8: var(--b3-theme-on-background);
-	--Sv-font-color7: var(--b3-theme-on-background);
-	--Sv-font-color6: var(--b3-theme-on-background);
-	--Sv-font-color5: var(--b3-theme-on-background);
-	--Sv-font-color4: var(--b3-theme-on-background);
-	--Sv-font-color3: var(--b3-theme-on-background);
-	--Sv-font-color2: var(--b3-theme-on-background);
-	--Sv-font-color1: var(--b3-theme-on-background);
+    /* 数据库 */
+	--Sv-font-color13: oklch(from var(--b3-font-color12) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color12: oklch(from var(--b3-font-color11) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color11: oklch(from var(--b3-font-color10) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color10: oklch(from var(--b3-font-color9) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color9: oklch(from var(--b3-font-color8) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color8: oklch(from var(--b3-font-color7) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color7: oklch(from var(--b3-font-color6) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color6: oklch(from var(--b3-font-color5) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color5: oklch(from var(--b3-font-color4) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color4: oklch(from var(--b3-font-color3) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color3: oklch(from var(--b3-font-color13) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color2: oklch(from var(--b3-font-color2) calc(l * 1.5) calc(c * 0.7) h );
+	--Sv-font-color1: oklch(from var(--b3-font-color1) calc(l * 1.5) calc(c * 0.7) h );
 	
 
 	--Sv-conceal-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z'/></svg>") no-repeat left 0px top -2px;
@@ -186,98 +141,33 @@
 	/* ————————————————————  自定义结构配色  ———————————————————— */
 
 	/* 顶栏 */
-    --Sv-toolbar-background: #262c2f;
+    --Sv-toolbar-background:  oklch(from var(--b3-theme-surface) calc(l*1.15) c h );
 
 	/* dock栏 */
-	--Sv-dock-item-color: #afb1b2;
+    --Sv-dock-background: oklch(from var(--b3-theme-surface) calc(l*1.15) c h );
+    --Sv-dock-item-color: oklch(from var(--b3-theme-surface) calc(l * 2) c h / 0.8);
 	
 	/* 侧栏面板 */
-	--Sv-list-item-arrow: rgba(149, 152, 156);
-    --Sv-block-icon-svg-color: #afb1b2;
-	--Sv-list-background: rgba(255, 255, 255, 0.1 );
-	--Sv-list-focus-hover: rgba(255, 255, 255, 0.2 );
-	--Sv-layout--resize-hover: #9c9c9c68;
+    --Sv-list-item-arrow: oklch(from var(--b3-theme-surface) calc(l * 2) c h / 0.4);
+    --Sv-list-background: oklch(from var(--b3-theme-surface) calc(l * 2) c h / 0.1);
+    --Sv-list-focus-hover: oklch(from var(--b3-theme-surface) calc(l * 2) c h / 0.15);
+    --Sv-block-logo-color: var(--b3-theme-on-background);
+    --Sv-block-logo-background: oklch(from var(--b3-theme-surface) calc(l * 1.2) c h );
 
-	/* 页签 */
-	--Sv-tab-bar-item-background: #2b3134;
-
-    /* 底栏 */
-    --Sv-status-msg-background:  var(--b3-theme-background);
-	--Sv-status-barDock: var(--Sv-dock-item-active-background);
-    --Sv-status-barDock-color: var(--Sv-dock--item--activefocus-color);
-    --Sv-status-item-hover: #474e52;
-    
     /* 滚动条 */
-	--Sv-scroll-color: #404649;
-	--Sv-scroll-color-hover: #585f63;
+	--Sv-scroll-color: oklch(from var(--b3-theme-surface) calc(l * 1.3) c h );
+	--Sv-scroll-color-hover: oklch(from var(--b3-theme-surface) calc(l * 1.6) c h );
 
-	/* 代码块 */
-    --Sv-code-block-background: rgb(55, 60, 63);
+     /* 表格 */
+     --Sv-table-thead: oklch(from var(--b3-theme-surface) calc(l*1.1) c h );
 
 	/* 行内代码 */
 	--Sv-inline-code: #ff9c9c;
-
-    /* —————— 设置界面 —————— */
-    --Sv--dialog-tab-bar: var(--b3-theme-surface);
-	--Sv-button-cancel: #4b5053;
-	--Sv-menu-accelerator: rgba(255, 255, 255, 0.3);
-	--Sv-menu-background: rgb(64, 70, 73);
-
-    /* 集市界面 */
-    --Sv-bazaar-focus: #3d4346;
-    --Sv-bazaar-item: #373c3f;
-	--Sv-card--current: #522e30;
-	--Sv-card-current-shadow: #eb838393 0px 0px 0px 2px;
-
-	/* 文档标签 */
-	--Sv-chip--secondary-color: var(--b3-theme-on-background);
-	--Sv-chip--secondary-bg: var(--b3-font-background6);
-	--Sv-chip--primary-color: var(--b3-theme-on-background);
-	--Sv-chip--primary-bg: var(--b3-font-background7);
-	--Sv-chip--info-color: var(--b3-theme-on-background);
-	--Sv-chip--info-bg: var(--b3-font-background8);
-	--Sv-chip--success-color: var(--b3-theme-on-background);
-	--Sv-chip--success-bg: var(--b3-font-background10);
-	--Sv-chip--warning-color: var(--b3-theme-on-background);
-	--Sv-chip--warning-bg: var(--b3-font-background11);
-	--Sv-chip--error-color: var(--b3-theme-on-background);
-	--Sv-chip--error-bg: var(--b3-font-background12);
-	--Sv-chip--pink-color: var(--b3-theme-on-background);
-	--Sv-chip--pink-bg: var(--b3-font-background13);
 
 	/* 字体颜色选择 工具条 */
 	--Sv-protyle-toolbar-color: var(--b3-theme-on-background);
 	--Sv-protyle-util-bg: var(--b3-theme-background);
 
-	--Sv-color-d-shadow: #474747;
-	--Sv-color1-shadow: #474747;
-	--Sv-color2-shadow: #4f5254;
-	--Sv-color3-shadow: #614b41;
-	--Sv-color4-shadow: #7f5122;
-	--Sv-color5-shadow: #564221;
-	--Sv-color6-shadow: #716224;
-	--Sv-color7-shadow: #27564d;
-	--Sv-color8-shadow: #295965;
-	--Sv-color9-shadow: #264456;
-	--Sv-color10-shadow: #4d376c;
-	--Sv-color11-shadow: #712b51;
-	--Sv-color12-shadow: #803a35;
-	--Sv-color13-shadow: #702a29;
-
-	--Sv-bg-d-shadow: #474747;
-	--Sv-bg1-shadow: #565d62;
-	--Sv-bg2-shadow: #828a8e;
-	--Sv-bg3-shadow: #778084;
-	--Sv-bg4-shadow: #747070;
-	--Sv-bg5-shadow: #937f67;
-	--Sv-bg6-shadow: #938668;
-	--Sv-bg7-shadow: #938f68;
-	--Sv-bg8-shadow: #5f8180;
-	--Sv-bg9-shadow: #61868c;
-	--Sv-bg10-shadow: #617d8c;
-	--Sv-bg11-shadow: #766e90;
-	--Sv-bg12-shadow: #8b6881;
-	--Sv-bg13-shadow: #937171;
 	
 	--Sv-style1-d-shadow: #474747;
 	--Sv-error-shadow: #6b4b4b;
@@ -285,27 +175,8 @@
 	--Sv-info-shadow: #536b7d;
 	--Sv-success-shadow: #5c705d;
 
-	/* 引述块颜色 */
-	--Sv-bq-background1: rgb(35, 38, 40 , .3);
-	--Sv-bq-background2: rgb(63, 68, 71 , .3);
-	--Sv-bq-background3: rgb(69, 75, 78 , .3);
-	--Sv-bq-background4: rgb(67, 64, 64 , .3);
-	--Sv-bq-background5: rgb(89, 74, 58 , .3);
-	--Sv-bq-background6: rgb(89, 79, 59 , .3);
-	--Sv-bq-background7: rgb(89, 86, 59 , .3);
-	--Sv-bq-background8: rgba(53, 76, 75 , .3);
-	--Sv-bq-background9: rgb(54, 79, 84 , .3);
-	--Sv-bq-background10: rgb(54, 73, 84 , .3);
-	--Sv-bq-background11: rgb(68, 63, 87 , .3);
-	--Sv-bq-background12: rgb(83, 59, 76 , .3);
-	--Sv-bq-background13: rgb(89, 65, 65 , .3);
+    
 
-    /* 合并顶栏插件收缩颜色 */
-    --Sv-plugin-off-bg: #2f3437;
-    --Sv-plugin-b-off-bg: #262c2f;
-    --Sv-plugin-b-off-bg-hover: #393e41;
-	--Sv-fixed-item-text: var(--b3-theme-on-surface);
-    --Sv-plugin-on-bg: var(--Sv-toolbar-item-hover);
 
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/
     --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
@@ -364,4 +235,8 @@
 }
 #buttonvinegar,#buttonmountain{
     margin-bottom: 5px;
+}
+
+.protyle-attr--refcount{
+    background-color: oklch(from var(--b3-theme-surface) calc(l*1.2) c h );
 }

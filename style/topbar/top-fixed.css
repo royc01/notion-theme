@@ -15,23 +15,24 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		}
     &  .toolbar__item:not(#barWorkspace,#closeWindow)[data-position]:not(.fn__none){
         counter-increment: plugin-counter;
-        box-shadow: 12px 0px 0px 0px var(--Sv-plugin-off-bg);
+        box-shadow: 12px 0px 0px 0px var(--Sv-plugin-off-bg),17px 0px 0px 0px var(--Sv-plugin-off-bg);
         background-color: var(--Sv-plugin-off-bg);
         width: 0px;
         opacity: 0;
         transition: all 200ms ease;
+        margin-top: 1px;
         &:hover{
             background-color: var(--Sv-toolbar-item-hover);
         }
-        &:not(.fn__none)~#barPlugins>#savorPlugins #Splugin.button_off{
+        &:not(.fn__none)~#barPlugins+#savorPlugins #Splugin.button_off{
             width: 28px!important;
             background:var(--Sv-Splugin-on);
             background-color: var(--Sv-plugin-on-bg);
-            margin-left: -15px;
+            margin-left: -62px;
             &:hover{
             background-color: var(--Sv-plugin-on-bg)!important;
             width: 42px!important;
-            margin-left: -28px;
+            margin-left: -75px;
             }
             &:hover:before{
                 right: 18px!important;
@@ -57,10 +58,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
         }
     }
 }
-#barPlugins:hover:has(#savorPlugins:hover) {
-    background-color: transparent;
-    color: var(--b3-toolbar-color);
-}
+
 #barPlugins{
     margin-left: 18px;
 }
@@ -144,11 +142,10 @@ body:not(.body--mobile,.body--window)>#toolbar{
 #savordrag.fn__none{
 	display:flex!important;
 }
-[data-menu]:not(.fn__none) ~ #barPlugins>#savorPlugins{
+[data-menu]:not(.fn__none) ~ #barPlugins+#savorPlugins{
 	display: flex;
 	width: 0px;
 	z-index:8;
-    margin-left: -36px;
 }
 #savordrag{
 	display: block!important;
@@ -171,7 +168,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
     width: 18px!important;
     border-radius: 0 6px 6px 0!important;
     box-shadow: 0 0 0 2px inset var(--Sv-plugin-off-bg);
-    margin-left: -4px;
+    margin-left: -51px;
     &:before{
         display: none;
     }

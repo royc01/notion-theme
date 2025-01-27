@@ -41,9 +41,8 @@
 			background-color: var(--Sv-dock-item-active-background);
 		}
 		&.dock__item--activefocus{
-			background: var(--Sv-dock-item-activefocus-background)!important;
-			color:var(--Sv-dock--item--activefocus-color)!important;
-			box-shadow: var(--Sv-dock--item--activefocus-shadow);
+			background: var(--Sv-dock-item--activefocus-background)!important;
+			color:var(--Sv-dock-item--activefocus-color)!important;
 		}/*dock焦点状态*/
 	}
 	& .dock__item--active{

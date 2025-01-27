@@ -273,6 +273,9 @@
 	border:none;
 	background-color: var(--Sv-protyle-util-bg);
     /* 弹出工具条字体颜色选择 */
+    .color__square[style*="--b3-font-background3"] {
+    order: 14; 
+    }
     .protyle-font>div:not(.fn__hr--small):not(.fn__flex){
         margin-left: 4px;
     }

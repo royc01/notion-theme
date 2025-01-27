@@ -73,7 +73,7 @@
 	border-radius: 44px;
 	border: none;
     &:hover{
-        box-shadow: 0 0 0 3px rgba(0,0,0,.05);
+        box-shadow: 0 0 0 3px oklch(from var(--b3-theme-surface) calc(l*0.99) c h );
     }
     &:after {
         box-shadow: none;
@@ -149,8 +149,7 @@
         }这个影响太多 暂时不能加*/
         .b3-tab-bar{
             margin: 5px;
-            background-color: var(--Sv--dialog-tab-bar);
-            border-radius: 6px;
+            /*background-color: var(--Sv--dialog-tab-bar);*/
             .config__tab-hr{
                 margin: 16px 8px;;
             }
@@ -171,9 +170,13 @@
             }
         }
         .config__tab-wrap{
-            margin: 5px 10px 5px 5px;
+            margin: 5px 5px 5px 0px;
             border-radius: 6px;
+            height: unset;
             .config__tab-container {
+            &[data-name="bazaar"]{
+                background-color: var(--b3-theme-surface);
+            }
             & .b3-label :where(.fn__flex-1,.fn__block,.fn__flex-center):not(.ft__on-surface,.b3-button,.b3-form__icon,.fn__size200,ul,input):first-child,& :where(.b3-label,.config__ite)::first-line{
                 font-weight: 600;
             }
@@ -190,7 +193,7 @@
                 }
 
             .layout-tab-bar{
-                background-color: var(--Sv-tab-bar-item-background-focus);
+                background-color: var(--b3-theme-surface);
                 border: none;
                 height: 37px;
                 .item:not(.item--readonly){
@@ -241,7 +244,7 @@
             }
             .config-bazaar__panel{
                 background-color: var(--Sv-bazaar-focus); 
-                border-radius: 6px;
+                border-radius: 6px 6px 0 0;
             }
             }
         }
@@ -304,7 +307,7 @@
                 grid-template-columns: 90px 1fr;
                 margin: 6px 0 0 6px;
                 box-shadow: none;
-                background-color: var(--b3-theme-background);
+                background-color: var(--Sv-list-background);
                 &:hover{
                     box-shadow: var(--Sv-card-current-shadow);
                 }
@@ -336,13 +339,12 @@
             grid-template-columns: 90px 1fr;
             margin: 6px 0 0 6px;
             box-shadow: none;
-            background-color: var(--b3-theme-background);
+            background-color: var(--Sv-list-background);
             &:hover{
                 box-shadow: var(--Sv-card-current-shadow);
             }
         }
         .b3-card--current{
-            background-color: var(--Sv-card--current);
             box-shadow: var(--Sv-card-current-shadow);
         }
         .b3-cards>.fn__flex-1{

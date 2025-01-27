@@ -79,6 +79,9 @@
             margin-left: 4px;
 			color: var(--Sv-list-counter-color);
 			background-color: var(--Sv-list-counter);
+			&:hover{
+				background-color: var(--Sv-list-background);
+			}
         }
 	}
 }

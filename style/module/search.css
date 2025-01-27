@@ -9,7 +9,6 @@
         & > .block__icons {
             order: 2; 
             min-height: 28px;
-            background-color: var(--Sv-list-background);
         }
         .b3-form__icon.search__header{
             order: 1; 

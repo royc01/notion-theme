@@ -105,6 +105,9 @@
     background-color: var(--Sv-bq-background11)!important;
     border-radius: 5px;
     box-shadow: 0 0 0 2px var(--b3-font-background11) inset;
+    &:before{
+        display: none;
+    }
 }
 .bq[style*="background12"]{
 	border: none;

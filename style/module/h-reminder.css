@@ -10,6 +10,7 @@
                 height: 1.2em;
                 width: 1.2em;
                 right: -1.3em;
+                pointer-events: none;
             }
         }
     }
