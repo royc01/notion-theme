@@ -300,7 +300,7 @@
     --Sv-layout--resize: transparent;/*分界线*/
     --Sv-layout--resize-hover: oklch(from var(--b3-theme-surface) calc(l * 0.3) c h / 0.1);
     --Sv-layout-resize-lr-width: 6px;
-    --Sv-float-background: var(--Sv-toolbar-background);
+    --Sv-float-background: var(--Sv-dock-background);
     --Sv-layout-radius: var(--Sv-dock-item-radius);
     --Sv-layout--resize-margin: -0.5px 0;
     --Sv-list-counter-color: var(--b3-theme-on-surface-light);
@@ -528,7 +528,7 @@
 
     /* 集市界面 */
     --Sv-bazaar-focus: var(--b3-theme-background);
-    --Sv-bazaar-item: oklch(from var(--b3-theme-surface) calc(l*0.98) c h );
+    --Sv-bazaar-item: var(--Sv-list-background);
     --Sv-card--current: #fff5f3;
     --Sv-card-current-shadow: var(--Sv-dock-item--activefocus-background) 0px 0px 0px 2px;
     
