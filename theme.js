@@ -753,20 +753,132 @@ const observeOutline = () => {
 };
 /**---------------------------------------------------------插件-------------------------------------------------------------- */
 
-function SpluginButton() {
-    savorPluginsAddButton(
-        "Splugin",
-        "toolbar__item b3-tooltips b3-tooltips__sw",
-		"收缩/展开插件",
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/Splugin.css", "Sv-theme-color-plugin隐藏").setAttribute("Splugin", "plugin隐藏");
-        },
-        () => {
-            document.getElementById("Sv-theme-color-plugin隐藏").remove();
-        },
-        true
-    );
+// 辅助函数：安全地创建和添加元素
+function safeCreateElement(parentElement, elementType, id = null) {
+    if (!parentElement) {
+        console.warn('父元素不存在，无法创建子元素');
+        return null;
+    }
+    
+    const element = document.createElement(elementType);
+    if (id) element.id = id;
+    parentElement.appendChild(element);
+    return element;
 }
+
+function SpluginButton() {
+    // 等待必要的DOM元素加载完成
+    const waitForElement = (selector) => {
+        return new Promise((resolve) => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                return;
+            }
+
+            const observer = new MutationObserver(() => {
+                if (document.querySelector(selector)) {
+                    observer.disconnect();
+                    resolve(document.querySelector(selector));
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+
+            // 设置超时
+            setTimeout(() => {
+                observer.disconnect();
+                resolve(null);
+            }, 5000);
+        });
+    };
+
+    // 异步初始化按钮
+    const initButton = async () => {
+        const barCommand = await waitForElement('#barCommand');
+        if (!barCommand) {
+            console.warn('无法找到 #barCommand 元素');
+            return;
+        }
+
+        savorPluginsAddButton(
+            "Splugin",
+            "toolbar__item b3-tooltips b3-tooltips__sw",
+            "收缩/展开插件",
+            () => {
+                loadStyle(
+                    "/appearance/themes/Savor/style/topbar/Splugin.css",
+                    "Sv-theme-color-plugin隐藏"
+                ).setAttribute("Splugin", "plugin隐藏");
+            },
+            () => {
+                const styleElement = document.getElementById("Sv-theme-color-plugin隐藏");
+                if (styleElement) styleElement.remove();
+            },
+            true
+        );
+    };
+
+    initButton();
+}
+
+function savorPluginsAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClickRunFun, OffClickRunFun, Memory) {
+    // 获取或创建插件容器
+    let savorPlugins = document.getElementById("savorPlugins");
+    const barCommand = document.getElementById("barCommand");
+
+    if (!barCommand) {
+        console.warn("无法找到 barCommand 元素");
+        return null;
+    }
+
+    if (!savorPlugins) {
+        savorPlugins = safeCreateElement(barCommand.parentElement, "div", "savorPlugins");
+        if (!savorPlugins) return null;
+        barCommand.parentNode.insertBefore(savorPlugins, barCommand);
+    }
+
+    // 创建按钮
+    const addButton = safeCreateElement(savorPlugins, "div");
+    if (!addButton) return null;
+
+    // 设置按钮属性
+    addButton.style.float = "top";
+    addButton.id = ButtonID;
+    addButton.setAttribute("class", ButtonTitle + " button_off");
+    addButton.setAttribute("aria-label", ButtonLabel);
+
+    let offNo = '0';
+
+    // 处理记忆状态
+    if (Memory) {
+        offNo = getItem(ButtonID) || '0';
+        if (offNo === "1") {
+            addButton.setAttribute("class", ButtonTitle + " button_on");
+            NoClickRunFun(addButton);
+        }
+    }
+
+    // 添加点击事件
+    addButton.addEventListener("click", () => {
+        if (offNo === "0") {
+            addButton.setAttribute("class", ButtonTitle + " button_on");
+            NoClickRunFun(addButton);
+            if (Memory) setItem(ButtonID, "1");
+            offNo = "1";
+        } else {
+            addButton.setAttribute("class", ButtonTitle + " button_off");
+            OffClickRunFun(addButton);
+            if (Memory) setItem(ButtonID, "0");
+            offNo = "0";
+        }
+    });
+
+    return addButton;
+}
+
 /**---------------------------------------------------------顶栏-------------------------------------------------------------- */
 
 function topbarfixedButton() {
@@ -1418,7 +1530,7 @@ function savorThemeToolbarAddButton(ButtonID, ButtonTitle , ButtonLabel, Mode, N
         var toolbarEdit = document.getElementById("toolbarEdit");
         var windowControls = document.querySelector("#commonMenu .b3-menu__items")
 
-        if (toolbarEdit == null && barBack != null) {
+        if (toolbarEdit == null ) {
             savorToolbar = document.createElement("div");
             savorToolbar.id = "savorToolbar";
             windowControls.parentElement.insertBefore(savorToolbar, windowControls);
@@ -1578,66 +1690,58 @@ function savorThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClick
 }
 
 function savorPluginsAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClickRunFun, OffClickRunFun, Memory) {
-    var savorPlugins = document.getElementById("savorPlugins");
-    if (savorPlugins == null) {
-        var toolbarEdit = document.getElementById("toolbarEdit");
-        var barCommand = document.getElementById("barCommand");
+    // 获取或创建插件容器
+    let savorPlugins = document.getElementById("savorPlugins");
+    const barCommand = document.getElementById("barCommand");
 
-        if (toolbarEdit == null && barCommand != null) {
-            savorPlugins = document.createElement("div");
-            savorPlugins.id = "savorPlugins";
-            barCommand.parentNode.insertBefore(savorPlugins, barCommand);
-        } else if (toolbarEdit != null) {
-            savorPlugins = insertCreateBefore(toolbarEdit, "div", "savorPlugins");
-            savorPlugins.style.position = "relative";
-        }
+    if (!barCommand) {
+        console.warn("无法找到 barCommand 元素");
+        return null;
     }
 
-    var addButton = addinsertCreateElement(savorPlugins, "div");
+    if (!savorPlugins) {
+        savorPlugins = safeCreateElement(barCommand.parentElement, "div", "savorPlugins");
+        if (!savorPlugins) return null;
+        barCommand.parentNode.insertBefore(savorPlugins, barCommand);
+    }
+
+    // 创建按钮
+    const addButton = safeCreateElement(savorPlugins, "div");
+    if (!addButton) return null;
+
+    // 设置按钮属性
     addButton.style.float = "top";
-
-
-    
     addButton.id = ButtonID;
-	addButton.setAttribute("class", ButtonTitle + " button_off");
-	addButton.setAttribute("aria-label", ButtonLabel)
-	
+    addButton.setAttribute("class", ButtonTitle + " button_off");
+    addButton.setAttribute("aria-label", ButtonLabel);
 
-	var offNo = '0';
+    let offNo = '0';
 
-
-    if (Memory == true) {
-        offNo = getItem(ButtonID);
-        if (offNo == "1") {
-			addButton.setAttribute("class", ButtonTitle + " button_on");
-            setItem(ButtonID, "0");
+    // 处理记忆状态
+    if (Memory) {
+        offNo = getItem(ButtonID) || '0';
+        if (offNo === "1") {
+            addButton.setAttribute("class", ButtonTitle + " button_on");
             NoClickRunFun(addButton);
-            setItem(ButtonID, "1");
-        } else if (offNo != "0") {
-            offNo = "0";
-            setItem(ButtonID, "0");
         }
     }
 
-    AddEvent(addButton, "click", () => {
-
-        if (offNo == "0") {
-			addButton.setAttribute("class", ButtonTitle + " button_on");
+    // 添加点击事件
+    addButton.addEventListener("click", () => {
+        if (offNo === "0") {
+            addButton.setAttribute("class", ButtonTitle + " button_on");
             NoClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "1");
+            if (Memory) setItem(ButtonID, "1");
             offNo = "1";
-            return;
-        }
-
-        if (offNo == "1") {
-			addButton.setAttribute("class", ButtonTitle + " button_off");
+        } else {
+            addButton.setAttribute("class", ButtonTitle + " button_off");
             OffClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "0");
+            if (Memory) setItem(ButtonID, "0");
             offNo = "0";
-            return;
         }
-    })
+    });
 
+    return addButton;
 }
 
 
@@ -1779,16 +1883,7 @@ function injectionCss(csstxt) {
  * @returns addElementObject
  */
 function addinsertCreateElement(fatherElement, addElementTxt, setId = null) {
-    if (!fatherElement) console.error("指定元素对象不存在！");
-    if (!addElementTxt) console.error("未指定字符串！");
-
-    var element = document.createElement(addElementTxt);
-
-    if (setId) element.id = setId;
-
-    fatherElement.appendChild(element);
-
-    return element;
+    return safeCreateElement(fatherElement, addElementTxt, setId);
 }
 
 
