@@ -58,7 +58,9 @@ body:not(.body--mobile,.body--window)>#toolbar{
         }
     }
 }
-
+#barWorkspace{
+    max-width: 90px;
+}
 #barPlugins{
     margin-left: 18px;
 }

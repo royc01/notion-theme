@@ -227,7 +227,7 @@
 
     /* 阴影 */
     --b3-point-shadow: 0 0 1px 0 rgba(0, 0, 0, .1), 0 0 2px 0 rgba(0, 0, 0, .2);
-    --b3-dialog-shadow: 0 8px 24px rgba(0, 0, 0, .2);
+    --b3-dialog-shadow: var(--b3-theme-background) 0px 0px 0px 1.5px,rgba(15, 15, 15, 0.05)  0px 0px 0px 2px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
     --b3-button-shadow: 0 5px 5px -3px rgb(0 0 0 / .2), 0 8px 10px 1px rgb(0 0 0 / .14), 0 3px 14px 2px rgb(0 0 0 / .12);
 
     /* 图表颜色 */
@@ -681,6 +681,17 @@
     background-color:var(--Sv-list-background)!important;
     &::before {
         display: none;
+    }
+}
+
+.layout__center [data-type="wnd"] .layout-tab-container{
+    box-shadow: var(--b3-theme-background) 0 0 0 7px inset;
+}
+
+.layout__center .layout__resize:not(.layout__resize--lr) +.fn__flex-1 .layout-tab-bar--readonly{
+    background-color: var(--Sv-dock-background)!important;
+    &::before{
+        box-shadow: 6px -6px 0 var(--Sv-dock-background)!important;
     }
 }
 

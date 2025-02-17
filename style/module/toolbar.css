@@ -13,7 +13,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
         height:28px;
         border-radius: var(--Sv-dock-item-radius);
         padding:0 3px 0 10px;
-        margin:0px 3px 0px 1px	;
+        margin:0px 3px 0px 1px;
         background-color: var(--Sv-barWorkspace-background);
         /*background:url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path fill='rgba(255, 255, 255, 1)' d='M13.2 10.8l-3.733 3.733v7.467l3.733-3.733v-7.467z'/><path fill='rgba(59, 62, 67, 1)' d='M13.2 10.8v7.467l2.8 2.8v-7.467z'/><path fill='rgba(59, 62, 67, 1)' d='M18.8 10.8v0 7.467l3.733 3.733v-7.467z'/><path fill='rgba(255, 255, 255, 1)' d='M16 13.6v7.467l2.8-2.8v-7.467z'/></svg>") no-repeat left -2px top -5px #ee6f5b;*/
         &:hover{
