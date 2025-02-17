@@ -1,7 +1,9 @@
 :root {
     /* 主色 */
-    --b3-theme-primary: rgb(255, 140, 113);/* 主色 */
-    --b3-theme-surface: #f0ebf9;/* 面板主色 */
+    --b3-theme-primary-base-l:75.97%;
+    --b3-theme-primary-base-ch:0.1453 34.26;
+    --b3-theme-surface-base-l:94.8%;
+    --b3-theme-surface-base-ch:0.0194 302.2;
 
      /* ————————————————————  自定义结构配色  ———————————————————— */
 
@@ -45,6 +47,11 @@
     --Sv-block-ref-bottom-image: linear-gradient(to bottom right,#ff5f40, #ff5f40) 1;
 
     --Sv-Savor-light-on:var(--Sv-Savor-light-off);
+
+    /* 合并顶栏插件收缩颜色 */
+    --Sv-plugin-off-bg: oklch(var(--b3-theme-surface-base-l) var(--b3-theme-surface-base-ch));
+    --Sv-plugin-b-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
+    --Sv-plugin-b-off-bg-hover: oklch(calc(var(--b3-theme-surface-base-l)*1.02) var(--b3-theme-surface-base-ch));
 }
 
 

@@ -1,7 +1,9 @@
 :root {
     /* 主色 */
-    --b3-theme-primary: rgb(0, 122, 149);/* 主色 */
-    --b3-theme-surface:oklch(90.94% 0.0087 197);/* 面板主色 */
+    --b3-theme-primary-base-l:53.63%;
+    --b3-theme-primary-base-ch:0.0979 220.45;
+    --b3-theme-surface-base-l:90.94%;
+    --b3-theme-surface-base-ch:0.0087 197;
 	
     /* ————————————————————  自定义结构配色  ———————————————————— */
 
@@ -16,9 +18,9 @@
 
 
     /* 合并顶栏插件收缩颜色 */
-    --Sv-plugin-off-bg:  oklch(from var(--Sv-toolbar-background) calc(l*0.9) c h );
-    --Sv-plugin-b-off-bg:  oklch(from var(--Sv-toolbar-background) calc(l*0.8) c h );
-    --Sv-plugin-b-off-bg-hover: oklch(from var(--Sv-toolbar-background) calc(l*1.02) c h );
+    --Sv-plugin-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.2) var(--b3-theme-surface-base-ch));
+    --Sv-plugin-b-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.25) var(--b3-theme-surface-base-ch));
+    --Sv-plugin-b-off-bg-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch));
     --Sv-fixed-item-text: #9fa4a7;
 
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/
@@ -30,7 +32,9 @@
 
 
 
-
+#toolbar svg{
+    color: oklch(calc(var(--b3-theme-surface-base-l)*0.8) var(--b3-theme-surface-base-ch));
+}
 
 #buttonSavor-dark,#buttonvinegar{
 	display:none!important;

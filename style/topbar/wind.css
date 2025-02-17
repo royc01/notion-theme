@@ -1,18 +1,20 @@
 :root {
     /* 主色 */
-    --b3-theme-primary: rgb(255, 140, 113);/* 主色 */
-    --b3-theme-surface: #e2e1e1;/* 面板主色 */
+    --b3-theme-primary-base-l:75.97%;
+    --b3-theme-primary-base-ch:0.1453 34.26;
+    --b3-theme-surface-base-l:91.05%;
+    --b3-theme-surface-base-ch:0.0011 17.18;
 
     /* ————————————————————  自定义结构配色  ———————————————————— */
 
 	/* 顶栏 */
-    --Sv-toolbar-background: oklch(from var(--b3-theme-surface) calc(l* 0.93) c h);
+    --Sv-toolbar-background: oklch(calc(var(--b3-theme-surface-base-l)*0.93) var(--b3-theme-surface-base-ch));
     --Sv-barWorkspace-color: var(--b3-theme-on-background);
     --Sv-barWorkspace-background: var(--Sv-list-background);
     --Sv-barWorkspace-background-hover: var(--Sv-list-focus-hover);
 
 	/* dock栏 */
-    --Sv-dock-background: oklch(from var(--b3-theme-surface) calc(l*0.93) c h );
+    --Sv-dock-background: oklch(calc(var(--b3-theme-surface-base-l)*0.93) var(--b3-theme-surface-base-ch));
     --Sv-dock-item-hover-color: var(--b3-theme-background);
     --Sv-dock--item--activefocus-color: var(--b3-theme-background);
     --Sv-dock-item-radius:10px;
@@ -49,6 +51,10 @@
     --Sv-block-ref-bottom-image: linear-gradient(to bottom right,#ff5f40, #ff5f40) 1;
 
     --Sv-Savor-light-on:var(--Sv-Savor-light-off);
+
+    /* 合并顶栏插件收缩颜色 */
+    --Sv-plugin-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.89) var(--b3-theme-surface-base-ch));
+    --Sv-plugin-b-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.86) var(--b3-theme-surface-base-ch));
 	
 }
 

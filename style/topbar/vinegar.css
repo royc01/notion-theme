@@ -1,7 +1,9 @@
 :root {
     /* 主色 */
-    --b3-theme-primary: rgb(35, 131, 226);/* 主色 */
-    --b3-theme-surface:oklch(20.38% 0 0);/* 面板主色 */
+    --b3-theme-primary-base-l:60.58%;
+    --b3-theme-primary-base-ch:0.1674 252.7;
+    --b3-theme-surface-base-l:20.38%;
+    --b3-theme-surface-base-ch:0 0;
 
     /* ————————————————————  自定义结构配色  ———————————————————— */
 

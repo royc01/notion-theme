@@ -67,26 +67,62 @@
 }
 
 :root {
+    /* 基础数 */
+    --b3-theme-primary-base-l:69.42%;
+    --b3-theme-primary-base-ch:0.1265 230.5;
+    --b3-theme-surface-base-l:97.89%;
+    --b3-theme-surface-base-ch:0.0013 106.42;
+    --b3-theme-on-background-base:32.89% 0.0107 91.66;
+    --Sv-dock-item--activefocus-background--base:68.98% 0.161 30.76;
+
+    --b3-font-color1-base-l: 0%;
+    --b3-font-color2-base-l: 61.97%;
+    --b3-font-color3-base-l: 42.61%;
+	--b3-font-color4-base-l: 65.94%;
+    --b3-font-color5-base-l: 72.3%;
+	--b3-font-color6-base-l: 76.79%;
+    --b3-font-color7-base-l: 70.63%;
+	--b3-font-color8-base-l: 52.39%;
+    --b3-font-color9-base-l: 50.87%;
+    --b3-font-color10-base-l: 47.14%;
+    --b3-font-color11-base-l: 50.25%;
+    --b3-font-color12-base-l: 60.52%;
+    --b3-font-color13-base-l: 58.99%;
+
+	--b3-font-color1-base-ch: 0 0;
+    --b3-font-color2-base-ch: 0.006 95.15;
+    --b3-font-color3-base-ch: 0.0452 45.15;
+	--b3-font-color4-base-ch: 0.1586 55.7;
+    --b3-font-color5-base-ch: 0.1674 51.83;
+	--b3-font-color6-base-ch: 0.157 86.52;
+    --b3-font-color7-base-ch: 0.165 139.18;
+	--b3-font-color8-base-ch: 0.0917 180;
+    --b3-font-color9-base-ch: 0.1052 235.24;
+    --b3-font-color10-base-ch: 0.1565 298.98;
+    --b3-font-color11-base-ch: 0.1934 350.57;
+    --b3-font-color12-base-ch: 0.199 25.43;
+    --b3-font-color13-base-ch: 0.2344 26.3;
+    
     /* 主色 */
-    --b3-theme-primary: oklch(69.42% 0.1265 230.5);/* 主色 */    
-    --b3-theme-primary-light: oklch(from var(--b3-theme-primary) l c h / 0.54);
-    --b3-theme-primary-lighter: oklch(from var(--b3-theme-primary) l c h / 0.38);
-    --b3-theme-primary-lightest: oklch(from var(--b3-theme-primary) l c h / 0.2);
+    --b3-theme-primary: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch));/* 主色 */    
+    --b3-theme-primary-light: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch) / 0.54);
+    --b3-theme-primary-lighter: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch) / 0.38);
+    --b3-theme-primary-lightest: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch) / 0.2);
     --b3-theme-secondary: #f3a92f;
-    --b3-theme-background:  oklch(from var(--b3-theme-surface) calc(l*1.05) c h );/* 编辑区背景 */
+    --b3-theme-background:  oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));/* 编辑区背景 */
     --b3-theme-background-light: var(--Sv-list-background);
-    --b3-theme-surface: oklch(97.89% 0.0013 106.42);/* 面板主色 */
-    --b3-theme-surface-light:  oklch(from var(--b3-theme-surface) calc(l*0.97) c h );
-    --b3-theme-surface-lighter:  oklch(from var(--b3-theme-surface) calc(l*0.95) c h );
+    --b3-theme-surface: oklch(var(--b3-theme-surface-base-l) var(--b3-theme-surface-base-ch));/* 面板主色 */
+    --b3-theme-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
+    --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*0.95) var(--b3-theme-surface-base-ch));
     --b3-theme-error: #eb5757;
     --b3-theme-success: #65b84d;
 
     /* 文字颜色 */
     --b3-theme-on-primary: #fff;
     --b3-theme-on-secondary: #fff;
-    --b3-theme-on-background: rgb(55, 53, 47);
-    --b3-theme-on-surface: oklch(from var(--b3-theme-surface) calc(l*0.5) c h );
-    --b3-theme-on-surface-light: oklch(from var(--b3-theme-surface) calc(l*0.5) c h / 0.68);
+    --b3-theme-on-background: oklch(var(--b3-theme-on-background-base));
+    --b3-theme-on-surface: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch));
+    --b3-theme-on-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch) / 0.68);
     --b3-theme-on-error: #fff;
 
     /* 字体 */
@@ -121,7 +157,7 @@
     --b3-menu-background: var(--b3-theme-surface);
 
     /* 提示 */
-    --b3-tooltips-background: oklch(from var(--b3-theme-surface) calc(l*0.4) c h );
+    --b3-tooltips-background: oklch(calc(var(--b3-theme-surface-base-l)*0.4) var(--b3-theme-surface-base-ch));
     --b3-tooltips-color: var(--b3-theme-background);
     --b3-tooltips-second-color: #7d7c7a;
     --b3-tooltips-shadow: 0 2px 8px rgba(0, 0, 0, .1);
@@ -143,33 +179,33 @@
     --b3-card-success-background: #d7eed8;
 
     /* 自定义文字 */
-	--b3-font-color1: #000;
-    --b3-font-color2: rgba(55, 53, 47, 0.6);
-    --b3-font-color3: rgb(100, 71, 58);
-	--b3-font-color4: rgb(217, 115, 13);
-    --b3-font-color5: #f5822e;
-	--b3-font-color6: rgb(223, 171, 1);
-    --b3-font-color7: #65b84d;
-	--b3-font-color8: rgb(15, 123, 108);
-    --b3-font-color9: rgb(11, 110, 153);
-    --b3-font-color10: rgb(105, 64, 165);
-    --b3-font-color11: rgb(173, 26, 114);
-    --b3-font-color12: rgb(224, 62, 62);
-    --b3-font-color13: #e81123;
+	--b3-font-color1: oklch(var(--b3-font-color1-base-l) var(--b3-font-color1-base-ch));
+    --b3-font-color2: oklch(var(--b3-font-color2-base-l) var(--b3-font-color2-base-ch));
+    --b3-font-color3: oklch(var(--b3-font-color3-base-l) var(--b3-font-color3-base-ch));
+	--b3-font-color4: oklch(var(--b3-font-color4-base-l) var(--b3-font-color4-base-ch));
+    --b3-font-color5: oklch(var(--b3-font-color5-base-l) var(--b3-font-color5-base-ch));
+	--b3-font-color6: oklch(var(--b3-font-color6-base-l) var(--b3-font-color6-base-ch));
+    --b3-font-color7: oklch(var(--b3-font-color7-base-l) var(--b3-font-color7-base-ch));
+	--b3-font-color8: oklch(var(--b3-font-color8-base-l) var(--b3-font-color8-base-ch));
+    --b3-font-color9: oklch(var(--b3-font-color9-base-l) var(--b3-font-color9-base-ch));
+    --b3-font-color10: oklch(var(--b3-font-color10-base-l) var(--b3-font-color10-base-ch));
+    --b3-font-color11: oklch(var(--b3-font-color11-base-l) var(--b3-font-color11-base-ch));
+    --b3-font-color12: oklch(var(--b3-font-color12-base-l) var(--b3-font-color12-base-ch));
+    --b3-font-color13: oklch(var(--b3-font-color13-base-l) var(--b3-font-color13-base-ch));
 
-    --b3-font-background1: oklch(from var(--b3-font-color1) calc(l * 0.95) c h / 0.13);
-    --b3-font-background2: oklch(from var(--b3-font-color2) calc(l * 0.95) c h / 0.13);
-    --b3-font-background3: oklch(from var(--b3-font-color13) calc(l * 0.95) c h / 0.13);
-    --b3-font-background4: oklch(from var(--b3-font-color3) calc(l * 0.95) c h / 0.13);
-	--b3-font-background5: oklch(from var(--b3-font-color4) calc(l * 0.95) c h / 0.13);
-    --b3-font-background6: oklch(from var(--b3-font-color5) calc(l * 0.95) c h / 0.13);
-    --b3-font-background7: oklch(from var(--b3-font-color6) calc(l * 0.95) c h / 0.13);
-	--b3-font-background8: oklch(from var(--b3-font-color7) calc(l * 0.95) c h / 0.13);
-    --b3-font-background9: oklch(from var(--b3-font-color8) calc(l * 0.95) c h / 0.13);
-    --b3-font-background10: oklch(from var(--b3-font-color9) calc(l * 0.95) c h / 0.13);
-    --b3-font-background11: oklch(from var(--b3-font-color10) calc(l * 0.95) c h / 0.13);
-    --b3-font-background12: oklch(from var(--b3-font-color11) calc(l * 0.95) c h / 0.13);
-    --b3-font-background13: oklch(from var(--b3-font-color12) calc(l * 0.95) c h / 0.13);
+    --b3-font-background1: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.13);
+    --b3-font-background2: oklch(calc(var(--b3-font-color2-base-l)*0.95) var(--b3-font-color2-base-ch) / 0.13);
+    --b3-font-background3: oklch(calc(var(--b3-font-color13-base-l)*0.95) var(--b3-font-color13-base-ch) / 0.13);
+    --b3-font-background4: oklch(calc(var(--b3-font-color3-base-l)*0.95) var(--b3-font-color3-base-ch) / 0.13);
+	--b3-font-background5: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.13);
+    --b3-font-background6: oklch(calc(var(--b3-font-color5-base-l)*0.95) var(--b3-font-color5-base-ch) / 0.13);
+    --b3-font-background7: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.13);
+	--b3-font-background8: oklch(calc(var(--b3-font-color7-base-l)*0.95) var(--b3-font-color7-base-ch) / 0.13);
+    --b3-font-background9: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.13);
+    --b3-font-background10: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.13);
+    --b3-font-background11: oklch(calc(var(--b3-font-color10-base-l)*0.95) var(--b3-font-color10-base-ch) / 0.13);
+    --b3-font-background12: oklch(calc(var(--b3-font-color11-base-l)*0.95) var(--b3-font-color11-base-ch) / 0.13);
+    --b3-font-background13: oklch(calc(var(--b3-font-color12-base-l)*0.95) var(--b3-font-color12-base-ch) / 0.13);
 
     /* 动画效果 */
     --b3-transition: all .2s cubic-bezier(0, 0, .2, 1) 0ms;
@@ -181,7 +217,7 @@
     --b3-select-background: url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M12.8,15.6l4-4.1c0.2-0.2,0.2-0.4,0.2-0.6c0-0.5-0.4-0.9-0.9-0.9c-0.3,0-0.5,0.1-0.6,0.3L12,13.9l-3.4-3.6C8.3,10.1,8.1,10,7.9,10C7.4,10,7,10.4,7,10.9c0,0.2,0.1,0.4,0.2,0.6l4,4.1c0.2,0.2,0.4,0.3,0.7,0.3C12.3,15.9,12.5,15.8,12.8,15.6z'/></svg>") no-repeat right 2px center var(--Sv-select-field)   ;
 
     /* switch */
-    --b3-switch-background: oklch(from var(--b3-theme-on-background) l c h / 0.2);
+    --b3-switch-background: oklch(var(--b3-theme-on-background-base) / 0.1);
     --b3-switch-border: var(--b3-theme-on-surface-light);
     --b3-switch-hover: rgba(31, 31, 31, 0.06);
     --b3-switch-checked: #fff;
@@ -266,24 +302,23 @@
     /* ————————————————————  自定义结构配色  ———————————————————— */
 	
 	/* 顶栏 */
-    --Sv-toolbar-background: oklch(from var(--b3-theme-surface) calc(l*0.97) c h );
+    --Sv-toolbar-background:  oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
     --Sv-toolbar-item-hover: var(--b3-theme-surface);
     --Sv-barWorkspace-color: var(--b3-theme-background);
     --Sv-barWorkspace-background: oklch(68.98% 0.161 30.76);
-    --Sv-barWorkspace-background-hover: oklch(from var(--Sv-barWorkspace-background) calc(l*0.9) c h );
+    --Sv-barWorkspace-background-hover: oklch(62.09% 0.1616 30.87);
     --Sv-toolbar-closeWindow-hover:  oklch(68.98% 0.161 30.76);
     --Sv-toolbar-closeWindow-svg: var(--b3-theme-background);
     --Sv-fixed-item:var(--b3-toolbar-color);
 
 	/* 边栏 */
-    --Sv-dock-background: oklch(from var(--b3-theme-surface) calc(l*0.97) c h );
-    --Sv-dock-item-color: oklch(from var(--b3-theme-surface) calc(l * 0.3) c h / 0.4);
+    --Sv-dock-background: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
+    --Sv-dock-item-color: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.4);
     --Sv-dock-item-hover-color: var(--b3-theme-on-background);
     --Sv-dock-item-active-background: var(--b3-theme-surface);
     --Sv-dock-item-active-background-hover: var(--Sv-dock-item-active-background);
     --Sv-dock-item--activefocus-color: var(--b3-theme-background);
-    --Sv-dock-item--activefocus-background:oklch(68.98% 0.161 30.76);
-    --Sv-dock--item--activefocus-shadow: 0px 0px 0px 2px oklch(from var(--Sv-dock-item--activefocus-color) l c h / 0.1) inset;
+    --Sv-dock-item--activefocus-background:oklch(var(--Sv-dock-item--activefocus-background--base));
     --Sv-dock-item-radius:6px;
 
     /* 侧栏 */
@@ -291,14 +326,14 @@
     --Sv-block-icon-svg-color-hover: var(--b3-theme-on-background);
     --Sv-block-icon--background-hover: var(--Sv-list-background);
     --Sv-list-item-radius: 6px;
-    --Sv-list-item-arrow: oklch(from var(--b3-theme-surface) calc(l * 0.3) c h / 0.4);
-    --Sv-list-background: oklch(from var(--b3-theme-surface) calc(l * 0.3) c h / 0.06);
-    --Sv-list-focus-hover: oklch(from var(--b3-theme-surface) calc(l * 0.3) c h / 0.10);
-    --Sv-list-focus-active: oklch(from var(--Sv-dock-item--activefocus-background) l c h / 0.1);
+    --Sv-list-item-arrow: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.4);
+    --Sv-list-background: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.06);
+    --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.1);
+    --Sv-list-focus-active: oklch(var(--Sv-dock-item--activefocus-background--base) / 0.1);
     --Sv-list-focus-color: var(--b3-theme-on-background);
     --Sv-list-item-color: var(--b3-theme-on-surface);
     --Sv-layout--resize: transparent;/*分界线*/
-    --Sv-layout--resize-hover: oklch(from var(--b3-theme-surface) calc(l * 0.3) c h / 0.1);
+    --Sv-layout--resize-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.1);
     --Sv-layout-resize-lr-width: 6px;
     --Sv-float-background: var(--Sv-dock-background);
     --Sv-layout-radius: var(--Sv-dock-item-radius);
@@ -315,7 +350,7 @@
     
     /* 反链面板 */
     --Sv-block-logo-color: var(--b3-theme-background);
-    --Sv-block-logo-background: oklch(from var(--b3-theme-surface) calc(l * 0.3) c h / 0.2);
+    --Sv-block-logo-background: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.2);
     --Sv-block-icon-active: var(--Sv-barWorkspace-background);
     --Sv-backlink-background: var(--Sv-dock-background);
     --Sv-backlink-list: var(--b3-theme-surface);
@@ -328,11 +363,11 @@
     --Sv-status-msg-background: var(--b3-theme-background);
     --Sv-status-barDock: var(--Sv-dock-item-active-background);
     --Sv-status-barDock-color: var(--Sv-dock-item--activefocus-background);
-    --Sv-status-item-hover:  oklch(from var(--b3-theme-surface) calc(l * 0.3) c h / 0.06);
+    --Sv-status-item-hover:  oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.06);
 
     /* 页签 */
     --Sv-tab-bar-background: var(--Sv-toolbar-background);
-    --Sv-tab-bar-item-background: oklch(from var(--b3-theme-surface) calc(l*0.99) c h );
+    --Sv-tab-bar-item-background: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
     --Sv-tab-bar-item-background-hover: var(--b3-theme-background);
     --Sv-tab-bar-item-background-focus: var(--b3-theme-background);
     --Sv-tab-bar-item-radius: var(--Sv-dock-item-radius);
@@ -350,7 +385,7 @@
     /* 头图 */
     --Sv-background-icon-hover: var(--Sv-list-background);
     --Sv-background-icon-button-color: var(--b3-theme-background);
-    --Sv-background-icon-button: oklch(from var(--b3-theme-on-background) l c h / 0.4);
+    --Sv-background-icon-button: oklch(var(--b3-theme-on-background-base) / 0.4);
     --Sv-background-icon-button-hover: var(--Sv-list-background);
     --Sv-protyle-icon: var(--b3-theme-background);
     --Sv-protyle-icon-color: var(--b3-theme-on-surface);
@@ -390,37 +425,37 @@
     --Sv-protyle-toolbar-color: var(--b3-theme-on-background);
     --Sv-protyle-util-bg: var(--b3-theme-background);
 
-    --Sv-color-d-shadow: oklch(from var(--b3-font-color1) calc(l * 0.95) c h / 0.2);
-    --Sv-color1-shadow: oklch(from var(--b3-font-color1) calc(l * 0.95) c h / 0.2);
-    --Sv-color2-shadow: oklch(from var(--b3-font-color2) calc(l * 0.95) c h / 0.2);
-    --Sv-color3-shadow: oklch(from var(--b3-font-color3) calc(l * 0.95) c h / 0.2);
-    --Sv-color4-shadow: oklch(from var(--b3-font-color4) calc(l * 0.95) c h / 0.2);
-    --Sv-color5-shadow: oklch(from var(--b3-font-color5) calc(l * 0.95) c h / 0.2);
-    --Sv-color6-shadow: oklch(from var(--b3-font-color6) calc(l * 0.95) c h / 0.2);
-    --Sv-color7-shadow: oklch(from var(--b3-font-color7) calc(l * 0.95) c h / 0.2);
-    --Sv-color8-shadow: oklch(from var(--b3-font-color8) calc(l * 0.95) c h / 0.2);
-    --Sv-color9-shadow: oklch(from var(--b3-font-color9) calc(l * 0.95) c h / 0.2);
-    --Sv-color10-shadow: oklch(from var(--b3-font-color10) calc(l * 0.95) c h / 0.2);
-    --Sv-color11-shadow: oklch(from var(--b3-font-color11) calc(l * 0.95) c h / 0.2);
-    --Sv-color12-shadow: oklch(from var(--b3-font-color12) calc(l * 0.95) c h / 0.2);
-    --Sv-color13-shadow: oklch(from var(--b3-font-color13) calc(l * 0.95) c h / 0.2);
+    --Sv-color-d-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
+    --Sv-color1-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
+    --Sv-color2-shadow: oklch(calc(var(--b3-font-color2-base-l)*0.95) var(--b3-font-color2-base-ch) / 0.2);
+    --Sv-color3-shadow: oklch(calc(var(--b3-font-color3-base-l)*0.95) var(--b3-font-color3-base-ch) / 0.2);
+    --Sv-color4-shadow: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.2);
+    --Sv-color5-shadow: oklch(calc(var(--b3-font-color5-base-l)*0.95) var(--b3-font-color5-base-ch) / 0.2);
+    --Sv-color6-shadow: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.2);
+    --Sv-color7-shadow: oklch(calc(var(--b3-font-color7-base-l)*0.95) var(--b3-font-color7-base-ch) / 0.2);
+    --Sv-color8-shadow: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.2);
+    --Sv-color9-shadow: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.2);
+    --Sv-color10-shadow: oklch(calc(var(--b3-font-color10-base-l)*0.95) var(--b3-font-color10-base-ch) / 0.2);
+    --Sv-color11-shadow: oklch(calc(var(--b3-font-color11-base-l)*0.95) var(--b3-font-color11-base-ch) / 0.2);
+    --Sv-color12-shadow: oklch(calc(var(--b3-font-color12-base-l)*0.95) var(--b3-font-color12-base-ch) / 0.2);
+    --Sv-color13-shadow: oklch(calc(var(--b3-font-color13-base-l)*0.95) var(--b3-font-color13-base-ch) / 0.2);
 
-    --Sv-bg-d-shadow: oklch(from var(--b3-font-color1) calc(l * 0.95) c h / 0.2);
-    --Sv-bg1-shadow: oklch(from var(--b3-font-color1) calc(l * 0.95) c h / 0.2);
-    --Sv-bg2-shadow: oklch(from var(--b3-font-color1) calc(l * 0.95) c h / 0.2);
-    --Sv-bg3-shadow: oklch(from var(--b3-font-color13) calc(l * 0.95) c h / 0.2);
-    --Sv-bg4-shadow: oklch(from var(--b3-font-color3) calc(l * 0.95) c h / 0.2);
-    --Sv-bg5-shadow: oklch(from var(--b3-font-color4) calc(l * 0.95) c h / 0.2);
-    --Sv-bg6-shadow: oklch(from var(--b3-font-color5) calc(l * 0.95) c h / 0.2);
-    --Sv-bg7-shadow: oklch(from var(--b3-font-color6) calc(l * 0.95) c h / 0.2);
-    --Sv-bg8-shadow: oklch(from var(--b3-font-color7) calc(l * 0.95) c h / 0.2);
-    --Sv-bg9-shadow: oklch(from var(--b3-font-color8) calc(l * 0.95) c h / 0.2);
-    --Sv-bg10-shadow: oklch(from var(--b3-font-color9) calc(l * 0.95) c h / 0.2);
-    --Sv-bg11-shadow: oklch(from var(--b3-font-color10) calc(l * 0.95) c h / 0.2);
-    --Sv-bg12-shadow: oklch(from var(--b3-font-color11) calc(l * 0.95) c h / 0.2);
-    --Sv-bg13-shadow: oklch(from var(--b3-font-color12) calc(l * 0.95) c h / 0.2);
+    --Sv-bg-d-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
+    --Sv-bg1-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
+    --Sv-bg2-shadow: oklch(calc(var(--b3-font-color2-base-l)*0.95) var(--b3-font-color2-base-ch) / 0.2);
+    --Sv-bg3-shadow: oklch(calc(var(--b3-font-color13-base-l)*0.95) var(--b3-font-color13-base-ch) / 0.2);
+    --Sv-bg4-shadow: oklch(calc(var(--b3-font-color3-base-l)*0.95) var(--b3-font-color3-base-ch) / 0.2);
+    --Sv-bg5-shadow: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.2);
+    --Sv-bg6-shadow: oklch(calc(var(--b3-font-color5-base-l)*0.95) var(--b3-font-color5-base-ch) / 0.2);
+    --Sv-bg7-shadow: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.2);
+    --Sv-bg8-shadow: oklch(calc(var(--b3-font-color7-base-l)*0.95) var(--b3-font-color7-base-ch) / 0.2);
+    --Sv-bg9-shadow: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.2);
+    --Sv-bg10-shadow: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.2);
+    --Sv-bg11-shadow: oklch(calc(var(--b3-font-color10-base-l)*0.95) var(--b3-font-color10-base-ch) / 0.2);
+    --Sv-bg12-shadow: oklch(calc(var(--b3-font-color11-base-l)*0.95) var(--b3-font-color11-base-ch) / 0.2);
+    --Sv-bg13-shadow: oklch(calc(var(--b3-font-color12-base-l)*0.95) var(--b3-font-color12-base-ch) / 0.2);
     
-    --Sv-style1-d-shadow:  oklch(from var(--b3-font-color1) calc(l * 0.95) c h / 0.2);
+    --Sv-style1-d-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
     --Sv-error-shadow: #e28c88;
     --Sv-warning-shadow: #ffc07b;
     --Sv-info-shadow: #97c5ed;
@@ -480,35 +515,35 @@
     --Sv-fold-border: var(--b3-theme-surface-lighter);
 
     /* 数据库 */
-	--Sv-font-color13: oklch(from var(--b3-font-color12) calc(l * 0.3) c h );
-	--Sv-font-color12: oklch(from var(--b3-font-color11) calc(l * 0.3) c h );
-	--Sv-font-color11: oklch(from var(--b3-font-color10) calc(l * 0.3) c h );
-	--Sv-font-color10: oklch(from var(--b3-font-color9) calc(l * 0.3) c h );
-	--Sv-font-color9: oklch(from var(--b3-font-color8) calc(l * 0.3) c h );
-	--Sv-font-color8: oklch(from var(--b3-font-color7) calc(l * 0.3) c h );
-	--Sv-font-color7: oklch(from var(--b3-font-color6) calc(l * 0.3) c h );
-	--Sv-font-color6: oklch(from var(--b3-font-color5) calc(l * 0.3) c h );
-	--Sv-font-color5: oklch(from var(--b3-font-color4) calc(l * 0.3) c h );;
-	--Sv-font-color4: oklch(from var(--b3-font-color3) calc(l * 0.3) c h );
-	--Sv-font-color3: oklch(from var(--b3-font-color13) calc(l * 0.3) c h );
-	--Sv-font-color2: oklch(from var(--b3-font-color2) calc(l * 0.3) c h );
-	--Sv-font-color1: oklch(from var(--b3-font-color1) calc(l * 0.3) c h );
+	--Sv-font-color13: oklch(calc(var(--b3-font-color12-base-l)*0.3) var(--b3-font-color12-base-ch));
+	--Sv-font-color12: oklch(calc(var(--b3-font-color11-base-l)*0.3) var(--b3-font-color11-base-ch));
+	--Sv-font-color11: oklch(calc(var(--b3-font-color10-base-l)*0.3) var(--b3-font-color10-base-ch));
+	--Sv-font-color10: oklch(calc(var(--b3-font-color9-base-l)*0.3) var(--b3-font-color9-base-ch));
+	--Sv-font-color9: oklch(calc(var(--b3-font-color8-base-l)*0.3) var(--b3-font-color8-base-ch));
+	--Sv-font-color8: oklch(calc(var(--b3-font-color7-base-l)*0.3) var(--b3-font-color7-base-ch));
+	--Sv-font-color7: oklch(calc(var(--b3-font-color6-base-l)*0.3) var(--b3-font-color6-base-ch));
+	--Sv-font-color6: oklch(calc(var(--b3-font-color5-base-l)*0.3) var(--b3-font-color5-base-ch));
+	--Sv-font-color5: oklch(calc(var(--b3-font-color4-base-l)*0.3) var(--b3-font-color4-base-ch));
+	--Sv-font-color4: oklch(calc(var(--b3-font-color3-base-l)*0.3) var(--b3-font-color3-base-ch));
+	--Sv-font-color3: oklch(calc(var(--b3-font-color13-base-l)*0.3) var(--b3-font-color13-base-ch));
+	--Sv-font-color2: oklch(calc(var(--b3-font-color2-base-l)*0.3) var(--b3-font-color2-base-ch));
+	--Sv-font-color1: oklch(calc(var(--b3-font-color1-base-l)*0.3) var(--b3-font-color1-base-ch));
 
     /* 引述块颜色 */
     --Sv-bq-color: var(--b3-theme-on-background);
-    --Sv-bq-background1:  oklch(from var(--b3-font-color1) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background2: oklch(from var(--b3-font-color2) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background3: oklch(from var(--b3-font-color13) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background4: oklch(from var(--b3-font-color3) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background5: oklch(from var(--b3-font-color4) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background6: oklch(from var(--b3-font-color5) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background7: oklch(from var(--b3-font-color6) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background8: oklch(from var(--b3-font-color7) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background9: oklch(from var(--b3-font-color8) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background10: oklch(from var(--b3-font-color9) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background11: oklch(from var(--b3-font-color10) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background12: oklch(from var(--b3-font-color11) calc(l * 0.95) c h / 0.08);
-    --Sv-bq-background13: oklch(from var(--b3-font-color12) calc(l * 0.95) c h / 0.08);
+    --Sv-bq-background1: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.08);
+    --Sv-bq-background2: oklch(calc(var(--b3-font-color2-base-l)*0.95) var(--b3-font-color2-base-ch) / 0.08);
+    --Sv-bq-background3: oklch(calc(var(--b3-font-color13-base-l)*0.95) var(--b3-font-color13-base-ch) / 0.08);
+    --Sv-bq-background4: oklch(calc(var(--b3-font-color3-base-l)*0.95) var(--b3-font-color3-base-ch) / 0.08);
+    --Sv-bq-background5: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.08);
+    --Sv-bq-background6: oklch(calc(var(--b3-font-color5-base-l)*0.95) var(--b3-font-color5-base-ch) / 0.08);
+    --Sv-bq-background7: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.08);
+    --Sv-bq-background8: oklch(calc(var(--b3-font-color7-base-l)*0.95) var(--b3-font-color7-base-ch) / 0.08);
+    --Sv-bq-background9: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.08);
+    --Sv-bq-background10: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.08);
+    --Sv-bq-background11: oklch(calc(var(--b3-font-color10-base-l)*0.95) var(--b3-font-color10-base-ch) / 0.08);
+    --Sv-bq-background12: oklch(calc(var(--b3-font-color11-base-l)*0.95) var(--b3-font-color11-base-ch) / 0.08);
+    --Sv-bq-background13: oklch(calc(var(--b3-font-color12-base-l)*0.95) var(--b3-font-color12-base-ch) / 0.08);
 
     /*导图*/
 	--b3-border-daotu: 2px solid #ffb8b8;
@@ -534,20 +569,20 @@
     
     /* 菜单 */
     --Sv-menu-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
-    --Sv-menu-accelerator: oklch(from var(--b3-theme-on-background) l c h / 0.4);
-    --Sv-menu-background: oklch(from var(--b3-theme-surface) calc(l*1.15) c h );
+    --Sv-menu-accelerator: oklch(var(--b3-theme-on-background-base) / 0.4);
+    --Sv-menu-background: oklch(calc(var(--b3-theme-surface-base-l)*1.15) var(--b3-theme-surface-base-ch));
     --Sv-menu-item-hover: var(--Sv-list-background);
     /* 按钮 */ 
     --Sv-button-background: var(--b3-theme-primary);
     --Sv-button-color: var(--b3-theme-background);
-    --Sv-button-background-hover: oklch(from var(--b3-theme-primary) calc(l*0.9) c h );
+    --Sv-button-background-hover: oklch(calc(var(--b3-theme-primary-base-l)*0.9) var(--b3-theme-primary-base-ch));
     --Sv-button-cancel: var(--b3-theme-background);
 
     /* 下拉框、输入框*/
     --Sv-select-field: var(--Sv-list-background);
     /* 滚动条 */
-	--Sv-scroll-color: oklch(from var(--b3-theme-surface) calc(l * 0.92) c h );
-	--Sv-scroll-color-hover: oklch(from var(--b3-theme-surface) calc(l * 0.7) c h );
+	--Sv-scroll-color: oklch(calc(var(--b3-theme-surface-base-l)*0.92) var(--b3-theme-surface-base-ch));
+	--Sv-scroll-color-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.7) var(--b3-theme-surface-base-ch));
 	--Sv-scroll-bgcolor: transparent;
 	--Sv-border-scroll: rgba(55, 53, 47, 0.2);
 	--webkit-scrollbar: 8px;
@@ -557,9 +592,9 @@
 
 
     /* 合并顶栏插件收缩颜色 */
-    --Sv-plugin-off-bg:  oklch(from var(--Sv-toolbar-background) calc(l*0.96) c h );
-    --Sv-plugin-b-off-bg:  oklch(from var(--Sv-toolbar-background) calc(l*0.92) c h );
-    --Sv-plugin-b-off-bg-hover: oklch(from var(--Sv-toolbar-background) calc(l*1.02) c h );
+    --Sv-plugin-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.93) var(--b3-theme-surface-base-ch));
+    --Sv-plugin-b-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.89) var(--b3-theme-surface-base-ch));
+    --Sv-plugin-b-off-bg-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
     --Sv-plugin-on-bg: var(--Sv-toolbar-item-hover);
     --Sv-plugin-counter: var(--Sv-dock-item--activefocus-background);
     --Sv-fixed-item-text: var(--b3-theme-on-surface);
