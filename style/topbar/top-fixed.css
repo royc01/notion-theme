@@ -70,7 +70,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 #dockLeft,#dockRight{
 	padding-top: 38px;
 }
-.layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
+body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
 	padding-left: 0px;
     min-width: 60px;
     & .item:not(.item--readonly):not(.item--pin){
@@ -131,7 +131,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	}
 }
 }
-.layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
+body:not(.body--window) .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
 	z-index: 2;
 	pointer-events: none;
 	border: none;
