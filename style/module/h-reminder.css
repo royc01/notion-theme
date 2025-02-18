@@ -11,6 +11,7 @@
                 width: 1.2em;
                 right: -1.3em;
                 pointer-events: none;
+                opacity: 0.8;
             }
         }
     }

@@ -81,7 +81,7 @@
 /*文档标签*/
 .protyle-background__ia{
     display: flex;
-    align-items: center; /* 垂直居中对齐 */
+    align-items: flex-end; 
     .protyle-background__action .b3-button{
         margin: 0 8px 8px 0;
     }
