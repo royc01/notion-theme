@@ -22,7 +22,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
         & .toolbar__text{
             line-height:28px;
             color:var(--Sv-barWorkspace-color);
-            font-weight:600;
+            font-weight:700;
             font-size: 14px;
             text-transform:uppercase;
         }

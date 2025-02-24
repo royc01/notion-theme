@@ -5,6 +5,10 @@
     --b3-theme-surface-base-l:19.33%;
     --b3-theme-surface-base-ch:0.0252 269.78;
 
+	--Sv-tab-bar-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23121622'/></svg>"),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23121622'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%23121622'/></svg>");
+
 	/* ————————————————————  自定义结构配色  ———————————————————— */
 
 	/* 顶栏 */
@@ -19,18 +23,10 @@
 	
 	/* 侧栏面板 */
     --Sv-block-icon-active: #cdff3b;
-	--Sv-layout-resize-lr-width: 10px;
-	--Sv-layout--resize-margin: 1px 0;
-	--Sv-backlink-top: 8px;
 
     /* 底栏 */
     --Sv-status-barDock-color: #cdff3b;
-	--Sv-status-radius-r: 0 10px 10px 0;
-    --Sv-status-radius-t: 0 0 10px 0;
 
-    /* 页签 */
-	--Sv-tab-bar-item--focus-radius: 10px 10px 0 0;
-    --Sv-tab-bar-readonly-shadow: 10px -10px 0 var(--Sv-dock-background);
 
     /* 块引用 */
     --Sv-block-ref-background: transparent;

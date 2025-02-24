@@ -40,8 +40,6 @@
 
 @import url(/appearance/themes/Savor/style/custom/list-fold.css);/* 折叠块悬浮弹窗 ✔*/
 
-/*@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;200;300;400;500;600;700;800;900&display=swap');*/
-
 @font-face {
     font-family: 'Twitter Emoji';
     font-display: swap;
@@ -51,19 +49,19 @@
     font-family: 'Roboto';
     font-weight: 500;
     font-display: swap;
-    src: url("font/Roboto-Regular.woff2") format("woff2");
+    src: url("font/Harmony-500.woff2") format("woff2");
 }
 @font-face {
     font-family: 'Roboto';
     font-weight: 600;
     font-display: swap;
-    src: url("font/Roboto-Medium.woff2") format("woff2");
+    src: url("font/Harmony-600.woff2") format("woff2");
 }
 @font-face {
     font-family: 'Roboto';
     font-weight: 700;
     font-display: swap;
-    src: url("font/Roboto-Bold.woff2") format("woff2");
+    src: url("font/Harmony-700.woff2") format("woff2");
 }
 
 :root {
@@ -319,7 +317,7 @@
     --Sv-dock-item-active-background-hover: var(--Sv-dock-item-active-background);
     --Sv-dock-item--activefocus-color: var(--b3-theme-background);
     --Sv-dock-item--activefocus-background:oklch(var(--Sv-dock-item--activefocus-background--base));
-    --Sv-dock-item-radius:6px;
+    --Sv-dock-item-radius:8px;
 
     /* 侧栏 */
     --Sv-block-icon-svg-color: var(--Sv-dock-item-color);
@@ -360,7 +358,7 @@
     --Sv-status-radius-r: 0 6px 6px 0;
     --Sv-status-radius: var(--Sv-dock-item-radius);
     --Sv-status-radius-t: 0 0 6px 0;
-    --Sv-status-msg-background: var(--b3-theme-background);
+    --Sv-status-msg-background: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
     --Sv-status-barDock: var(--Sv-dock-item-active-background);
     --Sv-status-barDock-color: var(--Sv-dock-item--activefocus-background);
     --Sv-status-item-hover:  oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.06);
@@ -371,7 +369,7 @@
     --Sv-tab-bar-item-background-hover: var(--b3-theme-background);
     --Sv-tab-bar-item-background-focus: var(--b3-theme-background);
     --Sv-tab-bar-item-radius: var(--Sv-dock-item-radius);
-    --Sv-tab-bar-item--focus-radius: 6px 6px 0 0;
+    --Sv-tab-bar-item--focus-radius: 8px 8px 0 0;
     --Sv-tab-bar-readonly-shadow: 6px -6px 0 var(--Sv-dock-background);
 
     /* 面包屑 */
@@ -701,4 +699,7 @@
         box-shadow: 6px -6px 0 var(--Sv-dock-background)!important;
     }
 }
+
+
+
 

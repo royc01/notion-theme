@@ -6,5 +6,6 @@ body:not(.body--mobile, .body--window) > #toolbar {
 	box-shadow:none;*/
 	width: 28px!important;
 	opacity: 1!important;
+	padding: 7px!important;
 }
 }

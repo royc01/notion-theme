@@ -1465,7 +1465,8 @@ function initStatusRight() {
         cacheElements();
         if (!statusRight && dockr && dockRight && status) {
             statusRight = Object.assign(document.createElement('div'), {
-                className: 'statusRight'
+                className: 'statusRight',
+                style: 'display: none;' // 添加默认样式
             });
             status.appendChild(statusRight);
 

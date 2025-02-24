@@ -19,6 +19,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
         background-color: var(--Sv-plugin-off-bg);
         width: 0px;
         opacity: 0;
+        padding: 0px;
         transition: all 200ms ease;
         margin-top: 1px;
         &:hover{
@@ -59,7 +60,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
     }
 }
 #barWorkspace{
-    max-width: 90px;
+    max-width: 92px;
 }
 #barPlugins{
     margin-left: 18px;
@@ -79,22 +80,15 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 	& .item:not(.item--readonly){
 		margin-bottom:7px!important;
 		pointer-events: visibleFill;
-		box-shadow: -6px 0 0 0 var(--Sv-toolbar-background) inset;
 		& .item__text{
 			color: var(--Sv-fixed-item-text);
 		}
-        &:last-child{
-            box-shadow: none;
-        }
 		&[data-type="tab-header"]{
 			pointer-events: visibleFill;
 			app-region: no-drag;
-            &:not(.item--focus)::before{
-                box-shadow: 4px -2px 0 var(--Sv-toolbar-background);
-            }
 			&.item--focus{
 				background-color: var(--b3-theme-background);
-				margin-bottom:2px!important;
+				margin-bottom:7px!important;
 				& .item__text{
 					color: var(--b3-theme-on-background);
 				}
@@ -102,6 +96,9 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 		}
         .item__icon{
             padding: 2px 0 2px 8px;
+        }
+        &:hover{
+            background-color: var(--Sv-tab-bar-item-background-hover); 
         }
 	}
 		& .item--readonly{
@@ -114,19 +111,21 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 		& .block__icon--show{
 			pointer-events: visibleFill;
 			app-region: no-drag;
-            padding: 6.5px!important;
-			margin-bottom: -1px;
 			background-color: transparent;
             &[data-type="new"]{
                 margin-right: 6px;
             }
+            &:hover{
+                background-color: var(--Sv-tab-bar-item-background-hover); 
+            }
 		}
 	}
 	&.layout-tab-bar--readonly{
-		background-color: var(--Sv-toolbar-background);
+        padding-left: 6px;
+        background-color: var(--Sv-toolbar-background);
         height: 38px;
 	&::before {
-		top: 5px;
+		top: 4px;
 		box-shadow: 6px -6px 0 var(--Sv-toolbar-background);
 	}
 }

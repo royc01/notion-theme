@@ -5,7 +5,11 @@
     --b3-theme-surface-base-l:94.8%;
     --b3-theme-surface-base-ch:0.0194 302.2;
 
-     /* ————————————————————  自定义结构配色  ———————————————————— */
+    --Sv-tab-bar-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23fffbff'/></svg>"),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23fffbff'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%23fffbff'/></svg>");
+
+    /* ————————————————————  自定义结构配色  ———————————————————— */
 
 	/* 顶栏 */
     --Sv-toolbar-background: #f9f5fc;
@@ -17,25 +21,17 @@
     --Sv-dock-background: var(--Sv-toolbar-background);
     --Sv-dock-item-hover-color: var(--b3-theme-background);
     --Sv-dock-item--activefocus-color: var(--b3-theme-background);
-    --Sv-dock-item-radius:10px;
     --Sv-dock-item-active-background: #a18ef9;
     --Sv-dock-item-active-background-hover: #8f7ce6;
     --Sv-dock-item--activefocus-background: #ff5f40!important;
     --Sv-dock--item--activefocus-shadow: 0 ;
 	
 	/* 侧栏面板 */
-    --Sv-layout-resize-lr-width: 10px;
     --Sv-block-icon-active: #ff5f40;
-    --Sv-backlink-top: 8px;
 
     /* 底栏 */
     --Sv-status-barDock-color: #ff5f40;
-    --Sv-status-radius-r: 0 10px 10px 0;
-    --Sv-status-radius-t: 0 0 10px 0;
 
-    /* 页签 */
-    --Sv-tab-bar-item--focus-radius: 10px 10px 0 0;
-    --Sv-tab-bar-readonly-shadow: 10px -10px 0 var(--Sv-dock-background);
 
     /* 面包屑 */
     --Sv-breadcrumb-active: #ab90f7;
