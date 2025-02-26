@@ -107,7 +107,8 @@
     --b3-theme-primary-lighter: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch) / 0.38);
     --b3-theme-primary-lightest: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch) / 0.2);
     --b3-theme-secondary: #f3a92f;
-    --b3-theme-background:  oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));/* 编辑区背景 */
+    --b3-theme-background:  oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));
+    /* 编辑区背景 */
     --b3-theme-background-light: var(--Sv-list-background);
     --b3-theme-surface: oklch(var(--b3-theme-surface-base-l) var(--b3-theme-surface-base-ch));/* 面板主色 */
     --b3-theme-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
@@ -190,6 +191,7 @@
     --b3-font-color11: oklch(var(--b3-font-color11-base-l) var(--b3-font-color11-base-ch));
     --b3-font-color12: oklch(var(--b3-font-color12-base-l) var(--b3-font-color12-base-ch));
     --b3-font-color13: oklch(var(--b3-font-color13-base-l) var(--b3-font-color13-base-ch));
+
 
     --b3-font-background1: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.13);
     --b3-font-background2: oklch(calc(var(--b3-font-color2-base-l)*0.95) var(--b3-font-color2-base-ch) / 0.13);

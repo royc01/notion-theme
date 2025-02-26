@@ -11,21 +11,8 @@
         border-radius: var(--Sv-tab-bar-item-radius);
         background-color: var(--Sv-tab-bar-item-background);
         margin-bottom: 12px;
-        margin-right: 5px;
+        margin-right: 6px;
         overflow: unset !important;
-        &:not(.item--focus)::before {
-            content: "" ;
-            display: inline-block ;
-            width: 20px;
-            height: 20px;
-            background-color: transparent ;
-            border-radius: 2px;
-            --Sv-tab-bar-readonly-shadow: 4px -2px 0 var(--Sv-dock-background);
-            position: absolute;
-            top: 0px;
-            left: -24px;
-            pointer-events: none;
-            }
         &:not(.item--focus) .item__text {
             letter-spacing: 0.1px; 
         }
@@ -103,24 +90,41 @@
         }
     }
     .item--pin{
-        min-width: 30px;
+        min-width: 28px;
         & .item__icon{
-            padding:0px 6px;
+            padding:0px 7px;
         }
         & .item__graphic{
             padding:4px;
         }
         &:nth-child(4n-3){
-            background-color:var(--b3-card-error-background);
+            box-shadow:0 0 0 1px var(--b3-font-background13) inset;
         }
         &:nth-child(4n-2){
-            background-color:var(--b3-card-warning-background);
+            box-shadow:0 0 0 1px var(--b3-font-background5) inset;
         }
         &:nth-child(4n-1){
-            background-color:var(--b3-card-info-background);
+            box-shadow:0 0 0 1px var(--b3-font-background10) inset;
         }
         &:nth-child(4n){
-            background-color:var(--b3-card-success-background);
+            box-shadow:0 0 0 1px var(--b3-font-background9) inset;
+        }
+        &.item--focus{
+            box-shadow: none;
+        }
+        &+.item:not(.item--pin,.item--readonly) {
+            margin-left: 12px;
+            &::before {
+                content: "";
+                position: absolute;
+                left: -10px;
+                display: block;
+                width: 2px;
+                background-color: var(--Sv-list-focus-hover);
+                height: 1.3em;
+                border-radius: 9px;
+                pointer-events: none;
+            }
         }
     }
     .item__close{
@@ -133,4 +137,3 @@
 .layout-tab-bars--drag>.layout-tab-bar{
 	background-color: var(--b3-theme-primary-lightest)!important;
 }
-

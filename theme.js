@@ -1463,22 +1463,24 @@ function initStatusRight() {
     // 初始化函数
     const init = () => {
         cacheElements();
+    
+        // 只有在 statusRight 不存在时才创建它
         if (!statusRight && dockr && dockRight && status) {
             statusRight = Object.assign(document.createElement('div'), {
                 className: 'statusRight',
                 style: 'display: none;' // 添加默认样式
             });
             status.appendChild(statusRight);
-
+    
             // 观察 dockr 的尺寸变化
             new ResizeObserver(updateWidth).observe(dockr);
-
+    
             // 观察 dockRight 的类变化
             new MutationObserver(updateWidth).observe(dockRight, {
                 attributes: true,
                 attributeFilter: ['class']
             });
-
+    
             // 观察 .protyle 的类变化，以检测全屏模式
             const protyleElement = document.querySelector('.protyle');
             if (protyleElement) {
@@ -1487,7 +1489,7 @@ function initStatusRight() {
                     attributeFilter: ['class']
                 });
             }
-
+    
             // 初始更新宽度和样式
             updateWidth();
         }
@@ -1541,11 +1543,11 @@ function savorThemeToolbarAddButton(ButtonID, ButtonTitle , ButtonLabel, Mode, N
         }
     }
 
+    var existingButton = document.getElementById(ButtonID);
+    if (existingButton) return;
+    
     var addButton = addinsertCreateElement(savorToolbar, "button");
     addButton.style.float = "top";
-
-
-    
     addButton.id = ButtonID;
 	addButton.setAttribute("class", ButtonTitle + " button_off");
 	addButton.setAttribute("aria-label", ButtonLabel)
@@ -2817,6 +2819,23 @@ if (document.readyState === 'loading') {
 } else {
     initTabBarsMargin();
 }
+
+
+
+// 判断是否为 macOS 平台
+const isMac = () => {
+    return navigator.platform.toUpperCase().indexOf("MAC") > -1;
+};
+
+// 向 body 注入 class
+const injectBodyClass = () => {
+    if (isMac()) {
+        document.body.classList.add('body--mac'); // 注入 class
+    }
+};
+
+// 执行函数
+injectBodyClass();
 
 
 /** 清除样式 **/
