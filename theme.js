@@ -604,7 +604,7 @@ function addResizeHandle() {
     resizeHandle.id = 'vertical-resize-handle';
     resizeHandle.style.cssText = `
         position: absolute;
-        right: -5px;
+        right: 0px;
         top: 0;
         bottom: 0;
         border-radius: 10px;

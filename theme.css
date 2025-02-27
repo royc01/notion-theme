@@ -691,17 +691,5 @@
     }
 }
 
-.layout__center [data-type="wnd"] .layout-tab-container .fn__flex-column{
-    box-shadow: var(--b3-theme-background) 0 0 0 7px inset;
-}
-
-.layout__center .layout__resize:not(.layout__resize--lr) +.fn__flex .layout-tab-bar--readonly{
-    background-color: var(--Sv-dock-background)!important;
-    &::before{
-        box-shadow: 6px -6px 0 var(--Sv-dock-background)!important;
-    }
-}
-
-
 
 

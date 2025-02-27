@@ -17,18 +17,26 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
     .item:not(.item--readonly) {
         margin:0 0 5px 0!important;
         max-width:unset;
-        box-shadow: none;
         & .item__close{
-            position:absolute;
-            right:0px;
+            margin-left: auto;
         }
-        &.item--focus {
-            box-shadow: 6px 0 0 0 var(--Sv-tab-bar-item-background-focus)!important;
-            border-radius: 6px 0 0 6px!important;
-            padding: 0px 5px 0px 0px;
-            &::before, &::after {
-                display: none!important;
-            }}
+        &.item--focus{
+            border-radius: 8px 0 0 8px;
+        &::after {
+            background-color: transparent;
+            top: calc(-1* var(--Sv-dock-item-radius) - 2px);
+            right: -5px; 
+            left: auto; 
+            height: calc(100% + var(--Sv-dock-item-radius)* 2 + 4px);
+            width: 12px;
+            border-radius: 0;
+            transition: var(--b3-transition);
+            background-image: var(--Sv-tab-bar-V-item-after);
+            background-size: 12px 12px, 12px 12px, calc(100% + var(--Sv-dock-item-radius)* 2 + 8px) calc(100% - var(--Sv-dock-item-radius)* 2 - 4px);
+            background-position: left bottom, left top, center right;
+            background-repeat: no-repeat;
+            box-shadow: none; 
+        }}
         &.item--pin .item__text.fn__none{
             display: block!important;
         }
@@ -49,11 +57,6 @@ body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]
     width: var(--custom-tab-width);
     transition: width 0.3s ease;
 }
-
-
-
-
-
 
 
 

@@ -84,15 +84,13 @@
 }
 
 #savorToolbar{
-	border-bottom: 1px solid var(--b3-theme-surface-lighter);
-	margin: 0 4px 4px 4px;
-	padding-bottom: 4px;
+	margin: 0 4px;
 	.b3-menu__item{
 		height:30px;
 		&:after{
 			content: attr(aria-label);
 			line-height: 30px;
-			padding:0 0 0 27px;
+			padding:0 0 0 22px;
 		}
 		&:hover{
 			background-color: var(--Sv-list-background)!important;
@@ -103,4 +101,70 @@
 
 #commonMenu:not([data-name="barmode"]) #savorToolbar{
 	display:none;
+}
+
+
+[data-name="barmode"]{
+    display: grid;
+    width: 140px;
+    .b3-menu__items {
+        display: flex ;
+        flex-direction: row ;
+        flex-wrap: nowrap ;
+        margin:0px 4px 3px 4px;
+        gap: 3px;
+        padding: 3px;
+        border-radius: 6px;
+        background-color: var(--Sv-list-background);
+        overflow:visible;
+        .b3-menu__item {
+            display: inline-block;
+            white-space: nowrap;
+            padding: 0;
+            line-height: 5px;
+            background-color: transparent;
+            &.b3-menu__item--selected,&:hover{
+                background-color: var(--Sv-menu-background);
+                box-shadow: 0 4px 9px rgba(0, 0, 0, .05), 0 1.5px 2.8px rgba(0, 0, 0, .07), 0 0.3px 0.7px rgba(0, 0, 0, .12);
+            }
+            .b3-menu__icon{
+                margin: 7px 12px;
+            }
+			&.b3-menu__item--selected .b3-menu__icon{
+				color: var(--Sv-status-barDock-color);
+			}
+            .b3-menu__label{
+                position: absolute;
+                bottom: -28px;
+                left: 0;
+                color: var(--b3-tooltips-color);
+                background-color: var(--b3-tooltips-background);
+                height: 18px;
+                line-height: 18px;
+                padding: 5px 8px;
+                border-radius: 6px;
+                min-width:unset;
+                opacity: 0;
+                pointer-events: none;
+            }
+            &:hover>.b3-menu__label{
+                opacity: 1;
+                transition: var(--b3-transition);
+            }
+        }
+    }
+    & #savorToolbar{
+        order: 2;
+    }
+}
+#conceal{
+    margin-top: 8px;
+    &::before{
+        content: "";
+        height: 1px;
+        width: calc(100% - 15px);
+        border-bottom: 1px solid var(--b3-theme-surface-lighter);
+        position: absolute;
+        top:-5px;
+    }
 }
