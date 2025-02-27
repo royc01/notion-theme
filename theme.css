@@ -109,7 +109,7 @@
     --b3-theme-secondary: #f3a92f;
     --b3-theme-background:  oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));
     /* 编辑区背景 */
-    --b3-theme-background-light: var(--Sv-list-background);
+    --b3-theme-background-light: var(--b3-theme-surface-lighter);
     --b3-theme-surface: oklch(var(--b3-theme-surface-base-l) var(--b3-theme-surface-base-ch));/* 面板主色 */
     --b3-theme-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
     --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*0.95) var(--b3-theme-surface-base-ch));
