@@ -4,6 +4,7 @@
     --b3-theme-primary-base-ch:0.1265 230.5;
     --b3-theme-surface-base-l:30.61%;
     --b3-theme-surface-base-ch:0.0087 233.95;
+    --b3-theme-on-background-base:94.01% 0 0;
 
     --b3-font-color1-base-l: 100%;
     --b3-font-color2-base-l: 55.57%;
@@ -39,7 +40,6 @@
     /* 文字颜色 */
     --b3-theme-on-primary: #fff;
     --b3-theme-on-secondary: #fff;
-    --b3-theme-on-background: #ebebeb;
     --b3-theme-on-surface: #afb1b2;
     --b3-theme-on-surface-light: rgba(154, 160, 166, .8);
     --b3-theme-on-error: #fff;
@@ -58,6 +58,8 @@
     /* 列表 */
     --b3-list-hover: rgba(230, 230, 230, .05);
 
+    /* 代码块 */
+    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));
 
     /* 提示 */
     --b3-tooltips-background: oklch(calc(var(--b3-theme-surface-base-l)*1.5) var(--b3-theme-surface-base-ch));
@@ -104,6 +106,10 @@
     --b3-protyle-inline-mark-color: #e8eaed;
     --b3-protyle-inline-tag-color: #9aa0a6;
     --b3-protyle-inline-blockref-color: #9876aa;
+
+    /* 头图 */
+    --Sv-background-icon-button-color: var(--b3-theme-background);
+    --Sv-background-icon-button: oklch(var(--b3-theme-on-background-base) / 0.4);
 
     /* PDF */
     --b3-pdf-selection: #779170;
@@ -173,7 +179,7 @@
     --Sv-dock-item-color: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.8);
 	
 	/* 侧栏面板 */
-    --Sv-list-item-arrow: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.4);
+    --Sv-list-item-arrow: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.8);
     --Sv-list-background: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.1);
     --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.15);
     --Sv-block-logo-color: var(--b3-theme-on-background);

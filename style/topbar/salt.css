@@ -54,10 +54,6 @@
 	background:var(--Sv-Savor-light-off);
 }
 
-#toolbar + .fn__flex,#layouts>.fn__flex{
-    background-color: var(--Sv-dock-background)!important;
-}
-
 .dock.dock--vertical .dock__item:first-child {
     margin-top: 5px !important;
 }

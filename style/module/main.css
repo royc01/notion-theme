@@ -25,11 +25,10 @@
 }
 
 #toolbar + .fn__flex{
-    background-color: var(--Sv-toolbar-background);
+    background-color: var(--Sv-dock-background);
 }
 body:not(.body--mobile,.body--window) #layouts{
     min-height: 90%;
-    background-color: var(--Sv-toolbar-background);
     margin: var(--Sv-layout-margin);
     .layout__center .layout-tab-container{
         border-radius: var(--Sv-center-radius);
@@ -123,4 +122,136 @@ body:not(.body--mobile,.body--window) #layouts{
         background-color: var(--b3-theme-background);
     }
 } 
+}
+
+
+/* 全局过渡动画 */
+:root {
+    --transition-time: 0.5s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-time-fast: 0.2s;
+    --transition-timing-fast: cubic-bezier(0, 0, .2, 1);
+}
+
+/* 界面框架元素过渡效果 */
+.layout__center,
+.toolbar,
+.block__icons,
+.b3-dialog__container,
+.b3-menu,
+.dock__item,
+.layout-tab-bar,
+.layout-tab-container,
+.block__content,
+.fn__flex-1,
+.b3-menu__item,
+.b3-menu__submenu,
+.dock__item,
+.toolbar__item,
+.toolbar__text,
+.layout-tab-bar__item,
+.block__logo,
+.block__icon,
+.b3-text-field,
+.b3-select,
+.b3-button,
+.b3-card,
+.b3-list-item,
+.b3-list__item,
+.status,
+#status,
+#toolbar,
+#dockLeft,
+#dockRight,
+#dockTop,
+#dockBottom,
+.b3-dialog,
+.b3-snackbar,
+body.body--window,
+body:not(.body--window) #layouts,
+[data-type="outline"] .b3-list-item,
+[data-type="graph"] .b3-list-item,
+[data-type="backlink"] .b3-list-item {
+    transition: background-color var(--transition-time) var(--transition-timing);
+}
+
+/* 编辑器相关元素只应用必要的过渡效果 */
+.protyle-background,
+.protyle-title,
+.protyle-toolbar,
+.protyle-util,
+.protyle,
+.protyle-content,
+.protyle-preview,
+.b3-typography,
+.protyle-breadcrumb,
+.protyle-breadcrumb__bar,
+.protyle-wysiwyg__embed,
+.protyle-wysiwyg__preview {
+    transition: background-color var(--transition-time) var(--transition-timing);
+}
+/* 编辑器和内容元素过渡效果（较快） */
+.layout__center .fn__flex-1,
+.layout__center .protyle-content,
+.layout__center .protyle-background,
+.layout__center .protyle-title,
+.layout__center .protyle-wysiwyg,
+.layout__center .protyle-preview,
+.layout__center .b3-typography,
+.layout__center .protyle-breadcrumb,
+.layout__center .protyle-breadcrumb__bar,
+.layout__center .layout-tab-bar,
+.layout__center .layout-tab-bar__item,
+.layout__center .layout-tab-bar--readonly,
+.layout__center .layout-tab-bar .item,
+.layout__center .layout-tab-bar .item--readonly,
+.layout__center .layout-tab-bar .item--focus,
+.layout__center .layout-tab-container,
+.layout__center .layout-tab-container .item,
+.layout__center .layout-tab-container .item--focus,
+.layout__center .protyle-wysiwyg [data-node-id],
+.layout__center .protyle-wysiwyg [data-type="NodeParagraph"],
+.layout__center .protyle-wysiwyg [data-type="NodeHeading"],
+.layout__center .protyle-wysiwyg div,
+.layout__center .protyle-wysiwyg p,
+.layout__center .protyle-wysiwyg h1,
+.layout__center .protyle-wysiwyg h2,
+.layout__center .protyle-wysiwyg h3,
+.layout__center .protyle-wysiwyg h4,
+.layout__center .protyle-wysiwyg h5,
+.layout__center .protyle-wysiwyg h6,
+.layout__center .protyle-wysiwyg li,
+.layout__center .protyle-wysiwyg blockquote,
+.layout__center .layout-tab-bar::before,
+.layout__center .layout-tab-bar::after,
+.layout__center .layout-tab-bar .item::before,
+.layout__center .layout-tab-bar .item::after,
+.layout__center .layout-tab-bar--readonly::before,
+.layout__center .layout-tab-bar--readonly::after,
+.layout__center .layout-tab-container::before,
+.layout__center .layout-tab-container::after {
+    transition: background-color var(--transition-time-fast) var(--transition-timing-fast);
+}
+/* 禁用特定元素的过渡效果以提高性能 */
+.protyle-wysiwyg [data-node-id],
+.protyle-wysiwyg [contenteditable="true"],
+img,
+svg:not(.toolbar__icon),
+.protyle-scroll,
+.protyle-gutters,
+.protyle-select,
+.protyle-hint,
+.protyle-util button,
+.protyle-util [data-type],
+[data-selected="true"],
+.protyle-wysiwyg [spellcheck="false"],
+.protyle-wysiwyg code,
+.protyle-wysiwyg pre,
+.protyle-wysiwyg kbd,
+.b3-typography code,
+.b3-typography pre,
+.b3-typography kbd,
+input,
+textarea {
+    transition: none !important;
 }

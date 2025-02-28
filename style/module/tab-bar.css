@@ -57,9 +57,9 @@
         margin-left: -10px;
         overflow: visible;
         z-index: 2;
-        background-color: var(--Sv-dock-background);
+        /*background-color: var(--Sv-dock-background);*/
         border-radius: var(--Sv-tab-bar-item-radius);
-        &::before {
+        /*&::before {
         content: "" ;
         display: inline-block ;
         width: 20px;
@@ -71,7 +71,8 @@
         top: 0px;
         left: -20px;
         pointer-events: none;
-        }
+        transition: box-shadow var(--transition-time) var(--transition-timing);
+        }*/
     }
     .item--readonly {
         min-height: 28px;

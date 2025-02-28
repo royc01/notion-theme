@@ -59,8 +59,8 @@ body:not(.body--mobile,.body--window)>#toolbar{
         }
     }
 }
-#barWorkspace{
-    max-width: 92px;
+#barWorkspace .toolbar__text{
+    max-width: 55px!important;
 }
 #barPlugins{
     margin-left: 18px;
@@ -197,7 +197,6 @@ body:not(.body--mobile,.body--window) #layouts{
 }
 
 #toolbar + .fn__flex{
-    background-color: var(--Sv-dock-background);
     box-shadow:0 38px 0 0 var(--Sv-toolbar-background) inset;
 }
 
@@ -257,7 +256,4 @@ body:not(.body--mobile,.body--window) #layouts{
 
 .layout__center .layout__resize:not(.layout__resize--lr) +.fn__flex .layout-tab-bar--readonly{
     background-color: var(--Sv-dock-background)!important;
-    &::before{
-        box-shadow: 6px -6px 0 var(--Sv-dock-background)!important;
-    }
 }

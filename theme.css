@@ -394,7 +394,7 @@
     --Sv-img-icons-span: rgba(0, 0, 0, .5);
 
     /* —————— 编辑器 —————— */
-    --Sv-title-input-empty: rgba(55, 53, 47, 0.2);
+    --Sv-title-input-empty: oklch(var(--b3-theme-on-background-base) / 0.1);
     --Sv-layout-margin: 0 5px 5px 5px;
     --Sv-layout-margin-fixed: 0 5px 5px 5px;
     --Sv-center-radius: var(--Sv-dock-item-radius);
@@ -500,7 +500,7 @@
     --Sv-table-thead: var(--b3-theme-surface);
 
     /* 代码块 */
-    --Sv-code-block-background: var(--b3-theme-surface);
+    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
 
     /* 行内代码*/
     --Sv-inline-code:var(--b3-theme-error);

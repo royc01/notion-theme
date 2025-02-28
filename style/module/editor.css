@@ -642,6 +642,7 @@
     .protyle-action{
 	padding:4px 3px;
     .protyle-action__language{
+        margin-left: 0.5em!important;
         height:16px;
         line-height:14px;
         border-radius:3px;

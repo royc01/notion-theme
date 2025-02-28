@@ -183,15 +183,6 @@
             & .config-query .fn__flex-1, & .b3-label__text, & .b3-label :where(a,code,.ft__on-surface):not(.b3-button--outline) {
                 font-weight: 400 !important;
             }
-        }
-            .fn__hr--b:not(.resize__move){
-                height: 11px;
-            }
-            [data-name="bazaar"]/*集市*/{
-                .b3-card--wrap {
-                    min-width: 300px;
-                }
-
             .layout-tab-bar{
                 background-color: var(--b3-theme-surface);
                 border: none;
@@ -235,6 +226,15 @@
                     }
                 }
             }
+        }
+            .fn__hr--b:not(.resize__move){
+                height: 11px;
+            }
+            [data-name="bazaar"]/*集市*/{
+                .b3-card--wrap {
+                    min-width: 300px;
+                }
+
             .config-bazaar__panel{
                 background-color: var(--Sv-bazaar-focus); 
                 border-radius: 6px 6px 0 0;
