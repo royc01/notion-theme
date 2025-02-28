@@ -5,7 +5,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	pointer-events: none;
 	counter-reset:plugin-counter;
 	background-color: transparent;
-    app-region: drag;
+    -webkit-app-region: drag; 
 	& .toolbar__item {
 		pointer-events: visibleFill;
 		app-region: no-drag;
@@ -256,4 +256,13 @@ body:not(.body--mobile,.body--window) #layouts{
 
 .layout__center .layout__resize:not(.layout__resize--lr) +.fn__flex .layout-tab-bar--readonly{
     background-color: var(--Sv-dock-background)!important;
+}
+
+.layout__center [data-type="wnd"]>.fn__flex::after{
+    content: "";
+    position: absolute;
+    height: 0.8em;
+    width: 100%;
+    opacity: 0;
+    -webkit-app-region: drag;
 }
