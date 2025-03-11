@@ -36,9 +36,6 @@ body:not(.body--mobile,.body--window) #layouts{
     }
 }
 
-#savordrag{
-	display: none;
-}
 #savorPlugins{
 	display: none;
 }
@@ -48,18 +45,17 @@ body:not(.body--mobile,.body--window) #layouts{
 }
 
 
-
+/*-----------------------新窗口-------------------------*/
 .body--window {
-    .layout__center .fn__flex-column{
-        background-color: var(--Sv-toolbar-background);
+    #layouts div[data-type=wnd]{
+        background-color: var(--Sv-toolbar-background)!important;
     & > .fn__flex > .layout-tab-bar {
         border-radius: 6px 0 0 6px;
-        margin-top:7px;
+        margin-top:5px;
         background-color: transparent;
         .item:not(.item--readonly) {
             margin-bottom:7px!important;
             pointer-events: visibleFill;
-            box-shadow: -6px 0 0 0 var(--Sv-toolbar-background) inset;
         }
         & .item--readonly{
             height: 28px;
@@ -75,9 +71,6 @@ body:not(.body--mobile,.body--window) #layouts{
         }
         &.layout-tab-bar--readonly{
             background-color: var(--Sv-toolbar-background);
-        &::before {
-            box-shadow: 6px -6px 0 var(--Sv-toolbar-background);
-        }
     }
     }
 }
@@ -131,6 +124,16 @@ body:not(.body--mobile,.body--window) #layouts{
     --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
     --transition-time-fast: 0.2s;
     --transition-timing-fast: cubic-bezier(0, 0, .2, 1);
+    
+    /* 默认情况下不应用过渡效果 */
+    --theme-transition: none;
+    --theme-transition-fast: none;
+}
+
+/* 当添加theme-transitioning类时才应用过渡效果 */
+:root.theme-transitioning {
+    --theme-transition: background-color var(--transition-time) var(--transition-timing);
+    --theme-transition-fast: background-color var(--transition-time-fast) var(--transition-timing-fast);
 }
 
 /* 界面框架元素过渡效果 */
@@ -172,7 +175,7 @@ body:not(.body--window) #layouts,
 [data-type="outline"] .b3-list-item,
 [data-type="graph"] .b3-list-item,
 [data-type="backlink"] .b3-list-item {
-    transition: background-color var(--transition-time) var(--transition-timing);
+    transition: var(--theme-transition);
 }
 
 /* 编辑器相关元素只应用必要的过渡效果 */
@@ -188,8 +191,9 @@ body:not(.body--window) #layouts,
 .protyle-breadcrumb__bar,
 .protyle-wysiwyg__embed,
 .protyle-wysiwyg__preview {
-    transition: background-color var(--transition-time) var(--transition-timing);
+    transition: var(--theme-transition);
 }
+
 /* 编辑器和内容元素过渡效果（较快） */
 .layout__center .fn__flex-1,
 .layout__center .protyle-content,
@@ -230,28 +234,6 @@ body:not(.body--window) #layouts,
 .layout__center .layout-tab-bar--readonly::after,
 .layout__center .layout-tab-container::before,
 .layout__center .layout-tab-container::after {
-    transition: background-color var(--transition-time-fast) var(--transition-timing-fast);
+    transition: var(--theme-transition-fast);
 }
-/* 禁用特定元素的过渡效果以提高性能 */
-.protyle-wysiwyg [data-node-id],
-.protyle-wysiwyg [contenteditable="true"],
-img,
-svg:not(.toolbar__icon),
-.protyle-scroll,
-.protyle-gutters,
-.protyle-select,
-.protyle-hint,
-.protyle-util button,
-.protyle-util [data-type],
-[data-selected="true"],
-.protyle-wysiwyg [spellcheck="false"],
-.protyle-wysiwyg code,
-.protyle-wysiwyg pre,
-.protyle-wysiwyg kbd,
-.b3-typography code,
-.b3-typography pre,
-.b3-typography kbd,
-input,
-textarea {
-    transition: none !important;
-}
+

@@ -1,106 +1,17 @@
-#buttonSavor-light.button_on{
-	background:var(--Sv-Savor-light-on);
-}
-#buttonSavor-light.button_off{
-	background:var(--Sv-Savor-light-off);
-}
-#buttonsalt.button_on{
-	background:var(--Sv-salt-on);
-}
-#buttonsalt.button_off{
-	background:var(--Sv-salt-off);
-}
-#buttonsugar.button_on{
-	background:var(--Sv-sugar-on);
-}
-#buttonsugar.button_off{
-	background:var(--Sv-sugar-off);
-}
-#buttonSavor-dark.button_on{
-	background:var(--Sv-Savor-dark-on);
-}
-#buttonSavor-dark.button_off{
-	background:var(--Sv-Savor-dark-off);
-}
-#buttonvinegar.button_on{
-	background:var(--Sv-vinegar-on);
-}
-#buttonvinegar.button_off{
-	background:var(--Sv-vinegar-off);
-}
-#conceal.button_on{
-	background:var(--Sv-conceal-on);
-}
-#conceal.button_off{
-	background:var(--Sv-conceal-off);
-}
-#tabbarVertical.button_on{
-	background:var(--Sv-tabbarVertical-on);
-}
-#tabbarVertical.button_off{
-	background:var(--Sv-tabbarVertical-off);
-}
-#topBar.button_on{
-	background:var(--Sv-topBar-on);
-}
-#topBar.button_off{
-	background:var(--Sv-topBar-off);
-}
-#bulletThreading.button_on{
-	background:var(--Sv-bulletThreading-on);
-}
-#bulletThreading.button_off{
-	background:var(--Sv-bulletThreading-off);
-}
-#buttonforest.button_on{
-	background:var(--Sv-Forest-on);
-}
-#buttonforest.button_off{
-	background:var(--Sv-Forest-off);
-}
-#buttonflower.button_on{
-	background:var(--Sv-Flower-on);
-}
-#buttonflower.button_off{
-	background:var(--Sv-Flower-off);
-}
-#buttonwind.button_on{
-	background:var(--Sv-Wind-on);
-}
-#buttonwind.button_off{
-	background:var(--Sv-Wind-off);
-}
-#buttonocean.button_on{
-	background:var(--Sv-Ocean-on);
-}
-#buttonocean.button_off{
-	background:var(--Sv-Ocean-off);
-}
-#buttonmountain.button_on{
-	background:var(--Sv-Mountain-on);
-}
-#buttonmountain.button_off{
-	background:var(--Sv-Mountain-off);
-}
-
 #savorToolbar{
 	margin: 0 4px;
 	.b3-menu__item{
-		height:30px;
-		&:after{
-			content: attr(aria-label);
-			line-height: 30px;
-			padding:0 0 0 22px;
-		}
+        background-color: var(--Sv-menu-background);
 		&:hover{
 			background-color: var(--Sv-list-background)!important;
 		}
 	}
-}
-
-
-#commonMenu:not([data-name="barmode"]) #savorToolbar{
-	display:none;
+    #buttonSavor-dark svg,#buttonSavor-light svg{
+        color: var(--Sv-dock-item--activefocus-background);
+    }
+    .button_on svg{
+        color: var(--Sv-dock-item--activefocus-background);
+    }
 }
 
 
@@ -157,14 +68,15 @@
         order: 2;
     }
 }
-#conceal{
+#concealButton{
     margin-top: 8px;
     &::before{
         content: "";
         height: 1px;
-        width: calc(100% - 15px);
+        width: calc(100% - 10px);
         border-bottom: 1px solid var(--b3-theme-surface-lighter);
         position: absolute;
         top:-5px;
+        left: 5px;
     }
 }

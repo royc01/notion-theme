@@ -1,44 +1,24 @@
 /* 主体结构*/
 
 @import url(/appearance/themes/Savor/style/module/toolbar.css);/* 顶栏 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/dock.css);/* 边栏 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/shrink.css);/* 侧栏 ✔*/
-
-@import url(/appearance/themes/Savor/style/module/status.css);/*  底栏 ✔*/
-
+@import url(/appearance/themes/Savor/style/module/status.css);/* 底栏 ✔*/
 @import url(/appearance/themes/Savor/style/module/tab-bar.css);/* 页签 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/breadcrumb.css);/* 面包屑 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/editor.css);/* 编辑器 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/menu.css);/* 菜单 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/ordered-list.css);/* 有序列表 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/unordered-list.css);/* 无序列表 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/av.css);/* 数据库 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/h-reminder.css);/* 标题符号 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/blockquote.css);/* 引述 ✔*/
-
 @import url(/appearance/themes/Savor/style/module/search.css);/* 搜索 ✔**/
-
 @import url(/appearance/themes/Savor/style/module/main.css);/* 主要结构 ✔*/
-
 @import url(/appearance/themes/Savor/style/custom/function.css);/* 自定义功能按钮 ✔*/
-
 @import url(/appearance/themes/Savor/style/custom/list2map.css);/* 列表转导图 ✔*/
-
 @import url(/appearance/themes/Savor/style/custom/list2table.css);/* 列表转表格 ✔*/
-
 @import url(/appearance/themes/Savor/style/custom/list2board.css);/* 列表转看板 ✔*/
-
-@import url(/appearance/themes/Savor/style/custom/list-fold.css);/* 折叠块悬浮弹窗 ✔*/
 
 @font-face {
     font-family: 'Twitter Emoji';
@@ -46,86 +26,31 @@
     src: url("font/Twemoji.woff2") format("woff2");
 }
 @font-face {
-    font-family: 'Roboto';
-    font-weight: 500;
+    font-family: 'Harmony';
     font-display: swap;
-    src: url("font/Harmony-500.woff2") format("woff2");
+    src: url("font/Harmony-500.woff2") format("woff2"),
+         url("font/Harmony-600.woff2") format("woff2"),
+         url("font/Harmony-700.woff2") format("woff2");
+    font-weight: 500 600 700;
 }
-@font-face {
-    font-family: 'Roboto';
-    font-weight: 600;
-    font-display: swap;
-    src: url("font/Harmony-600.woff2") format("woff2");
-}
-@font-face {
-    font-family: 'Roboto';
-    font-weight: 700;
-    font-display: swap;
-    src: url("font/Harmony-700.woff2") format("woff2");
-}
-
-:root {
-    /* 基础数 */
-    --b3-theme-primary-base-l:69.42%;
-    --b3-theme-primary-base-ch:0.1265 230.5;
-    --b3-theme-surface-base-l:97.89%;
-    --b3-theme-surface-base-ch:0.0013 106.42;
-    --b3-theme-on-background-base:32.89% 0.0107 91.66;
-    --Sv-dock-item--activefocus-background--base:68.98% 0.161 30.76;
-
-    --b3-font-color1-base-l: 0%;
-    --b3-font-color2-base-l: 61.97%;
-    --b3-font-color3-base-l: 42.61%;
-	--b3-font-color4-base-l: 65.94%;
-    --b3-font-color5-base-l: 72.3%;
-	--b3-font-color6-base-l: 76.79%;
-    --b3-font-color7-base-l: 70.63%;
-	--b3-font-color8-base-l: 52.39%;
-    --b3-font-color9-base-l: 50.87%;
-    --b3-font-color10-base-l: 47.14%;
-    --b3-font-color11-base-l: 50.25%;
-    --b3-font-color12-base-l: 60.52%;
-    --b3-font-color13-base-l: 58.99%;
-
-	--b3-font-color1-base-ch: 0 0;
-    --b3-font-color2-base-ch: 0.006 95.15;
-    --b3-font-color3-base-ch: 0.0452 45.15;
-	--b3-font-color4-base-ch: 0.1586 55.7;
-    --b3-font-color5-base-ch: 0.1674 51.83;
-	--b3-font-color6-base-ch: 0.157 86.52;
-    --b3-font-color7-base-ch: 0.165 139.18;
-	--b3-font-color8-base-ch: 0.0917 180;
-    --b3-font-color9-base-ch: 0.1052 235.24;
-    --b3-font-color10-base-ch: 0.1565 298.98;
-    --b3-font-color11-base-ch: 0.1934 350.57;
-    --b3-font-color12-base-ch: 0.199 25.43;
-    --b3-font-color13-base-ch: 0.2344 26.3;
-    
+:root{
     /* 主色 */
     --b3-theme-primary: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch));/* 主色 */    
     --b3-theme-primary-light: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch) / 0.54);
     --b3-theme-primary-lighter: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch) / 0.38);
     --b3-theme-primary-lightest: oklch(var(--b3-theme-primary-base-l) var(--b3-theme-primary-base-ch) / 0.2);
     --b3-theme-secondary: #f3a92f;
-    --b3-theme-background:  oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));
-    /* 编辑区背景 */
     --b3-theme-background-light: var(--b3-theme-surface-lighter);
     --b3-theme-surface: oklch(var(--b3-theme-surface-base-l) var(--b3-theme-surface-base-ch));/* 面板主色 */
     --b3-theme-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
-    --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*0.95) var(--b3-theme-surface-base-ch));
     --b3-theme-error: #eb5757;
     --b3-theme-success: #65b84d;
 
-    /* 文字颜色 */
-    --b3-theme-on-primary: #fff;
-    --b3-theme-on-secondary: #fff;
+      /* 文字颜色 */
     --b3-theme-on-background: oklch(var(--b3-theme-on-background-base));
-    --b3-theme-on-surface: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch));
-    --b3-theme-on-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch) / 0.68);
-    --b3-theme-on-error: #fff;
 
     /* 字体 */
-    --b3-font-family: Roboto, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", "Hiragino Sans", arial, sans-serif, emojis;
+    --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", "Hiragino Sans", arial, sans-serif, emojis;
     --b3-font-family-protyle: var(--b3-font-family);
     --b3-font-family-code: "Emojis Additional", "Emojis Reset", "JetBrainsMono-Regular", mononoki, Consolas, "Liberation Mono", var(--b3-font-family);
     --b3-font-family-graph: arial;
@@ -144,38 +69,6 @@
     --b3-border-color: var(--b3-theme-surface-lighter);
     --b3-border-radius: 6px;
     --b3-border-radius-b: 12px;
-
-    /* 滚动条 */
-    --b3-scroll-color: rgba(0, 0, 0, .2);
-
-    /* 列表 */
-    --b3-list-hover: rgba(0, 0, 0, .075);
-    --b3-list-icon-hover: rgba(33, 34, 36, .1);
-
-    /* 菜单 */
-    --b3-menu-background: var(--b3-theme-surface);
-
-    /* 提示 */
-    --b3-tooltips-background: oklch(calc(var(--b3-theme-surface-base-l)*0.4) var(--b3-theme-surface-base-ch));
-    --b3-tooltips-color: var(--b3-theme-background);
-    --b3-tooltips-second-color: #7d7c7a;
-    --b3-tooltips-shadow: 0 2px 8px rgba(0, 0, 0, .1);
-
-    /* 为空提示 */
-    --b3-empty-color: var(--b3-theme-on-surface-light);
-
-    /* 遮罩 */
-    --b3-mask-background: rgba(220, 220, 220, .4);
-
-    /* 卡片背景 */
-    --b3-card-error-color: rgb(97, 26, 21);
-    --b3-card-error-background: #f5d1cf;
-    --b3-card-warning-color: rgb(102, 60, 0);
-    --b3-card-warning-background: #ffe8c8;
-    --b3-card-info-color: rgb(13, 60, 97);
-    --b3-card-info-background: #d6eaf9;
-    --b3-card-success-color: rgb(30, 70, 32);
-    --b3-card-success-background: #d7eed8;
 
     /* 自定义文字 */
 	--b3-font-color1: oklch(var(--b3-font-color1-base-l) var(--b3-font-color1-base-ch));
@@ -213,9 +106,6 @@
     --b3-color-transition: color .2s cubic-bezier(0, 0, .2, 1) 0ms;
     --b3-background-transition: background 20ms ease-in 0s;
 
-    /* 下拉菜单 */
-    --b3-select-background: url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M12.8,15.6l4-4.1c0.2-0.2,0.2-0.4,0.2-0.6c0-0.5-0.4-0.9-0.9-0.9c-0.3,0-0.5,0.1-0.6,0.3L12,13.9l-3.4-3.6C8.3,10.1,8.1,10,7.9,10C7.4,10,7,10.4,7,10.9c0,0.2,0.1,0.4,0.2,0.6l4,4.1c0.2,0.2,0.4,0.3,0.7,0.3C12.3,15.9,12.5,15.8,12.8,15.6z'/></svg>") no-repeat right 2px center var(--Sv-select-field)   ;
-
     /* switch */
     --b3-switch-background: oklch(var(--b3-theme-on-background-base) / 0.1);
     --b3-switch-border: var(--b3-theme-on-surface-light);
@@ -230,79 +120,10 @@
     --b3-dialog-shadow: var(--b3-theme-background) 0px 0px 0px 1.5px,rgba(15, 15, 15, 0.05)  0px 0px 0px 2px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
     --b3-button-shadow: 0 5px 5px -3px rgb(0 0 0 / .2), 0 8px 10px 1px rgb(0 0 0 / .14), 0 3px 14px 2px rgb(0 0 0 / .12);
 
-    /* 图表颜色 */
-    --b3-graph-p-point: #076f7e;
-    --b3-graph-heading-point: #8250df;
-    --b3-graph-math-point: #80FFA5;
-    --b3-graph-code-point: #00DDFF;
-    --b3-graph-table-point: #37A2FF;
-    --b3-graph-list-point: #FF0087;
-    --b3-graph-todo-point: #FFBF00;
-    --b3-graph-olist-point: #b3005f;
-    --b3-graph-listitem-point: #f65b00;
-    --b3-graph-bq-point: #8d48e3;
-    --b3-graph-super-point: #dd79ff;
-    --b3-graph-doc-point: var(--b3-theme-on-background);
-    --b3-graph-tag-point: #dbf32f;
-    --b3-graph-asset-point: #05c091;
-    --b3-graph-line: #5f6368;
-    --b3-graph-ref-line: #d23f31;
-    --b3-graph-tag-line: #5f6b06;
-    --b3-graph-tag-tag-line: #dbf32f;
-    --b3-graph-asset-line: #037457;
-    --b3-graph-hl-point: #f3a92f;
-    --b3-graph-hl-line: #4285f4;
-
-    /* 编辑器搜索颜色 */
-    --b3-protyle-search-background: #ffe955;
-    --b3-protyle-search-border-color: #f2e680;
-    --b3-protyle-search-current-background: #a5d3fe;
-
-    /* 代码片段背景 */
-    --b3-protyle-code-background: rgba(27, 31, 35, .05);
-
-    /* 所见即所得行内元素颜色 */
-    --b3-protyle-inline-strong-color: inherit;
-    --b3-protyle-inline-em-color: inherit;
-    --b3-protyle-inline-u-color: inherit;
-    --b3-protyle-inline-s-color: inherit;
-    --b3-protyle-inline-link-color: #4285f4;
-    --b3-protyle-inline-mark-background: rgb(252, 212, 126);
-    --b3-protyle-inline-mark-color: #202124;
-    --b3-protyle-inline-tag-color: #5f6368;
-    --b3-protyle-inline-blockref-color: #8957e5;
-    --b3-protyle-inline-fileref-color: #21862e;
-
-    /* PDF */
-    --b3-pdf-selection: #d0e9c8;
-    --sidebar-width: 200px;
-    --b3-pdf-offset: 0;
-    --b3-pdf-background1: var(--b3-font-background5);
-    --b3-pdf-background2: var(--b3-font-background6);
-    --b3-pdf-background3: var(--b3-font-background7);
-    --b3-pdf-background4: var(--b3-font-background8);
-    --b3-pdf-background5: var(--b3-font-background10);
-    --b3-pdf-background6: var(--b3-font-background11);
-    --b3-pdf-background7: var(--b3-font-background13);
-    --b3-pdf-dark: #212224;
-
-    /* 表格 */
-    --b3-table-even-background: rgba(0, 0, 0, .02);
-
-    /* 嵌入块 */
-    --b3-embed-background: transparent;
-
-    /* 引述块 */
-    --b3-bq-background: transparent;
-
-    /* 父块颜色 */
-    --b3-parent-background: var(--b3-theme-background);
-
-
-    /* ————————————————————  自定义结构配色  ———————————————————— */
+    /* 下拉菜单 */
+    --b3-select-background: url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M12.8,15.6l4-4.1c0.2-0.2,0.2-0.4,0.2-0.6c0-0.5-0.4-0.9-0.9-0.9c-0.3,0-0.5,0.1-0.6,0.3L12,13.9l-3.4-3.6C8.3,10.1,8.1,10,7.9,10C7.4,10,7,10.4,7,10.9c0,0.2,0.1,0.4,0.2,0.6l4,4.1c0.2,0.2,0.4,0.3,0.7,0.3C12.3,15.9,12.5,15.8,12.8,15.6z'/></svg>") no-repeat right 2px center var(--Sv-select-field)   ;
 	
-	/* 顶栏 */
-    --Sv-toolbar-background:  oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
+    /* 顶栏 */
     --Sv-toolbar-item-hover: var(--b3-theme-surface);
     --Sv-barWorkspace-color: var(--b3-theme-background);
     --Sv-barWorkspace-background: oklch(68.98% 0.161 30.76);
@@ -311,9 +132,7 @@
     --Sv-toolbar-closeWindow-svg: var(--b3-theme-background);
     --Sv-fixed-item:var(--b3-toolbar-color);
 
-	/* 边栏 */
-    --Sv-dock-background: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
-    --Sv-dock-item-color: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.4);
+    /* 边栏 */
     --Sv-dock-item-hover-color: var(--b3-theme-on-background);
     --Sv-dock-item-active-background: var(--b3-theme-surface);
     --Sv-dock-item-active-background-hover: var(--Sv-dock-item-active-background);
@@ -326,9 +145,6 @@
     --Sv-block-icon-svg-color-hover: var(--b3-theme-on-background);
     --Sv-block-icon--background-hover: var(--Sv-list-background);
     --Sv-list-item-radius: 6px;
-    --Sv-list-item-arrow: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.4);
-    --Sv-list-background: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.06);
-    --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.1);
     --Sv-list-focus-active: oklch(var(--Sv-dock-item--activefocus-background--base) / 0.1);
     --Sv-list-focus-color: var(--b3-theme-on-background);
     --Sv-list-item-color: var(--b3-theme-on-surface);
@@ -349,8 +165,6 @@
 	--h6-list-graphic: #dda36a;
     
     /* 反链面板 */
-    --Sv-block-logo-color: var(--b3-theme-background);
-    --Sv-block-logo-background: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.2);
     --Sv-block-icon-active: var(--Sv-barWorkspace-background);
     --Sv-backlink-background: var(--Sv-dock-background);
     --Sv-backlink-list: var(--b3-theme-surface);
@@ -360,7 +174,6 @@
     --Sv-status-radius-r: 0 6px 6px 0;
     --Sv-status-radius: var(--Sv-dock-item-radius);
     --Sv-status-radius-t: 0 0 6px 0;
-    --Sv-status-msg-background: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
     --Sv-status-barDock: var(--Sv-dock-item-active-background);
     --Sv-status-barDock-color: var(--Sv-dock-item--activefocus-background);
     --Sv-status-item-hover:  oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.06);
@@ -384,8 +197,6 @@
 
     /* 头图 */
     --Sv-background-icon-hover: var(--Sv-list-background);
-    --Sv-background-icon-button-color: var(--b3-theme-background);
-    --Sv-background-icon-button: oklch(var(--b3-theme-on-background-base) / 0.4);
     --Sv-background-icon-button-hover: var(--Sv-list-background);
     --Sv-protyle-icon: var(--b3-theme-background);
     --Sv-protyle-icon-color: var(--b3-theme-on-surface);
@@ -422,8 +233,6 @@
     --Sv-chip--pink-color: #4d3838;
     --Sv-chip--pink-bg: var(--b3-font-background13);
     /* 字体颜色选择 工具条 */
-    --Sv-protyle-toolbar-color: var(--b3-theme-on-background);
-    --Sv-protyle-util-bg: var(--b3-theme-background);
 
     --Sv-color-d-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
     --Sv-color1-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
@@ -439,27 +248,7 @@
     --Sv-color11-shadow: oklch(calc(var(--b3-font-color11-base-l)*0.95) var(--b3-font-color11-base-ch) / 0.2);
     --Sv-color12-shadow: oklch(calc(var(--b3-font-color12-base-l)*0.95) var(--b3-font-color12-base-ch) / 0.2);
     --Sv-color13-shadow: oklch(calc(var(--b3-font-color13-base-l)*0.95) var(--b3-font-color13-base-ch) / 0.2);
-
-    --Sv-bg-d-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
-    --Sv-bg1-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
-    --Sv-bg2-shadow: oklch(calc(var(--b3-font-color2-base-l)*0.95) var(--b3-font-color2-base-ch) / 0.2);
-    --Sv-bg3-shadow: oklch(calc(var(--b3-font-color13-base-l)*0.95) var(--b3-font-color13-base-ch) / 0.2);
-    --Sv-bg4-shadow: oklch(calc(var(--b3-font-color3-base-l)*0.95) var(--b3-font-color3-base-ch) / 0.2);
-    --Sv-bg5-shadow: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.2);
-    --Sv-bg6-shadow: oklch(calc(var(--b3-font-color5-base-l)*0.95) var(--b3-font-color5-base-ch) / 0.2);
-    --Sv-bg7-shadow: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.2);
-    --Sv-bg8-shadow: oklch(calc(var(--b3-font-color7-base-l)*0.95) var(--b3-font-color7-base-ch) / 0.2);
-    --Sv-bg9-shadow: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.2);
-    --Sv-bg10-shadow: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.2);
-    --Sv-bg11-shadow: oklch(calc(var(--b3-font-color10-base-l)*0.95) var(--b3-font-color10-base-ch) / 0.2);
-    --Sv-bg12-shadow: oklch(calc(var(--b3-font-color11-base-l)*0.95) var(--b3-font-color11-base-ch) / 0.2);
-    --Sv-bg13-shadow: oklch(calc(var(--b3-font-color12-base-l)*0.95) var(--b3-font-color12-base-ch) / 0.2);
     
-    --Sv-style1-d-shadow: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.2);
-    --Sv-error-shadow: #e28c88;
-    --Sv-warning-shadow: #ffc07b;
-    --Sv-info-shadow: #97c5ed;
-    --Sv-success-shadow: #99cf9b;
 
     /* 标题符号 */
     --h1-r-graphic: url("data:image/svg+xml;utf8,<svg fill='rgba(235, 131, 131, 0.4)' height='24' viewBox='0 0 32 32' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M4.8 29.714v0c-1.371 0-2.514-1.143-2.514-2.514v0c0-1.371 1.143-2.514 2.514-2.514v0c1.371 0 2.514 1.143 2.514 2.514v0c0.114 1.371-1.029 2.514-2.514 2.514z'/></svg>") no-repeat  center;
@@ -495,15 +284,6 @@
 
     /* 命名，别名，备注*/
     --Sv-protyle-attr: var(--b3-font-color3);
-
-    /* 表格 */
-    --Sv-table-thead: var(--b3-theme-surface);
-
-    /* 代码块 */
-    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
-
-    /* 行内代码*/
-    --Sv-inline-code:var(--b3-theme-error);
 
     /* 行内标签 */
     --Sv-protyle-tag-color: var(--b3-theme-on-background);
@@ -587,9 +367,8 @@
 
     /* 下拉框、输入框*/
     --Sv-select-field: var(--Sv-list-background);
+
     /* 滚动条 */
-	--Sv-scroll-color: oklch(calc(var(--b3-theme-surface-base-l)*0.92) var(--b3-theme-surface-base-ch));
-	--Sv-scroll-color-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.7) var(--b3-theme-surface-base-ch));
 	--Sv-scroll-bgcolor: transparent;
 	--Sv-border-scroll: rgba(55, 53, 47, 0.2);
 	--webkit-scrollbar: 8px;
@@ -606,78 +385,311 @@
     --Sv-plugin-counter: var(--Sv-dock-item--activefocus-background);
     --Sv-fixed-item-text: var(--b3-theme-on-surface);
 
+}
+
+:root[data-theme-mode="light"] {
+    /* 基础数 */
+    --b3-theme-primary-base-l:69.42%;
+    --b3-theme-primary-base-ch:0.1265 230.5;
+    --b3-theme-surface-base-l:97.89%;
+    --b3-theme-surface-base-ch:0.0013 106.42;
+    --b3-theme-on-background-base:32.89% 0.0107 91.66;
+    --Sv-dock-item--activefocus-background--base:68.98% 0.161 30.76;
+
+    --b3-font-color1-base-l: 0%;
+    --b3-font-color2-base-l: 61.97%;
+    --b3-font-color3-base-l: 42.61%;
+	--b3-font-color4-base-l: 65.94%;
+    --b3-font-color5-base-l: 72.3%;
+	--b3-font-color6-base-l: 76.79%;
+    --b3-font-color7-base-l: 70.63%;
+	--b3-font-color8-base-l: 52.39%;
+    --b3-font-color9-base-l: 50.87%;
+    --b3-font-color10-base-l: 47.14%;
+    --b3-font-color11-base-l: 50.25%;
+    --b3-font-color12-base-l: 60.52%;
+    --b3-font-color13-base-l: 58.99%;
+
+	--b3-font-color1-base-ch: 0 0;
+    --b3-font-color2-base-ch: 0.006 95.15;
+    --b3-font-color3-base-ch: 0.0452 45.15;
+	--b3-font-color4-base-ch: 0.1586 55.7;
+    --b3-font-color5-base-ch: 0.1674 51.83;
+	--b3-font-color6-base-ch: 0.157 86.52;
+    --b3-font-color7-base-ch: 0.165 139.18;
+	--b3-font-color8-base-ch: 0.0917 180;
+    --b3-font-color9-base-ch: 0.1052 235.24;
+    --b3-font-color10-base-ch: 0.1565 298.98;
+    --b3-font-color11-base-ch: 0.1934 350.57;
+    --b3-font-color12-base-ch: 0.199 25.43;
+    --b3-font-color13-base-ch: 0.2344 26.3;
+    
+    /* 主色 */
+    --b3-theme-background: #fff;/* 编辑区背景 必须用HEX颜色*/
+    --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*0.95) var(--b3-theme-surface-base-ch));
+    --b3-theme-on-surface: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch));
+    --b3-theme-on-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch) / 0.68);
+
+    /* 提示 */
+    --b3-tooltips-background: oklch(calc(var(--b3-theme-surface-base-l)*0.4) var(--b3-theme-surface-base-ch));
+    --b3-tooltips-color: var(--b3-theme-background);
+
+    /* 卡片背景 */
+    --b3-card-error-color: rgb(97, 26, 21);
+    --b3-card-error-background: #f5d1cf;
+    --b3-card-warning-color: rgb(102, 60, 0);
+    --b3-card-warning-background: #ffe8c8;
+    --b3-card-info-color: rgb(13, 60, 97);
+    --b3-card-info-background: #d6eaf9;
+    --b3-card-success-color: rgb(30, 70, 32);
+    --b3-card-success-background: #d7eed8;
+
+    /* 头图 */
+    --Sv-background-icon-button-color: var(--b3-theme-background);
+    --Sv-background-icon-button: oklch(var(--b3-theme-on-background-base) / 0.4);
+
+    /* PDF */
+    --b3-pdf-selection: #d0e9c8;
+    --b3-pdf-sidebar-width: 200px;
+    --b3-pdf-offset: 0;
+    --b3-pdf-background1: var(--b3-font-background5);
+    --b3-pdf-background2: var(--b3-font-background6);
+    --b3-pdf-background3: var(--b3-font-background7);
+    --b3-pdf-background4: var(--b3-font-background8);
+    --b3-pdf-background5: var(--b3-font-background10);
+    --b3-pdf-background6: var(--b3-font-background11);
+    --b3-pdf-background7: var(--b3-font-background13);
+    --b3-pdf-dark: #212224;
+
+
+    /* ————————————————————  自定义结构配色  ———————————————————— */
+	
+	/* 顶栏 */
+    --Sv-toolbar-background:  oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
+
+	/* 边栏 */
+    --Sv-dock-background: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
+    --Sv-dock-item-color: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.4);
+
+    /* 侧栏 */
+    --Sv-list-item-arrow: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.4);
+    --Sv-list-background: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.06);
+    --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.1);
+
+    /* 反链面板 */
+    --Sv-block-logo-color: var(--b3-theme-background);
+    --Sv-block-logo-background: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.2);
+
+    /* 底栏 */
+    --Sv-status-msg-background: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
+
+    /* 滚动条 */
+	--Sv-scroll-color: oklch(calc(var(--b3-theme-surface-base-l)*0.92) var(--b3-theme-surface-base-ch));
+	--Sv-scroll-color-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.7) var(--b3-theme-surface-base-ch));
+    
+    /* 表格 */
+    --Sv-table-thead: var(--b3-theme-surface);
+
+    /* 行内代码*/
+    --Sv-inline-code:var(--b3-theme-error);
+
+    /* 代码块 */
+    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
+
+    /* 字体颜色选择 工具条 */
+    --Sv-protyle-toolbar-color: var(--b3-theme-on-background);
+    --Sv-protyle-util-bg: var(--b3-theme-background);
+
+    --Sv-error-shadow: #e28c88;
+    --Sv-warning-shadow: #ffc07b;
+    --Sv-info-shadow: #97c5ed;
+    --Sv-success-shadow: #99cf9b;
+
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/
     --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(132, 130, 125)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
     --Sv-Splugin-off:url("data:image/svg+xml;utf8,<svg fill='rgb(132, 130, 125)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -10px top -6px;
     /*——————————————————————————————————————————————————————————————*/
+
+    --Sv-tab-bar-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23fff'/></svg>"),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23fff'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%23fff'/></svg>");
+    --Sv-tab-bar-V-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C100 44.772 55.228 0 0 0H100V100z' fill='%23fff'/></svg>"),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23fff'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%23fff'/></svg>");
     
-
-    /*savor功能按钮*/
-    --Sv-Savor-light-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z'/></svg>") no-repeat left 0px top -2px;
-    --Sv-Savor-light-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z'/></svg>") no-repeat left 0px top -2px;
-
-    --Sv-salt-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z'/></svg>") no-repeat left 0px top -2px;
-    --Sv-salt-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z'/></svg>") no-repeat left 0px top -2px;
-
-    --Sv-sugar-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-0.267 0-0.533 0-0.8-0.133 2.533-0.133 4.533-2.133 4.533-4.533 0.133-1.067-0.267-2.133-1.067-2.8-0.8-0.8-1.6-1.2-2.8-1.333-0.933-0.133-1.733 0.267-2.4 0.8s-1.067 1.467-1.067 2.267c-0.133 1.467 1.067 2.8 2.533 2.933 1.2 0.133 2.4-0.933 2.4-2.133 0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533c0 0.667-0.533 1.2-1.2 1.067-0.933-0.133-1.6-0.8-1.467-1.6 0-0.533 0.267-1.067 0.667-1.467s0.933-0.533 1.6-0.533c0.8 0 1.467 0.267 2 0.933 0.533 0.533 0.8 1.2 0.8 2.133-0.133 2-1.867 3.6-3.867 3.467-1.6-0.133-2.933-0.933-3.733-2.133-0.267-0.8-0.267-1.467-0.267-2.133 0-2.8 2.4-5.2 5.2-5.2s5.2 2.4 5.2 5.2-2.4 5.2-5.2 5.2z'/></svg>") no-repeat left 0px top -2px;
-    --Sv-sugar-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-0.267 0-0.533 0-0.8-0.133 2.533-0.133 4.533-2.133 4.533-4.533 0.133-1.067-0.267-2.133-1.067-2.8-0.8-0.8-1.6-1.2-2.8-1.333-0.933-0.133-1.733 0.267-2.4 0.8s-1.067 1.467-1.067 2.267c-0.133 1.467 1.067 2.8 2.533 2.933 1.2 0.133 2.4-0.933 2.4-2.133 0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533c0 0.667-0.533 1.2-1.2 1.067-0.933-0.133-1.6-0.8-1.467-1.6 0-0.533 0.267-1.067 0.667-1.467s0.933-0.533 1.6-0.533c0.8 0 1.467 0.267 2 0.933 0.533 0.533 0.8 1.2 0.8 2.133-0.133 2-1.867 3.6-3.867 3.467-1.6-0.133-2.933-0.933-3.733-2.133-0.267-0.8-0.267-1.467-0.267-2.133 0-2.8 2.4-5.2 5.2-5.2s5.2 2.4 5.2 5.2-2.4 5.2-5.2 5.2z'/></svg>") no-repeat left 0px top -2px;
-
-    --Sv-Savor-dark-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z'/></svg>") no-repeat left 0px top -2px;
-    --Sv-Savor-dark-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z'/></svg>") no-repeat left 0px top -2px;
-
-    --Sv-vinegar-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M19.467 18.533c-0.133 0-0.133 0-0.133 0.133-0.4 0.133-0.8 0.133-1.2 0.133-2 0-3.2-1.2-3.2-3.2 0-0.4 0.133-1.067 0.267-1.2v-0.133c0-0.133-0.133-0.133-0.133-0.133s-0.133 0-0.267 0.133c-1.333 0.533-2.267 1.867-2.267 3.467 0 2.133 1.6 3.733 3.867 3.733 1.6 0 2.933-0.933 3.467-2.133 0.133-0.133 0.133-0.133 0.133-0.133-0.4-0.533-0.533-0.667-0.533-0.667zM16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2z'/></svg>") no-repeat left 0px top -2px;
-    --Sv-vinegar-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M19.467 18.533c-0.133 0-0.133 0-0.133 0.133-0.4 0.133-0.8 0.133-1.2 0.133-2 0-3.2-1.2-3.2-3.2 0-0.4 0.133-1.067 0.267-1.2v-0.133c0-0.133-0.133-0.133-0.133-0.133s-0.133 0-0.267 0.133c-1.333 0.533-2.267 1.867-2.267 3.467 0 2.133 1.6 3.733 3.867 3.733 1.6 0 2.933-0.933 3.467-2.133 0.133-0.133 0.133-0.133 0.133-0.133-0.4-0.533-0.533-0.667-0.533-0.667zM16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2z'/></svg>") no-repeat left 0px top -2px;
-
-
-    /*odyssey功能按钮*/
-	--Sv-Forest-on:url("data:image/svg+xml;utf8,<svg fill='rgb(185, 136, 255)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 12.133c-1.867 0-2.933 1.467-2.933 2.933 0 0.533 0 1.733 0 2.267 0 0.8 0.4 1.467 0.4 1.467 0.4 0.667 1.067 1.2 1.867 1.333v1.2c0 0.267 0.267 0.533 0.533 0.533s0.533-0.267 0.533-0.533v-1.2c1.333-0.267 2.267-1.467 2.267-2.8v-2.267c0.267-1.6-0.933-2.933-2.667-2.933zM17.733 17.333c0 0.8-0.4 1.333-1.2 1.6v-2.267c0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533v2.267c-0.8-0.267-1.2-0.933-1.2-1.6v-2.267c0-0.933 0.8-1.733 1.733-1.733s1.733 0.8 1.733 1.733v2.267zM16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.2-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467z'/></svg>") no-repeat left 0px top -2px;
-	--Sv-Forest-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 12.133c-1.867 0-2.933 1.467-2.933 2.933 0 0.533 0 1.733 0 2.267 0 0.8 0.4 1.467 0.4 1.467 0.4 0.667 1.067 1.2 1.867 1.333v1.2c0 0.267 0.267 0.533 0.533 0.533s0.533-0.267 0.533-0.533v-1.2c1.333-0.267 2.267-1.467 2.267-2.8v-2.267c0.267-1.6-0.933-2.933-2.667-2.933zM17.733 17.333c0 0.8-0.4 1.333-1.2 1.6v-2.267c0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533v2.267c-0.8-0.267-1.2-0.933-1.2-1.6v-2.267c0-0.933 0.8-1.733 1.733-1.733s1.733 0.8 1.733 1.733v2.267zM16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.2-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467z'/></svg>") no-repeat left 0px top -2px;
-	
-	--Sv-Flower-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM19.333 14.533c-0.267 0-1.6 0.267-1.6 0.267s-1.067-1.6-1.733-1.6-1.6 1.6-1.6 1.6-1.333-0.267-1.6-0.267-0.667 1.333-0.667 2.667c0 2.4 1.733 4 4 4s4-1.6 4-4c-0.133-1.333-0.4-2.667-0.8-2.667zM16 19.867c-1.467 0-2.667-1.067-2.667-2.667 0-0.4 0-0.8 0.133-1.2 0.133 0 0.4 0.133 0.533 0.133l0.933 0.267 0.533-0.8c0.133-0.267 0.267-0.533 0.533-0.667v0 0c0.133 0.267 0.4 0.533 0.533 0.8l0.533 0.8 0.933-0.267c0.133 0 0.4-0.133 0.533-0.133 0 0.4 0.133 0.8 0.133 1.2 0 1.333-1.2 2.533-2.667 2.533z'/></svg>") no-repeat left 0px top -2px;
-	--Sv-Flower-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM19.333 14.533c-0.267 0-1.6 0.267-1.6 0.267s-1.067-1.6-1.733-1.6-1.6 1.6-1.6 1.6-1.333-0.267-1.6-0.267-0.667 1.333-0.667 2.667c0 2.4 1.733 4 4 4s4-1.6 4-4c-0.133-1.333-0.4-2.667-0.8-2.667zM16 19.867c-1.467 0-2.667-1.067-2.667-2.667 0-0.4 0-0.8 0.133-1.2 0.133 0 0.4 0.133 0.533 0.133l0.933 0.267 0.533-0.8c0.133-0.267 0.267-0.533 0.533-0.667v0 0c0.133 0.267 0.4 0.533 0.533 0.8l0.533 0.8 0.933-0.267c0.133 0 0.4-0.133 0.533-0.133 0 0.4 0.133 0.8 0.133 1.2 0 1.333-1.2 2.533-2.667 2.533z'/></svg>") no-repeat left 0px top -2px;
-	
-	--Sv-Wind-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM18.4 13.2h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.267c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.267c1.067 0 1.867-0.8 1.867-1.867 0-1.333-0.8-2.133-1.867-2.133zM14.667 17.733h-2.533c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h2.533c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c1.067 0 1.867-0.8 1.867-1.867s-0.8-2.133-1.867-2.133z'/></svg>") no-repeat left 0px top -2px;
-	--Sv-Wind-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM18.4 13.2h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.267c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.267c1.067 0 1.867-0.8 1.867-1.867 0-1.333-0.8-2.133-1.867-2.133zM14.667 17.733h-2.533c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h2.533c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c1.067 0 1.867-0.8 1.867-1.867s-0.8-2.133-1.867-2.133z'/></svg>") no-repeat left 0px top -2px;
-	
-    --Sv-Ocean-on:url("data:image/svg+xml;utf8,<svg fill='rgb(178, 222, 57)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z'/></svg>") no-repeat left 0px top -2px;
-	--Sv-Ocean-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z'/></svg>") no-repeat left 0px top -2px;
-	
-	--Sv-Mountain-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM14.667 22.267c-1.2-0.267-2.267-0.933-2.933-1.867l2.533-4.4 2.133 3.6-1.733 2.667zM17.867 19.867l0.667-1.2 1.2 2.133c-0.933 0.933-2.133 1.467-3.467 1.467l1.6-2.4zM16 11.467c3.067 0 5.467 2.4 5.467 5.467 0 0.933-0.267 1.867-0.667 2.533l-1.6-2.533c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-0.667 1.2-2.4-4c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-2.8 4.8c-0.267-0.667-0.4-1.333-0.4-2 0-3.067 2.4-5.467 5.467-5.467z'/></svg>") no-repeat left 0px top -2px;
-	--Sv-Mountain-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM14.667 22.267c-1.2-0.267-2.267-0.933-2.933-1.867l2.533-4.4 2.133 3.6-1.733 2.667zM17.867 19.867l0.667-1.2 1.2 2.133c-0.933 0.933-2.133 1.467-3.467 1.467l1.6-2.4zM16 11.467c3.067 0 5.467 2.4 5.467 5.467 0 0.933-0.267 1.867-0.667 2.533l-1.6-2.533c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-0.667 1.2-2.4-4c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-2.8 4.8c-0.267-0.667-0.4-1.333-0.4-2 0-3.067 2.4-5.467 5.467-5.467z'/></svg>") no-repeat left 0px top -2px;
-
-    /*功能按钮*/
-    --Sv-conceal-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z'/></svg>") no-repeat left 0px top -2px;
-    --Sv-conceal-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z'/></svg>") no-repeat left 0px top -2px;
-
-    --Sv-tabbarVertical-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z'/></svg>") no-repeat left 0px top -2px;
-    --Sv-tabbarVertical-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z'/></svg>") no-repeat left 0px top -2px;
-
-
-    
-    --Sv-topBar-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z'/></svg>") no-repeat left 0px top -2px;
-    --Sv-topBar-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z'/></svg>") no-repeat left 0px top -2px;
-
-    --Sv-bulletThreading-on:url("data:image/svg+xml;utf8,<svg fill='rgb(235, 87, 87)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z'/></svg>") no-repeat left 0px top -2px;
-    --Sv-bulletThreading-off:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z'/></svg>") no-repeat left 0px top -2px;
-
-    --Sv-settings:url("data:image/svg+xml;utf8,<svg fill='rgb(55, 53, 47)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M16 21.2h-6c-0.4 0-0.667-0.267-0.667-0.667 0-0.267 0.267-0.533 0.667-0.533h6c0.267-1.067 1.2-1.867 2.4-1.867 1.067 0 2.133 0.8 2.4 1.867h1.067c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-1.067c-0.267 1.067-1.2 1.867-2.4 1.867s-2.133-0.8-2.4-2v0zM17.2 20.667c0 0.667 0.533 1.2 1.2 1.2s1.2-0.533 1.2-1.2c0-0.667-0.533-1.2-1.2-1.2s-1.2 0.533-1.2 1.2zM11.867 14.667h-1.867c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h1.867c0.267-1.067 1.2-1.867 2.4-1.867 1.067 0 2.133 0.8 2.4 1.867h5.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-5.333c-0.267 1.067-1.2 1.867-2.4 1.867-1.067-0.133-2-0.8-2.4-1.867zM13.067 14c0 0.667 0.533 1.2 1.2 1.2s1.2-0.533 1.2-1.2-0.533-1.2-1.2-1.2c-0.667 0-1.2 0.533-1.2 1.2z'/></svg>") no-repeat left -4px top -4px;
-
 }
 
 
 /* 微软字体斜体会被相邻背景遮挡，将 arial 放置其前 https://github.com/siyuan-note/siyuan/issues/11841；"Segoe UI" 和 Noto-COLRv1-2.047 冲突，故移除。 */
 
+:root[data-theme-mode="dark"] {
+    /* 基础数 */
+    --b3-theme-primary-base-l:69.42%;
+    --b3-theme-primary-base-ch:0.1265 230.5;
+    --b3-theme-surface-base-l:30.61%;
+    --b3-theme-surface-base-ch:0.0087 233.95;
+    --b3-theme-on-background-base:94.01% 0 0;
+    --Sv-dock-item--activefocus-background--base:68.98% 0.161 30.76;
+
+    --b3-font-color1-base-l: 100%;
+    --b3-font-color2-base-l: 55.57%;
+    --b3-font-color3-base-l: 58.06%;
+	--b3-font-color4-base-l: 78.79%;
+    --b3-font-color5-base-l: 83.02%;
+	--b3-font-color6-base-l: 89.92%;
+    --b3-font-color7-base-l: 67.96%;
+	--b3-font-color8-base-l: 71.53%;
+    --b3-font-color9-base-l: 66.4%;
+    --b3-font-color10-base-l: 62.63%;
+    --b3-font-color11-base-l: 65.71%;
+    --b3-font-color12-base-l: 72.18%;
+    --b3-font-color13-base-l: 63.03%;
+
+	--b3-font-color1-base-ch: 0 0;
+    --b3-font-color2-base-ch: 0.0077 233.74;
+    --b3-font-color3-base-ch: 0.0469 44.11;
+	--b3-font-color4-base-ch: 0.151 62.92;
+    --b3-font-color5-base-ch: 0.1477 74.87;
+	--b3-font-color6-base-ch: 0.1619 95.29;
+    --b3-font-color7-base-ch: 0.093 179.77;
+	--b3-font-color8-base-ch: 0.0961 216.69;
+    --b3-font-color9-base-ch: 0.1008 238.15;
+    --b3-font-color10-base-ch: 0.1587 301.59;
+    --b3-font-color11-base-ch: 0.1909 350.24;
+    --b3-font-color12-base-ch: 0.1728 26.38;
+    --b3-font-color13-base-ch: 0.1744 24.32;
+
+    /* 主色 */
+    --b3-theme-background:  oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));
+    --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*1.5) var(--b3-theme-surface-base-ch));
+    --b3-theme-on-surface: oklch(calc(var(--b3-theme-surface-base-l)*2.5) var(--b3-theme-surface-base-ch));
+    --b3-theme-on-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*2.5) var(--b3-theme-surface-base-ch) / 0.68);
+
+    /* 提示 */
+    --b3-tooltips-background: oklch(calc(var(--b3-theme-surface-base-l)*1.5) var(--b3-theme-surface-base-ch));
+	--b3-tooltips-color: var(--b3-theme-on-background);
+
+    /* 卡片背景 */
+    --b3-card-error-color: #d69595;
+    --b3-card-error-background: var(--b3-font-background13);
+    --b3-card-warning-color: rgb(255, 213, 153);
+    --b3-card-warning-background: var(--b3-font-background5);
+    --b3-card-info-color: rgb(166, 213, 250);
+    --b3-card-info-background: var(--b3-font-background10);
+    --b3-card-success-color: rgb(183, 223, 185);
+    --b3-card-success-background: var(--b3-font-background8);
+
+
+    /* 头图 */
+    --Sv-background-icon-button-color: var(--b3-theme-background);
+    --Sv-background-icon-button: oklch(var(--b3-theme-on-background-base) / 0.4);
+
+    /* PDF */
+    --b3-pdf-selection: #779170;
+    --b3-pdf-sidebar-width: 200px;
+    --b3-pdf-offset: 0;
+    --b3-pdf-background1: var(--b3-font-background5);
+    --b3-pdf-background2: var(--b3-font-background6);
+    --b3-pdf-background3: var(--b3-font-background7);
+    --b3-pdf-background4: var(--b3-font-background8);
+    --b3-pdf-background5: var(--b3-font-background10);
+    --b3-pdf-background6: var(--b3-font-background11);
+    --b3-pdf-background7: var(--b3-font-background13);
+	
+
+
+	/*导图*/
+	--b3-border-daotu: 2px solid rgba(69, 74, 77);
+	--b3-block-daotu:var(--b3-theme-surface-light);
+	/*看板*/
+	--kbline-boarditem-minwidth: 14rem;/*看板卡片的最小宽度*/
+	--kb--li--background:rgba(55, 60, 63);
+	  
+    /* 数据库 */
+    --Sv-font-color13: oklch(calc(var(--b3-font-color12-base-l)*1.3) var(--b3-font-color12-base-ch));
+	--Sv-font-color12: oklch(calc(var(--b3-font-color11-base-l)*1.3) var(--b3-font-color11-base-ch));
+	--Sv-font-color11: oklch(calc(var(--b3-font-color10-base-l)*1.3) var(--b3-font-color10-base-ch));
+	--Sv-font-color10: oklch(calc(var(--b3-font-color9-base-l)*1.3) var(--b3-font-color9-base-ch));
+	--Sv-font-color9: oklch(calc(var(--b3-font-color8-base-l)*1.3) var(--b3-font-color8-base-ch));
+	--Sv-font-color8: oklch(calc(var(--b3-font-color7-base-l)*1.3) var(--b3-font-color7-base-ch));
+	--Sv-font-color7: oklch(calc(var(--b3-font-color6-base-l)*1.3) var(--b3-font-color6-base-ch));
+	--Sv-font-color6: oklch(calc(var(--b3-font-color5-base-l)*1.3) var(--b3-font-color5-base-ch));
+	--Sv-font-color5: oklch(calc(var(--b3-font-color4-base-l)*1.3) var(--b3-font-color4-base-ch));
+	--Sv-font-color4: oklch(calc(var(--b3-font-color3-base-l)*1.3) var(--b3-font-color3-base-ch));
+	--Sv-font-color3: oklch(calc(var(--b3-font-color13-base-l)*1.3) var(--b3-font-color13-base-ch));
+	--Sv-font-color2: oklch(calc(var(--b3-font-color2-base-l)*1.3) var(--b3-font-color2-base-ch));
+	--Sv-font-color1: oklch(calc(var(--b3-font-color1-base-l)*1.3) var(--b3-font-color1-base-ch));
+
+	
+	/* ————————————————————  自定义结构配色  ———————————————————— */
+
+	/* 顶栏 */
+    --Sv-toolbar-background:  oklch(calc(var(--b3-theme-surface-base-l)*1.15) var(--b3-theme-surface-base-ch));
+
+	/* 边栏 */
+    --Sv-dock-background: oklch(calc(var(--b3-theme-surface-base-l)*1.15) var(--b3-theme-surface-base-ch));
+    --Sv-dock-item-color: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.8);
+	
+	/* 侧栏 */
+    --Sv-list-item-arrow: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.8);
+    --Sv-list-background: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.1);
+    --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.15);
+    
+    /* 反链面板 */
+    --Sv-block-logo-color: var(--b3-theme-on-background);
+    --Sv-block-logo-background: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));
+
+    /* 底栏 */
+    --Sv-status-msg-background: oklch(calc(var(--b3-theme-surface-base-l)*1.3) var(--b3-theme-surface-base-ch));
+    
+    /* 滚动条 */
+    --Sv-scroll-color: oklch(calc(var(--b3-theme-surface-base-l)*1.3) var(--b3-theme-surface-base-ch));
+	--Sv-scroll-color-hover: oklch(calc(var(--b3-theme-surface-base-l)*1.6) var(--b3-theme-surface-base-ch));
+
+     /* 表格 */
+     --Sv-table-thead: oklch(calc(var(--b3-theme-surface-base-l)*1.1) var(--b3-theme-surface-base-ch));
+
+	/* 行内代码 */
+	--Sv-inline-code: #ff9c9c;
+
+    /* 代码块 */
+    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));
+
+	/* 字体颜色选择 工具条 */
+	--Sv-protyle-toolbar-color: var(--b3-theme-on-background);
+	--Sv-protyle-util-bg: var(--b3-theme-background);
+
+	--Sv-error-shadow: #6b4b4b;
+	--Sv-warning-shadow: #806b4d;
+	--Sv-info-shadow: #536b7d;
+	--Sv-success-shadow: #5c705d;
+
+
+
+    /*——————————————————————————— 收缩按钮 ——————————————————————————*/
+    --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
+    --Sv-Splugin-off:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -10px top -6px;
+    /*——————————————————————————————————————————————————————————————*/
+
+    --Sv-tab-bar-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%232f3437'/></svg>"),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%232f3437'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%232f3437'/></svg>");
+
+    --Sv-tab-bar-V-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C100 44.772 55.228 0 0 0H100V100z' fill='%232f3437'/></svg>"),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%232f3437'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%232f3437'/></svg>");
+}
 
 :root:lang(zh_CN) {
-    --b3-font-family: Roboto, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "PingFang SC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Source Han Sans SC", arial, "Microsoft Yahei", sans-serif, emojis;
+    --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "PingFang SC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Source Han Sans SC", arial, "Microsoft Yahei", sans-serif, emojis;
 }
 
 :root:lang(zh_CHT) {
-    --b3-font-family: Roboto, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "PingFang TC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans TC", "Source Han Sans TC", "Microsoft JhengHei", arial, sans-serif, emojis;
+    --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "PingFang TC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans TC", "Source Han Sans TC", "Microsoft JhengHei", arial, sans-serif, emojis;
 }
 
 :root:lang(ja_JP) {
-    --b3-font-family: Roboto, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", "Hiragino Sans", "Yu Gothic UI", arial, sans-serif, emojis;
+    --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", "Hiragino Sans", "Yu Gothic UI", arial, sans-serif, emojis;
 }
 
 
@@ -690,6 +702,8 @@
         display: none;
     }
 }
+
+
 
 
 

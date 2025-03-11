@@ -27,12 +27,12 @@
     background-color: var(--b3-theme-on-background);
 }
 .av__panel .b3-chip {
-	margin:3px 9px 6px -3px;
+	margin:0px 6px 6px 0px;
 	border-radius:6px;
 }
 .av__panel .b3-menu .b3-chips input {
 	height: 24px;
-	margin:3px 0px 6px 0px;
+	margin:0px 0px 6px 0px;
 	border-radius: 5px;
 }
 .custom-attr__avvalue .b3-chip,.av__cell .b3-chip, .b3-menu__label .b3-chip{

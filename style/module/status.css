@@ -1,27 +1,23 @@
 /* ————————————————————底栏———————————————————— */
+.layout__center {
+    position: relative; /* 确保子元素的绝对定位是相对于它 */
+}
+
 #status {
-    position: fixed;
-    background-color: transparent;
-    right: 0px;
-    bottom: 9px;
-	height: 24px;
-	border:0;
-	margin:0;
-	z-index:10;
-    pointer-events: none;
-    &>div:not(.statusRight){
-        background-color:var(--Sv-status-msg-background);
-        margin-left: -2px;
-        border-radius:0px;
+    height: 24px;
+    position: absolute; /* 使用绝对定位 */
+    right: 32px; /* 距离右边界32px */
+    bottom: 4px; /* 距离底部4px */
+    padding-right: 0px;
+    border: none;
+    background-color: var(--Sv-status-msg-background);
+    border-radius: 6px;
+    z-index: 10; /* 确保底栏在其他元素上方 */
+    &>div{
         pointer-events:visibleFill;
         position: relative;
         line-height:24px;
         }
-    .statusRight{
-        position: relative;
-        order: 99; 
-        display: block!important;
-    }
     .toolbar__item:not(.toolbar__item--close) {
         padding:2px;
         height: 24px;
@@ -37,40 +33,22 @@
             background-color: var(--Sv-status-item-hover)!important;
         }
     }
-    /*#barDock{
-        position:fixed;
-        right:3px;
-        bottom: 3px;
-        height: 28px;
-        width: 28px;
-        padding: 4px;
-        background-color: var(--Os-status-barDock);
-        pointer-events:visibleFill;
-        box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px;
-        /*background-color: var(--Sv-status-barDock);
-        box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);*/
-        /*& svg{
-            color: var(--Os-status-barDock-color);
-        }
-    }*/
+    >.fn__flex-1{
+        display: none;
+    }
     #statusHelp{
         color: var(--Sv-status-barDock-color);
         order: 97; 
-        margin-right: 3px;
-        border-radius: 0 6px 6px 0;
     }
     #barDock{
         order: 98; 
-        margin-left: 1px;
-        margin-right: 3px;
-        border-radius: 6px;
+        margin-left: 4px;
+        margin-right: -28px;
+        background-color: var(--Sv-status-msg-background);
     }
-    .status__msg{
-        overflow: unset!important;
-        padding: 0 10px;
-        border-radius: 6px 0 0 6px!important;
-        &:not(:empty){
+    .status__msg:not(:empty){
             padding-left: 26px!important;
+            padding-right: 10px;
             &::after{
                 content: "📢"!important;
                 font-size:12px;
@@ -78,17 +56,13 @@
                 position: absolute;
                 left: 0px;
             }
-        }
     }
 }
 
 
 .status.fn__none{/*隐藏底栏保留停靠栏按钮*/
     display: flex!important;
-    &>div:not(#barDock,.statusRight){
+    &>div:not(#barDock){
         display: none;
-    }
-    #barDock::before{
-        left: -8px!important;
     }
 }

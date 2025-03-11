@@ -8,7 +8,6 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
 	border-bottom: none;
     display: block;
 	flex: 1;
-    overflow: visible;
     &.layout-tab-bar--readonly {
         flex: initial;
         padding-left: 0px;

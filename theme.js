@@ -1,2737 +1,1275 @@
 (function () {
-window.theme = {};
+    window.theme = {
+        ID_COLOR_STYLE: 'Sv-theme-color',
+        config: {},
+        themeMode: null,
 
-
-
-/**
- * 加载样式文件
- * @params {string} href 样式地址
- * @params {string} id 样式 ID
- */
-window.theme.loadStyle = function (href, id = null) {
-    let style = document.createElement('link');
-    if (id) style.id = id;
-    style.type = 'text/css';
-    style.rel = 'stylesheet';
-    style.href = href;
-    document.head.appendChild(style);
-}
-
-/**
- * 更新样式文件
- * @params {string} id 样式文件 ID
- * @params {string} href 样式文件地址
- */
-window.theme.updateStyle = function (id, href) {
-    let style = document.getElementById(id);
-    if (style) {
-        style.setAttribute('href', href);
-    }
-    else {
-        window.theme.loadStyle(href, id);
-    }
-}
-
-window.theme.ID_COLOR_STYLE = 'Sv-theme-color';
-
-/**
- * 获取主题模式
- * @return {string} light 或 dark
- */
-window.theme.themeMode = (() => {
-    /* 根据浏览器主题判断颜色模式 */
-    // switch (true) {
-    //     case window.matchMedia('(prefers-color-scheme: light)').matches:
-    //         return 'light';
-    //     case window.matchMedia('(prefers-color-scheme: dark)').matches:
-    //         return 'dark';
-    //     default:
-    //         return null;
-    // }
-    /* 根据配置选项判断主题 */
-    switch (window.siyuan.config.appearance.mode) {
-        case 0:
-            return 'light';
-        case 1:
-            return 'dark';
-        default:
-            return null;
-    }
-})();
-
-
-/**
- * 更换主题模式
- * @params {string} lightStyle 浅色主题配置文件路径
- * @params {string} darkStyle 深色主题配置文件路径
- */
-window.theme.changeThemeMode = function (
-    lightStyle,
-    darkStyle,
-) {
-    let href_color = null;
-    switch (window.theme.themeMode) {
-        case 'light':
-            href_color = lightStyle;
-            break;
-        case 'dark':
-        default:
-            href_color = darkStyle;
-            break;
-    }
-    window.theme.updateStyle(window.theme.ID_COLOR_STYLE, href_color);
-}
-
-
-/* 根据当前主题模式加载样式配置文件 */
-window.theme.changeThemeMode(
-    `/appearance/themes/Savor/style/topbar/savor-light.css`,
-    `/appearance/themes/Savor/style/topbar/savor-dark.css`,
-);
-
-
-
-
-
-/*----------------------------------创建savor主题工具栏区域----------------------------------
-function createsavorToolbar() {
-    var siYuanToolbar = getSiYuanToolbar();
-    var savorToolbar = getsavorToolbar();
-    var windowControls = document.getElementById("windowControls");
-    if (savorToolbar) siYuanToolbar.removeChild(savorToolbar);
-    savorToolbar = insertCreateBefore(windowControls, "div", "savorToolbar");
-    savorToolbar.style.marginRight = "14px";
-    savorToolbar.style.marginLeft = "11px";
-}*/
-
-  /****************************思源API操作**************************/ 
-  async function 设置思源块属性(内容块id, 属性对象) {
-    let url = '/api/attr/setBlockAttrs'
-    return 解析响应体(向思源请求数据(url, {
-        id: 内容块id,
-        attrs: 属性对象,
-    }))
-  }
-  async function 向思源请求数据(url, data) {
-    let resData = null
-    await fetch(url, {
-        body: JSON.stringify(data),
-        method: 'POST',
-        headers: {
-            Authorization: `Token ''`,
-        }
-    }).then(function (response) { resData = response.json() })
-    return resData
-  }
-  async function 解析响应体(response) {
-    let r = await response
-    return r.code === 0 ? r.data : null
-  }
-  
-
-  /****UI****/
-  function ViewSelect(selectid,selecttype){
-  let button = document.createElement("button")
-  button.id="viewselect"
-  button.className="b3-menu__item"
-  button.innerHTML='<svg class="b3-menu__icon" style="null"><use xlink:href="#iconGlobalGraph"></use></svg><span class="b3-menu__label" style="">视图选择</span><svg class="b3-menu__icon b3-menu__icon--arrow" style="null"><use xlink:href="#iconRight"></use></svg></button>'
-  button.appendChild(SubMenu(selectid,selecttype))
-  return button
-}
-function SubMenu(selectid,selecttype){
-  let button = document.createElement("button")
-  button.id="viewselectSub"
-  button.className="b3-menu__submenu"
-  button.appendChild(MenuItems(selectid,selecttype))
-  return button
-}
-
-  function MenuItems(selectid,selecttype,className = 'b3-menu__items'){
-  let node = document.createElement('div');
-  node.className = className;
-  if(selecttype=="NodeList"){
-    node.appendChild(GraphView(selectid))
-    node.appendChild(TableView(selectid))
-	node.appendChild(kanbanView(selectid))
-    node.appendChild(DefaultView(selectid))
-  }
-  if(selecttype=="NodeTable"){
-    node.appendChild(FixWidth(selectid))
-    node.appendChild(AutoWidth(selectid))
-	node.appendChild(FullWidth(selectid))
-	node.appendChild(vHeader(selectid))
-	node.appendChild(Removeth(selectid))
-	node.appendChild(Defaultth(selectid))
-  }
-return node;
-}
-
-function GraphView(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","f")
-  button.setAttribute("custom-attr-value","dt")
-
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconFiles"></use></svg><span class="b3-menu__label">转换为导图</span>`
-  button.onclick=ViewMonitor
-  return button
-}
-function TableView(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","f")
-  button.setAttribute("custom-attr-value","bg")
-
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">转换为表格</span>`
-  button.onclick=ViewMonitor
-  return button
-}
-function kanbanView(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","f")
-  button.setAttribute("custom-attr-value","kb")
-
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconMenu"></use></svg><span class="b3-menu__label">转换为看板</span>`
-  button.onclick=ViewMonitor
-  return button
-}
-function DefaultView(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.onclick=ViewMonitor
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","f")
-  button.setAttribute("custom-attr-value",'')
-
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconList"></use></svg><span class="b3-menu__label">恢复为列表</span>`
-  return button
-}
-function FixWidth(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.onclick=ViewMonitor
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","f")
-  button.setAttribute("custom-attr-value","")
-
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">自动宽度(换行)</span>`
-  return button
-}
-function AutoWidth(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","f")
-  button.setAttribute("custom-attr-value","auto")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">自动宽度(不换行)</span>`
-  button.onclick=ViewMonitor
-  return button
-}
-function FullWidth(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.onclick=ViewMonitor
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","f")
-  button.setAttribute("custom-attr-value","full")
-
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconTable"></use></svg><span class="b3-menu__label">页面宽度</span>`
-  return button
-}
-function vHeader(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.onclick=ViewMonitor
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","t")
-  button.setAttribute("custom-attr-value","vbiaotou")
-
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconSuper"></use></svg><span class="b3-menu__label">竖向表头样式</span>`
-  return button
-}
-function Removeth(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.onclick=ViewMonitor
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","t")
-  button.setAttribute("custom-attr-value","biaotou")
-
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconSuper"></use></svg><span class="b3-menu__label">空白表头样式</span>`
-  return button
-}
-function Defaultth(selectid){
-  let button = document.createElement("button")
-  button.className="b3-menu__item"
-  button.setAttribute("data-node-id",selectid)
-  button.setAttribute("custom-attr-name","t")
-  button.setAttribute("custom-attr-value","")
-  button.innerHTML=`<svg class="b3-menu__icon" style=""><use xlink:href="#iconSuper"></use></svg><span class="b3-menu__label">恢复表头样式</span>`
-  button.onclick=ViewMonitor
-  return button
-}
-function MenuSeparator(className = 'b3-menu__separator') {
-  let node = document.createElement('button');
-  node.className = className;
-  return node;
-}
-
-/* 操作 */ 
-
-/**
- * 获得所选择的块对应的块 ID
- * @returns {string} 块 ID
- * @returns {
- *     id: string, // 块 ID
- *     type: string, // 块类型
- *     subtype: string, // 块子类型(若没有则为 null)
- * }
- * @returns {null} 没有找到块 ID */
-function getBlockSelected() {
-    let node_list = document.querySelectorAll('.protyle-wysiwyg--select');
-    if (node_list.length === 1 && node_list[0].dataset.nodeId != null) return {
-        id: node_list[0].dataset.nodeId,
-        type: node_list[0].dataset.type,
-        subtype: node_list[0].dataset.subtype,
-    };
-    return null;
-}
-
-function ClickMonitor () {
-  window.addEventListener('mouseup', MenuShow)
-}
-
-function MenuShow() {
-  setTimeout(() => {
-    let selectinfo = getBlockSelected()
-      if(selectinfo){
-      let selecttype = selectinfo.type
-      let selectid = selectinfo.id
-      if(selecttype=="NodeList"||selecttype=="NodeTable"){
-        setTimeout(()=>InsertMenuItem(selectid,selecttype), 0)
-      }
-    }
-  }, 0);
-}
-
-
-function InsertMenuItem(selectid,selecttype){
-  let commonMenu = document.querySelector("#commonMenu .b3-menu__items")
-  let  readonly = commonMenu.querySelector('[data-id="updateAndCreatedAt"]')
-  let  selectview = commonMenu.querySelector('[id="viewselect"]')
-  if(readonly){
-    if(!selectview){
-    commonMenu.insertBefore(ViewSelect(selectid,selecttype),readonly)
-    commonMenu.insertBefore(MenuSeparator(),readonly)
-    }
-  }
-}
-
-function ViewMonitor(event) {
-    let id = event.currentTarget.getAttribute("data-node-id");
-    let attrName = 'custom-' + event.currentTarget.getAttribute("custom-attr-name");
-    let attrValue = event.currentTarget.getAttribute("custom-attr-value");
-    let blocks = document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${id}"]`);
-    
-    // 如果当前块之前有任何transform数据，都应该清除
-    const positions = JSON.parse(localStorage.getItem('dt-positions') || '{}');
-    if (positions[id]) {
-        delete positions[id];
-        localStorage.setItem('dt-positions', JSON.stringify(positions));
+    // 主题配色切换过渡效果
+    applyThemeTransition: function() {
+        // 添加过渡类
+        document.documentElement.classList.add('theme-transitioning');
         
-        // 清除transform样式和其他相关属性
-        blocks.forEach(block => {
-            const listItems = block.querySelectorAll(':scope > [data-type="NodeListItem"]');
-            listItems.forEach(listItem => {
-                listItem.style.transform = '';
-                listItem.style.cursor = '';
-                listItem.removeAttribute('data-draggable');
-            });
+        // 在过渡完成后移除类（使用过渡时间）
+        setTimeout(() => {
+            document.documentElement.classList.remove('theme-transitioning');
+        }, 600); // 略大于过渡时间以确保完成
+    },
+                
+    // 添加鼠标中键折叠/展开相关函数
+    isFatherFather: function(element, fn, maxDepth = 50) {
+        if (!element || !element.parentElement) return null;
+        
+        let depth = 0;
+        let parent = element.parentElement;
+        
+        while (parent && depth < maxDepth) {
+            if (fn(parent)) return parent;
+            parent = parent.parentElement;
+            depth++;
+        }
+        
+        return null;
+    },
+    
+    isSiyuanFloatingWindow: function(element) {
+        return this.isFatherFather(element, (v) => v.getAttribute("data-oid") != null);
+    },
+    
+    setBlockfold_1: function(id) {
+        if (!id) return;
+        
+        // 使用缓存避免频繁API调用
+        if (window._lastFoldedId === id && window._lastFoldedState === '1') {
+            return;
+        }
+        
+        window._lastFoldedId = id;
+        window._lastFoldedState = '1';
+        
+        fetch('/api/attr/setBlockAttrs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ''`
+            },
+            body: JSON.stringify({
+                id: id,
+                attrs: {
+                    'fold': '1'
+                }
+            })
         });
+    },
+    
+    setBlockfold_0: function(id) {
+        if (!id) return;
+        
+        // 使用缓存避免频繁API调用
+        if (window._lastFoldedId === id && window._lastFoldedState === '0') {
+            return;
+        }
+        
+        window._lastFoldedId = id;
+        window._lastFoldedState = '0';
+        
+        fetch('/api/attr/setBlockAttrs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ''`
+            },
+            body: JSON.stringify({
+                id: id,
+                attrs: {    
+                    'fold': '0'
+                }
+            })
+        });
+    },
+    
+    // 初始化鼠标中键折叠/展开功能
+    initCollapseExpand: function() {
+        let flag45 = false;
+        let lastClickTime = 0;
+        const DEBOUNCE_TIME = 300; // 防抖时间，避免频繁触发
+        const self = this; // 保存this引用
+        
+        // 使用事件委托，减少事件监听器数量
+        document.body.addEventListener("mouseup", () => {
+            flag45 = false;
+        });
+    
+        document.body.addEventListener("mousedown", (e) => {
+            // 只处理鼠标中键点击
+            if (e.button === 2) { 
+                flag45 = true; 
+                return;
+            }
+            
+            if (flag45 || e.shiftKey || e.altKey || e.button !== 1) return;
+            
+            // 防抖处理
+            const now = Date.now();
+            if (now - lastClickTime < DEBOUNCE_TIME) return;
+            lastClickTime = now;
+            
+            // 查找可编辑元素
+            let target = e.target;
+            if (target.getAttribute("contenteditable") == null) {
+                const editableParent = findEditableParent(target);
+                if (editableParent) {
+                    target = editableParent;
+                } else {
+                    return; // 如果找不到可编辑元素，直接返回
+                }
+            }
+    
+            const targetParentElement = target.parentElement;
+            if (!targetParentElement) return;
+    
+            // 处理事件并阻止默认行为
+            e.preventDefault();
+            
+            // 判断元素类型并执行相应的折叠/展开操作
+            const parentType = targetParentElement.getAttribute("data-type");
+            const grandParentElement = targetParentElement.parentElement;
+            
+            if (parentType === "NodeHeading") {
+                // 标题元素
+                if (grandParentElement && grandParentElement.getAttribute("data-type") === "NodeListItem") {
+                    // 列表中的标题
+                    handleListItemCollapse(target);
+                } else {
+                    // 普通标题
+                    handleHeadingCollapse(target);
+                }
+            } else if (grandParentElement && grandParentElement.getAttribute("data-type") === "NodeListItem") {
+                // 列表项
+                handleListItemCollapse(target);
+            }
+        });
+    
+        // 查找可编辑的父元素
+        function findEditableParent(element) {
+            return self.isFatherFather(element, (v) => {
+                return v.getAttribute("contenteditable") != null;
+            }, 10);
+        }
+    
+        // 递归查找符合条件的第一个子元素
+        function findElementByCondition(element, condition) {
+            if (!element) return null;
+            
+            if (condition(element)) return element;
+            
+            const children = element.children;
+            for (let i = 0; i < children.length; i++) {
+                const result = findElementByCondition(children[i], condition);
+                if (result) return result;
+            }
+            
+            return null;
+        }
+    
+        // 处理标题折叠
+        function handleHeadingCollapse(element) {
+            // 查找protyle容器
+            const protyle = findProtyleContainer(element);
+            if (!protyle) return;
+            
+            // 查找折叠按钮并点击
+            const gutters = protyle.querySelector(".protyle-gutters");
+            if (gutters) {
+                const foldButton = findElementByCondition(gutters, (v) => v.getAttribute("data-type") === "fold");
+                if (foldButton) {
+                    foldButton.click();
+                }
+            }
+        }
+        
+        // 查找protyle容器
+        function findProtyleContainer(element) {
+            const protyleClasses = [
+                "protyle", 
+                "fn__flex-1 protyle", 
+                "block__edit fn__flex-1 protyle", 
+                "fn__flex-1 spread-search__preview protyle"
+            ];
+            
+            let current = element;
+            let i = 0;
+            const MAX_DEPTH = 20; // 限制查找深度
+            
+            while (current && i < MAX_DEPTH) {
+                if (current.className && protyleClasses.some(cls => current.className === cls)) {
+                    return current;
+                }
+                current = current.parentElement;
+                i++;
+            }
+            
+            return null;
+        }
+    
+        // 处理列表项折叠
+        function handleListItemCollapse(element) {
+            // 检查是否在悬浮窗中
+            const floatingWindow = self.isSiyuanFloatingWindow(element);
+            if (floatingWindow) {
+                const listItem = self.isFatherFather(element, (v) => v.classList.contains("li"), 7);
+                if (listItem && !listItem.previousElementSibling) {
+                    // 悬浮窗中的第一个列表项特殊处理
+                    toggleFoldAttribute(listItem);
+                    return;
+                }
+            }
+    
+            // 查找列表项元素
+            let contentElement = element;
+            let depth = 0;
+            while (contentElement.getAttribute("contenteditable") == null && depth < 10) {
+                contentElement = contentElement.parentElement;
+                depth++;
+            }
+            
+            const listItemElement = contentElement?.parentElement?.parentElement;
+            if (!listItemElement) return;
+            
+            // 检查是否可以折叠（至少有子项）
+            if (listItemElement.children.length <= 3) return;
+            
+            // 获取当前折叠状态并切换
+            const nodeId = listItemElement.getAttribute("data-node-id");
+            const currentFoldState = listItemElement.getAttribute("fold");
+            
+            if (!nodeId) return;
+            
+            if (currentFoldState === "1") {
+                self.setBlockfold_0(nodeId);
+            } else {
+                self.setBlockfold_1(nodeId);
+            }
+        }
+        
+        // 切换fold属性
+        function toggleFoldAttribute(element) {
+            const foldState = element.getAttribute("fold");
+            element.setAttribute("fold", foldState === "1" ? "0" : "1");
+        }
+    }
+};
+    
+    /**
+     * 加载样式文件
+     * @params {string} href 样式地址
+     * @params {string} id 样式 ID
+     * @returns {HTMLElement} 创建的样式元素
+     */
+    window.theme.loadStyle = function (href, id = null) {
+        const style = document.createElement('link');
+        if (id) style.id = id;
+        style.type = 'text/css';
+        style.rel = 'stylesheet';
+        style.href = href;
+        document.head.appendChild(style);
+        return style;
     }
     
-    // 原有的属性设置逻辑
-    if (blocks) {
-        blocks.forEach(block => block.setAttribute(attrName, attrValue));
+    /**
+     * 更新样式文件
+     * @params {string} id 样式文件 ID
+     * @params {string} href 样式文件地址
+     * @returns {HTMLElement} 样式元素
+     */
+    window.theme.updateStyle = function (id, href) {
+        let style = document.getElementById(id);
+        if (style) {
+            style.setAttribute('href', href);
+            return style;
+        }
+        return window.theme.loadStyle(href, id);
     }
-    let attrs = {};
-    attrs[attrName] = attrValue;
-    设置思源块属性(id, attrs);
-}
+    
+    /**
+     * 获取主题模式
+     * @return {string} light 或 dark
+     */
+    window.theme.themeMode = (() => {
+        /* 根据配置选项判断主题 */
+        switch (window.siyuan.config.appearance.mode) {
+            case 0: return 'light';
+            case 1: return 'dark';
+            default: return null;
+        }
+    })();
+    
+    // 监听主题模式变化
+    const htmlElement = document.documentElement;
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            if (mutation.attributeName === 'data-theme-mode') {
+                const newThemeMode = htmlElement.getAttribute('data-theme-mode');
+                window.theme.themeMode = newThemeMode;
+                
+                // 添加主题切换过渡效果
+                window.theme.applyThemeTransition();
+                
+                clearThemeStyles();
+                
+                const savorToolbar = document.getElementById("savorToolbar");
+                if (savorToolbar) {
+                    savorToolbar.innerHTML = '';
+                    themeButton();
+                }
+                break;
+            }
+        }
+    });
+    
+    observer.observe(htmlElement, { attributes: true });
+    
+    /**
+     * 清理主题样式元素
+     */
+    function clearThemeStyles() {
+        document.querySelectorAll('[id^="Sv-theme-color"]')
+            .forEach(element => element.parentNode.removeChild(element));
+    }
+    
+    /**
+     * 更换主题模式
+     * @params {string} lightStyle 浅色主题配置文件路径
+     * @params {string} darkStyle 深色主题配置文件路径
+     */
+    window.theme.changeThemeMode = function (lightStyle, darkStyle) {
+        const href_color = window.theme.themeMode === 'light' ? lightStyle : darkStyle;
+        window.theme.updateStyle(window.theme.ID_COLOR_STYLE, href_color);
+    }
+    
+    /**---------------------------------------------------------主题-------------------------------------------------------- */
+    
+    function themeButton() {
+        // 检查 savorToolbar 是否存在
+        const savorToolbar = document.getElementById("savorToolbar");
+        if (!savorToolbar) return;
+        
+        // 清空现有内容
+        savorToolbar.innerHTML = '';
+        
+        // 添加监视器，当commonMenu隐藏时清除savorToolbar
+        const commonMenu = document.getElementById("commonMenu");
+        if (commonMenu) {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'class' && 
+                        commonMenu.classList.contains('fn__none') && 
+                        savorToolbar && savorToolbar.parentNode) {
+                        savorToolbar.parentNode.removeChild(savorToolbar);
+                    }
+                });
+            });
+            
+            observer.observe(commonMenu, { attributes: true });
+        }
+        
+        // 浅色主题配色
+        const lightThemes = [
+            { id: "buttonSavor-light", label: "Light 配色", path: "/appearance/themes/Savor/style/theme/savor-light.css", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z" },
+            { id: "buttonsalt", label: "Salt 配色", path: "/appearance/themes/Savor/style/theme/savor-salt.css", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z" },
+            { id: "buttonsugar", label: "Sugar 配色", path: "/appearance/themes/Savor/style/theme/savor-sugar.css", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-0.267 0-0.533 0-0.8-0.133 2.533-0.133 4.533-2.133 4.533-4.533 0.133-1.067-0.267-2.133-1.067-2.8-0.8-0.8-1.6-1.2-2.8-1.333-0.933-0.133-1.733 0.267-2.4 0.8s-1.067 1.467-1.067 2.267c-0.133 1.467 1.067 2.8 2.533 2.933 1.2 0.133 2.4-0.933 2.4-2.133 0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533c0 0.667-0.533 1.2-1.2 1.067-0.933-0.133-1.6-0.8-1.467-1.6 0-0.533 0.267-1.067 0.667-1.467s0.933-0.533 1.6-0.533c0.8 0 1.467 0.267 2 0.933 0.533 0.533 0.8 1.2 0.8 2.133-0.133 2-1.867 3.6-3.867 3.467-1.6-0.133-2.933-0.933-3.733-2.133-0.267-0.8-0.267-1.467-0.267-2.133 0-2.8 2.4-5.2 5.2-5.2s5.2 2.4 5.2 5.2-2.4 5.2-5.2 5.2z" },
+            { id: "buttonforest", label: "Forest 配色", path: "/appearance/themes/Savor/style/theme/savor-forest.css", svg: "M16 12.133c-1.867 0-2.933 1.467-2.933 2.933 0 0.533 0 1.733 0 2.267 0 0.8 0.4 1.467 0.4 1.467 0.4 0.667 1.067 1.2 1.867 1.333v1.2c0 0.267 0.267 0.533 0.533 0.533s0.533-0.267 0.533-0.533v-1.2c1.333-0.267 2.267-1.467 2.267-2.8v-2.267c0.267-1.6-0.933-2.933-2.667-2.933zM17.733 17.333c0 0.8-0.4 1.333-1.2 1.6v-2.267c0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533v2.267c-0.8-0.267-1.2-0.933-1.2-1.6v-2.267c0-0.933 0.8-1.733 1.733-1.733s1.733 0.8 1.733 1.733v2.267zM16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.2-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467z" },
+            { id: "buttonflower", label: "Flower 配色", path: "/appearance/themes/Savor/style/theme/savor-flower.css", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM19.333 14.533c-0.267 0-1.6 0.267-1.6 0.267s-1.067-1.6-1.733-1.6-1.6 1.6-1.6 1.6-1.333-0.267-1.6-0.267-0.667 1.333-0.667 2.667c0 2.4 1.733 4 4 4s4-1.6 4-4c-0.133-1.333-0.4-2.667-0.8-2.667zM16 19.867c-1.467 0-2.667-1.067-2.667-2.667 0-0.4 0-0.8 0.133-1.2 0.133 0 0.4 0.133 0.533 0.133l0.933 0.267 0.533-0.8c0.133-0.267 0.267-0.533 0.533-0.667v0 0c0.133 0.267 0.4 0.533 0.533 0.8l0.533 0.8 0.933-0.267c0.133 0 0.4-0.133 0.533-0.133 0 0.4 0.133 0.8 0.133 1.2 0 1.333-1.2 2.533-2.667 2.533z" },
+            { id: "buttonwind", label: "Wind 配色", path: "/appearance/themes/Savor/style/theme/savor-wind.css", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM18.4 13.2h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.267c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.267c1.067 0 1.867-0.8 1.867-1.867 0-1.333-0.8-2.133-1.867-2.133zM14.667 17.733h-2.533c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h2.533c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c1.067 0 1.867-0.8 1.867-1.867s-0.8-2.133-1.867-2.133z" }
+        ];
+        
+        // 深色主题配色
+        const darkThemes = [
+            { id: "buttonSavor-dark", label: "Dark 配色", path: "/appearance/themes/Savor/style/theme/savor-dark.css", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z" },
+            { id: "buttonvinegar", label: "Vinegar 配色", path: "/appearance/themes/Savor/style/theme/savor-vinegar.css", svg: "M19.467 18.533c-0.133 0-0.133 0-0.133 0.133-0.4 0.133-0.8 0.133-1.2 0.133-2 0-3.2-1.2-3.2-3.2 0-0.4 0.133-1.067 0.267-1.2v-0.133c0-0.133-0.133-0.133-0.133-0.133s-0.133 0-0.267 0.133c-1.333 0.533-2.267 1.867-2.267 3.467 0 2.133 1.6 3.733 3.867 3.733 1.6 0 2.933-0.933 3.467-2.133 0.133-0.133 0.133-0.133 0.133-0.133-0.4-0.533-0.533-0.667-0.533-0.667zM16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2z" },
+            { id: "buttonocean", label: "Ocean 配色", path: "/appearance/themes/Savor/style/theme/savor-ocean.css", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z" },
+            { id: "buttonmountain", label: "Mountain 配色", path: "/appearance/themes/Savor/style/theme/savor-mountain.css", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM14.667 22.267c-1.2-0.267-2.267-0.933-2.933-1.867l2.533-4.4 2.133 3.6-1.733 2.667zM17.867 19.867l0.667-1.2 1.2 2.133c-0.933 0.933-2.133 1.467-3.467 1.467l1.6-2.4zM16 11.467c3.067 0 5.467 2.4 5.467 5.467 0 0.933-0.267 1.867-0.667 2.533l-1.6-2.533c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-0.667 1.2-2.4-4c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-2.8 4.8c-0.267-0.667-0.4-1.333-0.4-2 0-3.067 2.4-5.467 5.467-5.467z" }
+        ];
+        
+        // 根据当前主题模式添加相应的主题按钮
+        const themes = window.theme.themeMode === 'light' ? lightThemes : darkThemes;
+        
+        themes.forEach(theme => {
+            savorThemeToolbarAddButton(
+                theme.id,
+                "b3-menu__item",
+                theme.label,
+                window.theme.themeMode,
+                () => {
+                    const styleId = `Sv-theme-color-${theme.id.replace('button', '')}`;
+                    window.theme.loadStyle(theme.path, styleId).setAttribute("topicfilter", theme.id);
+                    qucuFiiter();
+                },
+                () => {
+                    const styleId = `Sv-theme-color-${theme.id.replace('button', '')}`;
+                    const styleElement = document.getElementById(styleId);
+                    if (styleElement) styleElement.remove();
+                },
+                true,
+                theme.svg // 传递SVG路径
+            );
+        });
+         // 在主题按钮初始化后添加功能按钮
+         initFeatureButtons();
+        }
+/**---------------------------------------------------------功能按钮-------------------------------------------------------------- */
 
-setTimeout(()=>ClickMonitor(),1000)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**---------------------------------------------------------主题-------------------------------------------------------------- */
-
-function themeButton() {
-	savorThemeToolbarAddButton(
-        "buttonSavor-light",
-        "b3-menu__item",
-		"Light 配色",
-		'light',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/savor-light.css", "Sv-theme-color-Savor-light").setAttribute("topicfilter", "buttonSavor-light");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-Savor-light").remove();
-        },
-        true
-    );
-		savorThemeToolbarAddButton(
-        "buttonsalt",
-        "b3-menu__item",
-		"Salt 配色",
-		'light',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/salt.css", "Sv-theme-color-salt主题").setAttribute("topicfilter", "buttonsalt");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-salt主题").remove();
-        },
-        true
-    );
-		savorThemeToolbarAddButton(
-        "buttonsugar",
-        "b3-menu__item",
-		"Sugar 配色",
-		'light',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/sugar.css", "Sv-theme-color-sugar主题").setAttribute("topicfilter", "buttonsugar");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-sugar主题").remove();
-        },
-        true
-    );
-    savorThemeToolbarAddButton(
-        "buttonforest",
-        "b3-menu__item",
-		"Forest 配色",
-		'light',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/forest.css", "Sv-theme-color-forest主题").setAttribute("topicfilter", "buttonforest");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-forest主题").remove();
-        },
-        true
-    );
-    savorThemeToolbarAddButton(
-        "buttonflower",
-        "b3-menu__item",
-		"Flower 配色",
-		'light',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/flower.css", "Sv-theme-color-flower主题").setAttribute("topicfilter", "buttonflower");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-flower主题").remove();
-        },
-        true
-    );
-    savorThemeToolbarAddButton(
-        "buttonwind",
-        "b3-menu__item",
-		"Wind 配色",
-		'light',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/wind.css", "Sv-theme-color-wind主题").setAttribute("topicfilter", "buttonwind");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-wind主题").remove();
-        },
-        true
-    );
-		savorThemeToolbarAddButton(
-        "buttonSavor-dark",
-        "b3-menu__item",
-		"Dark 配色",
-		'dark',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/savor-dark.css", "Sv-theme-color-Savor-dark").setAttribute("topicfilter", "buttonSavor-dark");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-Savor-dark").remove();
-        },
-        true
-    );
-	    savorThemeToolbarAddButton(
-        "buttonvinegar",
-        "b3-menu__item",
-		"Vinegar 配色",
-		'dark',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/vinegar.css", "Sv-theme-color-vinegar主题").setAttribute("topicfilter", "buttonvinegar");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-vinegar主题").remove();
-        },
-        true
-    );
-    savorThemeToolbarAddButton(
-        "buttonocean",
-        "b3-menu__item",
-		"Ocean 配色",
-		'dark',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/ocean.css", "Sv-theme-color-ocean主题").setAttribute("topicfilter", "buttonocean");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-ocean主题").remove();
-        },
-        true
-    );
-    savorThemeToolbarAddButton(
-        "buttonmountain",
-        "b3-menu__item",
-		"Mountain 配色",
-		'dark',
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/mountain.css", "Sv-theme-color-mountain主题").setAttribute("topicfilter", "buttonmountain");
-            qucuFiiter();
-        },
-        () => {
-            document.getElementById("Sv-theme-color-mountain主题").remove();
-        },
-        true
-    );
-}
-
-/**---------------------------------------------------------挖空-------------------------------------------------------------- */
-
-function concealMarkButton() {
-    savorThemeToolplusAddButton(
-        "conceal",
-        "b3-menu__item",
-		"挖空",
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/conceal-mark.css", "Sv-theme-color-conceal挖空").setAttribute("topBarcss", "conceal挖空");
-        },
-        () => {
-            document.getElementById("Sv-theme-color-conceal挖空").remove();
-        },
-        true
-    );
-}
-/**---------------------------------------------------------垂直-------------------------------------------------------------- */
-
-
-
-function tabbarVerticalButton() {
-    let outlineObserverCleanup = null; // 将变量移到函数作用域中
-
-    savorThemeToolplusAddButton(
-        "tabbarVertical",
-        "b3-menu__item",
-        "垂直页签",
-        () => {
+// 功能按钮配置
+const featureButtons = [
+    {
+        id: "concealButton",
+        label: "挖空",
+        cssPath: "/appearance/themes/Savor/style/topbar/conceal-mark.css",
+        styleId: "Sv-theme-color-conceal挖空",
+        attrName: "conceal挖空",
+        svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z",
+        onEnable: () => {},
+        onDisable: () => {}
+    },
+    {
+        id: "tabbarVertical",
+        label: "垂直页签",
+        cssPath: "/appearance/themes/Savor/style/topbar/tab-bar-vertical.css",
+        styleId: "Sv-theme-color-tabbar垂直",
+        attrName: "tabbar垂直",
+        svg: "M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z",
+        onEnable: () => {
             // 启用垂直页签时，先检查并关闭顶栏合并
             let topbarFixed = document.getElementById("Sv-theme-color-topbar隐藏");
             if (topbarFixed) {
-                // 找到顶栏合并按钮并触发点击以关闭它
                 let topbarBtn = document.getElementById("topBar");
                 if (topbarBtn) topbarBtn.click();
             }
-
-            // 然后启用垂直页签
-            loadStyle("/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", "Sv-theme-color-tabbar垂直").setAttribute("topBarcss", "tabbar垂直");
-
-            // 添加调整宽度的拖动条
-            addResizeHandle();
-
-            // 启用 outline 面板监听
-            if (!outlineObserverCleanup) {
-                outlineObserverCleanup = observeOutline();
-            }
-        },
-        () => {
-            // 移除垂直页签样式
-            document.getElementById("Sv-theme-color-tabbar垂直").remove();
-            // 移除拖动条
-            let resizeHandle = document.getElementById("vertical-resize-handle");
-            if (resizeHandle) resizeHandle.remove();
-            // 重置宽度
-            document.documentElement.style.removeProperty('--custom-tab-width');
-
-            // 清理 outline 面板监听
-            if (outlineObserverCleanup) {
-                outlineObserverCleanup();
-                outlineObserverCleanup = null;
-            }
-        },
-        true
-    );
-}
-// 添加拖动调整宽度的功能
-function addResizeHandle() {
-    // 如果已经存在 resize handle，直接返回
-    if (document.getElementById("vertical-resize-handle")) return;
-
-    // 创建 resize handle
-    const resizeHandle = document.createElement('div');
-    resizeHandle.id = 'vertical-resize-handle';
-    resizeHandle.style.cssText = `
-        position: absolute;
-        right: 0px;
-        top: 0;
-        bottom: 0;
-        border-radius: 10px;
-        width: 4px;
-        background-color: transparent;
-        cursor: col-resize;
-        z-index: 8;
-        transition: background-color 0.2s ease;
-    `;
-
-    // 将 resize handle 添加到 DOM
-    document.querySelector('.layout__center .fn__flex.layout-tab-bar').appendChild(resizeHandle);
-
-    let startX, startWidth;
-    let isResizing = false;
-
-    // 使用 requestAnimationFrame 优化性能
-    const resize = (e) => {
-        if (!isResizing) return;
-
-        const width = startWidth + (e.clientX - startX);
-        if (width >= 100 && width <= 400) {
-            document.documentElement.style.setProperty('--custom-tab-width', `${width}px`);
-        }
-    };
-
-    // 开始调整大小
-    const startResize = (e) => {
-        e.preventDefault();
-        startX = e.clientX;
-        startWidth = parseInt(document.documentElement.style.getPropertyValue('--custom-tab-width') || '150', 10);
-        isResizing = true;
-
-        // 添加拖动时的类，用于临时禁用过渡动画
-        document.documentElement.classList.add('resizing');
-
-        // 改变拖动条颜色
-        resizeHandle.style.backgroundColor = 'var(--b3-theme-primary)';
-
-        // 使用 requestAnimationFrame 优化 mousemove
-        const onMouseMove = (e) => requestAnimationFrame(() => resize(e));
-        const onMouseUp = () => {
-            isResizing = false;
-            document.documentElement.classList.remove('resizing');
-            resizeHandle.style.backgroundColor = 'transparent';
-            window.removeEventListener('mousemove', onMouseMove);
-            window.removeEventListener('mouseup', onMouseUp);
-        };
-
-        window.addEventListener('mousemove', onMouseMove, { passive: true });
-        window.addEventListener('mouseup', onMouseUp, { once: true });
-    };
-
-    // 绑定事件
-    resizeHandle.addEventListener('mousedown', startResize);
-}
-
-
-// 加入监听文档类型
-// observeOutline 函数，支持监听多个元素
-const observeOutline = () => {
-    const processedElements = new Set();
-    let rafId = null;
-
-    // 需要监听的元素选择器
-    const selectors = [
-        '.fn__flex-column.sy__outline',
-        '.fn__flex-column.sy__backlink',
-        '.fn__flex-column.sy__graph',
-        '.fn__flex-1[data-timeout]'
-    ];
-
-    // 处理单个元素
-    const handleElement = (element) => {
-        if (processedElements.has(element)) return;
-
-        const wndElement = element.closest('[data-type="wnd"]');
-        if (wndElement && !wndElement.classList.contains('tab-horizontal')) {
-            wndElement.classList.add('tab-horizontal');
-            processedElements.add(element);
-        }
-    };
-
-    // 批量处理元素
-    const processBatch = () => {
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-        }
-
-        rafId = requestAnimationFrame(() => {
-            selectors.forEach(selector => {
-                document.querySelectorAll(selector).forEach(handleElement);
-            });
-        });
-    };
-
-    // 创建观察器实例
-    const observer = new MutationObserver((mutations) => {
-        let shouldProcess = false;
-
-        for (const mutation of mutations) {
-            // 检查新增的节点
-            if (mutation.addedNodes.length > 0) {
-                shouldProcess = true;
-                break;
-            }
-
-            // 检查属性变化
-            if (mutation.type === 'attributes' && 
-                selectors.some(selector => mutation.target.matches(selector))) {
-                shouldProcess = true;
-                break;
-            }
-        }
-
-        if (shouldProcess) {
-            processBatch();
-        }
-    });
-
-    // 配置观察选项
-    const config = {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['class']
-    };
-
-    // 开始观察
-    observer.observe(document.body, config);
-
-    // 初始处理
-    processBatch();
-
-    // 返回清理函数
-    return () => {
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-        }
-        observer.disconnect();
-        processedElements.clear();
-        document.querySelectorAll('.tab-horizontal').forEach(el => {
-            el.classList.remove('tab-horizontal');
-        });
-    };
-};
-/**---------------------------------------------------------插件-------------------------------------------------------------- */
-
-// 辅助函数：安全地创建和添加元素
-function safeCreateElement(parentElement, elementType, id = null) {
-    if (!parentElement) {
-        console.warn('父元素不存在，无法创建子元素');
-        return null;
-    }
-    
-    const element = document.createElement(elementType);
-    if (id) element.id = id;
-    parentElement.appendChild(element);
-    return element;
-}
-
-function SpluginButton() {
-    // 等待必要的DOM元素加载完成
-    const waitForElement = (selector) => {
-        return new Promise((resolve) => {
-            if (document.querySelector(selector)) {
-                resolve(document.querySelector(selector));
-                return;
-            }
-
-            const observer = new MutationObserver(() => {
-                if (document.querySelector(selector)) {
-                    observer.disconnect();
-                    resolve(document.querySelector(selector));
-                }
-            });
-
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-
-            // 设置超时
+            
+            // 添加垂直页签宽度调节功能
             setTimeout(() => {
-                observer.disconnect();
-                resolve(null);
-            }, 5000);
-        });
-    };
-
-    // 异步初始化按钮
-    const initButton = async () => {
-        const barCommand = await waitForElement('#barCommand');
-        if (!barCommand) {
-            console.warn('无法找到 #barCommand 元素');
-            return;
+                initTabbarResizer();
+            }, 500);
+        },
+        onDisable: () => {
+            // 移除垂直页签宽度调节器
+            removeTabbarResizer();
         }
-
-        savorPluginsAddButton(
-            "Splugin",
-            "toolbar__item b3-tooltips b3-tooltips__sw",
-            "收缩/展开插件",
-            () => {
-                loadStyle(
-                    "/appearance/themes/Savor/style/topbar/Splugin.css",
-                    "Sv-theme-color-plugin隐藏"
-                ).setAttribute("Splugin", "plugin隐藏");
-            },
-            () => {
-                const styleElement = document.getElementById("Sv-theme-color-plugin隐藏");
-                if (styleElement) styleElement.remove();
-            },
-            true
-        );
-    };
-
-    initButton();
-}
-
-function savorPluginsAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClickRunFun, OffClickRunFun, Memory) {
-    // 获取或创建插件容器
-    let savorPlugins = document.getElementById("savorPlugins");
-    const barCommand = document.getElementById("barCommand");
-
-    if (!barCommand) {
-        console.warn("无法找到 barCommand 元素");
-        return null;
-    }
-
-    if (!savorPlugins) {
-        savorPlugins = safeCreateElement(barCommand.parentElement, "div", "savorPlugins");
-        if (!savorPlugins) return null;
-        barCommand.parentNode.insertBefore(savorPlugins, barCommand);
-    }
-
-    // 创建按钮
-    const addButton = safeCreateElement(savorPlugins, "div");
-    if (!addButton) return null;
-
-    // 设置按钮属性
-    addButton.style.float = "top";
-    addButton.id = ButtonID;
-    addButton.setAttribute("class", ButtonTitle + " button_off");
-    addButton.setAttribute("aria-label", ButtonLabel);
-
-    let offNo = '0';
-
-    // 处理记忆状态
-    if (Memory) {
-        offNo = getItem(ButtonID) || '0';
-        if (offNo === "1") {
-            addButton.setAttribute("class", ButtonTitle + " button_on");
-            NoClickRunFun(addButton);
-        }
-    }
-
-    // 添加点击事件
-    addButton.addEventListener("click", () => {
-        if (offNo === "0") {
-            addButton.setAttribute("class", ButtonTitle + " button_on");
-            NoClickRunFun(addButton);
-            if (Memory) setItem(ButtonID, "1");
-            offNo = "1";
-        } else {
-            addButton.setAttribute("class", ButtonTitle + " button_off");
-            OffClickRunFun(addButton);
-            if (Memory) setItem(ButtonID, "0");
-            offNo = "0";
-        }
-    });
-
-    return addButton;
-}
-
-/**---------------------------------------------------------顶栏-------------------------------------------------------------- */
-
-function topbarfixedButton() {
-    savorThemeToolplusAddButton(
-        "topBar",
-        "b3-menu__item",
-		"顶栏合并",
-        () => {
+    },
+    {
+        id: "topBar",
+        label: "顶栏合并",
+        cssPath: "/appearance/themes/Savor/style/topbar/top-fixed.css",
+        styleId: "Sv-theme-color-topbar隐藏",
+        attrName: "topbar隐藏",
+        svg: "M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z",
+        onEnable: () => {
             // 启用顶栏合并时,先检查并关闭垂直页签
             let verticalTab = document.getElementById("Sv-theme-color-tabbar垂直");
             if (verticalTab) {
-                // 找到垂直页签按钮并触发点击以关闭它
                 let verticalBtn = document.getElementById("tabbarVertical");
                 if (verticalBtn) verticalBtn.click();
             }
             
-            // 然后启用顶栏合并
-            loadStyle("/appearance/themes/Savor/style/topbar/top-fixed.css", "Sv-theme-color-topbar隐藏").setAttribute("topBarcss", "topbar隐藏");
-        },
-        () => {
-            document.getElementById("Sv-theme-color-topbar隐藏").remove();
-        },
-        true
-    );
-}
-/**---------------------------------------------------------子弹-------------------------------------------------------------- */
-
-function bulletThreading() {
-    savorThemeToolplusAddButton(
-        "bulletThreading",
-        "b3-menu__item",
-		"列表子弹线",
-        () => {
-            loadStyle("/appearance/themes/Savor/style/topbar/bullet-threading.css", "Sv-theme-color-列表子弹线").setAttribute("bulletThreading", "列表子弹线");
-        },
-        () => {
-            document.getElementById("Sv-theme-color-列表子弹线").remove();
-        },
-        true
-    );
-}
-function updateWidth() {
-    // 更新宽度的逻辑
-}
-
-function qucuFiiter() {
-    // 去除主题所有滤镜还原按钮状态
-    var Topicfilters = document.querySelectorAll("head [topicfilter]");
-    Topicfilters.forEach(element => {
-        var offNo = getItem(element.getAttribute("topicfilter"));
-        if (offNo == "1") {
-            document.getElementById(element.getAttribute("topicfilter")).click();
-            element.remove();
-        }
-    });
-    
-    // 更新 .statusRight 宽度
-    updateWidth(); // 调用 updateWidth 函数
-}
-
-
-
-
-
-/**----------------------------------列表折叠内容预览查看---------------------------------- */
-function collapsedListPreview() {
-    BodyEventRunFun("mouseover", collapsedListPreviewEvent, 3000)
-}
-
-
-
-function collapsedListPreviewEvent() {
-    var _turn = [...document.querySelectorAll(".layout-tab-container>.fn__flex-1.protyle:not(.fn__none) [data-node-id].li[fold='1']"),
-    ...document.querySelectorAll("[data-oid] [data-node-id].li[fold='1']"),
-    ...document.querySelectorAll("#searchPreview [data-node-id].li[fold='1']")];//查询页面所有的折叠列表
-    var turn = [];
-    for (let index = 0; index < _turn.length; index++) {//找到列表第一列表项（父项）
-        const element = _turn[index].children[1];
-        var item = element.className;
-        if (item == "p" || item == "h1" || item == "h2" || item == "h3" || item == "h4" || item == "h5" || item == "h6") {
-            turn.push(element.children[0])
-        }
-    }
-
-    //检查注册事件的折叠列表是否恢复未折叠状态,是清除事件和去除标志属性
-    var ListPreview = [...document.querySelectorAll(".layout-tab-container>.fn__flex-1.protyle:not(.fn__none) [ListPreview]"),
-    ...document.querySelectorAll("[data-oid] [ListPreview]"),
-    ...document.querySelectorAll("#searchPreview [ListPreview]")];
-    for (let index = 0; index < ListPreview.length; index++) {
-        const element = ListPreview[index];
-        var fold = element.parentElement.getAttribute("fold")
-
-        if (fold == null || fold == 0) {
-            element.removeAttribute("ListPreview");
-            var item = element.children[0];
-            myRemoveEvent(item, "mouseenter", LIstIn);//解绑鼠标进入
-            myRemoveEvent(item.parentElement.parentElement, "mouseleave", LIstout);//解绑鼠标离开
-
-            items = Array.from(item.parentElement.parentElement.children);
-            for (let index = 0; index < items.length; index++) {
-                const element = items[index];
-                if (element.getAttribute("triggerBlock") != null) {
-                    element.remove();
-                }
-            }
-        }
-    }
-
-    for (let index = 0; index < turn.length; index++) {//重新注册、筛选未注册鼠标事件折叠列表
-        const element = turn[index];
-        var elementPP = element.parentElement.parentElement;
-
-        if (element.parentElement.getAttribute("ListPreview") != null) {
-            myRemoveEvent(element, "mouseenter", LIstIn);//解绑鼠标进入
-            myRemoveEvent(elementPP, "mouseleave", LIstout);//解绑鼠标离开
-
-            AddEvent(element, "mouseenter", LIstIn);//注册鼠标进入
-            AddEvent(elementPP, "mouseleave", LIstout);//注册鼠标离开
-        } else {
-            element.parentElement.setAttribute("ListPreview", true);
-            AddEvent(element, "mouseenter", LIstIn);//注册鼠标进入
-            AddEvent(elementPP, "mouseleave", LIstout);//注册鼠标离开
-        }
-    }
-}
-
-var flag22 = false;
-
-function LIstout(e) {
-    items = Array.from(e.target.children);
-    flag22 = false;
-    for (let index = 0; index < items.length; index++) {
-        const element = items[index];
-        if (element.getAttribute("triggerBlock") != null) {
-            element.remove();
-        }
-    }
-}
-
-function LIstIns(e) {
-
-    var id = setInterval(() => {
-
-        if (!flag22) {
-            clearInterval(id);
-            return;
-        }
-
-        var obj = e.target;
-
-        var timeDiv = addinsertCreateElement(obj, "div");
-        timeDiv.style.display = "inline-block";
-        timeDiv.style.width = "0px";
-        timeDiv.style.height = "16px";
-
-        var X = timeDiv.offsetLeft;
-        var Y = timeDiv.offsetTop;
-        timeDiv.remove();
-
-        var item = obj.parentElement.parentElement;
-        if (item == null) return;
-        items = item.children
-        var itemobj = items[items.length - 1];
-        if (itemobj != null && itemobj.getAttribute("triggerBlock") != null) {
-
-            var items1 = items[items.length - 1];
-            items1.style.top = (Y + 35) + "px";
-            items1.style.left = (obj.offsetLeft + 35) + "px";
-            var items2 = items[items.length - 2];
-            items2.style.top = (Y + 2) + "px";
-            items2.style.left = (X + 45) + "px";
-            return;
-        }
-
-    }, 500);
-}
-
-function LIstIn(e) {
-    flag22 = true;
-
-    var obj = e.target;
-    var timeDiv = addinsertCreateElement(obj, "div");
-    timeDiv.style.display = "inline-block";
-    timeDiv.style.width = "0px";
-    timeDiv.style.height = "16px";
-
-    var X = timeDiv.offsetLeft;
-    var Y = timeDiv.offsetTop;
-    timeDiv.remove();
-
-    var f = obj.parentElement.parentElement;
-    if (!f) return;
-    items = f.children;
-
-    var itemobj = items[items.length - 1];
-    if (itemobj != null && itemobj.getAttribute("triggerBlock") != null) return;
-
-    var triggerBlock1 = CreatetriggerBlock(e)//创建触发块1
-    //设置触发块样式，将触发块显示在〔 ··· 〕第二行位置
-    triggerBlock1.style.top = (Y + 35) + "px";
-    triggerBlock1.style.left = (obj.offsetLeft + 35) + "px";
-    AddEvent(triggerBlock1, "mouseenter", () => {
-        //一秒延时后搜索打开的悬浮窗，将悬浮窗中的列表展开,重复检查三次
-        setTimeout(Suspended, 1000)
-    });//注册鼠标进入
-
-    var triggerBlock2 = CreatetriggerBlock(e)//创建触发块2
-    //设置触发块样式，将触发块显示在〔 ··· 〕位置
-    triggerBlock2.style.top = (Y + 2) + "px";
-    triggerBlock2.style.left = (X + 45) + "px";
-
-    AddEvent(triggerBlock2, "mouseenter", () => {
-        //一秒延时后搜索打开的悬浮窗，将悬浮窗中的列表展开,重复检查三次
-        setTimeout(Suspended, 1000)
-    });//注册鼠标进入
-
-    //一秒延时后搜索打开的悬浮窗，将悬浮窗中的列表展开,重复检查三次
-    var previewID = obj.parentElement.parentElement.getAttribute("data-node-id");
-    var jisu = 0;
-    function Suspended() {
-        jisu++;
-        var y = false;
-        if (jisu == 3) return
-        var Sd = document.querySelectorAll("[data-oid]");
-        if (Sd.length >= 1) { //如果找到那么就将悬浮窗中列表展开
-            for (let index = 0; index < Sd.length; index++) {
-                const element = Sd[index];
-                var item = element.children[1].children[0].children[1].children[0].children[0];
-                if (item == null) continue;
-                if (item.getAttribute("data-node-id") == previewID) {
-                    item.setAttribute("fold", 0);
-                    y = true;
-                }
-            }
-        }
-        if (!y) { setTimeout(Suspended, 800) }
-    }
-    LIstIns(e);
-}
-
-function CreatetriggerBlock(e) {
-    var objParent = e.target.parentElement;
-    var triggerBlock = addinsertCreateElement(objParent.parentElement, "div");//创建触发块
-    //设置触发块样式，将触发块显示在〔 ··· 〕位置
-    triggerBlock.setAttribute("triggerBlock", true);
-    triggerBlock.style.position = "absolute";
-    triggerBlock.style.width = "20px";
-    triggerBlock.style.height = "15px";
-    //triggerBlock.style.background="red";
-    triggerBlock.style.display = "flex";
-    triggerBlock.style.zIndex = "999";
-    triggerBlock.style.cursor = "pointer";
-    triggerBlock.style.WebkitUserModify = "read-only";
-    triggerBlock.setAttribute("contenteditable", "false");
-    triggerBlock.innerHTML = "&#8203";
-
-    //获取折叠列表ID,设置悬浮窗
-    //protyle-wysiwyg__embed data-id
-    var previewID = objParent.parentElement.getAttribute("data-node-id");
-    triggerBlock.setAttribute("class", "protyle-attr");
-    triggerBlock.style.backgroundColor = "transparent";
-    //在触发块内创建思源超链接 
-    triggerBlock.innerHTML = "<span data-type='a' class='list-A' data-href=siyuan://blocks/" + previewID + ">####</span>";
-    //将这个思源连接样式隐藏
-    var a = triggerBlock.children[0];
-    a.style.fontSize = "15px";
-    a.style.lineHeight = "15px";
-    a.style.color = "transparent";
-    a.style.textShadow = "none";
-    a.style.border = "none";
-    return triggerBlock;
-}
-
-
-
-
-/**----------------鼠标中键标题、列表文本折叠/展开----------------*/
-function collapseExpand_Head_List() {
-    var flag45 = false;
-    AddEvent(document.body, "mouseup", () => {
-        flag45 = false;
-    });
-
-    AddEvent(document.body, "mousedown", (e) => {
-        if (e.button == 2) { flag45 = true; return }
-        if (flag45 || e.shiftKey || e.altKey || e.button != 1) return;
-        var target = e.target;
-
-        if (target.getAttribute("contenteditable") == null) {
-            isFatherFather(target, (v) => {
-                if (v.getAttribute("contenteditable") != null) {
-                    target = v;
-                    return true;
-                }
-                return false;
-            }, 10);
-        }
-
-        var targetParentElement = target.parentElement;
-        if (targetParentElement == null) return;
-
-        //是标题吗？
-        if (targetParentElement != null && targetParentElement.getAttribute("data-type") == "NodeHeading") {
-
-            var targetParentElementParentElement = targetParentElement.parentElement;
-            //标题父元素是列表吗？
-            if (targetParentElementParentElement != null && targetParentElementParentElement.getAttribute("data-type") == "NodeListItem") {
-                e.preventDefault();
-                //列表项实现折叠
-                _collapseExpand_NodeListItem(target);
+            // 添加空白div用于拖拽 - 使用setTimeout确保DOM已更新
+            setTimeout(() => {
+                addDragArea();
+            }, 100);
+            
+            // 启用顶栏合并右间距功能
+            if (!window.tabBarsMarginInitialized) {
+                window.tabBarsMarginInitialized = true;
+                initTabBarsMargin();
             } else {
-                e.preventDefault();
-                //标题块标项实现折叠
-                _collapseExpand_NodeHeading(target);
-            }
-        } else {//是列表
-            var targetParentElementParentElement = targetParentElement.parentElement;
-            if (targetParentElementParentElement != null && targetParentElementParentElement.getAttribute("data-type") == "NodeListItem") {
-                e.preventDefault();
-                //列表项实现折叠
-                _collapseExpand_NodeListItem(target);
-            }
-        }
-    });
-
-    //标题，块标实现折叠
-    function _collapseExpand_NodeHeading(element) {
-
-        var i = 0;
-        while (element.className != "protyle" && element.className != "fn__flex-1 protyle" && element.className != "block__edit fn__flex-1 protyle" && element.className != "fn__flex-1 spread-search__preview protyle") {
-            if (i == 999) return;
-            i++;
-            element = element.parentElement;
-        }
-        var ddddd = element.children;
-        for (let index = ddddd.length - 1; index >= 0; index--) {
-            const element = ddddd[index];
-            if (element.className == "protyle-gutters") {
-                var fold = diguiTooONE_1(element, (v) => { return v.getAttribute("data-type") === "fold"; })
-                if (fold != null) fold.click();
-                return;
-            }
-        }
-    }
-
-    //列表，列表项实现折叠
-    function _collapseExpand_NodeListItem(element) {
-
-        //在悬浮窗中第一个折叠元素吗？
-        var SiyuanFloatingWindow = isSiyuanFloatingWindow(element);
-        if (SiyuanFloatingWindow) {
-            var vs = isFatherFather(element, (v) => v.classList.contains("li"), 7);
-            if (vs != null && (vs.previousElementSibling == null)) {
-                var foid = vs.getAttribute("fold");
-                if (foid == null || foid == "0") {//判断是折叠
-                    vs.setAttribute("fold", "1");
-                } else {
-                    vs.setAttribute("fold", "0");
+                // 如果已初始化，则手动更新边距
+                if (window.updateTabBarsMargin) {
+                    window.updateTabBarsMargin();
                 }
-                return;
             }
-        }
-
-
-        var i = 0;
-        while (element.getAttribute("contenteditable") == null) {
-            if (i == 999) return;
-            i++;
-            element = element.parentElement;
-        }
-        var elementParentElement = element.parentElement.parentElement;
-
-        var fold = elementParentElement.getAttribute("fold");
-
-        if (elementParentElement.children.length == 3) return;
-
-        if (fold == null || fold == "0") {
-            setBlockfold_1(elementParentElement.getAttribute("data-node-id"));
-        } else {
-            setBlockfold_0(elementParentElement.getAttribute("data-node-id"));
-        }
-    }
-}
-
-/**
- * 
- * @param {*} element 元素是否在思源悬浮窗中
- * @returns 是返回悬浮窗元素，否返回null
- */
-function isSiyuanFloatingWindow(element) {
-    return isFatherFather(element, (v) => {
-        if (v.getAttribute("data-oid") != null) {
-            return true;
-        }
-        return false;
-    });
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//+++++++++++++++++++++++++++++++++思源API++++++++++++++++++++++++++++++++++++
-//思源官方API文档  https://github.com/siyuan-note/siyuan/blob/master/API_zh_CN.md
-
-/**
- * 
- * @param {*} 内容块id 
- * @param {*} 回调函数 
- * @param {*} 传递对象 
- */
-async function 根据ID获取人类可读路径(内容块id, then, obj = null) {
-    await 向思源请求数据('/api/filetree/getHPathByID', {
-        id: 内容块id
-    }).then((v) => then(v.data, obj))
-}
-
-async function 以id获取文档聚焦内容(id, then, obj = null) {
-    await 向思源请求数据('/api/filetree/getDoc', {
-        id: id,
-        k: "",
-        mode: 0,
-        size: 36,
-    }).then((v) => then(v.data, obj))
-}
-
-async function 更新块(id, dataType, data, then = null, obj = null) {
-    await 向思源请求数据('/api/block/updateBlock', {
-        id: id,
-        dataType: dataType,
-        data: data,
-    }).then((v) => {
-        if (then) then(v.data, obj);
-    })
-}
-
-async function 设置思源块属性(内容块id, 属性对象) {
-    let url = '/api/attr/setBlockAttrs'
-    return 解析响应体(向思源请求数据(url, {
-        id: 内容块id,
-        attrs: 属性对象,
-    }))
-}
-
-async function 获取块属性(内容块id, then = null, obj = null) {
-    let url = '/api/attr/getBlockAttrs'
-    return 向思源请求数据(url, {
-        id: 内容块id
-    }).then((v) => {
-        if (then) then(v.data, obj);
-    })
-}
-
-async function 向思源请求数据(url, data) {
-    const response = await fetch(url, {
-        body: JSON.stringify(data),
-        method: 'POST',
-        headers: {
-            Authorization: `Token ''`,
-        }
-    });
-    if (response.status === 200)
-        return await response.json();
-    else return null;
-}
-
-async function 解析响应体(response) {
-    let r = await response
-    return r.code === 0 ? r.data : null
-}
-
-
-async function 获取文件(path, then = null, obj = null) {
-    let url = '/api/file/getFile';
-    await 向思源请求数据(url, {
-        path: path
-    }).then((v) => {
-        if (then) then(v, obj);
-    });
-}
-
-async function 写入文件(path, filedata, then = null, obj = null, isDir = false, modTime = Date.now()) {
-
-    let blob = new Blob([filedata]);
-    let file = new File([blob], path.split('/').pop());
-    let formdata = new FormData();
-    formdata.append("path", path);
-    formdata.append("file", file);
-    formdata.append("isDir", isDir);
-    formdata.append("modTime", modTime);
-    await fetch(
-        "/api/file/putFile", {
-        body: formdata,
-        method: "POST",
-        headers: {
-            Authorization: `Token ""`,
         },
-    }).then((v) => {
-        setTimeout(() => {
-            if (then) then(obj);
-        }, 200)
-    });
-}
-//添加空白div//
-var savordragElement = document.createElement("div");
-savordragElement.id = "savordrag";
-var barForwardElement = document.getElementById("barForward");
-if (barForwardElement !== null) {
-    var parentElement = barForwardElement.parentNode;
-    parentElement.insertBefore(savordragElement, barForwardElement.nextSibling);
-    // 进行其他操作
-} else {
-    console.error("元素不存在");
-}
-savordragElement.style.cssText = "flex: 1; app-region: drag;"; 
-
-
-
-
-
-// 添加底栏右间距
-function initStatusRight() {
-    let statusRight = null;
-    let dockr = null;
-    let dockRight = null;
-    let resizeElement = null;
-    let status = null;
-
-    // 缓存 DOM 元素
-    const cacheElements = () => {
-        status = document.querySelector('#status');
-        statusRight = document.querySelector('.statusRight');
-        dockr = document.querySelector('.layout__dockr');
-        dockRight = document.querySelector('#dockRight');
-        resizeElement = document.querySelector('.layout__center + .layout__resize--lr');
-    };
-
-    // 更新宽度和样式的函数
-    const updateWidth = () => {
-        if (!status || !statusRight || !dockr) return;
-
-        // 检查 .protyle 是否为 .protyle.fullscreen
-        const isFullscreen = document.querySelector('.protyle.fullscreen') !== null;
-
-        if (isFullscreen) {
-            // 如果是全屏模式，设置 .statusRight 的宽度为 0
-            statusRight.style.width = '0px';
-            // 设置 #status 的 right 为 -5px，bottom 为 0px
-            status.style.right = '-5px';
-            status.style.bottom = '0px';
-            return;
-        }
-
-        // 非全屏模式下，恢复 #status 的默认样式
-        status.style.right = '';
-        status.style.bottom = '';
-
-        // 计算 .statusRight 的宽度
-        const dockRightWidth = (dockRight && !dockRight.classList.contains('fn__none')) ? 33 : 0;
-        const resizeWidth = dockr.offsetWidth > 0 && resizeElement ? resizeElement.offsetWidth : 0;
-        const totalWidth = dockr.classList.contains('layout--float') 
-            ? dockRightWidth 
-            : dockr.offsetWidth + resizeWidth + dockRightWidth;
-
-        statusRight.style.width = `${totalWidth}px`;
-    };
-
-    // 初始化函数
-    const init = () => {
-        cacheElements();
-    
-        // 只有在 statusRight 不存在时才创建它
-        if (!statusRight && dockr && dockRight && status) {
-            statusRight = Object.assign(document.createElement('div'), {
-                className: 'statusRight',
-                style: 'display: none;' // 添加默认样式
-            });
-            status.appendChild(statusRight);
-    
-            // 观察 dockr 的尺寸变化
-            new ResizeObserver(updateWidth).observe(dockr);
-    
-            // 观察 dockRight 的类变化
-            new MutationObserver(updateWidth).observe(dockRight, {
-                attributes: true,
-                attributeFilter: ['class']
-            });
-    
-            // 观察 .protyle 的类变化，以检测全屏模式
-            const protyleElement = document.querySelector('.protyle');
-            if (protyleElement) {
-                new MutationObserver(updateWidth).observe(protyleElement, {
-                    attributes: true,
-                    attributeFilter: ['class']
-                });
+        onDisable: () => {
+            // 移除空白div
+            let dragElement = document.getElementById("savordrag");
+            if (dragElement) {
+                dragElement.parentNode.removeChild(dragElement);
             }
-    
-            // 初始更新宽度和样式
-            updateWidth();
         }
+    },
+    {
+        id: "bulletThreading",
+        label: "列表子弹线",
+        cssPath: "/appearance/themes/Savor/style/topbar/bullet-threading.css",
+        styleId: "Sv-theme-color-列表子弹线",
+        attrName: "列表子弹线",
+        svg: "M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z",
+        onEnable: () => {
+            // 启用子弹线功能时，添加事件监听器
+            initBulletThreading();
+        },
+        onDisable: () => {
+            // 禁用子弹线功能时，移除事件监听器
+            removeBulletThreading();
+        }
+    }
+];
+
+// 子弹线相关变量和函数
+let bulletThreadingActive = false;
+let selectionChangeHandler = null;
+
+// 初始化子弹线功能
+function initBulletThreading() {
+    if (bulletThreadingActive) return;
+    
+    bulletThreadingActive = true;
+    selectionChangeHandler = () => {
+        const selection = window.getSelection();
+        if (!selection.rangeCount) return;
+        
+        // 获取当前选中节点的列表项祖先节点
+        const range = selection.getRangeAt(0);
+        const startNode = range.startContainer;
+        
+        // 清除所有已有的子弹线样式
+        document.querySelectorAll('.en_item_bullet_actived, .en_item_bullet_line')
+            .forEach(node => {
+                node.classList.remove('en_item_bullet_actived', 'en_item_bullet_line');
+                node.style.removeProperty('--en-bullet-line-height');
+            });
+        
+        // 查找当前节点所在的列表路径
+        const listItems = [];
+        let currentNode = startNode;
+        
+        // 检查是否存在具有custom-f属性的父级列表
+        let hasCustomFParent = false;
+        let tempNode = currentNode;
+        while (tempNode && tempNode !== document.body) {
+            if (tempNode.getAttribute && tempNode.getAttribute('custom-f')) {
+                hasCustomFParent = true;
+                break;
+            }
+            tempNode = tempNode.parentElement;
+        }
+        
+        // 如果存在custom-f属性的父级，则不应用子弹线
+        if (hasCustomFParent) return;
+        
+        while (currentNode && currentNode !== document.body) {
+            // 跳过具有custom-f属性的列表项
+            if (currentNode.dataset?.type === 'NodeListItem' && !currentNode.getAttribute('custom-f')) {
+                listItems.push(currentNode);
+            }
+            currentNode = currentNode.parentElement;
+        }
+        
+        // 如果没有找到列表项，直接返回
+        if (listItems.length === 0) return;
+        
+        // 设置子弹线高度并应用样式
+        for (let i = 0; i < listItems.length - 1; i++) {
+            const currentItem = listItems[i];
+            const parentItem = listItems[i + 1];
+            
+            const height = currentItem.getBoundingClientRect().top - 
+                           parentItem.getBoundingClientRect().top;
+            
+            currentItem.style.setProperty('--en-bullet-line-height', `${height}px`);
+            currentItem.classList.add('en_item_bullet_line');
+        }
+        
+        // 为所有列表项添加激活样式
+        listItems.forEach(item => item.classList.add('en_item_bullet_actived'));
     };
+    
+    // 添加事件监听器
+    document.addEventListener('selectionchange', selectionChangeHandler);
+}
 
-    // 首次尝试初始化
-    init();
-
-    // 使用 MutationObserver 等待正确时机
-    const observer = new MutationObserver(init);
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
+// 移除子弹线功能
+function removeBulletThreading() {
+    if (!bulletThreadingActive) return;
+    
+    bulletThreadingActive = false;
+    
+    // 移除事件监听器
+    if (selectionChangeHandler) {
+        document.removeEventListener('selectionchange', selectionChangeHandler);
+        selectionChangeHandler = null;
+    }
+    
+    // 清除所有样式
+    document.querySelectorAll('.en_item_bullet_actived, .en_item_bullet_line')
+        .forEach(node => {
+            node.classList.remove('en_item_bullet_actived', 'en_item_bullet_line');
+            node.style.removeProperty('--en-bullet-line-height');
+        });
+}
+// 创建功能按钮
+function createFeatureButtons() {
+    featureButtons.forEach(button => {
+        savorThemeToolbarAddButton(
+            button.id,
+            "b3-menu__item",
+            button.label,
+            window.theme.themeMode,
+            () => {
+                // 执行自定义启用逻辑
+                if (button.onEnable) button.onEnable();
+                
+                // 检查是否已存在样式元素
+                let styleElement = document.getElementById(button.styleId);
+                if (!styleElement) {
+                    const style = window.theme.loadStyle(button.cssPath, button.styleId);
+                    // 根据按钮ID设置不同的属性
+                    if (button.id === "bulletThreading") {
+                        style.setAttribute("bulletThreading", button.attrName);
+                    } else {
+                        style.setAttribute("topBarcss", button.attrName);
+                    }
+                }
+            },
+            () => {
+                // 移除样式元素
+                const styleElement = document.getElementById(button.styleId);
+                if (styleElement) styleElement.remove();
+                
+                // 执行自定义禁用逻辑
+                if (button.onDisable) button.onDisable();
+            },
+            true,
+            button.svg
+        );
     });
 }
-
-// 确保在 DOM 加载完成后执行
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initStatusRight);
-} else {
-    initStatusRight();
+// 在主题按钮初始化后添加功能按钮
+function initFeatureButtons() {
+    createFeatureButtons();
 }
-
-
-//+++++++++++++++++++++++++++++++++辅助API++++++++++++++++++++++++++++++++++++
-
+/**---------------------------------------------------------垂直页签宽度调节-------------------------------------------------------------- */
+// 垂直页签宽度调节相关变量
+let tabbarResizer = null;
+let isResizing = false;
+let startX = 0;
+let startWidth = 0;
+const MIN_WIDTH = 150; // 最小宽度
+const MAX_WIDTH = 400; // 最大宽度
 
 /**
- * 方便为主题功能添加开关按钮，并选择是否拥有记忆状态
- * @param {*} ButtonID 按钮ID。
- * @param {*} ButtonTitle 按钮作用提示文字。
- * @param {*} NoButtonSvg 按钮激活Svg图标路径
- * @param {*} OffButtonSvg 按钮未激活Svg图标路径
- * @param {*} NoClickRunFun 按钮开启执行函数
- * @param {*} OffClickRunFun 按钮关闭执行函数
- * @param {*} Memory 是否设置记忆状态 true为是留空或false为不设置记忆状态。
+ * 初始化垂直页签宽度调节器
  */
-function savorThemeToolbarAddButton(ButtonID, ButtonTitle , ButtonLabel, Mode, NoClickRunFun, OffClickRunFun, Memory) {
-    var savorToolbar = document.getElementById("savorToolbar");
-    if (savorToolbar == null) {
-        var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.querySelector("#commonMenu .b3-menu__items")
-
-        if (toolbarEdit == null ) {
-            savorToolbar = document.createElement("div");
-            savorToolbar.id = "savorToolbar";
-            windowControls.parentElement.insertBefore(savorToolbar, windowControls);
-        } else if (toolbarEdit != null) {
-            savorToolbar = insertCreateBefore(toolbarEdit, "div", "savorToolbar");
-            savorToolbar.style.position = "relative";
-        }
-    }
-
-    var existingButton = document.getElementById(ButtonID);
-    if (existingButton) return;
+function initTabbarResizer() {
+    // 如果已经存在调节器，先移除
+    removeTabbarResizer();
     
-    var addButton = addinsertCreateElement(savorToolbar, "button");
-    addButton.style.float = "top";
-    addButton.id = ButtonID;
-	addButton.setAttribute("class", ButtonTitle + " button_off");
-	addButton.setAttribute("aria-label", ButtonLabel)
-	
+    // 获取垂直页签容器 - 修正选择器以获取正确的页签容器
+    const tabContainer = document.querySelector('.layout__center .layout-tab-bar');
+    if (!tabContainer) return;
+    
+    // 创建调节器元素
+    tabbarResizer = document.createElement('div');
+    tabbarResizer.id = 'tabbar-resizer';
+    tabbarResizer.className = 'tabbar-resizer';
+    tabbarResizer.style.cssText = `
+        position: absolute;
+        top: 0;
+        right: -5px;
+        width: 10px;
+        height: 100%;
+        cursor: col-resize;
+        z-index: 100;
+    `;
+    
+    // 添加调节器到页签容器
+    tabContainer.style.position = 'relative';
+    tabContainer.appendChild(tabbarResizer);
+    
+    // 添加事件监听
+    tabbarResizer.addEventListener('mousedown', startResize);
+    document.addEventListener('mousemove', resizeTabbar);
+    document.addEventListener('mouseup', stopResize);
+}
 
-    if (window.theme.themeMode == Mode) {
-        var offNo = '0';
+/**
+ * 开始调整大小
+ * @param {MouseEvent} e - 鼠标事件
+ */
+function startResize(e) {
+    e.preventDefault();
+    isResizing = true;
+    startX = e.clientX;
+    
+    // 修正选择器以获取正确的页签容器
+    const tabContainer = document.querySelector('.layout__center .layout-tab-bar');
+    startWidth = tabContainer.offsetWidth;
+    
+    // 添加调整中的样式
+    document.body.classList.add('tabbar-resizing');
+}
 
+/**
+ * 调整页签宽度
+ * @param {MouseEvent} e - 鼠标事件
+ */
+function resizeTabbar(e) {
+    if (!isResizing) return;
+    
+    // 修正选择器以获取正确的页签容器
+    const tabContainer = document.querySelector('.layout__center .layout-tab-bar');
+    if (!tabContainer) return;
+    
+    const deltaX = e.clientX - startX;
+    let newWidth = startWidth + deltaX;
+    
+    // 限制宽度范围
+    newWidth = Math.max(MIN_WIDTH, Math.min(newWidth, MAX_WIDTH));
+    
+    // 应用新宽度
+    tabContainer.style.width = `${newWidth}px`;
+}
 
-        
-        // 如果主题是暗色主题，默认选中样式
-        if (Mode == 'dark'){
-            if (Memory == true) {
-			offNo = getItem(ButtonID);
-			if (offNo == "1") {
-				addButton.setAttribute("class", ButtonTitle + " button_on");
-				setItem(ButtonID, "0");
-				NoClickRunFun(addButton);
-				setItem(ButtonID, "1");
-			} else if (offNo != "0") {
-				offNo = "0";
-				setItem(ButtonID, "0");
-			}
+/**
+ * 停止调整大小
+ */
+function stopResize() {
+    if (!isResizing) return;
+    
+    isResizing = false;
+    document.body.classList.remove('tabbar-resizing');
+}
+
+/**
+ * 移除垂直页签宽度调节器
+ */
+function removeTabbarResizer() {
+    // 移除事件监听
+    document.removeEventListener('mousemove', resizeTabbar);
+    document.removeEventListener('mouseup', stopResize);
+    
+    // 移除调节器元素
+    const existingResizer = document.getElementById('tabbar-resizer');
+    if (existingResizer) {
+        existingResizer.parentNode.removeChild(existingResizer);
     }
-
-    AddEvent(addButton, "click", () => {
-
-        if (offNo == "0") {
-			addButton.setAttribute("class", ButtonTitle + " button_on");
-            NoClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "1");
-            offNo = "1";
+    
+    // 移除调整中的样式
+    document.body.classList.remove('tabbar-resizing');
+    
+    tabbarResizer = null;
+    isResizing = false;
+}
+/**---------------------------------------------------------插件-------------------------------------------------------------- */
+    
+// 等待必要的DOM元素加载完成
+const waitForElement = (selector, timeout = 5000) => {
+    return new Promise((resolve) => {
+        if (document.querySelector(selector)) {
+            resolve(document.querySelector(selector));
             return;
         }
 
-        if (offNo == "1") {
-			addButton.setAttribute("class", ButtonTitle + " button_off");
-            OffClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "0");
-            offNo = "0";
-            return;
-        }
+        const observer = new MutationObserver(() => {
+            if (document.querySelector(selector)) {
+                observer.disconnect();
+                resolve(document.querySelector(selector));
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+        // 设置超时
+        setTimeout(() => {
+            observer.disconnect();
+            resolve(null);
+        }, timeout);
     });
-        } else {
-    if (Memory == true) {
-        offNo = getItem(ButtonID);
-        if (offNo == "1") {
-			addButton.setAttribute("class", ButtonTitle + " button_on");
-            setItem(ButtonID, "0");
-            NoClickRunFun(addButton);
-            setItem(ButtonID, "1");
-        } else if (offNo != "0") {
-            offNo = "0";
-            setItem(ButtonID, "0");
-        }
+};
+
+// 插件按钮配置
+const pluginButtons = [
+    {
+        id: "Splugin",
+        label: "收缩/展开插件",
+        cssPath: "/appearance/themes/Savor/style/topbar/Splugin.css",
+        styleId: "Sv-theme-color-plugin隐藏",
+        attrName: "plugin隐藏",
+        className: "toolbar__item b3-tooltips b3-tooltips__sw",
+        onEnable: () => {},
+        onDisable: () => {}
+    }
+];
+
+// 创建插件按钮
+async function createPluginButtons() {
+    const barCommand = await waitForElement('#barCommand');
+    if (!barCommand) {
+        console.warn('无法找到 #barCommand 元素');
+        return;
     }
 
-    AddEvent(addButton, "click", () => {
-
-        if (offNo == "0") {
-			addButton.setAttribute("class", ButtonTitle + " button_on");
-            NoClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "1");
-            offNo = "1";
-            return;
-        }
-
-        if (offNo == "1") {
-			addButton.setAttribute("class", ButtonTitle + " button_off");
-            OffClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "0");
-            offNo = "0";
-            return;
-        }
-    })
-   }
-    }
-
-}
-
-
-function savorThemeToolplusAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClickRunFun, OffClickRunFun, Memory) {
-    var savorToolplus = document.getElementById("savorToolbar");
-    if (savorToolplus == null) {
-        var toolbarEdit = document.getElementById("toolbarEdit");
-        var windowControls = document.getElementById("windowControls");
-
-        if (toolbarEdit == null && windowControls != null) {
-            savorToolplus = document.createElement("div");
-            savorToolplus.id = "savorToolbar";
-            windowControls.parentElement.insertBefore(savorToolplus, windowControls);
-        } else if (toolbarEdit != null) {
-            savorToolplus = insertCreateBefore(toolbarEdit, "div", "savorToolbar");
-            savorToolplus.style.position = "relative";
-        }
-    }
-
-    var addButton = addinsertCreateElement(savorToolbar, "button");
-    addButton.style.float = "top";
-
-
-    
-    addButton.id = ButtonID;
-	addButton.setAttribute("class", ButtonTitle + " button_off");
-	addButton.setAttribute("aria-label", ButtonLabel)
-	
-
-	var offNo = '0';
-
-
-    if (Memory == true) {
-        offNo = getItem(ButtonID);
-        if (offNo == "1") {
-			addButton.setAttribute("class", ButtonTitle + " button_on");
-            setItem(ButtonID, "0");
-            NoClickRunFun(addButton);
-            setItem(ButtonID, "1");
-        } else if (offNo != "0") {
-            offNo = "0";
-            setItem(ButtonID, "0");
-        }
-    }
-
-    AddEvent(addButton, "click", () => {
-
-        if (offNo == "0") {
-			addButton.setAttribute("class", ButtonTitle + " button_on");
-            NoClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "1");
-            offNo = "1";
-            return;
-        }
-
-        if (offNo == "1") {
-			addButton.setAttribute("class", ButtonTitle + " button_off");
-            OffClickRunFun(addButton);
-            if (Memory != null) setItem(ButtonID, "0");
-            offNo = "0";
-            return;
-        }
-    })
-
-}
-
-function savorPluginsAddButton(ButtonID, ButtonTitle, ButtonLabel, NoClickRunFun, OffClickRunFun, Memory) {
     // 获取或创建插件容器
     let savorPlugins = document.getElementById("savorPlugins");
-    const barCommand = document.getElementById("barCommand");
-
-    if (!barCommand) {
-        console.warn("无法找到 barCommand 元素");
-        return null;
-    }
-
     if (!savorPlugins) {
         savorPlugins = safeCreateElement(barCommand.parentElement, "div", "savorPlugins");
-        if (!savorPlugins) return null;
+        if (!savorPlugins) return;
         barCommand.parentNode.insertBefore(savorPlugins, barCommand);
     }
 
-    // 创建按钮
-    const addButton = safeCreateElement(savorPlugins, "div");
-    if (!addButton) return null;
+    // 创建所有插件按钮
+    pluginButtons.forEach(button => {
+        // 检查按钮是否已存在
+        if (document.getElementById(button.id)) return;
 
-    // 设置按钮属性
-    addButton.style.float = "top";
-    addButton.id = ButtonID;
-    addButton.setAttribute("class", ButtonTitle + " button_off");
-    addButton.setAttribute("aria-label", ButtonLabel);
+        // 创建按钮
+        const addButton = safeCreateElement(savorPlugins, "div");
+        if (!addButton) return;
 
-    let offNo = '0';
+        // 设置按钮属性
+        addButton.style.float = "top";
+        addButton.id = button.id;
+        addButton.setAttribute("class", button.className + " button_off");
+        addButton.setAttribute("aria-label", button.label);
 
-    // 处理记忆状态
-    if (Memory) {
-        offNo = getItem(ButtonID) || '0';
+        let offNo = '0';
+
+        // 处理记忆状态
+        offNo = getItem(button.id) || '0';
         if (offNo === "1") {
-            addButton.setAttribute("class", ButtonTitle + " button_on");
-            NoClickRunFun(addButton);
-        }
-    }
-
-    // 添加点击事件
-    addButton.addEventListener("click", () => {
-        if (offNo === "0") {
-            addButton.setAttribute("class", ButtonTitle + " button_on");
-            NoClickRunFun(addButton);
-            if (Memory) setItem(ButtonID, "1");
-            offNo = "1";
-        } else {
-            addButton.setAttribute("class", ButtonTitle + " button_off");
-            OffClickRunFun(addButton);
-            if (Memory) setItem(ButtonID, "0");
-            offNo = "0";
-        }
-    });
-
-    return addButton;
-}
-
-
-function setItem(key, value) {
-    window.theme.config[key] = value;
-    写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
-}
-
-function getItem(key) {
-    return window.theme.config[key] === undefined ? null : window.theme.config[key];
-}
-
-function removeItem(key) {
-    delete window.theme.config[key];
-    写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
-}
-/**
- * 在DIV光标位置插入内容
- * @param {*} content 
- */
-function insertContent(content) {
-    if (content) {
-        var sel = window.getSelection();
-        if (sel.rangeCount > 0) {
-            var range = sel.getRangeAt(0); //获取选择范围
-            range.deleteContents(); //删除选中的内容
-            var el = document.createElement("div"); //创建一个空的div外壳
-            el.innerHTML = content; //设置div内容为我们想要插入的内容。
-            var frag = document.createDocumentFragment(); //创建一个空白的文档片段，便于之后插入dom树
-            var node = el.firstChild;
-            var lastNode = frag.appendChild(node);
-            range.insertNode(frag); //设置选择范围的内容为插入的内容
-            var contentRange = range.cloneRange(); //克隆选区
-
-            contentRange.setStartAfter(lastNode); //设置光标位置为插入内容的末尾
-            contentRange.collapse(true); //移动光标位置到末尾
-            sel.removeAllRanges(); //移出所有选区
-            sel.addRange(contentRange); //添加修改后的选区
-
-        }
-    }
-}
-
-
-/**
- * 获取DIV文本光标位置
- * @param {*} element 
- * @returns 
- */
-function getPosition(element) {
-    var caretOffset = 0;
-    var doc = element.ownerDocument || element.document;
-    var win = doc.defaultView || doc.parentWindow;
-    var sel;
-    if (typeof win.getSelection != "undefined") {
-        //谷歌、火狐
-        sel = win.getSelection();
-        if (sel.rangeCount > 0) {
-            var range = sel.getRangeAt(0);
-            var preCaretRange = range.cloneRange(); //克隆一个选区
-            preCaretRange.selectNodeContents(element); //设置选区的节点内容为当前节点
-            preCaretRange.setEnd(range.endContainer, range.endOffset); //重置选中区域的结束位置
-            caretOffset = preCaretRange.toString().length;
-        }
-    } else if ((sel = doc.selection) && sel.type != "Control") {
-        //IE
-        var textRange = sel.createRange();
-        var preCaretTextRange = doc.body.createTextRange();
-        preCaretTextRange.moveToElementText(element);
-        preCaretTextRange.setEndPoint("EndToEnd", textRange);
-        caretOffset = preCaretTextRange.text.length;
-    }
-    return caretOffset;
-};
-/**
- * 在指定DIV索引位置设置光标
- * @param {*} element 
- * @param {*} index 
- */
-function setCursor(element, index) {
-    var codeEl = element.firstChild;
-    var selection = window.getSelection();
-    // 创建新的光标对象
-    let range = selection.getRangeAt(0);
-    // 光标对象的范围界定为新建的代码节点
-    range.selectNodeContents(codeEl)
-    // 光标位置定位在代码节点的最大长度
-    // console.log(codeEl.length);
-    range.setStart(codeEl, index);
-    // 使光标开始和光标结束重叠
-    range.collapse(true)
-    selection.removeAllRanges()
-    selection.addRange(range)
-}
-
-
-/**
- * 获得文本的占用的宽度
- * @param {*} text 字符串文班
- * @param {*} font 文本字体的样式
- * @returns 
- */
-function getTextWidth(text, font) {
-    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-    var context = canvas.getContext("2d");
-    context.font = font;
-    var metrics = context.measureText(text);
-    return metrics.width;
-}
-
-/**
- * 触发元素的事件
- * @param {触发元素事件} type 
- * @param {*} element 
- * @param {*} detail 
- */
-function trigger(type, element) {
-    var customEvent = new Event(type, { bubbles: false, cancelable: true });
-    element.dispatchEvent(customEvent);
-}
-
-/**
- * 向body注入新style覆盖原本的css
- * @param {css文本字符串} csstxt 
- */
-function injectionCss(csstxt) {
-    var styleElement = document.createElement('style');
-
-    styleElement.innerText = t;
-
-    document.body.appendChild(styleElement);
-};
-
-/**
- * 向指定父级创建追加一个子元素，并可选添加ID,
- * @param {Element} fatherElement 
- * @param {string} addElementTxt 要创建添加的元素标签
- * @param {string} setId 
- * @returns addElementObject
- */
-function addinsertCreateElement(fatherElement, addElementTxt, setId = null) {
-    return safeCreateElement(fatherElement, addElementTxt, setId);
-}
-
-
-/**
- * 向指定元素后创建插入一个元素，可选添加ID
- * @param {*} targetElement 目标元素
- * @param {*} addElementTxt 要创建添加的元素标签
- * @param {*} setId 为创建元素设置ID
- */
-function insertCreateAfter(targetElement, addElementTxt, setId = null) {
-
-    if (!targetElement) console.error("指定元素对象不存在！");
-    if (!addElementTxt) console.error("未指定字符串！");
-
-    var element = document.createElement(addElementTxt);
-
-    if (setId) element.id = setId;
-
-    var parent = targetElement.parentNode;//得到父节点
-    if (parent.lastChild === targetElement) {
-        //如果最后一个子节点是当前元素那么直接添加即可
-        parent.appendChild(element);
-        return element;
-    } else {
-        parent.insertBefore(element, targetElement.nextSibling);//否则，当前节点的下一个节点之前添加
-        return element;
-    }
-}
-
-
-/**
- * 向指定元素前创建插入一个元素，可选添加ID
- * @param {*} targetElement 目标元素
- * @param {*} addElementTxt 要创建添加的元素标签
- * @param {*} setId 为创建元素设置ID
- */
-function insertCreateBefore(targetElement, addElementTxt, setId = null) {
-
-    if (!targetElement) console.error("指定元素对象不存在！");
-    if (!addElementTxt) console.error("未指定字符串！");
-
-    var element = document.createElement(addElementTxt);
-
-    if (setId) element.id = setId;
-
-    targetElement.parentElement.insertBefore(element, targetElement);
-
-    return element;
-}
-
-
-
-/**
- * 为元素注册监听事件
- * @param {Element} element 
- * @param {string} strType 
- * @param {Fun} fun 
- */
-function AddEvent(element, strType, fun) {
-    //判断浏览器有没有addEventListener方法
-    if (element.addEventListener) {
-        element.addEventListener(strType, fun, false);
-        //判断浏览器有没 有attachEvent IE8的方法	
-    } else if (element.attachEvent) {
-        element.attachEvent("on" + strType, fun);
-        //如果都没有则使用 元素.事件属性这个基本方法
-    } else {
-        element["on" + strType] = fun;
-    }
-}
-
-
-/**
- * 为元素解绑监听事件
- * @param {Element}  element ---注册事件元素对象
- * @param {String}   strType ---注册事件名(不加on 如"click")
- * @param {Function} fun	 ---回调函数
- * 
- */
-function myRemoveEvent(element, strType, fun) {
-    //判断浏览器有没有addEventListener方法
-    if (element.addEventListener) {
-        // addEventListener方法专用删除方法
-        element.removeEventListener(strType, fun, false);
-        //判断浏览器有没有attachEvent IE8的方法	
-    } else if (element.attachEvent) {
-        // attachEvent方法专用删除事件方法
-        element.detachEvent("on" + strType, fun);
-        //如果都没有则使用 元素.事件属性这个基本方法
-    } else {
-        //删除事件用null
-        element["on" + strType] = null;
-    }
-}
-
-
-/**
-* 加载脚本文件
-* @param {string} url 脚本地址
-* @param {string} type 脚本类型
-*/
-function loadScript(url, type = 'module') {
-    let script = document.createElement('script');
-    if (type) script.setAttribute('type', type);
-    script.setAttribute('src', url);
-    document.head.appendChild(script);
-}
-
-
-
-/**
- * 得到思源toolbar
- * @returns 
- */
-function getSiYuanToolbar() { return document.getElementById("toolbar"); }
-
-/**
- * 得到savorToolbar
- * @returns 
- */
-function getsavorToolbar() { return document.getElementById("savorToolbar"); }
-
-/**简单判断目前思源是否是pc窗口模式 */
-function isPcWindow() {
-    return document.body.classList.contains("body--window");
-}
-
-/**简单判断目前思源是否是手机模式 */
-function isPhone() {
-    return document.getElementById("editor") ;
-}
-
-
-/**
- * 加载样式文件
- * @param {string} url 样式地址
- * @param {string} id 样式 ID
- */
-function loadStyle(url, id, cssName) {
-
-    var headElement = document.head;
-
-    let style = document.getElementById(id);
-    if (id != null) {
-        if (style) headElement.removeChild(style);
-    }
-
-    style = document.createElement('link');
-    if (id != null) style.id = id;
-
-
-    style.setAttribute('type', 'text/css');
-    style.setAttribute('rel', 'stylesheet');
-    style.setAttribute('href', url);
-    if (cssName != null) style.setAttribute("class", cssName);
-    headElement.appendChild(style);
-    return style;
-}
-
-/**
- * 取出两个数组的不同元素
- * @param {*} arr1 
- * @param {*} arr2 
- * @returns 
- */
-function getArrDifference(arr1, arr2) {
-    return arr1.concat(arr2).filter(function (v, i, arr) {
-        return arr.indexOf(v) === arr.lastIndexOf(v);
-    });
-}
-
-/**
- * 取出两个数组的相同元素
- * @param {*} arr1 
- * @param {*} arr2 
- * @returns 
- */
-function getArrEqual(arr1, arr2) {
-    let newArr = [];
-    for (let i = 0; i < arr2.length; i++) {
-        for (let j = 0; j < arr1.length; j++) {
-            if (arr1[j] === arr2[i]) {
-                newArr.push(arr1[j]);
+            addButton.setAttribute("class", button.className + " button_on");
+            // 加载样式
+            if (!document.getElementById(button.styleId)) {
+                const style = window.theme.loadStyle(button.cssPath, button.styleId);
+                style.setAttribute(button.id, button.attrName);
             }
+            // 执行自定义启用逻辑
+            if (button.onEnable) button.onEnable(addButton);
         }
-    }
-    return newArr;
-}
 
-/**
- * 思源吭叽元素属性解析看是否包含那种行级元素类型
- * @param {} attributes 
- * @param {*} attribute 
- * @returns 
- */
-function attributesContains(attributes, attribute) {
-    if (attribute == true) return;
-    var arr = attributes.split(" ");
-    if (arr.length != 0) {
-        arr.forEach((v) => {
-            if (v == attribute) attribute = true;
+        // 添加点击事件
+        addButton.addEventListener("click", () => {
+            if (offNo === "0") {
+                addButton.setAttribute("class", button.className + " button_on");
+                // 加载样式
+                if (!document.getElementById(button.styleId)) {
+                    const style = window.theme.loadStyle(button.cssPath, button.styleId);
+                    style.setAttribute(button.id, button.attrName);
+                }
+                // 执行自定义启用逻辑
+                if (button.onEnable) button.onEnable(addButton);
+                setItem(button.id, "1");
+                offNo = "1";
+            } else {
+                addButton.setAttribute("class", button.className + " button_off");
+                // 移除样式
+                const styleElement = document.getElementById(button.styleId);
+                if (styleElement) styleElement.remove();
+                // 执行自定义禁用逻辑
+                if (button.onDisable) button.onDisable(addButton);
+                setItem(button.id, "0");
+                offNo = "0";
+            }
         });
-        return attribute == true ? true : false;
-    } else {
-        return attributes == attribute;
-    }
-}
-/**
- * 间隔执行指定次数的函数(不立即执行)
- * @param {*} time 间隔时间s
- * @param {*} frequency 执行次数
- * @param {*} Fun 执行函数
- */
-function IntervalFunTimes(time, frequency, Fun) {
-
-    for (let i = 0; i < frequency; i++) {
-        sleep(time * i).then(v => {
-            Fun();
-        })
-    }
-
-    function sleep(time2) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve()
-            }, time2)
-        })
-    }
+    });
 }
 
-/**
- * 获得当前浏览器缩放系数 默认值为1
- * @returns 
- */
-function detectZoom() {
-    var ratio = 0, screen = window.screen, ua = navigator.userAgent.toLowerCase();
-    if (window.devicePixelRatio !== undefined) {
-        ratio = window.devicePixelRatio;
-    } else if (~ua.indexOf('msie')) {
-        if (screen.deviceXDPI && screen.logicalXDPI) {
-            ratio = screen.deviceXDPI / screen.logicalXDPI;
-        }
-    } else if (window.outerWidth !== undefined && window.innerWidth !== undefined) {
-        ratio = window.outerWidth / window.innerWidth;
-    }
-    if (ratio) {
-        ratio = Math.round(ratio * 100);
-    }
-    return ratio * 0.01;
-};
-/**
- * 递归DOM元素查找深度子级的一批符合条件的元素返回数组
- * @param {*} element 要查找DOM元素
- * @param {*} judgeFun 查找函数 : fun(v) return true or false
- * @returns array
- */
-function diguiTooALL(element, judgeFun) {
-
-    var target = [];
-
-    if (element == null) return null;
-    if (judgeFun == null) return null;
+// 初始化插件按钮
+function initPluginButtons() {
+    createPluginButtons().catch(error => {
+        console.error("初始化插件按钮时出错:", error);
+    });
+}
 
 
-    digui(element);
-    return target;
 
-    function digui(elem) {
-        var child = elem.children;
-        if (child.length == 0) return;
 
-        for (let index = 0; index < child.length; index++) {
-            const element2 = child[index];
-            if (judgeFun(element2)) {
-                target.push(element2);
-                digui(element2);
-            } else {
-                digui(element2);
-            }
-        }
-    }
-};
 
-/**
-* 递归DOM元素查找深度子级的第一个符合条件的元素 - 子级的子级深度搜索赶紧后在搜索下一个子级
-* @param {*} element 要查找DOM元素
-* @param {*} judgeFun 查找函数: fun(v) return true or false
-* @returns element
-*/
-function diguiTooONE_1(element, judgeFun, xianz = 999) {
 
-    if (element == null) return null;
-    if (judgeFun == null) return null;
-    var i = xianz <= 0 ? 10 : xianz;
 
-    return digui(element);
 
-    function digui(elem) {
+/**---------------------------------------------------------思源API操作-------------------------------------------------------------- */
+async function 设置思源块属性(内容块id, 属性对象) {
+    return 解析响应体(向思源请求数据('/api/attr/setBlockAttrs', {
+        id: 内容块id,
+        attrs: 属性对象,
+    }));
+}
 
-        if (i <= 0) return null;
-        i--;
-
-        var child = elem.children;
-        if (child.length == 0) return null;
-
-        for (let index = 0; index < child.length; index++) {
-            const element2 = child[index];
-            if (judgeFun(element2)) {
-                return element2;
-            } else {
-                var item = digui(element2);
-                if (item == null) continue;
-                return item;
-            }
-        }
+async function 向思源请求数据(url, data) {
+    try {
+        const response = await fetch(url, {
+            body: JSON.stringify(data),
+            method: 'POST',
+            headers: { Authorization: `Token ''` }
+        });
+        return response.status === 200 ? response.json() : null;
+    } catch (error) {
+        console.error('请求思源API出错:', error);
         return null;
     }
 }
 
-/**
-* 递归DOM元素查找深度子级的第一个符合条件的元素-同层全部筛选一遍在依次深度搜索。
-* @param {*} element 要查找DOM元素
-* @param {*} judgeFun 查找函数 : fun(v) return true or false
-* @param {*} xianz 限制递归最大次数
-* @returns element
-*/
-function diguiTooONE_2(element, judgeFun, xianz = 999) {
-
-    if (element == null || element.firstElementChild == null) return null;
-    if (judgeFun == null) return null;
-    var i = xianz <= 0 ? 10 : xianz;
-    return digui(element);
-
-    function digui(elem) {
-
-        if (i <= 0) return null;
-        i--;
-
-        var child = elem.children;
-        var newchild = [];
-        for (let index = 0; index < child.length; index++) {
-            const element2 = child[index];
-            if (judgeFun(element2)) {
-                return element2;
-            } else {
-                if (newchild.firstElementChild != null) newchild.push(element2);
-            }
-        }
-
-        for (let index = 0; index < newchild.length; index++) {
-            const element2 = newchild[index];
-            var item = digui(element2);
-            if (item == null) continue;
-            return item;
-        }
+async function 解析响应体(response) {
+    try {
+        const r = await response;
+        return r?.code === 0 ? r.data : null;
+    } catch (error) {
+        console.error('解析响应体出错:', error);
         return null;
     }
 }
+
+/**---------------------------------------------------------视图选择UI-------------------------------------------------------------- */
+// 视图按钮配置
+const viewButtons = {
+    NodeList: [
+        { id: "GraphView", attrName: "f", attrValue: "dt", icon: "iconFiles", label: "转换为导图" },
+        { id: "TableView", attrName: "f", attrValue: "bg", icon: "iconTable", label: "转换为表格" },
+        { id: "kanbanView", attrName: "f", attrValue: "kb", icon: "iconMenu", label: "转换为看板" },
+        { id: "DefaultView", attrName: "f", attrValue: "", icon: "iconList", label: "恢复为列表" }
+    ],
+    NodeTable: [
+        { id: "FixWidth", attrName: "f", attrValue: "", icon: "iconTable", label: "自动宽度(换行)" },
+        { id: "AutoWidth", attrName: "f", attrValue: "auto", icon: "iconTable", label: "自动宽度(不换行)" },
+        { id: "FullWidth", attrName: "f", attrValue: "full", icon: "iconTable", label: "页面宽度" },
+        { separator: true },
+        { id: "vHeader", attrName: "t", attrValue: "vbiaotou", icon: "iconSuper", label: "竖向表头样式" },
+        { id: "Removeth", attrName: "t", attrValue: "biaotou", icon: "iconSuper", label: "空白表头样式" },
+        { id: "Defaultth", attrName: "t", attrValue: "", icon: "iconSuper", label: "恢复表头样式" }
+    ]
+};
+
 /**
- * 不断查找元素父级的父级知道这个父级符合条件函数
- * @param {*} element 起始元素
- * @param {*} judgeFun 条件函数
- * @param {*} upTimes 限制向上查找父级次数
- * @returns 返回符合条件的父级，或null
+ * 创建视图选择按钮
+ * @param {string} selectid - 选中块的ID
+ * @param {string} selecttype - 选中块的类型
+ * @returns {HTMLElement} - 视图选择按钮
  */
-function isFatherFather(element, judgeFun, upTimes) {
-    var i = 0;
-    for (; ;) {
-        if (!element) return null;
-        if (upTimes < 1 || i >= upTimes) return null;
-        if (judgeFun(element)) return element;
-        element = element.parentElement;
-        i++;
+function ViewSelect(selectid, selecttype) {
+    const button = document.createElement("button");
+    button.id = "viewselect";
+    button.className = "b3-menu__item";
+    button.innerHTML = `
+        <svg class="b3-menu__icon"><use xlink:href="#iconGlobalGraph"></use></svg>
+        <span class="b3-menu__label">视图选择</span>
+        <svg class="b3-menu__icon b3-menu__icon--arrow"><use xlink:href="#iconRight"></use></svg>
+    `;
+    
+    // 创建子菜单
+    const submenu = document.createElement("button");
+    submenu.id = "viewselectSub";
+    submenu.className = "b3-menu__submenu";
+    
+    // 创建菜单项容器
+    const menuItems = document.createElement('div');
+    menuItems.className = 'b3-menu__items';
+    
+    // 根据块类型添加相应的按钮
+    const buttons = viewButtons[selecttype] || [];
+    buttons.forEach(button => {
+        if (button.separator) {
+            // 添加分隔线
+            const separator = document.createElement('button');
+            separator.className = 'b3-menu__separator';
+            menuItems.appendChild(separator);
+        } else {
+            // 添加按钮
+            const viewButton = document.createElement("button");
+            viewButton.className = "b3-menu__item";
+            viewButton.setAttribute("data-node-id", selectid);
+            viewButton.setAttribute("custom-attr-name", button.attrName);
+            viewButton.setAttribute("custom-attr-value", button.attrValue);
+            viewButton.innerHTML = `
+                <svg class="b3-menu__icon"><use xlink:href="#${button.icon}"></use></svg>
+                <span class="b3-menu__label">${button.label}</span>
+            `;
+            viewButton.onclick = ViewMonitor;
+            menuItems.appendChild(viewButton);
+        }
+    });
+    
+    submenu.appendChild(menuItems);
+    button.appendChild(submenu);
+    return button;
+}
+
+/**---------------------------------------------------------视图操作-------------------------------------------------------------- */
+/**
+ * 获取当前选中的块
+ * @returns {Object|null} - 选中的块信息或null
+ */
+function getBlockSelected() {
+    const node = document.querySelector('.protyle-wysiwyg--select');
+    return node?.dataset?.nodeId ? {
+        id: node.dataset.nodeId,
+        type: node.dataset.type,
+        subtype: node.dataset.subtype
+    } : null;
+}
+
+/**
+ * 初始化点击监听
+ */
+function ClickMonitor() {
+    window.addEventListener('mouseup', MenuShow);
+}
+
+/**
+ * 显示菜单
+ */
+function MenuShow() {
+    setTimeout(() => {
+        const selectinfo = getBlockSelected();
+        if (selectinfo && (selectinfo.type === "NodeList" || selectinfo.type === "NodeTable")) {
+            setTimeout(() => InsertMenuItem(selectinfo.id, selectinfo.type), 0);
+        }
+    }, 0);
+}
+
+/**
+ * 插入菜单项
+ * @param {string} selectid - 选中块的ID
+ * @param {string} selecttype - 选中块的类型
+ */
+function InsertMenuItem(selectid, selecttype) {
+    const commonMenu = document.querySelector("#commonMenu .b3-menu__items");
+    if (!commonMenu) return;
+    
+    const readonly = commonMenu.querySelector('[data-id="updateAndCreatedAt"]');
+    const selectview = commonMenu.querySelector('[id="viewselect"]');
+    
+    if (readonly && !selectview) {
+        // 创建分隔线
+        const separator = document.createElement('button');
+        separator.className = 'b3-menu__separator';
+        
+        // 插入视图选择按钮和分隔线
+        commonMenu.insertBefore(ViewSelect(selectid, selecttype), readonly);
+        commonMenu.insertBefore(separator, readonly);
     }
 }
 
-
 /**
- * 获得焦点所在的块
- * @return {HTMLElement} 光标所在块
- * @return {null} 光标不在块内
+ * 视图监控处理函数
+ * @param {Event} event - 点击事件
  */
-function getFocusedBlock() {
-    let block = window.getSelection()
-        && window.getSelection().focusNode
-        && window.getSelection().focusNode.parentElement; // 当前光标
-    while (block != null && block.dataset.nodeId == null) block = block.parentElement;
-    return block;
+function ViewMonitor(event) {
+    const id = event.currentTarget.getAttribute("data-node-id");
+    const attrName = 'custom-' + event.currentTarget.getAttribute("custom-attr-name");
+    const attrValue = event.currentTarget.getAttribute("custom-attr-value");
+    const blocks = document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${id}"]`);
+    
+    // 清除之前的transform数据
+    clearTransformData(id, blocks);
+    
+    // 设置新属性
+    if (blocks?.length > 0) {
+        blocks.forEach(block => block.setAttribute(attrName, attrValue));
+    }
+    
+    // 保存到思源属性
+    const attrs = {};
+    attrs[attrName] = attrValue;
+    设置思源块属性(id, attrs);
 }
 
-
 /**
- * 获得指定块位于的编辑区
- * @params {HTMLElement} 
- * @return {HTMLElement} 光标所在块位于的编辑区
- * @return {null} 光标不在块内
+ * 清除块的transform数据
+ * @param {string} id - 块ID
+ * @param {NodeList} blocks - 块元素列表
  */
-function getTargetEditor(block) {
-    while (block != null && !block.classList.contains('protyle-content')) block = block.parentElement;
-    return block;
-}
-
-
-/**
- * 清除选中文本
- */
-function clearSelections() {
-    if (window.getSelection) {
-        var selection = window.getSelection();
-        selection.removeAllRanges();
-    } else if (document.selection && document.selection.empty) {
-        document.selection.empty();
+function clearTransformData(id, blocks) {
+    try {
+        // 清除localStorage中的位置数据
+        const positions = JSON.parse(localStorage.getItem('dt-positions') || '{}');
+        if (positions[id]) {
+            delete positions[id];
+            localStorage.setItem('dt-positions', JSON.stringify(positions));
+            
+            // 清除DOM元素的样式
+            blocks.forEach(block => {
+                block.querySelectorAll(':scope > [data-type="NodeListItem"]').forEach(listItem => {
+                    listItem.style.transform = '';
+                    listItem.style.cursor = '';
+                    listItem.removeAttribute('data-draggable');
+                });
+            });
+        }
+    } catch (error) {
+        console.error('清除transform数据出错:', error);
     }
 }
 
-/**
- * body全局事件频率优化执行
- * @param {*} eventStr 那种事件如 "mouseover"
- * @param {*} fun(e) 执行函数,e：事件对象
- * @param {*} accurate 精确度：每隔多少毫秒检测一次触发事件执行
- * @param {*} delay 检测到事件触发后延时执行的ms
- * @param {*} frequency 执行后再延时重复执行几次
- * @param {*} frequencydelay 执行后再延时重复执行之间的延时时间ms
- */
-function BodyEventRunFun(eventStr, fun, accurate = 100, delay = 0, frequency = 1, frequencydelay = 16) {
-    var isMove = true;
-    var _e = null;
-    AddEvent(document.body, eventStr, (e) => { isMove = true; _e = e })
-    setInterval(() => {
-        if (!isMove) return;
-        isMove = false;
-        setTimeout(() => {
-            fun(_e);
-            if (frequency == 1) return;
-            if (frequencydelay < 16) frequencydelay = 16;
+// 初始化视图选择功能
+setTimeout(() => ClickMonitor(), 1000);
 
-            var _frequencydelay = frequencydelay;
-            for (let index = 0; index < frequency; index++) {
-                setTimeout(() => { fun(_e); }, frequencydelay);
-                frequencydelay += _frequencydelay;
-            }
-
-        }, delay);
-    }, accurate);
-}
-
-/**
- * 为元素添加思源悬浮打开指定ID块内容悬浮窗事件
- * @param {*} element 绑定的元素
- * @param {*} id 悬浮窗内打开的块的ID
- */
-function suspensionToOpenSiyuanSuspensionWindow(element, id) {
-    element.setAttribute("data-defids", '[""]');
-    element.classList.add("popover__block");
-    element.setAttribute("data-id", id);
-}
-
-/**
- * 为元素添加思源点击打开指定ID块内容悬浮窗事件
- * @param {*} element 绑定的元素
- * @param {*} id 悬浮窗内打开的块的ID
- */
-function clickToOpenSiyuanFloatingWindow(element, id) {
-    element.classList.add("protyle-wysiwyg__embed");
-    element.setAttribute("data-id", id);
-}
-
-/**
- * 控制台打印输出
- * @param {*} obj 
- */
-function c(...data) {
-    console.log(data);
-}
-
-/**
- * 安全While循环
- * frequency:限制循环次数
- * 返回值不等于null终止循环
- */
-function WhileSafety(fun, frequency = 99999) {
-    var i = 0;
-    if (frequency <= 0) {
-        console.log("安全循环次数小于等于0")
-        return;
-    }
-    while (i < frequency) {
-        var _return = fun();
-        if (_return != null || _return != undefined) return _return;
-        i++;
-    }
-}
-/**设置思源块展开 */
-function setBlockfold_0(BlockId) {
-    设置思源块属性(BlockId, { "fold": "0" });
-}
-
-/**设置思源块折叠 */
-function setBlockfold_1(BlockId) {
-    设置思源块属性(BlockId, { "fold": "1" });
-}
-
-/**
-    * 得到光标编辑状态下的显示commonMenu菜单;
-    * @returns 
-    */
-function getcommonMenu_Cursor() {
-    if ((window.getSelection ? window.getSelection() : document.selection.createRange().text).toString().length != 0) return null;
-    var commonMenu = document.querySelector("#commonMenu:not(.fn__none)");
-    if (commonMenu == null) return null;
-    if (commonMenu.firstChild == null) return null;
-    if (commonMenu.children.length < 8) {
-        return commonMenu;
-    }
-    return null;
-}
-
-/**
-    * 得到光标选中编辑状态下的显示commonMenu菜单;
-    * @returns 
-    */
-function getcommonMenu_Cursor2() {
-    if ((window.getSelection ? window.getSelection() : document.selection.createRange().text).toString().length != 0) {
-        return document.querySelector("#commonMenu:not(.fn__none)");
+/**---------------------------------------------------------导图拖拽功能-------------------------------------------------------------- */
+// 初始化导图拖拽功能
+if (typeof window.dragDebounce === 'undefined') {
+    // 防抖函数 - 使用requestAnimationFrame提高性能
+    window.dragDebounce = (fn) => {
+        let timer = null;
+        return (...args) => {
+            if (timer) cancelAnimationFrame(timer);
+            timer = requestAnimationFrame(() => fn(...args));
+        };
     };
-    return null;
-}
 
-/**
- * 得到快选中状态下的显示commonMenu菜单;
- * @returns 
- */
-function getcommonMenu_Bolck() {
-    var commonMenu = document.querySelector("#commonMenu:not(.fn__none)");
-    if (commonMenu.children.length < 8) {
-        return commonMenu;
-    }
-    return null;
-}
-
-
-
-/**++++++++++++++++++++++++++++++++按需调用++++++++++++++++++++++++++++++ */
-获取文件("/data/snippets/Savor.config.json", (v) => {
-    let funs = () => {
-
-		setTimeout(() => {
-
-			if (isPhone()) {
-
-				loadStyle("/appearance/themes/Savor/style/module/mobile.css")
-
-				console.log("==============>附加CSS和特性JS_已经执行<==============");
-            } else {
-				const htmlTag = document.querySelector('html');
-				
-                const themeMode = htmlTag.getAttribute('data-theme-mode');
-				
-				if (themeMode == 'light') {
-                    loadsalt = getItem('buttonsalt');
-					loadsugar = getItem('buttonsugar');
-                    loadforest = getItem('buttonforest');
-                    loadflower = getItem('buttonflower');
-                    loadwind = getItem('buttonwind');
-                    if (loadsalt == '1') {
-                        loadStyle(
-                            '/appearance/themes/Savor/style/topbar/salt.css',
-                            'Sv-theme-color-salt主题'
-                        ).setAttribute('topicfilter', 'buttonsalt');
-                    }
-					if (loadsugar == '1') {
-                        loadStyle(
-                            '/appearance/themes/Savor/style/topbar/sugar.css',
-                            'Sv-theme-color-sugar主题'
-                        ).setAttribute('topicfilter', 'buttonsugar');
-                    }
-                    if (loadforest == '1') {
-                        loadStyle(
-                            '/appearance/themes/Savor/style/topbar/forest.css',
-                            'Sv-theme-color-forest主题'
-                        ).setAttribute('topicfilter', 'buttonforest');
-                    }
-                    if (loadflower == '1') {
-                        loadStyle(
-                            '/appearance/themes/Savor/style/topbar/flower.css',
-                            'Sv-theme-color-flower主题'
-                        ).setAttribute('topicfilter', 'buttonflower');
-                    }
-                    if (loadwind == '1') {
-                        loadStyle(
-                            '/appearance/themes/Savor/style/topbar/wind.css',
-                            'Sv-theme-color-wind主题'
-                        ).setAttribute('topicfilter', 'buttonwind');
-                    }
+    // 初始化拖拽功能
+    function initDraggable(element) {
+        // 找到所有直接子列表项
+        const listItems = element.querySelectorAll(':scope > [data-type="NodeListItem"]');
+        if (!listItems.length) return;
+        
+        listItems.forEach(listItem => {
+            if (listItem.hasAttribute('data-draggable')) return;
+            listItem.setAttribute('data-draggable', 'true');
+            
+            let startX, startY, initialTransform;
+            let scale = 1;
+            
+            const onMouseDown = e => {
+                // 如果是可编辑区域，不处理拖拽
+                if (e.target.getAttribute('contenteditable') === 'true') {
+                    return;
                 }
-				if (themeMode == 'dark') {
-					loadvinegar = getItem('buttonvinegar');
-                    loadocean = getItem('buttonocean');
-                    loadmountain = getItem('buttonmountain');
-                    if (loadvinegar == '1') {
-                        loadStyle(
-                            '/appearance/themes/Savor/style/topbar/vinegar.css',
-                            'Sv-theme-color-vinegar主题'
-                        ).setAttribute('topicfilter', 'buttonvinegar');
-                    }
-                    if (loadocean == '1') {
-                        loadStyle(
-                            '/appearance/themes/Savor/style/topbar/ocean.css',
-                            'Sv-theme-color-ocean主题'
-                        ).setAttribute('topicfilter', 'buttonvinegar');
-                    }
-                    if (loadvinegar == '1') {
-                        loadStyle(
-                            '/appearance/themes/Savor/style/topbar/mountain.css',
-                            'Sv-theme-color-mountain主题'
-                        ).setAttribute('topicfilter', 'buttonmountain');
-                    }
-                }
-				
-                    
-                themeButton();//主题
-                            
-                concealMarkButton();//挖空
                 
-                tabbarVerticalButton();//垂直页签
-				
-				topbarfixedButton();//顶栏悬浮
-
-                SpluginButton();//展开插件
-				
-				bulletThreading();//子弹线
- 
-                setTimeout(() => ClickMonitor(), 3000);//各种列表转xx
-
-                collapsedListPreview();//折叠列表内容预览查看
-
-                collapseExpand_Head_List()//鼠标中键标题、列表文本折叠/展开
-
-                //loadScript("/appearance/themes/Savor/comment/index.js");js批注评论
-
-                // 只在dragDebounce未定义时才声明
-                if (typeof window.dragDebounce === 'undefined') {
-                    // 防抖函数
-                    window.dragDebounce = (fn, delay = 16) => {
-                        let timer = null;
-                        return (...args) => {
-                            if (timer) cancelAnimationFrame(timer);
-                            timer = requestAnimationFrame(() => fn(...args));
-                        };
-                    };
-
-                    // 初始化拖拽功能
-                    function initDraggable(element) {
-                        // 找到所有直接子列表项
-                        const listItems = element.querySelectorAll(':scope > [data-type="NodeListItem"]');
-                        if (!listItems.length) return;
-                        
-                        listItems.forEach(listItem => {
-                            if (listItem.hasAttribute('data-draggable')) return;
-                            listItem.setAttribute('data-draggable', 'true');
-                            
-                            let startX, startY, initialTransform;
-                            let scale = 1;
-                            
-                            const onMouseDown = e => {
-                                if (e.target.getAttribute('contenteditable') === 'true') {
-                                    return;
-                                }
-                                
-                                e.preventDefault();
-                                listItem.style.cursor = 'grabbing';
-                                
-                                initialTransform = new DOMMatrix(getComputedStyle(listItem).transform);
-                                startX = e.clientX - initialTransform.m41;
-                                startY = e.clientY - initialTransform.m42;
-                                
-                                document.addEventListener('mousemove', onMouseMove);
-                                document.addEventListener('mouseup', onMouseUp, { once: true });
-                            };
-                            
-                            const onMouseMove = window.dragDebounce(e => {
-                                const x = e.clientX - startX;
-                                const y = e.clientY - startY;
-                                updateTransform(x, y, scale);
-                            });
-                            
-                            const onMouseUp = () => {
-                                listItem.style.cursor = 'grab';
-                                document.removeEventListener('mousemove', onMouseMove);
-                            };
-                            
-                            const onWheel = e => {
-                                if (e.target.getAttribute('contenteditable') === 'true') {
-                                    return;
-                                }
-                                
-                                if (!e.altKey) return;
-                                e.preventDefault();
-                                
-                                const delta = e.deltaY;
-                                const scaleChange = delta > 0 ? 0.9 : 1.1;
-                                scale = Math.min(Math.max(scale * scaleChange, 0.1), 5);
-                                
-                                const transform = new DOMMatrix(getComputedStyle(listItem).transform);
-                                updateTransform(transform.m41, transform.m42, scale);
-                            };
-                            
-                            const updateTransform = (x, y, scale) => {
-                                listItem.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-                                
-                                const id = element.getAttribute('data-node-id');
-                                const itemId = listItem.getAttribute('data-node-id'); // 获取列表项的ID
-                                const positions = JSON.parse(localStorage.getItem('dt-positions') || '{}');
-                                if (!positions[id]) positions[id] = {};
-                                positions[id][itemId] = { // 使用列表项ID作为key存储位置信息
-                                    transform: listItem.style.transform,
-                                    scale: scale
-                                };
-                                localStorage.setItem('dt-positions', JSON.stringify(positions));
-                            };
-                            
-                            listItem.style.cursor = 'grab';
-                            listItem.addEventListener('mousedown', onMouseDown);
-                            listItem.addEventListener('wheel', onWheel, { passive: false });
-                            
-                            // 恢复保存的位置
-                            const id = element.getAttribute('data-node-id');
-                            const itemId = listItem.getAttribute('data-node-id');
-                            const positions = JSON.parse(localStorage.getItem('dt-positions') || '{}');
-                            if (positions[id]?.[itemId]) {
-                                listItem.style.transform = positions[id][itemId].transform;
-                                scale = positions[id][itemId].scale || 1;
-                            }
-                        });
-                    }
-
-                    // DOM观察器
-                    function initObserver() {
-                        const observer = new MutationObserver(mutations => {
-                            mutations.forEach(mutation => {
-                                if (mutation.type === 'attributes') {
-                                    if (mutation.target.getAttribute('custom-f') === 'dt') {
-                                        initDraggable(mutation.target);
-                                    }
-                                } else if (mutation.type === 'childList') {
-                                    mutation.addedNodes.forEach(node => {
-                                        if (node.getAttribute?.('custom-f') === 'dt') {
-                                            initDraggable(node);
-                                        }
-                                        node.querySelectorAll?.('[custom-f="dt"]')?.forEach(initDraggable);
-                                    });
-                                }
-                            });
-                        });
-                        
-                        observer.observe(document.body, {
-                            childList: true,
-                            subtree: true,
-                            attributes: true,
-                            attributeFilter: ['custom-f']
-                        });
-                        
-                        document.querySelectorAll('[custom-f="dt"]').forEach(initDraggable);
-                    }
-
-                    // 启动观察器
-                    initObserver();
+                e.preventDefault();
+                listItem.style.cursor = 'grabbing';
+                
+                initialTransform = new DOMMatrix(getComputedStyle(listItem).transform);
+                startX = e.clientX - initialTransform.m41;
+                startY = e.clientY - initialTransform.m42;
+                
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp, { once: true });
+            };
+            
+            const onMouseMove = window.dragDebounce(e => {
+                const x = e.clientX - startX;
+                const y = e.clientY - startY;
+                // 直接应用变换，不保存状态
+                listItem.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+            });
+            
+            const onMouseUp = () => {
+                listItem.style.cursor = 'grab';
+                document.removeEventListener('mousemove', onMouseMove);
+            };
+            
+            const onWheel = e => {
+                if (e.target.getAttribute('contenteditable') === 'true') {
+                    return;
                 }
+                
+                if (!e.altKey) return;
+                e.preventDefault();
+                
+                const delta = e.deltaY;
+                const scaleChange = delta > 0 ? 0.9 : 1.1;
+                scale = Math.min(Math.max(scale * scaleChange, 0.1), 5);
+                
+                const transform = new DOMMatrix(getComputedStyle(listItem).transform);
+                // 直接应用变换，不保存状态
+                listItem.style.transform = `translate(${transform.m41}px, ${transform.m42}px) scale(${scale})`;
+            };
+            
+            // 添加双击复位功能
+            const onDoubleClick = e => {
+                // 如果是可编辑区域，不处理双击
+                if (e.target.getAttribute('contenteditable') === 'true') {
+                    return;
+                }
+                
+                // 复位变换
+                listItem.style.transform = 'translate(0px, 0px) scale(1)';
+                scale = 1;
+                
+                // 添加动画效果
+                listItem.style.transition = 'transform 0.3s ease';
+                setTimeout(() => {
+                    listItem.style.transition = '';
+                }, 300);
+            };
+            
+            // 设置初始样式
+            listItem.style.cursor = 'grab';
+            listItem.addEventListener('mousedown', onMouseDown);
+            listItem.addEventListener('wheel', onWheel, { passive: false });
+            listItem.addEventListener('dblclick', onDoubleClick);
+        });
+    }
 
-                console.log("==============>附加CSS和特性JS_已经执行<==============");
+    // DOM观察器 - 简化版本
+    function initObserver() {
+        const observer = new MutationObserver(mutations => {
+            for (const mutation of mutations) {
+                if (mutation.type === 'attributes' && mutation.target.getAttribute('custom-f') === 'dt') {
+                    initDraggable(mutation.target);
+                } else if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(node => {
+                        if (node.nodeType === 1) { // 元素节点
+                            if (node.getAttribute?.('custom-f') === 'dt') {
+                                initDraggable(node);
+                            }
+                            const dtElements = node.querySelectorAll?.('[custom-f="dt"]');
+                            if (dtElements) {
+                                dtElements.forEach(initDraggable);
+                            }
+                        }
+                    });
+                }
             }
-        }, 100);
-    };
-    if (v == null) {
-        window.theme.config = { "Savor": 1 };
-        写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4), (a) => { funs() });
-    } else {
-        window.theme.config = v;
-        funs();
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['custom-f']
+        });
+        
+        // 初始化已存在的元素
+        document.querySelectorAll('[custom-f="dt"]').forEach(initDraggable);
     }
-});
+
+    // 启动观察器
+    initObserver();
+}
 
 
-/* 子弹线 */
-allListItemNode = []
-  document.addEventListener('selectionchange', () => {
-    const selection = window.getSelection()
-    if (!selection.rangeCount) {
-      return
-    }
-    const range = selection?.getRangeAt(0)
-    const startNode = range?.startContainer
-    let currentNode = startNode
-    allListItemNode.forEach((node) => {
-      node.classList.remove('en_item_bullet_actived')
-      node.classList.remove('en_item_bullet_line')
-    })
-    allListItemNode = []
-    while (currentNode) {
-      if (currentNode?.dataset?.type === 'NodeListItem') {
-        allListItemNode.push(currentNode)
-      }
-      currentNode = currentNode.parentElement
-    }
-    for (let i = 0; i < allListItemNode.length - 1; i++) {
-      const currentNode = allListItemNode[i]
-      const currentRect = currentNode.getBoundingClientRect()
-
-      const nextNode = allListItemNode[i + 1]
-      const nextRect = nextNode.getBoundingClientRect()
-      const height = currentRect.top - nextRect.top
-
-      currentNode.style.setProperty('--en-bullet-line-height', `${height}px`)
-      currentNode.classList.add('en_item_bullet_line')
-    }
-    allListItemNode.forEach((node) => {
-      node.classList.add('en_item_bullet_actived')
-    })
-  })
 
 
-  /*顶栏合并*/
-  function initTabBarsMargin() {
+/**---------------------------------------------------------顶栏合并右侧间距-------------------------------------------------------------- **/
+function initTabBarsMargin() {
     let rafId = null;
-    let tabBar = null;
     let dockr = null;
     let topBarButton = null;
     let dockVertical = null;
 
     // 缓存 DOM 元素
     const cacheElements = () => {
-        tabBar = document.querySelector('.layout__center .layout-tab-bar');
         dockr = document.querySelector('.layout__dockr');
-        topBarButton = document.querySelector('#topBar');
+        topBarButton = document.querySelector('#topBar') || 
+                       document.querySelector('.toolbar__item[data-type="topBar"]') ||
+                       document.querySelector('[aria-label="顶栏合并"]');
         dockVertical = document.querySelector('.dock--vertical');
     };
 
     // 更新边距的函数
     const updateMargins = () => {
-        if (!tabBar || !dockr || !topBarButton) return;
+        if (!dockr || !topBarButton) return;
 
-        const isTopBarActive = topBarButton.classList.contains('button_on');
+        const isTopBarActive = topBarButton.classList.contains('button_on') || 
+                              topBarButton.classList.contains('toolbar__item--active');
+        
+        // 获取所有只读标签栏
+        const allReadonlyTabBars = document.querySelectorAll('.layout__center .layout-tab-bar--readonly');
+        
+        // 如果顶栏合并未激活，重置所有边距
         if (!isTopBarActive) {
-            // 如果顶栏合并未激活，重置所有边距
-            document.querySelectorAll('.layout__center .layout-tab-bar--readonly').forEach(tabBar => {
+            allReadonlyTabBars.forEach(tabBar => {
                 tabBar.style.marginRight = '0px';
             });
             return;
@@ -2739,30 +1277,29 @@ allListItemNode = []
 
         if (rafId) cancelAnimationFrame(rafId);
         rafId = requestAnimationFrame(() => {
+            // 计算边距值
             const isDockVerticalHidden = dockVertical?.classList.contains('fn__none');
             const rightMargin = isDockVerticalHidden ? '293px' : '260px';
-
-            // 处理右侧边距
             const dockrWidth = dockr.offsetWidth;
             const isFloatingR = dockr.classList.contains('layout--float');
             const marginRightValue = (dockrWidth === 0 || isFloatingR) ? rightMargin : '0px';
 
-            // 首先重置所有 readonly tab bars 的右边距
-            const allReadonlyTabBars = document.querySelectorAll('.layout__center .layout-tab-bar--readonly');
+            // 重置所有标签栏边距
             allReadonlyTabBars.forEach(tabBar => {
                 tabBar.style.marginRight = '0px';
             });
 
-            // 检查是否存在 layout__resize
+            // 检查是否存在分栏
             const resizers = document.querySelectorAll('.layout__center .layout__resize:not(.layout__resize--lr)');
+            
             if (resizers.length === 0) {
-                // 没有分栏时，设置最后一个 readonly tab bar 的右边距
+                // 没有分栏时，设置最后一个标签栏边距
                 const lastReadonlyTabBar = allReadonlyTabBars[allReadonlyTabBars.length - 1];
                 if (lastReadonlyTabBar) {
                     lastReadonlyTabBar.style.marginRight = marginRightValue;
                 }
             } else {
-                // 有分栏时，为每个 resize 前面的最后一个 readonly tab bar 设置右边距
+                // 有分栏时，为每个分栏前的最后一个标签栏设置边距
                 resizers.forEach(resizer => {
                     let prevElement = resizer.previousElementSibling;
                     if (!prevElement) return;
@@ -2779,89 +1316,574 @@ allListItemNode = []
     // 初始化函数
     const init = () => {
         cacheElements();
-        if (tabBar && dockr && topBarButton) {
-            // 观察右侧 dock 的尺寸变化
+        
+        if (dockr) {
+            // 观察右侧面板尺寸变化
             new ResizeObserver(updateMargins).observe(dockr);
-
-            // 观察顶栏合并按钮的类变化
+        }
+        
+        if (topBarButton) {
+            // 观察顶栏按钮状态变化
             new MutationObserver(updateMargins).observe(topBarButton, {
                 attributes: true,
                 attributeFilter: ['class']
             });
-
-            // 观察 dock--vertical 的类变化
-            if (dockVertical) {
-                new MutationObserver(updateMargins).observe(dockVertical, {
-                    attributes: true,
-                    attributeFilter: ['class']
-                });
-            }
-
-            // 初始更新边距
-            updateMargins();
         }
+
+        // 观察垂直面板状态变化
+        if (dockVertical) {
+            new MutationObserver(updateMargins).observe(dockVertical, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+        }
+        
+        // 初始更新边距
+        updateMargins();
     };
 
-    // 首次尝试初始化
+    // 首次初始化
     init();
 
-    // 使用 MutationObserver 等待正确时机
-    const observer = new MutationObserver(init);
-    observer.observe(document, {
+    // 使用 MutationObserver 等待元素加载
+    const observer = new MutationObserver(() => {
+        if (!dockr || !topBarButton) {
+            cacheElements();
+            if (dockr && topBarButton) {
+                observer.disconnect();
+                init();
+            }
+        }
+    });
+    
+    observer.observe(document.body, {
         childList: true,
         subtree: true
     });
+    
+    // 页面加载完成后再次尝试初始化
+    window.addEventListener('load', init);
+    
+    // 提供全局更新函数
+    window.updateTabBarsMargin = updateMargins;
 }
 
-// 确保在 DOM 加载完成后执行
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTabBarsMargin);
-} else {
-    initTabBarsMargin();
-}
 
 
 
-// 判断是否为 macOS 平台
-const isMac = () => {
-    return navigator.platform.toUpperCase().indexOf("MAC") > -1;
-};
 
-// 向 body 注入 class
-const injectBodyClass = () => {
-    if (isMac()) {
-        document.body.classList.add('body--mac'); // 注入 class
+
+    /**---------------------------------------------------------辅助函数-------------------------------------------------------------- */
+    /**
+     * 添加顶栏拖拽区域
+     */
+    function addDragArea() {
+        // 检查是否已存在拖拽区域
+        let existingDrag = document.getElementById("savordrag");
+        if (existingDrag) return;
+        
+        // 查找barForward元素
+        const barForwardElement = document.getElementById("barForward");
+        if (!barForwardElement) {
+            console.error("barForward元素不存在，无法添加拖拽区域");
+            return;
+        }
+        
+        // 创建拖拽区域
+        const savordragElement = document.createElement("div");
+        savordragElement.id = "savordrag";
+        
+        // 插入到DOM中
+        const parentElement = barForwardElement.parentNode;
+        parentElement.insertBefore(savordragElement, barForwardElement.nextSibling);
+        
+        // 设置样式
+        savordragElement.style.cssText = "flex: 1; -webkit-app-region: drag; app-region: drag;";
     }
-};
+    // 辅助函数：安全地创建和添加元素
+    function safeCreateElement(parentElement, elementType, id = null) {
+        if (!parentElement) {
+            console.warn('父元素不存在，无法创建子元素');
+            return null;
+        }
+        
+        const element = document.createElement(elementType);
+        if (id) element.id = id;
+        parentElement.appendChild(element);
+        return element;
+    }
+    
+    function qucuFiiter() {
+        // 去除主题所有滤镜还原按钮状态
+        const topicFilters = document.querySelectorAll("head [topicfilter]");
+        topicFilters.forEach(element => {
+            const offNo = getItem(element.getAttribute("topicfilter"));
+            if (offNo == "1") {
+                document.getElementById(element.getAttribute("topicfilter"))?.click();
+                element.remove();
+            }
+        });
+        
+        // 清理多余的样式元素，只保留当前激活的
+        const activeFilters = Array.from(document.querySelectorAll("button.button_on")).map(button => button.id);
+        
+        document.querySelectorAll("head [topicfilter]").forEach(element => {
+            if (!activeFilters.includes(element.getAttribute("topicfilter"))) {
+                element.remove();
+            }
+        });
+    }
+    
+    //+++++++++++++++++++++++++++++++++思源API++++++++++++++++++++++++++++++++++++
+    
+    async function 向思源请求数据(url, data) {
+        try {
+            const response = await fetch(url, {
+                body: JSON.stringify(data),
+                method: 'POST',
+                headers: {
+                    Authorization: `Token ''`,
+                }
+            });
+            return response.status === 200 ? await response.json() : null;
+        } catch (error) {
+            console.error('请求思源API出错:', error);
+            return null;
+        }
+    }
+    
+    async function 解析响应体(response) {
+        const r = await response;
+        return r?.code === 0 ? r.data : null;
+    }
+    
+    async function 获取文件(path, then = null, obj = null) {
+        const url = '/api/file/getFile';
+        await 向思源请求数据(url, { path }).then((v) => {
+            if (then) then(v, obj);
+        });
+    }
+    
+    async function 写入文件(path, filedata, then = null, obj = null, isDir = false, modTime = Date.now()) {
+        const blob = new Blob([filedata]);
+        const file = new File([blob], path.split('/').pop());
+        const formdata = new FormData();
+        formdata.append("path", path);
+        formdata.append("file", file);
+        formdata.append("isDir", isDir);
+        formdata.append("modTime", modTime);
+        
+        try {
+            await fetch("/api/file/putFile", {
+                body: formdata,
+                method: "POST",
+                headers: {
+                    Authorization: `Token ""`,
+                },
+            }).then(() => {
+                if (then) setTimeout(() => then(obj), 200);
+            });
+        } catch (error) {
+            console.error('写入文件出错:', error);
+        }
+    }
+    
+    //+++++++++++++++++++++++++++++++++辅助API++++++++++++++++++++++++++++++++++++
+    
+    /**
+     * 方便为主题功能添加开关按钮，并选择是否拥有记忆状态
+     * @param {string} ButtonID 按钮ID
+     * @param {string} ButtonTitle 按钮作用提示文字
+     * @param {string} ButtonLabel 按钮标签
+     * @param {string} Mode 主题模式
+     * @param {Function} NoClickRunFun 按钮开启执行函数
+     * @param {Function} OffClickRunFun 按钮关闭执行函数
+     * @param {boolean} Memory 是否设置记忆状态 true为是留空或false为不设置记忆状态
+     * @param {string} svgPath 可选的SVG路径数据
+    */
+    function savorThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, NoClickRunFun, OffClickRunFun, Memory, svgPath = null) {
+        let savorToolbar = document.getElementById("savorToolbar");
+        if (!savorToolbar) {
+            // 修改这里，不再自动创建 savorToolbar
+            // 而是等待 barMode 按钮点击时创建
+            return;
+        }
+    
+        const existingButton = document.getElementById(ButtonID);
+        if (existingButton) return;
+        
+        const addButton = addinsertCreateElement(savorToolbar, "button");
+        addButton.style.float = "top";
+        addButton.id = ButtonID;
+        addButton.setAttribute("class", ButtonTitle + " button_off");
+        addButton.setAttribute("aria-label", ButtonLabel);
+         // 设置按钮内容，根据是否提供svgPath使用不同的图标方式
+         if (svgPath) {
+            // 使用自定义SVG路径，通过CSS控制颜色
+            addButton.innerHTML = `
+                    <svg class="b3-menu__icon savor-icon" width="24" height="24" viewBox="9 10 14 14" xmlns="http://www.w3.org/2000/svg">
+                        <path d="${svgPath}"></path>
+                    </svg>
+                    <span class="b3-menu__label">${ButtonLabel}</span>
+            `;
+            
+            // 添加自定义类名以便CSS选择器识别
+            addButton.classList.add('savor-button');
+         } else {
+            // 使用内置图标
+            addButton.innerHTML = `<svg class="b3-menu__icon"><use xlink:href="#iconTheme"></use></svg><span class="b3-menu__label">${ButtonLabel}</span>`;
+         }
+        
+        let offNo = '0';
+        
+        if (window.theme.themeMode == Mode) {
+            // 如果主题是暗色主题，默认选中样式
+            if (Memory) {
+                offNo = getItem(ButtonID);
+                if (offNo == "1") {
+                    addButton.setAttribute("class", ButtonTitle + " button_on");
+                    setItem(ButtonID, "0");
+                    NoClickRunFun(addButton);
+                    setItem(ButtonID, "1");
+                } else if (offNo != "0") {
+                    offNo = "0";
+                    setItem(ButtonID, "0");
+                }
+            }
+        }
+        
+        AddEvent(addButton, "click", () => {
+            if (offNo == "0") {
+                addButton.setAttribute("class", ButtonTitle + " button_on");
+                // 在应用新主题前添加过渡效果
+                window.theme.applyThemeTransition();
+                NoClickRunFun(addButton);
+                if (Memory) setItem(ButtonID, "1");
+                offNo = "1";
+            } else {
+                addButton.setAttribute("class", ButtonTitle + " button_off");
+                // 在切换回默认主题前添加过渡效果
+                window.theme.applyThemeTransition();
+                OffClickRunFun(addButton);
+                if (Memory) setItem(ButtonID, "0");
+                offNo = "0";
+            }
+        });
+    }
 
-// 执行函数
-injectBodyClass();
+    function setItem(key, value) {
+        window.theme.config[key] = value;
+        写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
+    }
 
+    function getItem(key) {
+        return window.theme.config[key] === undefined ? null : window.theme.config[key];
+    }
 
-/** 清除样式 **/
+    function removeItem(key) {
+        delete window.theme.config[key];
+        写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
+    }
 
-window.destroyTheme = () => { 
-    // 删除主题加载的额外样式
-    var Sremove = document.querySelectorAll('[id^="Sv-theme-color"]');  
-    Sremove.forEach(function(Sremove) {  
-        Sremove.parentNode.removeChild(Sremove);  
-    }); 
-    // 删除切换按钮
-	document.querySelector("#savorToolbar").remove();
-    // 删除空白
-    document.querySelector("#savordrag").remove();
-    // 删除插件展开按钮
-    document.querySelector("#savorPlugins").remove();
-	// 删除列表转导图功能
-    window.removeEventListener('mouseup', MenuShow);
-    // 删除底栏间隙
-	document.querySelector(".statusRight").remove();
-};
+    /**
+     * 向指定父级创建追加一个子元素，并可选添加ID,
+     * @param {Element} fatherElement 
+     * @param {string} addElementTxt 要创建添加的元素标签
+     * @param {string} setId 
+     * @returns {Element} addElementObject
+     */
+    function addinsertCreateElement(fatherElement, addElementTxt, setId = null) {
+        return safeCreateElement(fatherElement, addElementTxt, setId);
+    }
 
+    /**
+     * 向指定元素前创建插入一个元素，可选添加ID
+     * @param {Element} targetElement 目标元素
+     * @param {string} addElementTxt 要创建添加的元素标签
+     * @param {string} setId 为创建元素设置ID
+     * @returns {Element} 创建的元素
+     */
+    function insertCreateBefore(targetElement, addElementTxt, setId = null) {
+        if (!targetElement) {
+            console.error("指定元素对象不存在！");
+            return null;
+        }
+        if (!addElementTxt) {
+            console.error("未指定字符串！");
+            return null;
+        }
 
-//siyuan.storage["local-images"].folder = '1F4C1'
-//siyuan.storage["local-images"].note = '1F5C3'
+        const element = document.createElement(addElementTxt);
+        if (setId) element.id = setId;
+        targetElement.parentElement.insertBefore(element, targetElement);
+        return element;
+    }
 
+        /**
+     * 为元素注册监听事件
+     * @param {Element} element 
+     * @param {string} strType 
+     * @param {Function} fun 
+     */
+        function AddEvent(element, strType, fun) {
+            if (!element) return;
+            
+            if (element.addEventListener) {
+                element.addEventListener(strType, fun, false);
+            } else if (element.attachEvent) {
+                element.attachEvent("on" + strType, fun);
+            } else {
+                element["on" + strType] = fun;
+            }
+        }
+    
+        /**
+         * 简单判断目前思源是否是手机模式
+         * @returns {boolean} 是否为手机模式
+         */
+        function isPhone() {
+            return !!document.getElementById("editor");
+        }
+    
+        /**++++++++++++++++++++++++++++++++按需调用++++++++++++++++++++++++++++++ */
+        获取文件("/data/snippets/Savor.config.json", (v) => {
+            const funs = () => {
+                setTimeout(() => {
+                    if (isPhone()) {
+                        window.theme.loadStyle("/appearance/themes/Savor/style/module/mobile.css");
+                        console.log("==============>附加CSS和特性JS_已经执行<==============");
+                    } else {
+                        const htmlTag = document.querySelector('html');
+                        if (!htmlTag) return;
+                        
+                        // 获取 #barWorkspace 宽度并设置为 CSS 变量
+                        function setBarWorkspaceWidth() {
+                            const barWorkspace = document.getElementById('barWorkspace');
+                            if (barWorkspace) {
+                                const width = barWorkspace.offsetWidth;
+                                document.documentElement.style.setProperty('--Sv-topfixed-marginLeft', width + 'px');
+                            }
+                        }
+                        
+                        // 在DOM加载完成后执行，并监听窗口大小变化
+                        setBarWorkspaceWidth();
+                        window.addEventListener('resize', setBarWorkspaceWidth);
+                        
+                        // 监听工作空间切换，因为可能会改变宽度
+                        const observer = new MutationObserver(setBarWorkspaceWidth);
+                        const barWorkspace = document.getElementById('barWorkspace');
+                        if (barWorkspace) {
+                            observer.observe(barWorkspace, { childList: true, subtree: true });
+                        }
+                        
+                        // 添加对 barMode 按钮的点击监听
+                        const barMode = document.getElementById('barMode');
+                        if (barMode) {
+                            barMode.addEventListener('click', initSavorToolbar);
+                        } else {
+                            // 如果按钮还没加载，等待它出现
+                            const barModeObserver = new MutationObserver((mutations, obs) => {
+                                const barModeBtn = document.getElementById('barMode');
+                                if (barModeBtn) {
+                                    barModeBtn.addEventListener('click', initSavorToolbar);
+                                    obs.disconnect();
+                                }
+                            });
+                            barModeObserver.observe(document.body, { childList: true, subtree: true });
+                        }
 
+                        // 初始化 savorToolbar 的函数
+                        function initSavorToolbar() {
+                            // 检查是否已存在
+                            if (document.getElementById('savorToolbar')) return;
+                            
+                            // 创建 savorToolbar
+                            const toolbarEdit = document.getElementById("toolbarEdit");
+                            const windowControls = document.querySelector("#commonMenu .b3-menu__items");
+                            let savorToolbar;
+                            
+                            if (!toolbarEdit) {
+                                savorToolbar = document.createElement("div");
+                                savorToolbar.id = "savorToolbar";
+                                if (windowControls) {
+                                    windowControls.parentElement.insertBefore(savorToolbar, windowControls);
+                                }
+                            } else {
+                                savorToolbar = insertCreateBefore(toolbarEdit, "div", "savorToolbar");
+                                savorToolbar.style.position = "relative";
+                            }
+                            
+                            // 初始化主题按钮
+                            themeButton();
+                        }
 
+                        const themeMode = htmlTag.getAttribute('data-theme-mode');
+                        
+                        // 判断是否为 macOS 平台并添加相应的类
+                        if (navigator.platform.toUpperCase().indexOf("MAC") > -1) {
+                            document.body.classList.add('body--mac');
+                        }
+                        // 加载浅色主题配色
+                        if (themeMode == 'light') {
+                            const lightThemes = [
+                                { id: 'buttonsalt', cssPath: '/appearance/themes/Savor/style/theme/savor-salt.css', styleId: 'Sv-theme-color-salt主题' },
+                                { id: 'buttonsugar', cssPath: '/appearance/themes/Savor/style/theme/savor-sugar.css', styleId: 'Sv-theme-color-sugar主题' },
+                                { id: 'buttonforest', cssPath: '/appearance/themes/Savor/style/theme/savor-forest.css', styleId: 'Sv-theme-color-forest主题' },
+                                { id: 'buttonflower', cssPath: '/appearance/themes/Savor/style/theme/savor-flower.css', styleId: 'Sv-theme-color-flower主题' },
+                                { id: 'buttonwind', cssPath: '/appearance/themes/Savor/style/theme/savor-wind.css', styleId: 'Sv-theme-color-wind主题' }
+                            ];
+                            
+                            lightThemes.forEach(theme => {
+                                const loadState = getItem(theme.id);
+                                if (loadState == '1') {
+                                    const styleElement = window.theme.loadStyle(theme.cssPath, theme.styleId);
+                                    if (styleElement) {
+                                        styleElement.setAttribute('topicfilter', theme.id);
+                                    }
+                                }
+                            });
+                        }
+                        
+                        // 加载深色主题配色
+                        if (themeMode == 'dark') {
+                            const darkThemes = [
+                                { id: 'buttonvinegar', cssPath: '/appearance/themes/Savor/style/theme/savor-vinegar.css', styleId: 'Sv-theme-color-vinegar主题' },
+                                { id: 'buttonocean', cssPath: '/appearance/themes/Savor/style/theme/savor-ocean.css', styleId: 'Sv-theme-color-ocean主题' },
+                                { id: 'buttonmountain', cssPath: '/appearance/themes/Savor/style/theme/savor-mountain.css', styleId: 'Sv-theme-color-mountain主题' }
+                            ];
+                            
+                            darkThemes.forEach(theme => {
+                                const loadState = getItem(theme.id);
+                                if (loadState == '1') {
+                                    const styleElement = window.theme.loadStyle(theme.cssPath, theme.styleId);
+                                    if (styleElement) {
+                                        styleElement.setAttribute('topicfilter', theme.id);
+                                    }
+                                }
+                            });
+                        }
+                        
+                        // 加载功能按钮状态
+                        featureButtons.forEach(button => {
+                            const buttonState = getItem(button.id);
+                            if (buttonState == '1') {
+                                // 检查是否已存在样式
+                                if (!document.getElementById(button.styleId)) {
+                                    window.theme.loadStyle(button.cssPath, button.styleId).setAttribute(
+                                        button.id === "bulletThreading" ? "bulletThreading" : "topBarcss", 
+                                        button.attrName
+                                    );
+                                }
+                                
+                                // 如果是顶栏合并功能且已启用，立即添加拖拽区域
+                                if (button.id === "topBar") {
+                                    setTimeout(() => {
+                                        addDragArea();
+                                    }, 300);
+                                }
+                            }
+                        });
+                        
+                        // 加载插件按钮状态
+                        pluginButtons.forEach(button => {
+                            const buttonState = getItem(button.id);
+                            if (buttonState == '1') {
+                                // 检查是否已存在样式
+                                if (!document.getElementById(button.styleId)) {
+                                    const style = window.theme.loadStyle(button.cssPath, button.styleId);
+                                    style.setAttribute(button.id, button.attrName);
+                                }
+                            }
+                        });
+                        
+                        // 在主函数末尾添加插件按钮初始化
+                        initPluginButtons();
+                        // 初始化主题按钮
+                        themeButton();
+                        
+                        // 初始化鼠标中键折叠/展开功能
+                        window.theme.initCollapseExpand();
+
+                         // 底栏改位功能
+                         const statusObserver = new MutationObserver((mutations, obs) => {
+                            const statusElement = document.getElementById('status');
+                            const layoutCenter = document.querySelector('.layout__center');
+
+                            if (statusElement && layoutCenter) {
+                                layoutCenter.appendChild(statusElement);
+                                obs.disconnect(); // 停止观察
+                            }
+                        });
+
+                        statusObserver.observe(document.body, { childList: true, subtree: true });
+                    
+                    console.log("==============>附加CSS和特性JS_已经执行<==============");
+                }
+            }, 100);
+        };
+            
+            if (v == null) {
+                window.theme.config = { "Savor": 1 };
+                写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4), funs);
+            } else {
+                window.theme.config = v;
+                funs();
+            }
+        }, () => {
+            // 使用默认配置
+            window.theme.config = { "Savor": 1 };
+            setTimeout(() => {
+                themeButton();
+                // 即使使用默认配置也初始化鼠标中键折叠/展开功能
+                window.theme.initCollapseExpand();
+            }, 100);
+        });
+        
+        // 简化获取文件函数
+        async function 获取文件(path, then = null, errorCallback = null, obj = null) {
+            const url = '/api/file/getFile';
+            try {
+                const response = await 向思源请求数据(url, { path });
+                if (then) then(response, obj);
+            } catch (error) {
+                if (errorCallback) errorCallback(error);
+            }
+        }
+        
+         /** 清除样式 **/
+    window.destroyTheme = () => { 
+        // 删除主题加载的额外样式
+        const styleElements = document.querySelectorAll('[id^="Sv-theme-color"]');  
+        styleElements.forEach(element => element.parentNode.removeChild(element));
+        // 删除切换按钮
+        document.querySelector("#savorToolbar")?.remove();
+        // 删除空白
+        document.querySelector("#savordrag")?.remove();
+        // 删除插件展开按钮
+        document.querySelector("#savorPlugins")?.remove();
+        // 删除列表转导图功能
+        window.removeEventListener('mouseup', MenuShow);
+
+        // 重置顶栏边距
+        document.querySelectorAll('.layout__center .layout-tab-bar--readonly').forEach(tabBar => {
+            tabBar.style.marginRight = '0px';
+        });
+        
+        // 将 status 元素复位到默认位置
+        const statusElement = document.getElementById('status');
+        if (statusElement) {
+            // 确保从当前父元素中移除
+            if (statusElement.parentElement) {
+                statusElement.parentElement.removeChild(statusElement);
+            }
+            // 添加到 body
+            document.body.appendChild(statusElement);
+        }
+    };
 })();
+
+
+
+
+
+

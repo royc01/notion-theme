@@ -189,3 +189,17 @@ div *[custom-f="dt"]>[data-type="NodeListItem"].li::after{
 
 
 
+[custom-f="dt"]::before {
+    content: "拖拽：鼠标拖动节点　|　缩放：Alt + 鼠标滚轮　|　双击：复位节点";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    color: var(--b3-theme-on-surface);
+    background-color: var(--b3-theme-surface);
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 3px 10px;
+    opacity: 0.8;
+    pointer-events: none;
+}

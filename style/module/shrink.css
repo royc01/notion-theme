@@ -15,6 +15,7 @@
 		height:33px; 
 		padding: 0px 8px 0px 11px;
 		min-height: unset;
+		border-bottom: none;
 		/*面板标题图标*/
 		.block__logo{
 			font-weight: 600;

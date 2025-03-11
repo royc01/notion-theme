@@ -176,7 +176,6 @@
 .bq > .h1,.bq > .h2,.bq > .h3,.bq > .h4,.bq > .h5,.bq > .h6{
 	margin-top: 0em!important;
     margin-bottom: 0.1em!important;
-	padding-left: 12px;
 }
 
 /*块标*/ 
@@ -285,178 +284,88 @@
     .color__square{
         font-weight: 600;
     }
-    [data-type="color"][data-position="3bottom"]{
+    [data-position="3south"],.protyle-font__style{
         box-shadow: 0 0 0 1px var(--Sv-color-d-shadow) inset;
         &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-color-d-shadow) inset;
+            box-shadow: 0 0 0 2px var(--Sv-color-d-shadow) inset!important;
         }
     }
-    [data-type="color"][style*="(--b3-font-color1)"]{
+    [data-type="color"][style*="(--b3-font-color1)"],[data-type="backgroundColor"][style*="(--b3-font-background1)"]{
         box-shadow: 0 0 0 1px var(--Sv-color1-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color1-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color2)"]{
+    [data-type="color"][style*="(--b3-font-color2)"],[data-type="backgroundColor"][style*="(--b3-font-background2)"]{
         box-shadow: 0 0 0 1px var(--Sv-color2-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color2-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color3)"]{
+    [data-type="color"][style*="(--b3-font-color3)"],[data-type="backgroundColor"][style*="(--b3-font-background4)"]{
         box-shadow: 0 0 0 1px var(--Sv-color3-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color3-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color4)"]{
+    [data-type="color"][style*="(--b3-font-color4)"],[data-type="backgroundColor"][style*="(--b3-font-background5)"]{
         box-shadow: 0 0 0 1px var(--Sv-color4-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color4-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color5)"]{
+    [data-type="color"][style*="(--b3-font-color5)"],[data-type="backgroundColor"][style*="(--b3-font-background6)"]{
         box-shadow: 0 0 0 1px var(--Sv-color5-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color5-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color6)"]{
+    [data-type="color"][style*="(--b3-font-color6)"],[data-type="backgroundColor"][style*="(--b3-font-background7"]{
         box-shadow: 0 0 0 1px var(--Sv-color6-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color6-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color7)"]{
+    [data-type="color"][style*="(--b3-font-color7)"],[data-type="backgroundColor"][style*="(--b3-font-background8)"]{
         box-shadow: 0 0 0 1px var(--Sv-color7-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color7-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color8)"]{
+    [data-type="color"][style*="(--b3-font-color8)"],[data-type="backgroundColor"][style*="(--b3-font-background9)"]{
         box-shadow: 0 0 0 1px var(--Sv-color8-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color8-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color9)"]{
+    [data-type="color"][style*="(--b3-font-color9)"],[data-type="backgroundColor"][style*="(--b3-font-background10)"]{
         box-shadow: 0 0 0 1px var(--Sv-color9-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color9-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color10)"]{
+    [data-type="color"][style*="(--b3-font-color10)"],[data-type="backgroundColor"][style*="(--b3-font-background11)"]{
         box-shadow: 0 0 0 1px var(--Sv-color10-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color10-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color11)"]{
+    [data-type="color"][style*="(--b3-font-color11)"],[data-type="backgroundColor"][style*="(--b3-font-background12)"]{
         box-shadow: 0 0 0 1px var(--Sv-color11-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color11-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color12)"]{
+    [data-type="color"][style*="(--b3-font-color12)"],[data-type="backgroundColor"][style*="(--b3-font-background13)"]{
         box-shadow: 0 0 0 1px var(--Sv-color12-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color12-shadow) inset;
         }
     }
-    [data-type="color"][style*="(--b3-font-color13)"]{
+    [data-type="color"][style*="(--b3-font-color13)"],[data-type="backgroundColor"][style*="(--b3-font-background3)"]{
         box-shadow: 0 0 0 1px var(--Sv-color13-shadow) inset;
         &:hover{
             box-shadow: 0 0 0 2px var(--Sv-color13-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][data-position="3bottom"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg-d-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg-d-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background1)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg1-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg1-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background2)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg2-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg2-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background3)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg3-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg3-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background4)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg4-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg4-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background5)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg5-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg5-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background6)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg6-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg6-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background7)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg7-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg7-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background8)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg8-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg8-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background9)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg9-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg9-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background10)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg10-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg10-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background11)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg11-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg11-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background12)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg12-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg12-shadow) inset;
-        }
-    }
-    [data-type="backgroundColor"][style*="(--b3-font-background13)"]{
-        box-shadow: 0 0 0 1px var(--Sv-bg13-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-bg13-shadow) inset;
-        }
-    }
-    [data-type="style1"][data-position="3bottom"],[data-type="style2"],[data-type="style4"]{
-        box-shadow: 0 0 0 1px var(--Sv-style1-d-shadow) inset;
-        &:hover{
-            box-shadow: 0 0 0 2px var(--Sv-style1-d-shadow) inset;
         }
     }
     [data-type="style1"][style*="(--b3-card-error-color)"]{
@@ -675,6 +584,10 @@
 }
 .protyle-wysiwyg div[fold="1"][data-type="NodeHeading"]:before{
 	background-color:transparent;
+}
+.sb[fold="1"] [data-type="NodeHeading"]{
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 /*pdf批注*/

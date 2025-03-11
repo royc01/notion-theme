@@ -10,10 +10,10 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		pointer-events: visibleFill;
 		app-region: no-drag;
 	}
-	& #drag,& #toolbarVIP{
+	& #toolbarVIP,#drag{
 		display: none;
 		}
-    &  .toolbar__item:not(#barWorkspace,#closeWindow)[data-position]:not(.fn__none){
+    &  .toolbar__item:not(#barWorkspace,#closeWindow)[data-location]:not(.fn__none){
         counter-increment: plugin-counter;
         box-shadow: 12px 0px 0px 0px var(--Sv-plugin-off-bg),17px 0px 0px 0px var(--Sv-plugin-off-bg);
         background-color: var(--Sv-plugin-off-bg);
@@ -58,9 +58,6 @@ body:not(.body--mobile,.body--window)>#toolbar{
         }
         }
     }
-}
-#barWorkspace .toolbar__text{
-    max-width: 55px!important;
 }
 #barPlugins{
     margin-left: 18px;
@@ -211,7 +208,7 @@ body:not(.body--mobile,.body--window) #layouts{
 /* 左侧间距 */
 .layout--float,.layout__dockl[style*="width: 0"]{
     & ~ .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
-        margin-left: 150px;
+        margin-left: calc(var(--Sv-topfixed-marginLeft) + 60px);
         padding-left: 10px;
         transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms,padding-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
     }
@@ -224,7 +221,7 @@ body:not(.body--mobile,.body--window) #layouts{
 .dock--vertical.fn__none + #layouts {
     .layout--float,.layout__dockl[style*="width: 0"]{
         & ~ .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
-            margin-left: 183px;
+            margin-left: calc(var(--Sv-topfixed-marginLeft) + 93px);
             transition: none;
         }
     }
@@ -234,7 +231,7 @@ body:not(.body--mobile,.body--window) #layouts{
 }
 .body--mac .layout--float,.body--mac .layout__dockl[style*="width: 0"]{
     & ~ .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
-        margin-left: 220px;
+        margin-left: calc(var(--Sv-topfixed-marginLeft) + 130px);
         padding-left: 10px;
         transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms,padding-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
     }
@@ -243,7 +240,7 @@ body:not(.body--mobile,.body--window) #layouts{
 .body--mac .dock--vertical.fn__none + #layouts {
     .layout--float,.layout__dockl[style*="width: 0"]{
         & ~ .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
-            margin-left: 253px;
+            margin-left: calc(var(--Sv-topfixed-marginLeft) + 163px);
             transition: none;
         }
     }
@@ -266,3 +263,4 @@ body:not(.body--mobile,.body--window) #layouts{
     opacity: 0;
     -webkit-app-region: drag;
 }
+
