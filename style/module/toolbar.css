@@ -24,7 +24,6 @@ body:not(.body--mobile,.body--window)>#toolbar{
             color:var(--Sv-barWorkspace-color);
             font-weight:700;
             font-size: 14px;
-            text-transform:uppercase;
         }
         & .toolbar__svg{
             margin-left:2px;

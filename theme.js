@@ -401,7 +401,10 @@
                 window.theme.themeMode,
                 () => {
                     const styleId = `Sv-theme-color-${theme.id.replace('button', '')}`;
-                    window.theme.loadStyle(theme.path, styleId).setAttribute("topicfilter", theme.id);
+                    // 检查样式是否已存在，不存在才加载
+                    if (!document.getElementById(styleId)) {
+                        window.theme.loadStyle(theme.path, styleId).setAttribute("topicfilter", theme.id);
+                    }
                     qucuFiiter();
                 },
                 () => {
@@ -1259,7 +1262,7 @@ function initTabBarsMargin() {
 
     // 更新边距的函数
     const updateMargins = () => {
-        if (!dockr || !topBarButton) return;
+        if (!topBarButton) return;
 
         const isTopBarActive = topBarButton.classList.contains('button_on') || 
                               topBarButton.classList.contains('toolbar__item--active');
@@ -1277,12 +1280,16 @@ function initTabBarsMargin() {
 
         if (rafId) cancelAnimationFrame(rafId);
         rafId = requestAnimationFrame(() => {
-            // 计算边距值
-            const isDockVerticalHidden = dockVertical?.classList.contains('fn__none');
+            // 计算边距值 - 修改这里以处理右侧面板关闭的情况
+            const isDockVerticalHidden = !dockVertical || dockVertical.classList.contains('fn__none');
             const rightMargin = isDockVerticalHidden ? '293px' : '260px';
-            const dockrWidth = dockr.offsetWidth;
-            const isFloatingR = dockr.classList.contains('layout--float');
-            const marginRightValue = (dockrWidth === 0 || isFloatingR) ? rightMargin : '0px';
+            
+            // 检查右侧面板是否存在或关闭
+            const dockrWidth = dockr ? dockr.offsetWidth : 0;
+            const isFloatingR = dockr ? dockr.classList.contains('layout--float') : true;
+            
+            // 如果右侧面板不存在、宽度为0或浮动，则应用右边距
+            const marginRightValue = (!dockr || dockrWidth === 0 || isFloatingR) ? rightMargin : '0px';
 
             // 重置所有标签栏边距
             allReadonlyTabBars.forEach(tabBar => {
@@ -1340,6 +1347,9 @@ function initTabBarsMargin() {
         
         // 初始更新边距
         updateMargins();
+        
+        // 添加一个延迟更新，确保在DOM完全加载后再次更新
+        setTimeout(updateMargins, 500);
     };
 
     // 首次初始化
@@ -1347,9 +1357,9 @@ function initTabBarsMargin() {
 
     // 使用 MutationObserver 等待元素加载
     const observer = new MutationObserver(() => {
-        if (!dockr || !topBarButton) {
+        if (!topBarButton) {
             cacheElements();
-            if (dockr && topBarButton) {
+            if (topBarButton) {
                 observer.disconnect();
                 init();
             }
@@ -1364,8 +1374,14 @@ function initTabBarsMargin() {
     // 页面加载完成后再次尝试初始化
     window.addEventListener('load', init);
     
+    // 监听主题切换事件
+    document.addEventListener('themechange', updateMargins);
+    
     // 提供全局更新函数
     window.updateTabBarsMargin = updateMargins;
+    
+    // 延迟执行一次更新，确保在所有DOM元素加载完成后生效
+    setTimeout(updateMargins, 1000);
 }
 
 
@@ -1504,8 +1520,6 @@ function initTabBarsMargin() {
     function savorThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, NoClickRunFun, OffClickRunFun, Memory, svgPath = null) {
         let savorToolbar = document.getElementById("savorToolbar");
         if (!savorToolbar) {
-            // 修改这里，不再自动创建 savorToolbar
-            // 而是等待 barMode 按钮点击时创建
             return;
         }
     
@@ -1676,7 +1690,10 @@ function initTabBarsMargin() {
                             observer.observe(barWorkspace, { childList: true, subtree: true });
                         }
                         
-                        // 添加对 barMode 按钮的点击监听
+                        // 初始化主题功能，与barMode按钮独立
+                        initThemeFeatures();
+                        
+                        // 添加对 barMode 按钮的点击监听，仅用于生成菜单
                         const barMode = document.getElementById('barMode');
                         if (barMode) {
                             barMode.addEventListener('click', initSavorToolbar);
@@ -1692,7 +1709,25 @@ function initTabBarsMargin() {
                             barModeObserver.observe(document.body, { childList: true, subtree: true });
                         }
 
-                        // 初始化 savorToolbar 的函数
+                        // 初始化主题的所有功能
+                        function initThemeFeatures() {
+                            // 初始化鼠标中键折叠/展开功能
+                            window.theme.initCollapseExpand();
+                            
+                            // 初始化插件按钮
+                            initPluginButtons();
+                            
+                            // 初始化主题按钮
+                            themeButton();
+                            
+                            // 初始化顶栏合并右侧间距功能
+                            if (!window.tabBarsMarginInitialized) {
+                                window.tabBarsMarginInitialized = true;
+                                initTabBarsMargin();
+                            }
+                        }
+
+                        // 初始化 savorToolbar 的函数，仅负责生成菜单
                         function initSavorToolbar() {
                             // 检查是否已存在
                             if (document.getElementById('savorToolbar')) return;
@@ -1775,10 +1810,18 @@ function initTabBarsMargin() {
                                     );
                                 }
                                 
-                                // 如果是顶栏合并功能且已启用，立即添加拖拽区域
+                                // 如果是顶栏合并功能且已启用，立即添加拖拽区域并更新间距
                                 if (button.id === "topBar") {
                                     setTimeout(() => {
                                         addDragArea();
+                                        // 确保顶栏合并右侧间距功能已初始化
+                                        if (!window.tabBarsMarginInitialized) {
+                                            window.tabBarsMarginInitialized = true;
+                                            initTabBarsMargin();
+                                        } else if (window.updateTabBarsMargin) {
+                                            // 如果已初始化，则手动更新边距
+                                            window.updateTabBarsMargin();
+                                        }
                                     }, 300);
                                 }
                             }
@@ -1804,18 +1847,42 @@ function initTabBarsMargin() {
                         // 初始化鼠标中键折叠/展开功能
                         window.theme.initCollapseExpand();
 
-                         // 底栏改位功能
-                         const statusObserver = new MutationObserver((mutations, obs) => {
+                        // 底栏位置调整功能
+                        const updateStatusPosition = () => {
                             const statusElement = document.getElementById('status');
-                            const layoutCenter = document.querySelector('.layout__center');
+                            if (!statusElement) return;
 
-                            if (statusElement && layoutCenter) {
-                                layoutCenter.appendChild(statusElement);
-                                obs.disconnect(); // 停止观察
-                            }
-                        });
+                            const dockr = document.querySelector('.layout__dockr');
+                            const dockVertical = document.querySelector('.dock--vertical');
+                            
+                            const dockrWidth = dockr?.offsetWidth || 0;
+                            const isFloatingR = dockr?.classList.contains('layout--float') ?? true;
+                            const isDockVerticalHidden = !dockVertical || dockVertical.classList.contains('fn__none');
+                            const dockVerticalWidth = isDockVerticalHidden ? 0 : 30;
 
-                        statusObserver.observe(document.body, { childList: true, subtree: true });
+                            const totalOffset = (isFloatingR || !dockrWidth) 
+                                ? (isDockVerticalHidden ? 8 : dockVerticalWidth + 12)
+                                : dockrWidth + (isDockVerticalHidden ? 13 : dockVerticalWidth + 17);
+
+                            statusElement.style.transform = `translateX(-${totalOffset}px)`;
+                        };
+
+                        // 使用 RAF 进行防抖
+                        const updateDebounced = () => {
+                            cancelAnimationFrame(window.statusPositionTimer);
+                            window.statusPositionTimer = requestAnimationFrame(updateStatusPosition);
+                        };
+
+                        // 设置观察器
+                        window.statusObserver = new MutationObserver(updateDebounced);
+                        window.statusObserver.observe(document.body, { childList: true, subtree: true });
+                        
+                        if (document.querySelector('.layout__dockr')) {
+                            window.statusResizeObserver = new ResizeObserver(updateDebounced);
+                            window.statusResizeObserver.observe(document.querySelector('.layout__dockr'));
+                        }
+                        
+                        updateStatusPosition();
                     
                     console.log("==============>附加CSS和特性JS_已经执行<==============");
                 }
@@ -1851,35 +1918,48 @@ function initTabBarsMargin() {
         }
         
          /** 清除样式 **/
-    window.destroyTheme = () => { 
-        // 删除主题加载的额外样式
-        const styleElements = document.querySelectorAll('[id^="Sv-theme-color"]');  
-        styleElements.forEach(element => element.parentNode.removeChild(element));
-        // 删除切换按钮
-        document.querySelector("#savorToolbar")?.remove();
-        // 删除空白
-        document.querySelector("#savordrag")?.remove();
-        // 删除插件展开按钮
-        document.querySelector("#savorPlugins")?.remove();
-        // 删除列表转导图功能
-        window.removeEventListener('mouseup', MenuShow);
-
-        // 重置顶栏边距
-        document.querySelectorAll('.layout__center .layout-tab-bar--readonly').forEach(tabBar => {
-            tabBar.style.marginRight = '0px';
-        });
-        
-        // 将 status 元素复位到默认位置
-        const statusElement = document.getElementById('status');
-        if (statusElement) {
-            // 确保从当前父元素中移除
-            if (statusElement.parentElement) {
-                statusElement.parentElement.removeChild(statusElement);
+         window.destroyTheme = () => { 
+            // 删除主题加载的额外样式
+            const styleElements = document.querySelectorAll('[id^="Sv-theme-color"]');  
+            styleElements.forEach(element => element.parentNode.removeChild(element));
+            // 删除切换按钮
+            document.querySelector("#savorToolbar")?.remove();
+            // 删除空白
+            document.querySelector("#savordrag")?.remove();
+            // 删除插件展开按钮
+            document.querySelector("#savorPlugins")?.remove();
+            // 删除列表转导图功能
+            window.removeEventListener('mouseup', MenuShow);
+    
+            // 重置顶栏边距
+            document.querySelectorAll('.layout__center .layout-tab-bar--readonly').forEach(tabBar => {
+                tabBar.style.marginRight = '0px';
+            });
+            
+            // 重置status元素的transform
+            const statusElement = document.getElementById('status');
+            if (statusElement) {
+                statusElement.style.transform = '';
             }
-            // 添加到 body
-            document.body.appendChild(statusElement);
-        }
-    };
+            
+            // 清理状态栏位置调整相关的观察器
+            if (window.statusObserver) {
+                window.statusObserver.disconnect();
+                window.statusObserver = null;
+            }
+            
+            // 清理ResizeObserver
+            if (window.statusResizeObserver) {
+                window.statusResizeObserver.disconnect();
+                window.statusResizeObserver = null;
+            }
+            
+            // 取消任何待处理的动画帧
+            if (window.statusPositionTimer) {
+                cancelAnimationFrame(window.statusPositionTimer);
+                window.statusPositionTimer = null;
+            }
+        };
 })();
 
 

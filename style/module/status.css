@@ -1,23 +1,14 @@
 /* ————————————————————底栏———————————————————— */
-.layout__center {
-    position: relative; /* 确保子元素的绝对定位是相对于它 */
-}
-
 #status {
     height: 24px;
-    position: absolute; /* 使用绝对定位 */
-    right: 32px; /* 距离右边界32px */
-    bottom: 4px; /* 距离底部4px */
+    line-height: 24px;
+    position: fixed;
+    right: 28px;
+    bottom: 9px; 
     padding-right: 0px;
     border: none;
     background-color: var(--Sv-status-msg-background);
     border-radius: 6px;
-    z-index: 10; /* 确保底栏在其他元素上方 */
-    &>div{
-        pointer-events:visibleFill;
-        position: relative;
-        line-height:24px;
-        }
     .toolbar__item:not(.toolbar__item--close) {
         padding:2px;
         height: 24px;
@@ -50,7 +41,7 @@
             padding-left: 26px!important;
             padding-right: 10px;
             &::after{
-                content: "📢"!important;
+                content: "📢";
                 font-size:12px;
                 padding:0 6px;
                 position: absolute;
