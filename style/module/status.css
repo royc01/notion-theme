@@ -1,4 +1,7 @@
 /* ————————————————————底栏———————————————————— */
+#savorToolbar button{
+    display: block!important;
+}
 #status {
     height: 24px;
     line-height: 24px;

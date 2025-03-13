@@ -798,9 +798,24 @@ const pluginButtons = [
         cssPath: "/appearance/themes/Savor/style/topbar/Splugin.css",
         styleId: "Sv-theme-color-plugin隐藏",
         attrName: "plugin隐藏",
+        style: "display: none;",
         className: "toolbar__item b3-tooltips b3-tooltips__sw",
-        onEnable: () => {},
-        onDisable: () => {}
+        onEnable: () => {
+            // 延迟执行以确保DOM更新完成
+            setTimeout(() => {
+                if (window.updateTabBarsMargin) {
+                    window.updateTabBarsMargin();
+                }
+            }, 100);
+        },
+        onDisable: () => {
+            // 延迟执行以确保DOM更新完成
+            setTimeout(() => {
+                if (window.updateTabBarsMargin) {
+                    window.updateTabBarsMargin();
+                }
+            }, 100);
+        }
     }
 ];
 
@@ -832,6 +847,7 @@ async function createPluginButtons() {
         // 设置按钮属性
         addButton.style.float = "top";
         addButton.id = button.id;
+        if (button.style) addButton.style.cssText = button.style;  // 添加这行来应用样式
         addButton.setAttribute("class", button.className + " button_off");
         addButton.setAttribute("aria-label", button.label);
 
@@ -1248,76 +1264,81 @@ if (typeof window.dragDebounce === 'undefined') {
 function initTabBarsMargin() {
     let rafId = null;
     let dockr = null;
-    let topBarButton = null;
     let dockVertical = null;
 
     // 缓存 DOM 元素
     const cacheElements = () => {
         dockr = document.querySelector('.layout__dockr');
-        topBarButton = document.querySelector('#topBar') || 
-                       document.querySelector('.toolbar__item[data-type="topBar"]') ||
-                       document.querySelector('[aria-label="顶栏合并"]');
         dockVertical = document.querySelector('.dock--vertical');
     };
 
     // 更新边距的函数
     const updateMargins = () => {
-        if (!topBarButton) return;
-
-        const isTopBarActive = topBarButton.classList.contains('button_on') || 
-                              topBarButton.classList.contains('toolbar__item--active');
-        
-        // 获取所有只读标签栏
-        const allReadonlyTabBars = document.querySelectorAll('.layout__center .layout-tab-bar--readonly');
-        
-        // 如果顶栏合并未激活，重置所有边距
-        if (!isTopBarActive) {
+        // 检查顶栏合并是否开启
+        const topBarFixed = document.getElementById("Sv-theme-color-topbar隐藏");
+        if (!topBarFixed) {
+            // 如果顶栏合并未开启，清除所有标签栏的右侧边距
+            const allReadonlyTabBars = document.querySelectorAll('.layout__center .layout-tab-bar--readonly');
             allReadonlyTabBars.forEach(tabBar => {
                 tabBar.style.marginRight = '0px';
             });
             return;
         }
+        // 获取所有只读标签栏
+        const allReadonlyTabBars = document.querySelectorAll('.layout__center .layout-tab-bar--readonly');
+        console.log('找到的只读标签栏数量:', allReadonlyTabBars.length);
+        
+        // 获取工具栏内的 data-location 元素数量并计算总宽度
+        const locationElements = Array.from(document.querySelectorAll('#toolbar [data-location]'))
+        .filter(el => !el.classList.contains('fn__none'));
+        console.log('找到的有效 data-location 元素数量:', locationElements.length);
+        
+        // 检查插件状态
+        const pluginHidden = document.getElementById('Sv-theme-color-plugin隐藏');
+        
+        // 如果插件处于关闭状态，使用固定宽度40，否则按元素数量计算后加20
+        const totalLocationWidth = !pluginHidden ? 40 : (locationElements.length * 28) + 20;
+        console.log('根据插件状态计算的总宽度:', totalLocationWidth, 'px');
+        
+          // 获取右侧栏面板宽度（包括浮动状态）
+          const rightPanel = document.querySelector('.layout__dockr');
+          const rightPanelWidth = rightPanel?.classList.contains('layout--float') 
+              ? rightPanel.querySelector('.dock')?.offsetWidth || 0 
+              : rightPanel?.offsetWidth || 0;
+          console.log('右侧栏面板宽度:', rightPanelWidth, 'px');
+           
+           // 获取右侧停靠栏宽度
+           const dockrWidth = document.querySelector('#dockRight')?.offsetWidth || 0;
+           console.log('右停靠栏宽度:', dockrWidth, 'px');
+          
+          // 定义固定偏移量
+          const FIXED_OFFSET = 234;
+          // 计算最终的边距值
+          const calculatedMargin = totalLocationWidth + FIXED_OFFSET - rightPanelWidth - dockrWidth;
+          const marginRightValue = calculatedMargin > 0 ? `${calculatedMargin}px` : '0px';
+        console.log('计算得到的最终边距值:', marginRightValue);
 
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(() => {
-            // 计算边距值 - 修改这里以处理右侧面板关闭的情况
-            const isDockVerticalHidden = !dockVertical || dockVertical.classList.contains('fn__none');
-            const rightMargin = isDockVerticalHidden ? '293px' : '260px';
-            
-            // 检查右侧面板是否存在或关闭
-            const dockrWidth = dockr ? dockr.offsetWidth : 0;
-            const isFloatingR = dockr ? dockr.classList.contains('layout--float') : true;
-            
-            // 如果右侧面板不存在、宽度为0或浮动，则应用右边距
-            const marginRightValue = (!dockr || dockrWidth === 0 || isFloatingR) ? rightMargin : '0px';
-
-            // 重置所有标签栏边距
-            allReadonlyTabBars.forEach(tabBar => {
-                tabBar.style.marginRight = '0px';
-            });
-
-            // 检查是否存在分栏
-            const resizers = document.querySelectorAll('.layout__center .layout__resize:not(.layout__resize--lr)');
-            
-            if (resizers.length === 0) {
-                // 没有分栏时，设置最后一个标签栏边距
-                const lastReadonlyTabBar = allReadonlyTabBars[allReadonlyTabBars.length - 1];
-                if (lastReadonlyTabBar) {
-                    lastReadonlyTabBar.style.marginRight = marginRightValue;
-                }
-            } else {
-                // 有分栏时，为每个分栏前的最后一个标签栏设置边距
-                resizers.forEach(resizer => {
-                    let prevElement = resizer.previousElementSibling;
-                    if (!prevElement) return;
-
-                    const prevReadonlyTabBars = prevElement.querySelectorAll('.layout-tab-bar--readonly');
-                    if (prevReadonlyTabBars.length > 0) {
-                        prevReadonlyTabBars[prevReadonlyTabBars.length - 1].style.marginRight = marginRightValue;
-                    }
-                });
+        // 检查是否存在分栏
+        const resizers = document.querySelectorAll('.layout__center .layout__resize:not(.layout__resize--lr)');
+        
+        if (resizers.length === 0) {
+            // 没有分栏时，设置最后一个标签栏边距
+            const lastReadonlyTabBar = allReadonlyTabBars[allReadonlyTabBars.length - 1];
+            if (lastReadonlyTabBar) {
+                lastReadonlyTabBar.style.marginRight = marginRightValue;
             }
-        });
+        } else {
+            // 有分栏时，为每个分栏前的最后一个标签栏设置边距
+            resizers.forEach(resizer => {
+                let prevElement = resizer.previousElementSibling;
+                if (!prevElement) return;
+
+                const prevReadonlyTabBars = prevElement.querySelectorAll('.layout-tab-bar--readonly');
+                if (prevReadonlyTabBars.length > 0) {
+                    prevReadonlyTabBars[prevReadonlyTabBars.length - 1].style.marginRight = marginRightValue;
+                }
+            });
+        }
     };
 
     // 初始化函数
@@ -1325,19 +1346,9 @@ function initTabBarsMargin() {
         cacheElements();
         
         if (dockr) {
-            // 观察右侧面板尺寸变化
             new ResizeObserver(updateMargins).observe(dockr);
         }
-        
-        if (topBarButton) {
-            // 观察顶栏按钮状态变化
-            new MutationObserver(updateMargins).observe(topBarButton, {
-                attributes: true,
-                attributeFilter: ['class']
-            });
-        }
 
-        // 观察垂直面板状态变化
         if (dockVertical) {
             new MutationObserver(updateMargins).observe(dockVertical, {
                 attributes: true,
@@ -1348,19 +1359,18 @@ function initTabBarsMargin() {
         // 初始更新边距
         updateMargins();
         
-        // 添加一个延迟更新，确保在DOM完全加载后再次更新
+        // 添加延迟更新
         setTimeout(updateMargins, 500);
     };
 
     // 首次初始化
     init();
 
-    // 使用 MutationObserver 等待元素加载
+    // 使用 MutationObserver 监听DOM变化
     const observer = new MutationObserver(() => {
-        if (!topBarButton) {
+        if (!dockr || !dockVertical) {
             cacheElements();
-            if (topBarButton) {
-                observer.disconnect();
+            if (dockr || dockVertical) {
                 init();
             }
         }
@@ -1380,7 +1390,7 @@ function initTabBarsMargin() {
     // 提供全局更新函数
     window.updateTabBarsMargin = updateMargins;
     
-    // 延迟执行一次更新，确保在所有DOM元素加载完成后生效
+    // 延迟执行一次更新
     setTimeout(updateMargins, 1000);
 }
 
@@ -1527,62 +1537,53 @@ function initTabBarsMargin() {
         if (existingButton) return;
         
         const addButton = addinsertCreateElement(savorToolbar, "button");
-        addButton.style.float = "top";
+        addButton.style.display = "none";
         addButton.id = ButtonID;
         addButton.setAttribute("class", ButtonTitle + " button_off");
         addButton.setAttribute("aria-label", ButtonLabel);
-         // 设置按钮内容，根据是否提供svgPath使用不同的图标方式
-         if (svgPath) {
-            // 使用自定义SVG路径，通过CSS控制颜色
+        
+        if (svgPath) {
             addButton.innerHTML = `
                     <svg class="b3-menu__icon savor-icon" width="24" height="24" viewBox="9 10 14 14" xmlns="http://www.w3.org/2000/svg">
                         <path d="${svgPath}"></path>
                     </svg>
                     <span class="b3-menu__label">${ButtonLabel}</span>
             `;
-            
-            // 添加自定义类名以便CSS选择器识别
             addButton.classList.add('savor-button');
-         } else {
-            // 使用内置图标
+        } else {
             addButton.innerHTML = `<svg class="b3-menu__icon"><use xlink:href="#iconTheme"></use></svg><span class="b3-menu__label">${ButtonLabel}</span>`;
-         }
+        }
         
         let offNo = '0';
         
-        if (window.theme.themeMode == Mode) {
-            // 如果主题是暗色主题，默认选中样式
-            if (Memory) {
-                offNo = getItem(ButtonID);
-                if (offNo == "1") {
-                    addButton.setAttribute("class", ButtonTitle + " button_on");
-                    setItem(ButtonID, "0");
-                    NoClickRunFun(addButton);
-                    setItem(ButtonID, "1");
-                } else if (offNo != "0") {
-                    offNo = "0";
-                    setItem(ButtonID, "0");
-                }
+        if (window.theme.themeMode == Mode && Memory) {
+            offNo = getItem(ButtonID);
+            if (offNo == "1") {
+                addButton.setAttribute("class", ButtonTitle + " button_on");
+            } else if (offNo != "0") {
+                offNo = "0";
+                setItem(ButtonID, "0");
             }
         }
         
         AddEvent(addButton, "click", () => {
             if (offNo == "0") {
                 addButton.setAttribute("class", ButtonTitle + " button_on");
-                // 在应用新主题前添加过渡效果
                 window.theme.applyThemeTransition();
                 NoClickRunFun(addButton);
                 if (Memory) setItem(ButtonID, "1");
                 offNo = "1";
             } else {
                 addButton.setAttribute("class", ButtonTitle + " button_off");
-                // 在切换回默认主题前添加过渡效果
                 window.theme.applyThemeTransition();
                 OffClickRunFun(addButton);
                 if (Memory) setItem(ButtonID, "0");
                 offNo = "0";
             }
         });
+    
+        // 返回按钮状态，但不立即执行功能
+        return { button: addButton, state: offNo };
     }
 
     function setItem(key, value) {
@@ -1670,6 +1671,10 @@ function initTabBarsMargin() {
                         const htmlTag = document.querySelector('html');
                         if (!htmlTag) return;
                         
+                        if (!window.tabBarsMarginInitialized) {
+                            window.tabBarsMarginInitialized = true;
+                            initTabBarsMargin();
+                        }
                         // 获取 #barWorkspace 宽度并设置为 CSS 变量
                         function setBarWorkspaceWidth() {
                             const barWorkspace = document.getElementById('barWorkspace');
@@ -1699,14 +1704,14 @@ function initTabBarsMargin() {
                             barMode.addEventListener('click', initSavorToolbar);
                         } else {
                             // 如果按钮还没加载，等待它出现
-                            const barModeObserver = new MutationObserver((mutations, obs) => {
+                            window.barModeObserver = new MutationObserver((mutations, obs) => {
                                 const barModeBtn = document.getElementById('barMode');
                                 if (barModeBtn) {
                                     barModeBtn.addEventListener('click', initSavorToolbar);
                                     obs.disconnect();
                                 }
                             });
-                            barModeObserver.observe(document.body, { childList: true, subtree: true });
+                            window.barModeObserver.observe(document.body, { childList: true, subtree: true });
                         }
 
                         // 初始化主题的所有功能
@@ -1748,10 +1753,12 @@ function initTabBarsMargin() {
                                 savorToolbar.style.position = "relative";
                             }
                             
-                            // 初始化主题按钮
-                            themeButton();
-                        }
+                            // 确保创建成功后初始化主题按钮
+                            if (savorToolbar) {
+                                themeButton();
 
+                            }
+                        }
                         const themeMode = htmlTag.getAttribute('data-theme-mode');
                         
                         // 判断是否为 macOS 平台并添加相应的类
@@ -1798,34 +1805,46 @@ function initTabBarsMargin() {
                             });
                         }
                         
-                        // 加载功能按钮状态
-                        featureButtons.forEach(button => {
-                            const buttonState = getItem(button.id);
-                            if (buttonState == '1') {
-                                // 检查是否已存在样式
-                                if (!document.getElementById(button.styleId)) {
-                                    window.theme.loadStyle(button.cssPath, button.styleId).setAttribute(
-                                        button.id === "bulletThreading" ? "bulletThreading" : "topBarcss", 
-                                        button.attrName
-                                    );
-                                }
-                                
-                                // 如果是顶栏合并功能且已启用，立即添加拖拽区域并更新间距
-                                if (button.id === "topBar") {
-                                    setTimeout(() => {
-                                        addDragArea();
-                                        // 确保顶栏合并右侧间距功能已初始化
-                                        if (!window.tabBarsMarginInitialized) {
-                                            window.tabBarsMarginInitialized = true;
-                                            initTabBarsMargin();
-                                        } else if (window.updateTabBarsMargin) {
-                                            // 如果已初始化，则手动更新边距
-                                            window.updateTabBarsMargin();
-                                        }
-                                    }, 300);
-                                }
-                            }
-                        });
+                        // ... existing code ...
+
+// 加载功能按钮状态
+featureButtons.forEach(button => {
+    const buttonState = getItem(button.id);
+    if (buttonState == '1') {
+        // 检查是否已存在样式
+        if (!document.getElementById(button.styleId)) {
+            window.theme.loadStyle(button.cssPath, button.styleId).setAttribute(
+                button.id === "bulletThreading" ? "bulletThreading" : "topBarcss", 
+                button.attrName
+            );
+        }
+        
+        // 如果是顶栏合并功能且已启用，立即添加拖拽区域并更新间距
+        if (button.id === "topBar") {
+            // 增加延迟确保DOM完全加载
+            setTimeout(() => {
+                addDragArea();
+                // 确保顶栏合并右侧间距功能已初始化
+                if (!window.tabBarsMarginInitialized) {
+                    window.tabBarsMarginInitialized = true;
+                    initTabBarsMargin();
+                } else if (window.updateTabBarsMargin) {
+                    // 如果已初始化，则手动更新边距
+                    window.updateTabBarsMargin();
+                }
+                
+                // 额外添加一次延迟更新以确保正确应用
+                setTimeout(() => {
+                    if (window.updateTabBarsMargin) {
+                        window.updateTabBarsMargin();
+                    }
+                }, 500);
+            }, 300);
+        }
+    }
+});
+
+// ... existing code ...
                         
                         // 加载插件按钮状态
                         pluginButtons.forEach(button => {

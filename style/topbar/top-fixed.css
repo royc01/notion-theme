@@ -264,3 +264,6 @@ body:not(.body--mobile,.body--window) #layouts{
     -webkit-app-region: drag;
 }
 
+#Splugin{
+	display: block!important;
+}
