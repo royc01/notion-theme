@@ -915,30 +915,6 @@ async function 设置思源块属性(内容块id, 属性对象) {
     }));
 }
 
-async function 向思源请求数据(url, data) {
-    try {
-        const response = await fetch(url, {
-            body: JSON.stringify(data),
-            method: 'POST',
-            headers: { Authorization: `Token ''` }
-        });
-        return response.status === 200 ? response.json() : null;
-    } catch (error) {
-        console.error('请求思源API出错:', error);
-        return null;
-    }
-}
-
-async function 解析响应体(response) {
-    try {
-        const r = await response;
-        return r?.code === 0 ? r.data : null;
-    } catch (error) {
-        console.error('解析响应体出错:', error);
-        return null;
-    }
-}
-
 /**---------------------------------------------------------视图选择UI-------------------------------------------------------------- */
 // 视图按钮配置
 const viewButtons = {
@@ -966,6 +942,7 @@ const viewButtons = {
  * @returns {HTMLElement} - 视图选择按钮
  */
 function ViewSelect(selectid, selecttype) {
+    // 创建主按钮
     const button = document.createElement("button");
     button.id = "viewselect";
     button.className = "b3-menu__item";
@@ -986,26 +963,26 @@ function ViewSelect(selectid, selecttype) {
     
     // 根据块类型添加相应的按钮
     const buttons = viewButtons[selecttype] || [];
-    buttons.forEach(button => {
+    
+    // 使用map和join简化按钮创建逻辑
+    menuItems.innerHTML = buttons.map(button => {
         if (button.separator) {
-            // 添加分隔线
-            const separator = document.createElement('button');
-            separator.className = 'b3-menu__separator';
-            menuItems.appendChild(separator);
+            return '<button class="b3-menu__separator"></button>';
         } else {
-            // 添加按钮
-            const viewButton = document.createElement("button");
-            viewButton.className = "b3-menu__item";
-            viewButton.setAttribute("data-node-id", selectid);
-            viewButton.setAttribute("custom-attr-name", button.attrName);
-            viewButton.setAttribute("custom-attr-value", button.attrValue);
-            viewButton.innerHTML = `
-                <svg class="b3-menu__icon"><use xlink:href="#${button.icon}"></use></svg>
-                <span class="b3-menu__label">${button.label}</span>
+            return `
+                <button class="b3-menu__item" data-node-id="${selectid}" 
+                        custom-attr-name="${button.attrName}" 
+                        custom-attr-value="${button.attrValue}">
+                    <svg class="b3-menu__icon"><use xlink:href="#${button.icon}"></use></svg>
+                    <span class="b3-menu__label">${button.label}</span>
+                </button>
             `;
-            viewButton.onclick = ViewMonitor;
-            menuItems.appendChild(viewButton);
         }
+    }).join('');
+    
+    // 为所有按钮添加点击事件
+    menuItems.querySelectorAll('.b3-menu__item').forEach(btn => {
+        btn.onclick = ViewMonitor;
     });
     
     submenu.appendChild(menuItems);
@@ -1028,22 +1005,17 @@ function getBlockSelected() {
 }
 
 /**
- * 初始化点击监听
+ * 初始化点击监听和菜单显示
  */
-function ClickMonitor() {
-    window.addEventListener('mouseup', MenuShow);
-}
-
-/**
- * 显示菜单
- */
-function MenuShow() {
-    setTimeout(() => {
-        const selectinfo = getBlockSelected();
-        if (selectinfo && (selectinfo.type === "NodeList" || selectinfo.type === "NodeTable")) {
-            setTimeout(() => InsertMenuItem(selectinfo.id, selectinfo.type), 0);
-        }
-    }, 0);
+function initMenuMonitor() {
+    window.addEventListener('mouseup', () => {
+        setTimeout(() => {
+            const selectinfo = getBlockSelected();
+            if (selectinfo && (selectinfo.type === "NodeList" || selectinfo.type === "NodeTable")) {
+                setTimeout(() => InsertMenuItem(selectinfo.id, selectinfo.type), 0);
+            }
+        }, 0);
+    });
 }
 
 /**
@@ -1077,20 +1049,20 @@ function ViewMonitor(event) {
     const id = event.currentTarget.getAttribute("data-node-id");
     const attrName = 'custom-' + event.currentTarget.getAttribute("custom-attr-name");
     const attrValue = event.currentTarget.getAttribute("custom-attr-value");
+    
+    // 查找所有匹配的块并应用属性
     const blocks = document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${id}"]`);
     
     // 清除之前的transform数据
     clearTransformData(id, blocks);
     
-    // 设置新属性
+    // 设置新属性并保存到思源
     if (blocks?.length > 0) {
         blocks.forEach(block => block.setAttribute(attrName, attrValue));
+        
+        const attrs = { [attrName]: attrValue };
+        设置思源块属性(id, attrs);
     }
-    
-    // 保存到思源属性
-    const attrs = {};
-    attrs[attrName] = attrValue;
-    设置思源块属性(id, attrs);
 }
 
 /**
@@ -1121,7 +1093,7 @@ function clearTransformData(id, blocks) {
 }
 
 // 初始化视图选择功能
-setTimeout(() => ClickMonitor(), 1000);
+setTimeout(() => initMenuMonitor(), 1000);
 
 /**---------------------------------------------------------导图拖拽功能-------------------------------------------------------------- */
 // 初始化导图拖拽功能
@@ -1261,6 +1233,8 @@ if (typeof window.dragDebounce === 'undefined') {
 
 
 /**---------------------------------------------------------顶栏合并右侧间距-------------------------------------------------------------- **/
+
+// 初始化顶栏合并右侧间距功能
 function initTabBarsMargin() {
     let rafId = null;
     let dockr = null;
@@ -1285,38 +1259,30 @@ function initTabBarsMargin() {
             return;
         }
         // 获取所有只读标签栏
-        const allReadonlyTabBars = document.querySelectorAll('.layout__center .layout-tab-bar--readonly');
-        console.log('找到的只读标签栏数量:', allReadonlyTabBars.length);
-        
-        // 获取工具栏内的 data-location 元素数量并计算总宽度
-        const locationElements = Array.from(document.querySelectorAll('#toolbar [data-location]'))
-        .filter(el => !el.classList.contains('fn__none'));
-        console.log('找到的有效 data-location 元素数量:', locationElements.length);
-        
+        const $ = s => document.querySelectorAll(s);
+        const allReadonlyTabBars = $('.layout__center .layout-tab-bar--readonly');
+              
         // 检查插件状态
         const pluginHidden = document.getElementById('Sv-theme-color-plugin隐藏');
         
         // 如果插件处于关闭状态，使用固定宽度40，否则按元素数量计算后加20
-        const totalLocationWidth = !pluginHidden ? 40 : (locationElements.length * 28) + 20;
-        console.log('根据插件状态计算的总宽度:', totalLocationWidth, 'px');
+        const totalLocationWidth = !pluginHidden ? 40 : 
+        (document.querySelectorAll('#toolbar [data-location]:not(.fn__none)').length * 28) + 20;
         
-          // 获取右侧栏面板宽度（包括浮动状态）
-          const rightPanel = document.querySelector('.layout__dockr');
-          const rightPanelWidth = rightPanel?.classList.contains('layout--float') 
-              ? rightPanel.querySelector('.dock')?.offsetWidth || 0 
-              : rightPanel?.offsetWidth || 0;
-          console.log('右侧栏面板宽度:', rightPanelWidth, 'px');
-           
-           // 获取右侧停靠栏宽度
-           const dockrWidth = document.querySelector('#dockRight')?.offsetWidth || 0;
-           console.log('右停靠栏宽度:', dockrWidth, 'px');
-          
-          // 定义固定偏移量
-          const FIXED_OFFSET = 234;
-          // 计算最终的边距值
-          const calculatedMargin = totalLocationWidth + FIXED_OFFSET - rightPanelWidth - dockrWidth;
-          const marginRightValue = calculatedMargin > 0 ? `${calculatedMargin}px` : '0px';
-        console.log('计算得到的最终边距值:', marginRightValue);
+        // 获取右侧栏面板宽度（包括浮动状态）
+        const rightPanel = document.querySelector('.layout__dockr');
+        const rightPanelWidth = rightPanel?.classList.contains('layout--float') 
+            ? rightPanel.querySelector('.dock')?.offsetWidth || 0 
+            : rightPanel?.offsetWidth || 0;
+         
+        // 获取右侧停靠栏宽度
+        const dockrWidth = document.querySelector('#dockRight')?.offsetWidth || 0;
+        
+        // 定义固定偏移量
+        const FIXED_OFFSET = 234;
+        // 计算最终的边距值
+        const calculatedMargin = totalLocationWidth + FIXED_OFFSET - rightPanelWidth - dockrWidth;
+        const marginRightValue = calculatedMargin > 0 ? `${calculatedMargin}px` : '0px';
 
         // 检查是否存在分栏
         const resizers = document.querySelectorAll('.layout__center .layout__resize:not(.layout__resize--lr)');
@@ -1392,6 +1358,18 @@ function initTabBarsMargin() {
     
     // 延迟执行一次更新
     setTimeout(updateMargins, 1000);
+} // 这里缺少分号，并且函数没有被正确封装
+
+// 添加 findEditableParent 函数的定义
+function findEditableParent(element) {
+    let current = element;
+    while (current && current !== document.body) {
+        if (current.getAttribute && current.getAttribute("contenteditable") !== null) {
+            return current;
+        }
+        current = current.parentElement;
+    }
+    return null;
 }
 
 
@@ -1426,7 +1404,14 @@ function initTabBarsMargin() {
         // 设置样式
         savordragElement.style.cssText = "flex: 1; -webkit-app-region: drag; app-region: drag;";
     }
-    // 辅助函数：安全地创建和添加元素
+    
+    /**
+     * 安全地创建元素并添加到父元素
+     * @param {Element} parentElement 父元素
+     * @param {string} elementType 要创建的元素类型
+     * @param {string} id 可选的元素ID
+     * @returns {Element} 创建的元素
+     */
     function safeCreateElement(parentElement, elementType, id = null) {
         if (!parentElement) {
             console.warn('父元素不存在，无法创建子元素');
@@ -1436,6 +1421,29 @@ function initTabBarsMargin() {
         const element = document.createElement(elementType);
         if (id) element.id = id;
         parentElement.appendChild(element);
+        return element;
+    }
+    
+    /**
+     * 向指定元素前创建插入一个元素，可选添加ID
+     * @param {Element} targetElement 目标元素
+     * @param {string} addElementTxt 要创建添加的元素标签
+     * @param {string} setId 为创建元素设置ID
+     * @returns {Element} 创建的元素
+     */
+    function insertCreateBefore(targetElement, addElementTxt, setId = null) {
+        if (!targetElement) {
+            console.error("指定元素对象不存在！");
+            return null;
+        }
+        if (!addElementTxt) {
+            console.error("未指定字符串！");
+            return null;
+        }
+
+        const element = document.createElement(addElementTxt);
+        if (setId) element.id = setId;
+        targetElement.parentElement.insertBefore(element, targetElement);
         return element;
     }
     
@@ -1460,6 +1468,7 @@ function initTabBarsMargin() {
         });
     }
     
+    
     //+++++++++++++++++++++++++++++++++思源API++++++++++++++++++++++++++++++++++++
     
     async function 向思源请求数据(url, data) {
@@ -1467,20 +1476,24 @@ function initTabBarsMargin() {
             const response = await fetch(url, {
                 body: JSON.stringify(data),
                 method: 'POST',
-                headers: {
-                    Authorization: `Token ''`,
-                }
+                headers: { Authorization: 'Token ' } 
             });
-            return response.status === 200 ? await response.json() : null;
+            return response.ok ? await response.json() : null;
         } catch (error) {
-            console.error('请求思源API出错:', error);
+            console.error('[Savor] API 请求失败:', error); 
             return null;
         }
     }
     
     async function 解析响应体(response) {
-        const r = await response;
-        return r?.code === 0 ? r.data : null;
+        try {
+            const result = await response;
+            if (!result) return null;
+            return result.code === 0 ? result.data : null;
+        } catch (error) {
+            console.error('[Savor] 响应解析失败:', error);
+            return null;
+        }
     }
     
     async function 获取文件(path, then = null, obj = null) {
@@ -1528,61 +1541,56 @@ function initTabBarsMargin() {
      * @param {string} svgPath 可选的SVG路径数据
     */
     function savorThemeToolbarAddButton(ButtonID, ButtonTitle, ButtonLabel, Mode, NoClickRunFun, OffClickRunFun, Memory, svgPath = null) {
-        let savorToolbar = document.getElementById("savorToolbar");
-        if (!savorToolbar) {
-            return;
+        const savorToolbar = document.getElementById("savorToolbar");
+        if (!savorToolbar || document.getElementById(ButtonID)) {
+            return null;
         }
-    
-        const existingButton = document.getElementById(ButtonID);
-        if (existingButton) return;
         
-        const addButton = addinsertCreateElement(savorToolbar, "button");
+        const addButton = document.createElement("button");
         addButton.style.display = "none";
         addButton.id = ButtonID;
         addButton.setAttribute("class", ButtonTitle + " button_off");
         addButton.setAttribute("aria-label", ButtonLabel);
         
-        if (svgPath) {
-            addButton.innerHTML = `
-                    <svg class="b3-menu__icon savor-icon" width="24" height="24" viewBox="9 10 14 14" xmlns="http://www.w3.org/2000/svg">
-                        <path d="${svgPath}"></path>
-                    </svg>
-                    <span class="b3-menu__label">${ButtonLabel}</span>
-            `;
-            addButton.classList.add('savor-button');
-        } else {
-            addButton.innerHTML = `<svg class="b3-menu__icon"><use xlink:href="#iconTheme"></use></svg><span class="b3-menu__label">${ButtonLabel}</span>`;
-        }
+        // 使用模板字符串简化HTML创建
+        addButton.innerHTML = svgPath 
+            ? `<svg class="b3-menu__icon savor-icon" width="24" height="24" viewBox="9 10 14 14" xmlns="http://www.w3.org/2000/svg">
+                  <path d="${svgPath}"></path>
+               </svg>
+               <span class="b3-menu__label">${ButtonLabel}</span>`
+            : `<svg class="b3-menu__icon"><use xlink:href="#iconTheme"></use></svg>
+               <span class="b3-menu__label">${ButtonLabel}</span>`;
         
+        if (svgPath) addButton.classList.add('savor-button');
+        
+        // 简化状态处理逻辑
         let offNo = '0';
-        
         if (window.theme.themeMode == Mode && Memory) {
-            offNo = getItem(ButtonID);
+            offNo = getItem(ButtonID) || '0';
             if (offNo == "1") {
                 addButton.setAttribute("class", ButtonTitle + " button_on");
-            } else if (offNo != "0") {
-                offNo = "0";
-                setItem(ButtonID, "0");
             }
         }
         
-        AddEvent(addButton, "click", () => {
-            if (offNo == "0") {
-                addButton.setAttribute("class", ButtonTitle + " button_on");
-                window.theme.applyThemeTransition();
+        // 使用箭头函数和三元运算符简化点击处理
+        addButton.addEventListener("click", () => {
+            const newState = offNo == "0" ? "1" : "0";
+            const newClass = newState == "1" ? "button_on" : "button_off";
+            
+            addButton.setAttribute("class", ButtonTitle + " " + newClass);
+            window.theme.applyThemeTransition();
+            
+            if (newState == "1") {
                 NoClickRunFun(addButton);
-                if (Memory) setItem(ButtonID, "1");
-                offNo = "1";
             } else {
-                addButton.setAttribute("class", ButtonTitle + " button_off");
-                window.theme.applyThemeTransition();
                 OffClickRunFun(addButton);
-                if (Memory) setItem(ButtonID, "0");
-                offNo = "0";
             }
+            
+            if (Memory) setItem(ButtonID, newState);
+            offNo = newState;
         });
-    
-        // 返回按钮状态，但不立即执行功能
+        
+        savorToolbar.appendChild(addButton);
         return { button: addButton, state: offNo };
     }
 
@@ -1601,64 +1609,30 @@ function initTabBarsMargin() {
     }
 
     /**
-     * 向指定父级创建追加一个子元素，并可选添加ID,
-     * @param {Element} fatherElement 
-     * @param {string} addElementTxt 要创建添加的元素标签
-     * @param {string} setId 
-     * @returns {Element} addElementObject
-     */
-    function addinsertCreateElement(fatherElement, addElementTxt, setId = null) {
-        return safeCreateElement(fatherElement, addElementTxt, setId);
-    }
-
-    /**
-     * 向指定元素前创建插入一个元素，可选添加ID
-     * @param {Element} targetElement 目标元素
-     * @param {string} addElementTxt 要创建添加的元素标签
-     * @param {string} setId 为创建元素设置ID
-     * @returns {Element} 创建的元素
-     */
-    function insertCreateBefore(targetElement, addElementTxt, setId = null) {
-        if (!targetElement) {
-            console.error("指定元素对象不存在！");
-            return null;
-        }
-        if (!addElementTxt) {
-            console.error("未指定字符串！");
-            return null;
-        }
-
-        const element = document.createElement(addElementTxt);
-        if (setId) element.id = setId;
-        targetElement.parentElement.insertBefore(element, targetElement);
-        return element;
-    }
-
-        /**
      * 为元素注册监听事件
      * @param {Element} element 
      * @param {string} strType 
      * @param {Function} fun 
      */
-        function AddEvent(element, strType, fun) {
-            if (!element) return;
-            
-            if (element.addEventListener) {
-                element.addEventListener(strType, fun, false);
-            } else if (element.attachEvent) {
-                element.attachEvent("on" + strType, fun);
-            } else {
-                element["on" + strType] = fun;
-            }
+    function AddEvent(element, strType, fun) {
+        if (!element) return;
+        
+        if (element.addEventListener) {
+            element.addEventListener(strType, fun, false);
+        } else if (element.attachEvent) {
+            element.attachEvent("on" + strType, fun);
+        } else {
+            element["on" + strType] = fun;
         }
-    
-        /**
-         * 简单判断目前思源是否是手机模式
-         * @returns {boolean} 是否为手机模式
-         */
-        function isPhone() {
-            return !!document.getElementById("editor");
-        }
+    }
+
+    /**
+     * 简单判断目前思源是否是手机模式
+     * @returns {boolean} 是否为手机模式
+     */
+    function isPhone() {
+        return !!document.getElementById("editor");
+    }
     
         /**++++++++++++++++++++++++++++++++按需调用++++++++++++++++++++++++++++++ */
         获取文件("/data/snippets/Savor.config.json", (v) => {
@@ -1768,11 +1742,11 @@ function initTabBarsMargin() {
                         // 加载浅色主题配色
                         if (themeMode == 'light') {
                             const lightThemes = [
-                                { id: 'buttonsalt', cssPath: '/appearance/themes/Savor/style/theme/savor-salt.css', styleId: 'Sv-theme-color-salt主题' },
-                                { id: 'buttonsugar', cssPath: '/appearance/themes/Savor/style/theme/savor-sugar.css', styleId: 'Sv-theme-color-sugar主题' },
-                                { id: 'buttonforest', cssPath: '/appearance/themes/Savor/style/theme/savor-forest.css', styleId: 'Sv-theme-color-forest主题' },
-                                { id: 'buttonflower', cssPath: '/appearance/themes/Savor/style/theme/savor-flower.css', styleId: 'Sv-theme-color-flower主题' },
-                                { id: 'buttonwind', cssPath: '/appearance/themes/Savor/style/theme/savor-wind.css', styleId: 'Sv-theme-color-wind主题' }
+                                { id: 'buttonsalt', cssPath: '/appearance/themes/Savor/style/theme/savor-salt.css', styleId: 'Sv-theme-color-salt' },
+                                { id: 'buttonsugar', cssPath: '/appearance/themes/Savor/style/theme/savor-sugar.css', styleId: 'Sv-theme-color-sugar' },
+                                { id: 'buttonforest', cssPath: '/appearance/themes/Savor/style/theme/savor-forest.css', styleId: 'Sv-theme-color-forest' },
+                                { id: 'buttonflower', cssPath: '/appearance/themes/Savor/style/theme/savor-flower.css', styleId: 'Sv-theme-color-flower' },
+                                { id: 'buttonwind', cssPath: '/appearance/themes/Savor/style/theme/savor-wind.css', styleId: 'Sv-theme-color-wind' }
                             ];
                             
                             lightThemes.forEach(theme => {
@@ -1789,9 +1763,9 @@ function initTabBarsMargin() {
                         // 加载深色主题配色
                         if (themeMode == 'dark') {
                             const darkThemes = [
-                                { id: 'buttonvinegar', cssPath: '/appearance/themes/Savor/style/theme/savor-vinegar.css', styleId: 'Sv-theme-color-vinegar主题' },
-                                { id: 'buttonocean', cssPath: '/appearance/themes/Savor/style/theme/savor-ocean.css', styleId: 'Sv-theme-color-ocean主题' },
-                                { id: 'buttonmountain', cssPath: '/appearance/themes/Savor/style/theme/savor-mountain.css', styleId: 'Sv-theme-color-mountain主题' }
+                                { id: 'buttonvinegar', cssPath: '/appearance/themes/Savor/style/theme/savor-vinegar.css', styleId: 'Sv-theme-color-vinegar' },
+                                { id: 'buttonocean', cssPath: '/appearance/themes/Savor/style/theme/savor-ocean.css', styleId: 'Sv-theme-color-ocean' },
+                                { id: 'buttonmountain', cssPath: '/appearance/themes/Savor/style/theme/savor-mountain.css', styleId: 'Sv-theme-color-mountain' }
                             ];
                             
                             darkThemes.forEach(theme => {
@@ -1805,7 +1779,6 @@ function initTabBarsMargin() {
                             });
                         }
                         
-                        // ... existing code ...
 
 // 加载功能按钮状态
 featureButtons.forEach(button => {
@@ -1813,10 +1786,19 @@ featureButtons.forEach(button => {
     if (buttonState == '1') {
         // 检查是否已存在样式
         if (!document.getElementById(button.styleId)) {
-            window.theme.loadStyle(button.cssPath, button.styleId).setAttribute(
-                button.id === "bulletThreading" ? "bulletThreading" : "topBarcss", 
-                button.attrName
-            );
+            const styleElement = window.theme.loadStyle(button.cssPath, button.styleId);
+            if (styleElement) {
+                // 修复这里：确保为子弹线设置正确的属性
+                if (button.id === "bulletThreading") {
+                    styleElement.setAttribute("bulletThreading", button.attrName);
+                    // 确保子弹线功能初始化
+                    if (button.onEnable) button.onEnable();
+                } else {
+                    styleElement.setAttribute("topBarcss", button.attrName);
+                    // 执行其他功能的启用逻辑
+                    if (button.onEnable) button.onEnable();
+                }
+            }
         }
         
         // 如果是顶栏合并功能且已启用，立即添加拖拽区域并更新间距
@@ -1843,8 +1825,6 @@ featureButtons.forEach(button => {
         }
     }
 });
-
-// ... existing code ...
                         
                         // 加载插件按钮状态
                         pluginButtons.forEach(button => {
@@ -1925,16 +1905,6 @@ featureButtons.forEach(button => {
             }, 100);
         });
         
-        // 简化获取文件函数
-        async function 获取文件(path, then = null, errorCallback = null, obj = null) {
-            const url = '/api/file/getFile';
-            try {
-                const response = await 向思源请求数据(url, { path });
-                if (then) then(response, obj);
-            } catch (error) {
-                if (errorCallback) errorCallback(error);
-            }
-        }
         
          /** 清除样式 **/
          window.destroyTheme = () => { 
@@ -1947,8 +1917,8 @@ featureButtons.forEach(button => {
             document.querySelector("#savordrag")?.remove();
             // 删除插件展开按钮
             document.querySelector("#savorPlugins")?.remove();
-            // 删除列表转导图功能
-            window.removeEventListener('mouseup', MenuShow);
+            // 删除列表转功能
+            window.removeEventListener('mouseup', initMenuMonitor);
     
             // 重置顶栏边距
             document.querySelectorAll('.layout__center .layout-tab-bar--readonly').forEach(tabBar => {

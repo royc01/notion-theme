@@ -13,7 +13,9 @@
         color: var(--Sv-dock-item--activefocus-background);
     }
 }
-
+#commonMenu:not([data-name="barmode"])>#savorToolbar{
+    display: none;
+}
 
 [data-name="barmode"]{
     display: grid;

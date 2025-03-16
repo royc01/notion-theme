@@ -1,17 +1,18 @@
-/* ————————————————————底栏———————————————————— */
 #savorToolbar button{
     display: block!important;
 }
 #status {
+	transition: transform .2s cubic-bezier(0, 0, .2, 1) 0ms;
+	position: fixed;
     height: 24px;
     line-height: 24px;
-    position: fixed;
     right: 28px;
     bottom: 9px; 
+	border-radius: 6px;
     padding-right: 0px;
     border: none;
     background-color: var(--Sv-status-msg-background);
-    border-radius: 6px;
+	transform: translate(0px, 0px);
     .toolbar__item:not(.toolbar__item--close) {
         padding:2px;
         height: 24px;
@@ -60,3 +61,5 @@
         display: none;
     }
 }
+
+

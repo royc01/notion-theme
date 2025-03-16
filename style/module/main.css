@@ -120,20 +120,17 @@ body:not(.body--mobile,.body--window) #layouts{
 
 /* 全局过渡动画 */
 :root {
-    --transition-time: 0.5s;
+    --transition-time: 0.3s;
     --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-time-fast: 0.2s;
-    --transition-timing-fast: cubic-bezier(0, 0, .2, 1);
     
     /* 默认情况下不应用过渡效果 */
     --theme-transition: none;
-    --theme-transition-fast: none;
 }
+
 
 /* 当添加theme-transitioning类时才应用过渡效果 */
 :root.theme-transitioning {
-    --theme-transition: background-color var(--transition-time) var(--transition-timing);
-    --theme-transition-fast: background-color var(--transition-time-fast) var(--transition-timing-fast);
+    --theme-transition: all var(--transition-time) var(--transition-timing);
 }
 
 /* 界面框架元素过渡效果 */
@@ -174,11 +171,8 @@ body.body--window,
 body:not(.body--window) #layouts,
 [data-type="outline"] .b3-list-item,
 [data-type="graph"] .b3-list-item,
-[data-type="backlink"] .b3-list-item {
-    transition: var(--theme-transition);
-}
-
-/* 编辑器相关元素只应用必要的过渡效果 */
+[data-type="backlink"] .b3-list-item,
+/* 编辑器相关元素 */
 .protyle-background,
 .protyle-title,
 .protyle-toolbar,
@@ -190,11 +184,8 @@ body:not(.body--window) #layouts,
 .protyle-breadcrumb,
 .protyle-breadcrumb__bar,
 .protyle-wysiwyg__embed,
-.protyle-wysiwyg__preview {
-    transition: var(--theme-transition);
-}
-
-/* 编辑器和内容元素过渡效果（较快） */
+.protyle-wysiwyg__preview,
+/* 编辑器和内容元素 */
 .layout__center .fn__flex-1,
 .layout__center .protyle-content,
 .layout__center .protyle-background,
@@ -204,15 +195,6 @@ body:not(.body--window) #layouts,
 .layout__center .b3-typography,
 .layout__center .protyle-breadcrumb,
 .layout__center .protyle-breadcrumb__bar,
-.layout__center .layout-tab-bar,
-.layout__center .layout-tab-bar__item,
-.layout__center .layout-tab-bar--readonly,
-.layout__center .layout-tab-bar .item,
-.layout__center .layout-tab-bar .item--readonly,
-.layout__center .layout-tab-bar .item--focus,
-.layout__center .layout-tab-container,
-.layout__center .layout-tab-container .item,
-.layout__center .layout-tab-container .item--focus,
 .layout__center .protyle-wysiwyg [data-node-id],
 .layout__center .protyle-wysiwyg [data-type="NodeParagraph"],
 .layout__center .protyle-wysiwyg [data-type="NodeHeading"],
@@ -234,6 +216,5 @@ body:not(.body--window) #layouts,
 .layout__center .layout-tab-bar--readonly::after,
 .layout__center .layout-tab-container::before,
 .layout__center .layout-tab-container::after {
-    transition: var(--theme-transition-fast);
+    transition: var(--theme-transition);
 }
-
