@@ -1,24 +1,24 @@
 /* 主体结构*/
 
-@import url(/appearance/themes/Savor/style/module/toolbar.css);/* 顶栏 ✔*/
-@import url(/appearance/themes/Savor/style/module/dock.css);/* 边栏 ✔*/
-@import url(/appearance/themes/Savor/style/module/shrink.css);/* 侧栏 ✔*/
-@import url(/appearance/themes/Savor/style/module/status.css);/* 底栏 ✔*/
-@import url(/appearance/themes/Savor/style/module/tab-bar.css);/* 页签 ✔*/
-@import url(/appearance/themes/Savor/style/module/breadcrumb.css);/* 面包屑 ✔*/
-@import url(/appearance/themes/Savor/style/module/editor.css);/* 编辑器 ✔*/
-@import url(/appearance/themes/Savor/style/module/menu.css);/* 菜单 ✔*/
-@import url(/appearance/themes/Savor/style/module/ordered-list.css);/* 有序列表 ✔*/
-@import url(/appearance/themes/Savor/style/module/unordered-list.css);/* 无序列表 ✔*/
-@import url(/appearance/themes/Savor/style/module/av.css);/* 数据库 ✔*/
-@import url(/appearance/themes/Savor/style/module/h-reminder.css);/* 标题符号 ✔*/
-@import url(/appearance/themes/Savor/style/module/blockquote.css);/* 引述 ✔*/
-@import url(/appearance/themes/Savor/style/module/search.css);/* 搜索 ✔**/
-@import url(/appearance/themes/Savor/style/module/main.css);/* 主要结构 ✔*/
-@import url(/appearance/themes/Savor/style/custom/function.css);/* 自定义功能按钮 ✔*/
-@import url(/appearance/themes/Savor/style/custom/list2map.css);/* 列表转导图 ✔*/
-@import url(/appearance/themes/Savor/style/custom/list2table.css);/* 列表转表格 ✔*/
-@import url(/appearance/themes/Savor/style/custom/list2board.css);/* 列表转看板 ✔*/
+@import url(style/module/toolbar.css);/* 顶栏 ✔*/
+@import url(style/module/dock.css);/* 边栏 ✔*/
+@import url(style/module/shrink.css);/* 侧栏 ✔*/
+@import url(style/module/status.css);/* 底栏 ✔*/
+@import url(style/module/tab-bar.css);/* 页签 ✔*/
+@import url( style/module/breadcrumb.css);/* 面包屑 ✔*/
+@import url( style/module/editor.css);/* 编辑器 ✔*/
+@import url( style/module/menu.css);/* 菜单 ✔*/
+@import url( style/module/ordered-list.css);/* 有序列表 ✔*/
+@import url( style/module/unordered-list.css);/* 无序列表 ✔*/
+@import url( style/module/av.css);/* 数据库 ✔*/
+@import url( style/module/h-reminder.css);/* 标题符号 ✔*/
+@import url( style/module/blockquote.css);/* 引述 ✔*/
+@import url( style/module/search.css);/* 搜索 ✔**/
+@import url( style/module/main.css);/* 主要结构 ✔*/
+@import url( style/custom/function.css);/* 自定义功能按钮 ✔*/
+@import url( style/custom/list2map.css);/* 列表转导图 ✔*/
+@import url( style/custom/list2table.css);/* 列表转表格 ✔*/
+@import url( style/custom/list2board.css);/* 列表转看板 ✔*/
 
 @font-face {
     font-family: 'Twitter Emoji';
