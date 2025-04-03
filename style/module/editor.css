@@ -460,14 +460,14 @@
     background-color: var(--Sv-table-thead) !important;
 }
 /* 标签 */
-.protyle-wysiwyg span[data-type="tag"] {
+.protyle-wysiwyg span[data-type="tag"], .sy__outline span[data-type="tag"]{
 	border-radius: 6px;
 	padding:0px 4px 2px 4px!important;
 	color: var(--Sv-protyle-tag-color)!important;
 	border-bottom:none !important; 
 	background-color: var(--Sv-protyle-tag-bg);
 }
-.protyle-wysiwyg span[data-type="tag"]::before{
+.protyle-wysiwyg span[data-type="tag"]::before, .sy__outline span[data-type="tag"]::before{
 	content: "#";
 }
 .export-img span[data-type="tag"]::before{

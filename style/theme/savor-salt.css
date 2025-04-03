@@ -2,10 +2,10 @@
     /* 主色 */
     --b3-theme-primary-base-l:53.63%;
     --b3-theme-primary-base-ch:0.0979 220.45;
-    --b3-theme-surface-base-l:90.94%;
-    --b3-theme-surface-base-ch:0.0087 197;
+    --b3-theme-surface-base-l:0.9;
+    --b3-theme-surface-base-ch:0.0098 189.04;
 
-    --b3-theme-on-background-base:32.89% 0.0107 91.66;
+    --b3-theme-on-background-base:0.28 0.0159 264.27;
     --Sv-dock-item--activefocus-background--base:68.98% 0.161 30.76;
 
     --b3-theme-background: #eaf2f2;/* 编辑区背景 必须用HEX颜色*/
@@ -26,8 +26,8 @@
     --Sv-layout-margin: 5px;
 	
 	/* 侧栏面板 */
+    --Sv-dock-background: #ccd5d4;
     --Sv-block-icon-svg-color: rgba(55, 53, 47, .5);
-
 
     /* 合并顶栏插件收缩颜色 */
     --Sv-plugin-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.2) var(--b3-theme-surface-base-ch));

@@ -2,16 +2,16 @@
 .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
     background-color: transparent;
     border: none;
-    height: 40px;
+    height: 38px;
     padding-right: 5px;
-    margin-bottom: -7px;
+    margin-bottom: -6px;
     /*overflow: visible;这个不能加*/
     .item:not(.item--readonly){
         min-height: 28px;
         border-radius: var(--Sv-tab-bar-item-radius);
         background-color: var(--Sv-tab-bar-item-background);
-        margin-bottom: 12px;
-        margin-right: 6px;
+        margin-bottom: 10px;
+        margin-right: 5px;
         overflow: unset !important;
         &:not(.item--focus) .item__text {
             letter-spacing: 0.1px; 
@@ -32,7 +32,7 @@
                 &::after{
                     background-color:transparent;
                     top: 22px;
-                    height: 12px;    
+                    height: 10px;  
                     left: calc(-1 * var(--Sv-dock-item-radius) - 2px) ;
                     border-radius: 0;
                     width: calc(100% + var(--Sv-dock-item-radius)*2 + 4px);

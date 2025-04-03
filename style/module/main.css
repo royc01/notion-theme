@@ -51,10 +51,11 @@ body:not(.body--mobile,.body--window) #layouts{
         background-color: var(--Sv-toolbar-background)!important;
     & > .fn__flex > .layout-tab-bar {
         border-radius: 6px 0 0 6px;
-        margin-top:5px;
+        margin-top:4px;
         background-color: transparent;
         .item:not(.item--readonly) {
-            margin-bottom:7px!important;
+            margin-bottom:8px!important;
+            margin-left: 5px;
             pointer-events: visibleFill;
         }
         & .item--readonly{
@@ -70,7 +71,9 @@ body:not(.body--mobile,.body--window) #layouts{
             }
         }
         &.layout-tab-bar--readonly{
-            background-color: var(--Sv-toolbar-background);
+            margin-right: 0px!important;
+            margin-top:5px;
+            height: 33px;
     }
     }
 }

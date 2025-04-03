@@ -71,6 +71,10 @@ body:not(.body--mobile,.body--window)>#toolbar{
 body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
 	padding-left: 0px;
     min-width: 60px;
+    z-index: 2;
+	pointer-events: none;
+	border: none;
+	height: 44px;
     & .item:not(.item--readonly):not(.item--pin){
         background-color: transparent;
         }
@@ -85,10 +89,12 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 			app-region: no-drag;
 			&.item--focus{
 				background-color: var(--b3-theme-background);
-				margin-bottom:7px!important;
 				& .item__text{
 					color: var(--b3-theme-on-background);
 				}
+                &::after {
+                    top: 23.5px;
+                }
 			}
 		}
         &:hover{
@@ -99,9 +105,6 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 		padding: 0px;
 		pointer-events: none;
 		height: 36px;
-		&>.fn__flex-1{
-			display: none;
-		}
 		& .block__icon--show{
 			pointer-events: visibleFill;
 			app-region: no-drag;
@@ -115,24 +118,16 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 		}
 	}
 	&.layout-tab-bar--readonly{
+        padding-top: 1px;
         padding-left: 6px;
-        background-color: var(--Sv-toolbar-background);
-        height: 38px;
+        height: 37px;
 	&::before {
 		top: 4px;
 		box-shadow: 6px -6px 0 var(--Sv-toolbar-background);
 	}
 }
 }
-body:not(.body--window) .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
-	z-index: 2;
-	pointer-events: none;
-	border: none;
-	height: 45px;
-	&.layout-tab-bar--readonly{
-		flex:none;
-	}
-}
+
 
 #savordrag.fn__none{
 	display:flex!important;

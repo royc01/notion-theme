@@ -211,7 +211,7 @@
     --Sv-center-radius: var(--Sv-dock-item-radius);
     /* 列表 */
     --Sv-protyle-action-color: var(--b3-theme-on-background);
-    --Sv-protyle-action-hover: var(--Sv-list-background);
+    --Sv-protyle-action-hover: var(--Sv-list-focus-hover);
     /* 块标 */ 
     --Sv-gutters-color: rgb(211, 209, 203);
     --Sv-gutters-background: var(--Sv-list-background);
@@ -484,8 +484,8 @@
     --Sv-status-msg-background: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
 
     /* 滚动条 */
-	--Sv-scroll-color: oklch(calc(var(--b3-theme-surface-base-l)*0.92) var(--b3-theme-surface-base-ch));
-	--Sv-scroll-color-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.7) var(--b3-theme-surface-base-ch));
+	--Sv-scroll-color: oklch(calc(var(--b3-theme-surface-base-l)*0.94) var(--b3-theme-surface-base-ch));
+	--Sv-scroll-color-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.8) var(--b3-theme-surface-base-ch));
     
     /* 表格 */
     --Sv-table-thead: var(--b3-theme-surface);
@@ -633,7 +633,7 @@
 	/* 侧栏 */
     --Sv-list-item-arrow: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.8);
     --Sv-list-background: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.1);
-    --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.15);
+    --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.3);
     
     /* 反链面板 */
     --Sv-block-logo-color: var(--b3-theme-on-background);
@@ -704,5 +704,7 @@
 }
 
 
-
+.protyle-toolbar,.tooltip--memo{
+    background-color: var(--Sv-menu-background);
+}
 
