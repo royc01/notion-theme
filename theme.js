@@ -1503,29 +1503,29 @@ function findEditableParent(element) {
         });
     }
     
-    async function 写入文件(path, filedata, then = null, obj = null, isDir = false, modTime = Date.now()) {
-        const blob = new Blob([filedata]);
-        const file = new File([blob], path.split('/').pop());
-        const formdata = new FormData();
-        formdata.append("path", path);
-        formdata.append("file", file);
-        formdata.append("isDir", isDir);
-        formdata.append("modTime", modTime);
-        
-        try {
-            await fetch("/api/file/putFile", {
-                body: formdata,
-                method: "POST",
-                headers: {
-                    Authorization: `Token ""`,
-                },
-            }).then(() => {
-                if (then) setTimeout(() => then(obj), 200);
-            });
-        } catch (error) {
-            console.error('写入文件出错:', error);
-        }
+async function 写入文件(path, filedata, then = null, obj = null, isDir = false, modTime = Date.now()) {
+    const blob = new Blob([filedata]);
+    const file = new File([blob], path.split('/').pop());
+    const formdata = new FormData();
+    formdata.append("path", path);
+    formdata.append("file", file);
+    formdata.append("isDir", isDir);
+    formdata.append("modTime", modTime);
+    
+    try {
+        await fetch("/api/file/putFile", {
+            body: formdata,
+            method: "POST",
+            headers: {
+                Authorization: `Token ${window.siyuan.config.api.token || ""}`,
+            },
+        }).then(() => {
+            if (then) setTimeout(() => then(obj), 200);
+        });
+    } catch (error) {
+        console.error('写入文件出错:', error);
     }
+}
     
     //+++++++++++++++++++++++++++++++++辅助API++++++++++++++++++++++++++++++++++++
     

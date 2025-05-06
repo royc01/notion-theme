@@ -180,7 +180,6 @@
 		&>.b3-list-item__text{
 			margin-left: 20px;
 			padding:6px 6px 2px 5px;
-			overflow-y: auto !important;
 			text-overflow: ellipsis !important;
 			line-height: 1.3;
 			-webkit-line-clamp:10;

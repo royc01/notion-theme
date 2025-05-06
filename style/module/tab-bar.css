@@ -3,18 +3,23 @@
     background-color: transparent;
     border: none;
     height: 38px;
-    padding-right: 5px;
     margin-bottom: -6px;
+    padding-right: 10px;
     /*overflow: visible;这个不能加*/
     .item:not(.item--readonly){
         min-height: 28px;
         border-radius: var(--Sv-tab-bar-item-radius);
-        background-color: var(--Sv-tab-bar-item-background);
         margin-bottom: 10px;
-        margin-right: 5px;
         overflow: unset !important;
         &:not(.item--focus) .item__text {
             letter-spacing: 0.1px; 
+        }
+        & .item__text{
+            &::before {
+                content: "📄";
+                margin-right: 8px;
+                font-size: 14px;
+            }
         }
         & .item__icon{
             padding: 3px 0 3px 7px;
@@ -22,9 +27,12 @@
                 height: 15px;
                 width: 15px;
             }
+            &+.item__text::before{
+                display: none;
+            }
         }
         &:hover{
-            background-color: var(--Sv-tab-bar-item-background-hover); 
+            background-color: var(--Sv-tab-bar-item-background);
         }
         &.item--focus{
             background-color: var(--Sv-tab-bar-item-background-focus);
@@ -53,8 +61,7 @@
     &.layout-tab-bar--readonly{
         height: 33px;
         padding-left: 5px;
-        padding-right: 0px;
-        margin-left: -10px;
+        padding-right: 4px;
         overflow: visible;
         z-index: 2;
         /*background-color: var(--Sv-dock-background);*/
@@ -78,7 +85,6 @@
         min-height: 28px;
         padding: 0;
         .block__icon{
-        background-color: var(--Sv-tab-bar-item-background);
         padding: 7.5px;
         border-radius: var(--Sv-tab-bar-item-radius);
         & svg{
@@ -93,6 +99,10 @@
     .item--pin{
         min-width: 28px;
         background-color: var(--b3-theme-background)!important;
+        margin-right: 5px;
+        & .item__text::before{
+            display: none;
+        }
         & .item__icon{
             padding:0px 7px;
         }

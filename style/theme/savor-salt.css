@@ -24,6 +24,8 @@
 	/* 顶栏 */
     --Sv-toolbar-background:/*#9ca8a8;*/rgb(37, 40, 48);
     --Sv-layout-margin: 5px;
+
+    --Sv-menu-background:#dfe7e6;
 	
 	/* 侧栏面板 */
     --Sv-dock-background: #ccd5d4;
