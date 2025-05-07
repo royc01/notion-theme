@@ -708,9 +708,3 @@
     background-color: var(--Sv-menu-background);
 }
 
-.b3-typography .code-block:not(pre) .protyle-action .protyle-action__language, .protyle-wysiwyg .code-block:not(pre) .protyle-action .protyle-action__language{
-    opacity: 1;
-}
-.protyle-wysiwyg div.hljs{
-    max-height: 100px;
-}
