@@ -1,15 +1,8 @@
 .protyle-wysiwyg {
-    .h1, .h2, .h3, .h4, .h5, .h6 {
-        & > [spellcheck]:not(:empty) {
-            display: inline-block;
-            position: relative;
-        }
-    }
-    
-    .h1 > [spellcheck]:not(:empty){ padding-right: 1em;background: var(--h1-r-graphic);background-position: right center;background-repeat: no-repeat;}
-    .h2 > [spellcheck]:not(:empty){ padding-right: 1.2em;background: var(--h2-r-graphic);background-position: right center;background-repeat: no-repeat;}
-    .h3 > [spellcheck]:not(:empty){ padding-right: 1.2em;background: var(--h3-r-graphic);background-position: right center;background-repeat: no-repeat;}
-    .h4 > [spellcheck]:not(:empty){ padding-right: 1.3em;background: var(--h4-r-graphic);background-position: right center;background-repeat: no-repeat;}
-    .h5 > [spellcheck]:not(:empty){ padding-right: 1.4em;background: var(--h5-r-graphic);background-position: right center;background-repeat: no-repeat;}
-    .h6 > [spellcheck]:not(:empty){ padding-right: 1.6em;background: var(--h6-r-graphic);background-position: right center;background-repeat: no-repeat;}
+    .h1 > [spellcheck]:not(:empty){ padding-left: 1em;margin-left: -1em;background: var(--h1-r-graphic);background-position: left center;background-repeat: no-repeat;}
+    .h2 > [spellcheck]:not(:empty){ padding-left: 1em;margin-left: -1em;background: var(--h2-r-graphic);background-position: left center;background-repeat: no-repeat;}
+    .h3 > [spellcheck]:not(:empty){ padding-left: 1.2em;margin-left: -1.2em;background: var(--h3-r-graphic);background-position: left center;background-repeat: no-repeat;}
+    .h4 > [spellcheck]:not(:empty){ padding-left: 1.3em;margin-left: -1.3em;background: var(--h4-r-graphic);background-position: left center;background-repeat: no-repeat;}
+    .h5 > [spellcheck]:not(:empty){ padding-left: 1.4em;margin-left: -1.4em;background: var(--h5-r-graphic);background-position: left center;background-repeat: no-repeat;}
+    .h6 > [spellcheck]:not(:empty){ padding-left: 1.6em;margin-left: -1.6em;background: var(--h6-r-graphic);background-position: left center;background-repeat: no-repeat;}
 }

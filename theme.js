@@ -1861,7 +1861,7 @@ featureButtons.forEach(button => {
 
                             const totalOffset = (isFloatingR || !dockrWidth) 
                                 ? (isDockVerticalHidden ? 8 : dockVerticalWidth + 12)
-                                : dockrWidth + (isDockVerticalHidden ? 13 : dockVerticalWidth + 17);
+                                : dockrWidth + (isDockVerticalHidden ? 15 : dockVerticalWidth + 19);
 
                             statusElement.style.transform = `translateX(-${totalOffset}px)`;
                         };
