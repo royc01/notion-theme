@@ -1554,7 +1554,7 @@ async function 写入文件(path, filedata, then = null, obj = null, isDir = fal
         
         // 使用模板字符串简化HTML创建
         addButton.innerHTML = svgPath 
-            ? `<svg class="b3-menu__icon savor-icon" width="24" height="24" viewBox="9 10 14 14" xmlns="http://www.w3.org/2000/svg">
+            ? `<svg class="b3-menu__icon savor-icon" viewBox="9 10 14 14" xmlns="http://www.w3.org/2000/svg">
                   <path d="${svgPath}"></path>
                </svg>
                <span class="b3-menu__label">${ButtonLabel}</span>`

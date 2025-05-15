@@ -25,6 +25,7 @@
 }
 .av__views .layout-tab-bar .item--focus::after {
     background-color: var(--b3-theme-on-background);
+	height: 0.25em;
 }
 .av__panel .b3-chip {
 	margin:0px 6px 6px 0px;

@@ -13,7 +13,7 @@
 @import url( style/module/av.css);/* 数据库 ✔*/
 @import url( style/module/h-reminder.css);/* 标题符号 ✔*/
 @import url( style/module/blockquote.css);/* 引述 ✔*/
-@import url( style/module/search.css);/* 搜索 ✔**/
+@import url( style/module/search.css);/* 搜索 ✔*/
 @import url( style/module/main.css);/* 主要结构 ✔*/
 @import url( style/custom/function.css);/* 自定义功能按钮 ✔*/
 @import url( style/custom/list2map.css);/* 列表转导图 ✔*/
@@ -340,13 +340,12 @@
 
 
     /* —————— 设置、搜索界面 —————— */
-    --Sv--dialog-scrim: rgba(0, 0, 0, 0.2);
-    --Sv--dialog-container: var(--b3-theme-surface);
     --Sv--dialog-tab-bar: rgb(247, 247, 247);
 
     /* 搜索界面 */
-    --Sv-search-result-tip: var(--b3-theme-surface);
+    --Sv-search-result-tip: var(--Sv--dialog-container);
     --Sv-list-meta-ellipsis: #9b9a97;
+
 
     /* 集市界面 */
     --Sv-bazaar-focus: var(--b3-theme-background);
@@ -426,7 +425,7 @@
     
     /* 主色 */
     --b3-theme-background: #fff;/* 编辑区背景 必须用HEX颜色*/
-    --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*0.95) var(--b3-theme-surface-base-ch));
+    --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*0.93) var(--b3-theme-surface-base-ch));
     --b3-theme-on-surface: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch));
     --b3-theme-on-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch) / 0.68);
 
@@ -466,6 +465,7 @@
 	
 	/* 顶栏 */
     --Sv-toolbar-background:  oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
+    --Sv-menu-selected: var(--Sv-menu-background);
 
 	/* 边栏 */
     --Sv-dock-background: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
@@ -504,6 +504,10 @@
     --Sv-warning-shadow: #ffc07b;
     --Sv-info-shadow: #97c5ed;
     --Sv-success-shadow: #99cf9b;
+
+    /* 搜索面板 */
+    --Sv--dialog-container: #eeeeed;
+    --Sv--dialog-scrim: rgba(0, 0, 0, 0.2);
 
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/
     --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(132, 130, 125)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
@@ -625,6 +629,7 @@
 
     /* 顶栏 */
     --Sv-toolbar-background: oklch(calc(var(--b3-theme-surface-base-l)*0.85) var(--b3-theme-surface-base-ch));
+    --Sv-menu-selected: var(--b3-theme-surface);
 
 	/* 边栏 */
     --Sv-dock-background: oklch(calc(var(--b3-theme-surface-base-l)*0.85) var(--b3-theme-surface-base-ch));
@@ -632,8 +637,8 @@
 	
 	/* 侧栏 */
     --Sv-list-item-arrow: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.8);
-    --Sv-list-background: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.1);
-    --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.3);
+    --Sv-list-background: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.2);
+    --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.4);
     
     /* 反链面板 */
     --Sv-block-logo-color: var(--b3-theme-on-background);
@@ -664,7 +669,9 @@
 	--Sv-info-shadow: #536b7d;
 	--Sv-success-shadow: #5c705d;
 
-
+    /* 搜索面板 */
+    --Sv--dialog-container: var(--Sv-dock-background);
+    --Sv--dialog-scrim: rgba(0, 0, 0, 0.7);
 
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/
     --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;

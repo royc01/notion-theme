@@ -4,7 +4,6 @@
     background-color: transparent;
 }
 .protyle-wysiwyg .bq:before{
-    width: .2em;
     background-color: var(--Sv-bq-color);
 }
 .list .bq {

@@ -34,6 +34,7 @@
 	
 	/* 侧栏面板 */
     --Sv-block-icon-active: #ff5f40;
+    --Sv--dialog-container: #e2e1e1;
 
     /* 底栏 */
     --Sv-status-barDock-color: #ff5f40;

@@ -37,7 +37,7 @@
             line-height: 5px;
             background-color: transparent;
             &.b3-menu__item--selected,&:hover{
-                background-color: var(--Sv-menu-background);
+                background-color: var(--Sv-menu-selected);
                 box-shadow: 0 4px 9px rgba(0, 0, 0, .05), 0 1.5px 2.8px rgba(0, 0, 0, .07), 0 0.3px 0.7px rgba(0, 0, 0, .12);
             }
             .b3-menu__icon{
@@ -65,6 +65,7 @@
                 transition: var(--b3-transition);
             }
         }
+        
     }
     & #savorToolbar{
         order: 2;
@@ -81,4 +82,8 @@
         top:-5px;
         left: 5px;
     }
+}
+
+.savor-icon{
+    margin-bottom: -2px;
 }
