@@ -110,16 +110,16 @@
             padding:4px;
         }
         &:nth-child(4n-3){
-            box-shadow:0 0 0 2px var(--b3-font-background13) inset;
+            box-shadow:0 0 0 2px var(--b3-font-background13) inset, 0 0 0 2px var(--b3-font-background13) inset;
         }
         &:nth-child(4n-2){
-            box-shadow:0 0 0 2px var(--b3-font-background5) inset;
+            box-shadow:0 0 0 2px var(--b3-font-background5) inset, 0 0 0 2px var(--b3-font-background5) inset;
         }
         &:nth-child(4n-1){
-            box-shadow:0 0 0 2px var(--b3-font-background10) inset;
+            box-shadow:0 0 0 2px var(--b3-font-background10) inset, 0 0 0 2px var(--b3-font-background10) inset;
         }
         &:nth-child(4n){
-            box-shadow:0 0 0 2px var(--b3-font-background9) inset;
+            box-shadow:0 0 0 2px var(--b3-font-background9) inset, 0 0 0 2px var(--b3-font-background9) inset;
         }
         &.item--focus{
             box-shadow: none;

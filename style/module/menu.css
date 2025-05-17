@@ -42,10 +42,10 @@
     font-weight:700;
 	background-color:var( --Sv-button-background);
 	color: var(--Sv-button-color);
-	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
+	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, .2);
     &:hover,&:focus{
         background-color: var(--Sv-button-background-hover);
-        box-shadow: none;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, .2);
     }
     svg{
         height: 14px;
@@ -56,9 +56,10 @@
     font-weight:700;
 	background-color: var(--Sv-button-cancel);
 	color: var(--b3-theme-on-background);
-	box-shadow: 0 4px 9px rgba(0,0,0,.05), 0 1.5px 2.8px rgba(0,0,0,.07), 0 0.3px 0.7px rgba(0,0,0,.12);
+	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, .2);
     &:hover,&:focus{
         background-color: var(--b3-theme-surface-lighter);
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, .2);
     }
     svg{
         height: 14px;
@@ -174,8 +175,8 @@
             border-radius: 6px;
             height: unset;
             .config__tab-container {
-            &[data-name="bazaar"]{
-                background-color: var(--b3-theme-surface);
+            &[data-name="bazaar"],&[data-name="image"]{
+                background-color: var(--Sv--dialog-container);
             }
             & .b3-label :where(.fn__flex-1,.fn__block,.fn__flex-center):not(.ft__on-surface,.b3-button,.b3-form__icon,.fn__size200,ul,input):first-child,& :where(.b3-label,.config__ite)::first-line{
                 font-weight: 600;
@@ -184,17 +185,21 @@
                 font-weight: 400 !important;
             }
             .layout-tab-bar{
-                background-color: var(--b3-theme-surface);
+                background-color: transparent;
                 border: none;
-                height: 37px;
+                height: 43px;
+                margin-bottom: -6px;
+                &+.fn__flex-1{
+                    background-color:  var(--Sv--dialog-container);
+                }
                 .item:not(.item--readonly){
                     min-height: 33px;
                     border-radius: 6px;
                     overflow: unset !important;
-                    background-color: var(--Sv-bazaar-item);
-                    margin: 0 10px 5px -5px;/*消除鼠标滚轮左右浮动*/
+                    /*background-color: var(--Sv-bazaar-item);*/
+                    margin: 0 10px 10px -5px;/*消除鼠标滚轮左右浮动*/
                     transition:none;
-                    &[data-type="widget"]{
+                    &:last-child{
                         margin-right: 0px;
                     }
                     &:first-child{
@@ -208,13 +213,15 @@
                         border-radius: var(--Sv-tab-bar-item--focus-radius);
                             &::after{
                                 background-color:transparent;
-                                top: 30px;
-                                height: 8px;
-                                left: -8px;
+                                top: 27px;
+                                height: 10px;  
+                                left: calc(-1 * var(--Sv-dock-item-radius) - 2px) ;
                                 border-radius: 0;
-                                width: calc(100% + 16px);
-                                background-image:  var(--Sv-tab-bar-item-after);
-                                background-size: 8px 8px, 8px 8px, calc(100% - 16px) calc(100% + 20px);
+                                width: calc(100% + var(--Sv-dock-item-radius)*2 + 4px);
+                                transition: var(--b3-transition);
+                                background-image: var(--Sv-tab-bar-item-after);
+                                background-size: 12px 12px,12px 12px,
+                                calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
                                 background-position: right bottom, left bottom, center top;
                                 background-repeat: no-repeat;
                                 box-shadow: var(--Sv-tab-bar-item-background-focus) 0 8px 0 0;
@@ -237,9 +244,13 @@
 
             .config-bazaar__panel{
                 background-color: var(--Sv-bazaar-focus); 
-                border-radius: 6px 6px 0 0;
+                border-radius: 8px 8px 0 0;
             }
             }
+        }
+        .config-assets{
+            background-color: var(--Sv-bazaar-focus); 
+            border-radius: 8px;
         }
         .config-bazaar__title{
             padding: 12px 16px 8px 16px;;
@@ -248,7 +259,6 @@
         }
     
         .config-bazaar__panel[data-type=downloaded]{
-            border-radius: 0 6px 6px 6px!important;
             .b3-button{
                 background-color: var(--Sv-bazaar-item);
                 height:24px;
@@ -347,7 +357,69 @@
     }
 }
 
-
+[data-key="dialog-history"]{
+    .b3-dialog__scrim{
+        backdrop-filter: blur(2px);
+        }
+    .b3-dialog__container{
+        background-color: var(--Sv--dialog-container);
+        padding: 6px;
+        border-radius: 12px;
+    }
+    #historyContainer{
+        background-color: var(--b3-theme-background);
+        border-radius: 6px;
+    }
+    .layout-tab-bar{
+        background-color: transparent;
+        border: none;
+        height: 43px;
+        margin-bottom: -6px;
+        &+.fn__flex-1{
+            background-color:  var(--Sv--dialog-container);
+        }
+        .item:not(.item--readonly){
+            min-height: 33px;
+            border-radius: 6px;
+            overflow: unset !important;
+            /*background-color: var(--Sv-bazaar-item);*/
+            margin: 0 10px 10px -5px;/*消除鼠标滚轮左右浮动*/
+            transition:none;
+            &:last-child{
+                margin-right: 0px;
+            }
+            &:first-child{
+                margin-left: 0px;/*消除鼠标滚轮左右浮动*/
+            }
+            &:hover{
+                background-color: var(--Sv-bazaar-focus); 
+            }
+            &.item--focus{
+                background-color: var(--Sv-tab-bar-item-background-focus);
+                border-radius: var(--Sv-tab-bar-item--focus-radius);
+                    &::after{
+                        background-color:transparent;
+                        top: 27px;
+                        height: 10px;  
+                        left: calc(-1 * var(--Sv-dock-item-radius) - 2px) ;
+                        border-radius: 0;
+                        width: calc(100% + var(--Sv-dock-item-radius)*2 + 4px);
+                        transition: var(--b3-transition);
+                        background-image: var(--Sv-tab-bar-item-after);
+                        background-size: 12px 12px,12px 12px,
+                        calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
+                        background-position: right bottom, left bottom, center top;
+                        background-repeat: no-repeat;
+                        box-shadow: var(--Sv-tab-bar-item-background-focus) 0 8px 0 0;
+                    }
+                    & .item__text {
+                        font-weight: 700;
+                    }
+    
+            }
+        }
+    }
+}
 
 
 /*登录页面*/
