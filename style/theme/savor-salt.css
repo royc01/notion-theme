@@ -2,7 +2,7 @@
     /* 主色 */
     --b3-theme-primary-base-l:53.63%;
     --b3-theme-primary-base-ch:0.0979 220.45;
-    --b3-theme-surface-base-l:0.9;
+    --b3-theme-surface-base-l:0.8996;
     --b3-theme-surface-base-ch:0.0098 189.04;
 
     --b3-theme-on-background-base:0.28 0.0159 264.27;
@@ -10,11 +10,16 @@
 
     --b3-theme-background: #eaf2f2;/* 编辑区背景 必须用HEX颜色*/
 
-    --Sv-tab-bar-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23eaf2f2'/></svg>"),
+
+    --Sv-tab-bar-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23ccd5d4'/></svg>"),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23ccd5d4'/></svg>"),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%23ccd5d4'/></svg>");
+
+    --Sv-tab-bar-V-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C100 44.772 55.228 0 0 0H100V100z' fill='%23eaf2f2'/></svg>"),
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23eaf2f2'/></svg>"),
     url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%23eaf2f2'/></svg>");
 
-    --Sv-tab-bar-V-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C100 44.772 55.228 0 0 0H100V100z' fill='%23eaf2f2'/></svg>"),
+    --Sv-tab-bar-item-focus-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23eaf2f2'/></svg>"),
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23eaf2f2'/></svg>"),
     url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%23eaf2f2'/></svg>");
 
@@ -22,38 +27,30 @@
     /* ————————————————————  自定义结构配色  ———————————————————— */
 
 	/* 顶栏 */
-    --Sv-toolbar-background:/*#9ca8a8;*/rgb(37, 40, 48);
-    --Sv-layout-margin: 5px;
+    --Sv-barWorkspace-background: #252830;
+    --Sv-barWorkspace-background-hover: #2b2d32;
 
     --Sv-menu-background:#dfe7e6;
     --Sv--dialog-container: #d7e0df;
+    --Sv-plugin-off-bg: #ccd5d4;
 	
 	/* 侧栏面板 */
-    --Sv-dock-background: #ccd5d4;
     --Sv-block-icon-svg-color: rgba(55, 53, 47, .5);
 
     /* 合并顶栏插件收缩颜色 */
-    --Sv-plugin-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.2) var(--b3-theme-surface-base-ch));
+    /*--Sv-plugin-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.2) var(--b3-theme-surface-base-ch));
     --Sv-plugin-b-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.25) var(--b3-theme-surface-base-ch));
-    --Sv-plugin-b-off-bg-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch));
-    --Sv-fixed-item-text: #9fa4a7;
+    --Sv-plugin-b-off-bg-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch));*/
+    /*--Sv-fixed-item-text: #9fa4a7;*/
 
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/
     --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(37, 40, 48)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
-    --Sv-Splugin-off:url("data:image/svg+xml;utf8,<svg fill='rgb(215, 224, 224)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -10px top -6px;
+    --Sv-Splugin-off:url("data:image/svg+xml;utf8,<svg fill='rgb(37, 40, 48)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -10px top -6px;
     /*——————————————————————————————————————————————————————————————*/
 
 }
 
 
-
-#toolbar svg,.toolbar #drag{
-    color: oklch(calc(var(--b3-theme-surface-base-l)*0.8) var(--b3-theme-surface-base-ch));
-}
-
-.dock.dock--vertical .dock__item:first-child {
-    margin-top: 5px !important;
-}
 
 #savorToolbar #buttonSavor-light svg{
     color: var(--b3-theme-on-surface);

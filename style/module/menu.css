@@ -10,7 +10,7 @@
         .b3-menu__item{
             margin: 0;
             background-color: var(--Sv-menu-background);
-            &:hover{
+            &:hover,&.b3-menu__item--current:not(.b3-menu__item--readonly){
                 background-color: var(--Sv-menu-item-hover);
             }
         }
@@ -219,7 +219,7 @@
                                 border-radius: 0;
                                 width: calc(100% + var(--Sv-dock-item-radius)*2 + 4px);
                                 transition: var(--b3-transition);
-                                background-image: var(--Sv-tab-bar-item-after);
+                                background-image: var(--Sv-tab-bar-item-focus-after);
                                 background-size: 12px 12px,12px 12px,
                                 calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
                                 background-position: right bottom, left bottom, center top;

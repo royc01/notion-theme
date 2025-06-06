@@ -103,7 +103,7 @@
         #searchPreview,#searchAssetPreview{
             border-radius: 8px;
             margin: 0 8px;
-            border-left:none;
+            border:none;
         }
     }
 	#criteria {

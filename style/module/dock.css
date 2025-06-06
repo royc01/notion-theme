@@ -29,6 +29,7 @@
 		color: var(--Sv-dock-item-color);
 		padding:8px ;
 		border-radius: var(--Sv-dock-item-radius);
+		background-color: var(--Sv-list-background);
 		svg{
 			width: 12px;
 			height: 12px;

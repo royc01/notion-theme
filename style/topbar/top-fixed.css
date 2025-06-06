@@ -1,7 +1,7 @@
 body:not(.body--mobile,.body--window)>#toolbar{
 	z-index: 3;
 	height: 38px;
-	margin-bottom: -38px;
+	margin-bottom: -32px;
 	pointer-events: none;
 	counter-reset:plugin-counter;
 	background-color: transparent;
@@ -59,52 +59,30 @@ body:not(.body--mobile,.body--window)>#toolbar{
         }
     }
 }
+
 #barPlugins{
-    margin-left: 18px;
+    margin-left: 20px;
 }
 .layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
-    padding-top: 38px;
+    padding-top: 32px;
 }
 #dockLeft,#dockRight{
-	padding-top: 38px;
+	padding-top: 32px;
 }
 body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
-	padding-left: 0px;
     min-width: 60px;
     z-index: 2;
 	pointer-events: none;
 	border: none;
-	height: 44px;
-    & .item:not(.item--readonly):not(.item--pin){
-        background-color: transparent;
-        }
 	& .item:not(.item--readonly){
-		margin-bottom:7px!important;
 		pointer-events: visibleFill;
-		& .item__text{
-			color: var(--Sv-fixed-item-text);
-		}
 		&[data-type="tab-header"]{
 			pointer-events: visibleFill;
 			app-region: no-drag;
-			&.item--focus{
-				background-color: var(--b3-theme-background);
-				& .item__text{
-					color: var(--b3-theme-on-background);
-				}
-                &::after {
-                    top: 23.5px;
-                }
-			}
 		}
-        &:hover{
-            background-color: var(--Sv-tab-bar-item-background-hover); 
-        }
 	}
 		& .item--readonly{
-		padding: 0px;
 		pointer-events: none;
-		height: 36px;
 		& .block__icon--show{
 			pointer-events: visibleFill;
 			app-region: no-drag;
@@ -118,9 +96,9 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 		}
 	}
 	&.layout-tab-bar--readonly{
-        padding-top: 1px;
+       /*padding-top: 1px;
         padding-left: 6px;
-        height: 37px;
+        height: 37px;*/
 	&::before {
 		top: 4px;
 		box-shadow: 6px -6px 0 var(--Sv-toolbar-background);
@@ -189,7 +167,7 @@ body:not(.body--mobile,.body--window) #layouts{
 }
 
 #toolbar + .fn__flex{
-    box-shadow:0 38px 0 0 var(--Sv-toolbar-background) inset;
+    box-shadow:0 -6px 0 0 var(--Sv-toolbar-background);
 }
 
 #layouts>.fn__flex{
@@ -207,7 +185,8 @@ body:not(.body--mobile,.body--window) #layouts{
         padding-left: 10px;
         transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms,padding-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
     }
-    & ~ .layout__center .layout__resize + .fn__flex-1 [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
+    & ~ .layout__center .layout__resize + .fn__flex-1 [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly),
+    & ~ .layout__center .layout__resize + .fn__flex [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
         margin-left: 0!important;
         padding-left: 0px!important;
     }
@@ -246,14 +225,15 @@ body:not(.body--mobile,.body--window) #layouts{
     box-shadow: var(--b3-theme-background) 0 0 0 7px inset;
 }
 
-.layout__center .layout__resize:not(.layout__resize--lr) +.fn__flex .layout-tab-bar--readonly{
+/*.layout__center .layout__resize:not(.layout__resize--lr) +.fn__flex .layout-tab-bar--readonly{
     background-color: var(--Sv-dock-background)!important;
-}
+}*/
 
 .layout__center [data-type="wnd"]>.fn__flex::after{
     content: "";
     position: absolute;
-    height: 0.8em;
+    height: 0.6em;
+    top: 0;
     width: 100%;
     opacity: 0;
     -webkit-app-region: drag;

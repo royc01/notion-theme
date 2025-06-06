@@ -1,7 +1,7 @@
 #savorToolbar button{
     display: block!important;
 }
-#status {
+.toolbar:not(.toolbar--border) ~ #status {
 	transition: transform .2s cubic-bezier(0, 0, .2, 1) 0ms;
 	position: fixed;
     height: 24px;

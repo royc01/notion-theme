@@ -1,5 +1,5 @@
 #menu.b3-menu--fullscreen{
-    background-color: var(--Sv-tab-bar-item-background);
+    background-color: var(--b3-theme-surface);
     &>div{
         margin: 5px 10px;
         border: none;
@@ -18,7 +18,7 @@
         border: none;
         margin: 0;
         height: 10px;
-		background-color: var(--Sv-tab-bar-item-background);
+		background-color: var(--b3-theme-surface);
         & + .b3-menu__item{
             border-radius: 6px 6px 0 0;
         }
@@ -27,7 +27,7 @@
 
 
 #sidebar.side-panel{
-	background-color: var(--Sv-tab-bar-item-background);
+	background-color: var(--b3-theme-surface);
     &>.toolbar--border{
         margin: 10px 10px 0px 10px;
         border-radius: 6px;

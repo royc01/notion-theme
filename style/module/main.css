@@ -11,6 +11,21 @@
         background-color: var(--Sv-layout--resize-hover);
     }
 }
+.layout__dockl .layout__resize:not(.layout__resize--lr), .layout__dockr .layout__resize:not(.layout__resize--lr) {
+    margin: var(--Sv-layout--resize-margin);
+    &:after{
+        height: 4px;
+        top: 0px;
+        border-radius: 3px;
+        background-color: var(--Sv-layout--resize-hover);
+        opacity: 0.3;
+        width: calc( 100% - 20px);
+        margin-left: 10px;
+    }
+    &:hover:after{
+        opacity: 1;
+    }
+}
 .layout__resize--lr {
     margin: 0 0.5px;
     width: var(--Sv-layout-resize-lr-width);
