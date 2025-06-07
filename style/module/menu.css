@@ -189,9 +189,6 @@
                 border: none;
                 height: 43px;
                 margin-bottom: -6px;
-                &+.fn__flex-1{
-                    background-color:  var(--Sv--dialog-container);
-                }
                 .item:not(.item--readonly){
                     min-height: 33px;
                     border-radius: 6px;
@@ -310,7 +307,7 @@
                 grid-template-columns: 90px 1fr;
                 margin: 6px 0 0 6px;
                 box-shadow: none;
-                background-color: var(--Sv-list-background);
+                background-color: var(--Sv-select-field);
                 &:hover{
                     box-shadow: var(--Sv-card-current-shadow);
                 }
@@ -631,3 +628,42 @@
 
 
 
+[data-key="dialog-snippets"] .b3-dialog__body{
+    margin: 5px;
+    overflow:hidden;
+    .layout-tab-bar{
+        background-color: var(--Sv--dialog-container);
+        border: none;
+        overflow: unset !important;
+        &+.fn__flex-1{
+            border-radius: 6px;
+            background-color: #fff;
+        }
+        .item:not(.item--readonly){
+            border-radius: 6px;
+            overflow: unset !important;
+            &.item--focus{
+                background-color: var(--Sv-tab-bar-item-background-focus);
+                border-radius: var(--Sv-tab-bar-item--focus-radius);
+            &::after{
+                background-color:transparent;
+                top: 32px;
+                height: 10px;  
+                left: calc(-1 * var(--Sv-dock-item-radius) - 2px) ;
+                border-radius: 0;
+                width: calc(100% + var(--Sv-dock-item-radius)*2 + 4px);
+                transition: var(--b3-transition);
+                background-image: var(--Sv-tab-bar-item-focus-after);
+                background-size: 12px 12px,12px 12px,
+                calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
+                background-position: right bottom, left bottom, center top;
+                background-repeat: no-repeat;
+                box-shadow: var(--Sv-tab-bar-item-background-focus) 0 8px 0 0;
+            }
+            & .item__text {
+                font-weight: 700;
+            }
+        }
+    }
+}
+}

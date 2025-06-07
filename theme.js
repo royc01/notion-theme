@@ -1857,11 +1857,11 @@ featureButtons.forEach(button => {
                             const dockrWidth = dockr?.offsetWidth || 0;
                             const isFloatingR = dockr?.classList.contains('layout--float') ?? true;
                             const isDockVerticalHidden = !dockVertical || dockVertical.classList.contains('fn__none');
-                            const dockVerticalWidth = isDockVerticalHidden ? 0 : 30;
+                            const dockVerticalWidth = isDockVerticalHidden ? 0 : 26;
 
                             const totalOffset = (isFloatingR || !dockrWidth) 
-                                ? (isDockVerticalHidden ? 8 : dockVerticalWidth + 12)
-                                : dockrWidth + (isDockVerticalHidden ? 15 : dockVerticalWidth + 19);
+                                ? (isDockVerticalHidden ? 9 : dockVerticalWidth + 16)
+                                : dockrWidth + (isDockVerticalHidden ? 9 : dockVerticalWidth + 16);
 
                             statusElement.style.transform = `translateX(-${totalOffset}px)`;
                         };

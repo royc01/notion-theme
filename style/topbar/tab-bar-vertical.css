@@ -8,9 +8,10 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
 	border-bottom: none;
     display: block;
 	flex: 1;
+    padding-left: 5px;
     &.layout-tab-bar--readonly {
         flex: initial;
-        padding-left: 0px;
+        padding-left: 5px;
         padding-right: 5px;
     }
     .item:not(.item--readonly) {
@@ -40,6 +41,9 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
             display: block!important;
         }
     }
+        .item--pin:not(.item--readonly) {
+            padding: 2.5px 1.5px;
+        }
     }
     .layout-tab-bar--readonly{
         margin-left: 0px!important;
