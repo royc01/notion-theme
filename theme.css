@@ -354,8 +354,7 @@
     /* 菜单 */
     --Sv-menu-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
     --Sv-menu-accelerator: oklch(var(--b3-theme-on-background-base) / 0.4);
-    --Sv-menu-background: oklch(calc(var(--b3-theme-surface-base-l)*1.15) var(--b3-theme-surface-base-ch));
-    --Sv-menu-item-hover: var(--Sv-list-background);
+    --Sv-menu-background: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));
     /* 按钮 */ 
     --Sv-button-background: var(--b3-theme-primary);
     --Sv-button-color: var(--b3-theme-background);
@@ -461,6 +460,7 @@
     --Sv-toolbar-background:  var(--b3-theme-surface);
     --Sv-menu-selected: var(--Sv-menu-background);
     --Sv-plugin-off-bg: #e9e9e8;
+    --Sv-menu-item-hover: var(--Sv-list-background);
 
 	/* 边栏 */
     --Sv-dock-background: /*oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch))*/var(--b3-theme-surface);
@@ -632,6 +632,7 @@
     --Sv-toolbar-background: /*oklch(calc(var(--b3-theme-surface-base-l)*0.85) var(--b3-theme-surface-base-ch))*/var(--b3-theme-surface);
     --Sv-menu-selected: var(--b3-theme-surface);
     --Sv-plugin-off-bg: #2a2e32;
+    --Sv-menu-item-hover: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.3);
 
 	/* 边栏 */
     --Sv-dock-background: /*oklch(calc(var(--b3-theme-surface-base-l)*0.85) var(--b3-theme-surface-base-ch))*/var(--b3-theme-surface);
@@ -723,6 +724,6 @@
 
 
 .protyle-toolbar,.tooltip--memo{
-    background-color: var(--Sv-menu-background);
+    background-color: oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));
 }
 

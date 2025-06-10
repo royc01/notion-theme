@@ -1,0 +1,20 @@
+.sy__file .b3-list--background:nth-child(4n-3){
+	background-color: var(--Sv-bq-background5) !important;
+    box-shadow: 0 0 0 1px var(--b3-font-background5) inset;
+    border-radius: 6px;
+}
+.sy__file .b3-list--background:nth-child(4n-2){
+	background-color: var(--Sv-bq-background7) !important;
+    box-shadow: 0 0 0 1px var(--b3-font-background7) inset;
+    border-radius: 6px;
+}
+.sy__file .b3-list--background:nth-child(4n-1){
+	background-color: var(--Sv-bq-background8) !important;
+    box-shadow: 0 0 0 1px var(--b3-font-background8) inset;
+    border-radius: 6px;
+}
+.sy__file .b3-list--background:nth-child(4n){
+	background-color: var(--Sv-bq-background10) !important;
+    box-shadow: 0 0 0 1px var(--b3-font-background10) inset;
+    border-radius: 6px;
+}

@@ -45,6 +45,7 @@
 .sy__file .b3-list--background:nth-child(4n) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
 	color:#49adbb;
 }
+
 .protyle-wysiwyg .h1{
 	color:var(--h1-list-graphic);
 }

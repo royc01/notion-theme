@@ -37,9 +37,9 @@ body:not(.body--mobile,.body--window)>#toolbar{
         }       
     }
     #closeWindow{
-        width: 40px;
+        width: 34px;
         &.toolbar__item--close{
-            padding: 2px 6px;
+            padding: 1px 0px;
         }
         svg{
             width: 12px!important;

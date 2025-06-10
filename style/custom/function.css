@@ -3,7 +3,7 @@
 	.b3-menu__item{
         background-color: var(--Sv-menu-background);
 		&:hover{
-			background-color: var(--Sv-list-background)!important;
+			background-color: var(--Sv-menu-item-hover)!important;
 		}
 	}
     #buttonSavor-dark svg,#buttonSavor-light svg{
@@ -28,7 +28,7 @@
         gap: 3px;
         padding: 3px;
         border-radius: 6px;
-        background-color: var(--Sv-list-background);
+        background-color: var(--Sv-menu-item-hover);
         overflow:visible;
         .b3-menu__item {
             display: inline-block;

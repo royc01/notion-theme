@@ -17,6 +17,7 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
     .item:not(.item--readonly) {
         margin:0 -5px 5px 0!important;
         max-width:unset;
+        padding: 2.5px 0 ;
         & .item__close{
             margin-left: auto;
         }

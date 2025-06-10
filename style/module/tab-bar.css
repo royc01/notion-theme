@@ -9,7 +9,7 @@
     .item:not(.item--readonly){
         min-height: 28px;
         border-radius: var(--Sv-tab-bar-item-radius);
-        padding: 2.5px 1.5px;
+        padding: 1px 0 4px 0 ;
         margin-bottom: 5px;
         overflow: unset !important;
         &::after{
@@ -75,7 +75,7 @@
         }
     &.layout-tab-bar--readonly{
         padding-left: 5px;
-        padding-right: 4px;
+        padding-right: 2px;
         overflow: visible;
         z-index: 2;
         /*background-color: var(--Sv-dock-background);*/
@@ -96,7 +96,7 @@
         }*/
     }
     .item--readonly {
-        min-height: 28px;
+        min-height: 30px;
         padding: 0;
         .block__icon{
         padding: 7.5px;
@@ -113,9 +113,13 @@
     .item--pin:not(.item--readonly){
         min-width: 28px;
         background-color: var(--b3-theme-background)!important;
-        margin-right: 5px;
-        padding: 0px;
-        margin-bottom: 10px;
+        margin-left: -3px;
+        margin-right: 6px;
+        padding:1px 0px;
+        margin-bottom: 8px;
+        &:first-child{
+            margin-left: 0px;
+        }
         &:hover::after{
             opacity: 0;
         }
@@ -123,7 +127,7 @@
             display: none;
         }
         & .item__icon{
-            padding:0px 7px;
+            padding:0px 8px;
         }
         & .item__graphic{
             padding:4px;

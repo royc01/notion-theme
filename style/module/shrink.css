@@ -12,7 +12,7 @@
     >.fn__flex-column{
 	/*面板标题*/
 	.block__icons{
-		height:33px; 
+		height:31px; 
 		padding: 0px 8px 0px 11px;
 		min-height: unset;
 		border-bottom: none;
@@ -23,6 +23,9 @@
 				display: none;
 			}
 		}
+		& ~ div ,& ~ ul{
+			padding: 2px 4px;
+		} 
 		/*面板功能按钮*/
 		.block__icon{
 			padding: 2px;
@@ -52,7 +55,7 @@
 	/*面板列表项*/
 	.b3-list-item{
 		border-radius:var(--Sv-list-item-radius);
-		margin:0px 4px 4px 4px!important;
+		margin:0 0 4px 0!important;
         padding-right: 3px;
         &:hover{
             background-color: var(--Sv-list-background)!important;
@@ -150,6 +153,11 @@
 /*大纲面板数字*/
 .sy__outline .b3-list-item__graphic{
 	margin-left: 4px;
+}
+.layout__dockl, .layout__dockr, .layout__dockb {
+    & .layout-tab-container .sy__outline .block__icons+.b3-list-item {
+	margin: 0 4px 4px 4px!important;
+}
 }
 .sy__outline ul.b3-list.b3-list--background{
 	& [data-subtype*="h"]{
@@ -251,25 +259,22 @@
         background-color: var(--Sv-backlink-list);
 		border-radius:6px;
         &>.b3-list>.protyle{
-	    margin:-4px 5px 5px 5px;	
+	    margin:-4px 0px 5px 0px;	
 	    border-radius:6px;
-        box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px;
+        box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
         }
     }
     .backlinkList,.backlinkMList{
         border-radius: 0 0 6px 6px;
-		box-shadow: 0 -4px 0 var(--Sv-backlink-list);
-        +.block__icons{
-            margin-top: var(--Sv-backlink-top);
-            border-radius: 6px 6px 0 0;
-        }
-    }
-    .protyle-wysiwyg {
-        padding: 6px 6px 6px 16px !important;
+		margin-left: 5px;
+		.b3-list-item{
+			margin: 0px 0px 4px 0px !important;
+		}
     }
     .protyle-breadcrumb__bar{
         font-size:80%;
         min-height: 24px;
+		margin-left: -18px;
         &+div{
             font-size:90%;
         }
@@ -351,3 +356,5 @@
 	margin-left:6px;
 	margin-right:6px;
 }
+
+

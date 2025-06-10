@@ -72,10 +72,9 @@ body:not(.body--mobile,.body--window) #layouts{
         background-color: var(--Sv-toolbar-background)!important;
     & > .fn__flex > .layout-tab-bar {
         border-radius: 6px 0 0 6px;
-        margin-top:4px;
+        margin-top:5px;
         background-color: transparent;
         .item:not(.item--readonly) {
-            margin-bottom:8px!important;
             margin-left: 5px;
             pointer-events: visibleFill;
         }
@@ -124,7 +123,7 @@ body:not(.body--mobile,.body--window) #layouts{
         }
     }
     #status {
-        right: -7px;
+        right: -8px;
         bottom: 0px;
         #statusHelp {
             right: 0px;
