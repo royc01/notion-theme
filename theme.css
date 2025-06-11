@@ -265,7 +265,6 @@
     */
     /* 引用 */
     --Sv-block-ref-color: var(--b3-theme-on-background); 
-    --Sv-block-ref-background: var(--Sv-list-background);
     --Sv-block-ref-background-hover: var(--Sv-list-focus-hover);
     --Sv-block-ref-bottom: 1px dashed;
     --Sv-block-ref-su: var(--b3-theme-background);
@@ -354,7 +353,6 @@
     /* 菜单 */
     --Sv-menu-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
     --Sv-menu-accelerator: oklch(var(--b3-theme-on-background-base) / 0.4);
-    --Sv-menu-background: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));
     /* 按钮 */ 
     --Sv-button-background: var(--b3-theme-primary);
     --Sv-button-color: var(--b3-theme-background);
@@ -461,6 +459,7 @@
     --Sv-menu-selected: var(--Sv-menu-background);
     --Sv-plugin-off-bg: #e9e9e8;
     --Sv-menu-item-hover: var(--Sv-list-background);
+    --Sv-menu-background: oklch(calc(var(--b3-theme-surface-base-l)*1.1) var(--b3-theme-surface-base-ch));
 
 	/* 边栏 */
     --Sv-dock-background: /*oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch))*/var(--b3-theme-surface);
@@ -486,6 +485,10 @@
     
     /* 表格 */
     --Sv-table-thead: var(--b3-theme-surface);
+
+    /*引用*/
+    --Sv-block-ref-background: var(--Sv-list-background);
+    --Sv-popover-menu: oklch(calc(var(--b3-theme-surface-base-l)*1) var(--b3-theme-surface-base-ch) / 0.8);
 
     /* 行内代码*/
     --Sv-inline-code:var(--b3-theme-error);
@@ -630,9 +633,10 @@
 
     /* 顶栏 */
     --Sv-toolbar-background: /*oklch(calc(var(--b3-theme-surface-base-l)*0.85) var(--b3-theme-surface-base-ch))*/var(--b3-theme-surface);
-    --Sv-menu-selected: var(--b3-theme-surface);
+    --Sv-menu-selected: var(--Sv-menu-background);
     --Sv-plugin-off-bg: #2a2e32;
     --Sv-menu-item-hover: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.3);
+    --Sv-menu-background: oklch(calc(var(--b3-theme-surface-base-l)*1.3) var(--b3-theme-surface-base-ch));
 
 	/* 边栏 */
     --Sv-dock-background: /*oklch(calc(var(--b3-theme-surface-base-l)*0.85) var(--b3-theme-surface-base-ch))*/var(--b3-theme-surface);
@@ -662,8 +666,12 @@
 	/* 行内代码 */
 	--Sv-inline-code: #ff9c9c;
 
+    /*引用*/
+    --Sv-block-ref-background: oklch(calc(var(--b3-theme-surface-base-l)*1.6) var(--b3-theme-surface-base-ch) / 0.5);
+    --Sv-popover-menu: oklch(calc(var(--b3-theme-surface-base-l)*1) var(--b3-theme-surface-base-ch) / 0.15);
+
     /* 代码块 */
-    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));
+    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));
 
 	/* 字体颜色选择 工具条 */
 	--Sv-protyle-toolbar-color: var(--b3-theme-on-background);
@@ -675,7 +683,7 @@
 	--Sv-success-shadow: #5c705d;
 
      /* 下拉框、输入框*/
-    --Sv-select-field: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.2);;
+    --Sv-select-field: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.2);
 
     /* 搜索面板 */
     --Sv--dialog-container: var(--Sv-dock-background);

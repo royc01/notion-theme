@@ -101,6 +101,9 @@
 .block__popover--open{
 	border:none;
 	box-shadow: var(--b3-dialog-shadow);
+    .block__icons--menu{
+        background-color: var(--Sv-popover-menu);
+    }
     .protyle,.protyle-breadcrumb{
         background-color: var(--Sv-menu-background);
     }

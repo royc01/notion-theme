@@ -238,7 +238,6 @@
     border:none;
     border-radius: 4px;
     box-shadow: rgba(15, 15, 15, 0.07) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0 2px 1px;
-    background-color: var(--b3-theme-background);
     color: var(--Sv-kbd-color);
     font: 75%  "var(--b3-font-family)";
     vertical-align: 10%;

@@ -171,7 +171,11 @@
 	justify-content: flex-end;
 	padding-right:0px;
 	padding-bottom:4px;
-	margin: 6px;
+	border-top:6px solid var(--b3-theme-background);
+    border-left:6px solid var(--b3-theme-background);
+    border-right:6px solid var(--b3-theme-background);
+    border-radius: 12px;
+    margin: 0px;
 		&.b3-list-item--focus,&:hover{
 			background-color: var(--Sv-select-field)!important;
 		}
