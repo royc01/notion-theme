@@ -9,6 +9,7 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
     display: block;
 	flex: 1;
     padding-left: 5px;
+    overflow: visible;
     &.layout-tab-bar--readonly {
         flex: initial;
         padding-left: 5px;
@@ -41,7 +42,13 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
         &.item--pin .item__text.fn__none{
             display: block!important;
         }
-    }
+        &:hover::after{
+            opacity: 0;
+        }
+        &.item--focus:hover::after{
+            opacity: 1;
+        }
+        }
         .item--pin:not(.item--readonly) {
             padding: 2.5px 1.5px;
         }
@@ -61,8 +68,6 @@ body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]
     width: var(--custom-tab-width);
     transition: width 0.3s ease;
 }
-
-
 
 #vertical-resize-handle:hover{
     background-color: var(--Sv-layout--resize-hover)!important;

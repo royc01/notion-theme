@@ -640,7 +640,7 @@
         overflow: unset !important;
         &+.fn__flex-1{
             border-radius: 6px;
-            background-color: #fff;
+            background-color: var(--b3-theme-background);
         }
         .item:not(.item--readonly){
             border-radius: 6px;

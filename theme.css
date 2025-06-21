@@ -494,7 +494,7 @@
     --Sv-inline-code:var(--b3-theme-error);
 
     /* 代码块 */
-    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*0.99) var(--b3-theme-surface-base-ch));
+    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.02) var(--b3-theme-surface-base-ch));
 
     /* 字体颜色选择 工具条 */
     --Sv-protyle-toolbar-color: var(--b3-theme-on-background);
