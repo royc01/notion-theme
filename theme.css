@@ -119,7 +119,7 @@
     --b3-point-shadow: 0 0 1px 0 rgba(0, 0, 0, .1), 0 0 2px 0 rgba(0, 0, 0, .2);
     --b3-dialog-shadow: var(--b3-theme-background) 0px 0px 0px 1.5px,rgba(15, 15, 15, 0.05)  0px 0px 0px 2px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
     --b3-button-shadow: 0 5px 5px -3px rgb(0 0 0 / .2), 0 8px 10px 1px rgb(0 0 0 / .14), 0 3px 14px 2px rgb(0 0 0 / .12);
-
+ 
     /* 下拉菜单 */
     --b3-select-background: url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M12.8,15.6l4-4.1c0.2-0.2,0.2-0.4,0.2-0.6c0-0.5-0.4-0.9-0.9-0.9c-0.3,0-0.5,0.1-0.6,0.3L12,13.9l-3.4-3.6C8.3,10.1,8.1,10,7.9,10C7.4,10,7,10.4,7,10.9c0,0.2,0.1,0.4,0.2,0.6l4,4.1c0.2,0.2,0.4,0.3,0.7,0.3C12.3,15.9,12.5,15.8,12.8,15.6z'/></svg>") no-repeat right 2px center var(--Sv-select-field)   ;
 	
@@ -187,7 +187,6 @@
 
     /* 面包屑 */
     --Sv-breadcrumb-arrow: rgb(174,172,166);
-    --Sv-breadcrumb-hover: var(--Sv-list-background);
     --Sv-breadcrumb-active: var(--Sv-barWorkspace-background);
     --Sv-breadcrumb-active-color: var(--b3-theme-background);
     --Sv-breadcrumb-active-hover:var(--Sv-barWorkspace-background-hover);
@@ -414,6 +413,7 @@
     --b3-font-color12-base-ch: 0.199 25.43;
     --b3-font-color13-base-ch: 0.2344 26.3;
     
+    
     /* 主色 */
     --b3-theme-background: #fff;/* 编辑区背景 必须用HEX颜色*/
     --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*0.93) var(--b3-theme-surface-base-ch));
@@ -450,6 +450,8 @@
     --b3-pdf-background6: var(--b3-font-background11);
     --b3-pdf-background7: var(--b3-font-background13);
     --b3-pdf-dark: #212224;
+
+    --b3-av-gallery-shadow: rgba(15, 15, 15, 0.07) 0px 2px 4px, var(--Sv-breadcrumb-hover) 0px 0px 0px 1px;
 
 
     /* ————————————————————  自定义结构配色  ———————————————————— */
@@ -510,6 +512,7 @@
     --Sv--dialog-container: #eeeeed;
     --Sv--dialog-scrim: rgba(0, 0, 0, 0.2);
 
+    --Sv-breadcrumb-hover: var(--Sv-list-background);
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/
     --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(132, 130, 125)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
     --Sv-Splugin-off:url("data:image/svg+xml;utf8,<svg fill='rgb(132, 130, 125)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -10px top -6px;
@@ -604,6 +607,7 @@
     --b3-pdf-background6: var(--b3-font-background11);
     --b3-pdf-background7: var(--b3-font-background13);
 	
+    --b3-av-gallery-shadow:  var(--Sv-breadcrumb-hover) 0px 0px 0px 1px,rgba(15, 15, 15, 0.3) 0px 2px 5px;
 
 
 	/*导图*/
@@ -688,6 +692,8 @@
     /* 搜索面板 */
     --Sv--dialog-container: var(--Sv-dock-background);
     --Sv--dialog-scrim: rgba(0, 0, 0, 0.7);
+    
+    --Sv-breadcrumb-hover: oklch(calc(var(--b3-theme-surface-base-l) * 1.6) var(--b3-theme-surface-base-ch) / 0.5);
 
     /*——————————————————————————— 收缩按钮 ——————————————————————————*/
     --Sv-Splugin-on:url("data:image/svg+xml;utf8,<svg fill='rgb(175, 177, 178)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M14.667 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333zM18.533 20.533c0.133 0.133 0.267 0.133 0.4 0.133 0.267 0 0.533-0.267 0.533-0.533 0-0.133 0-0.267-0.133-0.4l-3.067-2.933 3.067-2.933c0.133-0.133 0.133-0.267 0.133-0.4 0-0.267-0.267-0.533-0.533-0.533-0.133 0-0.267 0-0.4 0.133l-3.333 3.333c-0.133 0.133-0.133 0.267-0.133 0.4s0 0.267 0.133 0.4l3.333 3.333z'/></svg>") no-repeat left 16px top -6px;
@@ -735,3 +741,63 @@
     background-color: oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));
 }
 
+
+
+.av__title:empty::after{
+    opacity: 0.4;
+}
+
+.av__gallery-img{
+    background-color: var(--b3-theme-background);
+}
+.av__gallery-item:hover .av__gallery-cover .av__gallery-img{
+    background-color: unset;
+}
+
+.av__gallery-fields .av__cell[data-empty="false"],.av__gallery-fields .b3-menu__avemoji{
+    height: 2em;
+    line-height: 2em;
+}
+.av__gallery-fields--edit .av__cell{
+    min-height: 2em;
+    line-height: 2em;
+}
+.av__views,.av__views .layout-tab-bar{
+    border: none;
+}
+.av__views .item--focus{
+    box-shadow: none!important;
+    background-color: var(--Sv-breadcrumb-hover);
+    &::after{
+        display: none;
+    }
+}
+.av__views .item{
+    min-height: 32px;
+    border-radius: 8px;
+    padding: 0 4px;
+    margin: 0 4px 0px 0;
+    
+}
+.av__views{
+    box-shadow: none!important;
+    order: 2;
+}
+.av__views .item:hover{
+    background-color: var(--Sv-breadcrumb-hover);
+}
+
+.av__title{
+    order: 1;
+    font-size: 1.4em;
+}
+.av__header{
+    display: grid;
+}
+.av__gallery,.av__gallery--top,.av__body{
+    margin-top: 10px;
+}
+
+.av__panel .b3-menu__item[data-type=nobg]{
+    padding-right: 0px!important;
+}

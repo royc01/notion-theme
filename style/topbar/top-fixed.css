@@ -1,13 +1,13 @@
 body:not(.body--mobile,.body--window)>#toolbar{
 	z-index: 3;
 	height: 38px;
-	margin-bottom: -32px;
+	margin-bottom: -33px;
 	pointer-events: none;
 	counter-reset:plugin-counter;
 	background-color: transparent;
-    -webkit-app-region: drag; 
+    app-region: drag;
 	& .toolbar__item {
-		pointer-events: visibleFill;
+		pointer-events: auto;
 		app-region: no-drag;
 	}
 	& #toolbarVIP,#drag{
@@ -60,29 +60,27 @@ body:not(.body--mobile,.body--window)>#toolbar{
     }
 }
 
+
 #barPlugins{
     margin-left: 20px;
 }
 .layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
-    padding-top: 32px;
+    padding-top: 33px;
 }
 #dockLeft,#dockRight{
-	padding-top: 32px;
+	padding-top: 33px;
 }
 body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
-    min-width: 60px;
+    min-width: 62px;
     z-index: 2;
-	pointer-events: none;
+    app-region: no-drag;
 	border: none;
-	& .item:not(.item--readonly){
-		pointer-events: visibleFill;
-		&[data-type="tab-header"]{
+	& .item:not(.item--readonly)[data-type="tab-header"]{
 			pointer-events: visibleFill;
-			app-region: no-drag;
-		}
 	}
 		& .item--readonly{
-		pointer-events: none;
+            pointer-events: none;
+            app-region: drag;
 		& .block__icon--show{
 			pointer-events: visibleFill;
 			app-region: no-drag;
@@ -95,28 +93,15 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
             }
 		}
 	}
-	&.layout-tab-bar--readonly{
-       /*padding-top: 1px;
-        padding-left: 6px;
-        height: 37px;*/
 	&::before {
 		top: 4px;
 		box-shadow: 6px -6px 0 var(--Sv-toolbar-background);
 	}
 }
-}
-
-
-#savordrag.fn__none{
-	display:flex!important;
-}
 [data-menu]:not(.fn__none) ~ #barPlugins+#savorPlugins{
 	display: flex;
 	width: 0px;
 	z-index:8;
-}
-#savordrag{
-	display: block!important;
 }
 
 
@@ -126,6 +111,7 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
     margin-bottom: 3px;
 	background:var(--Sv-Splugin-off);
 	background-color: var(--Sv-plugin-b-off-bg);
+    display: block!important;
 	&::after{
         top: -3px;
 		right: -78px;
@@ -152,7 +138,7 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 
 .layout__empty{
     height: calc( 100% - 38px );
-    margin-top: 38px;
+    margin-top: 33px;
     border-radius: 6px;
 }
 body:not(.body--mobile,.body--window) #layouts{
@@ -228,17 +214,3 @@ body:not(.body--mobile,.body--window) #layouts{
 /*.layout__center .layout__resize:not(.layout__resize--lr) +.fn__flex .layout-tab-bar--readonly{
     background-color: var(--Sv-dock-background)!important;
 }*/
-
-.layout__center [data-type="wnd"]>.fn__flex::after{
-    content: "";
-    position: absolute;
-    height: 0.6em;
-    top: 0;
-    width: 100%;
-    opacity: 0;
-    -webkit-app-region: drag;
-}
-
-#Splugin{
-	display: block!important;
-}

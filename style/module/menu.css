@@ -10,7 +10,7 @@
         .b3-menu__item{
             margin: 0;
             background-color: var(--Sv-menu-background);
-            &:hover,&.b3-menu__item--current:not(.b3-menu__item--readonly){
+            &:not([data-type=nobg]):hover,&.b3-menu__item--current:not(.b3-menu__item--readonly){
                 background-color: var(--Sv-menu-item-hover);
             }
         }
@@ -29,6 +29,9 @@
     .b3-menu__accelerator{
         color:var(--Sv-menu-accelerator);
     }/*快捷键提示*/
+    .b3-menu__separator{
+        height: 0.5px;
+    }
 }
 
 

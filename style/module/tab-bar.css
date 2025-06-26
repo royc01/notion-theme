@@ -96,7 +96,7 @@
         }*/
     }
     .item--readonly {
-        min-height: 30px;
+        min-height: 28px;
         padding: 0;
         .block__icon{
         padding: 7.5px;
@@ -115,8 +115,8 @@
         background-color: var(--b3-theme-background)!important;
         margin-left: -3px;
         margin-right: 6px;
-        padding:1px 0px;
-        margin-bottom: 8px;
+        padding:0px;
+        margin-bottom: 10px;
         &:first-child{
             margin-left: 0px;
         }

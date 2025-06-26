@@ -31,7 +31,7 @@
     border-radius: 6px;
     padding: 0.4em 0.4em 0.4em 0 ;
     background-color: var(--b3-theme-background);
-	box-shadow: rgba(15, 15, 15, 0.02) 0px 0px 0px 1px, rgba(15, 15, 15, 0.05) 0px 2px 4px;
+	box-shadow: var(--b3-av-gallery-shadow);
     margin-bottom: 8px;
 }
 .protyle-wysiwyg *[custom-f="kb"] .li {

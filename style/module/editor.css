@@ -9,6 +9,7 @@
     .protyle-background__icon:not(.fn__none){
         margin-right: 12px;
         border-radius:6px;
+        font-size: 80px;
 		/*&:not(.fn__none)+.b3-chips{
 			margin-left:80px;
 			margin-top:-40px;
@@ -167,12 +168,16 @@
 }
 
 /*h1~6标题间距*/
-.protyle-wysiwyg .h1,.protyle-wysiwyg .h2,.protyle-wysiwyg .h3,.protyle-wysiwyg .h4,.protyle-wysiwyg .h5,.protyle-wysiwyg .h6{
+.protyle-wysiwyg{
+&>.h1,&>.h2,&>.h3,&>.h4,&>.h5,&>.h6{
 	font-weight:700;
 	margin-top: .5em;
     margin-bottom: .1em;
-}
-    
+}}
+.protyle-wysiwyg .protyle-wysiwyg__embed{
+    &>.h1,&>.h2,&>.h3,&>.h4,&>.h5,&>.h6{
+    margin: 2px 0;  
+}}
 .bq > .h1,.bq > .h2,.bq > .h3,.bq > .h4,.bq > .h5,.bq > .h6{
 	margin-top: 0em!important;
     margin-bottom: 0.1em!important;

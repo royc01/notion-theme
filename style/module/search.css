@@ -136,7 +136,6 @@
 	.search__tip{
 		background-color:var(--Sv-search-result-tip);
 		border-radius: 0 0 10px 10px;
-		height: 30px;
         border: none;
         padding: 5px 8px;
 	}
