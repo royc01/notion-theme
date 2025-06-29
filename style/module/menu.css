@@ -347,7 +347,7 @@
             grid-template-columns: 90px 1fr;
             margin: 6px 0 0 6px;
             box-shadow: none;
-            background-color: var(--Sv-list-background);
+            background-color: var(--Sv-select-field);
             &:hover{
                 box-shadow: var(--Sv-card-current-shadow);
             }
@@ -459,16 +459,39 @@
 
 
 /*登录页面*/
+[data-name="account"]{
+    background-color: var(--Sv--dialog-container);
+    .config-account__center--text{
+        overflow: visible;
+    }
+   .config-account__center:not(.config-account__center--text){
+    background-color: var(--b3-theme-background);
+    height: 400px;
+    margin: auto 30px;
+    border-radius: 20px;
+    box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 32px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    position: relative;
+    z-index: 2;
+    .config-account__bg{
+        margin-bottom: 20px;
+        min-height: 208px;
+        .config-account__cover{
+            border-radius: 20px 20px 0 0;
+        }
+    }
+    .config-account__info{
+        margin-top: 40px;
+    }
+   }
+}
+
 .config-account__center{
 	background-color:transparent;
     .b3-chip::before {
         display:none;
     }
-    .config-account__center--text{
-        overflow: visible;
-    }
     .config-account__svg{
-        margin-left:-100%;
+        margin-left:-120%;
         svg{
             width:30px;
             height:30px;
