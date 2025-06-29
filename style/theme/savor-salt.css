@@ -35,6 +35,8 @@
 	/* 侧栏面板 */
     --Sv-block-icon-svg-color: rgba(55, 53, 47, .5);
 
+    /* 代码块 */
+    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.02) var(--b3-theme-surface-base-ch));
     /* 合并顶栏插件收缩颜色 */
     /*--Sv-plugin-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.2) var(--b3-theme-surface-base-ch));
     --Sv-plugin-b-off-bg: oklch(calc(var(--b3-theme-surface-base-l)*0.25) var(--b3-theme-surface-base-ch));

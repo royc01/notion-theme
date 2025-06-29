@@ -28,10 +28,25 @@
 @font-face {
     font-family: 'Harmony';
     font-display: swap;
-    src: url("font/Harmony-500.woff2") format("woff2"),
-         url("font/Harmony-600.woff2") format("woff2"),
-         url("font/Harmony-700.woff2") format("woff2");
-    font-weight: 500 600 700;
+    src: url("font/Harmony-500.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Harmony';
+    font-display: swap;
+    src: url("font/Harmony-600.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Harmony';
+    font-display: swap;
+    src: url("font/Harmony-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
 }
 :root{
     /* 主色 */
@@ -496,11 +511,12 @@
     --Sv-inline-code:var(--b3-theme-error);
 
     /* 代码块 */
-    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.02) var(--b3-theme-surface-base-ch));
+    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)) var(--b3-theme-surface-base-ch));
 
     /* 字体颜色选择 工具条 */
     --Sv-protyle-toolbar-color: var(--b3-theme-on-background);
     --Sv-protyle-util-bg: var(--b3-theme-background);
+    --Sv-protyle-toolbar-bg:var(--b3-theme-background);
 
     --Sv-error-shadow: #e28c88;
     --Sv-warning-shadow: #ffc07b;
@@ -680,6 +696,7 @@
 	/* 字体颜色选择 工具条 */
 	--Sv-protyle-toolbar-color: var(--b3-theme-on-background);
 	--Sv-protyle-util-bg: var(--b3-theme-background);
+    --Sv-protyle-toolbar-bg:oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));
 
 	--Sv-error-shadow: #6b4b4b;
 	--Sv-warning-shadow: #806b4d;
@@ -737,67 +754,8 @@
 }
 
 
-.protyle-toolbar,.tooltip--memo{
-    background-color: oklch(calc(var(--b3-theme-surface-base-l)*1.05) var(--b3-theme-surface-base-ch));
-}
 
 
 
-.av__title:empty::after{
-    opacity: 0.4;
-}
 
-.av__gallery-img{
-    background-color: var(--b3-theme-background);
-}
-.av__gallery-item:hover .av__gallery-cover .av__gallery-img{
-    background-color: unset;
-}
 
-.av__gallery-fields .av__cell[data-empty="false"],.av__gallery-fields .b3-menu__avemoji{
-    height: 2em;
-    line-height: 2em;
-}
-.av__gallery-fields--edit .av__cell{
-    min-height: 2em;
-    line-height: 2em;
-}
-.av__views,.av__views .layout-tab-bar{
-    border: none;
-}
-.av__views .item--focus{
-    box-shadow: none!important;
-    background-color: var(--Sv-breadcrumb-hover);
-    &::after{
-        display: none;
-    }
-}
-.av__views .item{
-    min-height: 32px;
-    border-radius: 8px;
-    padding: 0 4px;
-    margin: 0 4px 0px 0;
-    
-}
-.av__views{
-    box-shadow: none!important;
-    order: 2;
-}
-.av__views .item:hover{
-    background-color: var(--Sv-breadcrumb-hover);
-}
-
-.av__title{
-    order: 1;
-    font-size: 1.4em;
-}
-.av__header{
-    display: grid;
-}
-.av__gallery,.av__gallery--top,.av__body{
-    margin-top: 10px;
-}
-
-.av__panel .b3-menu__item[data-type=nobg]{
-    padding-right: 0px!important;
-}

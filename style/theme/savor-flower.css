@@ -55,8 +55,6 @@
 
     --Sv-Savor-light-on:var(--Sv-Savor-light-off);
 
-    --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1) var(--b3-theme-surface-base-ch));
-
 }
 
 

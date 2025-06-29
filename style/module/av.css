@@ -10,34 +10,40 @@
     box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 	border-bottom:none!important;
 }
-.av__header .layout-tab-bar .item__graphic{
-	padding: 6px 4px 4px 7px;
-}
 
+.av__header{
+    display: grid;
+	.layout-tab-bar .item__graphic{
+		padding: 6px 4px 4px 7px;
+	}
+}
 [data-type="av-search-icon"] +div{
 	font-size: 90%;
-}
-[data-type="av-search-icon"] +div svg{
-	right: 5px;
+	& svg{
+		right: 5px;
+	}
 }
 .protyle-hint .b3-text-field{
 	margin:5px 8px 4px 0px!important;
 }
-.av__views .layout-tab-bar .item--focus::after {
-    background-color: var(--b3-theme-on-background);
-	height: 0.25em;
+
+.av__panel{
+	.b3-chip {
+		margin:0 5px 0 0;
+		border-radius:6px;
+	}
+	.b3-menu .b3-chips input {
+		height: 24px;
+		padding: 0;
+		border-radius: 5px;
+	}
+	.b3-menu .b3-chips+div:not(:empty){
+		margin-top: 5px;
+	}
 }
-.av__panel .b3-chip {
-	margin:0px 6px 6px 0px;
-	border-radius:6px;
-}
-.av__panel .b3-menu .b3-chips input {
-	height: 24px;
-	margin:0px 0px 6px 0px;
-	border-radius: 5px;
-}
+
 .custom-attr__avvalue .b3-chip,.av__cell .b3-chip, .b3-menu__label .b3-chip{
-	border-radius:3px;
+	border-radius:6px;
 }
 .custom-attr__avvalue .b3-chip[style*="color1)"],.av__cell .b3-chip[style*="color1)"],.av__panel .b3-chip[style*="color1)"],[data-name="av-col-option"] .color__square[style*="color1)"],.b3-menu__label .b3-chip[data-color="1"]{
 	background-color:var(--b3-font-background3)!important;
@@ -94,6 +100,11 @@
 
 .av__title{
 	padding: 5px 0px 5px 6px;
+	order: 1;
+    font-size: 1.4em;
+	&:empty::after{
+		opacity: 0.4;
+	}
 }
 .av__mask .b3-text-field:not(#searchInput, #replaceInput, #searchAssetInput,.b3-text-field--text){
 	background-color: var(--b3-theme-surface);
@@ -103,3 +114,66 @@
 	}
 	
 }
+
+.av__gallery-img{
+    background-color: var(--b3-theme-background);
+}
+.av__gallery-item:hover .av__gallery-cover .av__gallery-img{
+    background-color: unset;
+}
+
+.av__gallery-fields .av__cell[data-empty="false"],.av__gallery-fields .b3-menu__avemoji{
+    height: 2em;
+    line-height: 2em;
+}
+.av__gallery-fields--edit .av__cell{
+    min-height: 2em;
+    line-height: 2em;
+}
+
+
+.av__views{
+    box-shadow: none!important;
+    order: 2;
+    border: none;
+    .layout-tab-bar{
+        border: none;
+    }
+    .item{
+        min-height: 32px;
+        border-radius: 8px;
+        padding: 0 4px;
+        margin: 0 4px 0px 0;
+    &:hover{
+        background-color: var(--Sv-breadcrumb-hover);
+        }
+    }
+    .item--focus{
+        box-shadow: none!important;
+        background-color: var(--Sv-breadcrumb-hover);
+        &::after{
+            display: none;
+        }
+    }
+}
+
+.av__gallery-item{
+    border-radius: 8px;
+}
+.av__gallery-cover{
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid var(--b3-theme-surface);
+}
+
+
+.av__gallery,.av__gallery--top,.av__body{
+    margin-top: 10px;
+}
+
+
+.av__panel .b3-menu__item[data-type=nobg]{
+    padding-right: 0px!important;
+}
+
+
+

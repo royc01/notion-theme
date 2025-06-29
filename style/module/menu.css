@@ -8,7 +8,6 @@
     .b3-menu__items{
         padding: 0 4px;
         .b3-menu__item{
-            margin: 0;
             background-color: var(--Sv-menu-background);
             &:not([data-type=nobg]):hover,&.b3-menu__item--current:not(.b3-menu__item--readonly){
                 background-color: var(--Sv-menu-item-hover);
@@ -105,10 +104,13 @@
 	border:none;
 	box-shadow: var(--b3-dialog-shadow);
     .block__icons--menu{
-        background-color: var(--Sv-popover-menu);
+        background-color: oklch(var(--b3-theme-surface-base-l) var(--b3-theme-surface-base-ch) / 0.6);
+        padding: 0 4px;
+        height: 34px;
+        min-height: 34px;
     }
     .protyle,.protyle-breadcrumb{
-        background-color: var(--Sv-menu-background);
+        background-color: var(--b3-theme-background);
     }
 }
 .block__popover .protyle-wysiwyg>[data-node-id].li[fold="1"]>div:nth-child(3):not(.protyle-attr){
@@ -360,6 +362,37 @@
     }
 }
 
+#configBazaarReadme{
+    background-color: var(--b3-theme-surface);
+    padding: 5px 5px 5px 0;
+    .item__main{
+        background-color: var(--b3-theme-background);
+        border-radius: 6px;
+        .b3-typography{
+            margin-left: 20px;
+            margin-right: 20px;
+            &:not(.item__readme){
+                background-color: var(--Sv-bq-background7) !important;
+                border-radius: 5px;
+                box-shadow: 0 0 0 2px var(--b3-font-background7) inset;
+            }
+            blockquote::before{
+                display: none;
+            }
+        }
+    }
+    .item__side>.ft__on-surface {
+        font-weight: 600;
+        color: var(--b3-theme-on-background)
+    }
+    .item__side>.ft__on-surface::first-line {
+        font-weight: normal;
+        color: var(--b3-theme-on-surface)
+    }
+}
+
+
+
 [data-key="dialog-history"]{
     .b3-dialog__scrim{
         backdrop-filter: blur(2px);
@@ -482,7 +515,7 @@
 /* '/'弹出分栏*/
 .hint--menu{
 	box-shadow: var(--Sv-menu-shadow);
-    background-color: var(--b3-theme-background);
+    background-color: var(--Sv-protyle-toolbar-bg);
 	padding:5px;
 	border:none;
 	border-radius: 6px;
@@ -498,7 +531,6 @@
         width:100%!important;
     }
     .b3-list-item__text{
-        margin:0 0 0 8px;	
         color:var(--b3-theme-on-background);
     }
     .b3-list-item__graphic,.color__square {
@@ -509,6 +541,12 @@
         padding: 2px 3px;
         border-radius: 3px;
         box-shadow:none;
+        & + .b3-list-item__text{
+            margin-left: 8px;
+        }
+    }
+    .b3-menu__accelerator,.b3-list-item__meta{
+        color: var(--Sv-scroll-color-hover);
     }
 }
 .hint--menu>.emojis{

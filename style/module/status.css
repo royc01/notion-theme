@@ -1,3 +1,14 @@
+
+@keyframes statusExpand {
+    0% {
+        transform: scaleX(0.4) scaleY(0.4) translate(0px,0px);
+    }
+
+    100% {
+        transform: translate(0px,0px);
+    }
+}
+
 #savorToolbar button{
     display: block!important;
 }
@@ -12,7 +23,8 @@
     padding-right: 0px;
     border: none;
     background-color: var(--Sv-status-msg-background);
-	transform: translate(0px, 0px);
+    transform-origin: 100% 100%;
+    animation: statusExpand .1s ;
     .toolbar__item:not(.toolbar__item--close) {
         padding:2px;
         height: 24px;
@@ -57,9 +69,9 @@
 
 .status.fn__none{/*隐藏底栏保留停靠栏按钮*/
     display: flex!important;
+    padding: 0px;
     &>div:not(#barDock){
         display: none;
     }
 }
-
 

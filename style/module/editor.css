@@ -51,8 +51,11 @@
             color: var(--Sv-protyle-icon-color);
             background-color: var(--Sv-protyle-icon);
             box-shadow: rgba(15, 15, 15, 0.1) 0 0px 0px 1px;
-            &:after{
+            &:not(.protyle-icon--first):after,& input:after{
                 content: attr(aria-label);
+            }
+            &.protyle-icon--first:after{
+                content: "上传"!important;
             }
             &:hover{
                 background-color: var(--Sv-protyle-icon-hover);
@@ -269,6 +272,9 @@
             color: var(--Sv-protyle-toolbar-color);
         }
     }
+}
+.protyle-toolbar,.tooltip--memo{
+    background-color: var(--Sv-protyle-toolbar-bg);
 }
 .protyle-util{
 	animation: menu 0.2s ease-in-out;
@@ -553,13 +559,11 @@
 .code-block {
     background-color: var(--Sv-code-block-background)!important;
     .protyle-action{
-	padding:4px 3px;
+	padding:4px 4px 4px 1px;
     .protyle-action__language{
-        margin-left: 0.5em!important;
-        height:16px;
-        line-height:14px;
+        margin-left: 0!important;
         border-radius:3px;
-        padding:4px;
+        padding:0 8px;
         &:hover{
             background-color: var(--Sv-list-background);
         }
