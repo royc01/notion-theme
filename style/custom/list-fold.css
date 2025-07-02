@@ -9,11 +9,10 @@
     content: "🔗";
     display: inline;
     vertical-align: 6%;
-    font-size: 10px;
+    font-size: 0.7em;
     color: var(--h1-list-graphic);
     margin-left: 6px;
     border-radius: 4px;
 	background-color: var(--b3-font-background10);
 	padding:3px 4px;
-	opacity:1;
 }

@@ -368,6 +368,7 @@
     .item__main{
         background-color: var(--b3-theme-background);
         border-radius: 6px;
+        margin-left: 0px;
         .b3-typography{
             margin-left: 20px;
             margin-right: 20px;
@@ -379,6 +380,12 @@
             blockquote::before{
                 display: none;
             }
+        }
+    }
+    .item__side{
+        padding: 0 24px;
+        [data-type="goBack"]{
+            margin-left: -20px;
         }
     }
     .item__side>.ft__on-surface {
@@ -441,7 +448,7 @@
                         border-radius: 0;
                         width: calc(100% + var(--Sv-dock-item-radius)*2 + 4px);
                         transition: var(--b3-transition);
-                        background-image: var(--Sv-tab-bar-item-after);
+                        background-image: var(--Sv-tab-bar-item-focus-after);
                         background-size: 12px 12px,12px 12px,
                         calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
                         background-position: right bottom, left bottom, center top;

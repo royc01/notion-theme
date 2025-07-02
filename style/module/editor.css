@@ -251,7 +251,7 @@
     vertical-align: 10%;
 }
 /* 图片圆角 */
-.protyle-wysiwyg img{
+.protyle-wysiwyg img:not(.av__gallery-img){
 	border-radius: 6px;
 }
 /* 文字弹出工具条 */

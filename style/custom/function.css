@@ -6,20 +6,21 @@
 			background-color: var(--Sv-menu-item-hover)!important;
 		}
 	}
-    #buttonSavor-dark svg,#buttonSavor-light svg{
-        color: var(--Sv-dock-item--activefocus-background);
+#buttonSavor-light,#buttonsalt,#buttonsugar,#buttonforest,#buttonflower,#buttonwind,#buttonSavor-dark,#buttonvinegar,#buttonocean,#buttonmountain{
+        &.button_on svg{
+            color: var(--Sv-dock-item--activefocus-background);
+        }   
     }
-    .button_on svg{
-        color: var(--Sv-dock-item--activefocus-background);
+#concealButton,#tabbarVertical,#topBar,#bulletThreading,#colorFolder,#typewriterMode{
+        &:not(.button_off) svg{
+            color: var(--Sv-dock-item--activefocus-background);
+        }   
     }
 }
-#commonMenu:not([data-name="barmode"])>#savorToolbar{
-    display: none;
-}
+
 
 [data-name="barmode"]{
     display: grid;
-    width: 140px;
     .b3-menu__items {
         display: flex ;
         flex-direction: row ;
@@ -31,11 +32,12 @@
         background-color: var(--Sv-menu-item-hover);
         overflow:visible;
         .b3-menu__item {
-            display: inline-block;
+            display: flex;
             white-space: nowrap;
             padding: 0;
             line-height: 5px;
             background-color: transparent;
+            justify-content: center;
             &.b3-menu__item--selected,&:hover{
                 background-color: var(--Sv-menu-selected)!important;
                 box-shadow: 0 4px 9px rgba(0, 0, 0, .05), 0 1.5px 2.8px rgba(0, 0, 0, .07), 0 0.3px 0.7px rgba(0, 0, 0, .12);

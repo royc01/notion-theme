@@ -11,7 +11,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 		app-region: no-drag;
 	}
 	& #toolbarVIP,#drag{
-		display: none;
+		display: none!important;
 		}
     &  .toolbar__item:not(#barWorkspace,#closeWindow)[data-location]:not(.fn__none){
         counter-increment: plugin-counter;

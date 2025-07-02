@@ -19,6 +19,8 @@
 @import url( style/custom/list2map.css);/* 列表转导图 ✔*/
 @import url( style/custom/list2table.css);/* 列表转表格 ✔*/
 @import url( style/custom/list2board.css);/* 列表转看板 ✔*/
+@import url( style/custom/list-fold.css);/* 列表折叠 ✔*/
+
 
 @font-face {
     font-family: 'Twitter Emoji';
@@ -742,7 +744,13 @@
     --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", "Hiragino Sans", "Yu Gothic UI", arial, sans-serif, emojis;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.9 , 1);
+    animation-fill-mode: both;
 
+}
 
 
 
@@ -752,6 +760,10 @@
         display: none;
     }
 }
+
+
+
+
 
 
 

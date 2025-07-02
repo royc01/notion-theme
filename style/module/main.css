@@ -143,8 +143,8 @@ body:not(.body--mobile,.body--window) #layouts{
 
 /* 全局过渡动画 */
 :root {
-    --transition-time: 0.3s;
-    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-time: 0.2s;
+    --transition-timing: cubic-bezier(0, 0, .2, 1) 0ms;
     
     /* 默认情况下不应用过渡效果 */
     --theme-transition: none;
@@ -157,87 +157,10 @@ body:not(.body--mobile,.body--window) #layouts{
 }
 
 /* 界面框架元素过渡效果 */
-.layout__center,
-.toolbar,
-.block__icons,
-.b3-dialog__container,
-.b3-menu,
-.dock__item,
-.layout-tab-bar,
-.layout-tab-container,
-.block__content,
-.fn__flex-1,
-.b3-menu__item,
-.b3-menu__submenu,
-.dock__item,
-.toolbar__item,
-.toolbar__text,
-.layout-tab-bar__item,
-.block__logo,
-.block__icon,
-.b3-text-field,
-.b3-select,
-.b3-button,
-.b3-card,
-.b3-list-item,
-.b3-list__item,
-.status,
-#status,
-#toolbar,
-#dockLeft,
-#dockRight,
-#dockTop,
-#dockBottom,
-.b3-dialog,
-.b3-snackbar,
-body.body--window,
-body:not(.body--window) #layouts,
-[data-type="outline"] .b3-list-item,
-[data-type="graph"] .b3-list-item,
-[data-type="backlink"] .b3-list-item,
-/* 编辑器相关元素 */
-.protyle-background,
-.protyle-title,
-.protyle-toolbar,
-.protyle-util,
-.protyle,
-.protyle-content,
-.protyle-preview,
-.b3-typography,
-.protyle-breadcrumb,
-.protyle-breadcrumb__bar,
-.protyle-wysiwyg__embed,
-.protyle-wysiwyg__preview,
-/* 编辑器和内容元素 */
-.layout__center .fn__flex-1,
-.layout__center .protyle-content,
-.layout__center .protyle-background,
-.layout__center .protyle-title,
-.layout__center .protyle-wysiwyg,
-.layout__center .protyle-preview,
-.layout__center .b3-typography,
-.layout__center .protyle-breadcrumb,
-.layout__center .protyle-breadcrumb__bar,
-.layout__center .protyle-wysiwyg [data-node-id],
-.layout__center .protyle-wysiwyg [data-type="NodeParagraph"],
-.layout__center .protyle-wysiwyg [data-type="NodeHeading"],
-.layout__center .protyle-wysiwyg div,
-.layout__center .protyle-wysiwyg p,
-.layout__center .protyle-wysiwyg h1,
-.layout__center .protyle-wysiwyg h2,
-.layout__center .protyle-wysiwyg h3,
-.layout__center .protyle-wysiwyg h4,
-.layout__center .protyle-wysiwyg h5,
-.layout__center .protyle-wysiwyg h6,
-.layout__center .protyle-wysiwyg li,
-.layout__center .protyle-wysiwyg blockquote,
-.layout__center .layout-tab-bar::before,
-.layout__center .layout-tab-bar::after,
-.layout__center .layout-tab-bar .item::before,
-.layout__center .layout-tab-bar .item::after,
-.layout__center .layout-tab-bar--readonly::before,
-.layout__center .layout-tab-bar--readonly::after,
-.layout__center .layout-tab-container::before,
-.layout__center .layout-tab-container::after {
+.toolbar{
     transition: var(--theme-transition);
+}
+
+body, .toolbar, .layout__center, .dock, .layout__dockl, .layout__dockr, .layout-tab-bar, .layout-tab-container, .item, .fn__flex, .sy__outline, .sy__graph, .sy__backlink {
+  transition: var(--theme-transition);
 }

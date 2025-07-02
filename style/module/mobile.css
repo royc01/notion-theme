@@ -29,7 +29,7 @@
 #sidebar.side-panel{
 	background-color: var(--b3-theme-surface);
     &>.toolbar--border{
-        margin: 10px 10px 0px 10px;
+        margin: 6px 10px 0px 10px;
         border-radius: 6px;
         border: none;
     }
@@ -47,4 +47,26 @@
 		background-color: var(--b3-theme-background);
 	}
 }
+}
+#savorToolbar button{
+    &#tabbarVertical,&#topBar,&#colorFolder,&#typewriterMode{
+        display: none;
+    }
+}
+
+body{
+    background-color: var(--b3-theme-surface);
+    padding-top: 4px;
+    &>.toolbar--border{
+        margin: 5px 10px;
+        border: none;
+        border-radius: 6px;
+    }
+}
+#editor{
+    margin: 5px 10px;
+    border-radius: 6px;
+}
+.protyle-breadcrumb{
+    padding: 6px;
 }

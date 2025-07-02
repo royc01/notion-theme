@@ -43,6 +43,10 @@
     /* 底栏 */
     --Sv-status-barDock-color: #cdff3b;
 
+    /* 面包屑 */
+	--Sv-breadcrumb-active: #cdff3b;
+	--Sv-breadcrumb-active-hover:#b6de3e;
+
 
     /* 块引用 */
     --Sv-block-ref-background: transparent;

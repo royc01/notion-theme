@@ -1,16 +1,19 @@
 /*数据库*/
 .av__celltext--ref{
-	font-weight:700;
+	font-weight:600;
 }
 .av__cell .b3-chip[data-type="block-more"],.av__cell .b3-chip[data-type="block-ref"]{
 	padding: 4px!important;
-    top:5px;
     background-color: var(--b3-theme-background)!important;
     color: var(--b3-theme-on-surface);
     box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
 	border-bottom:none!important;
 }
-
+.av__gallery-fields{
+	.av__cell .b3-chip[data-type="block-more"],.av__cell .b3-chip[data-type="block-ref"]{
+		top: 2px!important;
+	}
+}
 .av__header{
     display: grid;
 	.layout-tab-bar .item__graphic{
@@ -122,14 +125,6 @@
     background-color: unset;
 }
 
-.av__gallery-fields .av__cell[data-empty="false"],.av__gallery-fields .b3-menu__avemoji{
-    height: 2em;
-    line-height: 2em;
-}
-.av__gallery-fields--edit .av__cell{
-    min-height: 2em;
-    line-height: 2em;
-}
 
 
 .av__views{
