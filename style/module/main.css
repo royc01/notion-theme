@@ -147,3 +147,6 @@ body:not(.body--mobile,.body--window) #layouts{
     outline: 4px solid var(--b3-theme-background);
     outline-offset: -4px; 
 }
+.layout__center .layout-tab-container:has(.layout__empty){
+    outline: 4px solid transparent;
+}
