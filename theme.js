@@ -207,7 +207,7 @@
             lastClickTime = now;
 
             // 查找可编辑父元素
-            let target = findEditableParent(e.target);
+            let target = self.findEditableParent(e.target);
             if (!target) return;
 
             e.preventDefault();
@@ -749,7 +749,7 @@ const featureButtons = [
         cssPath: "/appearance/themes/Savor/style/topbar/headingdots.css",
         styleId: "Sv-theme-color-标题点标识",
         attrName: "标题点标识",
-        svg: "M18.933 15.2c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733zM13.067 21.067c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733zM18.933 21.067c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733zM13.067 15.2c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733zM18.933 12.8c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733zM13.067 9.467c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733 0-1.067-0.8-1.733-1.733-1.733z",
+        svg: "M18.533 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM13.467 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM18.533 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM13.467 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM18.533 13.467c0.8 0 1.467-0.667 1.467-1.467s-0.667-1.467-1.467-1.467-1.467 0.667-1.467 1.467 0.667 1.467 1.467 1.467zM13.467 10.667c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.933-0.667-1.467-1.467-1.467z",
         onEnable: () => {},
         onDisable: () => {}
     },
@@ -780,7 +780,7 @@ function enableTypewriterMode() {
         let node = range.startContainer;
         // 找到可编辑父元素
         while (node && node.nodeType === 3) node = node.parentElement;
-        const editable = findEditableParent(node);
+        const editable = window.theme.findEditableParent(node);
         if (!editable) return;
         // 只在主编辑区生效
         const protyle = editable.closest('.protyle');
@@ -2221,7 +2221,14 @@ featureButtons.forEach(button => {
     });
     topBarPluginMenuObserver.observe(document.body, { childList: true, subtree: true });
 
-
+    // 单独挂载 findEditableParent，确保不会被覆盖
+    window.theme.findEditableParent = function(element) {
+        while (element && element !== document.body) {
+            if (element.getAttribute && element.getAttribute("contenteditable") != null) return element;
+            element = element.parentElement;
+        }
+        return null;
+    };
 
 })();
 
