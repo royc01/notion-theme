@@ -140,27 +140,10 @@ body:not(.body--mobile,.body--window) #layouts{
 } 
 }
 
-
-/* 全局过渡动画 */
-:root {
-    --transition-time: 0.2s;
-    --transition-timing: cubic-bezier(0, 0, .2, 1) 0ms;
-    
-    /* 默认情况下不应用过渡效果 */
-    --theme-transition: none;
+.layout__center [data-type="wnd"] .layout-tab-container .fn__flex-column{
+    box-shadow: var(--b3-theme-background) 0 0 0 7px inset;
 }
-
-
-/* 当添加theme-transitioning类时才应用过渡效果 */
-:root.theme-transitioning {
-    --theme-transition: all var(--transition-time) var(--transition-timing);
-}
-
-/* 界面框架元素过渡效果 */
-.toolbar{
-    transition: var(--theme-transition);
-}
-
-body, .toolbar, .layout__center, .dock, .layout__dockl, .layout__dockr, .layout-tab-bar, .layout-tab-container, .item, .fn__flex, .sy__outline, .sy__graph, .sy__backlink {
-  transition: var(--theme-transition);
+.layout__center .layout-tab-container {
+    outline: 4px solid var(--b3-theme-background);
+    outline-offset: -4px; 
 }

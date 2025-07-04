@@ -1,0 +1,18 @@
+.protyle-wysiwyg .h1{
+    color: var(--Sv-h1);
+}
+.protyle-wysiwyg .h2{
+    color: var(--Sv-h2);
+}
+.protyle-wysiwyg .h3{
+    color: var(--Sv-h3);
+}
+.protyle-wysiwyg .h4{
+    color: var(--Sv-h4);
+}
+.protyle-wysiwyg .h5{
+    color: var(--Sv-h5);
+}
+.protyle-wysiwyg .h6{
+    color: var(--Sv-h6);
+}

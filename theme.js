@@ -692,28 +692,28 @@ const featureButtons = [
                 let verticalBtn = document.getElementById("tabbarVertical");
                 if (verticalBtn) verticalBtn.click();
             }
-            
-            // 添加空白div用于拖拽 - 使用setTimeout确保DOM已更新
-            setTimeout(() => {
-                addDragArea();
-            }, 100);
-            
-            // 启用顶栏合并右间距功能
-            if (!window.tabBarsMarginInitialized) {
-                window.tabBarsMarginInitialized = true;
-                initTabBarsMargin();
-            } else {
-                // 如果已初始化，则手动更新边距
-                if (window.updateTabBarsMargin) {
-                    window.updateTabBarsMargin();
-                }
-            }
+            // 启用顶栏合并左右间距功能（合并调用）
+            initAllTabBarsMarginUnified();
+            if (window.updateTabBarsMargin) window.updateTabBarsMargin();
+            if (window.updateTabBarsMarginLeft) window.updateTabBarsMarginLeft();
         },
         onDisable: () => {
-            // 移除空白div
-            let dragElement = document.getElementById("savordrag");
-            if (dragElement) {
-                dragElement.parentNode.removeChild(dragElement);
+            // 顶栏合并功能已禁用，停用左右间距
+            window.tabBarsMarginInitialized = false;
+            // 还原所有标签栏的右侧边距
+            document.querySelectorAll('.layout__center .layout-tab-bar--readonly').forEach(tabBar => {
+                tabBar.style.marginRight = '0px';
+            });
+            // 还原所有标签栏的左侧边距
+            document.querySelectorAll('.layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)').forEach(tabBar => {
+                tabBar.style.marginLeft = '0px';
+            });
+            // 断开 observer
+            if (window.updateTabBarsMargin) {
+                window.updateTabBarsMargin = null;
+            }
+            if (window.updateTabBarsMarginLeft) {
+                window.updateTabBarsMarginLeft = null;
             }
         }
     },
@@ -740,6 +740,16 @@ const featureButtons = [
         styleId: "Sv-theme-color-彩色文档树",
         attrName: "彩色文档树",
         svg: "M11.6 14.933c0-0.133 0-0.267 0-0.4 0-2.533 2-4.533 4.4-4.533s4.4 2 4.4 4.533c0 0.133 0 0.267 0 0.4 1.467 0.667 2.533 2.267 2.533 4.133 0 2.533-2 4.533-4.4 4.533-0.933 0-1.867-0.267-2.533-0.8-0.8 0.533-1.6 0.8-2.533 0.8-2.4 0-4.4-2-4.4-4.533 0-1.867 0.933-3.467 2.533-4.133zM11.867 16.267c-0.933 0.533-1.6 1.6-1.6 2.8 0 1.733 1.467 3.2 3.2 3.2 0.533 0 1.067-0.133 1.6-0.4-0.667-0.8-0.933-1.733-0.933-2.8 0-0.133 0-0.267 0-0.4-1.067-0.533-1.867-1.467-2.267-2.4v0zM15.333 18.933v0c0 1.867 1.467 3.2 3.2 3.2s3.2-1.467 3.2-3.2c0-1.2-0.667-2.267-1.6-2.8-0.667 1.6-2.267 2.8-4.133 2.8-0.267 0.133-0.4 0-0.667 0v0zM16 17.733c1.733 0 3.2-1.467 3.2-3.2s-1.467-3.2-3.2-3.2-3.2 1.467-3.2 3.2 1.467 3.2 3.2 3.2z",
+        onEnable: () => {},
+        onDisable: () => {}
+    },
+    {
+        id: "headingDots",
+        label: i18n("标题点标识"),
+        cssPath: "/appearance/themes/Savor/style/topbar/headingdots.css",
+        styleId: "Sv-theme-color-标题点标识",
+        attrName: "标题点标识",
+        svg: "M18.933 15.2c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733zM13.067 21.067c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733zM18.933 21.067c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733zM13.067 15.2c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733zM18.933 12.8c0.933 0 1.733-0.8 1.733-1.733s-0.8-1.733-1.733-1.733c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733zM13.067 9.467c-0.933 0-1.733 0.8-1.733 1.733s0.8 1.733 1.733 1.733c0.933 0 1.733-0.8 1.733-1.733 0-1.067-0.8-1.733-1.733-1.733z",
         onEnable: () => {},
         onDisable: () => {}
     },
@@ -915,8 +925,12 @@ function createFeatureButtons() {
                     styleElement = window.theme.loadStyle(button.cssPath, button.styleId);
                     if (button.id === "bulletThreading") {
                         styleElement.setAttribute("bulletThreading", button.attrName);
+                        // 确保子弹线功能初始化
+                        if (button.onEnable) button.onEnable();
                     } else {
                         styleElement.setAttribute("topBarcss", button.attrName);
+                        // 执行其他功能的启用逻辑
+                        if (button.onEnable) button.onEnable();
                     }
                 }
             },
@@ -1075,123 +1089,6 @@ const waitForElement = (selector, timeout = 5000) => {
         }, timeout);
     });
 };
-
-// 插件按钮配置
-const pluginButtons = [
-    {
-        id: "Splugin",
-        label: i18n("收缩/展开插件"),
-        cssPath: "/appearance/themes/Savor/style/topbar/Splugin.css",
-        styleId: "Sv-theme-color-plugin隐藏",
-        attrName: "plugin隐藏",
-        style: "display: none;",
-        className: "toolbar__item b3-tooltips b3-tooltips__sw",
-        onEnable: () => {
-            // 延迟执行以确保DOM更新完成
-            setTimeout(() => {
-                if (window.updateTabBarsMargin) {
-                    window.updateTabBarsMargin();
-                }
-            }, 100);
-        },
-        onDisable: () => {
-            // 延迟执行以确保DOM更新完成
-            setTimeout(() => {
-                if (window.updateTabBarsMargin) {
-                    window.updateTabBarsMargin();
-                }
-            }, 100);
-        }
-    }
-];
-
-// 创建插件按钮
-async function createPluginButtons() {
-    const barCommand = await waitForElement('#barCommand');
-    if (!barCommand) {
-        console.warn('无法找到 #barCommand 元素');
-        return;
-    }
-
-    // 获取或创建插件容器
-    let savorPlugins = document.getElementById("savorPlugins");
-    if (!savorPlugins) {
-        savorPlugins = createElementEx(barCommand.parentElement, "div", "savorPlugins", 'append');
-        if (!savorPlugins) return;
-        barCommand.parentNode.insertBefore(savorPlugins, barCommand);
-    }
-
-    // 创建所有插件按钮
-    pluginButtons.forEach(button => {
-        // 检查按钮是否已存在
-        if (document.getElementById(button.id)) return;
-
-        // 创建按钮
-        const addButton = createElementEx(savorPlugins, "div", null, 'append');
-        if (!addButton) return;
-
-        // 设置按钮属性
-        addButton.style.float = "top";
-        addButton.id = button.id;
-        if (button.style) addButton.style.cssText = button.style;  // 添加这行来应用样式
-        addButton.setAttribute("class", button.className + " button_off");
-        addButton.setAttribute("aria-label", button.label);
-
-        let offNo = '0';
-
-        // 处理记忆状态
-        offNo = getItem(button.id) || '0';
-        if (offNo === "1") {
-            addButton.setAttribute("class", button.className + " button_on");
-            // 加载样式
-            if (!document.getElementById(button.styleId)) {
-                const style = window.theme.loadStyle(button.cssPath, button.styleId);
-                style.setAttribute(button.id, button.attrName);
-            }
-            // 执行自定义启用逻辑
-            if (button.onEnable) button.onEnable(addButton);
-        }
-
-        // 添加点击事件
-        addButton.addEventListener("click", () => {
-            if (offNo === "0") {
-                addButton.setAttribute("class", button.className + " button_on");
-                // 加载样式
-                if (!document.getElementById(button.styleId)) {
-                    const style = window.theme.loadStyle(button.cssPath, button.styleId);
-                    style.setAttribute(button.id, button.attrName);
-                }
-                // 执行自定义启用逻辑
-                if (button.onEnable) button.onEnable(addButton);
-                setItem(button.id, "1");
-                offNo = "1";
-            } else {
-                addButton.setAttribute("class", button.className + " button_off");
-                // 移除样式
-                const styleElement = document.getElementById(button.styleId);
-                if (styleElement) styleElement.remove();
-                // 执行自定义禁用逻辑
-                if (button.onDisable) button.onDisable(addButton);
-                setItem(button.id, "0");
-                offNo = "0";
-            }
-        });
-    });
-}
-
-// 初始化插件按钮
-function initPluginButtons() {
-    createPluginButtons().catch(error => {
-        console.error("初始化插件按钮时出错:", error);
-    });
-}
-
-
-
-
-
-
-
 
 /**---------------------------------------------------------思源API操作-------------------------------------------------------------- */
 async function 设置思源块属性(内容块id, 属性对象) {
@@ -1518,178 +1415,187 @@ if (typeof window.dragDebounce === 'undefined') {
 
 
 
-/**---------------------------------------------------------顶栏合并右侧间距-------------------------------------------------------------- **/
 
+/**---------------------------------------------------------顶栏合并左右间距-------------------------------------------------------------- **/
+
+// 合并初始化顶栏合并左右间距功能
+function initAllTabBarsMarginUnified() {
+    if (window.tabBarsMarginInitialized) return;
+    window.tabBarsMarginInitialized = true;
+    ['right', 'left'].forEach(direction => {
+        initTabBarsMarginUnified(direction);    
+    });
+
+    // 监听分栏变化，自动刷新左右间距（加防抖）
+    const layoutCenter = document.querySelector('.layout__center');
+    if (layoutCenter) {
+        let marginUpdateTimer = null;
+        const resizeObserver = new MutationObserver(() => {
+            if (marginUpdateTimer) return;
+            marginUpdateTimer = requestAnimationFrame(() => {
+                if (window.updateTabBarsMargin) window.updateTabBarsMargin();
+                if (window.updateTabBarsMarginLeft) window.updateTabBarsMarginLeft();
+                marginUpdateTimer = null;
+            });
+        });
+        resizeObserver.observe(layoutCenter, {
+            childList: true,
+            subtree: true
+        });
+        window._tabBarsResizeObserver = resizeObserver;
+    }
+}
 // 初始化顶栏合并右侧间距功能
-function initTabBarsMargin() {
-    let rafId = null;
-    let dockr = null;
+function initTabBarsMarginUnified(direction = 'right') {
+    let dock = null;
     let dockVertical = null;
+    const isRight = direction === 'right';
 
     // 缓存 DOM 元素
     const cacheElements = () => {
-        dockr = document.querySelector('.layout__dockr');
+        dock = document.querySelector(isRight ? '.layout__dockr' : '.layout__dockl');
         dockVertical = document.querySelector('.dock--vertical');
     };
 
     // 更新边距的函数
     const updateMargins = () => {
-        // 检查顶栏合并是否开启
         const topBarFixed = document.getElementById("Sv-theme-color-topbar隐藏");
         if (!topBarFixed) {
-            // 如果顶栏合并未开启，清除所有标签栏的右侧边距
-            const allReadonlyTabBars = document.querySelectorAll('.layout__center .layout-tab-bar--readonly');
-            allReadonlyTabBars.forEach(tabBar => {
-                tabBar.style.marginRight = '0px';
+            const selector = isRight
+                ? '.layout__center .layout-tab-bar--readonly'
+                : '.layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)';
+            document.querySelectorAll(selector).forEach(tabBar => {
+                tabBar.style[isRight ? 'marginRight' : 'marginLeft'] = '0px';
             });
             return;
         }
-        // 获取所有只读标签栏
         const $ = s => document.querySelectorAll(s);
-        const allReadonlyTabBars = $('.layout__center .layout-tab-bar--readonly');
-              
-        // 检查插件状态
-        const pluginHidden = document.getElementById('Sv-theme-color-plugin隐藏');
-        
-        // 如果插件处于关闭状态，使用固定宽度40，否则按元素数量计算后加20
-        const totalLocationWidth = !pluginHidden ? 40 : 
-        (document.querySelectorAll('#toolbar [data-location]:not(.fn__none)').length * 28) + 20;
-        
-        // 获取右侧栏面板宽度（包括浮动状态）
-        const rightPanel = document.querySelector('.layout__dockr');
-        const rightPanelWidth = rightPanel?.classList.contains('layout--float') 
-            ? rightPanel.querySelector('.dock')?.offsetWidth || 0 
-            : rightPanel?.offsetWidth || 0;
-         
-        // 获取右侧停靠栏宽度
-        const dockrWidth = document.querySelector('#dockRight')?.offsetWidth || 0;
-        
-        // 定义固定偏移量
-        const FIXED_OFFSET = 234;
-        // 计算最终的边距值
-        const calculatedMargin = totalLocationWidth + FIXED_OFFSET - rightPanelWidth - dockrWidth;
-        const marginRightValue = calculatedMargin > 0 ? `${calculatedMargin}px` : '0px';
+        const allTabBars = isRight
+            ? $('.layout__center .layout-tab-bar--readonly')
+            : $('.layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)');
 
-        // 检查是否存在分栏
-        const resizers = document.querySelectorAll('.layout__center .layout__resize:not(.layout__resize--lr)');
-        
-        if (resizers.length === 0) {
-            // 没有分栏时，设置最后一个标签栏边距
-            const lastReadonlyTabBar = allReadonlyTabBars[allReadonlyTabBars.length - 1];
-            if (lastReadonlyTabBar) {
-                lastReadonlyTabBar.style.marginRight = marginRightValue;
+        const panel = document.querySelector(isRight ? '.layout__dockr' : '.layout__dockl');
+        const panelWidth = panel?.classList.contains('layout--float')
+            ? panel.querySelector('.dock')?.offsetWidth || 0
+            : panel?.offsetWidth || 0;
+
+        // 只统计toolbar里的[data-location]的宽度总和
+        const toolbar = document.getElementById('toolbar');
+        const panels = toolbar ? toolbar.querySelectorAll(`[data-location="${isRight ? 'right' : 'left'}"]`) : [];
+        let panelsTotalWidth = 0;
+        panels.forEach(panel => {
+            if (panel.offsetParent !== null) {
+                panelsTotalWidth += (panel.offsetWidth || 0) + 4;
+            }
+        });
+
+        const dockId = isRight ? '#dockRight' : '#dockLeft';
+        const dockWidth = document.querySelector(dockId)?.offsetWidth || 0;
+
+        const barIds = isRight
+            ? ['toolbarVIP', 'barPlugins', 'barCommand', 'barSearch', 'barZoom', 'barMode', 'barExit', 'barMore', 'windowControls']
+            : ['barWorkspace', 'barSync', 'barBack', 'barForward'];
+        let barButtonsTotalWidth = 0;
+        barIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.offsetParent !== null) {
+                barButtonsTotalWidth += (el.offsetWidth || 0) + 4;
+            }
+        });
+
+        const calculatedMargin = panelsTotalWidth + barButtonsTotalWidth - panelWidth - dockWidth;
+        // 自定义宽度
+        const CUSTOM_MARGIN_RIGHT = -14;
+        const CUSTOM_MARGIN_LEFT = -10;
+        let marginValue;
+        if (isRight) {
+            const calcMargin = (calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN_RIGHT : CUSTOM_MARGIN_RIGHT);
+            marginValue = `${Math.max(0, calcMargin)}px`;
+        } else {
+            const calcMargin = (calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN_LEFT : CUSTOM_MARGIN_LEFT);
+            marginValue = `${calcMargin}px`;
+        }
+
+        if (isRight) {
+            // 先清空所有只读标签栏的 marginRight，避免左侧页签被加右间距
+            allTabBars.forEach(tabBar => {
+                tabBar.style.marginRight = '0px';
+            });
+            const resizers = document.querySelectorAll('.layout__center .layout__resize:not(.layout__resize--lr)');
+            if (resizers.length === 0) {
+                const lastTabBar = allTabBars[allTabBars.length - 1];
+                if (lastTabBar) {
+                    // 只对右侧分栏的 tab-bar 设置 marginRight
+                    if (lastTabBar.closest('.layout__dockr') || lastTabBar.closest('.layout__center')) {
+                        lastTabBar.style.marginRight = marginValue;
+                    }
+                }
+            } else {
+                resizers.forEach(resizer => {
+                    let prevElement = resizer.previousElementSibling;
+                    if (!prevElement) return;
+                    const prevTabBars = prevElement.querySelectorAll('.layout-tab-bar--readonly');
+                    if (prevTabBars.length > 0) {
+                        const lastTabBar = prevTabBars[prevTabBars.length - 1];
+                        // 只对右侧分栏的 tab-bar 设置 marginRight
+                        if (lastTabBar.closest('.layout__dockr') || lastTabBar.closest('.layout__center')) {
+                            lastTabBar.style.marginRight = marginValue;
+                        }
+                    }
+                });
             }
         } else {
-            // 有分栏时，为每个分栏前的最后一个标签栏设置边距
-            resizers.forEach(resizer => {
-                let prevElement = resizer.previousElementSibling;
-                if (!prevElement) return;
-
-                const prevReadonlyTabBars = prevElement.querySelectorAll('.layout-tab-bar--readonly');
-                if (prevReadonlyTabBars.length > 0) {
-                    prevReadonlyTabBars[prevReadonlyTabBars.length - 1].style.marginRight = marginRightValue;
-                }
-            });
+            const firstTabBar = allTabBars[0];
+            if (firstTabBar) {
+                firstTabBar.style.marginLeft = marginValue;
+            }
         }
     };
 
     // 初始化函数
     const init = () => {
         cacheElements();
-        
-        if (dockr) {
-            new ResizeObserver(updateMargins).observe(dockr);
+        if (dock) {
+            new ResizeObserver(updateMargins).observe(dock);
         }
-
         if (dockVertical) {
             new MutationObserver(updateMargins).observe(dockVertical, {
                 attributes: true,
                 attributeFilter: ['class']
             });
         }
-        
-        // 初始更新边距
         updateMargins();
-        
-        // 添加延迟更新
         setTimeout(updateMargins, 500);
     };
 
     // 首次初始化
     init();
 
-    // 使用 MutationObserver 监听DOM变化
+    // 监听 DOM 变化
     const observer = new MutationObserver(() => {
-        if (!dockr || !dockVertical) {
+        if (!dock || !dockVertical) {
             cacheElements();
-            if (dockr || dockVertical) {
+            if (dock || dockVertical) {
                 init();
             }
         }
     });
-    
     observer.observe(document.body, {
         childList: true,
         subtree: true
     });
-    
-    // 页面加载完成后再次尝试初始化
     window.addEventListener('load', init);
-    
-    // 监听主题切换事件
     document.addEventListener('themechange', updateMargins);
-    
-    // 提供全局更新函数
-    window.updateTabBarsMargin = updateMargins;
-    
-    // 延迟执行一次更新
-    setTimeout(updateMargins, 1000);
-} // 这里缺少分号，并且函数没有被正确封装
-
-// 添加 findEditableParent 函数的定义
-function findEditableParent(element) {
-    let current = element;
-    while (current && current !== document.body) {
-        if (current.getAttribute && current.getAttribute("contenteditable") !== null) {
-            return current;
-        }
-        current = current.parentElement;
+    if (isRight) {
+        window.updateTabBarsMargin = updateMargins;
+    } else {
+        window.updateTabBarsMarginLeft = updateMargins;
     }
-    return null;
+    setTimeout(updateMargins, 1000);
 }
 
+/**---------------------------------------------------------辅助函数-------------------------------------------------------------- */
 
-
-
-
-
-    /**---------------------------------------------------------辅助函数-------------------------------------------------------------- */
-    /**
-     * 添加顶栏拖拽区域
-     */
-    function addDragArea() {
-        // 检查是否已存在拖拽区域
-        let existingDrag = document.getElementById("savordrag");
-        if (existingDrag) return;
-        
-        // 查找barForward元素
-        const barForwardElement = document.getElementById("barForward");
-        if (!barForwardElement) {
-            console.error("barForward元素不存在，无法添加拖拽区域");
-            return;
-        }
-        
-        // 创建拖拽区域
-        const savordragElement = document.createElement("div");
-        savordragElement.id = "savordrag";
-        
-        // 插入到DOM中
-        const parentElement = barForwardElement.parentNode;
-        parentElement.insertBefore(savordragElement, barForwardElement.nextSibling);
-        
-        // 设置样式
-        savordragElement.style.cssText = "flex: 1; -webkit-app-region: drag; app-region: drag;";
-    }
     
     /**
      * 安全地创建元素并添加到父元素
@@ -1942,29 +1848,6 @@ async function 写入文件(path, filedata, then = null, obj = null, isDir = fal
                         const htmlTag = document.querySelector('html');
                         if (!htmlTag) return;
                         
-                        if (!window.tabBarsMarginInitialized) {
-                            window.tabBarsMarginInitialized = true;
-                            initTabBarsMargin();
-                        }
-                        // 获取 #barWorkspace 宽度并设置为 CSS 变量
-                        function setBarWorkspaceWidth() {
-                            const barWorkspace = document.getElementById('barWorkspace');
-                            if (barWorkspace) {
-                                const width = barWorkspace.offsetWidth;
-                                document.documentElement.style.setProperty('--Sv-topfixed-marginLeft', width + 'px');
-                            }
-                        }
-                        
-                        // 在DOM加载完成后执行，并监听窗口大小变化
-                        setBarWorkspaceWidth();
-                        window.addEventListener('resize', setBarWorkspaceWidth);
-                        
-                        // 监听工作空间切换，因为可能会改变宽度
-                        const observer = new MutationObserver(setBarWorkspaceWidth);
-                        const barWorkspace = document.getElementById('barWorkspace');
-                        if (barWorkspace) {
-                            observer.observe(barWorkspace, { childList: true, subtree: true });
-                        }
                         
                         // 初始化主题功能，与barMode按钮独立
                         initThemeFeatures();
@@ -2074,23 +1957,16 @@ async function 写入文件(path, filedata, then = null, obj = null, isDir = fal
 
                         // 初始化主题的所有功能
                         function initThemeFeatures() {
-                            // 初始化鼠标中键折叠/展开功能
-                            window.theme.initCollapseExpand();
-                            
-                            // 初始化插件按钮
-                            initPluginButtons();
-                            
-                            // 初始化主题按钮
-                            themeButton();
-                            
-                            // 初始化顶栏合并右侧间距功能
-                            if (!window.tabBarsMarginInitialized) {
-                                window.tabBarsMarginInitialized = true;
-                                initTabBarsMargin();
-                            }
-                            // 初始化折叠列表内容预览功能
-                            collapsedListPreview();
+                        // 初始化鼠标中键折叠/展开功能
+                        window.theme.initCollapseExpand();
+
+                        // 初始化顶栏合并间距功能（合并调用）
+                        if (!window.tabBarsMarginInitialized) {
+                            initAllTabBarsMarginUnified();
                         }
+                        // 初始化折叠列表内容预览功能
+                        collapsedListPreview();
+                                            }
 
                         // 初始化 savorToolbar 的函数，仅负责生成菜单
                         function initSavorToolbar() {
@@ -2195,24 +2071,29 @@ featureButtons.forEach(button => {
             }
         }
         
-        // 如果是顶栏合并功能且已启用，立即添加拖拽区域并更新间距
+        // 如果是顶栏合并功能且已启用，立即更新间距
         if (button.id === "topBar") {
             // 增加延迟确保DOM完全加载
             setTimeout(() => {
-                addDragArea();
-                // 确保顶栏合并右侧间距功能已初始化
+                // 确保顶栏合并间距功能已初始化（合并调用）
                 if (!window.tabBarsMarginInitialized) {
-                    window.tabBarsMarginInitialized = true;
-                    initTabBarsMargin();
-                } else if (window.updateTabBarsMargin) {
+                    initAllTabBarsMarginUnified();
+                } else {
                     // 如果已初始化，则手动更新边距
-                    window.updateTabBarsMargin();
+                    if (window.updateTabBarsMargin) {
+                        window.updateTabBarsMargin();
+                    }
+                    if (window.updateTabBarsMarginLeft) {
+                        window.updateTabBarsMarginLeft();
+                    }
                 }
-                
                 // 额外添加一次延迟更新以确保正确应用
                 setTimeout(() => {
                     if (window.updateTabBarsMargin) {
                         window.updateTabBarsMargin();
+                    }
+                    if (window.updateTabBarsMarginLeft) {
+                        window.updateTabBarsMarginLeft();
                     }
                 }, 500);
             }, 300);
@@ -2220,26 +2101,6 @@ featureButtons.forEach(button => {
     }
 });
                         
-                // 加载插件按钮状态
-                pluginButtons.forEach(button => {
-                    const buttonState = getItem(button.id);
-                    if (buttonState == '1') {
-                        // 检查是否已存在样式
-                        if (!document.getElementById(button.styleId)) {
-                            const style = window.theme.loadStyle(button.cssPath, button.styleId);
-                            style.setAttribute(button.id, button.attrName);
-                        }
-                    }
-                });
-                
-                // 在主函数末尾添加插件按钮初始化
-                initPluginButtons();
-                // 初始化主题按钮
-                themeButton();
-                
-                // 初始化鼠标中键折叠/展开功能
-                window.theme.initCollapseExpand();
-
                 // 底栏位置调整功能
                 const updateStatusPosition = () => {
                     const statusElement = document.getElementById('status');
@@ -2307,13 +2168,6 @@ featureButtons.forEach(button => {
         styleElements.forEach(element => element.parentNode.removeChild(element));
         // 删除切换按钮
         document.querySelector("#savorToolbar")?.remove();
-        // 删除空白
-        document.querySelector("#savordrag")?.remove();
-        // 删除插件展开按钮
-        document.querySelector("#savorPlugins")?.remove();
-        // 删除列表转功能
-        window.removeEventListener('mouseup', initMenuMonitor);
-
         // 重置顶栏边距
         document.querySelectorAll('.layout__center .layout-tab-bar--readonly').forEach(tabBar => {
             tabBar.style.marginRight = '0px';
@@ -2343,6 +2197,31 @@ featureButtons.forEach(button => {
             window.statusPositionTimer = null;
         }
     };
+
+    // 自动调整 topBarPlugin 菜单，将所有二级菜单的按钮移到一级菜单后面
+    const topBarPluginMenuObserver = new MutationObserver(() => {
+        const commonMenu = document.getElementById('commonMenu');
+        if (!commonMenu || commonMenu.getAttribute('data-name') !== 'topBarPlugin') return;
+        commonMenu.querySelectorAll('.b3-menu__submenu').forEach(submenu => {
+            const parentItem = submenu.parentElement;
+            const buttons = Array.from(submenu.querySelectorAll('.b3-menu__item'));
+            buttons.forEach(btn => {
+                btn.classList.add('submenu-inline'); // 添加特殊 class
+                const iconSmall = parentItem.querySelector('.b3-menu__icon--small');
+                if (iconSmall && iconSmall.nextSibling) {
+                    parentItem.insertBefore(btn, iconSmall.nextSibling);
+                } else if (iconSmall) {
+                    parentItem.appendChild(btn);
+                } else {
+                    parentItem.appendChild(btn);
+                }
+            });
+            if (!submenu.querySelector('.b3-menu__item')) submenu.remove();
+        });
+    });
+    topBarPluginMenuObserver.observe(document.body, { childList: true, subtree: true });
+
+
 
 })();
 

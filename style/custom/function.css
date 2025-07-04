@@ -11,7 +11,7 @@
             color: var(--Sv-dock-item--activefocus-background);
         }   
     }
-#concealButton,#tabbarVertical,#topBar,#bulletThreading,#colorFolder,#typewriterMode{
+#concealButton,#tabbarVertical,#topBar,#bulletThreading,#colorFolder,#typewriterMode,#headingDots{
         &:not(.button_off) svg{
             color: var(--Sv-dock-item--activefocus-background);
         }   
@@ -89,3 +89,5 @@
 .savor-icon{
     margin-bottom: -2px;
 }
+
+

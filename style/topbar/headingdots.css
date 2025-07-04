@@ -6,22 +6,3 @@
     .h5 > [spellcheck]:not(:empty){ padding-left: 1.4em;margin-left: -1.4em;background: var(--h5-r-graphic);background-position: left center;background-repeat: no-repeat;}
     .h6 > [spellcheck]:not(:empty){ padding-left: 1.6em;margin-left: -1.6em;background: var(--h6-r-graphic);background-position: left center;background-repeat: no-repeat;}
 }
-
-.protyle-wysiwyg .h1{
-    color: var(--Sv-h1);
-}
-.protyle-wysiwyg .h2{
-    color: var(--Sv-h2);
-}
-.protyle-wysiwyg .h3{
-    color: var(--Sv-h3);
-}
-.protyle-wysiwyg .h4{
-    color: var(--Sv-h4);
-}
-.protyle-wysiwyg .h5{
-    color: var(--Sv-h5);
-}
-.protyle-wysiwyg .h6{
-    color: var(--Sv-h6);
-}
