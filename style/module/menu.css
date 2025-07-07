@@ -8,7 +8,6 @@
     .b3-menu__items{
         padding: 0 4px;
         .b3-menu__item:not(.submenu-inline){
-            background-color: var(--Sv-menu-background);
             &:not([data-type=nobg]):hover,&.b3-menu__item--current:not(.b3-menu__item--readonly){
                 background-color: var(--Sv-menu-item-hover);
             }
@@ -157,7 +156,7 @@
             box-shadow: 0 15px 0 0 var(--b3-theme-background), 0 15.5px 0 0 var(--b3-border-color);
         }这个影响太多 暂时不能加*/
         .b3-tab-bar{
-            margin: 5px;
+            margin: 5px 0 5px 5px;
             /*background-color: var(--Sv--dialog-tab-bar);*/
             .config__tab-hr{
                 margin: 16px 8px;;
@@ -363,7 +362,7 @@
 }
 
 #configBazaarReadme{
-    background-color: var(--b3-theme-surface);
+    background-color: var(--Sv-theme-surface);
     padding: 5px 5px 5px 0;
     .item__main{
         background-color: var(--b3-theme-background);

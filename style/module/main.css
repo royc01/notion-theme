@@ -53,7 +53,6 @@ body:not(.body--mobile,.body--window) #layouts{
     margin: var(--Sv-layout-margin);
     .layout__center .layout-tab-container{
         border-radius: var(--Sv-center-radius);
-        background-color: transparent;
     }
 }
 
@@ -142,11 +141,4 @@ body:not(.body--mobile,.body--window) #layouts{
 
 .layout__center [data-type="wnd"] .layout-tab-container .fn__flex-column{
     box-shadow: var(--b3-theme-background) 0 0 0 7px inset;
-}
-.layout__center .layout-tab-container {
-    outline: 4px solid var(--b3-theme-background);
-    outline-offset: -4px; 
-}
-.layout__center .layout-tab-container:has(.layout__empty){
-    outline: 4px solid transparent;
 }

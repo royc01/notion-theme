@@ -1,194 +1,226 @@
 /*————————————————————————列表转导图————————————————————————*/
+
+/*————————————————————————基础布局————————————————————————*/
 /*整个导图取消缩进*/
-.protyle-wysiwyg *[custom-f="dt"] .li .list{
-    padding: 0px;
-    margin: 0px;
-	transition: all 0.5s;
+.protyle-wysiwyg *[custom-f="dt"] .li .list {
+    padding: 0;
+    margin: 0;
+    transition: all 0.5s;
 } 
-.protyle-wysiwyg *[custom-f="dt"].list{
-	overflow-x:auto;/*溢出滚动*/
-	padding:60px 30px!important;
-	margin:10px 0px;
-	border: 1px solid var(--Sv-fold-border);
-	background: radial-gradient(var(--Sv-list-background) 1.5px, transparent 1px) 0 0 / 20px 20px;
+
+.protyle-wysiwyg *[custom-f="dt"].list {
+    overflow-x: auto; /*溢出滚动*/
+    padding: 60px 30px !important;
+    margin: 10px 0;
+    border: 1px solid var(--Sv-fold-border);
+    background: radial-gradient(var(--Sv-list-background) 1.5px, transparent 1px) 0 0 / 20px 20px;
 }
+
 /*子项设偏移调整*/
-.protyle-wysiwyg *[custom-f="dt"] [data-node-id].li>[data-node-id]{
+.protyle-wysiwyg *[custom-f="dt"] [data-node-id].li > [data-node-id] {
     margin-left: 20px !important;
-	margin-right: -24px !important;
+    margin-right: -28px !important;
 }
-.protyle-wysiwyg *[custom-f="dt"] [data-node-id].li>.list{
-	padding-left: 20px;
+
+.protyle-wysiwyg *[custom-f="dt"] [data-node-id].li > .list {
+    padding-left: 20px;
 }
+
+/*————————————————————————文字布局————————————————————————*/
 /*文字设置居中*/
 .protyle-wysiwyg *[custom-f="dt"] .li {
-	display: flex;
-	flex-direction: unset;
-	margin: 0;
-}
-.protyle-wysiwyg *[custom-f="dt"] .li .p,.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"] {
-	display: flex;
-	align-items: center;
-	left:6px;
+    display: flex;
+    flex-direction: unset;
     margin: 0;
-	flex-shrink:0;/*不压缩宽度*/
 }
-.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"]>[spellcheck]:after{
-	display:none;
-}/*取消标题层级提示*/
-.protyle-wysiwyg *[custom-f="dt"] .li div{
-	border-right:10px solid transparent;
+
+.protyle-wysiwyg *[custom-f="dt"] .li .p,
+.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"] {
+    display: flex;
+    align-items: center;
+    left: 6px;
+    margin: 0;
+    flex-shrink: 0; /*不压缩宽度*/
 }
+
+.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"] > [spellcheck]:after {
+    display: none;
+} /*取消标题层级提示*/
+
+.protyle-wysiwyg *[custom-f="dt"] .li div {
+    border-right: 10px solid transparent;
+}
+
+/*————————————————————————文字框样式————————————————————————*/
 /*文字框*/
-.protyle-wysiwyg *[custom-f="dt"] .li div>div[spellcheck]{
-	margin-left:-8px;
-	padding:5px 0 5px 10px;
-	margin-top:2px;
-	background-color:var(--b3-block-daotu);
-	border-radius:8px;
-	box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
-	max-width:15vw;
+.protyle-wysiwyg *[custom-f="dt"] .li div > div[spellcheck] {
+    margin-left: -8px;
+    padding: 5px 0 5px 10px;
+    margin-top: 2px;
+    background-color: var(--b3-block-daotu);
+    border-radius: 8px;
+    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+    max-width: 15vw;
 }
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"]>[data-node-id]>div[spellcheck]
-{
-	padding:5px 0px 5px 35px;
+
+/* 合并重复的代码块样式 */
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"] > [data-node-id] > div[spellcheck],
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"] > [data-node-id] > div[spellcheck] {
+    padding: 5px 0 5px 25px;
 }
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"]>[data-node-id]>div[spellcheck]
-{
-	padding:5px 10px 5px 25px;
+
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"] > [data-node-id] > div[spellcheck] {
+    padding-left: 35px; /* 特殊调整 */
 }
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"]>.code-block>.protyle-action{
-	padding:5px 0px 5px 30px;
+
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"] > [data-node-id] > div[spellcheck] {
+    padding-left: 25px; /* 特殊调整 */
+    padding-right: 10px;
 }
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"]>[data-node-id]>div.hljs
-{
-	padding:30px 0px 22px 30px;
+
+/* 合并重复的代码块操作样式 */
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"] > .code-block > .protyle-action,
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"] > .code-block > .protyle-action {
+    padding: 5px 0 5px 30px;
 }
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"]>.code-block>.protyle-action{
-	padding:5px 0px 5px 30px;
+
+/* 合并重复的代码高亮样式 */
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"] > [data-node-id] > div.hljs,
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"] > [data-node-id] > div.hljs {
+    padding: 30px 0 22px 30px;
 }
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="o"]>[data-node-id]>div.hljs
-{
-	padding:30px 0px 22px 30px;
+.protyle-wysiwyg *[custom-f="dt"] .li div > div.hljs {
+    padding: 30px 10px 22px;
+    margin-left: 2px;
+    background-color: var(--b3-menu-background);
 }
-.protyle-wysiwyg *[custom-f="dt"] .li div>div.hljs{
-	padding:30px 10px 22px;
-	margin-left: 2px;
-	background-color:var(--b3-menu-background);
-}
+
+/*————————————————————————列表符号————————————————————————*/
 /*去除竖线*/
-.list[custom-f="dt"][data-node-id] .li>:before {
+.list[custom-f="dt"][data-node-id] .li > :before {
     display: none;
 }
 
 /*圆点符号居中对齐*/
-.protyle-content *[custom-f~=dt] [data-subtype="u"][data-node-id].li>div.protyle-action {
-	top:50%;
-	margin-left:-18px;
-}/*无序列表*/
-.protyle-content *[custom-f~=dt] [data-subtype="o"][data-node-id].li>div.protyle-action {
-	top:calc(50% + 1px);
-	margin-left:17px;
-}/*有序列表*/
-.list[custom-f="dt"][data-node-id] .li>.protyle-action{
-    top:calc(50% + 1px);
-	left:3px;
+.protyle-content *[custom-f~=dt] [data-subtype="u"][data-node-id].li > div.protyle-action {
+    top: 50%;
+    margin-left: -18px;
+} /*无序列表*/
+
+.protyle-content *[custom-f~=dt] [data-subtype="o"][data-node-id].li > div.protyle-action {
+    top: calc(50% + 1px);
+    margin-left: 17px;
+} /*有序列表*/
+
+.list[custom-f="dt"][data-node-id] .li > .protyle-action {
+    top: calc(50% + 1px);
+    left: 3px;
     position: absolute;
     transform: translate(0, -50%);
     z-index: 2;
 }
-.protyle-wysiwyg *[custom-f="dt"] [data-subtype="u"][data-node-id].li>.protyle-action:after{
-	left:37px;
-}
-.list[custom-f="dt"][data-node-id] .protyle-action svg{
-	left:20px;
+
+.protyle-wysiwyg *[custom-f="dt"] [data-subtype="u"][data-node-id].li > .protyle-action:after {
+    left: 37px;
 }
 
+.list[custom-f="dt"][data-node-id] .protyle-action svg {
+    left: 20px;
+}
+
+/*————————————————————————连接线样式————————————————————————*/
 /*前继承线*/
-.protyle-wysiwyg *[custom-f="dt"] .li::before,.protyle-wysiwyg *[custom-f="dt"] .li[fold="1"]::before{   
+.protyle-wysiwyg *[custom-f="dt"] .li::before,
+.protyle-wysiwyg *[custom-f="dt"] .li[fold="1"]::before {   
     content: '';   
     position: absolute;  
-	top: 50%!important;   
-    border-top:var(--b3-border-daotu);    
+    top: 50% !important;   
+    border-top: var(--b3-border-daotu);    
     width: 20px;  
-	height: 50%!important;      
+    height: 50% !important;      
 }
 
 /*上竖线*/
-.protyle-wysiwyg *[custom-f="dt"] .li::before{   
+.protyle-wysiwyg *[custom-f="dt"] .li::before {   
     bottom: 50%;    
-    border-left:var(--b3-border-daotu);  
-	left: 0px;
+    border-left: var(--b3-border-daotu);  
+    left: 0;
 }
 
-.protyle-wysiwyg *[custom-f="dt"] .li:hover::before{   
-    border-left:var(--b3-border-daotu);  
+.protyle-wysiwyg *[custom-f="dt"] .li:hover::before {   
+    border-left: var(--b3-border-daotu);  
 }
+
 /*下竖线*/
-.protyle-wysiwyg *[custom-f="dt"] .li::after{   
+.protyle-wysiwyg *[custom-f="dt"] .li::after {   
     content: '';   
     position: absolute;   
-    border-left:var(--b3-border-daotu);  
+    border-left: var(--b3-border-daotu);  
     width: 20px;  
-	height: 50%; 
+    height: 50%; 
 }
+/*————————————————————————特殊状态————————————————————————*/
 /*单个子项直线*/
-.protyle-wysiwyg *[custom-f="dt"] .list>.li:first-child:nth-last-child(2)::after{   
-	border-radius:0px!important;
+.protyle-wysiwyg *[custom-f="dt"] .list > .li:first-child:nth-last-child(2)::after {   
+    border-radius: 0 !important;
 }
+
 /*单子项居中*/
-.protyle-wysiwyg *[custom-f="dt"] .list>.li:first-child:nth-last-child(2){
-    top: 50%;
-    transform: translate(0, -50%);
+.protyle-wysiwyg *[custom-f="dt"] .list > .li:first-child:nth-last-child(2) {
+    top: 50%!important; 
+    transform: translate(0, -50%)!important; 
 }
+
 /*取消多余线条*/
-.protyle-wysiwyg *[custom-f="dt"] .li:first-child::after,.protyle-wysiwyg *[custom-f="dt"]  .li:nth-last-child(2)::before{   
-    border:none!important;    
+.protyle-wysiwyg *[custom-f="dt"] .li:first-child::after,
+.protyle-wysiwyg *[custom-f="dt"] .li:nth-last-child(2)::before {   
+    border: none !important;    
 }
+
 /*上框线*/
-.protyle-wysiwyg *[custom-f="dt"] .li:first-child::before{   
-    border-radius:8px 0 0 0 ;
+.protyle-wysiwyg *[custom-f="dt"] .li:first-child::before {   
+    border-radius: 8px 0 0 0;
 }
+
 /*下框线*/
-.protyle-wysiwyg *[custom-f="dt"] .li:nth-last-child(2)::after{   
-    border-bottom:var(--b3-border-daotu)!important;    
-    border-radius:0 0 0 8px!important;    
+.protyle-wysiwyg *[custom-f="dt"] .li:nth-last-child(2)::after {   
+    border-bottom: var(--b3-border-daotu) !important;    
+    border-radius: 0 0 0 8px !important;    
 }
+
 /*后继承线*/
-.list[custom-f="dt"] .list::after{   
+.list[custom-f="dt"] .list::after {   
     content: '';   
     position: absolute; 
-	left: 0; 
-	top: 50%;   
-    border-top:var(--b3-border-daotu);   
+    left: 0; 
+    top: 50%;   
+    border-top: var(--b3-border-daotu);   
     width: 20px; 
-	height: 0;  
+    height: 0;  
 }
 
+/*————————————————————————根目录样式————————————————————————*/
 /*根目录最小宽度，保证块标可点*/
-div *[custom-f="dt"]>[data-type="NodeListItem"]>[data-type="NodeParagraph"]>[spellcheck]{
-	min-width:50px;
+div *[custom-f="dt"] > [data-type="NodeListItem"] > [data-type="NodeParagraph"] > [spellcheck] {
+    min-width: 50px;
 }
 
-/*————————————————————————————————————————————————————————————————————————*/
-
-.protyle-wysiwyg *[custom-f="dt"] .li::before{
-	display: flex!important;
-}
 /*取消根目录线*/
-div *[custom-f="dt"]>[data-type="NodeListItem"].li::before,
-div *[custom-f="dt"]>[data-type="NodeListItem"].li::after{   
-	display: none!important;
+div *[custom-f="dt"] > [data-type="NodeListItem"].li::before,
+div *[custom-f="dt"] > [data-type="NodeListItem"].li::after {   
+    display: none !important;
 }
 
-
-
-.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"]>.protyle-action svg{
-	color:unset;
+/*————————————————————————其他样式————————————————————————*/
+.protyle-wysiwyg *[custom-f="dt"] .li::before {
+    display: flex !important;
 }
 
+.protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="u"] > .protyle-action svg {
+    color: unset;
+}
 
-
+/*————————————————————————提示信息————————————————————————*/
 [custom-f="dt"]::before {
     content: "拖拽：鼠标拖动节点　|　缩放：Alt + 鼠标滚轮　|　双击：复位节点";
     position: absolute;
@@ -196,7 +228,7 @@ div *[custom-f="dt"]>[data-type="NodeListItem"].li::after{
     right: 10px;
     font-size: 12px;
     color: var(--b3-theme-on-surface);
-    background-color: var(--b3-theme-surface);
+    background-color: var(--Sv-theme-surface);
     border-radius: 4px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     padding: 3px 10px;

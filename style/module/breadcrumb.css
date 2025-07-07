@@ -27,9 +27,11 @@
 	}
 	.protyle-breadcrumb__item:not(:last-child){
 		opacity: 0.6;
-		&:hover{
-			opacity: 1;
-		}
+		transition: opacity 300ms linear;
+	}
+	&:hover .protyle-breadcrumb__item:not(:last-child){
+		transition: opacity 300ms linear;
+		opacity: 1;
 	}
 	.protyle-breadcrumb__item--active{
 	background-color: transparent;

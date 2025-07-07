@@ -1,8 +1,18 @@
-.protyle-wysiwyg {
-    .h1 > [spellcheck]:not(:empty){ padding-left: 1em;margin-left: -1em;background: var(--h1-r-graphic);background-position: left center;background-repeat: no-repeat;}
-    .h2 > [spellcheck]:not(:empty){ padding-left: 1em;margin-left: -1em;background: var(--h2-r-graphic);background-position: left center;background-repeat: no-repeat;}
-    .h3 > [spellcheck]:not(:empty){ padding-left: 1.2em;margin-left: -1.2em;background: var(--h3-r-graphic);background-position: left center;background-repeat: no-repeat;}
-    .h4 > [spellcheck]:not(:empty){ padding-left: 1.3em;margin-left: -1.3em;background: var(--h4-r-graphic);background-position: left center;background-repeat: no-repeat;}
-    .h5 > [spellcheck]:not(:empty){ padding-left: 1.4em;margin-left: -1.4em;background: var(--h5-r-graphic);background-position: left center;background-repeat: no-repeat;}
-    .h6 > [spellcheck]:not(:empty){ padding-left: 1.6em;margin-left: -1.6em;background: var(--h6-r-graphic);background-position: left center;background-repeat: no-repeat;}
+.protyle-wysiwyg .h1>[spellcheck]:not(:empty)::after { background: var(--h1-r-graphic); }
+.protyle-wysiwyg .h2>[spellcheck]:not(:empty)::after { background: var(--h2-r-graphic); }
+.protyle-wysiwyg .h3>[spellcheck]:not(:empty)::after { background: var(--h3-r-graphic); }
+.protyle-wysiwyg .h4>[spellcheck]:not(:empty)::after { background: var(--h4-r-graphic); }
+.protyle-wysiwyg .h5>[spellcheck]:not(:empty)::after { background: var(--h5-r-graphic); }
+.protyle-wysiwyg .h6>[spellcheck]:not(:empty)::after { background: var(--h6-r-graphic); }
+.protyle-wysiwyg .h1 ,.protyle-wysiwyg .h2,.protyle-wysiwyg .h3,.protyle-wysiwyg .h4,.protyle-wysiwyg .h5,.protyle-wysiwyg .h6{
+	&>[spellcheck]:not(:empty)::after{
+    content: "";
+    position: absolute;
+    float: left;
+    margin-left: 0.2em;
+    margin-top: 0.1em;
+    height: 1.2em;
+    width: 1.2em;
+    background-size: 100% 100%;
+	}
 }

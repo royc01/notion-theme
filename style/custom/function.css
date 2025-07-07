@@ -5,17 +5,10 @@
 		&:hover{
 			background-color: var(--Sv-menu-item-hover)!important;
 		}
-	}
-#buttonSavor-light,#buttonsalt,#buttonsugar,#buttonforest,#buttonflower,#buttonwind,#buttonSavor-dark,#buttonvinegar,#buttonocean,#buttonmountain{
         &.button_on svg{
             color: var(--Sv-dock-item--activefocus-background);
-        }   
-    }
-#concealButton,#tabbarVertical,#topBar,#bulletThreading,#colorFolder,#typewriterMode,#headingDots{
-        &:not(.button_off) svg{
-            color: var(--Sv-dock-item--activefocus-background);
-        }   
-    }
+        } 
+	}  
 }
 
 

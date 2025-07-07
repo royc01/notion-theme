@@ -236,7 +236,9 @@
     padding: 0;
     line-height: 20px;
 	text-align: center;
+    background-color: var(--Sv-theme-surface);
 }
+
 /* 超级块 */
 .protyle-wysiwyg [data-node-id].sb[data-sb-layout=col]{
     column-gap: 8px;

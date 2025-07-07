@@ -1,4 +1,3 @@
-
 @keyframes statusExpand {
     0% {
         transform: scaleX(0.4) scaleY(0.4) translate(0px,0px);
@@ -9,24 +8,29 @@
     }
 }
 
+
 .toolbar:not(.toolbar--border) ~ #status,.body--window #status{
-	transition: transform .2s cubic-bezier(0, 0, .2, 1) 0ms;
 	position: fixed;
+    display: flex;
+    min-width: 0;
+    overflow: hidden;
+    align-items: center;
+    padding-right: 52px;
     height: 24px;
     line-height: 24px;
-    right: 28px;
+    right: 0px;
     bottom: 9px; 
 	border-radius: 6px;
-    padding-right: 0px;
     border: none;
     background-color: var(--Sv-status-msg-background);
     transform-origin: 100% 100%;
     animation: statusExpand .1s ;
     .toolbar__item:not(.toolbar__item--close) {
         padding:2px;
+        margin: unset;
         height: 24px;
         svg{
-            padding:3px 4px;
+            padding:3px;
             width: 12px;
         }
         & span{
@@ -41,14 +45,18 @@
         display: none;
     }
     #statusHelp{
+        position: absolute;
+        right: 26px;
         color: var(--Sv-status-barDock-color);
-        order: 97; 
+        box-shadow: 4px 0 0 0 var(--b3-theme-background);
+        background-color: var(--Sv-status-msg-background);
     }
     #barDock{
-        order: 98; 
+        position: absolute;
+        right: 0px;
         margin-left: 4px;
-        margin-right: -28px;
         background-color: var(--Sv-status-msg-background);
+        box-shadow: 0 0 0 4px var(--b3-theme-background);
     }
     .status__msg:not(:empty){
             padding-left: 26px!important;
