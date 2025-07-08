@@ -222,7 +222,7 @@ div *[custom-f="dt"] > [data-type="NodeListItem"].li::after {
 
 /*————————————————————————提示信息————————————————————————*/
 [custom-f="dt"]::before {
-    content: "拖拽：鼠标拖动节点　|　缩放：Alt + 鼠标滚轮　|　双击：复位节点";
+    content: attr(data-i18n-tip);
     position: absolute;
     top: 10px;
     right: 10px;

@@ -27,5 +27,7 @@
   "竖向表头样式": "Vertical Header",
   "空白表头样式": "Blank Header",
   "恢复表头样式": "Default Header",
-  "视图选择": "View Select"
+  "视图选择": "View Select",
+  "默认宽度": "Default Width",
+  "list2map.tip": "Drag: Drag node with mouse | Zoom: Alt + Mouse Wheel | Double Click: Reset node"
 } 
