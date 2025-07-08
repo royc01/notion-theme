@@ -66,10 +66,6 @@
     filter: grayscale(50%);
 }
 
-#savorToolbar #buttonSavor-light svg{
-    color: var(--b3-theme-on-surface);
-}
-
 
 body::before {
     content: "";

@@ -28,66 +28,77 @@
 
     const $$ = (selector) => document.querySelectorAll(selector);
 
+    // ========================================
+    // 模块：统一配置管理
+    // ========================================
+    const config = {
+        data: {},
+        save: debounce(function() {
+            写入文件("/data/snippets/Savor.config.json", JSON.stringify(config.data, undefined, 4));
+        }, 300),
+        set(key, value) {
+            if (config.data[key] === value) return;
+            config.data[key] = value;
+            config.save();
+        },
+        get(key) {
+            return config.data[key] ?? null;
+        },
+        async load() {
+            const result = await 获取文件("/data/snippets/Savor.config.json");
+            if (result && typeof result === "string") {
+                config.data = JSON.parse(result);
+            } else if (result) {
+                config.data = result;
+            } else {
+                config.data = { "Savor": 1 };
+                config.save();
+            }
+        }
+    };
+
 
 
 
     // ========================================
     // 模块：i18n 支持
     // ========================================
-    const i18n = (function() {
+    const i18n = (() => {
         let lang = (window.siyuan?.config?.lang || 'en').toLowerCase();
         if (lang === 'zh_cht') lang = 'zh_CHT';
         else if (lang.startsWith('zh')) lang = 'zh_CN';
         else lang = 'en';
         let dict = {};
-        
-        fetch(`/appearance/themes/Savor/i18n/${lang}.json`)
-            .then(response => response.ok ? response.json() : {})
-            .then(data => dict = data)
-            .catch(() => dict = {});
-            
-        return function(key) {
-            return dict[key] || key;
-        }
+        (async () => {
+            try {
+                const response = await fetch(`/appearance/themes/Savor/i18n/${lang}.json`);
+                dict = response.ok ? await response.json() : {};
+            } catch {
+                dict = {};
+            }
+        })();
+        return (key) => dict[key] || key;
     })();
 
 
 
 
     // ========================================
-    // 模块：主题配色配置
-    // ========================================
-    const themeStyles = new Map([
-        ["Sv-theme-color-light", "/appearance/themes/Savor/style/theme/savor-light.css"],
-        ["Sv-theme-color-dark", "/appearance/themes/Savor/style/theme/savor-dark.css"],
-        ["Sv-theme-color-salt", "/appearance/themes/Savor/style/theme/savor-salt.css"],
-        ["Sv-theme-color-sugar", "/appearance/themes/Savor/style/theme/savor-sugar.css"],
-        ["Sv-theme-color-forest", "/appearance/themes/Savor/style/theme/savor-forest.css"],
-        ["Sv-theme-color-flower", "/appearance/themes/Savor/style/theme/savor-flower.css"],
-        ["Sv-theme-color-wind", "/appearance/themes/Savor/style/theme/savor-wind.css"],
-        ["Sv-theme-color-vinegar", "/appearance/themes/Savor/style/theme/savor-vinegar.css"],
-        ["Sv-theme-color-ocean", "/appearance/themes/Savor/style/theme/savor-ocean.css"],
-        ["Sv-theme-color-mountain", "/appearance/themes/Savor/style/theme/savor-mountain.css"]
-    ]);
-
-
-
-    // ========================================
-    // 模块：统一按钮配置（配色+功能）
+    // 模块：统一按钮配置（合并 themeStyles）
     // ========================================
     const allButtons = [
         // 配色按钮（light）
-        { id: "buttonSavor-light", type: "theme", group: "light", label: i18n("Light 配色"), svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z" },
-        { id: "buttonsalt", type: "theme", group: "light", label: i18n("Salt 配色"), svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z" },
-        { id: "buttonsugar", type: "theme", group: "light", label: i18n("Sugar 配色"), svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-0.267 0-0.533 0-0.8-0.133 2.533-0.133 4.533-2.133 4.533-4.533 0.133-1.067-0.267-2.133-1.067-2.8-0.8-0.8-1.6-1.2-2.8-1.333-0.933-0.133-1.733 0.267-2.4 0.8s-1.067 1.467-1.067 2.267c-0.133 1.467 1.067 2.8 2.533 2.933 1.2 0.133 2.4-0.933 2.4-2.133 0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533c0 0.667-0.533 1.2-1.2 1.067-0.933-0.133-1.6-0.8-1.467-1.6 0-0.533 0.267-1.067 0.667-1.467s0.933-0.533 1.6-0.533c0.8 0 1.467 0.267 2 0.933 0.533 0.533 0.8 1.2 0.8 2.133-0.133 2-1.867 3.6-3.867 3.467-1.6-0.133-2.933-0.933-3.733-2.133-0.267-0.8-0.267-1.467-0.267-2.133 0-2.8 2.4-5.2 5.2-5.2s5.2 2.4 5.2 5.2-2.4 5.2-5.2 5.2z" },
-        { id: "buttonforest", type: "theme", group: "light", label: i18n("Forest 配色"), svg: "M16 12.133c-1.867 0-2.933 1.467-2.933 2.933 0 0.533 0 1.733 0 2.267 0 0.8 0.4 1.467 0.4 1.467 0.4 0.667 1.067 1.2 1.867 1.333v1.2c0 0.267 0.267 0.533 0.533 0.533s0.533-0.267 0.533-0.533v-1.2c1.333-0.267 2.267-1.467 2.267-2.8v-2.267c0.267-1.6-0.933-2.933-2.667-2.933zM17.733 17.333c0 0.8-0.4 1.333-1.2 1.6v-2.267c0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533v2.267c-0.8-0.267-1.2-0.933-1.2-1.6v-2.267c0-0.933 0.8-1.733 1.733-1.733s1.733 0.8 1.733 1.733v2.267zM16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467z" },
-        { id: "buttonflower", type: "theme", group: "light", label: i18n("Flower 配色"), svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM19.333 14.533c-0.267 0-1.6 0.267-1.6 0.267s-1.067-1.6-1.733-1.6-1.6 1.6-1.6 1.6-1.333-0.267-1.6-0.267-0.667 1.333-0.667 2.667c0 2.4 1.733 4 4 4s4-1.6 4-4c-0.133-1.333-0.4-2.667-0.8-2.667zM16 19.867c-1.467 0-2.667-1.067-2.667-2.667 0-0.4 0-0.8 0.133-1.2 0.133 0 0.4 0.133 0.533 0.133l0.933 0.267 0.533-0.8c0.133-0.267 0.267-0.533 0.533-0.667v0 0c0.133 0.267 0.4 0.533 0.533 0.8l0.533 0.8 0.933-0.267c0.133 0 0.4-0.133 0.533-0.133 0 0.4 0.133 0.8 0.133 1.2 0 1.333-1.2 2.533-2.667 2.533z" },
-        { id: "buttonwind", type: "theme", group: "light", label: i18n("Wind 配色"), svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM18.4 13.2h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.267c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.267c1.067 0 1.867-0.8 1.867-1.867 0-1.333-0.8-2.133-1.867-2.133zM14.667 17.733h-2.533c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h2.533c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c1.067 0 1.867-0.8 1.867-1.867s-0.8-2.133-1.867-2.133z" },
+        { id: "buttonSavor-light", type: "theme", group: "light", label: i18n("Light 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-light.css", styleId: "Sv-theme-color-light", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z" },
+        { id: "buttonsalt", type: "theme", group: "light", label: i18n("Salt 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-salt.css", styleId: "Sv-theme-color-salt", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z" },
+        { id: "buttonsugar", type: "theme", group: "light", label: i18n("Sugar 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-sugar.css", styleId: "Sv-theme-color-sugar", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-0.267 0-0.533 0-0.8-0.133 2.533-0.133 4.533-2.133 4.533-4.533 0.133-1.067-0.267-2.133-1.067-2.8-0.8-0.8-1.6-1.2-2.8-1.333-0.933-0.133-1.733 0.267-2.4 0.8s-1.067 1.467-1.067 2.267c-0.133 1.467 1.067 2.8 2.533 2.933 1.2 0.133 2.4-0.933 2.4-2.133 0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533c0 0.667-0.533 1.2-1.2 1.067-0.933-0.133-1.6-0.8-1.467-1.6 0-0.533 0.267-1.067 0.667-1.467s0.933-0.533 1.6-0.533c0.8 0 1.467 0.267 2 0.933 0.533 0.533 0.8 1.2 0.8 2.133-0.133 2-1.867 3.6-3.867 3.467-1.6-0.133-2.933-0.933-3.733-2.133-0.267-0.8-0.267-1.467-0.267-2.133 0-2.8 2.4-5.2 5.2-5.2s5.2 2.4 5.2 5.2-2.4 5.2-5.2 5.2z" },
+        { id: "buttonforest", type: "theme", group: "light", label: i18n("Forest 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-forest.css", styleId: "Sv-theme-color-forest", svg: "M16 12.133c-1.867 0-2.933 1.467-2.933 2.933 0 0.533 0 1.733 0 2.267 0 0.8 0.4 1.467 0.4 1.467 0.4 0.667 1.067 1.2 1.867 1.333v1.2c0 0.267 0.267 0.533 0.533 0.533s0.533-0.267 0.533-0.533v-1.2c1.333-0.267 2.267-1.467 2.267-2.8v-2.267c0.267-1.6-0.933-2.933-2.667-2.933zM17.733 17.333c0 0.8-0.4 1.333-1.2 1.6v-2.267c0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533v2.267c-0.8-0.267-1.2-0.933-1.2-1.6v-2.267c0-0.933 0.8-1.733 1.733-1.733s1.733 0.8 1.733 1.733v2.267zM16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467z" },
+        { id: "buttonflower", type: "theme", group: "light", label: i18n("Flower 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-flower.css", styleId: "Sv-theme-color-flower", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM19.333 14.533c-0.267 0-1.6 0.267-1.6 0.267s-1.067-1.6-1.733-1.6-1.6 1.6-1.6 1.6-1.333-0.267-1.6-0.267-0.667 1.333-0.667 2.667c0 2.4 1.733 4 4 4s4-1.6 4-4c-0.133-1.333-0.4-2.667-0.8-2.667zM16 19.867c-1.467 0-2.667-1.067-2.667-2.667 0-0.4 0-0.8 0.133-1.2 0.133 0 0.4 0.133 0.533 0.133l0.933 0.267 0.533-0.8c0.133-0.267 0.267-0.533 0.533-0.667v0 0c0.133 0.267 0.4 0.533 0.533 0.8l0.533 0.8 0.933-0.267c0.133 0 0.4-0.133 0.533-0.133 0 0.4 0.133 0.8 0.133 1.2 0 1.333-1.2 2.533-2.667 2.533z" },
+        { id: "buttonwind", type: "theme", group: "light", label: i18n("Wind 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-wind.css", styleId: "Sv-theme-color-wind", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM18.4 13.2h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.267c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.267c1.067 0 1.867-0.8 1.867-1.867 0-1.333-0.8-2.133-1.867-2.133zM14.667 17.733h-2.533c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h2.533c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c1.067 0 1.867-0.8 1.867-1.867s-0.8-2.133-1.867-2.133z" },
         // 配色按钮（dark）
-        { id: "buttonSavor-dark", type: "theme", group: "dark", label: i18n("Dark 配色"), svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z" },
-        { id: "buttonvinegar", type: "theme", group: "dark", label: i18n("Vinegar 配色"), svg: "M19.467 18.533c-0.133 0-0.133 0-0.133 0.133-0.4 0.133-0.8 0.133-1.2 0.133-2 0-3.2-1.2-3.2-3.2 0-0.4 0.133-1.067 0.267-1.2v-0.133c0-0.133-0.133-0.133-0.133-0.133s-0.133 0-0.267 0.133c-1.333 0.533-2.267 1.867-2.267 3.467 0 2.133 1.6 3.733 3.867 3.733 1.6 0 2.933-0.933 3.467-2.133 0.133-0.133 0.133-0.133 0.133-0.133-0.4-0.533-0.533-0.667-0.533-0.667zM16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2z" },
-        { id: "buttonocean", type: "theme", group: "dark", label: i18n("Ocean 配色"), svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z" },
-        { id: "buttonmountain", type: "theme", group: "dark", label: i18n("Mountain 配色"), svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM14.667 22.267c-1.2-0.267-2.267-0.933-2.933-1.867l2.533-4.4 2.133 3.6-1.733 2.667zM17.867 19.867l0.667-1.2 1.2 2.133c-0.933 0.933-2.133 1.467-3.467 1.467l1.6-2.4zM16 11.467c3.067 0 5.467 2.4 5.467 5.467 0 0.933-0.267 1.867-0.667 2.533l-1.6-2.533c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-0.667 1.2-2.4-4c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-2.8 4.8c-0.267-0.667-0.4-1.333-0.4-2 0-3.067 2.4-5.467 5.467-5.467z" },
+        { id: "buttonSavor-dark", type: "theme", group: "dark", label: i18n("Dark 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-dark.css", styleId: "Sv-theme-color-dark", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z" },
+        { id: "buttonvinegar", type: "theme", group: "dark", label: i18n("Vinegar 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-vinegar.css", styleId: "Sv-theme-color-vinegar", svg: "M19.467 18.533c-0.133 0-0.133 0-0.133 0.133-0.4 0.133-0.8 0.133-1.2 0.133-2 0-3.2-1.2-3.2-3.2 0-0.4 0.133-1.067 0.267-1.2v-0.133c0-0.133-0.133-0.133-0.133-0.133s-0.133 0-0.267 0.133c-1.333 0.533-2.267 1.867-2.267 3.467 0 2.133 1.6 3.733 3.867 3.733 1.6 0 2.933-0.933 3.467-2.133 0.133-0.133 0.133-0.133 0.133-0.133-0.4-0.533-0.533-0.667-0.533-0.667zM16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2z" },
+        { id: "buttonocean", type: "theme", group: "dark", label: i18n("Ocean 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-ocean.css", styleId: "Sv-theme-color-ocean", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z" },
+        { id: "buttonmountain", type: "theme", group: "dark", label: i18n("Mountain 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-mountain.css", styleId: "Sv-theme-color-mountain", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM14.667 22.267c-1.2-0.267-2.267-0.933-2.933-1.867l2.533-4.4 2.133 3.6-1.733 2.667zM17.867 19.867l0.667-1.2 1.2 2.133c-0.933 0.933-2.133 1.467-3.467 1.467l1.6-2.4zM16 11.467c3.067 0 5.467 2.4 5.467 5.467 0 0.933-0.267 1.867-0.667 2.533l-1.6-2.533c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-0.667 1.2-2.4-4c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-2.8 4.8c-0.267-0.667-0.4-1.333-0.4-2 0-3.067 2.4-5.467 5.467-5.467z" },
         // 功能按钮
         { id: "concealButton", type: "feature", label: i18n("挖空"), cssPath: "/appearance/themes/Savor/style/topbar/conceal-mark.css", styleId: "Sv-theme-color-conceal挖空", attrName: "conceal挖空", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z", onEnable: () => {}, onDisable: () => {} },
         { id: "tabbarVertical", type: "feature", label: i18n("垂直页签"), cssPath: "/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", styleId: "Sv-theme-color-tabbar垂直", attrName: "tabbar垂直", svg: "M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z", onEnable: () => { let topbarFixed = document.getElementById("Sv-theme-color-topbar隐藏"); if (topbarFixed) { let topbarBtn = document.getElementById("topBar"); if (topbarBtn) topbarBtn.click(); } setTimeout(() => { initTabbarResizer(); }, 500); }, onDisable: () => { removeTabbarResizer(); } },
@@ -105,7 +116,7 @@
     // ========================================
     const cssCache = new Map();
 
-    async function loadCSS(path, cacheKey = path) {
+    const loadCSS = async (path, cacheKey = path) => {
         if (cssCache.has(cacheKey)) return cssCache.get(cacheKey);
         if (!path) return null;
 
@@ -123,21 +134,25 @@
     }
 
     async function loadThemeCSS(themeId) {
-        const cssPath = themeStyles.get(themeId);
-        return loadCSS(cssPath, themeId);
+        const button = allButtons.find(btn => btn.styleId === themeId);
+        if (button?.cssPath) {
+            return loadCSS(button.cssPath, themeId);
+        }
+        return null;
     }
 
-    function preloadCurrentModeCSS() {
+    const preloadCurrentModeCSS = () => {
         const themeButtons = allButtons.filter(btn => btn.type === 'theme' && (!btn.group || btn.group === window.theme.themeMode));
         if (!themeButtons) return;
         
         themeButtons.forEach(btn => {
-            const themeId = btn.id.replace(/^button(Savor-)?/, 'Sv-theme-color-');
-            loadThemeCSS(themeId);
+            if (btn?.cssPath) {
+                loadCSS(btn.cssPath, btn.styleId);
+            }
         });
     }
 
-    function applyCSS(styleId, cssText) {
+    const applyCSS = (styleId, cssText) => {
         if (!cssText) return;
         const existing = $(`#${styleId}`);
         if (existing) existing.remove();
@@ -147,18 +162,18 @@
         document.head.appendChild(styleElement);
     }
 
-    function applyThemeCSS(themeId, cssText) {
+    const applyThemeCSS = (themeId, cssText) => {
         if (!cssText) return;
         $$('[id^="Sv-theme-color"]').forEach(el => el.remove());
         applyCSS(themeId, cssText);
     }
 
-    async function switchThemeStyle(themeId) {
+    const switchThemeStyle = async (themeId) => {
         const cssText = await loadThemeCSS(themeId);
         applyThemeCSS(themeId, cssText);
     }
 
-    function enableSvcolorfulHeading() {
+    const enableSvcolorfulHeading = () => {
         let styleElement = document.getElementById("snippet-SvcolorfulHeading");
         if (!styleElement) {
             styleElement = document.createElement("style");
@@ -176,13 +191,13 @@
         }
     }
 
-    async function applyRememberedThemeStyle(skipFeatures = false) {
+    const applyRememberedThemeStyle = async (skipFeatures = false) => {
         const themeButtons = allButtons.filter(btn => btn.type === 'theme' && (!btn.group || btn.group === window.theme.themeMode));
         const themeIds = themeButtons.map(btn => btn.id);
         
-        const rememberedId = themeIds.find(id => window.theme.config[id] === "1");
-        const themeLinkId = rememberedId 
-            ? rememberedId.replace(/^button(Savor-)?/, 'Sv-theme-color-')
+        const rememberedButton = themeButtons.find(btn => config.get(btn.id) === "1");
+        const themeLinkId = rememberedButton 
+            ? rememberedButton.styleId
             : `Sv-theme-color-${window.theme.themeMode}`;
         
         await switchThemeStyle(themeLinkId);
@@ -195,17 +210,10 @@
         }
         
         const savorToolbar = document.getElementById("savorToolbar");
-        if (savorToolbar) {
-            savorToolbar.querySelectorAll('.b3-menu__item').forEach(btn => {
-                btn.classList.remove('button_on');
-            });
-            if (rememberedId) {
-                const activeButton = document.getElementById(rememberedId);
-                if (activeButton) {
-                    activeButton.classList.add('button_on');
-                }
-            }
-        }
+        savorToolbar?.querySelectorAll('.b3-menu__item').forEach(btn => {
+            btn.classList.remove('button_on');
+        });
+        rememberedButton && document.getElementById(rememberedButton.id)?.classList.add('button_on');
         
         if (!skipFeatures) {
             await applyRememberedFeatures();
@@ -217,16 +225,16 @@
     // ========================================
     window.theme = {
         ID_COLOR_STYLE: 'Sv-theme-color',
-        config: {},
+        get config() { return config.data; },
         themeMode: null,
 
-        applyThemeTransition: function(callback, event = null) {
+        applyThemeTransition: (callback, event = null) => {
             const status = $('#status');
             const currentTransform = status ? status.style.transform : '';
             
             if (document.startViewTransition) {
                 document.startViewTransition(() => {
-                    if (typeof callback === "function") callback();
+                    callback?.();
                     
                     if (status && currentTransform) {
                         setTimeout(() => {
@@ -235,7 +243,7 @@
                     }
                 });
             } else {
-                if (typeof callback === "function") callback();
+                callback?.();
                 
                 if (status && currentTransform) {
                     setTimeout(() => {
@@ -245,7 +253,7 @@
             }
         },
 
-        findEditableParent: function(node) {
+        findEditableParent: (node) => {
             const editableSelectors = ['[contenteditable="true"]', '.protyle-wysiwyg'];
             
             for (const selector of editableSelectors) {
@@ -256,7 +264,7 @@
             return null;
         },
 
-        createElementEx: function(refElement, tag, id = null, mode = 'append') {
+        createElementEx: (refElement, tag, id = null, mode = 'append') => {
             if (!refElement) {
                 console.warn('[Savor] 参考元素不存在，无法创建子元素');
                 return null;
@@ -284,7 +292,7 @@
             }
         },
 
-        BodyEventRunFun: function(eventStr, fun, accurate = 100, delay = 0, frequency = 1, frequencydelay = 16) {
+        BodyEventRunFun: (eventStr, fun, accurate = 100, delay = 0, frequency = 1, frequencydelay = 16) => {
             let isMove = false;
             let _e = null;
             
@@ -310,21 +318,15 @@
         },
 
         EventUtil: {
-            on(element, type, handler) {
-                if (!element) return;
-                element.addEventListener?.(type, handler, false) || 
-                element.attachEvent?.("on" + type, handler) || 
-                (element["on" + type] = handler);
+            on: (element, type, handler) => {
+                element?.addEventListener?.(type, handler, false);
             },
-            off(element, type, handler) {
-                if (!element) return;
-                element.removeEventListener?.(type, handler, false) || 
-                element.detachEvent?.("on" + type, handler) || 
-                (element["on" + type] = null);
+            off: (element, type, handler) => {
+                element?.removeEventListener?.(type, handler, false);
             }
         },
 
-        findAncestor: function(element, fn, maxDepth = 50) {
+        findAncestor: (element, fn, maxDepth = 50) => {
             let depth = 0, parent = element?.parentElement;
             while (parent && depth < maxDepth) {
                 if (fn(parent)) return parent;
@@ -334,11 +336,11 @@
             return null;
         },
         
-        isSiyuanFloatingWindow: function(element) {
-            return this.findAncestor(element, v => v.getAttribute("data-oid") != null);
+        isSiyuanFloatingWindow: (element) => {
+            return window.theme.findAncestor(element, v => v.getAttribute("data-oid") != null);
         },
         
-        setBlockFold: function(id, fold) {
+        setBlockFold: (id, fold) => {
             if (!id) return;
             if (window._lastFoldedId === id && window._lastFoldedState === fold) return;
             window._lastFoldedId = id;
@@ -365,7 +367,7 @@
     // ========================================
     // 模块：主题按钮
     // ========================================
-    function renderAllButtons() {
+    const renderAllButtons = () => {
         const savorToolbar = document.getElementById("savorToolbar");
         if (!savorToolbar) return;
         savorToolbar.innerHTML = "";
@@ -386,29 +388,30 @@
 
             // 状态高亮
             let isActive = false;
-            if (btn.type === 'theme') {
-                const themeLinkId = btn.id.replace(/^button(Savor-)?/, 'Sv-theme-color-');
-                if (document.getElementById(themeLinkId) && !document.getElementById(themeLinkId).disabled) {
-                    button.classList.add("button_on");
-                    isActive = true;
-                }
-            } else if (btn.type === 'feature') {
-                if (getItem(btn.attrName) === "1") {
-                    button.classList.add("button_on");
-                    isActive = true;
-                }
+                    if (btn.type === 'theme') {
+            const themeLinkId = btn.id.replace(/^button(Savor-)?/, 'Sv-theme-color-');
+            const themeElement = document.getElementById(themeLinkId);
+            if (themeElement && !themeElement.disabled) {
+                button.classList.add("button_on");
+                isActive = true;
             }
+        } else if (btn.type === 'feature') {
+            if (getItem(btn.attrName) === "1") {
+                button.classList.add("button_on");
+                isActive = true;
+            }
+        }
 
             // 点击逻辑
             button.addEventListener("click", async () => {
                 if (btn.type === 'theme') {
                     savorToolbar.querySelectorAll('.b3-menu__item').forEach(btn => btn.classList.remove('button_on'));
                     button.classList.add('button_on');
-                    const themeLinkId = btn.id.replace(/^button(Savor-)?/, 'Sv-theme-color-');
                     window.theme.applyThemeTransition(async () => {
-                        await switchThemeStyle(themeLinkId);
+                        const cssText = await loadCSS(btn.cssPath);
+                        applyThemeCSS(btn.styleId, cssText);
                         const styleElement = document.getElementById("snippet-SvcolorfulHeading");
-                        if (themeLinkId === "Sv-theme-color-sugar" || themeLinkId === "Sv-theme-color-flower") {
+                        if (btn.styleId === "Sv-theme-color-sugar" || btn.styleId === "Sv-theme-color-flower") {
                             enableSvcolorfulHeading();
                         } else if (styleElement) {
                             styleElement.remove();
@@ -422,8 +425,8 @@
                     });
                     // 记忆状态
                     const themeButtons = allButtons.filter(b => b.type === 'theme' && (!b.group || b.group === themeMode));
-                    themeButtons.forEach(b => setItem(b.id, "0"));
-                    setItem(btn.id, "1");
+                    themeButtons.forEach(b => config.set(b.id, "0"));
+                    config.set(btn.id, "1");
                 } else if (btn.type === 'feature') {
                     const isActive = button.classList.contains("button_on");
                     if (isActive) {
@@ -431,7 +434,7 @@
                         const styleElement = document.getElementById(btn.styleId);
                         if (styleElement) styleElement.remove();
                         if (btn.onDisable) btn.onDisable();
-                        setItem(btn.attrName, "0");
+                        config.set(btn.attrName, "0");
                     } else {
                         button.classList.add("button_on");
                         if (btn.cssPath) {
@@ -439,14 +442,14 @@
                             applyCSS(btn.styleId, cssText);
                         }
                         if (btn.onEnable) btn.onEnable();
-                        setItem(btn.attrName, "1");
+                        config.set(btn.attrName, "1");
                     }
                 }
             });
             fragment.appendChild(button);
         });
         savorToolbar.appendChild(fragment);
-    }
+    };
 
 
 
@@ -456,17 +459,8 @@
     // ========================================
     // 配置和缓存管理
     const saveConfig = debounce(() => {
-        写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
+        写入文件("/data/snippets/Savor.config.json", JSON.stringify(config.data, undefined, 4));
     }, 300);
-
-    const config = {
-        set: (key, value) => {
-            if (window.theme.config[key] === value) return;
-            window.theme.config[key] = value;
-            saveConfig();
-        },
-        get: (key) => window.theme.config[key] ?? null
-    };
 
     const setItem = config.set;
     const getItem = config.get;
@@ -509,7 +503,7 @@
                 await fetch("/api/file/putFile", {
                     body: formdata,
                     method: "POST",
-                    headers: { Authorization: `Token ${window.siyuan.config.api.token || ""}` },
+                    headers: { Authorization: `Token ${window.siyuan.config.api.token ?? ""}` },
                 });
                 if (callback) setTimeout(() => callback(), 200);
             } catch (error) {
@@ -597,7 +591,7 @@
             
             const dockr = $(".layout__dockr");
             const dockVertical = $(".dock--vertical");
-            const dockrWidth = dockr?.offsetWidth || 0;
+            const dockrWidth = dockr?.offsetWidth ?? 0;
             const isFloatingR = dockr?.classList.contains("layout--float") ?? true;
             const isDockVerticalHidden = !dockVertical || dockVertical.classList.contains("fn__none");
             const dockVerticalWidth = isDockVerticalHidden ? 0 : 26;
@@ -608,7 +602,7 @@
             
             const layoutCenter = document.querySelector('.layout__center');
             if (layoutCenter) {
-                status.style.maxWidth = (layoutCenter.offsetWidth - 8) + 'px';
+                status.style.maxWidth = `${layoutCenter.offsetWidth - 8}px`;
             } else {
                 status.style.maxWidth = '';
             }
@@ -624,8 +618,8 @@
         const dockr = $(".layout__dockr");
         const dockVertical = $(".dock--vertical");
         
-        if (dockr) statusObserver.observe(dockr);
-        if (dockVertical) statusObserver.observe(dockVertical);
+        dockr && statusObserver.observe(dockr);
+        dockVertical && statusObserver.observe(dockVertical);
         
         window.statusObserver = statusObserver;
         window.statusObserver.updatePosition = updatePosition;
@@ -715,9 +709,7 @@
     };
 
     // 主初始化函数
-    获取文件("/data/snippets/Savor.config.json", async (v) => {
-        window.theme.config = v && typeof v === "string" ? JSON.parse(v) : (v || {});
-        
+    config.load().then(async () => {
         await Promise.all([
             applyRememberedThemeStyle(),
             preloadCurrentModeCSS()
@@ -734,15 +726,6 @@
         }
         
         initStatusPosition();
-        
-        if (v == null) {
-            window.theme.config = { "Savor": 1 };
-            写入文件("/data/snippets/Savor.config.json", JSON.stringify(window.theme.config, undefined, 4));
-        } else {
-            window.theme.config = v;
-        }
-    }, () => {
-        window.theme.config = { "Savor": 1 };
     });
 
 
@@ -751,7 +734,7 @@
     // ========================================
     // 模块：鼠标中键折叠/展开功能
     // ========================================
-    function initMiddleClickCollapse() {
+    const initMiddleClickCollapse = () => {
         if (window.theme._collapseHandler) return;
         
         const DEBOUNCE_TIME = 300;
@@ -785,7 +768,7 @@
             }
         };
 
-        function findElementByCondition(el, cond) {
+        const findElementByCondition = (el, cond) => {
             if (!el) return null;
             if (cond(el)) return el;
             for (const child of el.children || []) {
@@ -795,7 +778,7 @@
             return null;
         }
 
-        function handleHeadingCollapse(el) {
+        const handleHeadingCollapse = (el) => {
             const protyle = findProtyleContainer(el);
             if (!protyle) return;
             const gutters = protyle.querySelector(".protyle-gutters");
@@ -803,7 +786,7 @@
             foldBtn?.click();
         }
 
-        function findProtyleContainer(el) {
+        const findProtyleContainer = (el) => {
             const classes = ["protyle", "fn__flex-1 protyle", "block__edit fn__flex-1 protyle", "fn__flex-1 spread-search__preview protyle"];
             let cur = el, i = 0;
             while (cur && i++ < 20) {
@@ -813,7 +796,7 @@
             return null;
         }
 
-        function handleListItemCollapse(el) {
+        const handleListItemCollapse = (el) => {
             if (self.isSiyuanFloatingWindow(el)) {
                 const listItem = self.findAncestor(el, v => v.classList.contains("li"), 7);
                 if (listItem && !listItem.previousElementSibling) {
@@ -833,7 +816,7 @@
             else self.setBlockFold(nodeId, "1");
         }
 
-        function toggleFoldAttribute(el) {
+        const toggleFoldAttribute = (el) => {
             const fold = el.getAttribute("fold");
             el.setAttribute("fold", fold === "1" ? "0" : "1");
         }
@@ -851,7 +834,7 @@
     let listPreviewActive = false;
     let listPreviewHandler = null;
 
-    function collapsedListPreview() {
+    const collapsedListPreview = () => {
         if (listPreviewActive) return;
         listPreviewActive = true;
         
@@ -863,7 +846,7 @@
         }, 500);
     }
 
-    function collapsedListPreviewEvent() {
+    const collapsedListPreviewEvent = () => {
         const foldedItems = [
             ...document.querySelectorAll(".layout-tab-container>.fn__flex-1.protyle:not(.fn__none) [data-node-id].li[fold='1']"),
             ...document.querySelectorAll("[data-oid] [data-node-id].li[fold='1']"),
@@ -885,7 +868,7 @@
         previewTargets.forEach(registerPreviewEvents);
     }
 
-    function cleanupListPreview() {
+    const cleanupListPreview = () => {
         [
             ...document.querySelectorAll(".layout-tab-container>.fn__flex-1.protyle:not(.fn__none) [ListPreview]"),
             ...document.querySelectorAll("[data-oid] [ListPreview]"),
@@ -909,7 +892,7 @@
         });
     }
 
-    function registerPreviewEvents(element) {
+    const registerPreviewEvents = (element) => {
         const parent = element.parentElement, grandParent = parent?.parentElement;
         if (!parent || !grandParent) return;
         
@@ -923,7 +906,7 @@
         window.theme.EventUtil.on(grandParent, "mouseleave", handleMouseLeave);
     }
 
-    function handleMouseEnter(e) {
+    const handleMouseEnter = (e) => {
         const obj = e.target, parent = obj.parentElement, grandParent = parent?.parentElement;
         if (!grandParent) return;
         if ([...grandParent.children].some(child => child.getAttribute?.("triggerBlock") != null)) return;
@@ -935,11 +918,11 @@
         createTriggerBlock(grandParent, obj, obj.offsetLeft + 35, Y + 35);
     }
 
-    function handleMouseLeave(e) {
+    const handleMouseLeave = (e) => {
         e.target.querySelectorAll('[triggerBlock]').forEach(el => el.remove());
     }
 
-    function createTriggerBlock(container, refObj, left, top) {
+    const createTriggerBlock = (container, refObj, left, top) => {
         const previewID = container.getAttribute("data-node-id");
         if (!previewID) return;
         
@@ -953,7 +936,7 @@
         triggerBlock.innerHTML = `<span data-type='a' class='list-A' data-href='siyuan://blocks/${previewID}' style='font-size:15px;line-height:15px;color:transparent;text-shadow:none;border:none;'>####</span>`;
     }
 
-    function disableListPreview() {
+    const disableListPreview = () => {
         if (!listPreviewActive) return;
         
         listPreviewActive = false;
@@ -977,7 +960,7 @@
     const MIN_WIDTH = 150;
     const MAX_WIDTH = 400;
 
-    function initTabbarResizer() {
+    const initTabbarResizer = () => {
         removeTabbarResizer();
         const verticalTabbar = document.querySelector(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)");
         if (verticalTabbar) {
@@ -985,7 +968,7 @@
         }
     }
 
-    function createResizer(verticalTabbar) {
+    const createResizer = (verticalTabbar) => {
         tabbarResizer = document.createElement("div");
         tabbarResizer.id = "vertical-resize-handle";
         tabbarResizer.style.cssText = `
@@ -1005,7 +988,7 @@
         document.addEventListener("mouseup", stopResize);
     }
 
-    function startResize(e) {
+    const startResize = (e) => {
         e.preventDefault();
         isResizing = true;
         startX = e.clientX;
@@ -1015,7 +998,7 @@
         document.body.classList.add("tabbar-resizing");
     }
 
-    function resizeTabbar(e) {
+    const resizeTabbar = (e) => {
         if (!isResizing || !currentTabbar) return;
         const deltaX = e.clientX - startX;
         let newWidth = startWidth + deltaX;
@@ -1023,14 +1006,14 @@
         currentTabbar.style.width = newWidth + "px";
     }
 
-    function stopResize() {
+    const stopResize = () => {
         if (!isResizing) return;
         isResizing = false;
         document.body.classList.remove("tabbar-resizing");
         currentTabbar = null;
     }
 
-    function removeTabbarResizer() {
+    const removeTabbarResizer = () => {
         document.removeEventListener("mousemove", resizeTabbar);
         document.removeEventListener("mouseup", stopResize);
         const existingResizer = document.getElementById("vertical-resize-handle");
@@ -1047,7 +1030,7 @@
     // ========================================
     // 模块：顶栏合并左右间距功能
     // ========================================
-    function initTabBarsMarginUnified(direction = "right") {
+    const initTabBarsMarginUnified = (direction = "right") => {
         let dock = null;
         let dockVertical = null;
         const isRight = direction === "right";
@@ -1075,11 +1058,11 @@
 
             const panel = document.querySelector(isRight ? ".layout__dockr" : ".layout__dockl");
             const panelWidth = panel?.classList.contains("layout--float")
-                ? panel.querySelector(".dock")?.offsetWidth || 0
-                : panel?.offsetWidth || 0;
+                ? panel.querySelector(".dock")?.offsetWidth ?? 0
+                : panel?.offsetWidth ?? 0;
 
             const dockId = isRight ? "#dockRight" : "#dockLeft";
-            const dockWidth = document.querySelector(dockId)?.offsetWidth || 0;
+            const dockWidth = document.querySelector(dockId)?.offsetWidth ?? 0;
 
             let barButtonsTotalWidth = 0;
             const drag = document.getElementById("drag");
@@ -1089,7 +1072,7 @@
                     let el = drag.nextElementSibling;
                     while (el) {
                         if (el.offsetParent !== null) {
-                            barButtonsTotalWidth += (el.offsetWidth || 0) + 4;
+                            barButtonsTotalWidth += (el.offsetWidth ?? 0) + 4;
                         }
                         el = el.nextElementSibling;
                     }
@@ -1098,7 +1081,7 @@
                     let el = drag.previousElementSibling;
                     while (el) {
                         if (el.offsetParent !== null) {
-                            barButtonsTotalWidth += (el.offsetWidth || 0) + 4;
+                            barButtonsTotalWidth += (el.offsetWidth ?? 0) + 4;
                         }
                         el = el.previousElementSibling;
                     }
@@ -1213,7 +1196,7 @@
     let typewriterModeActive = false;
     let typewriterHandler = null;
 
-    function enableTypewriterMode() {
+    const enableTypewriterMode = () => {
         if (typewriterModeActive) return;
         typewriterModeActive = true;
         
@@ -1246,7 +1229,7 @@
         document.addEventListener("selectionchange", typewriterHandler);
     }
 
-    function disableTypewriterMode() {
+    const disableTypewriterMode = () => {
         if (!typewriterModeActive) return;
         typewriterModeActive = false;
         if (typewriterHandler) {
@@ -1266,7 +1249,7 @@
     let lastListItems = null;
 
 
-    function initBulletThreading() {
+    const initBulletThreading = () => {
         if (bulletThreadingActive) return;
         
         bulletThreadingActive = true;
@@ -1334,7 +1317,7 @@
         document.addEventListener('selectionchange', selectionChangeHandler);
     }
 
-    function removeBulletThreading() {
+    const removeBulletThreading = () => {
         if (!bulletThreadingActive) return;
         
         bulletThreadingActive = false;
@@ -1367,8 +1350,7 @@
             { id: "DefaultView", attrName: "f", attrValue: "", icon: "iconList", label: i18n("恢复为列表") }
         ],
         NodeTable: [
-            { id: "FixWidth", attrName: "f", attrValue: "", icon: "iconTable", label: i18n("自动宽度(换行)") },
-            { id: "AutoWidth", attrName: "f", attrValue: "auto", icon: "iconTable", label: i18n("自动宽度(不换行)") },
+            { id: "FixWidth", attrName: "f", attrValue: "", icon: "iconTable", label: i18n("默认宽度") },
             { id: "FullWidth", attrName: "f", attrValue: "full", icon: "iconTable", label: i18n("页面宽度") },
             { separator: true },
             { id: "vHeader", attrName: "t", attrValue: "vbiaotou", icon: "iconSuper", label: i18n("竖向表头样式") },
@@ -1377,7 +1359,7 @@
         ]
     };
 
-    function ViewSelect(selectid, selecttype) {
+    const ViewSelect = (selectid, selecttype) => {
         const button = document.createElement("button");
         button.id = "viewselect";
         button.className = "b3-menu__item";
@@ -1420,7 +1402,7 @@
         return button;
     }
 
-    function getBlockSelected() {
+    const getBlockSelected = () => {
         const node = document.querySelector(".protyle-wysiwyg--select");
         return node?.dataset?.nodeId ? {
             id: node.dataset.nodeId,
@@ -1429,7 +1411,7 @@
         } : null;
     }
 
-    function initMenuMonitor() {
+    const initMenuMonitor = () => {
         window.addEventListener("mouseup", () => {
             setTimeout(() => {
                 const selectinfo = getBlockSelected();
@@ -1440,7 +1422,7 @@
         });
     }
 
-    function InsertMenuItem(selectid, selecttype) {
+    const InsertMenuItem = (selectid, selecttype) => {
         const commonMenu = document.querySelector("#commonMenu .b3-menu__items");
         if (!commonMenu) return;
         
@@ -1456,7 +1438,7 @@
         }
     }
 
-    function ViewMonitor(event) {
+    const ViewMonitor = (event) => {
         const target = event.currentTarget;
         const id = target.getAttribute("data-node-id");
         const attrName = "custom-" + target.getAttribute("custom-attr-name");
@@ -1472,13 +1454,13 @@
         }
     }
 
-    async function 设置思源块属性(id, attrs) {
+    const 设置思源块属性 = async (id, attrs) => {
         try {
             const response = await fetch("/api/attr/setBlockAttrs", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Token ${window.siyuan?.config?.api?.token || ""}`
+                    "Authorization": `Token ${window.siyuan?.config?.api?.token ?? ""}`
                 },
                 body: JSON.stringify({
                     id,
@@ -1494,7 +1476,7 @@
         }
     }
 
-    function clearTransformData(id, blocks) {
+    const clearTransformData = (id, blocks) => {
         try {
             const positions = JSON.parse(localStorage.getItem("dt-positions") || "{}");
             if (positions[id]) {
@@ -1524,46 +1506,7 @@
             };
         };
 
-        // 清理导图拖拽功能的辅助函数
-        function cleanupDraggable(element) {
-            const listItems = element.querySelectorAll(`[data-type="NodeListItem"]`);
-            
-            // 重置所有列表项的位置和缩放
-            listItems.forEach(item => {
-                item.style.transform = "translate(0px, 0px) scale(1)";
-                item.style.cursor = "";
-                item.removeAttribute("data-draggable");
-                item.style.transition = "transform 0.3s ease";
-            });
-            
-            // 移除拖拽相关属性和事件监听器
-            element.removeAttribute("data-draggable");
-            element._scale = 1;
-            
-            // 清理事件监听器
-            const listeners = ['_wheelListeners', '_doubleClickListeners', '_mouseDownListeners'];
-            const eventTypes = ['wheel', 'dblclick', 'mousedown'];
-            
-            listeners.forEach((prop, index) => {
-                const listenerArray = element[prop] || [];
-                listenerArray.forEach(listener => {
-                    if (index === 2) { // mousedown listeners
-                        const listItem = listener.element;
-                        if (listItem) {
-                            listItem.removeEventListener(eventTypes[index], listener.handler);
-                        }
-                    } else {
-                        element.removeEventListener(eventTypes[index], listener, { passive: false });
-                    }
-                });
-                delete element[prop];
-            });
-            
-            // 延时移除过渡样式
-            setTimeout(() => listItems.forEach(item => item.style.transition = ""), 300);
-        }
-
-        function initDraggable(element) {
+        const initDraggable = (element) => {
             const listItems = element.querySelectorAll(`:scope > [data-type="NodeListItem"]`);
             if (!listItems.length) return;
             
@@ -1649,7 +1592,7 @@
             });
         }
 
-        function initObserver() {
+        const initObserver = () => {
             const observer = new MutationObserver(mutations => {
                 for (const mutation of mutations) {
                     if (mutation.type === "attributes" && mutation.target.getAttribute("custom-f") === "dt") {
@@ -1683,7 +1626,42 @@
         initObserver();
     }
 
+    // ========================================
+    // 模块：清理导图拖拽功能
+    // ========================================
+    const cleanupDraggable = (element) => {
+        // 重置所有列表项的位置和缩放
+        element.querySelectorAll('[data-type="NodeListItem"]').forEach(item => {
+            item.style.transform = "translate(0px, 0px) scale(1)";
+            item.style.cursor = "";
+            item.removeAttribute("data-draggable");
+            item.style.transition = "transform 0.3s ease";
+        });
 
+        // 移除自身属性
+        element.removeAttribute("data-draggable");
+        element._scale = 1;
+
+        // 清理事件监听器
+        ['_wheelListeners', '_doubleClickListeners', '_mouseDownListeners'].forEach((prop, idx) => {
+            const eventType = ['wheel', 'dblclick', 'mousedown'][idx];
+            (element[prop] || []).forEach(listener => {
+                if (eventType === 'mousedown' && listener.element) {
+                    listener.element.removeEventListener(eventType, listener.handler);
+                } else {
+                    element.removeEventListener(eventType, listener, { passive: false });
+                }
+            });
+            delete element[prop];
+        });
+
+        // 延时移除过渡样式
+        setTimeout(() => {
+            element.querySelectorAll('[data-type="NodeListItem"]').forEach(item => {
+                item.style.transition = "";
+            });
+        }, 300);
+    };
 
 
     // ========================================
@@ -1717,15 +1695,15 @@
     // ========================================
     // 模块：移动端和平台判断功能
     // ========================================
-    function isPhone() {
+    const isPhone = () => {
         return !!document.getElementById("editor");
     }
 
-    function isMac() {
+    const isMac = () => {
         return navigator.platform.toUpperCase().indexOf("MAC") > -1;
     }
 
-    function initMobileAndPlatformFeatures() {
+    const initMobileAndPlatformFeatures = () => {
         if (isPhone()) {
             const mobileStyle = document.createElement("link");
             mobileStyle.rel = "stylesheet";
@@ -1740,7 +1718,7 @@
         }
     }
 
-    function initMobileMenu() {
+    const initMobileMenu = () => {
         const waitForElement = (selector, timeout = 5000) => {
             return new Promise((resolve) => {
                 if (document.querySelector(selector)) {
@@ -1804,14 +1782,14 @@
                     justify-content: center;
                 `;
                 
-                toggleBtn.onclick = function(e) {
+                toggleBtn.addEventListener("click", (e) => {
                     e.stopPropagation();
                     savorToolbar.style.display = (savorToolbar.style.display === "none" ? "block" : "none");
-                };
+                });
 
                 toolbarMore.parentNode.insertBefore(toggleBtn, toolbarMore);
 
-                document.addEventListener("click", function hideSavorToolbar(e) {
+                document.addEventListener("click", (e) => {
                     if (!savorToolbar.contains(e.target) && e.target !== toggleBtn) {
                         savorToolbar.style.display = "none";
                     }
@@ -1824,7 +1802,7 @@
         });
     }
 
-    function initMobileThemeButtons(savorToolbar) {
+    const initMobileThemeButtons = (savorToolbar) => {
         // 移动端也使用统一的按钮渲染
         renderAllButtons();
     }
@@ -1840,9 +1818,9 @@
     // 模块：功能按钮相关变量和函数
     // ========================================
     const featureButtonsActive = new Set();
-    async function applyRememberedFeatures() {
+    const applyRememberedFeatures = async () => {
         for (const btn of allButtons) {
-            if (btn.type === 'feature' && getItem(btn.attrName) === "1") {
+            if (btn.type === 'feature' && config.get(btn.attrName) === "1") {
                 featureButtonsActive.add(btn.id);
                 
                 const button = document.getElementById(btn.id);
@@ -1892,8 +1870,9 @@
         window.statusObserver?.disconnect();
         window.statusObserver = null;
         
-        $$(`[id^="Sv-theme-color"]`).forEach(el => el.remove());
+        $$("[id^=\"Sv-theme-color\"]").forEach(el => el.remove());
         $("#snippet-SvcolorfulHeading")?.remove();
+        $("#Sv-theme-typewriter-mode")?.remove();
         $("#savorToolbar")?.remove();
         $$(".layout__center .layout-tab-bar--readonly").forEach(el => el.style.marginRight = "0px");
         $$(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(el => el.style.marginLeft = "0px");

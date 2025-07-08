@@ -15,7 +15,8 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
     overflow: visible;
     &.layout-tab-bar--readonly {
         flex: initial;
-        padding: 5px 5px 5px 10px;
+        width: calc(100% - 10px);
+        padding: 5px;
     }
     .item:not(.item--readonly) {
         margin:0 -5px 5px 0!important;

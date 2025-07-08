@@ -422,16 +422,9 @@
 }
 
 /* 表格 */
-.b3-typography table, .protyle-wysiwyg table{
-	font-weight:500;
-}
 .b3-typography table thead, .protyle-wysiwyg table thead{
 	background-color: var(--Sv-table-thead);
 }
-.protyle-wysiwyg div.table[data-node-id] table {
-    width: auto;
-}
-
 .b3-typography table tr:nth-child(even) td, .protyle-wysiwyg table tr:nth-child(even) td{
 	background-color:transparent;
 }
@@ -441,16 +434,7 @@
 	width: 100%;
 	display: table;
 }
-.protyle-wysiwyg [data-node-id][custom-f~=full] colgroup{
-	border-style:unset;
-}
-/* 自定义表格宽度 */
-.protyle-wysiwyg div.table[data-node-id][custom-f~=auto] table {
-    width: max-content;
-}
-.protyle-wysiwyg [data-node-id][custom-f~=auto] table {
-    width: max-content !important;
-}
+
 /* 表头和表行格式一致 */
 .protyle-wysiwyg [data-node-id][custom-t~=biaotou] table th {
     font-weight: normal !important;
