@@ -170,6 +170,9 @@
 			pointer-events:none;
 			font-family:"Segoe UI";
 		}
+		&:hover>span:first-child::after{
+			opacity:1;
+		}
 	}
 	& svg.b3-list-item__graphic{
 		margin-left:-15px;

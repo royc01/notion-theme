@@ -117,7 +117,7 @@
 }/*弹窗列表不折叠*/
 
 /* 选择下拉菜单、输入框  */
-.b3-text-field:not(#searchInput, #replaceInput, #searchAssetInput,.b3-text-field--text){
+.b3-text-field:not(#searchInput, #replaceInput, #searchAssetInput,.b3-text-field--text,.search__label){
 	box-shadow: none;
 	background-color: var(--Sv-select-field);
     &:hover{

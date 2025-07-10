@@ -962,7 +962,7 @@
     const MAX_WIDTH = 400;
 
     const initTabbarResizer = () => {
-        removeTabbarResizer();
+        removeTabbarResizer(false); // 初始化时不重置宽度
         const verticalTabbar = document.querySelector(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)");
         if (verticalTabbar) {
             createResizer(verticalTabbar);
@@ -1014,12 +1014,21 @@
         currentTabbar = null;
     }
 
-    const removeTabbarResizer = () => {
+    const removeTabbarResizer = (resetWidth = true) => {
         document.removeEventListener("mousemove", resizeTabbar);
         document.removeEventListener("mouseup", stopResize);
         const existingResizer = document.getElementById("vertical-resize-handle");
         if (existingResizer) existingResizer.remove();
         document.body.classList.remove("tabbar-resizing");
+        
+        // 只在需要时重置宽度
+        if (resetWidth) {
+            document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabbar => {
+                tabbar.style.width = "";
+                tabbar.style.position = "";
+            });
+        }
+        
         tabbarResizer = null;
         isResizing = false;
         currentTabbar = null;
@@ -1091,7 +1100,7 @@
 
             const calculatedMargin = barButtonsTotalWidth - panelWidth - dockWidth;
             const CUSTOM_MARGIN_RIGHT = -14;
-            const CUSTOM_MARGIN_LEFT = -10;
+            const CUSTOM_MARGIN_LEFT = 0;
             let marginValue;
             if (isRight) {
                 const calcMargin = (calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN_RIGHT : CUSTOM_MARGIN_RIGHT);
