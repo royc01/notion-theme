@@ -86,9 +86,6 @@ body:not(.body--mobile,.body--window) #layouts{
 
 
 
-.layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
-    padding-left: 10px;
-}
 .layout__center .layout__resize + .fn__flex [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
     padding-left: 0px!important;
     margin-left: 0!important;

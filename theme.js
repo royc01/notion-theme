@@ -106,7 +106,8 @@
             { id: "bulletThreading", type: "feature", label: i18n.t("列表子弹线"), cssPath: "/appearance/themes/Savor/style/topbar/bullet-threading.css", styleId: "Sv-theme-color-列表子弹线", attrName: "列表子弹线", svg: "M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z", onEnable: () => { initBulletThreading(); }, onDisable: () => { removeBulletThreading(); } },
             { id: "colorFolder", type: "feature", label: i18n.t("彩色文档树"), cssPath: "/appearance/themes/Savor/style/topbar/color-folder.css", styleId: "Sv-theme-color-彩色文档树", attrName: "彩色文档树", svg: "M11.6 14.933c0-0.133 0-0.267 0-0.4 0-2.533 2-4.533 4.4-4.533s4.4 2 4.4 4.533c0 0.133 0 0.267 0 0.4 1.467 0.667 2.533 2.267 2.533 4.133 0 2.533-2 4.533-4.4 4.533-0.933 0-1.867-0.267-2.533-0.8-0.8 0.533-1.6 0.8-2.533 0.8-2.4 0-4.4-2-4.4-4.533 0-1.867 0.933-3.467 2.533-4.133zM11.867 16.267c-0.933 0.533-1.6 1.6-1.6 2.8 0 1.733 1.467 3.2 3.2 3.2 0.533 0 1.067-0.133 1.6-0.4-0.667-0.8-0.933-1.733-0.933-2.8 0-0.133 0-0.267 0-0.4-1.067-0.533-1.867-1.467-2.267-2.4v0zM15.333 18.933v0c0 1.867 1.467 3.2 3.2 3.2s3.2-1.467 3.2-3.2c0-1.2-0.667-2.267-1.6-2.8-0.667 1.6-2.267 2.8-4.133 2.8-0.267 0.133-0.4 0-0.667 0v0zM16 17.733c1.733 0 3.2-1.467 3.2-3.2s-1.467-3.2-3.2-3.2-3.2 1.467-3.2 3.2 1.467 3.2 3.2 3.2z", onEnable: () => {}, onDisable: () => {} },
             { id: "headingDots", type: "feature", label: i18n.t("标题点标识"), cssPath: "/appearance/themes/Savor/style/topbar/headingdots.css", styleId: "Sv-theme-color-标题点标识", attrName: "标题点标识", svg: "M18.533 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM13.467 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM18.533 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM13.467 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM18.533 13.467c0.8 0 1.467-0.667 1.467-1.467s-0.667-1.467-1.467-1.467-1.467 0.667-1.467 1.467 0.667 1.467 1.467 1.467zM13.467 10.667c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.933-0.667-1.467-1.467-1.467z", onEnable: () => {}, onDisable: () => {} },
-            { id: "typewriterMode", type: "feature", label: i18n.t("打字机模式"), cssPath: "", styleId: "Sv-theme-typewriter-mode", attrName: "typewriterMode", svg: "M20.133 10.667c1.6 0 2.8 1.2 2.8 2.8v0 6.933c0 1.6-1.2 2.8-2.8 2.8v0h-8.267c-1.6 0-2.8-1.2-2.8-2.8v0-7.067c0-1.467 1.2-2.667 2.8-2.667 0 0 8.267 0 8.267 0zM20.133 12h-8.267c-0.8 0-1.333 0.533-1.333 1.333v0 6.933c0 0.8 0.533 1.333 1.333 1.333h8.533c0.8 0 1.333-0.533 1.333-1.333v-6.933c-0.133-0.667-0.667-1.333-1.6-1.333v0zM19.467 18.933c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.933c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h6.933zM12.533 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM12.533 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667z", onEnable: () => { enableTypewriterMode(); }, onDisable: () => { disableTypewriterMode(); } }
+            { id: "typewriterMode", type: "feature", label: i18n.t("打字机模式"), cssPath: "", styleId: "Sv-theme-typewriter-mode", attrName: "typewriterMode", svg: "M20.133 10.667c1.6 0 2.8 1.2 2.8 2.8v0 6.933c0 1.6-1.2 2.8-2.8 2.8v0h-8.267c-1.6 0-2.8-1.2-2.8-2.8v0-7.067c0-1.467 1.2-2.667 2.8-2.667 0 0 8.267 0 8.267 0zM20.133 12h-8.267c-0.8 0-1.333 0.533-1.333 1.333v0 6.933c0 0.8 0.533 1.333 1.333 1.333h8.533c0.8 0 1.333-0.533 1.333-1.333v-6.933c-0.133-0.667-0.667-1.333-1.6-1.333v0zM19.467 18.933c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.933c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h6.933zM12.533 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM12.533 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667z", onEnable: () => { enableTypewriterMode(); }, onDisable: () => { disableTypewriterMode(); } },
+            { id: "sidebarMemo", type: "feature", label: i18n.t("侧边栏备注"), cssPath: "/appearance/themes/Savor/style/custom/sidebar-memo.css", styleId: "Sv-theme-sidebar-memo", attrName: "sidebarMemo", svg: "M19.2 13.733h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM19.2 16.267h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM20.533 10.533h-9.067c-1.067 0-1.867 0.8-1.867 1.867v6.4c0 1.067 0.8 1.867 1.867 1.867h7.467l2.4 2.4c0.133 0.133 0.267 0.133 0.4 0.133s0.133 0 0.267 0c0.267-0.133 0.4-0.267 0.4-0.533v-10.267c0-1.067-0.8-1.867-1.867-1.867zM21.067 21.2l-1.467-1.467c-0.133-0.133-0.267-0.133-0.4-0.133h-7.733c-0.4 0-0.667-0.267-0.667-0.667v-6.533c0-0.4 0.267-0.667 0.667-0.667h8.933c0.4 0 0.667 0.267 0.667 0.667v8.8z", onEnable: () => { sidebarMemo.setEnabled(true); }, onDisable: () => { sidebarMemo.setEnabled(false); } }
         ];
     }
 
@@ -1747,11 +1748,11 @@
 
     const initMobileAndPlatformFeatures = () => {
         if (isPhone()) {
+            document.body.classList.add("body--mobile");
             const mobileStyle = document.createElement("link");
             mobileStyle.rel = "stylesheet";
             mobileStyle.href = "/appearance/themes/Savor/style/module/mobile.css";
             document.head.appendChild(mobileStyle);
-            
             initMobileMenu();
         }
 
@@ -1883,6 +1884,7 @@
 
 
 
+
     // ========================================
     // 模块：清理样式
     // ========================================
@@ -1897,6 +1899,12 @@
         
         [removeTabbarResizer, removeBulletThreading, disableTypewriterMode, disableListPreview]
             .forEach(fn => fn?.());
+        
+        // 清理侧边栏备注功能
+        if (sidebarMemo) {
+            sidebarMemo.openSideBar(false);
+            sidebarMemo.unobserveDragTitle?.(); // 确保清理 drag 监听
+        }
         
         if (window.theme._collapseHandler) {
             document.body.removeEventListener("mousedown", window.theme._collapseHandler);
@@ -1939,6 +1947,399 @@
     };
 
 
+    
+
+
+
+
+
+
+
+
+
+    
+    // ========================================
+    // 模块：侧边栏备注功能
+    // ========================================
+    const sidebarMemo = (() => {
+        let isEnabled = false, observers = {}, editorNode = null;
+        let dragObserver = null, dragTimeout = null, dragMutationObserver = null, refreshTimer = null;
+
+        // 获取块节点
+        const getBlockNode = el => { while (el && !el.dataset.nodeId) el = el.parentElement; return el; };
+
+        // 新增：监听 #drag 的 title 属性变化
+        function observeDragTitle() {
+            if (dragObserver) return;
+            dragObserver = function _observe() {
+                const dragEl = document.getElementById('drag');
+                if (!dragEl) {
+                    dragTimeout = setTimeout(_observe, 1000);
+                    return;
+                }
+                let lastTitle = dragEl.getAttribute('title');
+                let debounceTimer = null;
+                dragMutationObserver = new MutationObserver(mutations => {
+                    mutations.forEach(mutation => {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'title') {
+                            const newTitle = dragEl.getAttribute('title');
+                            if (newTitle !== lastTitle) {
+                                lastTitle = newTitle;
+                                if (debounceTimer) clearTimeout(debounceTimer);
+                                debounceTimer = setTimeout(() => {
+                                    refreshEditor();
+                                }, 1000);
+                            }
+                        }
+                    });
+                });
+                dragMutationObserver.observe(dragEl, { attributes: true, attributeFilter: ['title'] });
+            };
+            dragObserver();
+        }
+        function unobserveDragTitle() {
+            if (dragMutationObserver) {
+                dragMutationObserver.disconnect();
+                dragMutationObserver = null;
+            }
+            if (dragTimeout) {
+                clearTimeout(dragTimeout);
+                dragTimeout = null;
+            }
+            dragObserver = null;
+        }
+
+        // 刷新侧边栏备注位置
+        const refreshMemoOffset = (main, sidebar) => {
+            requestAnimationFrame(() => {
+                const groups = Array.from(sidebar.querySelectorAll('div[data-node-id]'));
+                const mainRect = main.getBoundingClientRect();
+                groups.forEach(group => {
+                    const nodeId = group.getAttribute('data-node-id');
+                    const block = main.querySelector(`div[data-node-id="${nodeId}"]`);
+                    if (!block) return;
+                    const blockRect = block.getBoundingClientRect();
+                    let curTop = 0;
+                    group.querySelectorAll('.memo-item').forEach(item => {
+                        item.style.position = 'relative';
+                        item.style.top = '';
+                        item.style.height = 'auto';
+                        item.style.transition = 'none';
+                        let h = item.offsetHeight;
+                        if (!h || h < 10) h = 48; // 兜底高度
+                        curTop += h + 8;
+                    });
+                    // group 绝对定位，top 由正文块决定，height 让内容自适应
+                    group.style.position = 'absolute';
+                    group.style.top = `${blockRect.top - mainRect.top - group.offsetHeight / 2}px`;
+                    group.style.height = '';
+                    group.style.transition = 'none';
+                    // memo-item 用标准流布局
+                    group.querySelectorAll('.memo-item').forEach(item => {
+                        item.style.position = '';
+                        item.style.top = '';
+                        item.style.height = '';
+                        item.style.transition = 'none';
+                    });
+                });
+                // 防止分组重叠
+                for (let i = 1; i < groups.length; i++) {
+                    const prev = groups[i - 1], curr = groups[i];
+                    const prevBottom = (parseFloat(prev.style.top) || 0) + (prev.offsetHeight || 0);
+                    if ((parseFloat(curr.style.top) || 0) < prevBottom + 8) {
+                        curr.style.top = `${prevBottom + 8}px`;
+                        // 移除动画效果
+                        curr.style.transition = 'none';
+                    }
+                }
+            });
+        };
+
+        // 添加侧边栏
+        const addSideBar = main => {
+            let sidebar = main.parentElement.querySelector('#protyle-sidebar');
+            const title = main.parentElement.querySelector('div.protyle-title');
+            const pr = parseFloat(getComputedStyle(main).paddingRight);
+            const isFull = main.parentElement.dataset.fullwidth;
+            if (!sidebar) {
+                sidebar = document.createElement('div');
+                sidebar.id = 'protyle-sidebar';
+                title.insertAdjacentElement('beforeend', sidebar);
+                const width = isFull ? 230 : pr - 20;
+                sidebar.style.cssText = `position:absolute;right:-${width}px;width:${width}px;z-index:3;`;
+                main.style.minWidth = '90%';
+            }
+            return sidebar;
+        };
+
+        // 编辑备注内容
+        function bindMemoEdit(div, memoDiv, el, main, sidebar) {
+            div.onclick = e => {
+                e.stopPropagation();
+                if (memoDiv.classList.contains('editing')) return;
+                memoDiv.classList.add('editing');
+                memoDiv.style.zIndex = '999'; // 编辑时提升z-index
+                const old = el.getAttribute('data-inline-memo-content') || '';
+                const input = document.createElement('textarea');
+                input.className = 'memo-edit-input';
+                input.value = old;
+                input.placeholder = '输入备注内容...';
+                input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.9em;resize:none;box-sizing:border-box;overflow:hidden;';
+                // 自适应高度函数
+                function autoResizeTextarea(textarea) {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = textarea.scrollHeight + 'px';
+                }
+                input.addEventListener('input', () => autoResizeTextarea(input));
+                autoResizeTextarea(input); // 初始时自适应
+                div.replaceWith(input);
+                input.focus(); input.select();
+                requestAnimationFrame(() => autoResizeTextarea(input)); // 确保渲染后再自适应一次
+                const save = () => {
+                    const val = input.value.trim();
+                    if (val !== old) {
+                        el.setAttribute('data-inline-memo-content', val);
+                        updateInlineMemo(el, val);
+                    }
+                    const newDiv = document.createElement('div');
+                    newDiv.className = 'memo-content-view';
+                    newDiv.style.cssText = div.style.cssText;
+                    newDiv.innerHTML = val || '<span style="color:#bbb;">点击编辑备注...</span>';
+                    bindMemoEdit(newDiv, memoDiv, el, main, sidebar);
+                    input.replaceWith(newDiv);
+                    memoDiv.classList.remove('editing');
+                    memoDiv.style.zIndex = '';
+                    memoDiv.style.transform = '';
+                    setTimeout(() => { memoDiv.style.transition = ''; }, 300);
+                    setTimeout(() => refreshMemoOffset(main, sidebar), 100);
+                };
+                input.onblur = () => setTimeout(() => { if (document.activeElement !== input) save(); }, 100);
+                input.onkeydown = e => {
+                    if ((e.key === 'Enter' && e.ctrlKey) || e.key === 'Escape') { e.preventDefault(); save(); }
+                };
+            };
+        }
+
+        // 刷新侧边栏备注
+        const refreshSideBarMemos = (main, sidebar) => {
+            const memos = main.querySelectorAll('span[data-type*="inline-memo"]');
+            sidebar.innerHTML = '';
+            if (!memos.length) { sidebar.removeAttribute('data-memo-count'); return; }
+            memos.forEach((el, idx) => {
+                const block = getBlockNode(el);
+                const memo = el.getAttribute('data-inline-memo-content') || '';
+                const text = el.textContent || '';
+                const memoDiv = document.createElement('div');
+                memoDiv.className = 'memo-item';
+                memoDiv.setAttribute('data-node-id', block.dataset.nodeId);
+                memoDiv.setAttribute('data-memo-index', idx);
+                memoDiv.style.cssText = 'margin:8px;padding:8px;border:1px solid var(--b3-border-color);border-radius:8px;position:absolute;width:calc(100% - 16px);box-shadow:0 1px 3px rgba(0,0,0,0.1);';
+                memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="color:var(--b3-theme-on-background);font-size:0.9em;margin-bottom:4px;cursor:pointer;">${memo || '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
+                memoDiv.onclick = e => {
+                    if (e.target.classList.contains('memo-content-view')) return;
+                    sidebar.querySelectorAll('.memo-item').forEach(el => el.style.backgroundColor = '');
+                    const blockEl = main.querySelector(`div[data-node-id="${block.dataset.nodeId}"]`);
+                    if (blockEl) {
+                        blockEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        blockEl.style.transition = 'background-color 1.2s cubic-bezier(0.4,0,0.2,1)';
+                        blockEl.style.backgroundColor = 'var(--b3-theme-primary-lightest)';
+                        setTimeout(() => {
+                            blockEl.style.backgroundColor = '';
+                            setTimeout(() => {
+                                blockEl.style.transition = '';
+                            }, 1200);
+                        }, 1200);
+                    }
+                    // 激活时左移，1秒后自动复位
+                    memoDiv.style.transition = 'transform 0.25s cubic-bezier(0.4,0,0.2,1)';
+                    memoDiv.style.transform = 'translateX(-8px)';
+                    setTimeout(() => {
+                        memoDiv.style.transform = '';
+                        setTimeout(() => { memoDiv.style.transition = ''; }, 300);
+                    }, 2000);
+                };
+                const memoContentDiv = memoDiv.querySelector('.memo-content-view');
+                bindMemoEdit(memoContentDiv, memoDiv, el, main, sidebar);
+                sidebar.appendChild(memoDiv);
+            });
+            sidebar.setAttribute('data-memo-count', `共 ${memos.length} 个备注`);
+            refreshMemoOffset(main, sidebar);
+            // 检查并设置 .protyle-content 的 Sv-memo class
+            const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
+            if (protyleContent) {
+                if (memos.length > 0) {
+                    protyleContent.classList.add('Sv-memo');
+                } else {
+                    protyleContent.classList.remove('Sv-memo');
+                }
+            }
+        };
+
+        // 更新内联备注到思源
+        async function updateInlineMemo(el, content) {
+            try {
+                let blockEl = el;
+                while (blockEl && !blockEl.dataset.nodeId) blockEl = blockEl.parentElement;
+                if (!blockEl?.dataset.nodeId) return;
+                const blockId = blockEl.dataset.nodeId;
+                // 在 blockEl 下找到与 el 完全相同的 inline-memo span
+                const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
+                let targetMemo = null;
+                for (const m of allMemos) {
+                    if (m.isSameNode(el)) {
+                        targetMemo = m;
+                        break;
+                    }
+                }
+                if (!targetMemo) return;
+                targetMemo.setAttribute('data-inline-memo-content', content);
+                // 只更新属性，不动 innerHTML
+                const newHtml = blockEl.outerHTML;
+                await fetch('/api/block/updateBlock', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` },
+                    body: JSON.stringify({ dataType: 'html', data: newHtml, id: blockId })
+                });
+            } catch (e) { console.error('[Savor] 更新备注出错:', e); }
+        }
+
+        // 刷新编辑器（observer 回调加防抖）
+        function refreshEditor() {
+            if (!editorNode) return;
+            const mains = editorNode.querySelectorAll('div.protyle-wysiwyg');
+            Object.values(observers).forEach(list => list.forEach(o => o.disconnect()));
+            observers = {};
+            mains.forEach(main => {
+                const sidebar = addSideBar(main);
+                if (sidebar) {
+                    const mainId = main.parentElement.parentElement.getAttribute('data-id');
+                    const observer = new MutationObserver(() => {
+                        clearTimeout(refreshTimer);
+                        refreshTimer = setTimeout(() => { if (isEnabled) refreshSideBarMemos(main, sidebar); }, 100);
+                    });
+                    observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content'] });
+                    observers[mainId] = [observer];
+                    refreshSideBarMemos(main, sidebar);
+                }
+            });
+            // 修复：切换到没有备注的文档时移除 Sv-memo class
+            document.querySelectorAll('.protyle-content').forEach(pc => {
+                const main = pc.closest('.protyle')?.querySelector('.protyle-wysiwyg');
+                if (main && main.querySelectorAll('span[data-type*="inline-memo"]').length === 0) {
+                    pc.classList.remove('Sv-memo');
+                }
+            });
+        }
+
+        // 开关侧边栏
+        function openSideBar(open, save = false) {
+            if (!editorNode && open) return;
+            isEnabled = open;
+            if (open) {
+                window.siyuan?.eventBus?.on('loaded-protyle', refreshEditor);
+                refreshEditor();
+                observeDragTitle();
+            } else {
+                window.siyuan?.eventBus?.off('loaded-protyle', refreshEditor);
+                Object.values(observers).forEach(list => list.forEach(o => o.disconnect()));
+                observers = {};
+                if (editorNode) editorNode.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
+                    const sidebar = main.parentElement.querySelector('#protyle-sidebar');
+                    if (sidebar) {
+                        sidebar.removeEventListener('click', sidebar._memoEditHandler);
+                        sidebar._memoEditHandler = null;
+                        sidebar.innerHTML = '';
+                        sidebar.remove();
+                    }
+                });
+                unobserveDragTitle();
+            }
+            if (save) config.set('sidebarMemoEnabled', open ? '1' : '0');
+        }
+
+        // 初始化
+        function init() {
+            editorNode = document.querySelector('div.layout__center');
+            if (editorNode) {
+                openSideBar(config.get('sidebarMemoEnabled') === '1', true);
+            } else {
+                const wait = () => {
+                    editorNode = document.querySelector('div.layout__center');
+                    if (editorNode) {
+                        if (config.get('sidebarMemoEnabled') === '1') openSideBar(true, true);
+                    } else setTimeout(wait, 100);
+                };
+                setTimeout(wait, 100);
+            }
+        }
+
+        return {
+            init,
+            openSideBar,
+            isEnabled: () => isEnabled,
+            setEnabled: enabled => {
+                isEnabled = enabled;
+                if (editorNode) openSideBar(enabled, true);
+                else config.set('sidebarMemoEnabled', enabled ? '1' : '0');
+            },
+            unobserveDragTitle,
+        };
+    })();
+    // ========================================
+    // 模块：主初始化（简化版）
+    // ========================================
+    (async () => {
+        try {
+            // 核心初始化
+            await Promise.all([
+                i18n.ready(),
+                buildAllButtons(),
+                config.load()
+            ]);
+            
+            // UI 初始化
+            await Promise.all([
+                applyRememberedThemeStyle(),
+                preloadCurrentModeCSS()
+            ]);
+            
+            // 侧边栏备注功能延迟一点点初始化，确保文档已渲染
+            setTimeout(() => {
+                try { sidebarMemo.init(); }
+                catch (e) { console.error("[Savor] 侧边栏备注初始化失败:", e); }
+            }, 300);
+            
+            // 功能初始化
+            [initMiddleClickCollapse, collapsedListPreview, initThemeObserver, initStatusPosition].forEach(fn => fn());
+            
+            // DOM 相关初始化
+            const initToolbar = () => {
+                if (document.getElementById("commonMenu")) {
+                    initToolbarObserver();
+                } else {
+                    setTimeout(initToolbar, 16);
+                }
+            };
+            initToolbar();
+            
+            // 延迟初始化非关键功能
+            const scheduleInit = (fn, delay = 1000) => {
+                if (window.requestIdleCallback) {
+                    requestIdleCallback(fn, { timeout: delay });
+                } else {
+                    setTimeout(fn, delay);
+                }
+            };
+            
+            scheduleInit(() => {
+                try { initMobileAndPlatformFeatures(); } 
+                catch (e) { console.error("[Savor] 移动端功能初始化失败:", e); }
+            }, 2000);
+            
+        } catch (error) {
+            console.error("[Savor] 主题初始化失败:", error);
+        }
+    })();
 
 })();
 

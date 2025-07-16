@@ -49,7 +49,7 @@
 }
 }
 #savorToolbar button{
-    &#tabbarVertical,&#topBar,&#colorFolder,&#typewriterMode{
+    &#tabbarVertical,&#topBar,&#colorFolder,&#typewriterMode,&#sidebarMemo{
         display: none;
     }
 }

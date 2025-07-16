@@ -1,11 +1,6 @@
 /* ————————————————————编辑区———————————————————— */
 /*头图、图标*/
 .protyle-background{
-    .protyle-background__img img{
-        margin: 0 5px;
-        border-radius: 6px;
-        width: calc(100% - 10px);
-    }
     .protyle-background__icon:not(.fn__none){
         margin-right: 12px;
         border-radius:6px;
@@ -602,7 +597,7 @@
 
 /*备注*/
 .b3-typography span[data-type~=inline-memo], .protyle-wysiwyg span[data-type~=inline-memo] {
-    background-color: var(--b3-theme-primary-lightest);
+    background-color: var(--b3-theme-primary-lightest)!important;
     border-bottom: 2px solid var(--b3-theme-primary);
 }
 .tooltip--memo{
