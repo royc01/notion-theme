@@ -1963,39 +1963,37 @@
     // ========================================
     const sidebarMemo = (() => {
         let isEnabled = false, observers = {}, editorNode = null;
-        let dragObserver = null, dragTimeout = null, dragMutationObserver = null, refreshTimer = null;
+        let dragTimeout = null, dragMutationObserver = null;
 
         // 获取块节点
         const getBlockNode = el => { while (el && !el.dataset.nodeId) el = el.parentElement; return el; };
 
-        // 新增：监听 #drag 的 title 属性变化
+        // 新增：监听 #drag 的 title 属性变化（简化版）
         function observeDragTitle() {
-            if (dragObserver) return;
-            dragObserver = function _observe() {
+            if (dragMutationObserver) return;
+            function tryObserve() {
                 const dragEl = document.getElementById('drag');
                 if (!dragEl) {
-                    dragTimeout = setTimeout(_observe, 1000);
+                    dragTimeout = setTimeout(tryObserve, 1000);
                     return;
                 }
                 let lastTitle = dragEl.getAttribute('title');
                 let debounceTimer = null;
                 dragMutationObserver = new MutationObserver(mutations => {
-                    mutations.forEach(mutation => {
+                    for (const mutation of mutations) {
                         if (mutation.type === 'attributes' && mutation.attributeName === 'title') {
                             const newTitle = dragEl.getAttribute('title');
                             if (newTitle !== lastTitle) {
                                 lastTitle = newTitle;
-                                if (debounceTimer) clearTimeout(debounceTimer);
-                                debounceTimer = setTimeout(() => {
-                                    refreshEditor();
-                                }, 1000);
+                                clearTimeout(debounceTimer);
+                                debounceTimer = setTimeout(refreshEditor, 1000);
                             }
                         }
-                    });
+                    }
                 });
                 dragMutationObserver.observe(dragEl, { attributes: true, attributeFilter: ['title'] });
-            };
-            dragObserver();
+            }
+            tryObserve();
         }
         function unobserveDragTitle() {
             if (dragMutationObserver) {
@@ -2006,52 +2004,44 @@
                 clearTimeout(dragTimeout);
                 dragTimeout = null;
             }
-            dragObserver = null;
         }
 
         // 刷新侧边栏备注位置
         const refreshMemoOffset = (main, sidebar) => {
             requestAnimationFrame(() => {
-                const groups = Array.from(sidebar.querySelectorAll('div[data-node-id]'));
-                const mainRect = main.getBoundingClientRect();
-                groups.forEach(group => {
-                    const nodeId = group.getAttribute('data-node-id');
-                    const block = main.querySelector(`div[data-node-id="${nodeId}"]`);
-                    if (!block) return;
-                    const blockRect = block.getBoundingClientRect();
-                    let curTop = 0;
-                    group.querySelectorAll('.memo-item').forEach(item => {
-                        item.style.position = 'relative';
-                        item.style.top = '';
-                        item.style.height = 'auto';
-                        item.style.transition = 'none';
-                        let h = item.offsetHeight;
-                        if (!h || h < 10) h = 48; // 兜底高度
-                        curTop += h + 8;
-                    });
-                    // group 绝对定位，top 由正文块决定，height 让内容自适应
-                    group.style.position = 'absolute';
-                    group.style.top = `${blockRect.top - mainRect.top - group.offsetHeight / 2}px`;
-                    group.style.height = '';
-                    group.style.transition = 'none';
-                    // memo-item 用标准流布局
-                    group.querySelectorAll('.memo-item').forEach(item => {
-                        item.style.position = '';
-                        item.style.top = '';
-                        item.style.height = '';
-                        item.style.transition = 'none';
-                    });
+                const MARGIN = 10;
+                // 分组并累加高度
+                const memoGroups = {};
+                sidebar.querySelectorAll('.memo-item').forEach(memoItem => {
+                    const nodeId = memoItem.getAttribute('data-node-id');
+                    if (!memoGroups[nodeId]) memoGroups[nodeId] = { items: [], totalHeight: 0 };
+                    memoGroups[nodeId].items.push(memoItem);
+                    memoGroups[nodeId].totalHeight += memoItem.offsetHeight + MARGIN;
                 });
-                // 防止分组重叠
-                for (let i = 1; i < groups.length; i++) {
-                    const prev = groups[i - 1], curr = groups[i];
-                    const prevBottom = (parseFloat(prev.style.top) || 0) + (prev.offsetHeight || 0);
-                    if ((parseFloat(curr.style.top) || 0) < prevBottom + 8) {
-                        curr.style.top = `${prevBottom + 8}px`;
-                        // 移除动画效果
-                        curr.style.transition = 'none';
-                    }
-                }
+        
+                // 排序，防重叠并定位
+                let lastBottom = 0;
+                Object.values(memoGroups)
+                    .map(group => {
+                        const block = main.querySelector(`div[data-node-id="${group.items[0].getAttribute('data-node-id')}"]`);
+                        if (!block) return null;
+                        const blockRect = block.getBoundingClientRect();
+                        const mainRect = main.getBoundingClientRect();
+                        const blockCenter = blockRect.top - mainRect.top + blockRect.height / 2;
+                        const groupCenter = group.totalHeight / 2;
+                        let top = Math.max(0, blockCenter - groupCenter);
+                        // 防止重叠
+                        if (top < lastBottom + MARGIN) top = lastBottom + MARGIN;
+                        let currentTop = top;
+                        group.items.forEach(item => {
+                            item.style.position = 'absolute';
+                            item.style.top = `${currentTop}px`;
+                            item.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1)';
+                            currentTop += item.offsetHeight + MARGIN;
+                        });
+                        lastBottom = currentTop - MARGIN;
+                        return null;
+                    });
             });
         };
 
@@ -2065,8 +2055,7 @@
                 sidebar = document.createElement('div');
                 sidebar.id = 'protyle-sidebar';
                 title.insertAdjacentElement('beforeend', sidebar);
-                const width = isFull ? 230 : pr - 20;
-                sidebar.style.cssText = `position:absolute;right:-${width}px;width:${width}px;z-index:3;`;
+                sidebar.style.cssText = 'position:absolute;right:-230px;width:230px;z-index:3;';
                 main.style.minWidth = '90%';
             }
             return sidebar;
@@ -2076,6 +2065,18 @@
         function bindMemoEdit(div, memoDiv, el, main, sidebar) {
             div.onclick = e => {
                 e.stopPropagation();
+                // 高亮正文块
+                const blockEl = main.querySelector(`div[data-node-id="${el.closest('[data-node-id]').dataset.nodeId}"]`);
+                if (blockEl) {
+                    blockEl.style.transition = 'background-color 1.2s cubic-bezier(0.4,0,0.2,1)';
+                    blockEl.style.backgroundColor = 'var(--b3-theme-primary-lightest)';
+                    setTimeout(() => {
+                        blockEl.style.backgroundColor = '';
+                        setTimeout(() => {
+                            blockEl.style.transition = '';
+                        }, 1200);
+                    }, 1200);
+                }
                 if (memoDiv.classList.contains('editing')) return;
                 memoDiv.classList.add('editing');
                 memoDiv.style.zIndex = '999'; // 编辑时提升z-index
@@ -2094,7 +2095,10 @@
                 autoResizeTextarea(input); // 初始时自适应
                 div.replaceWith(input);
                 input.focus(); input.select();
-                requestAnimationFrame(() => autoResizeTextarea(input)); // 确保渲染后再自适应一次
+                requestAnimationFrame(() => {
+                    autoResizeTextarea(input);
+                    refreshMemoOffset(main, sidebar); // 进入编辑后立即刷新，避免重叠
+                });
                 const save = () => {
                     const val = input.value.trim();
                     if (val !== old) {
@@ -2125,6 +2129,7 @@
             const memos = main.querySelectorAll('span[data-type*="inline-memo"]');
             sidebar.innerHTML = '';
             if (!memos.length) { sidebar.removeAttribute('data-memo-count'); return; }
+            
             memos.forEach((el, idx) => {
                 const block = getBlockNode(el);
                 const memo = el.getAttribute('data-inline-memo-content') || '';
@@ -2133,35 +2138,41 @@
                 memoDiv.className = 'memo-item';
                 memoDiv.setAttribute('data-node-id', block.dataset.nodeId);
                 memoDiv.setAttribute('data-memo-index', idx);
-                memoDiv.style.cssText = 'margin:8px;padding:8px;border:1px solid var(--b3-border-color);border-radius:8px;position:absolute;width:calc(100% - 16px);box-shadow:0 1px 3px rgba(0,0,0,0.1);';
-                memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="color:var(--b3-theme-on-background);font-size:0.9em;margin-bottom:4px;cursor:pointer;">${memo || '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
-                memoDiv.onclick = e => {
+                memoDiv.style.cssText = 'margin:8px;padding:8px;border:1px solid var(--b3-border-color);border-radius:8px;position:relative;width:220px;box-shadow:0 1px 3px rgba(0,0,0,0.1);';
+                memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="color:var(--b3-theme-on-background);font-size:0.9em;margin-bottom:4px;cursor:pointer;">${memo || '<span style=\\"color:#bbb;\\">点击编辑备注...</span>'}</div>`;
+                // 改为 hover 高亮正文块
+                memoDiv.onmouseenter = e => {
                     if (e.target.classList.contains('memo-content-view')) return;
-                    sidebar.querySelectorAll('.memo-item').forEach(el => el.style.backgroundColor = '');
+                    // 只高亮内容一致的 inline-memo span
                     const blockEl = main.querySelector(`div[data-node-id="${block.dataset.nodeId}"]`);
                     if (blockEl) {
-                        blockEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        blockEl.style.transition = 'background-color 1.2s cubic-bezier(0.4,0,0.2,1)';
-                        blockEl.style.backgroundColor = 'var(--b3-theme-primary-lightest)';
-                        setTimeout(() => {
-                            blockEl.style.backgroundColor = '';
-                            setTimeout(() => {
-                                blockEl.style.transition = '';
-                            }, 1200);
-                        }, 1200);
+                        const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
+                        const memoText = text;
+                        allMemos.forEach(span => {
+                            if (span.textContent === memoText) {
+                                span.classList.add('memo-span-highlight');
+                            }
+                        });
                     }
-                    // 激活时左移，1秒后自动复位
-                    memoDiv.style.transition = 'transform 0.25s cubic-bezier(0.4,0,0.2,1)';
-                    memoDiv.style.transform = 'translateX(-8px)';
-                    setTimeout(() => {
-                        memoDiv.style.transform = '';
-                        setTimeout(() => { memoDiv.style.transition = ''; }, 300);
-                    }, 2000);
+                };
+                memoDiv.onmouseleave = e => {
+                    // 只取消内容一致的 inline-memo span 高亮
+                    const blockEl = main.querySelector(`div[data-node-id="${block.dataset.nodeId}"]`);
+                    if (blockEl) {
+                        const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
+                        const memoText = text;
+                        allMemos.forEach(span => {
+                            if (span.textContent === memoText) {
+                                span.classList.remove('memo-span-highlight');
+                            }
+                        });
+                    }
                 };
                 const memoContentDiv = memoDiv.querySelector('.memo-content-view');
                 bindMemoEdit(memoContentDiv, memoDiv, el, main, sidebar);
                 sidebar.appendChild(memoDiv);
             });
+            
             sidebar.setAttribute('data-memo-count', `共 ${memos.length} 个备注`);
             refreshMemoOffset(main, sidebar);
             // 检查并设置 .protyle-content 的 Sv-memo class
@@ -2213,6 +2224,7 @@
                 const sidebar = addSideBar(main);
                 if (sidebar) {
                     const mainId = main.parentElement.parentElement.getAttribute('data-id');
+                    let refreshTimer = null;
                     const observer = new MutationObserver(() => {
                         clearTimeout(refreshTimer);
                         refreshTimer = setTimeout(() => { if (isEnabled) refreshSideBarMemos(main, sidebar); }, 100);
@@ -2231,9 +2243,19 @@
             });
         }
 
-        // 开关侧边栏
+        // 开关侧边栏（合并 setEnabled 逻辑）
         function openSideBar(open, save = false) {
-            if (!editorNode && open) return;
+            if (!editorNode && open) {
+                // 等待 editorNode 出现后再初始化
+                const wait = () => {
+                    editorNode = document.querySelector('div.layout__center');
+                    if (editorNode) {
+                        openSideBar(open, save);
+                    } else setTimeout(wait, 100);
+                };
+                setTimeout(wait, 100);
+                return;
+            }
             isEnabled = open;
             if (open) {
                 window.siyuan?.eventBus?.on('loaded-protyle', refreshEditor);
@@ -2246,8 +2268,6 @@
                 if (editorNode) editorNode.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
                     const sidebar = main.parentElement.querySelector('#protyle-sidebar');
                     if (sidebar) {
-                        sidebar.removeEventListener('click', sidebar._memoEditHandler);
-                        sidebar._memoEditHandler = null;
                         sidebar.innerHTML = '';
                         sidebar.remove();
                     }
@@ -2260,85 +2280,16 @@
         // 初始化
         function init() {
             editorNode = document.querySelector('div.layout__center');
-            if (editorNode) {
-                openSideBar(config.get('sidebarMemoEnabled') === '1', true);
-            } else {
-                const wait = () => {
-                    editorNode = document.querySelector('div.layout__center');
-                    if (editorNode) {
-                        if (config.get('sidebarMemoEnabled') === '1') openSideBar(true, true);
-                    } else setTimeout(wait, 100);
-                };
-                setTimeout(wait, 100);
-            }
+            openSideBar(config.get('sidebarMemoEnabled') === '1', true);
         }
 
         return {
             init,
             openSideBar,
             isEnabled: () => isEnabled,
-            setEnabled: enabled => {
-                isEnabled = enabled;
-                if (editorNode) openSideBar(enabled, true);
-                else config.set('sidebarMemoEnabled', enabled ? '1' : '0');
-            },
+            setEnabled: enabled => openSideBar(enabled, true),
             unobserveDragTitle,
         };
-    })();
-    // ========================================
-    // 模块：主初始化（简化版）
-    // ========================================
-    (async () => {
-        try {
-            // 核心初始化
-            await Promise.all([
-                i18n.ready(),
-                buildAllButtons(),
-                config.load()
-            ]);
-            
-            // UI 初始化
-            await Promise.all([
-                applyRememberedThemeStyle(),
-                preloadCurrentModeCSS()
-            ]);
-            
-            // 侧边栏备注功能延迟一点点初始化，确保文档已渲染
-            setTimeout(() => {
-                try { sidebarMemo.init(); }
-                catch (e) { console.error("[Savor] 侧边栏备注初始化失败:", e); }
-            }, 300);
-            
-            // 功能初始化
-            [initMiddleClickCollapse, collapsedListPreview, initThemeObserver, initStatusPosition].forEach(fn => fn());
-            
-            // DOM 相关初始化
-            const initToolbar = () => {
-                if (document.getElementById("commonMenu")) {
-                    initToolbarObserver();
-                } else {
-                    setTimeout(initToolbar, 16);
-                }
-            };
-            initToolbar();
-            
-            // 延迟初始化非关键功能
-            const scheduleInit = (fn, delay = 1000) => {
-                if (window.requestIdleCallback) {
-                    requestIdleCallback(fn, { timeout: delay });
-                } else {
-                    setTimeout(fn, delay);
-                }
-            };
-            
-            scheduleInit(() => {
-                try { initMobileAndPlatformFeatures(); } 
-                catch (e) { console.error("[Savor] 移动端功能初始化失败:", e); }
-            }, 2000);
-            
-        } catch (error) {
-            console.error("[Savor] 主题初始化失败:", error);
-        }
     })();
 
 })();

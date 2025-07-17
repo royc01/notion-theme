@@ -518,9 +518,13 @@
 /* pdf */
 #sidebarContainer,#viewerContainer{
 	top:40px;
+    .thumbnail{
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+    }
 }
 .pdfViewer{
-	background-color:var(--b3-theme-background);
+	background-color:var(--Sv-theme-surface);
+    border-radius: 6px;
 }
 #toolbarViewer{
 	padding:5px 5px 5px 8px;

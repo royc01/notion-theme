@@ -599,6 +599,10 @@
 .b3-typography span[data-type~=inline-memo], .protyle-wysiwyg span[data-type~=inline-memo] {
     background-color: var(--b3-theme-primary-lightest)!important;
     border-bottom: 2px solid var(--b3-theme-primary);
+    &.memo-span-highlight{
+        background: var(--b3-protyle-inline-mark-background)!important;
+        border-bottom: 2px solid var(--Sv-dock-item--activefocus-background);
+    }
 }
 .tooltip--memo{
 	font-size:14px;
