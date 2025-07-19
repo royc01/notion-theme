@@ -3,10 +3,14 @@
     box-shadow: 0 0 0 1px var(--b3-font-background5) inset;
     border-radius: 6px;
     & [data-type="navigation-root"]{
-        background-color: var(--Sv-bq-background5) !important;
+        background-color: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.1) !important;
+        border-radius: 6px 6px 0 0 !important;
     }
     & .b3-list-item:hover,& .b3-list-item--focus {
-        background-color: var(--Sv-bq-background5) !important;
+        background-color: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.05) !important;
+    }
+    & .b3-list-item__arrow{
+        color:#f67563;
     }
 }
 .sy__file .b3-list--background:nth-child(4n-2){
@@ -14,21 +18,29 @@
     box-shadow: 0 0 0 1px var(--b3-font-background7) inset;
     border-radius: 6px;
     & [data-type="navigation-root"]{
-        background-color: var(--Sv-bq-background7) !important;
+        background-color: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.1) !important;
+        border-radius: 6px 6px 0 0 !important;
     }
     & .b3-list-item:hover,& .b3-list-item--focus {
-        background-color: var(--Sv-bq-background7) !important;
+        background-color: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.05) !important;
+    }
+    & .b3-list-item__arrow{
+        color:#ff9b1e;
     }
 }
 .sy__file .b3-list--background:nth-child(4n-1){
-    background-color: var(--Sv-bq-background8) !important;
-    box-shadow: 0 0 0 1px var(--b3-font-background8) inset;
+    background-color: var(--Sv-bq-background9) !important;
+    box-shadow: 0 0 0 1px var(--b3-font-background9) inset;
     border-radius: 6px;
     & [data-type="navigation-root"]{
-        background-color: var(--Sv-bq-background8) !important;
+        background-color: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.1) !important;
+        border-radius: 6px 6px 0 0 !important;
     }
     & .b3-list-item:hover,& .b3-list-item--focus {
-        background-color: var(--Sv-bq-background8) !important;
+        background-color: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.05) !important;
+    }
+    & .b3-list-item__arrow{
+        color:#64bbaa;
     }
 }
 .sy__file .b3-list--background:nth-child(4n){
@@ -36,9 +48,13 @@
     box-shadow: 0 0 0 1px var(--b3-font-background10) inset;
     border-radius: 6px;
     & [data-type="navigation-root"]{
-        background-color: var(--Sv-bq-background10) !important;
+        background-color: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.1) !important;
+        border-radius: 6px 6px 0 0 !important;
     }
     & .b3-list-item:hover,& .b3-list-item--focus {
-        background-color: var(--Sv-bq-background10) !important;
+        background-color: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.05) !important;
+    }
+    & .b3-list-item__arrow{
+        color:#49adbb;
     }
 }
