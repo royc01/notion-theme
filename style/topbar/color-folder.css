@@ -4,7 +4,6 @@
     border-radius: 6px;
     & [data-type="navigation-root"]{
         background-color: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.1) !important;
-        border-radius: 6px 6px 0 0 !important;
     }
     & .b3-list-item:hover,& .b3-list-item--focus {
         background-color: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.05) !important;
@@ -19,7 +18,6 @@
     border-radius: 6px;
     & [data-type="navigation-root"]{
         background-color: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.1) !important;
-        border-radius: 6px 6px 0 0 !important;
     }
     & .b3-list-item:hover,& .b3-list-item--focus {
         background-color: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.05) !important;
@@ -34,7 +32,6 @@
     border-radius: 6px;
     & [data-type="navigation-root"]{
         background-color: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.1) !important;
-        border-radius: 6px 6px 0 0 !important;
     }
     & .b3-list-item:hover,& .b3-list-item--focus {
         background-color: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.05) !important;
@@ -49,7 +46,6 @@
     border-radius: 6px;
     & [data-type="navigation-root"]{
         background-color: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.1) !important;
-        border-radius: 6px 6px 0 0 !important;
     }
     & .b3-list-item:hover,& .b3-list-item--focus {
         background-color: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.05) !important;
