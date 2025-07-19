@@ -13,7 +13,6 @@
 	position: fixed;
     display: flex;
     min-width: 0;
-    overflow: hidden;
     align-items: center;
     padding-right: 52px;
     height: 24px;
@@ -56,7 +55,7 @@
         right: 0px;
         margin-left: 4px;
         background-color: var(--Sv-status-msg-background);
-        box-shadow: 0 0 0 4px var(--b3-theme-background);
+        box-shadow: -4px 0 0 0 var(--b3-theme-background);
     }
     .status__msg:not(:empty){
             padding-left: 26px!important;
@@ -80,3 +79,47 @@
     }
 }
 
+
+
+/* 隐藏内容 */
+#status.Sv-StatusHidden {
+    height: 0px!important;
+    transition: all 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
+    position: relative;
+    cursor: pointer;
+    /*width: 28px!important;*/
+    & div{
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
+    }
+    &::before {
+        content: '···';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10px;
+        width: 48px;
+        font-size: 18px;
+        position: absolute;
+        right: 6px;
+        top: -10px;
+        border-radius: 5px;
+        color: var(--Sv-dock-item--activefocus-color);
+        background: var(--Sv-dock-item--activefocus-background);
+        z-index: 1;
+        transition: all 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
+    }
+}
+
+
+/* 悬停时展开底栏，显示内容 */
+#status.Sv-StatusHidden:hover {
+    height: 24px!important;
+    width: auto!important;
+    & div{
+        opacity: 1;
+    }
+    &::before{
+        opacity: 0;
+    }
+}

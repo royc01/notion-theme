@@ -15,12 +15,10 @@ body:not(.body--mobile,.body--window)>#toolbar{
 	}
 }
 
-.layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
+#dockLeft,#dockRight,.layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
     padding-top: 33px;
 }
-#dockLeft,#dockRight{
-	padding-top: 33px;
-}
+
 body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
     min-width: 62px;
     z-index: 2;
@@ -28,10 +26,12 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 	border: none;
 	& .item:not(.item--readonly)[data-type="tab-header"]{
 			pointer-events: visibleFill;
+            min-height: 28px;
 	}
 		& .item--readonly{
             pointer-events: none;
             app-region: drag;
+            min-height: 28px;
 		& .block__icon--show{
 			pointer-events: visibleFill;
 			app-region: no-drag;
@@ -59,7 +59,7 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 
 .layout__empty{
     border-radius: 6px;
-    box-shadow: 0 33px 0 0 var(--Sv-toolbar-background) inset;
+    box-shadow: 0 33px 0 0 var(--Sv-theme-surface) inset;
 }
 body:not(.body--mobile,.body--window) #layouts{
     margin: var(--Sv-layout-margin-fixed);
@@ -73,16 +73,14 @@ body:not(.body--mobile,.body--window) #layouts{
 }
 
 #toolbar + .fn__flex{
-    box-shadow:0 -6px 0 0 var(--Sv-toolbar-background);
+    box-shadow:0 -6px 0 0 var(--Sv-theme-surface);
+    box-shadow:0 -38px 0 0 var(--Sv-theme-surface);
 }
 
 #layouts>.fn__flex{
     background-color: var(--Sv-dock-background);
-    box-shadow:0 38px 0 0 var(--Sv-toolbar-background) inset;
 }
-.dock--vertical{
-    box-shadow:0 38px 0 0 var(--Sv-toolbar-background) inset;
-}
+
 
 
 

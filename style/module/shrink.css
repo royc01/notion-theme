@@ -6,6 +6,7 @@
 	padding-left: 5px!important;
 }
 .layout__dockl,.layout__dockr,.layout__dockb{
+	transition: padding-top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     .layout-tab-container{
         border-radius: var(--Sv-layout-radius);
 		background-color: transparent;
@@ -19,10 +20,9 @@
     >.fn__flex-column{
 	/*面板标题*/
 	.block__icons{
-		height:31px;
 		padding: 0px 9px 0px 8px; 
-		min-height: unset;
 		border-bottom: none;
+		min-height: 35px;
 		/*面板标题图标*/
 		.block__logo{
 			font-weight: 700;
@@ -56,13 +56,13 @@
             }
 		}
 	}
-	/*面板列表项*/
+	/*面板列表项*/.b3-list--background 
 	.b3-list-item{
 		border-radius:var(--Sv-list-item-radius);
 		margin:0 0 4px 0!important;
         padding-right: 3px;
-        &:hover{
-            background-color: var(--Sv-list-background)!important;
+        &:hover:not(.b3-list-item--focus):not(.dragover):not(.dragover__current):not(.dragover__top):not(.dragover__bottom){
+            background-color: var(--Sv-list-background);
             .b3-list-item__text{
                 color: var(--Sv-list-focus-color);
             }
@@ -74,7 +74,7 @@
                 color: var(--Sv-list-focus-color);
             }
             &:hover{
-                background-color: var(--Sv-list-focus-hover)!important;
+                background-color: var(--Sv-list-focus-hover);
             }
         }
         .counter:not(:empty)/*引用数*/{

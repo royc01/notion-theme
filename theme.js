@@ -101,7 +101,7 @@
             { id: "buttonmountain", type: "theme", group: "dark", label: i18n.t("Mountain 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-mountain.css", styleId: "Sv-theme-color-mountain", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM14.667 22.267c-1.2-0.267-2.267-0.933-2.933-1.867l2.533-4.4 2.133 3.6-1.733 2.667zM17.867 19.867l0.667-1.2 1.2 2.133c-0.933 0.933-2.133 1.467-3.467 1.467l1.6-2.4zM16 11.467c3.067 0 5.467 2.4 5.467 5.467 0 0.933-0.267 1.867-0.667 2.533l-1.6-2.533c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-0.667 1.2-2.4-4c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-2.8 4.8c-0.267-0.667-0.4-1.333-0.4-2 0-3.067 2.4-5.467 5.467-5.467z" },
             // 功能按钮
             { id: "concealButton", type: "feature", label: i18n.t("挖空"), cssPath: "/appearance/themes/Savor/style/topbar/conceal-mark.css", styleId: "Sv-theme-color-conceal挖空", attrName: "conceal挖空", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z", onEnable: () => {}, onDisable: () => {} },
-            { id: "tabbarVertical", type: "feature", label: i18n.t("垂直页签"), cssPath: "/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", styleId: "Sv-theme-color-tabbar垂直", attrName: "tabbar垂直", svg: "M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z", onEnable: () => { let topbarFixed = document.getElementById("Sv-theme-color-topbar隐藏"); if (topbarFixed) { let topbarBtn = document.getElementById("topBar"); if (topbarBtn) topbarBtn.click(); } setTimeout(() => { initTabbarResizer(); }, 500); }, onDisable: () => { removeTabbarResizer(); } },
+            { id: "tabbarVertical", type: "feature", label: i18n.t("垂直页签"), cssPath: "/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", styleId: "Sv-theme-color-tabbar垂直", attrName: "tabbar垂直", svg: "M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z", onEnable: () => { let topbarFixed = document.getElementById("Sv-theme-color-topbar隐藏"); if (topbarFixed) { let topbarBtn = document.getElementById("topBar"); if (topbarBtn) topbarBtn.click(); } setTimeout(() => { tabbarResize.init(); }, 500); }, onDisable: () => { tabbarResize.remove(); } },
             { id: "topBar", type: "feature", label: i18n.t("顶栏合并"), cssPath: "/appearance/themes/Savor/style/topbar/top-fixed.css", styleId: "Sv-theme-color-topbar隐藏", attrName: "topbar隐藏", svg: "M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z", onEnable: () => { let verticalTab = document.getElementById("Sv-theme-color-tabbar垂直"); if (verticalTab) { let verticalBtn = document.getElementById("tabbarVertical"); if (verticalBtn) verticalBtn.click(); } initTabBarsMarginUnified('right');initTabBarsMarginUnified('left'); if (window.updateTabBarsMargin) window.updateTabBarsMargin(); if (window.updateTabBarsMarginLeft) window.updateTabBarsMarginLeft(); }, onDisable: () => { window.tabBarsMarginInitialized = false; document.querySelectorAll(".layout__center .layout-tab-bar--readonly").forEach(tabBar => { tabBar.style.marginRight = "0px"; }); document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabBar => { tabBar.style.marginLeft = "0px"; }); if (window.updateTabBarsMargin) { window.updateTabBarsMargin = null; } if (window.updateTabBarsMarginLeft) { window.updateTabBarsMarginLeft = null; } if (window._tabBarsResizeObserver) { window._tabBarsResizeObserver.disconnect(); window._tabBarsResizeObserver = null; } } },
             { id: "bulletThreading", type: "feature", label: i18n.t("列表子弹线"), cssPath: "/appearance/themes/Savor/style/topbar/bullet-threading.css", styleId: "Sv-theme-color-列表子弹线", attrName: "列表子弹线", svg: "M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z", onEnable: () => { initBulletThreading(); }, onDisable: () => { removeBulletThreading(); } },
             { id: "colorFolder", type: "feature", label: i18n.t("彩色文档树"), cssPath: "/appearance/themes/Savor/style/topbar/color-folder.css", styleId: "Sv-theme-color-彩色文档树", attrName: "彩色文档树", svg: "M11.6 14.933c0-0.133 0-0.267 0-0.4 0-2.533 2-4.533 4.4-4.533s4.4 2 4.4 4.533c0 0.133 0 0.267 0 0.4 1.467 0.667 2.533 2.267 2.533 4.133 0 2.533-2 4.533-4.4 4.533-0.933 0-1.867-0.267-2.533-0.8-0.8 0.533-1.6 0.8-2.533 0.8-2.4 0-4.4-2-4.4-4.533 0-1.867 0.933-3.467 2.533-4.133zM11.867 16.267c-0.933 0.533-1.6 1.6-1.6 2.8 0 1.733 1.467 3.2 3.2 3.2 0.533 0 1.067-0.133 1.6-0.4-0.667-0.8-0.933-1.733-0.933-2.8 0-0.133 0-0.267 0-0.4-1.067-0.533-1.867-1.467-2.267-2.4v0zM15.333 18.933v0c0 1.867 1.467 3.2 3.2 3.2s3.2-1.467 3.2-3.2c0-1.2-0.667-2.267-1.6-2.8-0.667 1.6-2.267 2.8-4.133 2.8-0.267 0.133-0.4 0-0.667 0v0zM16 17.733c1.733 0 3.2-1.467 3.2-3.2s-1.467-3.2-3.2-3.2-3.2 1.467-3.2 3.2 1.467 3.2 3.2 3.2z", onEnable: () => {}, onDisable: () => {} },
@@ -365,7 +365,11 @@
     window.theme.themeMode = window.siyuan.config.appearance.mode === 0 ? 'light' : 'dark';
 
 
+    // ========================================
+    // 模块：底栏隐藏
+    // ========================================
 
+    (()=>{let s, c, t='.layout__wnd--active > .layout-tab-container > .fn__flex-1:not(.fn__none):not(.protyle)',f=()=>{(s=document.getElementById('status'))&&s.classList.toggle('Sv-StatusHidden',!!document.querySelector(t))};(function w(){(c=document.querySelector('.layout__center'))?(f(),new MutationObserver(f).observe(c,{childList:1,subtree:1,attributes:1,attributeFilter:['class']})):setTimeout(w,200)})()})();
 
     // ========================================
     // 模块：主题按钮
@@ -584,47 +588,25 @@
         requestAnimationFrame(() => applyRememberedThemeStyle());
     };
 
-    // 观察器初始化函数
+    // 底栏悬浮
     const initStatusPosition = () => {
         let lastOffset = null;
-        
         const updatePosition = () => {
             const status = $("#status");
             if (!status) return;
-            
-            const dockr = $(".layout__dockr");
-            const dockVertical = $(".dock--vertical");
-            const dockrWidth = dockr?.offsetWidth ?? 0;
-            const isFloatingR = dockr?.classList.contains("layout--float") ?? true;
-            const isDockVerticalHidden = !dockVertical || dockVertical.classList.contains("fn__none");
-            const dockVerticalWidth = isDockVerticalHidden ? 0 : 26;
-            
-            const totalOffset = (isFloatingR || !dockrWidth) 
-                ? (isDockVerticalHidden ? 9 : dockVerticalWidth + 16)
-                : dockrWidth + (isDockVerticalHidden ? 9 : dockVerticalWidth + 16);
-            
+            const dockr = $(".layout__dockr"), dockVertical = $(".dock--vertical");
+            const dockrWidth = dockr?.offsetWidth || 0;
+            const isFloating = dockr?.classList.contains("layout--float");
+            const dockVerticalWidth = (!dockVertical || dockVertical.classList.contains("fn__none")) ? 0 : 26;
+            const offset = (!dockrWidth || isFloating) ? (dockVerticalWidth ? dockVerticalWidth + 16 : 9) : dockrWidth + (dockVerticalWidth ? dockVerticalWidth + 16 : 9);
             const layoutCenter = document.querySelector('.layout__center');
-            if (layoutCenter) {
-                status.style.maxWidth = `${layoutCenter.offsetWidth - 8}px`;
-            } else {
-                status.style.maxWidth = '';
-            }
-            
-            if (lastOffset !== totalOffset) {
-                status.style.transform = `translateX(-${totalOffset}px)`;
-                lastOffset = totalOffset;
-            }
+            status.style.maxWidth = layoutCenter ? `${layoutCenter.offsetWidth - 8}px` : '';
+            if (lastOffset !== offset) status.style.transform = `translateX(-${offset}px)`;
+            lastOffset = offset;
         };
-        
-        const statusObserver = new ResizeObserver(throttle(updatePosition, 8));
-        
-        const dockr = $(".layout__dockr");
-        const dockVertical = $(".dock--vertical");
-        
-        dockr && statusObserver.observe(dockr);
-        dockVertical && statusObserver.observe(dockVertical);
-        
-        window.statusObserver = statusObserver;
+        const observer = new ResizeObserver(throttle(updatePosition, 8));
+        [".layout__dockr", ".dock--vertical"].forEach(sel => { const el = $(sel); el && observer.observe(el); });
+        window.statusObserver = observer;
         window.statusObserver.updatePosition = updatePosition;
         updatePosition();
     };
@@ -733,99 +715,67 @@
 
 
 
-    // ========================================
-    // 模块：鼠标中键折叠/展开功能
-    // ========================================
-    const initMiddleClickCollapse = () => {
-        if (window.theme._collapseHandler) return;
-        
-        const DEBOUNCE_TIME = 300;
-        let lastClickTime = 0;
-        const self = window.theme;
+// ========================================
+// 模块：鼠标中键折叠/展开功能
+// ========================================
+const initMiddleClickCollapse = () => {
+    if (window.theme._collapseHandler) return;
 
-        const collapseHandler = (e) => {
-            if (e.button !== 1 || e.shiftKey || e.altKey) return;
+    const DEBOUNCE_TIME = 300;
+    let lastClickTime = 0;
 
-            const now = Date.now();
-            if (now - lastClickTime < DEBOUNCE_TIME) return;
-            lastClickTime = now;
+    const collapseHandler = (e) => {
+        if (e.button !== 1 || e.shiftKey || e.altKey) return;
+        const now = Date.now();
+        if (now - lastClickTime < DEBOUNCE_TIME) return;
+        lastClickTime = now;
 
-            let target = window.theme.findEditableParent(e.target);
-            if (!target) return;
-
-            e.preventDefault();
-
-            const parent = target.parentElement;
-            const grandParent = parent?.parentElement;
-            if (!parent) return;
-
-            if (parent.getAttribute("data-type") === "NodeHeading") {
-                if (grandParent?.getAttribute("data-type") === "NodeListItem") {
-                    handleListItemCollapse(target);
-                } else {
-                    handleHeadingCollapse(target);
-                }
-            } else if (grandParent?.getAttribute("data-type") === "NodeListItem") {
-                handleListItemCollapse(target);
-            }
-        };
-
-        const findElementByCondition = (el, cond) => {
-            if (!el) return null;
-            if (cond(el)) return el;
-            for (const child of el.children || []) {
-                const found = findElementByCondition(child, cond);
-                if (found) return found;
-            }
-            return null;
+        // 查找可编辑块
+        let editable = e.target;
+        while (editable && !(
+            editable.getAttribute && editable.getAttribute("contenteditable") === "true" ||
+            editable.classList && editable.classList.contains("protyle-wysiwyg")
+        )) {
+            editable = editable.parentElement;
         }
+        if (!editable) return;
 
-        const handleHeadingCollapse = (el) => {
-            const protyle = findProtyleContainer(el);
-            if (!protyle) return;
-            const gutters = protyle.querySelector(".protyle-gutters");
-            const foldBtn = findElementByCondition(gutters, v => v.getAttribute("data-type") === "fold");
-            foldBtn?.click();
-        }
-
-        const findProtyleContainer = (el) => {
-            const classes = ["protyle", "fn__flex-1 protyle", "block__edit fn__flex-1 protyle", "fn__flex-1 spread-search__preview protyle"];
-            let cur = el, i = 0;
-            while (cur && i++ < 20) {
-                if (cur.className && classes.includes(cur.className)) return cur;
-                cur = cur.parentElement;
+        // 查找列表项或标题
+        let node = editable;
+        let found = null;
+        for (let i = 0; i < 10 && node; i++, node = node.parentElement) {
+            if (node.getAttribute && (node.getAttribute("data-type") === "NodeListItem" || node.getAttribute("data-type") === "NodeHeading")) {
+                found = node;
+                break;
             }
-            return null;
         }
+        if (!found) return;
 
-        const handleListItemCollapse = (el) => {
-            if (self.isSiyuanFloatingWindow(el)) {
-                const listItem = self.findAncestor(el, v => v.classList.contains("li"), 7);
-                if (listItem && !listItem.previousElementSibling) {
-                    toggleFoldAttribute(listItem);
-                    return;
-                }
-            }
-            let content = el;
-            let depth = 0;
-            while (content.getAttribute("contenteditable") == null && depth++ < 10) content = content.parentElement;
-            const listItem = content?.parentElement?.parentElement;
-            if (!listItem || listItem.children.length <= 3) return;
-            const nodeId = listItem.getAttribute("data-node-id");
+        e.preventDefault();
+
+        // 列表项折叠/展开
+        if (found.getAttribute("data-type") === "NodeListItem") {
+            const nodeId = found.getAttribute("data-node-id");
             if (!nodeId) return;
-            const fold = listItem.getAttribute("fold");
-            if (fold === "1") self.setBlockFold(nodeId, "0");
-            else self.setBlockFold(nodeId, "1");
+            // 只有存在.list子元素时才允许折叠
+            const hasList = found.querySelector(':scope > .list');
+            if (!hasList) return;
+            const fold = found.getAttribute("fold");
+            window.theme.setBlockFold(nodeId, fold === "1" ? "0" : "1");
         }
-
-        const toggleFoldAttribute = (el) => {
-            const fold = el.getAttribute("fold");
-            el.setAttribute("fold", fold === "1" ? "0" : "1");
+        // 标题折叠/展开
+        else if (found.getAttribute("data-type") === "NodeHeading") {
+            // 查找同级的折叠按钮
+            const protyle = found.closest(".protyle");
+            const gutters = protyle && protyle.querySelector(".protyle-gutters");
+            const foldBtn = gutters && gutters.querySelector('[data-type="fold"]');
+            if (foldBtn) foldBtn.click();
         }
+    };
 
-        window.theme._collapseHandler = collapseHandler;
-        document.body.addEventListener("mousedown", collapseHandler);
-    }
+    window.theme._collapseHandler = collapseHandler;
+    document.body.addEventListener("mousedown", collapseHandler);
+}
 
 
 
@@ -952,251 +902,197 @@
 
 
     // ========================================
-    // 模块：垂直页签宽度调节功能
-    // ========================================
-    let tabbarResizer = null;
-    let isResizing = false;
-    let startX = 0;
-    let startWidth = 0;
-    let currentTabbar = null;
-    const MIN_WIDTH = 150;
-    const MAX_WIDTH = 400;
-
-    const initTabbarResizer = () => {
-        removeTabbarResizer(false); // 初始化时不重置宽度
-        const verticalTabbar = document.querySelector(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)");
-        if (verticalTabbar) {
-            createResizer(verticalTabbar);
-        }
-    }
-
-    const createResizer = (verticalTabbar) => {
-        tabbarResizer = document.createElement("div");
-        tabbarResizer.id = "vertical-resize-handle";
-        tabbarResizer.style.cssText = `
-            position: absolute;
-            top: 0;
-            right: -3px;
-            width: 6px;
-            height: 100%;
-            cursor: col-resize;
-            background: transparent;
-            z-index: 1000;
-        `;
-        verticalTabbar.style.position = "relative";
-        verticalTabbar.appendChild(tabbarResizer);
-        tabbarResizer.addEventListener("mousedown", startResize);
-        document.addEventListener("mousemove", resizeTabbar);
-        document.addEventListener("mouseup", stopResize);
-    }
-
-    const startResize = (e) => {
+// 模块：垂直页签宽度调节功能（精简版）
+// ========================================
+const tabbarResize = {
+    resizer: null, isResizing: false, startX: 0, startWidth: 0, tabbar: null,
+    MIN: 150, MAX: 600,
+    init() {
+        this.remove(false);
+        const tabbar = document.querySelector(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)");
+        if (tabbar) this.create(tabbar);
+    },
+    create(tabbar) {
+        this.resizer = document.createElement("div");
+        Object.assign(this.resizer, { id: "vertical-resize-handle" });
+        this.resizer.style.cssText = "position:absolute;top:0;right:-3px;width:6px;height:100%;cursor:col-resize;background:transparent;z-index:1000;";
+        tabbar.style.position = "relative";
+        tabbar.appendChild(this.resizer);
+        this.resizer.onmousedown = e => this.start(e, tabbar);
+        document.addEventListener("mousemove", this.move);
+        document.addEventListener("mouseup", this.stop);
+    },
+    start(e, tabbar) {
         e.preventDefault();
-        isResizing = true;
-        startX = e.clientX;
-        currentTabbar = e.target.parentElement;
-        if (!currentTabbar) return;
-        startWidth = currentTabbar.offsetWidth;
+        Object.assign(this, { isResizing: true, startX: e.clientX, tabbar, startWidth: tabbar.offsetWidth });
         document.body.classList.add("tabbar-resizing");
-    }
-
-    const resizeTabbar = (e) => {
-        if (!isResizing || !currentTabbar) return;
-        const deltaX = e.clientX - startX;
-        let newWidth = startWidth + deltaX;
-        newWidth = Math.max(MIN_WIDTH, Math.min(newWidth, MAX_WIDTH));
-        currentTabbar.style.width = newWidth + "px";
-    }
-
-    const stopResize = () => {
-        if (!isResizing) return;
-        isResizing = false;
+    },
+    move: e => {
+        if (!tabbarResize.isResizing || !tabbarResize.tabbar) return;
+        let w = tabbarResize.startWidth + (e.clientX - tabbarResize.startX);
+        w = Math.max(tabbarResize.MIN, Math.min(w, tabbarResize.MAX));
+        tabbarResize.tabbar.style.width = w + "px";
+    },
+    stop: () => {
+        if (!tabbarResize.isResizing) return;
+        tabbarResize.isResizing = false;
         document.body.classList.remove("tabbar-resizing");
-        currentTabbar = null;
-    }
-
-    const removeTabbarResizer = (resetWidth = true) => {
-        document.removeEventListener("mousemove", resizeTabbar);
-        document.removeEventListener("mouseup", stopResize);
-        const existingResizer = document.getElementById("vertical-resize-handle");
-        if (existingResizer) existingResizer.remove();
+        tabbarResize.tabbar = null;
+    },
+    remove(reset = true) {
+        document.removeEventListener("mousemove", this.move);
+        document.removeEventListener("mouseup", this.stop);
+        document.getElementById("vertical-resize-handle")?.remove();
         document.body.classList.remove("tabbar-resizing");
-        
-        // 只在需要时重置宽度
-        if (resetWidth) {
-            document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabbar => {
-                tabbar.style.width = "";
-                tabbar.style.position = "";
+        if (reset) document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabbar => {
+            tabbar.style.width = "";
+            tabbar.style.position = "";
+        });
+        Object.assign(this, { resizer: null, isResizing: false, tabbar: null });
+    }
+};
+
+
+// ========================================
+// 模块：顶栏合并左右间距功能
+// ========================================
+function initTabBarsMarginUnified(direction = "right") {
+    const isRight = direction === "right";
+
+    function updateMargins() {
+        const topBarFixed = document.getElementById("Sv-theme-color-topbar隐藏");
+        const tabBarSelector = isRight
+            ? ".layout__center .layout-tab-bar--readonly"
+            : ".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)";
+        const allTabBars = document.querySelectorAll(tabBarSelector);
+
+        if (!topBarFixed) {
+            allTabBars.forEach(tabBar => {
+                tabBar.style[isRight ? "marginRight" : "marginLeft"] = "0px";
             });
+            return;
         }
-        
-        tabbarResizer = null;
-        isResizing = false;
-        currentTabbar = null;
-    }
 
-
-
-
-    // ========================================
-    // 模块：顶栏合并左右间距功能
-    // ========================================
-    const initTabBarsMarginUnified = (direction = "right") => {
-        let dock = null;
-        let dockVertical = null;
-        const isRight = direction === "right";
-
-        const cacheElements = () => {
-            dock = document.querySelector(isRight ? ".layout__dockr" : ".layout__dockl");
-            dockVertical = document.querySelector(".dock--vertical");
-        };
-
-        const updateMargins = () => {
-            const topBarFixed = document.getElementById("Sv-theme-color-topbar隐藏");
-            if (!topBarFixed) {
-                const selector = isRight
-                    ? ".layout__center .layout-tab-bar--readonly"
-                    : ".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)";
-                document.querySelectorAll(selector).forEach(tabBar => {
-                    tabBar.style[isRight ? "marginRight" : "marginLeft"] = "0px";
-                });
-                return;
-            }
-            const $ = s => document.querySelectorAll(s);
-            const allTabBars = isRight
-                ? $(".layout__center .layout-tab-bar--readonly")
-                : $(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)");
-
-            const panel = document.querySelector(isRight ? ".layout__dockr" : ".layout__dockl");
-            const panelWidth = panel?.classList.contains("layout--float")
-                ? panel.querySelector(".dock")?.offsetWidth ?? 0
-                : panel?.offsetWidth ?? 0;
-
-            const dockId = isRight ? "#dockRight" : "#dockLeft";
-            const dockWidth = document.querySelector(dockId)?.offsetWidth ?? 0;
-
-            let barButtonsTotalWidth = 0;
-            const drag = document.getElementById("drag");
-            if (drag) {
-                if (isRight) {
-                    // #drag 后面所有兄弟元素
-                    let el = drag.nextElementSibling;
-                    while (el) {
-                        if (el.offsetParent !== null) {
-                            barButtonsTotalWidth += (el.offsetWidth ?? 0) + 4;
-                        }
-                        el = el.nextElementSibling;
-                    }
-                } else {
-                    // #drag 前面所有兄弟元素
-                    let el = drag.previousElementSibling;
-                    while (el) {
-                        if (el.offsetParent !== null) {
-                            barButtonsTotalWidth += (el.offsetWidth ?? 0) + 4;
-                        }
-                        el = el.previousElementSibling;
-                    }
+        // 动态计算按钮宽度
+        let barButtonsTotalWidth = 0;
+        const drag = document.getElementById("drag");
+        if (drag) {
+            let el = isRight ? drag.nextElementSibling : drag.previousElementSibling;
+            while (el) {
+                if (el.offsetParent !== null) {
+                    barButtonsTotalWidth += (el.offsetWidth ?? 0) + 4;
                 }
+                el = isRight ? el.nextElementSibling : el.previousElementSibling;
             }
+        }
 
-            const calculatedMargin = barButtonsTotalWidth - panelWidth - dockWidth;
-            const CUSTOM_MARGIN_RIGHT = -14;
-            const CUSTOM_MARGIN_LEFT = 0;
-            let marginValue;
-            if (isRight) {
-                const calcMargin = (calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN_RIGHT : CUSTOM_MARGIN_RIGHT);
-                marginValue = `${Math.max(0, calcMargin)}px`;
+        // 动态计算 panel/dock 宽度
+        const panel = document.querySelector(isRight ? ".layout__dockr" : ".layout__dockl");
+        const panelWidth = panel?.classList.contains("layout--float")
+            ? panel.querySelector(".dock")?.offsetWidth ?? 0
+            : panel?.offsetWidth ?? 0;
+        const dockId = isRight ? "#dockRight" : "#dockLeft";
+        const dockWidth = document.querySelector(dockId)?.offsetWidth ?? 0;
+
+        // margin 计算
+        const calculatedMargin = barButtonsTotalWidth - panelWidth - dockWidth;
+        const CUSTOM_MARGIN = isRight ? -14 : 0;
+        const marginValue = isRight
+            ? `${Math.max(0, (calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN : CUSTOM_MARGIN))}px`
+            : `${(calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN : CUSTOM_MARGIN)}px`;
+
+        // 应用 margin
+        if (isRight) {
+            allTabBars.forEach(tabBar => tabBar.style.marginRight = "0px");
+            const resizers = document.querySelectorAll(".layout__center .layout__resize:not(.layout__resize--lr)");
+            if (resizers.length === 0) {
+                const lastTabBar = allTabBars[allTabBars.length - 1];
+                if (lastTabBar && (lastTabBar.closest(".layout__dockr") || lastTabBar.closest(".layout__center"))) {
+                    lastTabBar.style.marginRight = marginValue;
+                }
             } else {
-                const calcMargin = (calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN_LEFT : CUSTOM_MARGIN_LEFT);
-                marginValue = `${calcMargin}px`;
-            }
-
-            if (isRight) {
-                allTabBars.forEach(tabBar => {
-                    tabBar.style.marginRight = "0px";
-                });
-                const resizers = document.querySelectorAll(".layout__center .layout__resize:not(.layout__resize--lr)");
-                if (resizers.length === 0) {
-                    const lastTabBar = allTabBars[allTabBars.length - 1];
-                    if (lastTabBar) {
+                resizers.forEach(resizer => {
+                    let prevElement = resizer.previousElementSibling;
+                    if (!prevElement) return;
+                    const prevTabBars = prevElement.querySelectorAll(".layout-tab-bar--readonly");
+                    if (prevTabBars.length > 0) {
+                        const lastTabBar = prevTabBars[prevTabBars.length - 1];
                         if (lastTabBar.closest(".layout__dockr") || lastTabBar.closest(".layout__center")) {
                             lastTabBar.style.marginRight = marginValue;
                         }
                     }
-                } else {
-                    resizers.forEach(resizer => {
-                        let prevElement = resizer.previousElementSibling;
-                        if (!prevElement) return;
-                        const prevTabBars = prevElement.querySelectorAll(".layout-tab-bar--readonly");
-                        if (prevTabBars.length > 0) {
-                            const lastTabBar = prevTabBars[prevTabBars.length - 1];
-                            if (lastTabBar.closest(".layout__dockr") || lastTabBar.closest(".layout__center")) {
-                                lastTabBar.style.marginRight = marginValue;
-                            }
-                        }
-                    });
-                }
-            } else {
-                const firstTabBar = allTabBars[0];
-                if (firstTabBar) {
-                    firstTabBar.style.marginLeft = marginValue;
-                }
-            }
-        };
-
-        const init = () => {
-            cacheElements();
-            if (dock) new ResizeObserver(updateMargins).observe(dock);
-            if (dockVertical) {
-                new MutationObserver(updateMargins).observe(dockVertical, {
-                    attributes: true,
-                    attributeFilter: ["class"]
                 });
             }
-            updateMargins();
-            setTimeout(updateMargins, 500);
-        };
-
-        init();
-
-        const observer = new MutationObserver(() => {
-            if (!dock || !dockVertical) {
-                cacheElements();
-                if (dock || dockVertical) init();
-            }
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-        
-        window.addEventListener("load", init);
-        document.addEventListener("themechange", updateMargins);
-        
-        if (isRight) {
-            window.updateTabBarsMargin = updateMargins;
         } else {
-            window.updateTabBarsMarginLeft = updateMargins;
+            const firstTabBar = allTabBars[0];
+            if (firstTabBar) {
+                firstTabBar.style.marginLeft = marginValue;
+            }
         }
-        setTimeout(updateMargins, 1000);
     }
 
-    // 初始化左右两侧
-    initTabBarsMarginUnified("right");
-    initTabBarsMarginUnified("left");
+    // observer 只初始化一次
+    const dockSelector = isRight ? ".layout__dockr" : ".layout__dockl";
+    const dockVerticalSelector = ".dock--vertical";
+    const panelObserver = new ResizeObserver(updateMargins);
+    const dockVerticalObserver = new MutationObserver(updateMargins);
 
-    // layoutCenter observer 保留
-    const layoutCenter = document.querySelector(".layout__center");
-    if (layoutCenter) {
-        let marginUpdateTimer = null;
-        const resizeObserver = new MutationObserver(() => {
-            if (marginUpdateTimer) return;
-            marginUpdateTimer = requestAnimationFrame(() => {
-                window.updateTabBarsMargin?.();
-                window.updateTabBarsMarginLeft?.();
-                marginUpdateTimer = null;
+    function observeDock() {
+        const dock = document.querySelector(dockSelector);
+        if (dock) panelObserver.observe(dock);
+        const dockVertical = document.querySelector(dockVerticalSelector);
+        if (dockVertical) {
+            dockVerticalObserver.observe(dockVertical, {
+                attributes: true,
+                attributeFilter: ["class"]
             });
-        });
-        resizeObserver.observe(layoutCenter, { childList: true, subtree: true });
-        window._tabBarsResizeObserver = resizeObserver;
+        }
     }
+
+    // 监听 body 结构变化，dock/dockVertical 变化时重新 observe
+    new MutationObserver(() => {
+        panelObserver.disconnect();
+        dockVerticalObserver.disconnect();
+        observeDock();
+        updateMargins();
+    }).observe(document.body, { childList: true, subtree: true });
+
+    // 主题和页面加载时刷新
+    window.addEventListener("load", updateMargins);
+    document.addEventListener("themechange", updateMargins);
+
+    // 首次初始化
+    observeDock();
+    updateMargins();
+    setTimeout(updateMargins, 500);
+
+    if (isRight) {
+        window.updateTabBarsMargin = updateMargins;
+    } else {
+        window.updateTabBarsMarginLeft = updateMargins;
+    }
+    setTimeout(updateMargins, 1000);
+}
+
+// 初始化左右两侧
+initTabBarsMarginUnified("right");
+initTabBarsMarginUnified("left");
+
+// layoutCenter observer 保留
+const layoutCenter = document.querySelector(".layout__center");
+if (layoutCenter) {
+    let marginUpdateTimer = null;
+    const resizeObserver = new MutationObserver(() => {
+        if (marginUpdateTimer) return;
+        marginUpdateTimer = requestAnimationFrame(() => {
+            window.updateTabBarsMargin?.();
+            window.updateTabBarsMarginLeft?.();
+            marginUpdateTimer = null;
+        });
+    });
+    resizeObserver.observe(layoutCenter, { childList: true, subtree: true });
+    window._tabBarsResizeObserver = resizeObserver;
+}
 
 
 
@@ -1204,42 +1100,32 @@
     // ========================================
     // 模块：打字机模式
     // ========================================
-    let typewriterModeActive = false;
-    let typewriterHandler = null;
+    let typewriterModeActive = false, typewriterHandler = null;
 
     const enableTypewriterMode = () => {
         if (typewriterModeActive) return;
         typewriterModeActive = true;
-        
         typewriterHandler = debounce(() => {
-            const selection = window.getSelection();
-            if (!selection.rangeCount) return;
-            
-            const range = selection.getRangeAt(0);
-            const node = range.startContainer.nodeType === 3 ? range.startContainer.parentElement : range.startContainer;
+            const sel = window.getSelection();
+            if (!sel.rangeCount) return;
+            let node = sel.getRangeAt(0).startContainer;
+            node = node.nodeType === 3 ? node.parentElement : node;
             const editable = window.theme.findEditableParent(node);
             if (!editable) return;
-            
             const protyle = editable.closest(".protyle");
             if (!protyle) return;
-            
             const line = node.closest(".p, .h1, .h2, .h3, .h4, .h5, .h6, .li") || node;
             const container = protyle.querySelector(".protyle-content") || protyle;
-            
-            const rect = line.getBoundingClientRect();
-            const containerRect = container.getBoundingClientRect();
+            const rect = line.getBoundingClientRect(), crect = container.getBoundingClientRect();
             const center = container.clientHeight * 0.4;
-            const targetScrollTop = container.scrollTop + rect.top - containerRect.top - center + rect.height / 2;
-            
             container.scrollTo({
-                top: targetScrollTop,
+                top: container.scrollTop + rect.top - crect.top - center + rect.height / 2,
                 behavior: "smooth"
             });
         }, 100);
-        
         document.addEventListener("selectionchange", typewriterHandler);
-    }
-
+    };
+    
     const disableTypewriterMode = () => {
         if (!typewriterModeActive) return;
         typewriterModeActive = false;
@@ -1247,7 +1133,7 @@
             document.removeEventListener("selectionchange", typewriterHandler);
             typewriterHandler = null;
         }
-    }
+    };
 
 
 
@@ -1897,8 +1783,8 @@
         });
         featureButtonsActive?.clear();
         
-        [removeTabbarResizer, removeBulletThreading, disableTypewriterMode, disableListPreview]
-            .forEach(fn => fn?.());
+        [tabbarResize.remove, removeBulletThreading, disableTypewriterMode, disableListPreview]
+        .forEach(fn => fn?.());
         
         // 清理侧边栏备注功能
         if (sidebarMemo) {
@@ -1959,16 +1845,63 @@
 
     
     // ========================================
-    // 模块：侧边栏备注功能
+    // 模块：侧边栏备注功能（精简版）
     // ========================================
     const sidebarMemo = (() => {
         let isEnabled = false, observers = {}, editorNode = null;
         let dragTimeout = null, dragMutationObserver = null;
 
-        // 获取块节点
-        const getBlockNode = el => { while (el && !el.dataset.nodeId) el = el.parentElement; return el; };
+        // 工具函数集合
+        const utils = {
+            autoResizeDiv(div) {
+                div.style.height = 'auto';
+                div.style.height = (div.scrollHeight + 1) + 'px';
+            },
+            setEndOfContenteditable(el) {
+                let range = document.createRange();
+                range.selectNodeContents(el); range.collapse(false);
+                let sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+            },
+            insertAtCursor(editableDiv, node) {
+                let sel = window.getSelection();
+                if (!sel.rangeCount) { editableDiv.appendChild(node); return; }
+                let range = sel.getRangeAt(0);
+                range.deleteContents(); range.insertNode(node);
+                range.setStartAfter(node); range.collapse(true);
+                sel.removeAllRanges(); sel.addRange(range);
+            },
+            bindImageZoom(img) {
+                img.style.cursor = 'zoom-in';
+                img.ondblclick = e => {
+                    e.stopPropagation();
+                    let overlay = document.createElement('div');
+                    overlay.style.cssText = 'position:fixed;z-index:99999;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
+                    let bigImg = document.createElement('img');
+                    bigImg.src = img.src;
+                    bigImg.style.cssText = 'max-width:90vw;max-height:90vh;box-shadow:0 4px 32px rgba(0,0,0,0.5);border-radius:8px;';
+                    overlay.appendChild(bigImg);
+                    document.body.appendChild(overlay);
+                    overlay.onclick = () => overlay.remove();
+                };
+            },
+            getBlockNode(el) {
+                while (el && !el.dataset.nodeId) el = el.parentElement;
+                return el;
+            },
+            toggleMemoHighlight(main, nodeId, text, highlight) {
+                const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
+                if (blockEl) {
+                    const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
+                    allMemos.forEach(span => {
+                        if (span.textContent === text) {
+                            span.classList.toggle('memo-span-highlight', highlight);
+                        }
+                    });
+                }
+            }
+        };
 
-        // 新增：监听 #drag 的 title 属性变化（简化版）
+        // 监听 #drag 的 title 属性变化
         function observeDragTitle() {
             if (dragMutationObserver) return;
             function tryObserve() {
@@ -2007,10 +1940,9 @@
         }
 
         // 刷新侧边栏备注位置
-        const refreshMemoOffset = (main, sidebar) => {
+        function refreshMemoOffset(main, sidebar) {
             requestAnimationFrame(() => {
                 const MARGIN = 10;
-                // 分组并累加高度
                 const memoGroups = {};
                 sidebar.querySelectorAll('.memo-item').forEach(memoItem => {
                     const nodeId = memoItem.getAttribute('data-node-id');
@@ -2018,89 +1950,78 @@
                     memoGroups[nodeId].items.push(memoItem);
                     memoGroups[nodeId].totalHeight += memoItem.offsetHeight + MARGIN;
                 });
-        
-                // 排序，防重叠并定位
                 let lastBottom = 0;
-                Object.values(memoGroups)
-                    .map(group => {
-                        const block = main.querySelector(`div[data-node-id="${group.items[0].getAttribute('data-node-id')}"]`);
-                        if (!block) return null;
-                        const blockRect = block.getBoundingClientRect();
-                        const mainRect = main.getBoundingClientRect();
-                        const blockCenter = blockRect.top - mainRect.top + blockRect.height / 2;
-                        const groupCenter = group.totalHeight / 2;
-                        let top = Math.max(0, blockCenter - groupCenter);
-                        // 防止重叠
-                        if (top < lastBottom + MARGIN) top = lastBottom + MARGIN;
-                        let currentTop = top;
-                        group.items.forEach(item => {
-                            item.style.position = 'absolute';
-                            item.style.top = `${currentTop}px`;
-                            item.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1)';
-                            currentTop += item.offsetHeight + MARGIN;
-                        });
-                        lastBottom = currentTop - MARGIN;
-                        return null;
+                Object.values(memoGroups).forEach(group => {
+                    const block = main.querySelector(`div[data-node-id="${group.items[0].getAttribute('data-node-id')}"]`);
+                    if (!block) return;
+                    const blockRect = block.getBoundingClientRect();
+                    const mainRect = main.getBoundingClientRect();
+                    const blockCenter = blockRect.top - mainRect.top + blockRect.height / 2;
+                    const groupCenter = group.totalHeight / 2;
+                    let top = Math.max(0, blockCenter - groupCenter);
+                    if (top < lastBottom + MARGIN) top = lastBottom + MARGIN;
+                    let currentTop = top;
+                    group.items.forEach(item => {
+                        item.style.position = 'absolute';
+                        item.style.top = `${currentTop}px`;
+                        item.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1),transform 0.3s cubic-bezier(0.4,0,0.2,1)';
+                        currentTop += item.offsetHeight + MARGIN;
                     });
+                    lastBottom = currentTop - MARGIN;
+                });
             });
-        };
+        }
 
         // 添加侧边栏
-        const addSideBar = main => {
+        function addSideBar(main) {
             let sidebar = main.parentElement.querySelector('#protyle-sidebar');
             const title = main.parentElement.querySelector('div.protyle-title');
-            const pr = parseFloat(getComputedStyle(main).paddingRight);
-            const isFull = main.parentElement.dataset.fullwidth;
             if (!sidebar) {
                 sidebar = document.createElement('div');
                 sidebar.id = 'protyle-sidebar';
                 title.insertAdjacentElement('beforeend', sidebar);
-                sidebar.style.cssText = 'position:absolute;right:-230px;width:230px;z-index:3;';
+                sidebar.style.cssText = 'position:absolute;right:-230px;width:230px;';
                 main.style.minWidth = '90%';
             }
             return sidebar;
-        };
+        }
 
         // 编辑备注内容
         function bindMemoEdit(div, memoDiv, el, main, sidebar) {
             div.onclick = e => {
                 e.stopPropagation();
-                // 高亮正文块
                 const blockEl = main.querySelector(`div[data-node-id="${el.closest('[data-node-id]').dataset.nodeId}"]`);
                 if (blockEl) {
                     blockEl.style.transition = 'background-color 1.2s cubic-bezier(0.4,0,0.2,1)';
                     blockEl.style.backgroundColor = 'var(--b3-theme-primary-lightest)';
-                    setTimeout(() => {
-                        blockEl.style.backgroundColor = '';
-                        setTimeout(() => {
-                            blockEl.style.transition = '';
-                        }, 1200);
-                    }, 1200);
+                    setTimeout(() => { blockEl.style.backgroundColor = ''; setTimeout(() => { blockEl.style.transition = ''; }, 1200); }, 1200);
                 }
                 if (memoDiv.classList.contains('editing')) return;
                 memoDiv.classList.add('editing');
-                memoDiv.style.zIndex = '999'; // 编辑时提升z-index
+                memoDiv.style.zIndex = '999';
                 const old = el.getAttribute('data-inline-memo-content') || '';
-                const input = document.createElement('textarea');
+                const input = document.createElement('div');
                 input.className = 'memo-edit-input';
-                input.value = old;
-                input.placeholder = '输入备注内容...';
-                input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.9em;resize:none;box-sizing:border-box;overflow:hidden;';
-                // 自适应高度函数
-                function autoResizeTextarea(textarea) {
-                    textarea.style.height = 'auto';
-                    textarea.style.height = textarea.scrollHeight + 'px';
-                }
-                input.addEventListener('input', () => autoResizeTextarea(input));
-                autoResizeTextarea(input); // 初始时自适应
+                input.contentEditable = 'true';
+                input.innerHTML = old.replace(/\n/g, '<br>');
+                input.setAttribute('placeholder', '输入备注内容...');
+                input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.9em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;';
+                input.addEventListener('input', () => utils.autoResizeDiv(input));
+                utils.autoResizeDiv(input);
                 div.replaceWith(input);
-                input.focus(); input.select();
-                requestAnimationFrame(() => {
-                    autoResizeTextarea(input);
-                    refreshMemoOffset(main, sidebar); // 进入编辑后立即刷新，避免重叠
-                });
+                input.focus(); utils.setEndOfContenteditable(input);
+                requestAnimationFrame(() => { utils.autoResizeDiv(input); refreshMemoOffset(main, sidebar); });
                 const save = () => {
-                    const val = input.value.trim();
+                    // 将HTML内容转换为纯文本，保持换行
+                    let val = input.innerHTML
+                        .replace(/<div>/gi, '\n')
+                        .replace(/<\/div>/gi, '')
+                        .replace(/<br\s*\/?>/gi, '\n')
+                        .replace(/<p>/gi, '\n')
+                        .replace(/<\/p>/gi, '')
+                        .replace(/&nbsp;/g, ' ')
+                        .replace(/\n\s*\n\s*\n+/g, '\n\n') // 将连续更多换行压缩
+                        .trim();
                     if (val !== old) {
                         el.setAttribute('data-inline-memo-content', val);
                         updateInlineMemo(el, val);
@@ -2108,74 +2029,98 @@
                     const newDiv = document.createElement('div');
                     newDiv.className = 'memo-content-view';
                     newDiv.style.cssText = div.style.cssText;
-                    newDiv.innerHTML = val || '<span style="color:#bbb;">点击编辑备注...</span>';
+                    newDiv.innerHTML = (val ? val.replace(/\n/g, '<br>') : '') || '<span style="color:#bbb;">点击编辑备注...</span>';
                     bindMemoEdit(newDiv, memoDiv, el, main, sidebar);
                     input.replaceWith(newDiv);
+                    newDiv.querySelectorAll('img').forEach(utils.bindImageZoom);
                     memoDiv.classList.remove('editing');
                     memoDiv.style.zIndex = '';
-                    memoDiv.style.transform = '';
-                    setTimeout(() => { memoDiv.style.transition = ''; }, 300);
                     setTimeout(() => refreshMemoOffset(main, sidebar), 100);
                 };
                 input.onblur = () => setTimeout(() => { if (document.activeElement !== input) save(); }, 100);
-                input.onkeydown = e => {
-                    if ((e.key === 'Enter' && e.ctrlKey) || e.key === 'Escape') { e.preventDefault(); save(); }
+                input.onkeydown = e => { 
+                    if ((e.key === 'Enter' && e.ctrlKey) || e.key === 'Escape') { 
+                        e.preventDefault(); 
+                        save(); 
+                    } else if (e.key === 'a' && e.ctrlKey) {
+                        e.preventDefault();
+                        const range = document.createRange();
+                        range.selectNodeContents(input);
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
                 };
+                input.addEventListener('paste', e => {
+                    e.preventDefault();
+                    const items = e.clipboardData?.items;
+                    if (items) for (let i = 0; i < items.length; i++) {
+                        const item = items[i];
+                        if (item.type.indexOf('image') !== -1) {
+                            const file = item.getAsFile();
+                            const reader = new FileReader();
+                            reader.onload = evt => {
+                                const img = document.createElement('img');
+                                img.src = evt.target.result;
+                                img.style.maxWidth = '100%';
+                                utils.bindImageZoom(img);
+                                utils.insertAtCursor(input, img);
+                            };
+                            reader.readAsDataURL(file);
+                            return;
+                        }
+                    }
+                    const text = e.clipboardData?.getData('text');
+                    if (text && /^\/?assets\//.test(text)) {
+                        const url = text.startsWith('/') ? text : '/' + text;
+                        fetch(url).then(res => res.blob()).then(blob => {
+                            const reader = new FileReader();
+                            reader.onload = evt => {
+                                const img = document.createElement('img');
+                                img.src = evt.target.result;
+                                img.style.maxWidth = '100%';
+                                utils.bindImageZoom(img);
+                                utils.insertAtCursor(input, img);
+                            };
+                            reader.readAsDataURL(blob);
+                        });
+                        return;
+                    }
+                    if (text) document.execCommand('insertText', false, text);
+                }, true);
+                input.querySelectorAll('img').forEach(utils.bindImageZoom);
             };
         }
 
         // 刷新侧边栏备注
-        const refreshSideBarMemos = (main, sidebar) => {
+        function refreshSideBarMemos(main, sidebar) {
             const memos = main.querySelectorAll('span[data-type*="inline-memo"]');
             sidebar.innerHTML = '';
             if (!memos.length) { sidebar.removeAttribute('data-memo-count'); return; }
-            
             memos.forEach((el, idx) => {
-                const block = getBlockNode(el);
+                const block = utils.getBlockNode(el);
                 const memo = el.getAttribute('data-inline-memo-content') || '';
                 const text = el.textContent || '';
                 const memoDiv = document.createElement('div');
                 memoDiv.className = 'memo-item';
                 memoDiv.setAttribute('data-node-id', block.dataset.nodeId);
                 memoDiv.setAttribute('data-memo-index', idx);
-                memoDiv.style.cssText = 'margin:8px;padding:8px;border:1px solid var(--b3-border-color);border-radius:8px;position:relative;width:220px;box-shadow:0 1px 3px rgba(0,0,0,0.1);';
-                memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="color:var(--b3-theme-on-background);font-size:0.9em;margin-bottom:4px;cursor:pointer;">${memo || '<span style=\\"color:#bbb;\\">点击编辑备注...</span>'}</div>`;
-                // 改为 hover 高亮正文块
+                memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
+                memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="color:var(--b3-theme-on-background);font-size:0.9em;margin-bottom:4px;cursor:pointer;">${memo ? memo.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>'}</div>`;
                 memoDiv.onmouseenter = e => {
-                    if (e.target.classList.contains('memo-content-view')) return;
-                    // 只高亮内容一致的 inline-memo span
-                    const blockEl = main.querySelector(`div[data-node-id="${block.dataset.nodeId}"]`);
-                    if (blockEl) {
-                        const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
-                        const memoText = text;
-                        allMemos.forEach(span => {
-                            if (span.textContent === memoText) {
-                                span.classList.add('memo-span-highlight');
-                            }
-                        });
+                    if (!e.target.classList.contains('memo-content-view')) {
+                        utils.toggleMemoHighlight(main, block.dataset.nodeId, text, true);
                     }
                 };
                 memoDiv.onmouseleave = e => {
-                    // 只取消内容一致的 inline-memo span 高亮
-                    const blockEl = main.querySelector(`div[data-node-id="${block.dataset.nodeId}"]`);
-                    if (blockEl) {
-                        const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
-                        const memoText = text;
-                        allMemos.forEach(span => {
-                            if (span.textContent === memoText) {
-                                span.classList.remove('memo-span-highlight');
-                            }
-                        });
-                    }
+                    utils.toggleMemoHighlight(main, block.dataset.nodeId, text, false);
                 };
                 const memoContentDiv = memoDiv.querySelector('.memo-content-view');
                 bindMemoEdit(memoContentDiv, memoDiv, el, main, sidebar);
                 sidebar.appendChild(memoDiv);
             });
-            
             sidebar.setAttribute('data-memo-count', `共 ${memos.length} 个备注`);
             refreshMemoOffset(main, sidebar);
-            // 检查并设置 .protyle-content 的 Sv-memo class
             const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
             if (protyleContent) {
                 if (memos.length > 0) {
@@ -2184,7 +2129,7 @@
                     protyleContent.classList.remove('Sv-memo');
                 }
             }
-        };
+        }
 
         // 更新内联备注到思源
         async function updateInlineMemo(el, content) {
@@ -2193,18 +2138,13 @@
                 while (blockEl && !blockEl.dataset.nodeId) blockEl = blockEl.parentElement;
                 if (!blockEl?.dataset.nodeId) return;
                 const blockId = blockEl.dataset.nodeId;
-                // 在 blockEl 下找到与 el 完全相同的 inline-memo span
                 const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
                 let targetMemo = null;
                 for (const m of allMemos) {
-                    if (m.isSameNode(el)) {
-                        targetMemo = m;
-                        break;
-                    }
+                    if (m.isSameNode(el)) { targetMemo = m; break; }
                 }
                 if (!targetMemo) return;
                 targetMemo.setAttribute('data-inline-memo-content', content);
-                // 只更新属性，不动 innerHTML
                 const newHtml = blockEl.outerHTML;
                 await fetch('/api/block/updateBlock', {
                     method: 'POST',
@@ -2217,43 +2157,39 @@
         // 刷新编辑器（observer 回调加防抖）
         function refreshEditor() {
             if (!editorNode) return;
-            const mains = editorNode.querySelectorAll('div.protyle-wysiwyg');
-            Object.values(observers).forEach(list => list.forEach(o => o.disconnect()));
+            Object.values(observers).flat().forEach(o => o.disconnect());
             observers = {};
-            mains.forEach(main => {
-                const sidebar = addSideBar(main);
-                if (sidebar) {
-                    const mainId = main.parentElement.parentElement.getAttribute('data-id');
-                    let refreshTimer = null;
-                    const observer = new MutationObserver(() => {
-                        clearTimeout(refreshTimer);
-                        refreshTimer = setTimeout(() => { if (isEnabled) refreshSideBarMemos(main, sidebar); }, 100);
-                    });
-                    observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content'] });
-                    observers[mainId] = [observer];
-                    refreshSideBarMemos(main, sidebar);
-                }
+            editorNode.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
+                let sidebar = main.parentElement.querySelector('#protyle-sidebar');
+                if (!sidebar && isEnabled) sidebar = addSideBar(main);
+                if (!sidebar) return;
+                const mainId = main.parentElement.parentElement.getAttribute('data-id');
+                let refreshTimer = null;
+                const observer = new MutationObserver(() => {
+                    clearTimeout(refreshTimer);
+                    refreshTimer = setTimeout(() => isEnabled && refreshSideBarMemos(main, sidebar), 100);
+                });
+                observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content'] });
+                observers[mainId] = [observer];
+                refreshSideBarMemos(main, sidebar);
             });
-            // 修复：切换到没有备注的文档时移除 Sv-memo class
             document.querySelectorAll('.protyle-content').forEach(pc => {
                 const main = pc.closest('.protyle')?.querySelector('.protyle-wysiwyg');
-                if (main && main.querySelectorAll('span[data-type*="inline-memo"]').length === 0) {
+                if (main && !main.querySelector('span[data-type*="inline-memo"]')) {
                     pc.classList.remove('Sv-memo');
                 }
             });
         }
 
-        // 开关侧边栏（合并 setEnabled 逻辑）
+        // 开关侧边栏
         function openSideBar(open, save = false) {
+            if (isEnabled === open) return;
             if (!editorNode && open) {
-                // 等待 editorNode 出现后再初始化
-                const wait = () => {
+                (function wait() {
                     editorNode = document.querySelector('div.layout__center');
-                    if (editorNode) {
-                        openSideBar(open, save);
-                    } else setTimeout(wait, 100);
-                };
-                setTimeout(wait, 100);
+                    if (editorNode) openSideBar(open, save);
+                    else setTimeout(wait, 100);
+                })();
                 return;
             }
             isEnabled = open;
@@ -2263,14 +2199,10 @@
                 observeDragTitle();
             } else {
                 window.siyuan?.eventBus?.off('loaded-protyle', refreshEditor);
-                Object.values(observers).forEach(list => list.forEach(o => o.disconnect()));
+                Object.values(observers).flat().forEach(o => o.disconnect());
                 observers = {};
-                if (editorNode) editorNode.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
-                    const sidebar = main.parentElement.querySelector('#protyle-sidebar');
-                    if (sidebar) {
-                        sidebar.innerHTML = '';
-                        sidebar.remove();
-                    }
+                editorNode?.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
+                    main.parentElement.querySelector('#protyle-sidebar')?.remove();
                 });
                 unobserveDragTitle();
             }

@@ -1,13 +1,22 @@
 /* 侧边栏备注区渐显动画 */
 .Sv-memo #protyle-sidebar{
     animation: SvMemoFadeIn 0.5s cubic-bezier(0.4,0,0.2,1) 1;
-    animation-delay: 1s; /* 新增：延迟1秒后再播放动画 */
+    animation-delay: 0.5s; /* 新增：延迟1秒后再播放动画 */
     opacity: 0; /* 初始隐藏 */
     animation-fill-mode: forwards; /* 动画结束后保持最终状态 */
 }
 @keyframes SvMemoFadeIn {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: none; }
+}
+
+@keyframes memoHighlightFade {
+  0% { background-color: var(--b3-theme-primary-lightest); }
+  80% { background-color: var(--b3-theme-primary-lightest); }
+  100% { background-color: transparent; }
+}
+.memo-highlight {
+  animation: memoHighlightFade 1.2s cubic-bezier(0.4,0,0.2,1);
 }
 
 body:not(.body--mobile){
@@ -46,8 +55,11 @@ body:not(.body--mobile){
 
     .memo-item {
         background-color: var(--Sv-protyle-toolbar-bg);
-        &:hover .memo-title-dot {
-            background: var(--Sv-dock-item--activefocus-background);
+        &:hover{
+            transform: translateX(-8px);
+            & .memo-title-dot {
+                background: var(--Sv-dock-item--activefocus-background);
+            }
         }
     }
 }
