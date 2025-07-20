@@ -68,7 +68,7 @@
         }
     &.layout-tab-bar--readonly{
         padding-left: 5px;
-        padding-right: 6px;
+        padding-right: 5px;
         overflow: visible;
         z-index: 2;
         /*background-color: var(--Sv-dock-background);*/

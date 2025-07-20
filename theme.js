@@ -1898,35 +1898,66 @@ if (layoutCenter) {
                         }
                     });
                 }
+            },
+
+            // 创建连线功能
+            createMemoConnection(main, sidebar, memoDiv, nodeId, text, memoIndex) {
+                this.removeMemoConnection();
+                const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
+                if (!blockEl || !memoDiv) return;
+                const memoSpans = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
+                const memoSpan = memoSpans[memoIndex] || memoSpans[0];
+                if (!memoSpan) return;
+
+                const container = document.createElement('div');
+                container.id = 'memo-connection-container';
+                container.style = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9998;';
+                container.innerHTML = `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"><path stroke="var(--Sv-dock-item--activefocus-background)" stroke-width="2" fill="none" stroke-dasharray="6,4"></path></svg>`;
+                document.body.appendChild(container);
+                const path = container.querySelector('path');
+
+                const update = () => {
+                    const a = memoDiv.getBoundingClientRect(), b = memoSpan.getBoundingClientRect();
+                    if (!a.width || !b.width) return;
+                    const sx = b.right, sy = b.top + b.height / 2, ex = a.left - 6, ey = a.top + a.height / 2;
+                    const o = Math.min(Math.abs(ex - sx) * 0.5, 200);
+                    path.setAttribute('d', `M${sx} ${sy}C${sx + o} ${sy},${ex - o} ${ey},${ex} ${ey}`);
+                };
+                update();
+                const onScroll = () => requestAnimationFrame(update);
+                window.addEventListener('scroll', onScroll, true);
+                window.addEventListener('resize', onScroll);
+
+                this.connectionCleanup = () => {
+                    window.removeEventListener('scroll', onScroll, true);
+                    window.removeEventListener('resize', onScroll);
+                    container.remove();
+                    this.connectionCleanup = null;
+                };
+            },
+
+            // 移除连线
+            removeMemoConnection() {
+                this.connectionCleanup?.();
             }
         };
 
         // 监听 #drag 的 title 属性变化
         function observeDragTitle() {
             if (dragMutationObserver) return;
-            function tryObserve() {
+            function waitForDrag() {
                 const dragEl = document.getElementById('drag');
                 if (!dragEl) {
-                    dragTimeout = setTimeout(tryObserve, 1000);
+                    dragTimeout = setTimeout(waitForDrag, 1000);
                     return;
                 }
-                let lastTitle = dragEl.getAttribute('title');
-                let debounceTimer = null;
-                dragMutationObserver = new MutationObserver(mutations => {
-                    for (const mutation of mutations) {
-                        if (mutation.type === 'attributes' && mutation.attributeName === 'title') {
-                            const newTitle = dragEl.getAttribute('title');
-                            if (newTitle !== lastTitle) {
-                                lastTitle = newTitle;
-                                clearTimeout(debounceTimer);
-                                debounceTimer = setTimeout(refreshEditor, 1000);
-                            }
-                        }
-                    }
+                const debouncedRefresh = debounce(refreshEditor, 1000);
+                dragMutationObserver = new MutationObserver(() => {
+                    debouncedRefresh();
                 });
                 dragMutationObserver.observe(dragEl, { attributes: true, attributeFilter: ['title'] });
             }
-            tryObserve();
+            waitForDrag();
         }
         function unobserveDragTitle() {
             if (dragMutationObserver) {
@@ -1976,7 +2007,7 @@ if (layoutCenter) {
         function addSideBar(main) {
             let sidebar = main.parentElement.querySelector('#protyle-sidebar');
             const title = main.parentElement.querySelector('div.protyle-title');
-            if (!sidebar) {
+            if (!sidebar && title) {
                 sidebar = document.createElement('div');
                 sidebar.id = 'protyle-sidebar';
                 title.insertAdjacentElement('beforeend', sidebar);
@@ -1991,11 +2022,12 @@ if (layoutCenter) {
             div.onclick = e => {
                 e.stopPropagation();
                 const blockEl = main.querySelector(`div[data-node-id="${el.closest('[data-node-id]').dataset.nodeId}"]`);
-                if (blockEl) {
-                    blockEl.style.transition = 'background-color 1.2s cubic-bezier(0.4,0,0.2,1)';
-                    blockEl.style.backgroundColor = 'var(--b3-theme-primary-lightest)';
-                    setTimeout(() => { blockEl.style.backgroundColor = ''; setTimeout(() => { blockEl.style.transition = ''; }, 1200); }, 1200);
-                }
+                // Remove highlight effect when editing memo
+                // if (blockEl) {
+                //     blockEl.style.transition = 'background-color 1.2s cubic-bezier(0.4,0,0.2,1)';
+                //     blockEl.style.backgroundColor = 'var(--b3-theme-primary-lightest)';
+                //     setTimeout(() => { blockEl.style.backgroundColor = ''; setTimeout(() => { blockEl.style.transition = ''; }, 1200); }, 1200);
+                // }
                 if (memoDiv.classList.contains('editing')) return;
                 memoDiv.classList.add('editing');
                 memoDiv.style.zIndex = '999';
@@ -2097,27 +2129,39 @@ if (layoutCenter) {
             const memos = main.querySelectorAll('span[data-type*="inline-memo"]');
             sidebar.innerHTML = '';
             if (!memos.length) { sidebar.removeAttribute('data-memo-count'); return; }
-            memos.forEach((el, idx) => {
+            // --- 修复：分组并用块内索引 ---
+            const blockMemos = {};
+            memos.forEach(el => {
                 const block = utils.getBlockNode(el);
-                const memo = el.getAttribute('data-inline-memo-content') || '';
-                const text = el.textContent || '';
-                const memoDiv = document.createElement('div');
-                memoDiv.className = 'memo-item';
-                memoDiv.setAttribute('data-node-id', block.dataset.nodeId);
-                memoDiv.setAttribute('data-memo-index', idx);
-                memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
-                memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="color:var(--b3-theme-on-background);font-size:0.9em;margin-bottom:4px;cursor:pointer;">${memo ? memo.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>'}</div>`;
-                memoDiv.onmouseenter = e => {
-                    if (!e.target.classList.contains('memo-content-view')) {
-                        utils.toggleMemoHighlight(main, block.dataset.nodeId, text, true);
-                    }
-                };
-                memoDiv.onmouseleave = e => {
-                    utils.toggleMemoHighlight(main, block.dataset.nodeId, text, false);
-                };
-                const memoContentDiv = memoDiv.querySelector('.memo-content-view');
-                bindMemoEdit(memoContentDiv, memoDiv, el, main, sidebar);
-                sidebar.appendChild(memoDiv);
+                if (!blockMemos[block.dataset.nodeId]) blockMemos[block.dataset.nodeId] = [];
+                blockMemos[block.dataset.nodeId].push(el);
+            });
+            Object.entries(blockMemos).forEach(([nodeId, memosInBlock]) => {
+                memosInBlock.forEach((el, idxInBlock) => {
+                    const block = utils.getBlockNode(el);
+                    const memo = el.getAttribute('data-inline-memo-content') || '';
+                    const text = el.textContent || '';
+                    const memoDiv = document.createElement('div');
+                    memoDiv.className = 'memo-item';
+                    memoDiv.setAttribute('data-node-id', block.dataset.nodeId);
+                    memoDiv.setAttribute('data-memo-index', idxInBlock);
+                    memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
+                    memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="color:var(--b3-theme-on-background);font-size:0.9em;margin-bottom:4px;cursor:pointer;">${memo ? memo.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>'}</div>`;
+                    memoDiv.onmouseenter = e => {
+                        if (!e.target.classList.contains('memo-content-view')) {
+                            utils.toggleMemoHighlight(main, block.dataset.nodeId, text, true);
+                            const memoIndex = Number(memoDiv.getAttribute('data-memo-index')) || 0;
+                            utils.createMemoConnection(main, sidebar, memoDiv, block.dataset.nodeId, text, memoIndex);
+                        }
+                    };
+                    memoDiv.onmouseleave = e => {
+                        utils.toggleMemoHighlight(main, block.dataset.nodeId, text, false);
+                        utils.removeMemoConnection();
+                    };
+                    const memoContentDiv = memoDiv.querySelector('.memo-content-view');
+                    bindMemoEdit(memoContentDiv, memoDiv, el, main, sidebar);
+                    sidebar.appendChild(memoDiv);
+                });
             });
             sidebar.setAttribute('data-memo-count', `共 ${memos.length} 个备注`);
             refreshMemoOffset(main, sidebar);
@@ -2167,11 +2211,22 @@ if (layoutCenter) {
                 let refreshTimer = null;
                 const observer = new MutationObserver(() => {
                     clearTimeout(refreshTimer);
-                    refreshTimer = setTimeout(() => isEnabled && refreshSideBarMemos(main, sidebar), 100);
+                    refreshTimer = setTimeout(() => {
+                        isEnabled && refreshSideBarMemos(main, sidebar);
+                        refreshMemoOffset(main, sidebar); // 新增：DOM 变动时自动刷新侧边栏备注定位
+                    }, 100);
                 });
                 observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content'] });
                 observers[mainId] = [observer];
                 refreshSideBarMemos(main, sidebar);
+                // 新增：滚动编辑器时侧边栏自动刷新定位（监听 .protyle-content）
+                const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
+                if (protyleContent && !protyleContent._sidebarMemoScrollBinded) {
+                    protyleContent.addEventListener('scroll', function() {
+                        refreshMemoOffset(main, sidebar);
+                    });
+                    protyleContent._sidebarMemoScrollBinded = true;
+                }
             });
             document.querySelectorAll('.protyle-content').forEach(pc => {
                 const main = pc.closest('.protyle')?.querySelector('.protyle-wysiwyg');

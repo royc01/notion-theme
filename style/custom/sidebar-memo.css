@@ -46,11 +46,11 @@ body:not(.body--mobile){
     .memo-title-dot {
         display: inline-block;
         width: 4px;
-        height: 1.2em;
         border-radius: 3px;
         background: var(--b3-theme-primary);
         margin-right: 6px;
         flex-shrink: 0;
+        align-self: stretch; /* 让竖条高度和父 flex 容器一样高 */
     }
 
     .memo-item {

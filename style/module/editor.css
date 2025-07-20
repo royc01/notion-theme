@@ -607,7 +607,7 @@
     background-color: var(--b3-theme-primary-lightest)!important;
     border-bottom: 2px solid var(--b3-theme-primary);
     &.memo-span-highlight{
-        background: var(--b3-protyle-inline-mark-background)!important;
+        background: rgba(255,212,0,0.25)!important;
         border-bottom: 2px solid var(--Sv-dock-item--activefocus-background);
     }
 }
