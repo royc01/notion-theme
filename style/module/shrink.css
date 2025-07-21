@@ -95,7 +95,9 @@
 }
 }
 }
-
+.sy__file .b3-list--background {
+	transition: background-color 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+}
 .block__icon:hover:not([disabled]):not(.ft__primary):not(.block__icon--warning), .block__icon--active {
 	background-color: var(--Sv-list-background);
 }

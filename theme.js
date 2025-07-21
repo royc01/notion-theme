@@ -2020,14 +2020,15 @@ if (layoutCenter) {
         // 编辑备注内容
         function bindMemoEdit(div, memoDiv, el, main, sidebar) {
             div.onclick = e => {
+                // 只读模式下禁止编辑
+                if (main.getAttribute && main.getAttribute('data-readonly') === 'true') {
+                    div.style.cursor = 'auto';
+                    return;
+                } else {
+                    div.style.cursor = 'pointer';
+                }
                 e.stopPropagation();
                 const blockEl = main.querySelector(`div[data-node-id="${el.closest('[data-node-id]').dataset.nodeId}"]`);
-                // Remove highlight effect when editing memo
-                // if (blockEl) {
-                //     blockEl.style.transition = 'background-color 1.2s cubic-bezier(0.4,0,0.2,1)';
-                //     blockEl.style.backgroundColor = 'var(--b3-theme-primary-lightest)';
-                //     setTimeout(() => { blockEl.style.backgroundColor = ''; setTimeout(() => { blockEl.style.transition = ''; }, 1200); }, 1200);
-                // }
                 if (memoDiv.classList.contains('editing')) return;
                 memoDiv.classList.add('editing');
                 memoDiv.style.zIndex = '999';
@@ -2044,15 +2045,14 @@ if (layoutCenter) {
                 input.focus(); utils.setEndOfContenteditable(input);
                 requestAnimationFrame(() => { utils.autoResizeDiv(input); refreshMemoOffset(main, sidebar); });
                 const save = () => {
-                    // 将HTML内容转换为纯文本，保持换行
                     let val = input.innerHTML
                         .replace(/<div>/gi, '\n')
                         .replace(/<\/div>/gi, '')
-                        .replace(/<br\s*\/?>/gi, '\n')
+                        .replace(/<br\s*\/?>(?!$)/gi, '\n')
                         .replace(/<p>/gi, '\n')
                         .replace(/<\/p>/gi, '')
                         .replace(/&nbsp;/g, ' ')
-                        .replace(/\n\s*\n\s*\n+/g, '\n\n') // 将连续更多换行压缩
+                        .replace(/\n\s*\n\s*\n+/g, '\n\n')
                         .trim();
                     if (val !== old) {
                         el.setAttribute('data-inline-memo-content', val);
@@ -2129,7 +2129,7 @@ if (layoutCenter) {
             const memos = main.querySelectorAll('span[data-type*="inline-memo"]');
             sidebar.innerHTML = '';
             if (!memos.length) { sidebar.removeAttribute('data-memo-count'); return; }
-            // --- 修复：分组并用块内索引 ---
+            const isReadonly = main.getAttribute && main.getAttribute('data-readonly') === 'true';
             const blockMemos = {};
             memos.forEach(el => {
                 const block = utils.getBlockNode(el);
@@ -2146,7 +2146,9 @@ if (layoutCenter) {
                     memoDiv.setAttribute('data-node-id', block.dataset.nodeId);
                     memoDiv.setAttribute('data-memo-index', idxInBlock);
                     memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
-                    memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="color:var(--b3-theme-on-background);font-size:0.9em;margin-bottom:4px;cursor:pointer;">${memo ? memo.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>'}</div>`;
+                    // 只读样式
+                    const memoContentStyle = isReadonly ? 'color:#aaa;cursor:auto;' : 'color:var(--b3-theme-on-background);cursor:pointer;';
+                    memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.9em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
                     memoDiv.onmouseenter = e => {
                         if (!e.target.classList.contains('memo-content-view')) {
                             utils.toggleMemoHighlight(main, block.dataset.nodeId, text, true);
