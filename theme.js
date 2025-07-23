@@ -605,7 +605,7 @@
             lastOffset = offset;
         };
         const observer = new ResizeObserver(throttle(updatePosition, 8));
-        [".layout__dockr", ".dock--vertical"].forEach(sel => { const el = $(sel); el && observer.observe(el); });
+        [".layout__dockr", ".dock--vertical", ".layout__center"].forEach(sel => { const el = $(sel); el && observer.observe(el); });
         window.statusObserver = observer;
         window.statusObserver.updatePosition = updatePosition;
         updatePosition();
@@ -2147,8 +2147,39 @@ if (layoutCenter) {
                     memoDiv.setAttribute('data-memo-index', idxInBlock);
                     memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
                     // 只读样式
-                    const memoContentStyle = isReadonly ? 'color:#aaa;cursor:auto;' : 'color:var(--b3-theme-on-background);cursor:pointer;';
+                    const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
                     memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.9em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
+                    // 新增：删除按钮
+                    const titleDiv = memoDiv.querySelector('.memo-title-with-dot');
+                    if (titleDiv && !isReadonly) {
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconCloseRound"></use></svg>`;
+                        deleteBtn.style.cssText = 'position:absolute;top:-12px;right:-16px;padding:0;background:transparent;border:none;border-radius:4px;cursor:pointer;z-index:2;';
+                        deleteBtn.onclick = (ev) => {
+                            ev.stopPropagation();
+                            memoDiv.remove();
+                            utils.removeMemoConnection(); 
+                            const blockEl = main.querySelector(`div[data-node-id=\"${block.dataset.nodeId}\"]`);
+                            if (blockEl) {
+                                const m = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]')).find(m => m.textContent === text);
+                                if (m) {
+                                    let types = (m.getAttribute("data-type") || "").split(" ").filter(t => t !== "inline-memo");
+                                    if (types.length) {
+                                        m.setAttribute("data-type", types.join(" "));
+                                        m.removeAttribute("data-inline-memo-content");
+                                    } else {
+                                        m.outerHTML = m.innerHTML;
+                                    }
+                                }
+                                fetch('/api/block/updateBlock', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` },
+                                    body: JSON.stringify({ dataType: 'html', data: blockEl.outerHTML, id: blockEl.dataset.nodeId })
+                                });
+                            }
+                        };
+                        titleDiv.appendChild(deleteBtn);
+                    }
                     memoDiv.onmouseenter = e => {
                         if (!e.target.classList.contains('memo-content-view')) {
                             utils.toggleMemoHighlight(main, block.dataset.nodeId, text, true);
@@ -2218,7 +2249,7 @@ if (layoutCenter) {
                         refreshMemoOffset(main, sidebar); // 新增：DOM 变动时自动刷新侧边栏备注定位
                     }, 100);
                 });
-                observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content'] });
+                observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content', 'data-readonly'] });
                 observers[mainId] = [observer];
                 refreshSideBarMemos(main, sidebar);
                 // 新增：滚动编辑器时侧边栏自动刷新定位（监听 .protyle-content）

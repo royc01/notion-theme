@@ -55,10 +55,19 @@ body:not(.body--mobile){
 
     .memo-item {
         background-color: var(--Sv-protyle-toolbar-bg);
+        & button .b3-menu__icon{
+            opacity: 0;
+            width: 18px;
+            height: 18px;
+            color: var(--Sv-dock-item--activefocus-background);
+        }
         &:hover{
             transform: translateX(-8px);
             & .memo-title-dot {
                 background: var(--Sv-dock-item--activefocus-background);
+            }
+            & button .b3-menu__icon{
+                opacity: 1;
             }
         }
     }

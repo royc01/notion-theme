@@ -14,6 +14,9 @@
     display: flex;
     min-width: 0;
     align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding-right: 52px;
     height: 24px;
     line-height: 24px;
@@ -83,11 +86,12 @@
 
 /* 隐藏内容 */
 #status.Sv-StatusHidden {
-    height: 0px!important;
+    height: 10px!important;
     transition: all 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
     position: relative;
     cursor: pointer;
-    /*width: 28px!important;*/
+    width: 48px!important;
+    background-color: transparent!important;
     & div{
         opacity: 0;
         transition: all 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
@@ -102,12 +106,13 @@
         font-size: 18px;
         position: absolute;
         right: 6px;
-        top: -10px;
+        top: 0px;
         border-radius: 5px;
         color: var(--Sv-dock-item--activefocus-color);
         background: var(--Sv-dock-item--activefocus-background);
         z-index: 1;
         transition: all 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
+        pointer-events: none;
     }
 }
 
@@ -116,6 +121,7 @@
 #status.Sv-StatusHidden:hover {
     height: 24px!important;
     width: auto!important;
+    background-color: var(--Sv-status-msg-background)!important;
     & div{
         opacity: 1;
     }
