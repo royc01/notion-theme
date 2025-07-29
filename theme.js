@@ -1976,6 +1976,7 @@ if (layoutCenter) {
                 const MARGIN = 10;
                 const memoGroups = {};
                 sidebar.querySelectorAll('.memo-item').forEach(memoItem => {
+                    if (memoItem.style.display === 'none') return; // 跳过隐藏的备注
                     const nodeId = memoItem.getAttribute('data-node-id');
                     if (!memoGroups[nodeId]) memoGroups[nodeId] = { items: [], totalHeight: 0 };
                     memoGroups[nodeId].items.push(memoItem);
@@ -2136,7 +2137,13 @@ if (layoutCenter) {
                 if (!blockMemos[block.dataset.nodeId]) blockMemos[block.dataset.nodeId] = [];
                 blockMemos[block.dataset.nodeId].push(el);
             });
+            
+            let visibleMemoCount = 0;
             Object.entries(blockMemos).forEach(([nodeId, memosInBlock]) => {
+                // 检查块及其父级是否被折叠
+                const block = main.querySelector(`div[data-node-id="${nodeId}"]`);
+                const isBlockFolded = block && isAnyAncestorFolded(block);
+                
                 memosInBlock.forEach((el, idxInBlock) => {
                     const block = utils.getBlockNode(el);
                     const memo = el.getAttribute('data-inline-memo-content') || '';
@@ -2146,6 +2153,14 @@ if (layoutCenter) {
                     memoDiv.setAttribute('data-node-id', block.dataset.nodeId);
                     memoDiv.setAttribute('data-memo-index', idxInBlock);
                     memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
+                    
+                    // 如果块或其父级被折叠，隐藏对应的侧栏备注
+                    if (isBlockFolded) {
+                        memoDiv.style.display = 'none';
+                    } else {
+                        visibleMemoCount++;
+                    }
+                    
                     // 只读样式
                     const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
                     memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.9em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
@@ -2196,11 +2211,11 @@ if (layoutCenter) {
                     sidebar.appendChild(memoDiv);
                 });
             });
-            sidebar.setAttribute('data-memo-count', `共 ${memos.length} 个备注`);
+            sidebar.setAttribute('data-memo-count', `共 ${visibleMemoCount} 个备注`);
             refreshMemoOffset(main, sidebar);
             const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
             if (protyleContent) {
-                if (memos.length > 0) {
+                if (visibleMemoCount > 0) {
                     protyleContent.classList.add('Sv-memo');
                 } else {
                     protyleContent.classList.remove('Sv-memo');
@@ -2249,7 +2264,7 @@ if (layoutCenter) {
                         refreshMemoOffset(main, sidebar); // 新增：DOM 变动时自动刷新侧边栏备注定位
                     }, 100);
                 });
-                observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content', 'data-readonly'] });
+                observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content', 'data-readonly', 'fold'] });
                 observers[mainId] = [observer];
                 refreshSideBarMemos(main, sidebar);
                 // 新增：滚动编辑器时侧边栏自动刷新定位（监听 .protyle-content）
@@ -2311,6 +2326,18 @@ if (layoutCenter) {
             unobserveDragTitle,
         };
     })();
+
+    // 判断某块及其所有父块是否有折叠
+    function isAnyAncestorFolded(block) {
+        let current = block;
+        while (current) {
+            if (current.getAttribute && current.getAttribute('fold') === '1') {
+                return true;
+            }
+            current = current.parentElement;
+        }
+        return false;
+    }
 
 })();
 
