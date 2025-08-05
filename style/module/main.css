@@ -31,10 +31,11 @@
     &:after{
         width: 4px;
         border-radius: 3px;
-        background-color: var(--Sv-layout--resize);
+        opacity: 0.3;
+        background-color: var(--Sv-layout--resize-hover);
     }
     &:hover:after{
-        background-color: var(--Sv-layout--resize-hover);
+        opacity: 1;
     }
     & + .layout__center .layout__resize--lr{
         margin: 0 0.5px;

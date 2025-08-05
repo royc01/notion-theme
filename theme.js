@@ -915,7 +915,7 @@ const tabbarResize = {
     create(tabbar) {
         this.resizer = document.createElement("div");
         Object.assign(this.resizer, { id: "vertical-resize-handle" });
-        this.resizer.style.cssText = "position:absolute;top:0;right:-3px;width:6px;height:100%;cursor:col-resize;background:transparent;z-index:1000;";
+        this.resizer.style.cssText = "position:absolute;top:0;right:-3px;width:6px;height:100%;cursor:col-resize;background:transparent;z-index:2;";
         tabbar.style.position = "relative";
         tabbar.appendChild(this.resizer);
         this.resizer.onmousedown = e => this.start(e, tabbar);
@@ -2168,8 +2168,8 @@ if (layoutCenter) {
                     const titleDiv = memoDiv.querySelector('.memo-title-with-dot');
                     if (titleDiv && !isReadonly) {
                         const deleteBtn = document.createElement('button');
-                        deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconCloseRound"></use></svg>`;
-                        deleteBtn.style.cssText = 'position:absolute;top:-12px;right:-16px;padding:0;background:transparent;border:none;border-radius:4px;cursor:pointer;z-index:2;';
+                        deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconTrashcan"></use></svg>`;
+                        deleteBtn.style.cssText = 'position:absolute;top:4px;right:4px;padding:0;background: var(--Sv-dock-item--activefocus-background);border:none;border-radius:6px;cursor:pointer;z-index:2;';
                         deleteBtn.onclick = (ev) => {
                             ev.stopPropagation();
                             memoDiv.remove();

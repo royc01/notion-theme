@@ -772,3 +772,11 @@ span[data-type="a"]::before {
 */
 
 
+
+.av__counter{
+    bottom: 43px;
+    z-index: 3;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px -2px, rgba(84, 72, 49, 0.08) 0px 0px 0px 1px;
+    margin-left: 3px;
+}

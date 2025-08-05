@@ -39,8 +39,11 @@ body:not(.body--mobile){
 
     .memo-title-with-dot {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         color:var(--b3-theme-on-surface);
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
 
     .memo-title-dot {
@@ -55,18 +58,23 @@ body:not(.body--mobile){
 
     .memo-item {
         background-color: var(--Sv-protyle-toolbar-bg);
-        & button .b3-menu__icon{
+        & button{
+            height: 28px;
+            width: 28px;
             opacity: 0;
-            width: 18px;
-            height: 18px;
-            color: var(--Sv-dock-item--activefocus-background);
+        }
+        & button .b3-menu__icon{
+            width: 14px;
+            height: 14px;
+            color: var(--Sv-dock-item--activefocus-color);
+            margin: 4px;
         }
         &:hover{
             transform: translateX(-8px);
             & .memo-title-dot {
                 background: var(--Sv-dock-item--activefocus-background);
             }
-            & button .b3-menu__icon{
+            & button{
                 opacity: 1;
             }
         }

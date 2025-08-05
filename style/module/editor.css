@@ -564,6 +564,9 @@
         }
     }
 }
+    &[fold="1"]{
+        height: 2.3em!important;
+    }
 }
 
 /*行内代码*/
