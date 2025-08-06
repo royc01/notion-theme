@@ -59,15 +59,15 @@ body:not(.body--mobile){
     .memo-item {
         background-color: var(--Sv-protyle-toolbar-bg);
         & button{
-            height: 28px;
-            width: 28px;
+            height: 24px;
+            width: 24px;
             opacity: 0;
         }
         & button .b3-menu__icon{
             width: 14px;
             height: 14px;
             color: var(--Sv-dock-item--activefocus-color);
-            margin: 4px;
+            margin: 5px;
         }
         &:hover{
             transform: translateX(-8px);

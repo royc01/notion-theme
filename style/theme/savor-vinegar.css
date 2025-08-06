@@ -35,19 +35,3 @@
 
 
 }
-
-/* PDF */
-.textLayer,
-.pdf__resize {
-    mix-blend-mode: screen;
-}
-
-.b3-text-field::-webkit-calendar-picker-indicator {
-    fiilter: invert(1)
-}
-
-
-
-#savorToolbar #buttonSavor-dark svg{
-    color: var(--b3-theme-on-surface);
-}

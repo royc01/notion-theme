@@ -23,8 +23,8 @@
     url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  y='15%' width='100%' height='80%' fill='%232f3437'/></svg>");
 }
 
-
-.protyle-attr--refcount{
-    background-color: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));
+:root[data-theme-mode="dark"]{
+    .protyle-attr--refcount{
+        background-color: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));
+    }
 }
-

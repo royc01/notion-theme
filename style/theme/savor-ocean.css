@@ -55,16 +55,3 @@
 
 }
 
-/* PDF */
-.textLayer,
-.pdf__resize {
-    mix-blend-mode: screen;
-}
-
-
-
-#savorToolbar #buttonSavor-dark svg{
-    color: var(--b3-theme-on-surface);
-}
-
-

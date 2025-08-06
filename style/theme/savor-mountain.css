@@ -46,23 +46,3 @@
     --Sv-block-ref-bottom-image: linear-gradient(to bottom right,#ff6000, #ff6000) 1;
 
 }
-
-/* PDF */
-.textLayer,
-.pdf__resize {
-    mix-blend-mode: screen;
-}
-
-
-body{
-	border: 0px!important;
-}
-
-
-.b3-select:hover {
-    background-color: #4e504d;
-}
-
-#savorToolbar #buttonSavor-dark svg{
-    color: var(--b3-theme-on-surface);
-}

@@ -26,8 +26,7 @@
         opacity: 1;
     }
 }
-.layout__resize--lr {
-    width: var(--Sv-layout-resize-lr-width);
+.layout__dockb .layout__resize--lr{
     &:after{
         width: 4px;
         border-radius: 3px;
@@ -36,6 +35,17 @@
     }
     &:hover:after{
         opacity: 1;
+    }
+}
+.layout__resize--lr {
+    width: var(--Sv-layout-resize-lr-width);
+    &:after{
+        width: 4px;
+        border-radius: 3px;
+        background-color: var(--Sv-layout--resize);
+    }
+    &:hover:after{
+        background-color: var(--Sv-layout--resize-hover);
     }
     & + .layout__center .layout__resize--lr{
         margin: 0 0.5px;

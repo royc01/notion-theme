@@ -36,7 +36,7 @@
     /*——————————————————————————————————————————————————————————————*/
 }
 
-
+:root[data-theme-mode="light"]{
 .sy__file .b3-list--background:nth-child(4n-3) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
 	color:#f67563;
 }
@@ -50,27 +50,8 @@
 	color:#49adbb;
 }
 
-/*.protyle-wysiwyg .h1{
-	color:var(--h1-list-graphic);
-}
-.protyle-wysiwyg .h2{
-	color: #8a7da0;
-}
-.protyle-wysiwyg .h3{
-	color:var(--h3-list-graphic);
-}
-.protyle-wysiwyg .h4{
-	color:var(--h4-list-graphic);
-}
-.protyle-wysiwyg .h5{
-	color:#b6a277;
-}
-.protyle-wysiwyg .h6{
-	color:var(--h6-list-graphic);
-}*/
-
-
 #savorToolbar #buttonSavor-light svg{
     color: var(--b3-theme-on-surface);
 }
 
+}

@@ -55,14 +55,3 @@
     --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.02) var(--b3-theme-surface-base-ch));
 
 }
-
-/* PDF */
-.textLayer,
-.pdf__resize {
-    mix-blend-mode: darken;
-}
-
-
-#savorToolbar #buttonSavor-light svg{
-    color: var(--b3-theme-on-surface);
-}

@@ -120,8 +120,7 @@
     const cssCache = new Map();
 
     const loadCSS = async (path, cacheKey = path) => {
-        if (cssCache.has(cacheKey)) return cssCache.get(cacheKey);
-        if (!path) return null;
+        if (cssCache.has(cacheKey) || !path) return cssCache.get(cacheKey) || null;
 
         try {
             const response = await fetch(path);
@@ -136,44 +135,42 @@
         }
     }
 
-    async function loadThemeCSS(themeId) {
+    const loadThemeCSS = async (themeId) => {
         const button = allButtons.find(btn => btn.styleId === themeId);
-        if (button?.cssPath) {
-            return loadCSS(button.cssPath, themeId);
-        }
-        return null;
+        return button?.cssPath ? loadCSS(button.cssPath, themeId) : null;
     }
 
     const preloadCurrentModeCSS = () => {
-        const themeButtons = allButtons.filter(btn => btn.type === 'theme' && (!btn.group || btn.group === window.theme.themeMode));
-        if (!themeButtons) return;
-        
-        themeButtons.forEach(btn => {
-            if (btn?.cssPath) {
-                loadCSS(btn.cssPath, btn.styleId);
-            }
-        });
+        allButtons.filter(btn => btn.type === 'theme' && btn?.cssPath)
+            .forEach(btn => loadCSS(btn.cssPath, btn.styleId));
     }
 
-    const applyCSS = (styleId, cssText) => {
+    const applyStyle = (id, cssText, options = {}) => {
         if (!cssText) return;
-        const existing = $(`#${styleId}`);
-        if (existing) existing.remove();
+        
+        const { group = null, isTheme = false } = options;
+        
+        // 移除现有样式
+        if (isTheme && group) {
+            allButtons.filter(btn => btn.type === 'theme' && btn.group === group)
+                .forEach(btn => $(`#${btn.styleId}`)?.remove());
+        } else if (isTheme) {
+            $$('[id^="Sv-theme-color"]').forEach(el => el.remove());
+        } else {
+            $(`#${id}`)?.remove();
+        }
+        
+        // 添加新样式
         const styleElement = document.createElement('style');
-        styleElement.id = styleId;
+        styleElement.id = id;
         styleElement.textContent = cssText;
         document.head.appendChild(styleElement);
     }
 
-    const applyThemeCSS = (themeId, cssText) => {
-        if (!cssText) return;
-        $$('[id^="Sv-theme-color"]').forEach(el => el.remove());
-        applyCSS(themeId, cssText);
-    }
-
     const switchThemeStyle = async (themeId) => {
         const cssText = await loadThemeCSS(themeId);
-        applyThemeCSS(themeId, cssText);
+        const currentButton = allButtons.find(btn => btn.styleId === themeId);
+        applyStyle(themeId, cssText, { group: currentButton?.group, isTheme: true });
     }
 
     const enableSvcolorfulHeading = () => {
@@ -182,7 +179,7 @@
             styleElement = document.createElement("style");
             styleElement.id = "snippet-SvcolorfulHeading";
             styleElement.innerHTML = `
-            :root {
+            :root[data-theme-mode="light"] {
                 --Sv-h1: var(--h1-list-graphic);
                 --Sv-h2: #8a7da0;
                 --Sv-h3: var(--h3-list-graphic);
@@ -195,28 +192,46 @@
     }
 
     const applyRememberedThemeStyle = async (skipFeatures = false) => {
-        const themeButtons = allButtons.filter(btn => btn.type === 'theme' && (!btn.group || btn.group === window.theme.themeMode));
-        const themeIds = themeButtons.map(btn => btn.id);
+        // 处理主题组
+        const processThemeGroup = async (group) => {
+            const buttons = allButtons.filter(btn => btn.type === 'theme' && btn.group === group);
+            const rememberedButton = buttons.find(btn => config.get(btn.id) === "1");
+            const defaultTheme = group === 'light' ? 'Sv-theme-color-light' : 'Sv-theme-color-dark';
+            
+            await switchThemeStyle(rememberedButton?.styleId || defaultTheme);
+            return rememberedButton;
+        };
         
-        const rememberedButton = themeButtons.find(btn => config.get(btn.id) === "1");
-        const themeLinkId = rememberedButton 
-            ? rememberedButton.styleId
-            : `Sv-theme-color-${window.theme.themeMode}`;
+        // 应用light和dark主题
+        const [rememberedLightButton, rememberedDarkButton] = await Promise.all([
+            processThemeGroup('light'),
+            processThemeGroup('dark')
+        ]);
         
-        await switchThemeStyle(themeLinkId);
+        // 处理彩色标题功能
+        const colorfulThemes = ['Sv-theme-color-sugar', 'Sv-theme-color-flower'];
+        const currentThemes = [
+            rememberedLightButton?.styleId || 'Sv-theme-color-light',
+            rememberedDarkButton?.styleId || 'Sv-theme-color-dark'
+        ];
         
         const styleElement = document.getElementById("snippet-SvcolorfulHeading");
-        if (themeLinkId === 'Sv-theme-color-sugar' || themeLinkId === 'Sv-theme-color-flower') {
+        if (currentThemes.some(theme => colorfulThemes.includes(theme))) {
             enableSvcolorfulHeading();
-        } else if (styleElement) {
-            styleElement.remove();
+        } else {
+            styleElement?.remove();
         }
         
+        // 更新按钮状态
         const savorToolbar = document.getElementById("savorToolbar");
         savorToolbar?.querySelectorAll('.b3-menu__item').forEach(btn => {
             btn.classList.remove('button_on');
         });
-        rememberedButton && document.getElementById(rememberedButton.id)?.classList.add('button_on');
+        
+        // 为记住的主题按钮添加激活状态
+        [rememberedLightButton, rememberedDarkButton].forEach(button => {
+            document.getElementById(button?.id)?.classList.add('button_on');
+        });
         
         if (!skipFeatures) {
             await applyRememberedFeatures();
@@ -231,49 +246,31 @@
         get config() { return config.data; },
         themeMode: null,
 
-        applyThemeTransition: (callback, event = null) => {
+        applyThemeTransition: (callback) => {
             const status = $('#status');
-            const currentTransform = status ? status.style.transform : '';
+            const currentTransform = status?.style.transform;
             
-            if (document.startViewTransition) {
-                document.startViewTransition(() => {
-                    callback?.();
-                    
-                    if (status && currentTransform) {
-                        setTimeout(() => {
-                            status.style.transform = currentTransform;
-                        }, 50);
-                    }
-                });
-            } else {
+            const executeCallback = () => {
                 callback?.();
-                
                 if (status && currentTransform) {
-                    setTimeout(() => {
-                        status.style.transform = currentTransform;
-                    }, 50);
+                    setTimeout(() => status.style.transform = currentTransform, 50);
                 }
-            }
+            };
+            
+            document.startViewTransition ? 
+                document.startViewTransition(executeCallback) : 
+                executeCallback();
         },
 
         findEditableParent: (node) => {
             const editableSelectors = ['[contenteditable="true"]', '.protyle-wysiwyg'];
-            
-            for (const selector of editableSelectors) {
-                const found = node.closest(selector);
-                if (found) return found;
-            }
-            
-            return null;
+            return editableSelectors.reduce((found, selector) => 
+                found || node.closest(selector), null);
         },
 
         createElementEx: (refElement, tag, id = null, mode = 'append') => {
-            if (!refElement) {
-                console.warn('[Savor] 参考元素不存在，无法创建子元素');
-                return null;
-            }
-            if (!tag) {
-                console.error('[Savor] 未指定标签名');
+            if (!refElement || !tag) {
+                console.warn('[Savor] 参考元素或标签名不存在');
                 return null;
             }
             
@@ -281,13 +278,13 @@
             if (id) el.id = id;
             
             try {
-                if (mode === 'append') {
-                    refElement.appendChild(el);
-                } else if (mode === 'prepend') {
-                    refElement.insertBefore(el, refElement.firstChild);
-                } else if (mode === 'before') {
-                    refElement.parentElement.insertBefore(el, refElement);
-                }
+                const insertModes = {
+                    append: () => refElement.appendChild(el),
+                    prepend: () => refElement.insertBefore(el, refElement.firstChild),
+                    before: () => refElement.parentElement.insertBefore(el, refElement)
+                };
+                
+                insertModes[mode]?.();
                 return el;
             } catch (error) {
                 console.error('[Savor] 创建元素失败:', error);
@@ -321,12 +318,8 @@
         },
 
         EventUtil: {
-            on: (element, type, handler) => {
-                element?.addEventListener?.(type, handler, false);
-            },
-            off: (element, type, handler) => {
-                element?.removeEventListener?.(type, handler, false);
-            }
+            on: (element, type, handler) => element?.addEventListener?.(type, handler, false),
+            off: (element, type, handler) => element?.removeEventListener?.(type, handler, false)
         },
 
         findAncestor: (element, fn, maxDepth = 50) => {
@@ -339,25 +332,22 @@
             return null;
         },
         
-        isSiyuanFloatingWindow: (element) => {
-            return window.theme.findAncestor(element, v => v.getAttribute("data-oid") != null);
-        },
+        isSiyuanFloatingWindow: (element) => 
+            window.theme.findAncestor(element, v => v.getAttribute("data-oid") != null),
         
         setBlockFold: (id, fold) => {
-            if (!id) return;
-            if (window._lastFoldedId === id && window._lastFoldedState === fold) return;
+            if (!id || (window._lastFoldedId === id && window._lastFoldedState === fold)) return;
+            
             window._lastFoldedId = id;
             window._lastFoldedState = fold;
+            
             fetch('/api/attr/setBlockAttrs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Token ${window.siyuan?.config?.api?.token || ''}`
                 },
-                body: JSON.stringify({
-                    id,
-                    attrs: { fold }
-                })
+                body: JSON.stringify({ id, attrs: { fold } })
             });
         }
     };
@@ -382,7 +372,8 @@
 
         // 先配色后功能
         const themeMode = window.theme.themeMode;
-        const themeButtons = allButtons.filter(btn => btn.type === 'theme' && (!btn.group || btn.group === themeMode));
+        // 根据当前模式显示对应组的主题按钮
+        const themeButtons = allButtons.filter(btn => btn.type === 'theme' && btn.group === themeMode);
         const featureButtons = allButtons.filter(btn => btn.type === 'feature');
         const buttons = [...themeButtons, ...featureButtons];
 
@@ -395,28 +386,36 @@
 
             // 状态高亮
             let isActive = false;
-                    if (btn.type === 'theme') {
-            const themeLinkId = btn.id.replace(/^button(Savor-)?/, 'Sv-theme-color-');
-            const themeElement = document.getElementById(themeLinkId);
-            if (themeElement && !themeElement.disabled) {
-                button.classList.add("button_on");
-                isActive = true;
+            if (btn.type === 'theme') {
+                // 检查配置中是否记住了这个主题
+                if (config.get(btn.id) === "1") {
+                    button.classList.add("button_on");
+                    isActive = true;
+                }
+            } else if (btn.type === 'feature') {
+                if (getItem(btn.attrName) === "1") {
+                    button.classList.add("button_on");
+                    isActive = true;
+                }
             }
-        } else if (btn.type === 'feature') {
-            if (getItem(btn.attrName) === "1") {
-                button.classList.add("button_on");
-                isActive = true;
-            }
-        }
 
             // 点击逻辑
             button.addEventListener("click", async () => {
                 if (btn.type === 'theme') {
-                    savorToolbar.querySelectorAll('.b3-menu__item').forEach(btn => btn.classList.remove('button_on'));
+                    // 只移除同组按钮的激活状态
+                    const currentGroup = btn.group;
+                    if (currentGroup) {
+                        const groupButtons = allButtons.filter(b => b.type === 'theme' && b.group === currentGroup);
+                        groupButtons.forEach(b => {
+                            const groupButton = document.getElementById(b.id);
+                            if (groupButton) groupButton.classList.remove('button_on');
+                        });
+                    }
                     button.classList.add('button_on');
+                    
                     window.theme.applyThemeTransition(async () => {
                         const cssText = await loadCSS(btn.cssPath);
-                        applyThemeCSS(btn.styleId, cssText);
+                        applyStyle(btn.styleId, cssText, { group: btn.group, isTheme: true });
                         const styleElement = document.getElementById("snippet-SvcolorfulHeading");
                         if (btn.styleId === "Sv-theme-color-sugar" || btn.styleId === "Sv-theme-color-flower") {
                             enableSvcolorfulHeading();
@@ -430,9 +429,12 @@
                             }
                         }, 100);
                     });
-                    // 记忆状态
-                    const themeButtons = allButtons.filter(b => b.type === 'theme' && (!b.group || b.group === themeMode));
-                    themeButtons.forEach(b => config.set(b.id, "0"));
+                    
+                    // 记忆状态 - 只重置同组的状态
+                    if (currentGroup) {
+                        const groupButtons = allButtons.filter(b => b.type === 'theme' && b.group === currentGroup);
+                        groupButtons.forEach(b => config.set(b.id, "0"));
+                    }
                     config.set(btn.id, "1");
                 } else if (btn.type === 'feature') {
                     const isActive = button.classList.contains("button_on");
@@ -446,7 +448,7 @@
                         button.classList.add("button_on");
                         if (btn.cssPath) {
                             const cssText = await loadCSS(btn.cssPath);
-                            applyCSS(btn.styleId, cssText);
+                            applyStyle(btn.styleId, cssText);
                         }
                         if (btn.onEnable) btn.onEnable();
                         config.set(btn.attrName, "1");
@@ -1759,7 +1761,7 @@ if (layoutCenter) {
                 
                 if (btn.cssPath) {
                     const cssText = await loadCSS(btn.cssPath);
-                    applyCSS(btn.styleId, cssText);
+                    applyStyle(btn.styleId, cssText);
                 }
                 
                 if (btn.onEnable) btn.onEnable();
@@ -1774,68 +1776,77 @@ if (layoutCenter) {
     // ========================================
     // 模块：清理样式
     // ========================================
-    window.destroyTheme = () => { 
-        allButtons?.forEach(btn => {
-            if (btn.type === 'feature') {
-                $(`#${btn.id}`)?.remove();
-                $(`#${btn.styleId}`)?.remove();
-            }
-        });
-        featureButtonsActive?.clear();
-        
-        [tabbarResize.remove, removeBulletThreading, disableTypewriterMode, disableListPreview]
-        .forEach(fn => fn?.());
-        
-        // 清理侧边栏备注功能
-        if (sidebarMemo) {
-            sidebarMemo.openSideBar(false);
-            sidebarMemo.unobserveDragTitle?.(); // 确保清理 drag 监听
-        }
-        
-        if (window.theme._collapseHandler) {
-            document.body.removeEventListener("mousedown", window.theme._collapseHandler);
-            window.theme._collapseHandler = null;
-        }
-        
-        Object.assign(window, {
-            tabBarsMarginInitialized: false,
-            updateTabBarsMargin: null,
-            updateTabBarsMarginLeft: null
-        });
-        
-        window.statusObserver?.disconnect();
-        window.statusObserver = null;
-        
-        $$("[id^=\"Sv-theme-color\"]").forEach(el => el.remove());
-        $("#snippet-SvcolorfulHeading")?.remove();
-        $("#Sv-theme-typewriter-mode")?.remove();
-        $("#savorToolbar")?.remove();
-        $$(".layout__center .layout-tab-bar--readonly").forEach(el => el.style.marginRight = "0px");
-        $$(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(el => el.style.marginLeft = "0px");
-        
-        cssCache.clear();
-        domCache.clear();
-        
-        const commonMenu = $("#commonMenu");
-        if (commonMenu) toggleMenuListener(commonMenu, false);
-        
-        // 清理状态栏样式
-        const status = $("#status");
-        if (status) {
-            status.style.transform = "";
-            status.style.maxWidth = "";
-        }
-        // 清理 topBarPluginMenuObserver
-        if (window.topBarPluginMenuObserver) {
-            window.topBarPluginMenuObserver.disconnect();
-            window.topBarPluginMenuObserver = null;
-        }
+    const html = document.documentElement;
+    const isSavorTheme = () => html.getAttribute('data-light-theme') === 'Savor' && 
+                               html.getAttribute('data-dark-theme') === 'Savor';
+
+    const updateDestroyTheme = () => {
+        window.destroyTheme = isSavorTheme() ? () => {} : () => {
+            // 清理功能按钮和模块
+            allButtons?.forEach(btn => btn.type === 'feature' && 
+                [btn.id, btn.styleId].forEach(id => $(`#${id}`)?.remove()));
+            featureButtonsActive?.clear();
+            [tabbarResize.remove, removeBulletThreading, disableTypewriterMode, disableListPreview]
+                .forEach(fn => fn?.());
+            
+            // 清理侧边栏和事件监听
+            sidebarMemo?.openSideBar(false);
+            sidebarMemo?.unobserveDragTitle?.();
+            window.theme._collapseHandler && 
+                (document.body.removeEventListener("mousedown", window.theme._collapseHandler), 
+                 window.theme._collapseHandler = null);
+            
+            // 清理窗口属性和观察者
+            Object.assign(window, {
+                tabBarsMarginInitialized: false,
+                updateTabBarsMargin: null,
+                updateTabBarsMarginLeft: null
+            });
+            [window.statusObserver, window.topBarPluginMenuObserver].forEach(obs => 
+                obs?.disconnect() && (obs = null));
+            
+            // 清理DOM元素和样式
+            $$("[id^=\"Sv-theme-color\"]").forEach(el => el.remove());
+            ["#snippet-SvcolorfulHeading", "#Sv-theme-typewriter-mode", "#savorToolbar"]
+                .forEach(selector => $(selector)?.remove());
+            $$(".layout__center .layout-tab-bar--readonly").forEach(el => el.style.marginRight = "0px");
+            $$(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(el => el.style.marginLeft = "0px");
+            $("#status") && Object.assign($("#status").style, {transform: "", maxWidth: ""});
+            
+            // 清理缓存和菜单
+            [cssCache, domCache].forEach(cache => cache.clear());
+            $("#commonMenu") && toggleMenuListener($("#commonMenu"), false);
+        };
     };
+
+    updateDestroyTheme();
+
+    // 监听主题变化
+    const destroyThemeObserver = new MutationObserver(mutations => {
+        const mutation = mutations.find(m => m.type === 'attributes' && 
+            ['data-light-theme', 'data-dark-theme'].includes(m.attributeName));
+        
+        if (mutation) {
+            const [light, dark] = [html.getAttribute('data-light-theme'), html.getAttribute('data-dark-theme')];
+            const wasSavor = mutation.oldValue === 'Savor' || 
+                            (mutation.attributeName === 'data-light-theme' && dark === 'Savor') ||
+                            (mutation.attributeName === 'data-dark-theme' && light === 'Savor');
+            
+            if (wasSavor && !(light === 'Savor' && dark === 'Savor')) {
+                window.location.reload();
+                return;
+            }
+            updateDestroyTheme();
+        }
+    });
+
+    destroyThemeObserver.observe(html, {
+        attributes: true,
+        attributeFilter: ["data-light-theme", "data-dark-theme"]
+    });
 
 
     
-
-
 
 
 
@@ -2137,13 +2148,13 @@ if (layoutCenter) {
                 if (!blockMemos[block.dataset.nodeId]) blockMemos[block.dataset.nodeId] = [];
                 blockMemos[block.dataset.nodeId].push(el);
             });
-            
+
             let visibleMemoCount = 0;
             Object.entries(blockMemos).forEach(([nodeId, memosInBlock]) => {
                 // 检查块及其父级是否被折叠
                 const block = main.querySelector(`div[data-node-id="${nodeId}"]`);
                 const isBlockFolded = block && isAnyAncestorFolded(block);
-                
+
                 memosInBlock.forEach((el, idxInBlock) => {
                     const block = utils.getBlockNode(el);
                     const memo = el.getAttribute('data-inline-memo-content') || '';
@@ -2153,14 +2164,12 @@ if (layoutCenter) {
                     memoDiv.setAttribute('data-node-id', block.dataset.nodeId);
                     memoDiv.setAttribute('data-memo-index', idxInBlock);
                     memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
-                    
                     // 如果块或其父级被折叠，隐藏对应的侧栏备注
                     if (isBlockFolded) {
                         memoDiv.style.display = 'none';
                     } else {
                         visibleMemoCount++;
                     }
-                    
                     // 只读样式
                     const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
                     memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.9em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
@@ -2326,7 +2335,6 @@ if (layoutCenter) {
             unobserveDragTitle,
         };
     })();
-
     // 判断某块及其所有父块是否有折叠
     function isAnyAncestorFolded(block) {
         let current = block;

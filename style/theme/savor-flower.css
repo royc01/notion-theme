@@ -54,7 +54,7 @@
     --Sv-block-ref-bottom-image: linear-gradient(to bottom right,#ff5f40, #ff5f40) 1;
 
 }
-
+:root[data-theme-mode="light"]{
 
 .sy__file .b3-list--background:nth-child(4n-3) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow,
 .sy__file .b3-list--background:nth-child(4n-3) [data-type="navigation-root"]+ul .b3-list-item__toggle>.b3-list-item__arrow{
@@ -78,7 +78,4 @@
     color:unset;
    }
 
-
-#savorToolbar #buttonSavor-light svg{
-    color: var(--b3-theme-on-surface);
 }

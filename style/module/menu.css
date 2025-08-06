@@ -128,8 +128,12 @@
             box-shadow: inset 0 0 0 1px var(--b3-theme-primary), 0 0 0 3px var(--b3-theme-primary-lightest)!important;
     }
 }
-.b3-select,.b3-select:hover{
+.b3-select{
     box-shadow: none;
+    &:hover{
+        box-shadow: none;
+        background-color: var(--Sv-dock-background)!important;
+    }
 }
 
 
@@ -767,4 +771,9 @@
 
 .protyle-util .block__icons{
     background-color: oklch(var(--b3-theme-surface-base-l) var(--b3-theme-surface-base-ch) / 0.6);
+}
+
+
+#commonMenu:not([data-name="barmode"]) #savorToolbar{
+    display: none;
 }

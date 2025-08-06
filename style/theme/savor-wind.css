@@ -61,11 +61,10 @@
 }
 
 
-
+:root[data-theme-mode="light"]{
 .b3-list-item{
     filter: grayscale(50%);
 }
-
 
 body::before {
     content: "";
@@ -77,4 +76,5 @@ body::before {
     background-size: auto;
     z-index: 10;
     pointer-events: none;
+}
 }
