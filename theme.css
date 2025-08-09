@@ -1,26 +1,48 @@
 /* 主体结构*/
 
-@import url(style/module/toolbar.css);/* 顶栏 ✔*/
-@import url(style/module/dock.css);/* 边栏 ✔*/
-@import url(style/module/shrink.css);/* 侧栏 ✔*/
-@import url(style/module/status.css);/* 底栏 ✔*/
-@import url(style/module/tab-bar.css);/* 页签 ✔*/
-@import url( style/module/breadcrumb.css);/* 面包屑 ✔*/
-@import url( style/module/editor.css);/* 编辑器 ✔*/
-@import url( style/module/menu.css);/* 菜单 ✔*/
-@import url( style/module/ordered-list.css);/* 有序列表 ✔*/
-@import url( style/module/unordered-list.css);/* 无序列表 ✔*/
-@import url( style/module/av.css);/* 数据库 ✔*/
-@import url( style/module/colorfulH.css);/* 彩色标题 ✔*/
-@import url( style/module/blockquote.css);/* 引述 ✔*/
-@import url( style/module/search.css);/* 搜索 ✔*/
-@import url( style/module/main.css);/* 主要结构 ✔*/
-@import url( style/custom/function.css);/* 自定义功能按钮 ✔*/
-@import url( style/custom/list2map.css);/* 列表转导图 ✔*/
-@import url( style/custom/list2table.css);/* 列表转表格 ✔*/
-@import url( style/custom/list2board.css);/* 列表转看板 ✔*/
-@import url( style/custom/list-fold.css);/* 列表折叠 ✔*/
+@import url(style/module/toolbar.css);/* 顶栏 */
+@import url(style/module/dock.css);/* 边栏 */
+@import url(style/module/shrink.css);/* 侧栏 */
+@import url(style/module/status.css);/* 底栏 */
+@import url(style/module/tab-bar.css);/* 页签 */
+@import url( style/module/breadcrumb.css);/* 面包屑 */
+@import url( style/module/editor.css);/* 编辑器 */
+@import url( style/module/menu.css);/* 菜单 */
+@import url( style/module/ordered-list.css);/* 有序列表 */
+@import url( style/module/unordered-list.css);/* 无序列表 */
+@import url( style/module/av.css);/* 数据库 */
+@import url( style/module/colorfulH.css);/* 彩色标题 */
+@import url( style/module/blockquote.css);/* 引述 */
+@import url( style/module/search.css);/* 搜索 */
+@import url( style/module/main.css);/* 主要结构 */
+@import url( style/custom/function.css);/* 自定义功能按钮 */
+@import url( style/custom/list2map.css);/* 列表转导图 */
+@import url( style/custom/list2table.css);/* 列表转表格 */
+@import url( style/custom/list2board.css);/* 列表转看板 */
+@import url( style/custom/list-fold.css);/* 列表折叠 */
 
+/*---------------------------------------------------*/
+
+@import url( style/topbar/conceal-mark.css);/* 挖空 */
+@import url( style/topbar/headingdots.css);/* 标题点标识 */
+@import url( style/topbar/color-folder.css);/* 彩色文档树 */
+@import url( style/topbar/tab-bar-vertical.css);/* 垂直页签 */
+@import url( style/topbar/top-fixed.css);/* 顶栏合并 */ 
+@import url( style/topbar/bullet-threading.css);/* 子弹线 */
+@import url( style/topbar/sidebar-memo.css);/* 侧边栏备注 */
+@import url( style/topbar/font-color-switch.css);/* 字体配色切换 */
+
+/* 主题配色 */
+@import url( style/theme/savor-light.css);/* Light 配色 */
+@import url( style/theme/savor-salt.css);/* Salt 配色 */
+@import url( style/theme/savor-sugar.css);/* Sugar 配色 */
+@import url( style/theme/savor-forest.css);/* Forest 配色 */
+@import url( style/theme/savor-flower.css);/* Flower 配色 */
+@import url( style/theme/savor-wind.css);/* Wind 配色 */
+@import url( style/theme/savor-dark.css);/* Dark 配色 */
+@import url( style/theme/savor-vinegar.css);/* Vinegar 配色 */
+@import url( style/theme/savor-ocean.css);/* Ocean 配色 */
+@import url( style/theme/savor-mountain.css);/* Mountain 配色 */
 
 @font-face {
     font-family: 'Twitter Emoji';
@@ -434,7 +456,7 @@
     
     
     /* 主色 */
-    --b3-theme-background: #fff;/* 编辑区背景 必须用HEX颜色*/
+    /*--b3-theme-background: #fff;*/
     --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*0.93) var(--b3-theme-surface-base-ch));
     --b3-theme-on-surface: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch));
     --b3-theme-on-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.5) var(--b3-theme-surface-base-ch) / 0.68);
@@ -542,9 +564,9 @@
     --Sv-tab-bar-V-item-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C100 44.772 55.228 0 0 0H100V100z' fill='%23fff'/></svg>"),
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23fff'/></svg>"),
     url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%23fff'/></svg>");
-    --Sv-tab-bar-item-focus-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23fff'/></svg>"),
+   /* --Sv-tab-bar-item-focus-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23fff'/></svg>"),
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23fff'/></svg>"),
-    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect y='15%' width='100%' height='80%' fill='%23fff'/></svg>");
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect y='15%' width='100%' height='80%' fill='%23fff'/></svg>");*/
     
 }
 
@@ -589,7 +611,7 @@
     --b3-font-color13-base-ch: 0.1744 24.32;
 
     /* 主色 */
-    --b3-theme-background:  #2f3437;
+    /*--b3-theme-background:  #2f3437;*/
     --b3-theme-surface-lighter: oklch(calc(var(--b3-theme-surface-base-l)*1.5) var(--b3-theme-surface-base-ch));
     --b3-theme-on-surface: oklch(calc(var(--b3-theme-surface-base-l)*2.5) var(--b3-theme-surface-base-ch));
     --b3-theme-on-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*2.5) var(--b3-theme-surface-base-ch) / 0.68);
@@ -724,9 +746,9 @@
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%232f3437'/></svg>"),
     url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  width='100%' height='100%' fill='%232f3437'/></svg>");
 
-    --Sv-tab-bar-item-focus-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%232f3437'/></svg>"),
+    /*--Sv-tab-bar-item-focus-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%232f3437'/></svg>"),
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%232f3437'/></svg>"),
-    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect y='15%' width='100%' height='80%' fill='%232f3437'/></svg>");
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect y='15%' width='100%' height='80%' fill='%232f3437'/></svg>");*/
 }
 
 :root:lang(zh_CN) {
@@ -770,6 +792,4 @@ span[data-type="a"]::before {
   opacity: 0.7;
 }
 */
-
-
 

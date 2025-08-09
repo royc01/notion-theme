@@ -1,3 +1,4 @@
+:root[savor-tabbar="merge"] {
 body:not(.body--mobile,.body--window)>#toolbar{
 	z-index: 3;
 	height: 38px;
@@ -128,3 +129,4 @@ body--mac .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layou
 /*.layout__center .layout__resize:not(.layout__resize--lr) +.fn__flex .layout-tab-bar--readonly{
     background-color: var(--Sv-dock-background)!important;
 }*/
+}

@@ -1,0 +1,90 @@
+/* 当启用官方字体配色时，覆盖 Savor 主题的字体配色变量 */
+:root[data-theme-mode="light"][savor-official-font-colors="true"] {
+    --b3-card-error-color: #790600;
+    --b3-card-error-background: #f5d1cf;
+    --b3-card-warning-color: #b16700;
+    --b3-card-warning-background: #ffe8c8;
+    --b3-card-info-color: #005599;
+    --b3-card-info-background: #d6eaf9;
+    --b3-card-success-color: #008606;
+    --b3-card-success-background: #d7eed8;
+    
+    --b3-font-color1: #790600;
+    --b3-font-color2: #b16700;;
+    --b3-font-color3: #005599;
+    --b3-font-color4: #008606;
+    --b3-font-color5: #5f6368;
+    --b3-font-color6: #3575f0;
+    --b3-font-color7: #ff9200;
+    --b3-font-color8: #d23f31;
+    --b3-font-color9: #f5539e;
+    --b3-font-color10: #00cdcd;
+    --b3-font-color11: #00b853;
+    --b3-font-color12: #9e9700;
+    --b3-font-color13: #fff;
+    --b3-font-background1: #f5d1cf;
+    --b3-font-background2: #ffe8c8;
+    --b3-font-background3: #d6eaf9;
+    --b3-font-background4: #d7eed8;
+    --b3-font-background5: #e2e3e4;
+    --b3-font-background6: #acd0fc;
+    --b3-font-background7: #fddaab;
+    --b3-font-background8: #ffb0a9;
+    --b3-font-background9: #fdbfff;
+    --b3-font-background10: #b1ffff;
+    --b3-font-background11: #affad1;
+    --b3-font-background12: #fff88f;
+    --b3-font-background13: #222;
+
+    .protyle-util{
+        .color__square[style*="--b3-font-color"], .color__square[style*="--b3-font-background"] {box-shadow: 0 0 0 1px var(--b3-list-hover) inset; &:hover{box-shadow: 0 0 0 2px var(--b3-list-hover) inset;}}
+    }
+    .color__square[style*="--b3-font-background3"]{
+        order: unset;
+    }
+}
+
+:root[data-theme-mode="dark"][savor-official-font-colors="true"] {
+    --b3-card-error-color: rgb(243, 153, 147);
+    --b3-card-error-background: #442724;
+    --b3-card-warning-color: rgb(255, 213, 153);
+    --b3-card-warning-background: #554636;
+    --b3-card-info-color: rgb(166, 213, 250);
+    --b3-card-info-background: #28405c;
+    --b3-card-success-color: rgb(183, 223, 185);
+    --b3-card-success-background: #425347;
+
+    --b3-font-color1: rgb(243, 153, 147);
+    --b3-font-color2: rgb(255, 213, 153);
+    --b3-font-color3: rgb(166, 213, 250);
+    --b3-font-color4: rgb(183, 223, 185);
+    --b3-font-color5: #9aa0a6;
+    --b3-font-color6: #3573f0;
+    --b3-font-color7: #f3a92f;
+    --b3-font-color8: #d23f31;
+    --b3-font-color9: #f5539e;
+    --b3-font-color10: #00eeff;
+    --b3-font-color11: #74ff00;
+    --b3-font-color12: #fff200;
+    --b3-font-color13: #1e1e1e;
+    --b3-font-background1: #442724;
+    --b3-font-background2: #554636;
+    --b3-font-background3: #28405c;
+    --b3-font-background4: #425347;
+    --b3-font-background5: #4c5257;
+    --b3-font-background6: #08296c;
+    --b3-font-background7: #593905;
+    --b3-font-background8: #541812;
+    --b3-font-background9: #843473;
+    --b3-font-background10: #329096;
+    --b3-font-background11: #568b2a;
+    --b3-font-background12: #8d8829;
+    --b3-font-background13: #dadada;
+
+    .protyle-util{
+        .color__square[style*="--b3-font-color"], .color__square[style*="--b3-font-background"] {box-shadow: 0 0 0 1px var(--b3-list-hover) inset; &:hover{box-shadow: 0 0 0 2px var(--b3-list-hover) inset;}}
+    }
+    .color__square[style*="--b3-font-background3"]{
+        order: unset;
+    }
+}

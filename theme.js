@@ -88,90 +88,33 @@
         await i18n.ready();
         allButtons = [
             // 配色按钮（light）
-            { id: "buttonSavor-light", type: "theme", group: "light", label: i18n.t("Light 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-light.css", styleId: "Sv-theme-color-light", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z" },
-            { id: "buttonsalt", type: "theme", group: "light", label: i18n.t("Salt 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-salt.css", styleId: "Sv-theme-color-salt", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z" },
-            { id: "buttonsugar", type: "theme", group: "light", label: i18n.t("Sugar 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-sugar.css", styleId: "Sv-theme-color-sugar", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-0.267 0-0.533 0-0.8-0.133 2.533-0.133 4.533-2.133 4.533-4.533 0.133-1.067-0.267-2.133-1.067-2.8-0.8-0.8-1.6-1.2-2.8-1.333-0.933-0.133-1.733 0.267-2.4 0.8s-1.067 1.467-1.067 2.267c-0.133 1.467 1.067 2.8 2.533 2.933 1.2 0.133 2.4-0.933 2.4-2.133 0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533c0 0.667-0.533 1.2-1.2 1.067-0.933-0.133-1.6-0.8-1.467-1.6 0-0.533 0.267-1.067 0.667-1.467s0.933-0.533 1.6-0.533c0.8 0 1.467 0.267 2 0.933 0.533 0.533 0.8 1.2 0.8 2.133-0.133 2-1.867 3.6-3.867 3.467-1.6-0.133-2.933-0.933-3.733-2.133-0.267-0.8-0.267-1.467-0.267-2.133 0-2.8 2.4-5.2 5.2-5.2s5.2 2.4 5.2 5.2-2.4 5.2-5.2 5.2z" },
-            { id: "buttonforest", type: "theme", group: "light", label: i18n.t("Forest 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-forest.css", styleId: "Sv-theme-color-forest", svg: "M16 12.133c-1.867 0-2.933 1.467-2.933 2.933 0 0.533 0 1.733 0 2.267 0 0.8 0.4 1.467 0.4 1.467 0.4 0.667 1.067 1.2 1.867 1.333v1.2c0 0.267 0.267 0.533 0.533 0.533s0.533-0.267 0.533-0.533v-1.2c1.333-0.267 2.267-1.467 2.267-2.8v-2.267c0.267-1.6-0.933-2.933-2.667-2.933zM17.733 17.333c0 0.8-0.4 1.333-1.2 1.6v-2.267c0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533v2.267c-0.8-0.267-1.2-0.933-1.2-1.6v-2.267c0-0.933 0.8-1.733 1.733-1.733s1.733 0.8 1.733 1.733v2.267zM16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467z" },
-            { id: "buttonflower", type: "theme", group: "light", label: i18n.t("Flower 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-flower.css", styleId: "Sv-theme-color-flower", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM19.333 14.533c-0.267 0-1.6 0.267-1.6 0.267s-1.067-1.6-1.733-1.6-1.6 1.6-1.6 1.6-1.333-0.267-1.6-0.267-0.667 1.333-0.667 2.667c0 2.4 1.733 4 4 4s4-1.6 4-4c-0.133-1.333-0.4-2.667-0.8-2.667zM16 19.867c-1.467 0-2.667-1.067-2.667-2.667 0-0.4 0-0.8 0.133-1.2 0.133 0 0.4 0.133 0.533 0.133l0.933 0.267 0.533-0.8c0.133-0.267 0.267-0.533 0.533-0.667v0 0c0.133 0.267 0.4 0.533 0.533 0.8l0.533 0.8 0.933-0.267c0.133 0 0.4-0.133 0.533-0.133 0 0.4 0.133 0.8 0.133 1.2 0 1.333-1.2 2.533-2.667 2.533z" },
-            { id: "buttonwind", type: "theme", group: "light", label: i18n.t("Wind 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-wind.css", styleId: "Sv-theme-color-wind", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM18.4 13.2h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.267c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.267c1.067 0 1.867-0.8 1.867-1.867 0-1.333-0.8-2.133-1.867-2.133zM14.667 17.733h-2.533c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h2.533c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c1.067 0 1.867-0.8 1.867-1.867s-0.8-2.133-1.867-2.133z" },
+            { id: "buttonSavor-light", type: "theme", group: "light", label: i18n.t("Light 配色"), styleId: "Sv-theme-color-light", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'light'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
+            { id: "buttonsalt", type: "theme", group: "light", label: i18n.t("Salt 配色"), styleId: "Sv-theme-color-salt", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'salt'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
+            { id: "buttonsugar", type: "theme", group: "light", label: i18n.t("Sugar 配色"), styleId: "Sv-theme-color-sugar", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-0.267 0-0.533 0-0.8-0.133 2.533-0.133 4.533-2.133 4.533-4.533 0.133-1.067-0.267-2.133-1.067-2.8-0.8-0.8-1.6-1.2-2.8-1.333-0.933-0.133-1.733 0.267-2.4 0.8s-1.067 1.467-1.067 2.267c-0.133 1.467 1.067 2.8 2.533 2.933 1.2 0.133 2.4-0.933 2.4-2.133 0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533c0 0.667-0.533 1.2-1.2 1.067-0.933-0.133-1.6-0.8-1.467-1.6 0-0.533 0.267-1.067 0.667-1.467s0.933-0.533 1.6-0.533c0.8 0 1.467 0.267 2 0.933 0.533 0.533 0.8 1.2 0.8 2.133-0.133 2-1.867 3.6-3.867 3.467-1.6-0.133-2.933-0.933-3.733-2.133-0.267-0.8-0.267-1.467-0.267-2.133 0-2.8 2.4-5.2 5.2-5.2s5.2 2.4 5.2 5.2-2.4 5.2-5.2 5.2z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'sugar'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
+            { id: "buttonforest", type: "theme", group: "light", label: i18n.t("Forest 配色"), styleId: "Sv-theme-color-forest", svg: "M16 12.133c-1.867 0-2.933 1.467-2.933 2.933 0 0.533 0 1.733 0 2.267 0 0.8 0.4 1.467 0.4 1.467 0.4 0.667 1.067 1.2 1.867 1.333v1.2c0 0.267 0.267 0.533 0.533 0.533s0.533-0.267 0.533-0.533v-1.2c1.333-0.267 2.267-1.467 2.267-2.8v-2.267c0.267-1.6-0.933-2.933-2.667-2.933zM17.733 17.333c0 0.8-0.4 1.333-1.2 1.6v-2.267c0-0.267-0.267-0.533-0.533-0.533s-0.533 0.267-0.533 0.533v2.267c-0.8-0.267-1.2-0.933-1.2-1.6v-2.267c0-0.933 0.8-1.733 1.733-1.733s1.733 0.8 1.733 1.733v2.267zM16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'forest'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
+            { id: "buttonflower", type: "theme", group: "light", label: i18n.t("Flower 配色"), styleId: "Sv-theme-color-flower", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM19.333 14.533c-0.267 0-1.6 0.267-1.6 0.267s-1.067-1.6-1.733-1.6-1.6 1.6-1.6 1.6-1.333-0.267-1.6-0.267-0.667 1.333-0.667 2.667c0 2.4 1.733 4 4 4s4-1.6 4-4c-0.133-1.333-0.4-2.667-0.8-2.667zM16 19.867c-1.467 0-2.667-1.067-2.667-2.667 0-0.4 0-0.8 0.133-1.2 0.133 0 0.4 0.133 0.533 0.133l0.933 0.267 0.533-0.8c0.133-0.267 0.267-0.533 0.533-0.667v0 0c0.133 0.267 0.4 0.533 0.533 0.8l0.533 0.8 0.933-0.267c0.133 0 0.4-0.133 0.533-0.133 0 0.4 0.133 0.8 0.133 1.2 0 1.333-1.2 2.533-2.667 2.533z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'flower'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
+            { id: "buttonwind", type: "theme", group: "light", label: i18n.t("Wind 配色"), styleId: "Sv-theme-color-wind", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM16 22.4c-3.067 0-5.467-2.4-5.467-5.467 0-2.933 2.4-5.467 5.467-5.467s5.467 2.4 5.467 5.467c0 2.933-2.533 5.467-5.467 5.467zM18.4 13.2h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.267c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.267c1.067 0 1.867-0.8 1.867-1.867 0-1.333-0.8-2.133-1.867-2.133zM14.667 17.733h-2.533c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h2.533c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-0.667c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h0.667c1.067 0 1.867-0.8 1.867-1.867s-0.8-2.133-1.867-2.133z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'wind'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
             // 配色按钮（dark）
-            { id: "buttonSavor-dark", type: "theme", group: "dark", label: i18n.t("Dark 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-dark.css", styleId: "Sv-theme-color-dark", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z" },
-            { id: "buttonvinegar", type: "theme", group: "dark", label: i18n.t("Vinegar 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-vinegar.css", styleId: "Sv-theme-color-vinegar", svg: "M19.467 18.533c-0.133 0-0.133 0-0.133 0.133-0.4 0.133-0.8 0.133-1.2 0.133-2 0-3.2-1.2-3.2-3.2 0-0.4 0.133-1.067 0.267-1.2v-0.133c0-0.133-0.133-0.133-0.133-0.133s-0.133 0-0.267 0.133c-1.333 0.533-2.267 1.867-2.267 3.467 0 2.133 1.6 3.733 3.867 3.733 1.6 0 2.933-0.933 3.467-2.133 0.133-0.133 0.133-0.133 0.133-0.133-0.4-0.533-0.533-0.667-0.533-0.667zM16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2z" },
-            { id: "buttonocean", type: "theme", group: "dark", label: i18n.t("Ocean 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-ocean.css", styleId: "Sv-theme-color-ocean", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z" },
-            { id: "buttonmountain", type: "theme", group: "dark", label: i18n.t("Mountain 配色"), cssPath: "/appearance/themes/Savor/style/theme/savor-mountain.css", styleId: "Sv-theme-color-mountain", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM14.667 22.267c-1.2-0.267-2.267-0.933-2.933-1.867l2.533-4.4 2.133 3.6-1.733 2.667zM17.867 19.867l0.667-1.2 1.2 2.133c-0.933 0.933-2.133 1.467-3.467 1.467l1.6-2.4zM16 11.467c3.067 0 5.467 2.4 5.467 5.467 0 0.933-0.267 1.867-0.667 2.533l-1.6-2.533c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-0.667 1.2-2.4-4c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-2.8 4.8c-0.267-0.667-0.4-1.333-0.4-2 0-3.067 2.4-5.467 5.467-5.467z" },
+            { id: "buttonSavor-dark", type: "theme", group: "dark", label: i18n.t("Dark 配色"), styleId: "Sv-theme-color-dark", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.4-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.267 14c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c0.933 0 1.6 0.8 1.6 1.6s-0.8 1.6-1.6 1.6c-0.533 0-0.8 0.267-0.8 0.8s0.267 0.8 0.8 0.8c1.867 0 3.333-1.467 3.333-3.333s-1.467-3.067-3.333-3.067z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'dark'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
+            { id: "buttonvinegar", type: "theme", group: "dark", label: i18n.t("Vinegar 配色"), styleId: "Sv-theme-color-vinegar", svg: "M19.467 18.533c-0.133 0-0.133 0-0.133 0.133-0.4 0.133-0.8 0.133-1.2 0.133-2 0-3.2-1.2-3.2-3.2 0-0.4 0.133-1.067 0.267-1.2v-0.133c0-0.133-0.133-0.133-0.133-0.133s-0.133 0-0.267 0.133c-1.333 0.533-2.267 1.867-2.267 3.467 0 2.133 1.6 3.733 3.867 3.733 1.6 0 2.933-0.933 3.467-2.133 0.133-0.133 0.133-0.133 0.133-0.133-0.4-0.533-0.533-0.667-0.533-0.667zM16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'vinegar'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
+            { id: "buttonocean", type: "theme", group: "dark", label: i18n.t("Ocean 配色"), styleId: "Sv-theme-color-ocean", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.8 0 5.2 2.4 5.2 5.2s-2.4 5.2-5.2 5.2zM16.133 17.2c-1.867-1.067-3.867-2.133-3.867 0s1.733 3.867 3.867 3.867 3.867-1.733 3.867-3.867-2.133 1.067-3.867 0z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'ocean'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
+            { id: "buttonmountain", type: "theme", group: "dark", label: i18n.t("Mountain 配色"), styleId: "Sv-theme-color-mountain", svg: "M16 9.867c-3.867 0-6.933 3.2-6.933 6.933 0 3.867 3.2 7.067 6.933 7.067 3.867 0 7.067-3.2 7.067-7.067-0.133-3.733-3.333-6.933-7.067-6.933zM14.667 22.267c-1.2-0.267-2.267-0.933-2.933-1.867l2.533-4.4 2.133 3.6-1.733 2.667zM17.867 19.867l0.667-1.2 1.2 2.133c-0.933 0.933-2.133 1.467-3.467 1.467l1.6-2.4zM16 11.467c3.067 0 5.467 2.4 5.467 5.467 0 0.933-0.267 1.867-0.667 2.533l-1.6-2.533c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-0.667 1.2-2.4-4c-0.267-0.4-0.667-0.4-0.933-0.267-0.133 0-0.133 0.133-0.267 0.267l-2.8 4.8c-0.267-0.667-0.4-1.333-0.4-2 0-3.067 2.4-5.467 5.467-5.467z", onEnable: () => { document.documentElement.setAttribute('savor-theme', 'mountain'); }, onDisable: () => { document.documentElement.removeAttribute('savor-theme'); } },
             // 功能按钮
-            { id: "concealButton", type: "feature", label: i18n.t("挖空"), cssPath: "/appearance/themes/Savor/style/topbar/conceal-mark.css", styleId: "Sv-theme-color-conceal挖空", attrName: "conceal挖空", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z", onEnable: () => {}, onDisable: () => {} },
-            { id: "tabbarVertical", type: "feature", label: i18n.t("垂直页签"), cssPath: "/appearance/themes/Savor/style/topbar/tab-bar-vertical.css", styleId: "Sv-theme-color-tabbar垂直", attrName: "tabbar垂直", svg: "M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z", onEnable: () => { let topbarFixed = document.getElementById("Sv-theme-color-topbar隐藏"); if (topbarFixed) { let topbarBtn = document.getElementById("topBar"); if (topbarBtn) topbarBtn.click(); } setTimeout(() => { tabbarResize.init(); }, 500); }, onDisable: () => { tabbarResize.remove(); } },
-            { id: "topBar", type: "feature", label: i18n.t("顶栏合并"), cssPath: "/appearance/themes/Savor/style/topbar/top-fixed.css", styleId: "Sv-theme-color-topbar隐藏", attrName: "topbar隐藏", svg: "M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z", onEnable: () => { let verticalTab = document.getElementById("Sv-theme-color-tabbar垂直"); if (verticalTab) { let verticalBtn = document.getElementById("tabbarVertical"); if (verticalBtn) verticalBtn.click(); } initTabBarsMarginUnified('right');initTabBarsMarginUnified('left'); if (window.updateTabBarsMargin) window.updateTabBarsMargin(); if (window.updateTabBarsMarginLeft) window.updateTabBarsMarginLeft(); }, onDisable: () => { window.tabBarsMarginInitialized = false; document.querySelectorAll(".layout__center .layout-tab-bar--readonly").forEach(tabBar => { tabBar.style.marginRight = "0px"; }); document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabBar => { tabBar.style.marginLeft = "0px"; }); if (window.updateTabBarsMargin) { window.updateTabBarsMargin = null; } if (window.updateTabBarsMarginLeft) { window.updateTabBarsMarginLeft = null; } if (window._tabBarsResizeObserver) { window._tabBarsResizeObserver.disconnect(); window._tabBarsResizeObserver = null; } } },
-            { id: "bulletThreading", type: "feature", label: i18n.t("列表子弹线"), cssPath: "/appearance/themes/Savor/style/topbar/bullet-threading.css", styleId: "Sv-theme-color-列表子弹线", attrName: "列表子弹线", svg: "M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z", onEnable: () => { initBulletThreading(); }, onDisable: () => { removeBulletThreading(); } },
-            { id: "colorFolder", type: "feature", label: i18n.t("彩色文档树"), cssPath: "/appearance/themes/Savor/style/topbar/color-folder.css", styleId: "Sv-theme-color-彩色文档树", attrName: "彩色文档树", svg: "M11.6 14.933c0-0.133 0-0.267 0-0.4 0-2.533 2-4.533 4.4-4.533s4.4 2 4.4 4.533c0 0.133 0 0.267 0 0.4 1.467 0.667 2.533 2.267 2.533 4.133 0 2.533-2 4.533-4.4 4.533-0.933 0-1.867-0.267-2.533-0.8-0.8 0.533-1.6 0.8-2.533 0.8-2.4 0-4.4-2-4.4-4.533 0-1.867 0.933-3.467 2.533-4.133zM11.867 16.267c-0.933 0.533-1.6 1.6-1.6 2.8 0 1.733 1.467 3.2 3.2 3.2 0.533 0 1.067-0.133 1.6-0.4-0.667-0.8-0.933-1.733-0.933-2.8 0-0.133 0-0.267 0-0.4-1.067-0.533-1.867-1.467-2.267-2.4v0zM15.333 18.933v0c0 1.867 1.467 3.2 3.2 3.2s3.2-1.467 3.2-3.2c0-1.2-0.667-2.267-1.6-2.8-0.667 1.6-2.267 2.8-4.133 2.8-0.267 0.133-0.4 0-0.667 0v0zM16 17.733c1.733 0 3.2-1.467 3.2-3.2s-1.467-3.2-3.2-3.2-3.2 1.467-3.2 3.2 1.467 3.2 3.2 3.2z", onEnable: () => {}, onDisable: () => {} },
-            { id: "headingDots", type: "feature", label: i18n.t("标题点标识"), cssPath: "/appearance/themes/Savor/style/topbar/headingdots.css", styleId: "Sv-theme-color-标题点标识", attrName: "标题点标识", svg: "M18.533 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM13.467 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM18.533 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM13.467 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM18.533 13.467c0.8 0 1.467-0.667 1.467-1.467s-0.667-1.467-1.467-1.467-1.467 0.667-1.467 1.467 0.667 1.467 1.467 1.467zM13.467 10.667c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.933-0.667-1.467-1.467-1.467z", onEnable: () => {}, onDisable: () => {} },
-            { id: "typewriterMode", type: "feature", label: i18n.t("打字机模式"), cssPath: "", styleId: "Sv-theme-typewriter-mode", attrName: "typewriterMode", svg: "M20.133 10.667c1.6 0 2.8 1.2 2.8 2.8v0 6.933c0 1.6-1.2 2.8-2.8 2.8v0h-8.267c-1.6 0-2.8-1.2-2.8-2.8v0-7.067c0-1.467 1.2-2.667 2.8-2.667 0 0 8.267 0 8.267 0zM20.133 12h-8.267c-0.8 0-1.333 0.533-1.333 1.333v0 6.933c0 0.8 0.533 1.333 1.333 1.333h8.533c0.8 0 1.333-0.533 1.333-1.333v-6.933c-0.133-0.667-0.667-1.333-1.6-1.333v0zM19.467 18.933c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.933c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h6.933zM12.533 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM12.533 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667z", onEnable: () => { enableTypewriterMode(); }, onDisable: () => { disableTypewriterMode(); } },
-            { id: "sidebarMemo", type: "feature", label: i18n.t("侧边栏备注"), cssPath: "/appearance/themes/Savor/style/custom/sidebar-memo.css", styleId: "Sv-theme-sidebar-memo", attrName: "sidebarMemo", svg: "M19.2 13.733h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM19.2 16.267h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM20.533 10.533h-9.067c-1.067 0-1.867 0.8-1.867 1.867v6.4c0 1.067 0.8 1.867 1.867 1.867h7.467l2.4 2.4c0.133 0.133 0.267 0.133 0.4 0.133s0.133 0 0.267 0c0.267-0.133 0.4-0.267 0.4-0.533v-10.267c0-1.067-0.8-1.867-1.867-1.867zM21.067 21.2l-1.467-1.467c-0.133-0.133-0.267-0.133-0.4-0.133h-7.733c-0.4 0-0.667-0.267-0.667-0.667v-6.533c0-0.4 0.267-0.667 0.667-0.667h8.933c0.4 0 0.667 0.267 0.667 0.667v8.8z", onEnable: () => { sidebarMemo.setEnabled(true); }, onDisable: () => { sidebarMemo.setEnabled(false); } }
+            { id: "concealButton", type: "feature", label: i18n.t("挖空"), styleId: "Sv-theme-color-conceal挖空", attrName: "conceal挖空", svg: "M16 10.667c-3.733 0-6.667 2.933-6.667 6.667 0 3.6 3.067 6.667 6.667 6.667 3.733 0 6.667-3.067 6.667-6.667 0-3.733-3.067-6.667-6.667-6.667zM16 22.533c-2.933 0-5.2-2.267-5.2-5.2s2.267-5.2 5.2-5.2c2.267 0 4.133 1.467 4.933 3.467-0.133 0-0.4 0-0.4 0.133-0.533 0.533-0.933 0.8-1.467 1.2 0 0-0.133 0-0.133 0.133-0.533 0.267-1.2 0.533-1.733 0.533 0 0 0 0-0.133 0-0.4 0.133-0.667 0.133-1.067 0.133-0.267 0-0.667 0-0.933-0.133h-0.133c-0.533-0.133-1.2-0.267-1.6-0.533-0.133-0.133-0.133-0.133-0.133-0.133-0.533-0.267-1.067-0.667-1.467-1.067-0.133-0.133-0.533-0.133-0.8 0-0.133 0.133-0.133 0.533 0 0.8 0.4 0.4 0.8 0.8 1.2 1.067l-0.933 0.8c-0.133 0.133-0.133 0.533 0.133 0.8 0.133 0.133 0.133 0.133 0.4 0.133 0.133 0 0.267-0.133 0.4-0.133l0.933-1.2c0.4 0.133 0.8 0.267 1.2 0.4l-0.267 1.2c-0.133 0.267 0.133 0.533 0.4 0.667h0.267c0.267 0 0.533-0.133 0.533-0.4l0.267-1.2h1.467l0.267 1.2c0.133 0.267 0.267 0.4 0.533 0.4h0.133c0.267-0.133 0.533-0.4 0.4-0.667l-0.267-1.2c0.4-0.133 0.8-0.267 1.2-0.4l0.933 1.2c0.133 0.133 0.267 0.133 0.4 0.133s0.267 0 0.4-0.133c0 0 0-0.133 0.133-0.133-0.933 1.867-2.8 3.333-5.067 3.333zM20.933 18.933c0-0.133 0-0.267-0.133-0.4l-0.8-1.067c0.4-0.267 0.8-0.533 1.067-0.8 0 0.267 0 0.533 0 0.667 0.133 0.533 0 1.067-0.133 1.6z", onEnable: () => { document.documentElement.setAttribute('savor-conceal-mark', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-conceal-mark'); } },
+            { id: "tabbarVertical", type: "feature", label: i18n.t("垂直页签"), styleId: "Sv-theme-color-tabbar垂直", attrName: "tabbar垂直", svg: "M21.067 10.667h-10.133c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-7.333v-7.733h7.6v7.467zM21.333 13.6h-10.667v-1.333c0-0.133 0.133-0.267 0.267-0.267h10c0.267 0 0.4 0.133 0.4 0.267v1.333z", onEnable: () => { document.getElementById("topBar")?.classList.remove('button_on'); config.set("topbar隐藏", "0"); cleanupTopbarMerge(); document.documentElement.setAttribute('savor-tabbar', 'vertical'); setTimeout(() => tabbarResize.init(), 500); }, onDisable: () => { document.documentElement.removeAttribute('savor-tabbar'); tabbarResize.remove(); } },
+            { id: "topBar", type: "feature", label: i18n.t("顶栏合并"), styleId: "Sv-theme-color-topbar隐藏", attrName: "topbar隐藏", svg: "M21.067 10.667h-1.867c-0.133 0-0.133 0-0.267 0h-3.733c-0.133 0-0.133 0-0.267 0h-4c-0.8 0-1.6 0.8-1.6 1.6v10c0 0.933 0.8 1.733 1.6 1.733h10c0.933 0 1.6-0.8 1.6-1.6v-10.133c0.133-0.8-0.667-1.6-1.467-1.6zM15.333 12h2.4l-1.067 1.6h-2.4l1.067-1.6zM10.667 12.267c0-0.133 0.133-0.267 0.267-0.267h2.8l-1.067 1.6h-2v-1.333zM21.333 22.4c0 0.133-0.133 0.267-0.267 0.267h-10.133c-0.133 0-0.267-0.133-0.267-0.267v-7.333h10.667v7.333zM21.333 13.6h-3.067l1.067-1.6h1.6c0.267 0 0.4 0.133 0.4 0.267 0 0 0 1.333 0 1.333z", onEnable: () => { document.getElementById("tabbarVertical")?.classList.remove('button_on'); config.set("tabbar垂直", "0"); tabbarResize.remove(); document.documentElement.setAttribute('savor-tabbar', 'merge'); initTabBarsMarginUnified('right'); initTabBarsMarginUnified('left'); if (window.updateTabBarsMargin) window.updateTabBarsMargin(); if (window.updateTabBarsMarginLeft) window.updateTabBarsMarginLeft(); }, onDisable: () => { document.documentElement.removeAttribute('savor-tabbar'); cleanupTopbarMerge(); } },
+            { id: "bulletThreading", type: "feature", label: i18n.t("列表子弹线"), styleId: "Sv-theme-color-列表子弹线", attrName: "列表子弹线", svg: "M20 20c1.067 0 2 0.933 2 2s-0.933 2-2 2-2-0.933-2-2c0-1.067 0.933-2 2-2zM18.4 12c1.6 0 2.933 1.333 2.933 2.933s-1.333 2.933-2.933 2.933h-4.667c-0.933 0-1.6 0.8-1.6 1.6 0 0.933 0.8 1.6 1.6 1.6h2.933c0.267 0 0.667 0.267 0.667 0.667 0 0.267-0.267 0.667-0.667 0.667h-2.933c-1.733 0.267-3.067-1.067-3.067-2.8s1.333-2.933 3.067-2.933h4.667c0.933 0 1.6-0.8 1.6-1.6s-0.8-1.733-1.6-1.733h-2.933c-0.533 0-0.8-0.4-0.8-0.667s0.267-0.667 0.667-0.667c0 0 3.067 0 3.067 0zM20 21.333c-0.267 0-0.667 0.267-0.667 0.667 0 0.267 0.267 0.667 0.667 0.667s0.667-0.267 0.667-0.667c0-0.4-0.267-0.667-0.667-0.667v0zM12 10.667c1.067 0 2 0.933 2 2s-0.933 2-2 2c-1.067 0-2-0.933-2-2s0.933-2 2-2zM12 12c-0.267 0-0.667 0.267-0.667 0.667s0.4 0.667 0.667 0.667c0.4 0 0.667-0.267 0.667-0.667v0c0-0.4-0.267-0.667-0.667-0.667z", onEnable: () => { document.documentElement.setAttribute('savor-bullet-threading', 'true'); initBulletThreading(); }, onDisable: () => { document.documentElement.removeAttribute('savor-bullet-threading'); removeBulletThreading(); } },
+            { id: "colorFolder", type: "feature", label: i18n.t("彩色文档树"), styleId: "Sv-theme-color-彩色文档树", attrName: "彩色文档树", svg: "M11.6 14.933c0-0.133 0-0.267 0-0.4 0-2.533 2-4.533 4.4-4.533s4.4 2 4.4 4.533c0 0.133 0 0.267 0 0.4 1.467 0.667 2.533 2.267 2.533 4.133 0 2.533-2 4.533-4.4 4.533-0.933 0-1.867-0.267-2.533-0.8-0.8 0.533-1.6 0.8-2.533 0.8-2.4 0-4.4-2-4.4-4.533 0-1.867 0.933-3.467 2.533-4.133zM11.867 16.267c-0.933 0.533-1.6 1.6-1.6 2.8 0 1.733 1.467 3.2 3.2 3.2 0.533 0 1.067-0.133 1.6-0.4-0.667-0.8-0.933-1.733-0.933-2.8 0-0.133 0-0.267 0-0.4-1.067-0.533-1.867-1.467-2.267-2.4v0zM15.333 18.933v0c0 1.867 1.467 3.2 3.2 3.2s3.2-1.467 3.2-3.2c0-1.2-0.667-2.267-1.6-2.8-0.667 1.6-2.267 2.8-4.133 2.8-0.267 0.133-0.4 0-0.667 0v0zM16 17.733c1.733 0 3.2-1.467 3.2-3.2s-1.467-3.2-3.2-3.2-3.2 1.467-3.2 3.2 1.467 3.2 3.2 3.2z", onEnable: () => { document.documentElement.setAttribute('savor-color-folder', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-color-folder'); } },
+            { id: "headingDots", type: "feature", label: i18n.t("标题点标识"), styleId: "Sv-theme-color-标题点标识", attrName: "标题点标识", svg: "M18.533 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM13.467 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM18.533 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM13.467 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM18.533 13.467c0.8 0 1.467-0.667 1.467-1.467s-0.667-1.467-1.467-1.467-1.467 0.667-1.467 1.467 0.667 1.467 1.467 1.467zM13.467 10.667c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.933-0.667-1.467-1.467-1.467z", onEnable: () => { document.documentElement.setAttribute('savor-heading-dots', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-heading-dots'); } },
+            { id: "typewriterMode", type: "feature", label: i18n.t("打字机模式"), styleId: "Sv-theme-typewriter-mode", attrName: "typewriterMode", svg: "M20.133 10.667c1.6 0 2.8 1.2 2.8 2.8v0 6.933c0 1.6-1.2 2.8-2.8 2.8v0h-8.267c-1.6 0-2.8-1.2-2.8-2.8v0-7.067c0-1.467 1.2-2.667 2.8-2.667 0 0 8.267 0 8.267 0zM20.133 12h-8.267c-0.8 0-1.333 0.533-1.333 1.333v0 6.933c0 0.8 0.533 1.333 1.333 1.333h8.533c0.8 0 1.333-0.533 1.333-1.333v-6.933c-0.133-0.667-0.667-1.333-1.6-1.333v0zM19.467 18.933c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.933c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h6.933zM12.533 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM12.533 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667z", onEnable: () => { enableTypewriterMode(); }, onDisable: () => { disableTypewriterMode(); } },
+            { id: "sidebarMemo", type: "feature", label: i18n.t("侧边栏备注"), styleId: "Sv-theme-sidebar-memo", attrName: "sidebarMemo", svg: "M19.2 13.733h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM19.2 16.267h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM20.533 10.533h-9.067c-1.067 0-1.867 0.8-1.867 1.867v6.4c0 1.067 0.8 1.867 1.867 1.867h7.467l2.4 2.4c0.133 0.133 0.267 0.133 0.4 0.133s0.133 0 0.267 0c0.267-0.133 0.4-0.267 0.4-0.533v-10.267c0-1.067-0.8-1.867-1.867-1.867zM21.067 21.2l-1.467-1.467c-0.133-0.133-0.267-0.133-0.4-0.133h-7.733c-0.4 0-0.667-0.267-0.667-0.667v-6.533c0-0.4 0.267-0.667 0.667-0.667h8.933c0.4 0 0.667 0.267 0.667 0.667v8.8z", onEnable: () => { document.documentElement.setAttribute('savor-sidebar-memo', 'true'); sidebarMemo.openSideBar(true, true); }, onDisable: () => { document.documentElement.removeAttribute('savor-sidebar-memo'); sidebarMemo.openSideBar(false, true); } },
+            { id: "officialFontColors", type: "feature", label: i18n.t("官方字体配色"), styleId: "Sv-theme-official-font-colors", attrName: "officialFontColors", svg: "M13.067 10.667v7.467l2.933 2.933v-7.6l-2.933-2.8zM13.733 17.733v-5.333l1.733 1.6v5.333l-1.733-1.6zM9.333 22l3.733-3.733v-7.467l-3.733 3.6v7.6zM16 21.067l2.933-2.933v-7.467l-2.933 2.8v7.6zM18.933 10.667v7.467l3.733 3.733v-7.6l-3.733-3.6zM22 20.133l-2.533-2.4v-5.333l2.533 2.4v5.333z", onEnable: () => { document.documentElement.setAttribute('savor-official-font-colors', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-official-font-colors'); } }
         ];
     }
 
 
 
 
-    // ========================================
-    // 模块：CSS 缓存和应用
-    // ========================================
-    const cssCache = new Map();
-
-    const loadCSS = async (path, cacheKey = path) => {
-        if (cssCache.has(cacheKey) || !path) return cssCache.get(cacheKey) || null;
-
-        try {
-            const response = await fetch(path);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            
-            const cssText = await response.text();
-            cssCache.set(cacheKey, cssText);
-            return cssText;
-        } catch (error) {
-            console.error(`[Savor] 加载CSS失败: ${path}`, error);
-            return null;
-        }
-    }
-
-    const loadThemeCSS = async (themeId) => {
-        const button = allButtons.find(btn => btn.styleId === themeId);
-        return button?.cssPath ? loadCSS(button.cssPath, themeId) : null;
-    }
-
-    const preloadCurrentModeCSS = () => {
-        allButtons.filter(btn => btn.type === 'theme' && btn?.cssPath)
-            .forEach(btn => loadCSS(btn.cssPath, btn.styleId));
-    }
-
-    const applyStyle = (id, cssText, options = {}) => {
-        if (!cssText) return;
-        
-        const { group = null, isTheme = false } = options;
-        
-        // 移除现有样式
-        if (isTheme && group) {
-            allButtons.filter(btn => btn.type === 'theme' && btn.group === group)
-                .forEach(btn => $(`#${btn.styleId}`)?.remove());
-        } else if (isTheme) {
-            $$('[id^="Sv-theme-color"]').forEach(el => el.remove());
-        } else {
-            $(`#${id}`)?.remove();
-        }
-        
-        // 添加新样式
-        const styleElement = document.createElement('style');
-        styleElement.id = id;
-        styleElement.textContent = cssText;
-        document.head.appendChild(styleElement);
-    }
-
-    const switchThemeStyle = async (themeId) => {
-        const cssText = await loadThemeCSS(themeId);
-        const currentButton = allButtons.find(btn => btn.styleId === themeId);
-        applyStyle(themeId, cssText, { group: currentButton?.group, isTheme: true });
-    }
 
     const enableSvcolorfulHeading = () => {
         let styleElement = document.getElementById("snippet-SvcolorfulHeading");
@@ -191,36 +134,45 @@
         }
     }
 
+    // 新增：统一处理彩色标题样式的工具函数，消除重复逻辑
+    const updateColorfulHeading = (styleId) => {
+        const colorfulThemes = ["Sv-theme-color-sugar", "Sv-theme-color-flower"];
+        const styleElement = document.getElementById("snippet-SvcolorfulHeading");
+        if (colorfulThemes.includes(styleId)) {
+            enableSvcolorfulHeading();
+        } else {
+            styleElement?.remove();
+        }
+    }
+
     const applyRememberedThemeStyle = async (skipFeatures = false) => {
         // 处理主题组
         const processThemeGroup = async (group) => {
             const buttons = allButtons.filter(btn => btn.type === 'theme' && btn.group === group);
             const rememberedButton = buttons.find(btn => config.get(btn.id) === "1");
-            const defaultTheme = group === 'light' ? 'Sv-theme-color-light' : 'Sv-theme-color-dark';
+            const defaultButton = buttons.find(btn => btn.styleId === (group === 'light' ? 'Sv-theme-color-light' : 'Sv-theme-color-dark'));
             
-            await switchThemeStyle(rememberedButton?.styleId || defaultTheme);
-            return rememberedButton;
+            // 先清理所有主题的savor-theme属性
+            allButtons.filter(btn => btn.type === 'theme').forEach(btn => {
+                if (btn.onDisable) btn.onDisable();
+            });
+            
+            // 启用记住的主题或默认主题
+            const buttonToEnable = rememberedButton || defaultButton;
+            if (buttonToEnable && buttonToEnable.onEnable) {
+                buttonToEnable.onEnable();
+            }
+            
+            return buttonToEnable;
         };
         
-        // 应用light和dark主题
-        const [rememberedLightButton, rememberedDarkButton] = await Promise.all([
-            processThemeGroup('light'),
-            processThemeGroup('dark')
-        ]);
+        // 只应用当前主题模式的主题，而不是同时应用light和dark
+        const currentThemeMode = window.theme.themeMode;
+        const rememberedButton = await processThemeGroup(currentThemeMode);
         
-        // 处理彩色标题功能
-        const colorfulThemes = ['Sv-theme-color-sugar', 'Sv-theme-color-flower'];
-        const currentThemes = [
-            rememberedLightButton?.styleId || 'Sv-theme-color-light',
-            rememberedDarkButton?.styleId || 'Sv-theme-color-dark'
-        ];
-        
-        const styleElement = document.getElementById("snippet-SvcolorfulHeading");
-        if (currentThemes.some(theme => colorfulThemes.includes(theme))) {
-            enableSvcolorfulHeading();
-        } else {
-            styleElement?.remove();
-        }
+        // 处理彩色标题功能（使用统一函数）
+        const currentTheme = rememberedButton?.styleId || (currentThemeMode === 'light' ? 'Sv-theme-color-light' : 'Sv-theme-color-dark');
+        updateColorfulHeading(currentTheme);
         
         // 更新按钮状态
         const savorToolbar = document.getElementById("savorToolbar");
@@ -229,9 +181,9 @@
         });
         
         // 为记住的主题按钮添加激活状态
-        [rememberedLightButton, rememberedDarkButton].forEach(button => {
-            document.getElementById(button?.id)?.classList.add('button_on');
-        });
+        if (rememberedButton) {
+            document.getElementById(rememberedButton.id)?.classList.add('button_on');
+        }
         
         if (!skipFeatures) {
             await applyRememberedFeatures();
@@ -242,9 +194,8 @@
     // 模块：window.theme 对象
     // ========================================
     window.theme = {
-        ID_COLOR_STYLE: 'Sv-theme-color',
         get config() { return config.data; },
-        themeMode: null,
+        get themeMode() { return window.siyuan?.config?.appearance?.mode === 0 ? 'light' : 'dark'; },
 
         applyThemeTransition: (callback) => {
             const status = $('#status');
@@ -352,8 +303,6 @@
         }
     };
 
-    window.theme.themeMode = window.siyuan.config.appearance.mode === 0 ? 'light' : 'dark';
-
 
     // ========================================
     // 模块：底栏隐藏
@@ -364,8 +313,8 @@
     // ========================================
     // 模块：主题按钮
     // ========================================
-    const renderAllButtons = () => {
-        const savorToolbar = document.getElementById("savorToolbar");
+    const renderAllButtons = (targetToolbar = null) => {
+        const savorToolbar = targetToolbar || document.getElementById("savorToolbar");
         if (!savorToolbar) return;
         savorToolbar.innerHTML = "";
         const fragment = document.createDocumentFragment();
@@ -385,17 +334,14 @@
             button.innerHTML = `<svg class="b3-menu__icon savor-icon" viewBox="9 10 14 14" xmlns="http://www.w3.org/2000/svg"><path d="${btn.svg}"></path></svg><span class="b3-menu__label">${btn.label}</span>`;
 
             // 状态高亮
-            let isActive = false;
             if (btn.type === 'theme') {
                 // 检查配置中是否记住了这个主题
                 if (config.get(btn.id) === "1") {
                     button.classList.add("button_on");
-                    isActive = true;
                 }
             } else if (btn.type === 'feature') {
                 if (getItem(btn.attrName) === "1") {
                     button.classList.add("button_on");
-                    isActive = true;
                 }
             }
 
@@ -414,14 +360,18 @@
                     button.classList.add('button_on');
                     
                     window.theme.applyThemeTransition(async () => {
-                        const cssText = await loadCSS(btn.cssPath);
-                        applyStyle(btn.styleId, cssText, { group: btn.group, isTheme: true });
-                        const styleElement = document.getElementById("snippet-SvcolorfulHeading");
-                        if (btn.styleId === "Sv-theme-color-sugar" || btn.styleId === "Sv-theme-color-flower") {
-                            enableSvcolorfulHeading();
-                        } else if (styleElement) {
-                            styleElement.remove();
+                        // 先移除同组所有主题的HTML属性
+                        if (currentGroup) {
+                            const groupButtons = allButtons.filter(b => b.type === 'theme' && b.group === currentGroup);
+                            groupButtons.forEach(b => {
+                                if (b.onDisable) b.onDisable();
+                            });
                         }
+                        
+                        // 然后启用当前主题
+                        if (btn.onEnable) btn.onEnable();
+                        
+                        updateColorfulHeading(btn.styleId);
                         await applyRememberedFeatures();
                         setTimeout(() => {
                             if (window.statusObserver?.updatePosition) {
@@ -446,10 +396,7 @@
                         config.set(btn.attrName, "0");
                     } else {
                         button.classList.add("button_on");
-                        if (btn.cssPath) {
-                            const cssText = await loadCSS(btn.cssPath);
-                            applyStyle(btn.styleId, cssText);
-                        }
+                        // 现在所有功能都通过属性控制，不需要加载 CSS
                         if (btn.onEnable) btn.onEnable();
                         config.set(btn.attrName, "1");
                     }
@@ -467,11 +414,7 @@
     // 模块：配置、文件操作和初始化管理
     // ========================================
     // 配置和缓存管理
-    const saveConfig = debounce(() => {
-        写入文件("/data/snippets/Savor.config.json", JSON.stringify(config.data, undefined, 4));
-    }, 300);
 
-    const setItem = config.set;
     const getItem = config.get;
 
     const domCache = new Map();
@@ -489,7 +432,10 @@
                 const response = await fetch("/api/file/getFile", {
                     body: JSON.stringify({ path }),
                     method: "POST",
-                    headers: { Authorization: "Token " } 
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Authorization": `Token ${window.siyuan?.config?.api?.token ?? ""}` 
+                    } 
                 });
                 const data = response.ok ? await response.json() : null;
                 if (callback) callback(data);
@@ -528,9 +474,8 @@
     const menuListeners = new WeakMap();
     
     const shouldShowSavorToolbar = () => {
-        const html = document.documentElement;
-        const themeMode = html.getAttribute("data-theme-mode");
-        return html.getAttribute(`data-${themeMode}-theme`) === "Savor";
+        const mode = window.theme.themeMode;
+        return document.documentElement.getAttribute(`data-${mode}-theme`) === "Savor";
     };
 
     const handleMenuClick = (e) => {
@@ -551,7 +496,7 @@
             const targetTheme = targetMode === themeLight ? window.siyuan.config.appearance.themeLight : window.siyuan.config.appearance.themeDark;
             if (targetTheme !== "Savor") return;
             
-            window.theme.applyThemeTransition(() => {}, e);
+            window.theme.applyThemeTransition(() => {});
         }
     };
 
@@ -566,25 +511,27 @@
         }
     };
 
+    // 通过 CSS 控制 savorToolbar 的可见性
+    const ensureSavorToolbarCSS = () => {
+        const id = "savor-toolbar-visibility";
+        let st = document.getElementById(id);
+        if (!st) { st = document.createElement("style"); st.id = id; document.head.appendChild(st); }
+        st.textContent = `#commonMenu[data-name="barmode"] #savorToolbar{display:block!important;}`;
+    };
+
     const initSavorToolbar = () => {
+        ensureSavorToolbarCSS();
+        // 移动端不创建桌面工具栏
+        if (document.getElementById("editor")) return;
         if (document.getElementById("savorToolbar")) return; // 只创建一次
         
         const commonMenu = document.getElementById("commonMenu");
-        if (!commonMenu || commonMenu.getAttribute("data-name") !== "barmode" || !shouldShowSavorToolbar()) return;
+        if (!commonMenu || !shouldShowSavorToolbar()) return;
         
-        const toolbarEdit = document.getElementById("toolbarEdit");
-        const windowControls = commonMenu.querySelector(".b3-menu__items");
-        let savorToolbar = document.createElement("div");
+        const savorToolbar = document.createElement("div");
         savorToolbar.id = "savorToolbar";
-        
-        if (!toolbarEdit) {
-            if (windowControls) {
-                windowControls.parentElement.insertBefore(savorToolbar, windowControls);
-            }
-        } else {
-            savorToolbar.style.position = "relative";
-            toolbarEdit.parentNode.insertBefore(savorToolbar, toolbarEdit);
-        }
+        // 简化：始终插入为 #commonMenu 的第一个子元素
+        commonMenu.insertBefore(savorToolbar, commonMenu.firstChild);
         
         renderAllButtons();
         requestAnimationFrame(() => applyRememberedThemeStyle());
@@ -606,49 +553,11 @@
             if (lastOffset !== offset) status.style.transform = `translateX(-${offset}px)`;
             lastOffset = offset;
         };
-        const observer = new ResizeObserver(throttle(updatePosition, 8));
+        const observer = new ResizeObserver(throttle(updatePosition, 16));
         [".layout__dockr", ".dock--vertical", ".layout__center"].forEach(sel => { const el = $(sel); el && observer.observe(el); });
         window.statusObserver = observer;
         window.statusObserver.updatePosition = updatePosition;
         updatePosition();
-    };
-
-    const initToolbarObserver = () => {
-        const commonMenuObserver = new MutationObserver(debounce(() => {
-            const commonMenu = getCachedElement("#commonMenu");
-            const isBarMode = commonMenu?.getAttribute("data-name") === "barmode";
-            if (isBarMode && shouldShowSavorToolbar()) {
-                initSavorToolbar();
-                toggleMenuListener(commonMenu, true);
-            } else {
-                // 切换到其他菜单时物理移除savorToolbar
-                const savorToolbar = document.getElementById("savorToolbar");
-                if (savorToolbar) savorToolbar.remove();
-                if (commonMenu) toggleMenuListener(commonMenu, false);
-            }
-        }, 16));
-        
-        const commonMenu = getCachedElement("#commonMenu");
-        if (commonMenu) {
-            commonMenuObserver.observe(commonMenu, { attributes: true, attributeFilter: ["data-name"] });
-            if (commonMenu.getAttribute("data-name") === "barmode" && shouldShowSavorToolbar()) {
-                initSavorToolbar();
-                toggleMenuListener(commonMenu, true);
-            }
-        } else {
-            const waitObserver = new MutationObserver((mutations, obs) => {
-                const commonMenu = getCachedElement("#commonMenu");
-                if (commonMenu) {
-                    commonMenuObserver.observe(commonMenu, { attributes: true, attributeFilter: ["data-name"] });
-                    if (commonMenu.getAttribute("data-name") === "barmode" && shouldShowSavorToolbar()) {
-                        initSavorToolbar();
-                        toggleMenuListener(commonMenu, true);
-                    }
-                    obs.disconnect();
-                }
-            });
-            waitObserver.observe(document.body, { childList: true, subtree: true });
-        }
     };
 
     const initThemeObserver = () => {
@@ -663,10 +572,9 @@
             if (previousThemeMode === newThemeMode && previousThemeName === newThemeName) return;
             
             const isSavorToSavor = previousThemeName === "Savor" && newThemeName === "Savor";
-            window.theme.themeMode = newThemeMode;
             
             const commonMenu = getCachedElement("#commonMenu");
-            const existingSavorToolbar = getCachedElement("#savorToolbar");
+            const existingSavorToolbar = document.getElementById("savorToolbar");
             
             if (commonMenu?.getAttribute("data-name") === "barmode") {
                 if (shouldShowSavorToolbar()) {
@@ -680,8 +588,7 @@
                         });
                     }
                 } else if (existingSavorToolbar) {
-                    existingSavorToolbar.remove();
-                    domCache.clear();
+                    // 不再移除，交由 CSS 控制显示
                 }
             }
             
@@ -701,15 +608,26 @@
         await buildAllButtons();
         await config.load();
         await Promise.all([
-            applyRememberedThemeStyle(),
-            preloadCurrentModeCSS()
+            applyRememberedThemeStyle()
         ]);
         [initMiddleClickCollapse, collapsedListPreview].forEach(fn => fn());
         initThemeObserver();
-        if (document.getElementById("commonMenu")) {
-            initToolbarObserver();
+        const commonMenuEl = document.getElementById("commonMenu");
+        if (commonMenuEl) {
+            ensureSavorToolbarCSS();
+            if (shouldShowSavorToolbar()) initSavorToolbar();
+            toggleMenuListener(commonMenuEl, true);
         } else {
-            setTimeout(initToolbarObserver, 50);
+            const waitObserver = new MutationObserver((mutations, obs) => {
+                const cm = document.getElementById("commonMenu");
+                if (cm) {
+                    ensureSavorToolbarCSS();
+                    if (shouldShowSavorToolbar()) initSavorToolbar();
+                    toggleMenuListener(cm, true);
+                    obs.disconnect();
+                }
+            });
+            waitObserver.observe(document.body, { childList: true, subtree: true });
         }
         initStatusPosition();
     })();
@@ -733,24 +651,11 @@ const initMiddleClickCollapse = () => {
         lastClickTime = now;
 
         // 查找可编辑块
-        let editable = e.target;
-        while (editable && !(
-            editable.getAttribute && editable.getAttribute("contenteditable") === "true" ||
-            editable.classList && editable.classList.contains("protyle-wysiwyg")
-        )) {
-            editable = editable.parentElement;
-        }
+        const editable = window.theme.findEditableParent(e.target);
         if (!editable) return;
 
         // 查找列表项或标题
-        let node = editable;
-        let found = null;
-        for (let i = 0; i < 10 && node; i++, node = node.parentElement) {
-            if (node.getAttribute && (node.getAttribute("data-type") === "NodeListItem" || node.getAttribute("data-type") === "NodeHeading")) {
-                found = node;
-                break;
-            }
-        }
+        const found = editable.closest('[data-type="NodeListItem"], [data-type="NodeHeading"]');
         if (!found) return;
 
         e.preventDefault();
@@ -962,13 +867,13 @@ function initTabBarsMarginUnified(direction = "right") {
     const isRight = direction === "right";
 
     function updateMargins() {
-        const topBarFixed = document.getElementById("Sv-theme-color-topbar隐藏");
+        const isTopbarMerged = document.documentElement.getAttribute('savor-tabbar') === 'merge';
         const tabBarSelector = isRight
             ? ".layout__center .layout-tab-bar--readonly"
             : ".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)";
         const allTabBars = document.querySelectorAll(tabBarSelector);
 
-        if (!topBarFixed) {
+        if (!isTopbarMerged) {
             allTabBars.forEach(tabBar => {
                 tabBar.style[isRight ? "marginRight" : "marginLeft"] = "0px";
             });
@@ -1107,23 +1012,14 @@ if (layoutCenter) {
     const enableTypewriterMode = () => {
         if (typewriterModeActive) return;
         typewriterModeActive = true;
-        typewriterHandler = debounce(() => {
+        typewriterHandler = throttle(() => {
             const sel = window.getSelection();
             if (!sel.rangeCount) return;
-            let node = sel.getRangeAt(0).startContainer;
+            let node = sel.anchorNode || sel.getRangeAt(0).startContainer;
             node = node.nodeType === 3 ? node.parentElement : node;
-            const editable = window.theme.findEditableParent(node);
-            if (!editable) return;
-            const protyle = editable.closest(".protyle");
-            if (!protyle) return;
-            const line = node.closest(".p, .h1, .h2, .h3, .h4, .h5, .h6, .li") || node;
-            const container = protyle.querySelector(".protyle-content") || protyle;
-            const rect = line.getBoundingClientRect(), crect = container.getBoundingClientRect();
-            const center = container.clientHeight * 0.4;
-            container.scrollTo({
-                top: container.scrollTop + rect.top - crect.top - center + rect.height / 2,
-                behavior: "smooth"
-            });
+            const line = node.closest(".p, .h1, .h2, .h3, .h4, .h5, .h6, .li");
+            if (!line) return;
+            line.scrollIntoView({ block: "center", inline: "nearest", behavior: "smooth" });
         }, 100);
         document.addEventListener("selectionchange", typewriterHandler);
     };
@@ -1140,122 +1036,99 @@ if (layoutCenter) {
 
 
 
+
     // ========================================
-    // 模块：子弹线功能
+    // 模块：子弹线功能（精简版）
     // ========================================
     let bulletThreadingActive = false;
     let selectionChangeHandler = null;
-    let lastListItems = null;
-
+    let btRafId = null;
+    let btLastItems = [];
 
     const initBulletThreading = () => {
         if (bulletThreadingActive) return;
-        
         bulletThreadingActive = true;
-        selectionChangeHandler = () => {
-            const selection = window.getSelection();
-            if (!selection.rangeCount) return;
-            
-            // 获取当前选中节点的列表项祖先节点
-            const range = selection.getRangeAt(0);
-            const startNode = range.startContainer;
-            
-            // 清除所有已有的子弹线样式
-            document.querySelectorAll('.en_item_bullet_actived, .en_item_bullet_line')
-                .forEach(node => {
+        const apply = () => {
+            btRafId = null;
+            const sel = window.getSelection();
+            if (!sel.rangeCount) {
+                // 清理上一次标记
+                btLastItems.forEach(node => {
                     node.classList.remove('en_item_bullet_actived', 'en_item_bullet_line');
                     node.style.removeProperty('--en-bullet-line-height');
                 });
-            
-            // 查找当前节点所在的列表路径
-            const listItems = [];
-            let currentNode = startNode;
-            
-            // 检查是否存在具有custom-f属性的父级列表
-            let hasCustomFParent = false;
-            let tempNode = currentNode;
-            while (tempNode && tempNode !== document.body) {
-                if (tempNode.getAttribute && tempNode.getAttribute('custom-f')) {
-                    hasCustomFParent = true;
-                    break;
-                }
-                tempNode = tempNode.parentElement;
+                btLastItems = [];
+                return;
             }
-            
-            // 如果存在custom-f属性的父级，则不应用子弹线
-            if (hasCustomFParent) return;
-            
-            while (currentNode && currentNode !== document.body) {
-                // 跳过具有custom-f属性的列表项
-                if (currentNode.dataset?.type === 'NodeListItem' && !currentNode.getAttribute('custom-f')) {
-                    listItems.push(currentNode);
-                }
-                currentNode = currentNode.parentElement;
+            const start = sel.getRangeAt(0).startContainer;
+
+            // 清理上一次标记（避免全局查询）
+            btLastItems.forEach(node => {
+                node.classList.remove('en_item_bullet_actived', 'en_item_bullet_line');
+                node.style.removeProperty('--en-bullet-line-height');
+            });
+            btLastItems = [];
+
+            const items = [];
+            for (let n = start; n && n !== document.body; n = n.parentElement) {
+                if (n.getAttribute?.('custom-f')) return; // 父级存在 custom-f 时直接终止
+                if (n.dataset?.type === 'NodeListItem') items.push(n);
             }
-            
-            // 如果没有找到列表项，直接返回
-            if (listItems.length === 0) return;
-            
-            // 设置子弹线高度并应用样式
-            for (let i = 0; i < listItems.length - 1; i++) {
-                const currentItem = listItems[i];
-                const parentItem = listItems[i + 1];
-                
-                const height = currentItem.getBoundingClientRect().top - 
-                            parentItem.getBoundingClientRect().top;
-                
-                currentItem.style.setProperty('--en-bullet-line-height', `${height}px`);
-                currentItem.classList.add('en_item_bullet_line');
+            if (items.length === 0) return;
+
+            for (let i = 0; i < items.length - 1; i++) {
+                const h = items[i].getBoundingClientRect().top - items[i + 1].getBoundingClientRect().top;
+                items[i].style.setProperty('--en-bullet-line-height', `${h}px`);
+                items[i].classList.add('en_item_bullet_line');
             }
-            
-            // 为所有列表项添加激活样式
-            listItems.forEach(item => item.classList.add('en_item_bullet_actived'));
+            items.forEach(item => item.classList.add('en_item_bullet_actived'));
+            btLastItems = items.slice();
         };
-        
-        // 添加事件监听器
+
+        selectionChangeHandler = () => { if (!btRafId) btRafId = requestAnimationFrame(apply); };
         document.addEventListener('selectionchange', selectionChangeHandler);
-    }
+    };
 
     const removeBulletThreading = () => {
         if (!bulletThreadingActive) return;
-        
         bulletThreadingActive = false;
-        
-        // 移除事件监听器
+        if (btRafId) { cancelAnimationFrame(btRafId); btRafId = null; }
         if (selectionChangeHandler) {
             document.removeEventListener('selectionchange', selectionChangeHandler);
             selectionChangeHandler = null;
         }
-        
-        // 清除所有样式
-        document.querySelectorAll('.en_item_bullet_actived, .en_item_bullet_line')
-            .forEach(node => {
-                node.classList.remove('en_item_bullet_actived', 'en_item_bullet_line');
-                node.style.removeProperty('--en-bullet-line-height');
-            });
+        // 清理剩余标记
+        btLastItems.forEach(node => {
+            node.classList.remove('en_item_bullet_actived', 'en_item_bullet_line');
+            node.style.removeProperty('--en-bullet-line-height');
+        });
+        btLastItems = [];
     }
 
 
     // ===================== 新增：list2map 提示 i18n 赋值 =====================
-    function setList2MapI18nTip() {
+    function setList2MapI18nTip(root = document) {
         const tip = i18n.t("list2map.tip");
-        document.querySelectorAll('[custom-f="dt"]').forEach(el => {
+        root.querySelectorAll?.('[custom-f="dt"]').forEach(el => {
             el.setAttribute('data-i18n-tip', tip);
         });
     }
     i18n.ready().then(() => {
         setList2MapI18nTip();
-        // 监听 DOM 变化，动态赋值
+        // 监听 DOM 变化，增量赋值
         const observer = new MutationObserver(mutations => {
             for (const mutation of mutations) {
-                if (mutation.type === "attributes" && mutation.target.getAttribute("custom-f") === "dt") {
-                    setList2MapI18nTip();
+                if (mutation.type === "attributes") {
+                    const t = mutation.target;
+                    if (t.getAttribute?.("custom-f") === "dt") {
+                        setList2MapI18nTip(t);
+                    }
                 } else if (mutation.type === "childList") {
                     mutation.addedNodes.forEach(node => {
                         if (node.nodeType === 1) {
-                            if (node.getAttribute?.("custom-f") === "dt" || node.querySelector?.('[custom-f="dt"]')) {
-                                setList2MapI18nTip();
-                            }
+                            if (node.getAttribute?.("custom-f") === "dt") setList2MapI18nTip(node);
+                            const dtNodes = node.querySelectorAll?.('[custom-f="dt"]');
+                            if (dtNodes?.length) setList2MapI18nTip(node);
                         }
                     });
                 }
@@ -1309,24 +1182,19 @@ if (layoutCenter) {
         
         const buttons = viewButtons[selecttype] || [];
         
-        menuItems.innerHTML = buttons.map(button => {
-            if (button.separator) {
+        menuItems.innerHTML = buttons.map(btn => {
+            if (btn.separator) {
                 return `<button class="b3-menu__separator"></button>`;
             } else {
                 return `
-                    <button class="b3-menu__item" data-node-id="${selectid}" 
-                            custom-attr-name="${button.attrName}" 
-                            custom-attr-value="${button.attrValue}">
-                        <svg class="b3-menu__icon"><use xlink:href="#${button.icon}"></use></svg>
-                        <span class="b3-menu__label">${i18n.t(button.labelKey)}</span>
+                    <button class="b3-menu__item" data-view-item="1" data-node-id="${selectid}"
+                            data-attr-name="${btn.attrName}" data-attr-value="${btn.attrValue}">
+                        <svg class="b3-menu__icon"><use xlink:href="#${btn.icon}"></use></svg>
+                        <span class="b3-menu__label">${i18n.t(btn.labelKey)}</span>
                     </button>
                 `;
             }
         }).join("");
-        
-        menuItems.querySelectorAll(".b3-menu__item").forEach(btn => {
-            btn.onclick = ViewMonitor;
-        });
         
         submenu.appendChild(menuItems);
         button.appendChild(submenu);
@@ -1342,14 +1210,30 @@ if (layoutCenter) {
         } : null;
     }
 
+    // 统一的事件委托，处理视图选择子项点击
+    document.addEventListener("click", (event) => {
+        const item = event.target.closest('.b3-menu__item[data-view-item="1"]');
+        if (!item) return;
+        const id = item.dataset.nodeId;
+        const attrName = "custom-" + item.dataset.attrName;
+        const attrValue = item.dataset.attrValue;
+        const blocks = document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${id}"]`);
+        clearTransformData(id, blocks);
+        if (blocks?.length > 0) {
+            blocks.forEach(block => block.setAttribute(attrName, attrValue));
+            if (attrValue === "") blocks.forEach(cleanupDraggable);
+            设置思源块属性(id, { [attrName]: attrValue });
+        }
+    }, true);
+
     const initMenuMonitor = () => {
         window.addEventListener("mouseup", () => {
-            setTimeout(() => {
+            requestAnimationFrame(() => {
                 const selectinfo = getBlockSelected();
                 if (selectinfo && (selectinfo.type === "NodeList" || selectinfo.type === "NodeTable")) {
-                    setTimeout(() => InsertMenuItem(selectinfo.id, selectinfo.type), 0);
+                    InsertMenuItem(selectinfo.id, selectinfo.type);
                 }
-            }, 0);
+            });
         });
     }
 
@@ -1366,22 +1250,6 @@ if (layoutCenter) {
             
             commonMenu.insertBefore(ViewSelect(selectid, selecttype), readonly);
             commonMenu.insertBefore(separator, readonly);
-        }
-    }
-
-    const ViewMonitor = (event) => {
-        const target = event.currentTarget;
-        const id = target.getAttribute("data-node-id");
-        const attrName = "custom-" + target.getAttribute("custom-attr-name");
-        const attrValue = target.getAttribute("custom-attr-value");
-        
-        const blocks = document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${id}"]`);
-        clearTransformData(id, blocks);
-        
-        if (blocks?.length > 0) {
-            blocks.forEach(block => block.setAttribute(attrName, attrValue));
-            if (attrValue === "") blocks.forEach(cleanupDraggable);
-            设置思源块属性(id, { [attrName]: attrValue });
         }
     }
 
@@ -1437,90 +1305,119 @@ if (layoutCenter) {
             };
         };
 
-        const initDraggable = (element) => {
-            const listItems = element.querySelectorAll(`:scope > [data-type="NodeListItem"]`);
-            if (!listItems.length) return;
-            
-            // 为整个导图容器设置共享的缩放状态
+        // 注入一次性样式，使用 CSS 变量驱动 transform 与光标
+        const ensureDTStyles = () => {
+            if (window.__dtStylesInjected) return;
+            const style = document.createElement("style");
+            style.id = "dt-inline-styles";
+            style.textContent = `
+            [custom-f="dt"][data-draggable] { --dt-scale: 1; }
+            [custom-f="dt"] [data-type="NodeListItem"][data-draggable] {
+            cursor: grab;
+            transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(var(--dt-scale, 1));
+            }
+            [custom-f="dt"][data-animating] [data-type="NodeListItem"][data-draggable] {
+            transition: transform 0.25s ease;
+            }
+            `;
+                document.head.appendChild(style);
+                window.__dtStylesInjected = true;
+            };
+
+            const initDraggable = (element) => {
+                const listItems = element.querySelectorAll(`:scope > [data-type="NodeListItem"]`);
+                if (!listItems.length) return;
+
+            ensureDTStyles();
+
+            // 初始化容器状态（一次）
             if (!element.hasAttribute("data-draggable")) {
                 element.setAttribute("data-draggable", "true");
                 element._scale = 1;
-                
-                // 初始化事件监听器数组
-                element._wheelListeners = [];
-                element._doubleClickListeners = [];
-                element._mouseDownListeners = [];
-                
-                // 为整个导图容器添加滚轮和双击事件监听器
+                element.style.setProperty("--dt-scale", "1");
+
                 const onWheel = e => {
                     if (e.target.getAttribute("contenteditable") === "true" || !e.altKey) return;
                     e.preventDefault();
-                    
                     const scaleChange = e.deltaY > 0 ? 0.9 : 1.1;
-                    element._scale = Math.min(Math.max(element._scale * scaleChange, 0.1), 5);
-                    
-                    element.querySelectorAll(`[data-type="NodeListItem"]`).forEach(item => {
-                        const transform = new DOMMatrix(getComputedStyle(item).transform);
-                        item.style.transform = `translate(${transform.m41}px, ${transform.m42}px) scale(${element._scale})`;
-                    });
+                    element._scale = Math.min(Math.max((element._scale || 1) * scaleChange, 0.1), 5);
+                    element.style.setProperty("--dt-scale", String(element._scale));
                 };
-                
+
                 const onDoubleClick = e => {
                     if (e.target.getAttribute("contenteditable") === "true") return;
-                    
+                    element._scale = 1;
+                    element.style.setProperty("--dt-scale", "1");
+                    // 开启动画
+                    element.setAttribute("data-animating", "true");
                     const allListItems = element.querySelectorAll(`[data-type="NodeListItem"]`);
                     allListItems.forEach(item => {
-                        item.style.transform = "translate(0px, 0px) scale(1)";
-                        item.style.transition = "transform 0.3s ease";
+                        // 清零位移（CSS 变量 + dataset）
+                        item.style.removeProperty("--tx");
+                        item.style.removeProperty("--ty");
+                        item.dataset.tx = "0";
+                        item.dataset.ty = "0";
                     });
-                    
-                    element._scale = 1;
-                    setTimeout(() => allListItems.forEach(item => item.style.transition = ""), 300);
+                    // 动画结束后移除标记
+                    setTimeout(() => element.removeAttribute("data-animating"), 260);
                 };
-                
+
                 element.addEventListener("wheel", onWheel, { passive: false });
                 element.addEventListener("dblclick", onDoubleClick);
-                
-                // 保存事件监听器引用
-                element._wheelListeners.push(onWheel);
-                element._doubleClickListeners.push(onDoubleClick);
+                element._onWheel = onWheel;
+                element._onDoubleClick = onDoubleClick;
             }
-            
+
+            // 标记子项为可拖拽（利用样式规则）
             listItems.forEach(listItem => {
-                if (listItem.hasAttribute("data-draggable")) return;
-                listItem.setAttribute("data-draggable", "true");
-                
-                let startX, startY, initialTransform;
-                
-                const onMouseDown = e => {
-                    if (e.target.getAttribute("contenteditable") === "true") return;
-                    
-                    e.preventDefault();
-                    listItem.style.cursor = "grabbing";
-                    
-                    initialTransform = new DOMMatrix(getComputedStyle(listItem).transform);
-                    startX = e.clientX - initialTransform.m41;
-                    startY = e.clientY - initialTransform.m42;
-                    
-                    const onMouseMove = window.dragDebounce(e => {
-                        listItem.style.transform = `translate(${e.clientX - startX}px, ${e.clientY - startY}px) scale(${element._scale})`;
-                    });
-                    
-                    const onMouseUp = () => {
-                        listItem.style.cursor = "grab";
-                        document.removeEventListener("mousemove", onMouseMove);
-                    };
-                    
-                    document.addEventListener("mousemove", onMouseMove);
-                    document.addEventListener("mouseup", onMouseUp, { once: true });
-                };
-                
-                listItem.style.cursor = "grab";
-                listItem.addEventListener("mousedown", onMouseDown);
-                
-                // 保存鼠标事件监听器引用
-                element._mouseDownListeners.push({ element: listItem, handler: onMouseDown });
+                if (!listItem.hasAttribute("data-draggable")) listItem.setAttribute("data-draggable", "true");
             });
+
+            // 使用 Pointer 事件简化移动/释放与触屏支持
+            if (!element._onItemPointerDown) {
+                element._onItemPointerDown = e => {
+                    // 鼠标：仅左键；触屏/笔：允许
+                    if (e.pointerType === "mouse" && e.button !== 0) return;
+                    if (e.target.getAttribute?.("contenteditable") === "true") return;
+                    const listItem = e.target.closest?.('[data-type="NodeListItem"]');
+                    if (!listItem || !element.contains(listItem)) return;
+                    e.preventDefault();
+
+                    listItem.style.cursor = "grabbing";
+                    listItem.setPointerCapture?.(e.pointerId);
+
+                    const baseTx = parseFloat(listItem.dataset.tx || "0");
+                    const baseTy = parseFloat(listItem.dataset.ty || "0");
+                    const startX = e.clientX - baseTx;
+                    const startY = e.clientY - baseTy;
+
+                    let rafId = 0;
+                    const onPointerMove = (ev) => {
+                        if (rafId) cancelAnimationFrame(rafId);
+                        rafId = requestAnimationFrame(() => {
+                            const tx = ev.clientX - startX;
+                            const ty = ev.clientY - startY;
+                            listItem.dataset.tx = String(tx);
+                            listItem.dataset.ty = String(ty);
+                            listItem.style.setProperty("--tx", `${tx}px`);
+                            listItem.style.setProperty("--ty", `${ty}px`);
+                        });
+                    };
+
+                    const onPointerUp = () => {
+                        listItem.style.cursor = "grab";
+                        listItem.releasePointerCapture?.(e.pointerId);
+                        listItem.removeEventListener("pointermove", onPointerMove);
+                        listItem.removeEventListener("pointerup", onPointerUp);
+                        listItem.removeEventListener("pointercancel", onPointerUp);
+                    };
+
+                    listItem.addEventListener("pointermove", onPointerMove);
+                    listItem.addEventListener("pointerup", onPointerUp);
+                    listItem.addEventListener("pointercancel", onPointerUp);
+                };
+                element.addEventListener("pointerdown", element._onItemPointerDown);
+            }
         }
 
         const initObserver = () => {
@@ -1543,14 +1440,14 @@ if (layoutCenter) {
                     }
                 }
             });
-            
+
             observer.observe(document.body, {
                 childList: true,
                 subtree: true,
                 attributes: true,
                 attributeFilter: ["custom-f"]
             });
-            
+
             document.querySelectorAll(`[custom-f="dt"]`).forEach(initDraggable);
         }
 
@@ -1561,37 +1458,37 @@ if (layoutCenter) {
     // 模块：清理导图拖拽功能
     // ========================================
     const cleanupDraggable = (element) => {
-        // 重置所有列表项的位置和缩放
+        // 重置所有列表项的位置
         element.querySelectorAll('[data-type="NodeListItem"]').forEach(item => {
-            item.style.transform = "translate(0px, 0px) scale(1)";
-            item.style.cursor = "";
+            item.style.removeProperty("--tx");
+            item.style.removeProperty("--ty");
+            delete item.dataset.tx;
+            delete item.dataset.ty;
             item.removeAttribute("data-draggable");
-            item.style.transition = "transform 0.3s ease";
         });
 
         // 移除自身属性
         element.removeAttribute("data-draggable");
         element._scale = 1;
+        element.style.removeProperty("--dt-scale");
 
         // 清理事件监听器
-        ['_wheelListeners', '_doubleClickListeners', '_mouseDownListeners'].forEach((prop, idx) => {
-            const eventType = ['wheel', 'dblclick', 'mousedown'][idx];
-            (element[prop] || []).forEach(listener => {
-                if (eventType === 'mousedown' && listener.element) {
-                    listener.element.removeEventListener(eventType, listener.handler);
-                } else {
-                    element.removeEventListener(eventType, listener, { passive: false });
-                }
-            });
-            delete element[prop];
-        });
-
-        // 延时移除过渡样式
-        setTimeout(() => {
-            element.querySelectorAll('[data-type="NodeListItem"]').forEach(item => {
-                item.style.transition = "";
-            });
-        }, 300);
+        if (element._onWheel) {
+            element.removeEventListener('wheel', element._onWheel);
+            delete element._onWheel;
+        }
+        if (element._onDoubleClick) {
+            element.removeEventListener('dblclick', element._onDoubleClick);
+            delete element._onDoubleClick;
+        }
+        if (element._onItemPointerDown) {
+            element.removeEventListener('pointerdown', element._onItemPointerDown);
+            delete element._onItemPointerDown;
+        }
+        if (element._onItemMouseDown) { // 兼容旧实现的清理
+            element.removeEventListener('mousedown', element._onItemMouseDown);
+            delete element._onItemMouseDown;
+        }
     };
 
 
@@ -1618,7 +1515,8 @@ if (layoutCenter) {
             if (!submenu.querySelector(".b3-menu__item")) submenu.remove();
         });
     });
-    window.topBarPluginMenuObserver.observe(document.body, { childList: true, subtree: true });
+    const _topBarObserveTarget = document.getElementById("commonMenu") || document.body;
+    window.topBarPluginMenuObserver.observe(_topBarObserveTarget, { childList: true, subtree: true });
 
 
 
@@ -1633,6 +1531,23 @@ if (layoutCenter) {
     const isMac = () => {
         return navigator.platform.toUpperCase().indexOf("MAC") > -1;
     }
+
+    // 清理顶栏合并状态的辅助函数
+    const cleanupTopbarMerge = () => {
+        window.tabBarsMarginInitialized = false;
+        document.querySelectorAll(".layout__center .layout-tab-bar--readonly").forEach(tabBar => { 
+            tabBar.style.marginRight = "0px"; 
+        });
+        document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabBar => { 
+            tabBar.style.marginLeft = "0px"; 
+        });
+        if (window.updateTabBarsMargin) { window.updateTabBarsMargin = null; }
+        if (window.updateTabBarsMarginLeft) { window.updateTabBarsMarginLeft = null; }
+        if (window._tabBarsResizeObserver) { 
+            window._tabBarsResizeObserver.disconnect(); 
+            window._tabBarsResizeObserver = null; 
+        }
+    };
 
     const initMobileAndPlatformFeatures = () => {
         if (isPhone()) {
@@ -1735,7 +1650,7 @@ if (layoutCenter) {
 
     const initMobileThemeButtons = (savorToolbar) => {
         // 移动端也使用统一的按钮渲染
-        renderAllButtons();
+        renderAllButtons(savorToolbar);
     }
 
     setTimeout(() => {
@@ -1759,10 +1674,7 @@ if (layoutCenter) {
                     button.classList.add("button_on");
                 }
                 
-                if (btn.cssPath) {
-                    const cssText = await loadCSS(btn.cssPath);
-                    applyStyle(btn.styleId, cssText);
-                }
+                // 现在所有功能都通过属性控制，不需要加载 CSS
                 
                 if (btn.onEnable) btn.onEnable();
             }
@@ -1774,78 +1686,44 @@ if (layoutCenter) {
 
 
     // ========================================
-    // 模块：清理样式
+    // 模块：主题清理
     // ========================================
-    const html = document.documentElement;
-    const isSavorTheme = () => html.getAttribute('data-light-theme') === 'Savor' && 
-                               html.getAttribute('data-dark-theme') === 'Savor';
+    window.destroyTheme = () => { 
+        // 清理功能按钮
+        allButtons?.forEach(btn => btn.type === 'feature' && $(`#${btn.id}`)?.remove());
+        featureButtonsActive?.clear();
 
-    const updateDestroyTheme = () => {
-        window.destroyTheme = isSavorTheme() ? () => {} : () => {
-            // 清理功能按钮和模块
-            allButtons?.forEach(btn => btn.type === 'feature' && 
-                [btn.id, btn.styleId].forEach(id => $(`#${id}`)?.remove()));
-            featureButtonsActive?.clear();
-            [tabbarResize.remove, removeBulletThreading, disableTypewriterMode, disableListPreview]
-                .forEach(fn => fn?.());
-            
-            // 清理侧边栏和事件监听
-            sidebarMemo?.openSideBar(false);
-            sidebarMemo?.unobserveDragTitle?.();
-            window.theme._collapseHandler && 
-                (document.body.removeEventListener("mousedown", window.theme._collapseHandler), 
-                 window.theme._collapseHandler = null);
-            
-            // 清理窗口属性和观察者
-            Object.assign(window, {
-                tabBarsMarginInitialized: false,
-                updateTabBarsMargin: null,
-                updateTabBarsMarginLeft: null
-            });
-            [window.statusObserver, window.topBarPluginMenuObserver].forEach(obs => 
-                obs?.disconnect() && (obs = null));
-            
-            // 清理DOM元素和样式
-            $$("[id^=\"Sv-theme-color\"]").forEach(el => el.remove());
-            ["#snippet-SvcolorfulHeading", "#Sv-theme-typewriter-mode", "#savorToolbar"]
-                .forEach(selector => $(selector)?.remove());
-            $$(".layout__center .layout-tab-bar--readonly").forEach(el => el.style.marginRight = "0px");
-            $$(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(el => el.style.marginLeft = "0px");
-            $("#status") && Object.assign($("#status").style, {transform: "", maxWidth: ""});
-            
-            // 清理缓存和菜单
-            [cssCache, domCache].forEach(cache => cache.clear());
-            $("#commonMenu") && toggleMenuListener($("#commonMenu"), false);
-        };
+        // 执行清理函数
+        [tabbarResize.remove, removeBulletThreading, disableTypewriterMode, disableListPreview].forEach(fn => fn?.());
+
+        // 清理属性
+        document.documentElement.removeAttribute('savor-bullet-threading');
+        document.documentElement.removeAttribute('savor-sidebar-memo');
+
+        // 清理侧边栏和事件
+        sidebarMemo?.openSideBar(false);
+        sidebarMemo?.unobserveDragTitle?.();
+        window.theme._collapseHandler && document.body.removeEventListener("mousedown", window.theme._collapseHandler);
+        window.theme._collapseHandler = null;
+
+        // 清理全局变量
+        Object.assign(window, {
+            tabBarsMarginInitialized: false,
+            updateTabBarsMargin: null,
+            updateTabBarsMarginLeft: null
+        });
+        [window.statusObserver, window.topBarPluginMenuObserver].forEach(obs => obs?.disconnect());
+
+        // 清理DOM和样式
+        $$("[id^=\"Sv-theme-color\"], #snippet-SvcolorfulHeading, #Sv-theme-typewriter-mode, #savorToolbar").forEach(el => el.remove());
+        $$(".layout__center .layout-tab-bar--readonly").forEach(el => el.style.marginRight = "0px");
+        $$(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(el => el.style.marginLeft = "0px");
+        $("#status") && Object.assign($("#status").style, { transform: "", maxWidth: "" });
+
+        // 清理缓存
+        domCache.clear();
+        $("#commonMenu") && toggleMenuListener($("#commonMenu"), false);
     };
-
-    updateDestroyTheme();
-
-    // 监听主题变化
-    const destroyThemeObserver = new MutationObserver(mutations => {
-        const mutation = mutations.find(m => m.type === 'attributes' && 
-            ['data-light-theme', 'data-dark-theme'].includes(m.attributeName));
-        
-        if (mutation) {
-            const [light, dark] = [html.getAttribute('data-light-theme'), html.getAttribute('data-dark-theme')];
-            const wasSavor = mutation.oldValue === 'Savor' || 
-                            (mutation.attributeName === 'data-light-theme' && dark === 'Savor') ||
-                            (mutation.attributeName === 'data-dark-theme' && light === 'Savor');
-            
-            if (wasSavor && !(light === 'Savor' && dark === 'Savor')) {
-                window.location.reload();
-                return;
-            }
-            updateDestroyTheme();
-        }
-    });
-
-    destroyThemeObserver.observe(html, {
-        attributes: true,
-        attributeFilter: ["data-light-theme", "data-dark-theme"]
-    });
-
-
     
 
 
@@ -1856,7 +1734,7 @@ if (layoutCenter) {
 
     
     // ========================================
-    // 模块：侧边栏备注功能（精简版）
+    // 模块：侧边栏备注功能
     // ========================================
     const sidebarMemo = (() => {
         let isEnabled = false, observers = {}, editorNode = null;
@@ -1899,15 +1777,13 @@ if (layoutCenter) {
                 while (el && !el.dataset.nodeId) el = el.parentElement;
                 return el;
             },
-            toggleMemoHighlight(main, nodeId, text, highlight) {
+            toggleMemoHighlight(main, nodeId, index, highlight) {
                 const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
-                if (blockEl) {
-                    const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
-                    allMemos.forEach(span => {
-                        if (span.textContent === text) {
-                            span.classList.toggle('memo-span-highlight', highlight);
-                        }
-                    });
+                if (!blockEl) return;
+                const memoSpans = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
+                const target = memoSpans[index];
+                if (target) {
+                    target.classList.toggle('memo-span-highlight', highlight);
                 }
             },
 
@@ -2140,6 +2016,7 @@ if (layoutCenter) {
         function refreshSideBarMemos(main, sidebar) {
             const memos = main.querySelectorAll('span[data-type*="inline-memo"]');
             sidebar.innerHTML = '';
+            const frag = document.createDocumentFragment();
             if (!memos.length) { sidebar.removeAttribute('data-memo-count'); return; }
             const isReadonly = main.getAttribute && main.getAttribute('data-readonly') === 'true';
             const blockMemos = {};
@@ -2173,54 +2050,75 @@ if (layoutCenter) {
                     // 只读样式
                     const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
                     memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.9em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
-                    // 新增：删除按钮
+                    // 新增：删除按钮（按索引定位）
                     const titleDiv = memoDiv.querySelector('.memo-title-with-dot');
                     if (titleDiv && !isReadonly) {
                         const deleteBtn = document.createElement('button');
                         deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconTrashcan"></use></svg>`;
                         deleteBtn.style.cssText = 'position:absolute;top:4px;right:4px;padding:0;background: var(--Sv-dock-item--activefocus-background);border:none;border-radius:6px;cursor:pointer;z-index:2;';
-                        deleteBtn.onclick = (ev) => {
-                            ev.stopPropagation();
-                            memoDiv.remove();
-                            utils.removeMemoConnection(); 
-                            const blockEl = main.querySelector(`div[data-node-id=\"${block.dataset.nodeId}\"]`);
-                            if (blockEl) {
-                                const m = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]')).find(m => m.textContent === text);
-                                if (m) {
-                                    let types = (m.getAttribute("data-type") || "").split(" ").filter(t => t !== "inline-memo");
-                                    if (types.length) {
-                                        m.setAttribute("data-type", types.join(" "));
-                                        m.removeAttribute("data-inline-memo-content");
-                                    } else {
-                                        m.outerHTML = m.innerHTML;
-                                    }
-                                }
-                                fetch('/api/block/updateBlock', {
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` },
-                                    body: JSON.stringify({ dataType: 'html', data: blockEl.outerHTML, id: blockEl.dataset.nodeId })
-                                });
-                            }
-                        };
+                        deleteBtn.setAttribute('data-action', 'delete');
                         titleDiv.appendChild(deleteBtn);
                     }
-                    memoDiv.onmouseenter = e => {
-                        if (!e.target.classList.contains('memo-content-view')) {
-                            utils.toggleMemoHighlight(main, block.dataset.nodeId, text, true);
-                            const memoIndex = Number(memoDiv.getAttribute('data-memo-index')) || 0;
-                            utils.createMemoConnection(main, sidebar, memoDiv, block.dataset.nodeId, text, memoIndex);
-                        }
-                    };
-                    memoDiv.onmouseleave = e => {
-                        utils.toggleMemoHighlight(main, block.dataset.nodeId, text, false);
-                        utils.removeMemoConnection();
-                    };
                     const memoContentDiv = memoDiv.querySelector('.memo-content-view');
                     bindMemoEdit(memoContentDiv, memoDiv, el, main, sidebar);
-                    sidebar.appendChild(memoDiv);
+                    frag.appendChild(memoDiv);
                 });
             });
             sidebar.setAttribute('data-memo-count', `共 ${visibleMemoCount} 个备注`);
+            sidebar.appendChild(frag);
+
+            // 侧栏事件委托：hover 高亮 + 连线、点击删除
+            if (!sidebar._delegated) {
+                sidebar.addEventListener('mouseover', e => {
+                    const item = e.target.closest('.memo-item');
+                    if (!item || !sidebar.contains(item)) return;
+                    const nodeId = item.getAttribute('data-node-id');
+                    const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
+                    if (e.target.classList.contains('memo-content-view')) return;
+                    utils.toggleMemoHighlight(main, nodeId, memoIndex, true);
+                    utils.createMemoConnection(main, sidebar, item, nodeId, '', memoIndex);
+                }, { passive: true });
+                sidebar.addEventListener('mouseout', e => {
+                    const item = e.target.closest('.memo-item');
+                    if (!item || !sidebar.contains(item)) return;
+                    const nodeId = item.getAttribute('data-node-id');
+                    const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
+                    utils.toggleMemoHighlight(main, nodeId, memoIndex, false);
+                    utils.removeMemoConnection();
+                }, { passive: true });
+                sidebar.addEventListener('click', e => {
+                    const btn = e.target.closest('button[data-action="delete"]');
+                    if (!btn) return;
+                    const item = btn.closest('.memo-item');
+                    if (!item) return;
+                    e.stopPropagation();
+                    const nodeId = item.getAttribute('data-node-id');
+                    const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
+                    const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
+                    item.remove();
+                    utils.removeMemoConnection();
+                    if (blockEl) {
+                        const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
+                        const targetSpan = memoSpans[memoIndex];
+                        if (targetSpan) {
+                            let types = (targetSpan.getAttribute("data-type") || "").split(" ").filter(t => t !== "inline-memo");
+                            if (types.length) {
+                                targetSpan.setAttribute("data-type", types.join(" "));
+                                targetSpan.removeAttribute("data-inline-memo-content");
+                            } else {
+                                targetSpan.outerHTML = targetSpan.innerHTML;
+                            }
+                        }
+                        fetch('/api/block/updateBlock', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` },
+                            body: JSON.stringify({ dataType: 'html', data: blockEl.outerHTML, id: blockEl.dataset.nodeId })
+                        });
+                    }
+                });
+                sidebar._delegated = true;
+            }
+
             refreshMemoOffset(main, sidebar);
             const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
             if (protyleContent) {
@@ -2279,9 +2177,16 @@ if (layoutCenter) {
                 // 新增：滚动编辑器时侧边栏自动刷新定位（监听 .protyle-content）
                 const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
                 if (protyleContent && !protyleContent._sidebarMemoScrollBinded) {
-                    protyleContent.addEventListener('scroll', function() {
-                        refreshMemoOffset(main, sidebar);
-                    });
+                    let scheduled = false;
+                    const onScroll = () => {
+                        if (scheduled) return;
+                        scheduled = true;
+                        requestAnimationFrame(() => {
+                            refreshMemoOffset(main, sidebar);
+                            scheduled = false;
+                        });
+                    };
+                    protyleContent.addEventListener('scroll', onScroll, { passive: true });
                     protyleContent._sidebarMemoScrollBinded = true;
                 }
             });
@@ -2324,7 +2229,9 @@ if (layoutCenter) {
         // 初始化
         function init() {
             editorNode = document.querySelector('div.layout__center');
-            openSideBar(config.get('sidebarMemoEnabled') === '1', true);
+            // 检查是否通过属性控制
+            const shouldEnable = document.documentElement.hasAttribute('savor-sidebar-memo');
+            openSideBar(shouldEnable, true);
         }
 
         return {
@@ -2347,6 +2254,47 @@ if (layoutCenter) {
         return false;
     }
 
+
+    // 斜杠菜单左右键导航（内联极简版）
+    if (!window.__slashMenuNavInstalled) {
+        window.__slashMenuNavInstalled = true;
+        // 隐藏分割线，保持行对齐
+        const styleId = 'slash-menu-hide-separator';
+        if (!document.getElementById(styleId)) {
+            const st = document.createElement('style');
+            st.id = styleId;
+            st.textContent = '.hint--menu .b3-menu__separator{display:none!important;}';
+            document.head.appendChild(st);
+        }
+        const getMenu = () => document.querySelector('.hint--menu:not(.fn__none)');
+        const setFocus = (menu, el) => {
+            if (!el) return;
+            const cur = menu.querySelector('.b3-list-item--focus');
+            if (cur) cur.classList.remove('b3-list-item--focus');
+            el.classList.add('b3-list-item--focus');
+        };
+        const move = (dir) => {
+            const menu = getMenu();
+            if (!menu) return false;
+            const items = Array.from(menu.querySelectorAll('.b3-list-item'));
+            if (!items.length) return false;
+            const current = menu.querySelector('.b3-list-item--focus') || items[0];
+            const top = current.offsetTop;
+            const row = items.filter(el => el.offsetTop === top).sort((a,b)=>a.offsetLeft-b.offsetLeft);
+            if (row.length <= 1) return false;
+            let i = row.indexOf(current); if (i < 0) i = 0;
+            const target = dir==='right' ? row[(i+1)%row.length] : row[(i-1+row.length)%row.length];
+            if (target !== current) setFocus(menu, target);
+            return true;
+        };
+        const handler = (e) => {
+            if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+            if (!getMenu()) return;
+            move(e.key==='ArrowRight' ? 'right' : 'left');
+            e.preventDefault();
+            e.stopImmediatePropagation();
+        };
+        window.addEventListener('keydown', handler, true);
+    }
+
 })();
-
-

@@ -1,3 +1,4 @@
+:root[savor-bullet-threading="true"] {  
   [data-type="NodeList"]{
     .en_item_bullet_line:not(.protyle-wysiwyg--select)::after 
     {
@@ -75,3 +76,4 @@
     width: 25px;
     top: calc(var(--en-bullet-line-height) * -1 + 16px);
   }
+}

@@ -160,7 +160,7 @@
             box-shadow: 0 15px 0 0 var(--b3-theme-background), 0 15.5px 0 0 var(--b3-border-color);
         }这个影响太多 暂时不能加*/
         .b3-tab-bar{
-            margin: 5px 0 5px 5px;
+            margin: 5px 0;
             /*background-color: var(--Sv--dialog-tab-bar);*/
             .config__tab-hr{
                 margin: 16px 8px;;

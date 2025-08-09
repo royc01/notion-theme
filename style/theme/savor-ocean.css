@@ -1,4 +1,4 @@
-:root[data-theme-mode="dark"] {
+:root[data-theme-mode="dark"][savor-theme="ocean"] {
     /* 主色 */
 	--b3-theme-primary-base-l:86.08%;
     --b3-theme-primary-base-ch:0.1912 123.83;

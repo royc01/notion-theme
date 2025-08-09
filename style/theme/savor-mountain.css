@@ -1,4 +1,4 @@
-:root[data-theme-mode="dark"] {
+:root[data-theme-mode="dark"][savor-theme="mountain"] {
     /* 主色 */
     --b3-theme-primary-base-l:64.04%;
     --b3-theme-primary-base-ch:0.1865 43.18;

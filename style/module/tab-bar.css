@@ -12,7 +12,7 @@
         border-radius: var(--Sv-tab-bar-item-radius);
         padding: 1px 0 4px 0 ;
         margin-bottom: 5px;
-        overflow: unset !important;
+        overflow: unset !important; 
         &::after{
             content: "";
             bottom: 0;
@@ -22,7 +22,6 @@
             left: calc(-1 * var(--Sv-dock-item-radius) - 2px) ;
             border-radius: 0;
             width: calc(100% + var(--Sv-dock-item-radius)*2 + 4px);
-            transition: var(--b3-transition);
             background-image: var(--Sv-tab-bar-item-after);
             background-size: 12px 12px,12px 12px,calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
             background-position: right bottom, left bottom, center top;
@@ -57,6 +56,7 @@
             background-color: var(--Sv-tab-bar-item-background-focus);
             border-radius: var(--Sv-tab-bar-item--focus-radius);
             box-shadow:unset!important;
+            transition: opacity .2s cubic-bezier(0, 0, .2, 1) 0ms;
                 &::after{
                     background-color:transparent;
                     background-image: var(--Sv-tab-bar-item-focus-after);

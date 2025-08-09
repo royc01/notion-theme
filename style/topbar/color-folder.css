@@ -1,3 +1,4 @@
+html[savor-color-folder="true"] {
 .sy__file .b3-list--background:nth-child(4n-3){
     background-color: var(--Sv-bq-background5) !important;
     box-shadow: 0 0 0 1px var(--b3-font-background5) inset;
@@ -53,4 +54,5 @@
     & .b3-list-item__arrow{
         color:#49adbb;
     }
+}
 }

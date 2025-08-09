@@ -1,18 +1,20 @@
-.protyle-wysiwyg .h1>[spellcheck]:not(:empty)::after { background: var(--h1-r-graphic); }
-.protyle-wysiwyg .h2>[spellcheck]:not(:empty)::after { background: var(--h2-r-graphic); }
-.protyle-wysiwyg .h3>[spellcheck]:not(:empty)::after { background: var(--h3-r-graphic); }
-.protyle-wysiwyg .h4>[spellcheck]:not(:empty)::after { background: var(--h4-r-graphic); }
-.protyle-wysiwyg .h5>[spellcheck]:not(:empty)::after { background: var(--h5-r-graphic); }
-.protyle-wysiwyg .h6>[spellcheck]:not(:empty)::after { background: var(--h6-r-graphic); }
-.protyle-wysiwyg .h1 ,.protyle-wysiwyg .h2,.protyle-wysiwyg .h3,.protyle-wysiwyg .h4,.protyle-wysiwyg .h5,.protyle-wysiwyg .h6{
-	&>[spellcheck]:not(:empty)::after{
-    content: "";
-    position: absolute;
-    float: left;
-    margin-left: 0.2em;
-    margin-top: 0.1em;
-    height: 1.2em;
-    width: 1.2em;
-    background-size: 100% 100%;
-	}
+html[savor-heading-dots="true"] {
+    .protyle-wysiwyg .h1>[spellcheck]:not(:empty)::after { background: var(--h1-r-graphic); }
+    .protyle-wysiwyg .h2>[spellcheck]:not(:empty)::after { background: var(--h2-r-graphic); }
+    .protyle-wysiwyg .h3>[spellcheck]:not(:empty)::after { background: var(--h3-r-graphic); }
+    .protyle-wysiwyg .h4>[spellcheck]:not(:empty)::after { background: var(--h4-r-graphic); }
+    .protyle-wysiwyg .h5>[spellcheck]:not(:empty)::after { background: var(--h5-r-graphic); }
+    .protyle-wysiwyg .h6>[spellcheck]:not(:empty)::after { background: var(--h6-r-graphic); }
+    .protyle-wysiwyg .h1 ,.protyle-wysiwyg .h2,.protyle-wysiwyg .h3,.protyle-wysiwyg .h4,.protyle-wysiwyg .h5,.protyle-wysiwyg .h6{
+        &>[spellcheck]:not(:empty)::after{
+        content: "";
+        position: absolute;
+        float: left;
+        margin-left: 0.2em;
+        margin-top: 0.1em;
+        height: 1.2em;
+        width: 1.2em;
+        background-size: 100% 100%;
+        }
+    }
 }

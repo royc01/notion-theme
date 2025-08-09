@@ -1,4 +1,4 @@
-:root[data-theme-mode="light"] {
+:root[data-theme-mode="light"][savor-theme="forest"] {
     /* 主色 */
     --b3-theme-primary-base-l:74.85%;
     --b3-theme-primary-base-ch:0.0828 303.23;
