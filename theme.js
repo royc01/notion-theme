@@ -2072,15 +2072,18 @@ if (layoutCenter) {
                 sidebar.addEventListener('mouseover', e => {
                     const item = e.target.closest('.memo-item');
                     if (!item || !sidebar.contains(item)) return;
+                    const rt = e.relatedTarget;
+                    if (rt && item.contains(rt)) return; // 仍在同一 memo-item 内部移动时不重新触发
                     const nodeId = item.getAttribute('data-node-id');
                     const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
-                    if (e.target.classList.contains('memo-content-view')) return;
                     utils.toggleMemoHighlight(main, nodeId, memoIndex, true);
                     utils.createMemoConnection(main, sidebar, item, nodeId, '', memoIndex);
                 }, { passive: true });
                 sidebar.addEventListener('mouseout', e => {
                     const item = e.target.closest('.memo-item');
                     if (!item || !sidebar.contains(item)) return;
+                    const rt = e.relatedTarget;
+                    if (rt && item.contains(rt)) return; // 仍在同一 memo-item 内部移动时不移除
                     const nodeId = item.getAttribute('data-node-id');
                     const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
                     utils.toggleMemoHighlight(main, nodeId, memoIndex, false);
@@ -2220,6 +2223,11 @@ if (layoutCenter) {
                 observers = {};
                 editorNode?.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
                     main.parentElement.querySelector('#protyle-sidebar')?.remove();
+                    // 清除 Sv-memo 类
+                    const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
+                    if (protyleContent) {
+                        protyleContent.classList.remove('Sv-memo');
+                    }
                 });
                 unobserveDragTitle();
             }
