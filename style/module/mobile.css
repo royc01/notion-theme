@@ -70,3 +70,11 @@ body{
 .protyle-breadcrumb{
     padding: 6px;
 }
+
+.protyle-wysiwyg [data-node-id].sb[data-sb-layout=col] .sb {
+    flex: unset !important;
+    width: unset !important;
+}
+.sb-resize-handle{
+    display: none;
+}

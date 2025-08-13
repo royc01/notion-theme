@@ -2425,6 +2425,58 @@ if (layoutCenter) {
             return v.map(x => effMin + (x - effMin) * factor);
         }
 
+        async function handleColumnCountChange(sb, cols, previousCount) {
+            if (cols.length < 2) return;
+            
+            const saved = cols.map(readSavedWidth);
+            const hasSavedWidths = saved.some(v => isFinite(v));
+            
+            if (hasSavedWidths) {
+                // 如果有保存的宽度，需要重新分配
+                const newPercents = normalizePercents(saved, MIN_PERCENT, 100);
+                cols.forEach((col, i) => {
+                    setColumnSize(sb, col, newPercents[i]);
+                });
+            } else {
+                // 如果没有保存的宽度，根据列数变化智能分配
+                let targetPercents;
+                
+                if (cols.length < previousCount) {
+                    // 列数减少：让剩余列占用更多空间
+                    // 根据减少的比例适当增加每列的宽度
+                    const reductionRatio = previousCount / cols.length;
+                    const basePercent = 100 / cols.length;
+                    const bonusPercent = Math.min(basePercent * 0.3, 10); // 最多增加30%或10%
+                    targetPercents = cols.map(() => basePercent + bonusPercent);
+                } else {
+                    // 列数增加：平均分配
+                    targetPercents = cols.map(() => 100 / cols.length);
+                }
+                
+                // 确保总宽度为100%
+                const totalPercent = targetPercents.reduce((sum, p) => sum + p, 0);
+                if (totalPercent !== 100) {
+                    const factor = 100 / totalPercent;
+                    targetPercents = targetPercents.map(p => p * factor);
+                }
+                
+                cols.forEach((col, i) => {
+                    setColumnSize(sb, col, targetPercents[i]);
+                });
+            }
+            
+            // 保存新的宽度设置
+            try {
+                const host = cols[0]?.parentElement || sb;
+                const gap = getColumnGapPx(host);
+                const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
+                const percents = measurePercents(sb, cols);
+                await Promise.all(
+                    cols.map((c, i) => saveWidth(c, Math.round(percents[i] * 10) / 10, gapShare))
+                );
+            } catch (_) {}
+        }
+
         async function saveWidth(el, pct, gapSharePx) {
             const id = el?.dataset?.nodeId; if (!id) return;
             try {
@@ -2575,6 +2627,8 @@ if (layoutCenter) {
             if (!sb || sb._sbResizerInit || !isColLayout(sb)) return;
             sb._sbResizerInit = true;
             sb.classList.add(SB_CLASS);
+            const cols = getColumns(sb);
+            sb._lastColsCount = cols.length;
             applySaved(sb);
             positionHandles(sb);
             let lastW = 0;
@@ -2595,6 +2649,16 @@ if (layoutCenter) {
                 if (!sb._sbResizerInit) {
                     initSuperBlock(sb);
                 } else {
+                    const cols = getColumns(sb);
+                    const existingCols = sb._lastColsCount || 0;
+                    
+                    // 检测列数是否发生变化（增加或减少）
+                    if (cols.length !== existingCols) {
+                        // 列数发生变化，需要重新分配宽度
+                        handleColumnCountChange(sb, cols, existingCols);
+                        sb._lastColsCount = cols.length;
+                    }
+                    
                     if (!sb.querySelector(':scope > .' + HANDLE_CLASS)) {
                         try { applySaved(sb); } catch (_) {}
                         positionHandles(sb);
