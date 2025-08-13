@@ -243,10 +243,10 @@
     background-color: var(--Sv-theme-surface);
 }
 
-/* 超级块 */
+/* 超级块 
 .protyle-wysiwyg [data-node-id].sb[data-sb-layout=col]{
     column-gap: 8px;
-}
+}*/
 /* 行内键盘 */
 .b3-typography kbd, .b3-typography span[data-type~=kbd], .protyle-wysiwyg kbd, .protyle-wysiwyg span[data-type~=kbd]{
     border:none;

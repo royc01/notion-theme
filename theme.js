@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
 
     // ========================================
     // 模块：工具函数
@@ -1723,6 +1723,14 @@ if (layoutCenter) {
         // 清理缓存
         domCache.clear();
         $("#commonMenu") && toggleMenuListener($("#commonMenu"), false);
+        // SuperBlock Resizer cleanup
+        try { superBlockResizer?.stop?.(); } catch (e) {}
+        try {
+            document.getElementById('sb-resizer-styles')?.remove();
+            document.body.classList.remove('sb-resizing');
+            document.querySelectorAll('.sb-resize-handle').forEach(el => el.remove());
+            document.querySelectorAll('.sb-resize-container').forEach(el => el.classList.remove('sb-resize-container'));
+        } catch (_) {}
     };
     
 
@@ -2305,4 +2313,335 @@ if (layoutCenter) {
         window.addEventListener('keydown', handler, true);
     }
 
+
+
+    
+    // ========================================
+    // 模块：超级块宽度调节
+    // ========================================
+    const superBlockResizer = (() => {
+        const HANDLE_CLASS = 'sb-resize-handle';
+        const SB_CLASS = 'sb-resize-container';
+        const MIN_PERCENT = 5;
+
+        let bodyObserver = null;
+        let resizeObservers = new WeakMap();
+        let scanScheduled = false;
+
+        function ensureStyles() {
+            const id = 'sb-resizer-styles';
+            if (document.getElementById(id)) return;
+            const st = document.createElement('style');
+            st.id = id;
+            st.textContent = `
+            .${SB_CLASS}{position:relative;}
+            .${HANDLE_CLASS}{position:absolute;top:0;bottom:0;width:20px;margin-left:-6px;cursor:col-resize;z-index:1;background:transparent;opacity:0;pointer-events:auto;}
+            .${HANDLE_CLASS}::after{content:'';position:absolute;top:8px;bottom:8px;left:3px;width:5px;border-radius:3px;background:var(--b3-border-color);opacity:0.5;}
+            .sb-resizing *{user-select:none!important;}
+            .${HANDLE_CLASS}{transition: opacity 0.3s ease;}
+            .${HANDLE_CLASS}:hover{opacity: 1;}
+            `;
+            document.head.appendChild(st);
+        }
+
+        const isColLayout = (sb) => sb?.getAttribute?.('data-sb-layout') === 'col';
+
+        function getColumns(sb) {
+            if (!isColLayout(sb)) return [];
+            let cols = Array.from(sb.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
+            if (cols.length < 2) {
+                const wrapper = sb.firstElementChild;
+                if (wrapper) {
+                    const nested = Array.from(wrapper.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
+                    if (nested.length >= 2) cols = nested;
+                }
+            }
+            return cols;
+        }
+
+        function readSavedWidth(el) {
+            const ds = parseFloat(el?.dataset?.sbPct || '');
+            if (isFinite(ds)) return ds;
+            const styleText = el?.getAttribute?.('style') || '';
+            if (!styleText) return NaN;
+            const mCalc = styleText.match(/width\s*:\s*calc\(([-\d.]+)%\s*-\s*([-\d.]+)px\)/i);
+            if (mCalc && isFinite(parseFloat(mCalc[1]))) return parseFloat(mCalc[1]);
+            const mPct = styleText.match(/width\s*:\s*([-\d.]+)%/i);
+            if (mPct && isFinite(parseFloat(mPct[1]))) return parseFloat(mPct[1]);
+            return NaN;
+        }
+
+        function getColumnGapPx(host) {
+            try {
+                const cs = getComputedStyle(host);
+                let g = parseFloat(cs.columnGap);
+                if (!isFinite(g)) {
+                    const gap = cs.gap || '';
+                    if (gap) {
+                        const parts = gap.split(' ');
+                        const colGapStr = parts.length === 1 ? parts[0] : parts[1];
+                        g = parseFloat(colGapStr);
+                    }
+                }
+                return isFinite(g) ? g : 0;
+            } catch (_) { return 0; }
+        }
+
+        function setColumnSize(sb, col, percent) {
+            const v = Math.max(0, isFinite(percent) ? percent : 0);
+            const vRound = Math.round(v * 10) / 10;
+            const host = col?.parentElement || sb;
+            const colsCount = getColumns(sb).length || 1;
+            const gap = getColumnGapPx(host);
+            const gapShare = colsCount > 0 ? (gap * (colsCount - 1)) / colsCount : 0;
+            const adjustShare = gapShare + 1;
+            const calc = `calc(${vRound}% - ${Math.round(adjustShare * 10) / 10}px)`;
+            col.style.flex = '0 0 auto';
+            col.style.width = calc;
+            col.style.flexBasis = calc;
+            col.dataset.sbPct = String(vRound);
+        }
+
+        function measurePercents(sb, cols) {
+            const host = cols[0]?.parentElement || sb;
+            const w = host.getBoundingClientRect().width || 1;
+            const colsCount = cols.length || 1;
+            const gap = getColumnGapPx(host);
+            const gapShare = colsCount > 0 ? (gap * (colsCount - 1)) / colsCount : 0;
+            return cols.map(col => ((col.getBoundingClientRect().width + gapShare) / w) * 100);
+        }
+
+        function normalizePercents(values, minPercent = MIN_PERCENT, total = 100) {
+            const n = values.length; if (!n) return [];
+            const effMin = Math.min(minPercent, total / n);
+            let v = values.map(x => Math.max(0, isFinite(x) ? x : 0));
+            v = v.map(x => Math.max(effMin, x));
+            const sum = v.reduce((a,b) => a + b, 0);
+            const base = effMin * n;
+            const varSum = Math.max(0, sum - base);
+            const targetVar = Math.max(0, total - base);
+            if (varSum === 0) return v.map(() => effMin);
+            const factor = targetVar / varSum;
+            return v.map(x => effMin + (x - effMin) * factor);
+        }
+
+        async function saveWidth(el, pct, gapSharePx) {
+            const id = el?.dataset?.nodeId; if (!id) return;
+            try {
+                const vRound = Math.round(pct * 10) / 10;
+                const gapRound = Math.round(((gapSharePx || 0) + 1) * 10) / 10;
+                const calcVal = `calc(${vRound}% - ${gapRound}px)`;
+                el.style.flex = '0 0 auto';
+                el.style.width = calcVal;
+                el.style.flexBasis = calcVal;
+                const newStyle = el.getAttribute('style') || el.style.cssText || '';
+                await 设置思源块属性(id, { 'style': newStyle });
+            } catch (_) {}
+        }
+
+        		async function clearWidth(el) {
+			const id = el?.dataset?.nodeId; if (!id) return;
+			try {
+				el.style.removeProperty('width');
+				el.style.removeProperty('flex-basis');
+				el.style.removeProperty('flex');
+				delete el.dataset.sbPct;
+				const newStyle = el.getAttribute('style') || el.style.cssText || '';
+				if (!newStyle) el.removeAttribute('style');
+				await 设置思源块属性(id, { 'style': newStyle });
+			} catch (_) {}
+		}
+
+        function removeHandles(sb) { sb.querySelectorAll(':scope > .' + HANDLE_CLASS).forEach(h => h.remove()); }
+
+        function positionHandles(sb) {
+            const cols = getColumns(sb);
+            if (cols.length < 2) { removeHandles(sb); return; }
+            const rect = sb.getBoundingClientRect();
+            const need = cols.length - 1;
+            const existing = sb.querySelectorAll(':scope > .' + HANDLE_CLASS);
+            if (existing.length === need) {
+                for (let i = 0; i < need; i++) {
+                    const leftRect = cols[i].getBoundingClientRect();
+                    const rightRect = cols[i + 1].getBoundingClientRect();
+                    const centerX = ((leftRect.right + rightRect.left) / 2) - rect.left;
+                    existing[i].style.left = centerX + 'px';
+                }
+            } else {
+                removeHandles(sb);
+                for (let i = 0; i < need; i++) {
+                    const leftRect = cols[i].getBoundingClientRect();
+                    const rightRect = cols[i + 1].getBoundingClientRect();
+                    const centerX = ((leftRect.right + rightRect.left) / 2) - rect.left;
+                    const handle = document.createElement('div');
+                    handle.className = HANDLE_CLASS;
+                    handle.style.left = centerX + 'px';
+                    attachDrag(sb, handle, cols[i], cols[i + 1]);
+                    sb.appendChild(handle);
+                }
+            }
+        }
+
+        function attachDrag(sb, handle, leftEl, rightEl) {
+            let startX = 0, containerWidth = 0, startLeftPct = 0, startRightPct = 0, moved = false;
+            let colsAll = [];
+
+            const onPointerDown = (e) => {
+                if (e.pointerType === 'mouse' && e.button !== 0) return;
+                e.preventDefault();
+                const rect = sb.getBoundingClientRect();
+                containerWidth = rect.width || 1;
+                startX = e.clientX;
+                colsAll = getColumns(sb);
+                const saved = colsAll.map(readSavedWidth);
+                const measured = measurePercents(sb, colsAll);
+                const baseline = normalizePercents(saved.some(v => isFinite(v)) ? saved : measured, MIN_PERCENT, 100);
+                const li = colsAll.indexOf(leftEl), ri = colsAll.indexOf(rightEl);
+                startLeftPct = baseline[li] ?? 50;
+                startRightPct = baseline[ri] ?? 50;
+                moved = false;
+                sb.classList.add('sb-resizing');
+                getColumns(sb).forEach(c => c.style.transition = 'none');
+                handle.setPointerCapture?.(e.pointerId);
+                window.addEventListener('pointermove', onPointerMove);
+                window.addEventListener('pointerup', onPointerUp, { once: true });
+            };
+
+            const onPointerMove = throttle((e) => {
+                const dx = e.clientX - startX;
+                const dxPct = (dx / (containerWidth || 1)) * 100;
+                if (Math.abs(dx) < 1) return;
+                moved = true;
+                const pairBudget = (startLeftPct + startRightPct);
+                const min = Math.min(MIN_PERCENT, pairBudget / 2);
+                let newLeft = Math.min(Math.max(min, startLeftPct + dxPct), pairBudget - min);
+                const newRight = pairBudget - newLeft;
+                const cols = getColumns(sb);
+                const li = cols.indexOf(leftEl), ri = cols.indexOf(rightEl);
+                if (li >= 0) setColumnSize(sb, cols[li], newLeft);
+                if (ri >= 0) setColumnSize(sb, cols[ri], newRight);
+                positionHandles(sb);
+            }, 16);
+
+            const onPointerUp = async () => {
+                window.removeEventListener('pointermove', onPointerMove);
+                sb.classList.remove('sb-resizing');
+                const cols = getColumns(sb);
+                if (!moved) {
+                    cols.forEach(c => c.style.removeProperty('transition'));
+                    positionHandles(sb);
+                    return;
+                }
+                // 计算并应用所有列的当前宽度，确保未拖动列也写入 style
+                const percents = measurePercents(sb, cols);
+                cols.forEach((c, i) => setColumnSize(sb, c, percents[i]));
+                cols.forEach(c => c.style.removeProperty('transition'));
+                try {
+                    const host = cols[0]?.parentElement || sb;
+                    const gap = getColumnGapPx(host);
+                    const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
+                    await Promise.all(
+                        cols.map((c, i) => saveWidth(c, Math.round(percents[i] * 10) / 10, gapShare))
+                    );
+                } catch (_) {}
+                positionHandles(sb);
+            };
+
+            handle.addEventListener('pointerdown', onPointerDown, { capture: true });
+            const onDoubleClick = async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const cols = getColumns(sb);
+                if (cols.length < 2) return;
+                cols.forEach(c => c.style.removeProperty('transition'));
+                try { await Promise.all(cols.map(c => clearWidth(c))); } catch (_) {}
+                positionHandles(sb);
+            };
+            handle.addEventListener('dblclick', onDoubleClick, { capture: true });
+        }
+
+        async function applySaved(sb) {
+            const cols = getColumns(sb); if (cols.length < 2) return;
+            const saved = cols.map(readSavedWidth);
+            if (saved.some(v => isFinite(v))) {
+                cols.forEach((c, i) => {
+                    if (isFinite(saved[i])) setColumnSize(sb, c, saved[i]);
+                });
+            }
+            positionHandles(sb);
+        }
+
+        function initSuperBlock(sb) {
+            if (!sb || sb._sbResizerInit || !isColLayout(sb)) return;
+            sb._sbResizerInit = true;
+            sb.classList.add(SB_CLASS);
+            applySaved(sb);
+            positionHandles(sb);
+            let lastW = 0;
+            const ro = new ResizeObserver(throttle(() => {
+                if (sb.classList.contains('sb-resizing')) return;
+                const w = sb.getBoundingClientRect().width;
+                if (Math.abs(w - lastW) < 0.5) return;
+                lastW = w;
+                positionHandles(sb);
+            }, 120));
+            ro.observe(sb);
+            resizeObservers.set(sb, ro);
+        }
+
+        function scan() {
+            scanScheduled = false;
+            document.querySelectorAll('.protyle-wysiwyg [data-type="NodeSuperBlock"][data-sb-layout="col"]').forEach(sb => {
+                if (!sb._sbResizerInit) {
+                    initSuperBlock(sb);
+                } else {
+                    if (!sb.querySelector(':scope > .' + HANDLE_CLASS)) {
+                        try { applySaved(sb); } catch (_) {}
+                        positionHandles(sb);
+                    } else {
+                        positionHandles(sb);
+                    }
+                }
+            });
+        }
+
+        function scheduleScan() {
+            if (scanScheduled) return;
+            scanScheduled = true;
+            requestAnimationFrame(scan);
+        }
+
+        function start() {
+            ensureStyles();
+            scan();
+            if (!bodyObserver) {
+                bodyObserver = new MutationObserver(mutations => {
+                    for (const x of mutations) {
+                        if (x.type === 'childList') { scheduleScan(); break; }
+                        if (x.type === 'attributes' && x.target?.matches?.('[data-type="NodeSuperBlock"]')) { scheduleScan(); break; }
+                    }
+                });
+                bodyObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-type', 'data-sb-layout'] });
+            }
+            window.addEventListener('themechange', scheduleScan, { passive: true });
+            window.siyuan?.eventBus?.on('loaded-protyle', () => setTimeout(scheduleScan, 50));
+        }
+
+        function stop() {
+            try { window.siyuan?.eventBus?.off('loaded-protyle', scan); } catch (_) {}
+            bodyObserver?.disconnect(); bodyObserver = null;
+            window.removeEventListener('themechange', scheduleScan);
+            document.querySelectorAll('.' + SB_CLASS).forEach(sb => sb.classList.remove(SB_CLASS));
+            document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
+            for (const [, ro] of resizeObservers.entries()) ro.disconnect();
+            resizeObservers = new WeakMap();
+            scanScheduled = false;
+        }
+
+        return { start, stop, refresh: scan };
+    })();
+
+    setTimeout(() => { try { superBlockResizer.start(); } catch (e) { console.error('[Savor] 超级块调整启动失败:', e); } }, 800);
+
 })();
+
