@@ -71,7 +71,7 @@ body{
     padding: 6px;
 }
 
-.protyle-wysiwyg [data-node-id].sb[data-sb-layout=col] .sb {
+.protyle-wysiwyg [data-node-id].sb[data-sb-layout=col]>[data-node-id]{
     flex: unset !important;
     width: unset !important;
 }
