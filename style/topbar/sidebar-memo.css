@@ -38,12 +38,18 @@ body:not(.body--mobile){
     }
 
     .memo-title-with-dot {
-        display: flex;
-        align-items: flex-start;
-        color:var(--b3-theme-on-surface);
+        display: -webkit-box;
+        color: var(--b3-theme-on-surface);
         word-wrap: break-word;
         word-break: break-word;
         overflow-wrap: break-word;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        line-height: 1.2em;
+        max-height: 2.4em;
     }
 
     .memo-title-dot {
@@ -84,4 +90,6 @@ body:not(.body--mobile){
 .memo-content-view{
     word-wrap: break-word;
     white-space: break-spaces;
+    max-height: 282px;
+    overflow-y: auto;
 }

@@ -1934,7 +1934,7 @@ if (layoutCenter) {
                 input.contentEditable = 'true';
                 input.innerHTML = old.replace(/\n/g, '<br>');
                 input.setAttribute('placeholder', '输入备注内容...');
-                input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.9em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;';
+                input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.8em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;overflow-y:hidden;';
                 input.addEventListener('input', () => utils.autoResizeDiv(input));
                 utils.autoResizeDiv(input);
                 div.replaceWith(input);
@@ -2057,7 +2057,7 @@ if (layoutCenter) {
                     }
                     // 只读样式
                     const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
-                    memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:1em;display:flex;align-items:center;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.9em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
+                    memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:0.9em;display:flex;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.8em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
                     // 新增：删除按钮（按索引定位）
                     const titleDiv = memoDiv.querySelector('.memo-title-with-dot');
                     if (titleDiv && !isReadonly) {
@@ -2322,7 +2322,7 @@ if (layoutCenter) {
     const superBlockResizer = (() => {
         const HANDLE_CLASS = 'sb-resize-handle';
         const SB_CLASS = 'sb-resize-container';
-        const MIN_PERCENT = 5;
+        const MIN_PERCENT = 10;
 
         let bodyObserver = null;
         let resizeObservers = new WeakMap();
@@ -2340,11 +2340,35 @@ if (layoutCenter) {
             .sb-resizing *{user-select:none!important;}
             .${HANDLE_CLASS}{transition: opacity 0.3s ease;}
             .${HANDLE_CLASS}:hover{opacity: 1;}
+            .sb-percentage{position:absolute;top:7px;right:5px;background:var(--Sv-theme-surface);color:var(--b3-theme-on-background);padding:2px 6px;border-radius:6px;font-size:12px;pointer-events:none;z-index:2;}
             `;
             document.head.appendChild(st);
         }
 
         const isColLayout = (sb) => sb?.getAttribute?.('data-sb-layout') === 'col';
+
+        // 显示列百分比
+        function showColumnPercentages(sb, cols) {
+            cols.forEach(col => {
+                // 避免重复创建
+                if (col.querySelector('.sb-percentage')) return;
+                const percentEl = document.createElement('div');
+                percentEl.className = 'sb-percentage';
+                col.appendChild(percentEl);
+            });
+            updateColumnPercentages(sb, cols);
+        }
+
+        // 更新列百分比显示
+        function updateColumnPercentages(sb, cols) {
+            const percents = measurePercents(sb, cols);
+            cols.forEach((col, i) => {
+                const percentEl = col.querySelector('.sb-percentage');
+                if (percentEl) {
+                    percentEl.textContent = `${Math.round(percents[i])}%`;
+                }
+            });
+        }
 
         function getColumns(sb) {
             if (!isColLayout(sb)) return [];
@@ -2389,13 +2413,12 @@ if (layoutCenter) {
 
         function setColumnSize(sb, col, percent) {
             const v = Math.max(0, isFinite(percent) ? percent : 0);
-            const vRound = Math.round(v * 10) / 10;
+            const vRound = Math.round(v * 1000) / 1000; // 保留三位小数
             const host = col?.parentElement || sb;
             const colsCount = getColumns(sb).length || 1;
             const gap = getColumnGapPx(host);
             const gapShare = colsCount > 0 ? (gap * (colsCount - 1)) / colsCount : 0;
-            const adjustShare = gapShare + 1;
-            const calc = `calc(${vRound}% - ${Math.round(adjustShare * 10) / 10}px)`;
+            const calc = `calc(${vRound}% - ${Math.round(gapShare * 10) / 10}px)`;
             col.style.flex = '0 0 auto';
             col.style.width = calc;
             col.style.flexBasis = calc;
@@ -2472,7 +2495,7 @@ if (layoutCenter) {
                 const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
                 const percents = measurePercents(sb, cols);
                 await Promise.all(
-                    cols.map((c, i) => saveWidth(c, Math.round(percents[i] * 10) / 10, gapShare))
+                    cols.map((c, i) => saveWidth(c, Math.round(percents[i] * 1000) / 1000, gapShare))
                 );
             } catch (_) {}
         }
@@ -2480,8 +2503,8 @@ if (layoutCenter) {
         async function saveWidth(el, pct, gapSharePx) {
             const id = el?.dataset?.nodeId; if (!id) return;
             try {
-                const vRound = Math.round(pct * 10) / 10;
-                const gapRound = Math.round(((gapSharePx || 0) + 1) * 10) / 10;
+                const vRound = Math.round(pct * 1000) / 1000; // 保留三位小数
+                const gapRound = Math.round((gapSharePx || 0) * 10) / 10;
                 const calcVal = `calc(${vRound}% - ${gapRound}px)`;
                 el.style.flex = '0 0 auto';
                 el.style.width = calcVal;
@@ -2553,7 +2576,10 @@ if (layoutCenter) {
                 startRightPct = baseline[ri] ?? 50;
                 moved = false;
                 sb.classList.add('sb-resizing');
-                getColumns(sb).forEach(c => c.style.transition = 'none');
+                const cols = getColumns(sb);
+                cols.forEach(c => c.style.transition = 'none');
+                // 显示列百分比
+                showColumnPercentages(sb, cols);
                 handle.setPointerCapture?.(e.pointerId);
                 window.addEventListener('pointermove', onPointerMove);
                 window.addEventListener('pointerup', onPointerUp, { once: true });
@@ -2572,6 +2598,8 @@ if (layoutCenter) {
                 const li = cols.indexOf(leftEl), ri = cols.indexOf(rightEl);
                 if (li >= 0) setColumnSize(sb, cols[li], newLeft);
                 if (ri >= 0) setColumnSize(sb, cols[ri], newRight);
+                // 更新百分比显示
+                updateColumnPercentages(sb, cols);
                 positionHandles(sb);
             }, 16);
 
@@ -2579,21 +2607,24 @@ if (layoutCenter) {
                 window.removeEventListener('pointermove', onPointerMove);
                 sb.classList.remove('sb-resizing');
                 const cols = getColumns(sb);
+                // 移除百分比显示
+                sb.querySelectorAll('.sb-percentage').forEach(el => el.remove());
                 if (!moved) {
                     cols.forEach(c => c.style.removeProperty('transition'));
                     positionHandles(sb);
                     return;
                 }
-                // 计算并应用所有列的当前宽度，确保未拖动列也写入 style
-                const percents = measurePercents(sb, cols);
-                cols.forEach((c, i) => setColumnSize(sb, c, percents[i]));
+                // 只保存被拖动的两列的宽度
                 cols.forEach(c => c.style.removeProperty('transition'));
                 try {
                     const host = cols[0]?.parentElement || sb;
                     const gap = getColumnGapPx(host);
                     const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
+                    // 保存所有列的宽度，确保总宽度为100%
+                    const percents = measurePercents(sb, cols);
+                    const normalized = normalizePercents(percents);
                     await Promise.all(
-                        cols.map((c, i) => saveWidth(c, Math.round(percents[i] * 10) / 10, gapShare))
+                        cols.map((c, i) => saveWidth(c, Math.round(normalized[i] * 1000) / 1000, gapShare))
                     );
                 } catch (_) {}
                 positionHandles(sb);
