@@ -1253,8 +1253,25 @@ if (layoutCenter) {
         }
     }
 
+    // 添加API请求限流和重试机制
+    const apiRequestQueue = new Map();
+    const apiRequestDelay = 100; // 请求间隔100ms
+    
     const 设置思源块属性 = async (id, attrs) => {
+        const key = `${id}-${JSON.stringify(attrs)}`;
+        
+        // 如果相同请求正在处理中，跳过
+        if (apiRequestQueue.has(key)) {
+            return;
+        }
+        
+        // 添加到队列
+        apiRequestQueue.set(key, true);
+        
         try {
+            // 延迟执行，避免频繁请求
+            await new Promise(resolve => setTimeout(resolve, apiRequestDelay));
+            
             const response = await fetch("/api/attr/setBlockAttrs", {
                 method: "POST",
                 headers: {
@@ -1268,10 +1285,22 @@ if (layoutCenter) {
             });
             
             if (!response.ok) {
-                console.error("[Savor] 设置块属性失败:", response.statusText);
+                console.warn("[Savor] 设置块属性失败:", response.statusText);
+                // 失败时延迟重试
+                setTimeout(() => {
+                    apiRequestQueue.delete(key);
+                }, 1000);
+                return;
             }
+            
+            // 成功时从队列移除
+            apiRequestQueue.delete(key);
         } catch (error) {
-            console.error("[Savor] 设置块属性出错:", error);
+            console.warn("[Savor] 设置块属性出错:", error);
+            // 错误时延迟重试
+            setTimeout(() => {
+                apiRequestQueue.delete(key);
+            }, 1000);
         }
     }
 
@@ -1724,7 +1753,10 @@ if (layoutCenter) {
         domCache.clear();
         $("#commonMenu") && toggleMenuListener($("#commonMenu"), false);
         // SuperBlock Resizer cleanup
-        try { superBlockResizer?.stop?.(); } catch (e) {}
+        try { 
+            superBlockResizer?.stop?.(); 
+            superBlockResizer?.cleanup?.(); 
+        } catch (e) {}
         try {
             document.getElementById('sb-resizer-styles')?.remove();
             document.body.classList.remove('sb-resizing');
@@ -2326,216 +2358,260 @@ if (layoutCenter) {
 
         let bodyObserver = null;
         let resizeObservers = new WeakMap();
-        let scanScheduled = false;
 
+        // 样式注入
         function ensureStyles() {
-            const id = 'sb-resizer-styles';
-            if (document.getElementById(id)) return;
+            if (document.getElementById('sb-resizer-styles')) return;
             const st = document.createElement('style');
-            st.id = id;
+            st.id = 'sb-resizer-styles';
             st.textContent = `
             .${SB_CLASS}{position:relative;}
-            .${HANDLE_CLASS}{position:absolute;top:0;bottom:0;width:20px;margin-left:-6px;cursor:col-resize;z-index:1;background:transparent;opacity:0;pointer-events:auto;}
+            .${HANDLE_CLASS}{position:absolute;top:0;bottom:0;width:20px;margin-left:-6px;cursor:col-resize;z-index:1;background:transparent;opacity:0;pointer-events:auto;transition:opacity 0.3s ease;}
             .${HANDLE_CLASS}::after{content:'';position:absolute;top:8px;bottom:8px;left:3px;width:5px;border-radius:3px;background:var(--b3-border-color);opacity:0.5;}
             .sb-resizing *{user-select:none!important;}
-            .${HANDLE_CLASS}{transition: opacity 0.3s ease;}
             .${HANDLE_CLASS}:hover{opacity: 1;}
-            .sb-percentage{position:absolute;top:7px;right:5px;background:var(--Sv-theme-surface);color:var(--b3-theme-on-background);padding:2px 6px;border-radius:6px;font-size:12px;pointer-events:none;z-index:2;}
+            .sb-percentage{position:absolute;top:7px;right:5px;background:var(--Sv-theme-surface);color:var(--b3-theme-on-background);padding:2px 6px;border-radius:6px;font-size:12px;pointer-events:none;z-index:2;opacity:0;transition:opacity 0.3s ease;}
+            .sb-resizing .sb-percentage{opacity:1;}
             `;
             document.head.appendChild(st);
         }
 
-        const isColLayout = (sb) => sb?.getAttribute?.('data-sb-layout') === 'col';
-
-        // 显示列百分比
-        function showColumnPercentages(sb, cols) {
-            cols.forEach(col => {
-                // 避免重复创建
-                if (col.querySelector('.sb-percentage')) return;
-                const percentEl = document.createElement('div');
-                percentEl.className = 'sb-percentage';
-                col.appendChild(percentEl);
-            });
-            updateColumnPercentages(sb, cols);
-        }
-
-        // 更新列百分比显示
-        function updateColumnPercentages(sb, cols) {
-            const percents = measurePercents(sb, cols);
-            cols.forEach((col, i) => {
-                const percentEl = col.querySelector('.sb-percentage');
-                if (percentEl) {
-                    percentEl.textContent = `${Math.round(percents[i])}%`;
-                }
-            });
-        }
-
-        function getColumns(sb) {
+        // 核心工具函数 - 修复this指向问题
+        const isColLayout = sb => sb?.getAttribute?.('data-sb-layout') === 'col';
+        
+        const getColumns = sb => {
             if (!isColLayout(sb)) return [];
             let cols = Array.from(sb.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
-            if (cols.length < 2) {
-                const wrapper = sb.firstElementChild;
-                if (wrapper) {
-                    const nested = Array.from(wrapper.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
-                    if (nested.length >= 2) cols = nested;
-                }
+            if (cols.length < 2 && sb.firstElementChild) {
+                const nested = Array.from(sb.firstElementChild.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
+                if (nested.length >= 2) cols = nested;
             }
             return cols;
-        }
-
-        function readSavedWidth(el) {
-            const ds = parseFloat(el?.dataset?.sbPct || '');
-            if (isFinite(ds)) return ds;
-            const styleText = el?.getAttribute?.('style') || '';
-            if (!styleText) return NaN;
-            const mCalc = styleText.match(/width\s*:\s*calc\(([-\d.]+)%\s*-\s*([-\d.]+)px\)/i);
-            if (mCalc && isFinite(parseFloat(mCalc[1]))) return parseFloat(mCalc[1]);
-            const mPct = styleText.match(/width\s*:\s*([-\d.]+)%/i);
-            if (mPct && isFinite(parseFloat(mPct[1]))) return parseFloat(mPct[1]);
-            return NaN;
-        }
-
-        function getColumnGapPx(host) {
+        };
+        
+        const getGap = host => {
             try {
                 const cs = getComputedStyle(host);
                 let g = parseFloat(cs.columnGap);
-                if (!isFinite(g)) {
-                    const gap = cs.gap || '';
-                    if (gap) {
-                        const parts = gap.split(' ');
-                        const colGapStr = parts.length === 1 ? parts[0] : parts[1];
-                        g = parseFloat(colGapStr);
-                    }
+                if (!isFinite(g) && cs.gap) {
+                    const parts = cs.gap.split(' ');
+                    g = parseFloat(parts.length === 1 ? parts[0] : parts[1]);
                 }
                 return isFinite(g) ? g : 0;
             } catch (_) { return 0; }
-        }
-
-        function setColumnSize(sb, col, percent) {
+        };
+        
+        // 宽度操作
+        const readWidth = el => {
+            const ds = parseFloat(el?.dataset?.sbPct || '');
+            if (isFinite(ds)) return ds;
+            const style = el?.getAttribute?.('style') || '';
+            const mCalc = style.match(/width\s*:\s*calc\(([-\d.]+)%\s*-\s*([-\d.]+)px\)/i);
+            if (mCalc && isFinite(parseFloat(mCalc[1]))) return parseFloat(mCalc[1]);
+            const mPct = style.match(/width\s*:\s*([-\d.]+)%/i);
+            return mPct && isFinite(parseFloat(mPct[1])) ? parseFloat(mPct[1]) : NaN;
+        };
+        
+        const setWidth = (sb, col, percent) => {
             const v = Math.max(0, isFinite(percent) ? percent : 0);
-            const vRound = Math.round(v * 1000) / 1000; // 保留三位小数
+            const vRound = Math.round(v * 1000) / 1000;
             const host = col?.parentElement || sb;
-            const colsCount = getColumns(sb).length || 1;
-            const gap = getColumnGapPx(host);
-            const gapShare = colsCount > 0 ? (gap * (colsCount - 1)) / colsCount : 0;
+            const count = getColumns(sb).length || 1;
+            const gap = getGap(host);
+            const gapShare = count > 0 ? (gap * (count - 1)) / count : 0;
             const calc = `calc(${vRound}% - ${Math.round(gapShare * 10) / 10}px)`;
-            col.style.flex = '0 0 auto';
-            col.style.width = calc;
-            col.style.flexBasis = calc;
+            
+            Object.assign(col.style, { flex: '0 0 auto', width: calc, flexBasis: 'auto' });
             col.dataset.sbPct = String(vRound);
-        }
-
-        function measurePercents(sb, cols) {
+        };
+        
+        const measureWidths = (sb, cols) => {
             const host = cols[0]?.parentElement || sb;
             const w = host.getBoundingClientRect().width || 1;
-            const colsCount = cols.length || 1;
-            const gap = getColumnGapPx(host);
-            const gapShare = colsCount > 0 ? (gap * (colsCount - 1)) / colsCount : 0;
+            const gap = getGap(host);
+            const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
             return cols.map(col => ((col.getBoundingClientRect().width + gapShare) / w) * 100);
-        }
-
-        function normalizePercents(values, minPercent = MIN_PERCENT, total = 100) {
+        };
+        
+        const normalizeWidths = (values, min = MIN_PERCENT, total = 100) => {
             const n = values.length; if (!n) return [];
-            const effMin = Math.min(minPercent, total / n);
+            const effMin = Math.min(min, total / n);
             let v = values.map(x => Math.max(0, isFinite(x) ? x : 0));
+            
+            const nonEmpty = v.filter(x => x > 0);
+            const emptyCount = v.length - nonEmpty.length;
+            if (emptyCount > 0) {
+                const remaining = Math.max(0, total - nonEmpty.reduce((a, b) => a + b, 0));
+                const avg = remaining / emptyCount;
+                v = v.map(x => x > 0 ? x : avg);
+            }
+            
             v = v.map(x => Math.max(effMin, x));
             const sum = v.reduce((a,b) => a + b, 0);
             const base = effMin * n;
             const varSum = Math.max(0, sum - base);
             const targetVar = Math.max(0, total - base);
+            
             if (varSum === 0) return v.map(() => effMin);
             const factor = targetVar / varSum;
             return v.map(x => effMin + (x - effMin) * factor);
-        }
+        };
 
-        async function handleColumnCountChange(sb, cols, previousCount) {
-            if (cols.length < 2) return;
+        // API和宽度管理 - 大幅简化
+        const apiQueue = new Map();
+        let batchTimer = null;
+        
+        const batchApi = async () => {
+            if (batchTimer) clearTimeout(batchTimer);
+            if (apiQueue.size === 0) return;
             
-            const saved = cols.map(readSavedWidth);
-            const hasSavedWidths = saved.some(v => isFinite(v));
+            // 按块ID分组，只保留最新请求
+            const latest = new Map();
+            for (const [key, req] of apiQueue.entries()) {
+                const [id] = key.split('-');
+                latest.set(id, req);
+            }
+            apiQueue.clear();
             
-            if (hasSavedWidths) {
-                // 如果有保存的宽度，需要重新分配
-                const newPercents = normalizePercents(saved, MIN_PERCENT, 100);
-                cols.forEach((col, i) => {
-                    setColumnSize(sb, col, newPercents[i]);
-                });
-            } else {
-                // 如果没有保存的宽度，根据列数变化智能分配
-                let targetPercents;
+            try {
+                await Promise.all(Array.from(latest.values()).map(req => req()));
+            } catch (e) { console.warn('[Savor] 批量更新失败:', e); }
+        };
+        
+        const scheduleBatch = (delay = 50) => {
+            if (batchTimer) clearTimeout(batchTimer);
+            batchTimer = setTimeout(batchApi, delay);
+        };
+        
+        const widthOps = {
+            save: async (el, pct, gapShare) => {
+                const id = el?.dataset?.nodeId;
+                if (!id) return;
                 
-                if (cols.length < previousCount) {
-                    // 列数减少：让剩余列占用更多空间
-                    // 根据减少的比例适当增加每列的宽度
-                    const reductionRatio = previousCount / cols.length;
-                    const basePercent = 100 / cols.length;
-                    const bonusPercent = Math.min(basePercent * 0.3, 10); // 最多增加30%或10%
-                    targetPercents = cols.map(() => basePercent + bonusPercent);
-                } else {
-                    // 列数增加：平均分配
-                    targetPercents = cols.map(() => 100 / cols.length);
+                const vRound = Math.round(pct * 1000) / 1000;
+                const gapRound = Math.round((gapShare || 0) * 10) / 10;
+                const calc = `calc(${vRound}% - ${gapRound}px)`;
+                
+                Object.assign(el.style, { flex: '0 0 auto', width: calc, flexBasis: 'auto' });
+                el.dataset.sbPct = String(vRound);
+                
+                const key = `${id}-${Date.now()}`;
+                apiQueue.set(key, async () => {
+                    try { await 设置思源块属性(id, { 'style': el.getAttribute('style') || '' }); } 
+                    catch (e) { console.warn(`[Savor] 更新块 ${id} 失败:`, e); }
+                });
+                scheduleBatch();
+            },
+            
+            clear: async (el, skipApi = false) => {
+                const id = el?.dataset?.nodeId; if (!id) return;
+                ['width', 'flex-basis', 'flex'].forEach(prop => el.style.removeProperty(prop));
+                delete el.dataset.sbPct;
+                if (!el.getAttribute('style')) el.removeAttribute('style');
+                
+                if (!skipApi) {
+                    setTimeout(async () => {
+                        try { await 设置思源块属性(id, { 'style': el.getAttribute('style') || '' }); } 
+                        catch (_) {}
+                    }, 50);
+                }
+            },
+            
+            clearBatch: (elements, skipApi = false) => {
+                elements.forEach(el => {
+                    ['width', 'flex-basis', 'flex'].forEach(prop => el.style.removeProperty(prop));
+                    delete el.dataset.sbPct;
+                    if (!el.getAttribute('style')) el.removeAttribute('style');
+                });
+                
+                if (!skipApi) {
+                    setTimeout(() => {
+                        const calls = elements
+                            .filter(el => el.dataset.nodeId)
+                            .map(el => 设置思源块属性(el.dataset.nodeId, { 'style': el.getAttribute('style') || '' }));
+                        Promise.all(calls).catch(() => {});
+                    }, 100);
+                }
+            }
+        };
+
+                // 列数变化和手柄管理 - 大幅简化
+        const handleColumnChange = async (sb, cols, prevCount) => {
+            if (cols.length < 2) {
+                const allCols = getColumns(sb);
+                if (allCols.length === 1) {
+                    await widthOps.clear(allCols[0]);
+                    if (allCols[0].dataset.type === 'NodeSuperBlock' && allCols[0].dataset.sbLayout === 'col') {
+                        const nested = getColumns(allCols[0]);
+                        if (nested.length < 2) {
+                            await widthOps.clear(nested[0]);
+                            await positionHandles(allCols[0]);
+                        }
+                    }
+                }
+                return;
+            }
+            
+            const saved = cols.map(readWidth);
+            const hasSaved = saved.some(v => isFinite(v));
+            
+            if (hasSaved) {
+                const newPercents = normalizeWidths(saved, MIN_PERCENT, 100);
+                cols.forEach((col, i) => setWidth(sb, col, newPercents[i]));
+            } else {
+                let targetPercents = cols.map(() => 100 / cols.length);
+                if (cols.length < prevCount) {
+                    const base = 100 / cols.length;
+                    const bonus = Math.min(base * 0.3, 10);
+                    targetPercents = cols.map(() => base + bonus);
                 }
                 
-                // 确保总宽度为100%
-                const totalPercent = targetPercents.reduce((sum, p) => sum + p, 0);
-                if (totalPercent !== 100) {
-                    const factor = 100 / totalPercent;
+                const total = targetPercents.reduce((sum, p) => sum + p, 0);
+                if (total !== 100) {
+                    const factor = 100 / total;
                     targetPercents = targetPercents.map(p => p * factor);
                 }
                 
-                cols.forEach((col, i) => {
-                    setColumnSize(sb, col, targetPercents[i]);
-                });
+                cols.forEach((col, i) => setWidth(sb, col, targetPercents[i]));
             }
             
-            // 保存新的宽度设置
             try {
                 const host = cols[0]?.parentElement || sb;
-                const gap = getColumnGapPx(host);
+                const gap = getGap(host);
                 const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
-                const percents = measurePercents(sb, cols);
-                await Promise.all(
-                    cols.map((c, i) => saveWidth(c, Math.round(percents[i] * 1000) / 1000, gapShare))
-                );
+                const percents = measureWidths(sb, cols);
+                await Promise.all(cols.map((c, i) => widthOps.save(c, Math.round(percents[i] * 1000) / 1000, gapShare)));
             } catch (_) {}
-        }
+        };
 
-        async function saveWidth(el, pct, gapSharePx) {
-            const id = el?.dataset?.nodeId; if (!id) return;
-            try {
-                const vRound = Math.round(pct * 1000) / 1000; // 保留三位小数
-                const gapRound = Math.round((gapSharePx || 0) * 10) / 10;
-                const calcVal = `calc(${vRound}% - ${gapRound}px)`;
-                el.style.flex = '0 0 auto';
-                el.style.width = calcVal;
-                el.style.flexBasis = calcVal;
-                const newStyle = el.getAttribute('style') || el.style.cssText || '';
-                await 设置思源块属性(id, { 'style': newStyle });
-            } catch (_) {}
-        }
+        const removeHandles = sb => sb.querySelectorAll(':scope > .' + HANDLE_CLASS).forEach(h => h.remove());
 
-        		async function clearWidth(el) {
-			const id = el?.dataset?.nodeId; if (!id) return;
-			try {
-				el.style.removeProperty('width');
-				el.style.removeProperty('flex-basis');
-				el.style.removeProperty('flex');
-				delete el.dataset.sbPct;
-				const newStyle = el.getAttribute('style') || el.style.cssText || '';
-				if (!newStyle) el.removeAttribute('style');
-				await 设置思源块属性(id, { 'style': newStyle });
-			} catch (_) {}
-		}
-
-        function removeHandles(sb) { sb.querySelectorAll(':scope > .' + HANDLE_CLASS).forEach(h => h.remove()); }
-
-        function positionHandles(sb) {
+        const positionHandles = async (sb) => {
             const cols = getColumns(sb);
-            if (cols.length < 2) { removeHandles(sb); return; }
+            if (cols.length < 2) { 
+                removeHandles(sb); 
+                if (cols.length === 1) {
+                    for (const c of cols) {
+                        if (c.style.width || c.style.flexBasis) {
+                            widthOps.clear(c, true);
+                        }
+                        if (c.dataset.type === 'NodeSuperBlock' && c.dataset.sbLayout === 'col') {
+                            const nestedCols = getColumns(c);
+                            if (nestedCols.length < 2) {
+                                widthOps.clearBatch(nestedCols, true);
+                            }
+                        }
+                    }
+                }
+                return; 
+            }
+            
             const rect = sb.getBoundingClientRect();
             const need = cols.length - 1;
             const existing = sb.querySelectorAll(':scope > .' + HANDLE_CLASS);
+            
             if (existing.length === need) {
+                // 更新现有手柄位置
                 for (let i = 0; i < need; i++) {
                     const leftRect = cols[i].getBoundingClientRect();
                     const rightRect = cols[i + 1].getBoundingClientRect();
@@ -2543,6 +2619,7 @@ if (layoutCenter) {
                     existing[i].style.left = centerX + 'px';
                 }
             } else {
+                // 重新创建手柄
                 removeHandles(sb);
                 for (let i = 0; i < need; i++) {
                     const leftRect = cols[i].getBoundingClientRect();
@@ -2555,31 +2632,31 @@ if (layoutCenter) {
                     sb.appendChild(handle);
                 }
             }
-        }
+        };
 
-        function attachDrag(sb, handle, leftEl, rightEl) {
-            let startX = 0, containerWidth = 0, startLeftPct = 0, startRightPct = 0, moved = false;
-            let colsAll = [];
+        // 拖拽功能 - 大幅简化
+        const attachDrag = (sb, handle, leftEl, rightEl) => {
+            let startX = 0, containerWidth = 0, startLeft = 0, startRight = 0, moved = false;
 
             const onPointerDown = (e) => {
                 if (e.pointerType === 'mouse' && e.button !== 0) return;
                 e.preventDefault();
+                
                 const rect = sb.getBoundingClientRect();
                 containerWidth = rect.width || 1;
                 startX = e.clientX;
-                colsAll = getColumns(sb);
-                const saved = colsAll.map(readSavedWidth);
-                const measured = measurePercents(sb, colsAll);
-                const baseline = normalizePercents(saved.some(v => isFinite(v)) ? saved : measured, MIN_PERCENT, 100);
-                const li = colsAll.indexOf(leftEl), ri = colsAll.indexOf(rightEl);
-                startLeftPct = baseline[li] ?? 50;
-                startRightPct = baseline[ri] ?? 50;
-                moved = false;
-                sb.classList.add('sb-resizing');
                 const cols = getColumns(sb);
+                const saved = cols.map(readWidth);
+                const measured = measureWidths(sb, cols);
+                const baseline = normalizeWidths(saved.some(v => isFinite(v)) ? saved : measured, MIN_PERCENT, 100);
+                const li = cols.indexOf(leftEl), ri = cols.indexOf(rightEl);
+                startLeft = baseline[li] ?? 50;
+                startRight = baseline[ri] ?? 50;
+                moved = false;
+                
+                sb.classList.add('sb-resizing');
                 cols.forEach(c => c.style.transition = 'none');
-                // 显示列百分比
-                showColumnPercentages(sb, cols);
+
                 handle.setPointerCapture?.(e.pointerId);
                 window.addEventListener('pointermove', onPointerMove);
                 window.addEventListener('pointerup', onPointerUp, { once: true });
@@ -2589,154 +2666,307 @@ if (layoutCenter) {
                 const dx = e.clientX - startX;
                 const dxPct = (dx / (containerWidth || 1)) * 100;
                 if (Math.abs(dx) < 1) return;
+                
                 moved = true;
-                const pairBudget = (startLeftPct + startRightPct);
+                const pairBudget = (startLeft + startRight);
                 const min = Math.min(MIN_PERCENT, pairBudget / 2);
-                let newLeft = Math.min(Math.max(min, startLeftPct + dxPct), pairBudget - min);
+                let newLeft = Math.min(Math.max(min, startLeft + dxPct), pairBudget - min);
                 const newRight = pairBudget - newLeft;
+                
                 const cols = getColumns(sb);
                 const li = cols.indexOf(leftEl), ri = cols.indexOf(rightEl);
-                if (li >= 0) setColumnSize(sb, cols[li], newLeft);
-                if (ri >= 0) setColumnSize(sb, cols[ri], newRight);
-                // 更新百分比显示
-                updateColumnPercentages(sb, cols);
-                positionHandles(sb);
+                if (li >= 0) setWidth(sb, cols[li], newLeft);
+                if (ri >= 0) setWidth(sb, cols[ri], newRight);
+                
+                // 显示百分比
+                if (!sb.querySelector('.sb-percentage')) {
+                    cols.forEach(col => {
+                        if (!col.querySelector('.sb-percentage')) {
+                            const percentEl = document.createElement('div');
+                            percentEl.className = 'sb-percentage';
+                            col.appendChild(percentEl);
+                        }
+                    });
+                }
+                
+                const percents = measureWidths(sb, cols);
+                cols.forEach((col, i) => {
+                    const percentEl = col.querySelector('.sb-percentage');
+                    if (percentEl) percentEl.textContent = `${Math.round(percents[i])}%`;
+                });
+                
+                // 减少 positionHandles 调用频率
+                if (!sb._handleUpdateScheduled) {
+                    sb._handleUpdateScheduled = true;
+                    requestAnimationFrame(() => {
+                        positionHandles(sb);
+                        sb._handleUpdateScheduled = false;
+                    });
+                }
             }, 16);
 
             const onPointerUp = async () => {
                 window.removeEventListener('pointermove', onPointerMove);
                 sb.classList.remove('sb-resizing');
                 const cols = getColumns(sb);
-                // 移除百分比显示
-                sb.querySelectorAll('.sb-percentage').forEach(el => el.remove());
-                if (!moved) {
-                    cols.forEach(c => c.style.removeProperty('transition'));
-                    positionHandles(sb);
-                    return;
+                
+                if (moved) {
+                    try {
+                        const host = cols[0]?.parentElement || sb;
+                        const gap = getGap(host);
+                        const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
+                        const percents = measureWidths(sb, cols);
+                        const normalized = normalizeWidths(percents);
+                        
+                        cols.forEach((c, i) => {
+                            widthOps.save(c, Math.round(normalized[i] * 1000) / 1000, gapShare);
+                        });
+                        
+                        scheduleBatch(20);
+                    } catch (error) {
+                        console.warn('[Savor] 拖拽结束后保存失败:', error);
+                    }
                 }
-                // 只保存被拖动的两列的宽度
+                
+                setTimeout(() => sb.querySelectorAll('.sb-percentage').forEach(el => el.remove()), 300);
                 cols.forEach(c => c.style.removeProperty('transition'));
-                try {
-                    const host = cols[0]?.parentElement || sb;
-                    const gap = getColumnGapPx(host);
-                    const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
-                    // 保存所有列的宽度，确保总宽度为100%
-                    const percents = measurePercents(sb, cols);
-                    const normalized = normalizePercents(percents);
-                    await Promise.all(
-                        cols.map((c, i) => saveWidth(c, Math.round(normalized[i] * 1000) / 1000, gapShare))
-                    );
-                } catch (_) {}
                 positionHandles(sb);
             };
 
             handle.addEventListener('pointerdown', onPointerDown, { capture: true });
+            
             const onDoubleClick = async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 const cols = getColumns(sb);
                 if (cols.length < 2) return;
+                
                 cols.forEach(c => c.style.removeProperty('transition'));
-                try { await Promise.all(cols.map(c => clearWidth(c))); } catch (_) {}
+                widthOps.clearBatch(cols, true);
                 positionHandles(sb);
+                
+                setTimeout(async () => {
+                    try {
+                        const calls = cols
+                            .filter(c => c.dataset.nodeId)
+                            .map(c => 设置思源块属性(c.dataset.nodeId, { 'style': c.getAttribute('style') || '' }));
+                        await Promise.all(calls);
+                    } catch (_) {}
+                }, 30);
             };
             handle.addEventListener('dblclick', onDoubleClick, { capture: true });
-        }
+        };
 
-        async function applySaved(sb) {
-            const cols = getColumns(sb); if (cols.length < 2) return;
-            const saved = cols.map(readSavedWidth);
+        // 应用保存宽度和初始化超级块 - 大幅简化
+        const applySaved = async (sb, skipApi = false) => {
+            const cols = getColumns(sb); 
+            if (cols.length < 2) {
+                if (cols.length === 1) {
+                    widthOps.clear(cols[0], true);
+                    if (cols[0].dataset.type === 'NodeSuperBlock' && cols[0].dataset.sbLayout === 'col') {
+                        try { await applySaved(cols[0], skipApi); } catch (_) {}
+                    }
+                }
+                return;
+            }
+            const saved = cols.map(readWidth);
             if (saved.some(v => isFinite(v))) {
                 cols.forEach((c, i) => {
-                    if (isFinite(saved[i])) setColumnSize(sb, c, saved[i]);
+                    if (isFinite(saved[i])) setWidth(sb, c, saved[i]);
                 });
             }
-            positionHandles(sb);
-        }
+            await positionHandles(sb);
+        };
 
-        function initSuperBlock(sb) {
+        const initSuperBlock = async (sb) => {
             if (!sb || sb._sbResizerInit || !isColLayout(sb)) return;
             sb._sbResizerInit = true;
             sb.classList.add(SB_CLASS);
             const cols = getColumns(sb);
             sb._lastColsCount = cols.length;
-            applySaved(sb);
-            positionHandles(sb);
+            await applySaved(sb);
+            await positionHandles(sb);
+            
             let lastW = 0;
-            const ro = new ResizeObserver(throttle(() => {
+            const ro = new ResizeObserver(throttle(async () => {
                 if (sb.classList.contains('sb-resizing')) return;
                 const w = sb.getBoundingClientRect().width;
                 if (Math.abs(w - lastW) < 0.5) return;
                 lastW = w;
-                positionHandles(sb);
+                await positionHandles(sb);
             }, 120));
             ro.observe(sb);
             resizeObservers.set(sb, ro);
-        }
+        };
 
-        function scan() {
+        // 扫描和清理 - 大幅简化
+        let scanScheduled = false;
+        let lastScanTime = 0;
+        
+        const scan = async () => {
             scanScheduled = false;
-            document.querySelectorAll('.protyle-wysiwyg [data-type="NodeSuperBlock"][data-sb-layout="col"]').forEach(sb => {
+            if (lastScanTime && Date.now() - lastScanTime < 200) return;
+            lastScanTime = Date.now();
+            
+            // 处理被拖出超级块的块
+            const blocksToClear = [];
+            const allBlocksWithCustomWidth = document.querySelectorAll('.protyle-wysiwyg [data-node-id][style*="width"]');
+            allBlocksWithCustomWidth.forEach(block => {
+                if (block.dataset.sbPct && !block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]')) {
+                    blocksToClear.push(block);
+                }
+                
+                const parentSB = block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
+                if (parentSB) {
+                    const cols = parentSB._cachedCols || getColumns(parentSB);
+                    if (cols.length === 1 && cols[0] === block) blocksToClear.push(block);
+                }
+                
+                if (block.dataset.type === 'NodeSuperBlock' && block.dataset.sbLayout === 'col') {
+                    const grandParent = block.parentElement.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
+                    if (grandParent) {
+                        const directChildren = Array.from(grandParent.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
+                        if (directChildren.length === 1 && directChildren[0] === block) blocksToClear.push(block);
+                    }
+                }
+            });
+            
+            if (blocksToClear.length > 0) {
+                widthOps.clearBatch(blocksToClear, true);
+                setTimeout(() => {
+                    const calls = blocksToClear
+                        .filter(block => block.dataset.nodeId)
+                        .map(block => 设置思源块属性(block.dataset.nodeId, { 'style': block.getAttribute('style') || '' }));
+                    Promise.all(calls).catch(() => {});
+                }, 500);
+            }
+            
+            // 处理超级块
+            const superBlocks = document.querySelectorAll('.protyle-wysiwyg [data-type="NodeSuperBlock"][data-sb-layout="col"]');
+            const initPromises = [];
+            const updatePromises = [];
+            
+            for (const sb of superBlocks) {
                 if (!sb._sbResizerInit) {
-                    initSuperBlock(sb);
+                    initPromises.push(initSuperBlock(sb));
                 } else {
                     const cols = getColumns(sb);
+                    sb._cachedCols = cols;
                     const existingCols = sb._lastColsCount || 0;
                     
-                    // 检测列数是否发生变化（增加或减少）
                     if (cols.length !== existingCols) {
-                        // 列数发生变化，需要重新分配宽度
-                        handleColumnCountChange(sb, cols, existingCols);
+                        updatePromises.push(handleColumnChange(sb, cols, existingCols));
                         sb._lastColsCount = cols.length;
                     }
                     
                     if (!sb.querySelector(':scope > .' + HANDLE_CLASS)) {
-                        try { applySaved(sb); } catch (_) {}
-                        positionHandles(sb);
+                        try { applySaved(sb, true); } catch (_) {}
+                        updatePromises.push(positionHandles(sb));
                     } else {
-                        positionHandles(sb);
+                        updatePromises.push(positionHandles(sb));
                     }
                 }
-            });
-        }
+            }
+            
+            if (initPromises.length > 0) await Promise.all(initPromises);
+            if (updatePromises.length > 0) await Promise.all(updatePromises);
+        };
 
-        function scheduleScan() {
+        const scheduleScan = () => {
             if (scanScheduled) return;
             scanScheduled = true;
-            requestAnimationFrame(scan);
-        }
+            const delay = lastScanTime && Date.now() - lastScanTime < 500 ? 500 : 50;
+            setTimeout(() => {
+                scanScheduled = false;
+                scan();
+            }, delay);
+        };
 
-        function start() {
+        // 启动和停止 - 合并相关函数
+        // 启动和停止 - 大幅简化
+        const start = () => {
             ensureStyles();
             scan();
             if (!bodyObserver) {
                 bodyObserver = new MutationObserver(mutations => {
+                    let shouldScan = false;
                     for (const x of mutations) {
-                        if (x.type === 'childList') { scheduleScan(); break; }
-                        if (x.type === 'attributes' && x.target?.matches?.('[data-type="NodeSuperBlock"]')) { scheduleScan(); break; }
+                        if (x.type === 'childList' && x.target?.closest?.('.protyle-wysiwyg')) {
+                            shouldScan = true;
+                            break;
+                        }
+                        if (x.type === 'attributes' && x.target?.matches?.('[data-type="NodeSuperBlock"]')) {
+                            shouldScan = true;
+                            break;
+                        }
                     }
+                    if (shouldScan) scheduleScan();
                 });
                 bodyObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-type', 'data-sb-layout'] });
             }
+            
+            window.siyuan?.eventBus?.on('dragend', () => {
+                requestAnimationFrame(() => {
+                    const draggedBlocks = document.querySelectorAll('.protyle-wysiwyg [data-node-id][style*="width"]');
+                    if (draggedBlocks.length > 0) {
+                        const quickScan = async () => {
+                                                            for (const block of draggedBlocks) {
+                                    const parentSB = block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
+                                    if (parentSB && parentSB._sbResizerInit) {
+                                        const cols = getColumns(parentSB);
+                                        if (cols.length >= 2) await positionHandles(parentSB);
+                                    }
+                                }
+                        };
+                        quickScan();
+                    }
+                    setTimeout(scheduleScan, 20);
+                });
+            });
+            
+            window.siyuan?.eventBus?.on('dragend-node', () => {
+                requestAnimationFrame(() => setTimeout(scheduleScan, 15));
+            });
+            
             window.addEventListener('themechange', scheduleScan, { passive: true });
-            window.siyuan?.eventBus?.on('loaded-protyle', () => setTimeout(scheduleScan, 50));
-        }
+            window.siyuan?.eventBus?.on('loaded-protyle', () => setTimeout(scheduleScan, 500));
+        };
 
-        function stop() {
+        const stop = () => {
             try { window.siyuan?.eventBus?.off('loaded-protyle', scan); } catch (_) {}
-            bodyObserver?.disconnect(); bodyObserver = null;
+            bodyObserver?.disconnect(); 
+            bodyObserver = null;
             window.removeEventListener('themechange', scheduleScan);
             document.querySelectorAll('.' + SB_CLASS).forEach(sb => sb.classList.remove(SB_CLASS));
             document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
             for (const [, ro] of resizeObservers.entries()) ro.disconnect();
             resizeObservers = new WeakMap();
             scanScheduled = false;
-        }
+            
+            if (batchTimer) {
+                clearTimeout(batchTimer);
+                batchTimer = null;
+            }
+            apiQueue.clear();
+        };
 
-        return { start, stop, refresh: scan };
+        return { start, stop, refresh: scan, cleanup: stop };
     })();
 
-    setTimeout(() => { try { superBlockResizer.start(); } catch (e) { console.error('[Savor] 超级块调整启动失败:', e); } }, 800);
+    // 初始化
+    const initSuperBlockResizer = () => {
+        if (document.readyState === 'complete') {
+            try { superBlockResizer.start(); } catch (e) { console.error('[Savor] 超级块调整启动失败:', e); }
+        } else {
+            window.addEventListener('load', () => {
+                try { superBlockResizer.start(); } catch (e) { console.error('[Savor] 超级块调整启动失败:', e); }
+                }, { once: true });
+        }
+    };
+    
+    setTimeout(initSuperBlockResizer, 300);
 
 })();
+
+
 
