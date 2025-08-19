@@ -1,5 +1,5 @@
 /*数据库*/
-.av__celltext--ref{
+.av__celltext--ref,.av__cell[data-dtype="block"]{
 	font-weight:600;
 }
 .av__cell .b3-chip[data-type="block-more"],.av__cell .b3-chip[data-type="block-ref"]{
@@ -64,55 +64,55 @@
 .custom-attr__avvalue .b3-chip,.av__cell .b3-chip, .b3-menu__label .b3-chip{
 	border-radius:6px;
 }
-.custom-attr__avvalue .b3-chip[style*="color1)"],.av__cell .b3-chip[style*="color1)"],.av__panel .b3-chip[style*="color1)"],[data-name="av-col-option"] .color__square[style*="color1)"],.b3-menu__label .b3-chip[data-color="1"]{
+.custom-attr__avvalue .b3-chip[style*="color1)"],.av__cell .b3-chip[style*="color1)"],.av__panel .b3-chip[style*="color1)"],[data-name="av-col-option"] .color__square[style*="color1)"],.b3-menu__label .b3-chip[data-color="1"],.av__group-title .b3-chip[style*="color1)"]{
 	background-color:var(--b3-font-background3)!important;
 	color:var(--Sv-font-color3)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color2)"],.av__cell .b3-chip[style*="color2)"],.av__panel .b3-chip[style*="color2)"],[data-name="av-col-option"] .color__square[style*="color2)"],.b3-menu__label .b3-chip[data-color="2"]{
+.custom-attr__avvalue .b3-chip[style*="color2)"],.av__cell .b3-chip[style*="color2)"],.av__panel .b3-chip[style*="color2)"],[data-name="av-col-option"] .color__square[style*="color2)"],.b3-menu__label .b3-chip[data-color="2"],.av__group-title .b3-chip[style*="color2)"]{
 	background-color:var(--b3-font-background13)!important;
 	color:var(--Sv-font-color13)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color3)"],.av__cell .b3-chip[style*="color3)"],.av__panel .b3-chip[style*="color3)"],[data-name="av-col-option"] .color__square[style*="color3)"],.b3-menu__label .b3-chip[data-color="3"]{
+.custom-attr__avvalue .b3-chip[style*="color3)"],.av__cell .b3-chip[style*="color3)"],.av__panel .b3-chip[style*="color3)"],[data-name="av-col-option"] .color__square[style*="color3)"],.b3-menu__label .b3-chip[data-color="3"],.av__group-title .b3-chip[style*="color3)"]{
 	background-color:var(--b3-font-background12)!important;
 	color:var(--Sv-font-color12)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color4)"],.av__cell .b3-chip[style*="color4)"],.av__panel .b3-chip[style*="color4)"],[data-name="av-col-option"] .color__square[style*="color4)"],.b3-menu__label .b3-chip[data-color="4"]{
+.custom-attr__avvalue .b3-chip[style*="color4)"],.av__cell .b3-chip[style*="color4)"],.av__panel .b3-chip[style*="color4)"],[data-name="av-col-option"] .color__square[style*="color4)"],.b3-menu__label .b3-chip[data-color="4"],.av__group-title .b3-chip[style*="color4)"]{
 	background-color:var(--b3-font-background11)!important;
 	color:var(--Sv-font-color11)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color5)"],.av__cell .b3-chip[style*="color5)"],.av__panel .b3-chip[style*="color5)"],[data-name="av-col-option"] .color__square[style*="color5)"],.b3-menu__label .b3-chip[data-color="5"]{
+.custom-attr__avvalue .b3-chip[style*="color5)"],.av__cell .b3-chip[style*="color5)"],.av__panel .b3-chip[style*="color5)"],[data-name="av-col-option"] .color__square[style*="color5)"],.b3-menu__label .b3-chip[data-color="5"],.av__group-title .b3-chip[style*="color5)"]{
 	background-color:var(--b3-font-background10)!important;
 	color:var(--Sv-font-color10)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color6)"],.av__cell .b3-chip[style*="color6)"],.av__panel .b3-chip[style*="color6)"],[data-name="av-col-option"] .color__square[style*="color6)"],.b3-menu__label .b3-chip[data-color="6"]{
+.custom-attr__avvalue .b3-chip[style*="color6)"],.av__cell .b3-chip[style*="color6)"],.av__panel .b3-chip[style*="color6)"],[data-name="av-col-option"] .color__square[style*="color6)"],.b3-menu__label .b3-chip[data-color="6"],.av__group-title .b3-chip[style*="color6)"]{
 	background-color:var(--b3-font-background9)!important;
 	color:var(--Sv-font-color9)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color7)"],.av__cell .b3-chip[style*="color7)"],.av__panel .b3-chip[style*="color7)"],[data-name="av-col-option"] .color__square[style*="color7)"],.b3-menu__label .b3-chip[data-color="7"]{
+.custom-attr__avvalue .b3-chip[style*="color7)"],.av__cell .b3-chip[style*="color7)"],.av__panel .b3-chip[style*="color7)"],[data-name="av-col-option"] .color__square[style*="color7)"],.b3-menu__label .b3-chip[data-color="7"],.av__group-title .b3-chip[style*="color7)"]{
 	background-color:var(--b3-font-background8)!important;
 	color:var(--Sv-font-color8)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color8)"],.av__cell .b3-chip[style*="color8)"],.av__panel .b3-chip[style*="color8)"],[data-name="av-col-option"] .color__square[style*="color8)"],.b3-menu__label .b3-chip[data-color="8"]{
+.custom-attr__avvalue .b3-chip[style*="color8)"],.av__cell .b3-chip[style*="color8)"],.av__panel .b3-chip[style*="color8)"],[data-name="av-col-option"] .color__square[style*="color8)"],.b3-menu__label .b3-chip[data-color="8"],.av__group-title .b3-chip[style*="color8)"]{
 	background-color:var(--b3-font-background7)!important;
 	color:var(--Sv-font-color7)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color9)"],.av__cell .b3-chip[style*="color9)"],.av__panel .b3-chip[style*="color9)"],[data-name="av-col-option"] .color__square[style*="color9)"],.b3-menu__label .b3-chip[data-color="9"]{
+.custom-attr__avvalue .b3-chip[style*="color9)"],.av__cell .b3-chip[style*="color9)"],.av__panel .b3-chip[style*="color9)"],[data-name="av-col-option"] .color__square[style*="color9)"],.b3-menu__label .b3-chip[data-color="9"],.av__group-title .b3-chip[style*="color9)"]{
 	background-color:var(--b3-font-background6)!important;
 	color:var(--Sv-font-color6)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color10)"],.av__cell .b3-chip[style*="color10)"],.av__panel .b3-chip[style*="color10)"],[data-name="av-col-option"] .color__square[style*="color10)"],.b3-menu__label .b3-chip[data-color="10"]{
+.custom-attr__avvalue .b3-chip[style*="color10)"],.av__cell .b3-chip[style*="color10)"],.av__panel .b3-chip[style*="color10)"],[data-name="av-col-option"] .color__square[style*="color10)"],.b3-menu__label .b3-chip[data-color="10"],.av__group-title .b3-chip[style*="color10)"]{
 	background-color:var(--b3-font-background5)!important;
 	color:var(--Sv-font-color5)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color11)"],.av__cell .b3-chip[style*="color11)"],.av__panel .b3-chip[style*="color11)"],[data-name="av-col-option"] .color__square[style*="color11)"],.b3-menu__label .b3-chip[data-color="11"]{
+.custom-attr__avvalue .b3-chip[style*="color11)"],.av__cell .b3-chip[style*="color11)"],.av__panel .b3-chip[style*="color11)"],[data-name="av-col-option"] .color__square[style*="color11)"],.b3-menu__label .b3-chip[data-color="11"],.av__group-title .b3-chip[style*="color11)"]{
 	background-color:var(--b3-font-background4)!important;
 	color:var(--Sv-font-color4)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color12)"],.av__cell .b3-chip[style*="color12)"],.av__panel .b3-chip[style*="color12)"],[data-name="av-col-option"] .color__square[style*="color12)"],.b3-menu__label .b3-chip[data-color="12"]{
+.custom-attr__avvalue .b3-chip[style*="color12)"],.av__cell .b3-chip[style*="color12)"],.av__panel .b3-chip[style*="color12)"],[data-name="av-col-option"] .color__square[style*="color12)"],.b3-menu__label .b3-chip[data-color="12"],.av__group-title .b3-chip[style*="color12)"]{
 	background-color:var(--b3-font-background2)!important;
 	color:var(--Sv-font-color2)!important;
 }
-.custom-attr__avvalue .b3-chip[style*="color13)"],.av__cell .b3-chip[style*="color13)"],.av__panel .b3-chip[style*="color13)"],[data-name="av-col-option"] .color__square[style*="color13)"],.b3-menu__label .b3-chip[data-color="13"]{
+.custom-attr__avvalue .b3-chip[style*="color13)"],.av__cell .b3-chip[style*="color13)"],.av__panel .b3-chip[style*="color13)"],[data-name="av-col-option"] .color__square[style*="color13)"],.b3-menu__label .b3-chip[data-color="13"],.av__group-title .b3-chip[style*="color13)"]{
 	background-color:var(--b3-font-background1)!important;
 	color:var(--Sv-font-color1)!important;
 }
@@ -166,6 +166,7 @@
 .av__gallery-cover{
     border-radius: 8px 8px 0 0;
     border-bottom: 1px solid var(--Sv-theme-surface);
+	background-color: var(--Sv-theme-surface);
 }
 
 

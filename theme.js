@@ -2541,10 +2541,13 @@ if (layoutCenter) {
                 const allCols = getColumns(sb);
                 if (allCols.length === 1) {
                     await widthOps.clear(allCols[0]);
+                    // 重置为默认的flex布局
+                    allCols[0].style.cssText = '';
                     if (allCols[0].dataset.type === 'NodeSuperBlock' && allCols[0].dataset.sbLayout === 'col') {
                         const nested = getColumns(allCols[0]);
                         if (nested.length < 2) {
                             await widthOps.clear(nested[0]);
+                            nested[0].style.cssText = '';
                             await positionHandles(allCols[0]);
                         }
                     }
@@ -2775,7 +2778,8 @@ if (layoutCenter) {
                     if (isFinite(saved[i])) setWidth(sb, c, saved[i]);
                 });
             }
-            await positionHandles(sb);
+            // 移除自动创建手柄，改为hover时创建
+            // await positionHandles(sb);
         };
 
         const initSuperBlock = async (sb) => {
@@ -2785,7 +2789,38 @@ if (layoutCenter) {
             const cols = getColumns(sb);
             sb._lastColsCount = cols.length;
             await applySaved(sb);
-            await positionHandles(sb);
+            // 移除自动创建手柄，改为hover时创建
+            // await positionHandles(sb);
+            
+            // 添加hover事件监听
+            if (!sb._hoverHandlersAdded) {
+                sb._hoverHandlersAdded = true;
+                
+                const showHandles = () => {
+                    if (sb.classList.contains('sb-resizing')) return;
+                    const cols = getColumns(sb);
+                    if (cols.length >= 2) {
+                        positionHandles(sb);
+                    }
+                };
+                
+                const hideHandles = () => {
+                    if (sb.classList.contains('sb-resizing')) return;
+                    // 延迟隐藏，避免拖拽时手柄消失
+                    setTimeout(() => {
+                        if (!sb.matches(':hover') && !sb.classList.contains('sb-resizing')) {
+                            removeHandles(sb);
+                        }
+                    }, 100);
+                };
+                
+                sb.addEventListener('mouseenter', showHandles);
+                sb.addEventListener('mouseleave', hideHandles);
+                
+                // 保存事件处理器引用，用于清理
+                sb._showHandlers = showHandles;
+                sb._hideHandlers = hideHandles;
+            }
             
             let lastW = 0;
             const ro = new ResizeObserver(throttle(async () => {
@@ -2793,7 +2828,10 @@ if (layoutCenter) {
                 const w = sb.getBoundingClientRect().width;
                 if (Math.abs(w - lastW) < 0.5) return;
                 lastW = w;
-                await positionHandles(sb);
+                // 只在hover时更新手柄位置
+                if (sb.matches(':hover')) {
+                    positionHandles(sb);
+                }
             }, 120));
             ro.observe(sb);
             resizeObservers.set(sb, ro);
@@ -2859,11 +2897,10 @@ if (layoutCenter) {
                         sb._lastColsCount = cols.length;
                     }
                     
-                    if (!sb.querySelector(':scope > .' + HANDLE_CLASS)) {
+                    // 列数变化后需要重新处理手柄，但不在hover时创建
+                    if (cols.length >= 2 && !sb.querySelector(':scope > .' + HANDLE_CLASS)) {
                         try { applySaved(sb, true); } catch (_) {}
-                        updatePromises.push(positionHandles(sb));
-                    } else {
-                        updatePromises.push(positionHandles(sb));
+                        // 不自动创建手柄，只在hover时创建
                     }
                 }
             }
@@ -2905,28 +2942,39 @@ if (layoutCenter) {
                 bodyObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-type', 'data-sb-layout'] });
             }
             
-            window.siyuan?.eventBus?.on('dragend', () => {
-                requestAnimationFrame(() => {
-                    const draggedBlocks = document.querySelectorAll('.protyle-wysiwyg [data-node-id][style*="width"]');
-                    if (draggedBlocks.length > 0) {
-                        const quickScan = async () => {
-                                                            for (const block of draggedBlocks) {
-                                    const parentSB = block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
-                                    if (parentSB && parentSB._sbResizerInit) {
-                                        const cols = getColumns(parentSB);
-                                        if (cols.length >= 2) await positionHandles(parentSB);
-                                    }
-                                }
-                        };
-                        quickScan();
+            // 清除超级块样式的核心函数
+            const clearSuperBlockStyles = () => {
+                const superBlocks = document.querySelectorAll('.protyle-wysiwyg > .sb-resize-container[style*="width"]');
+                if (superBlocks.length === 0) return;
+                
+                console.log('[Savor] 清除超级块样式，数量:', superBlocks.length);
+                
+                superBlocks.forEach(block => {
+                    // 清除样式
+                    block.style.removeProperty('width');
+                    block.style.removeProperty('flex');
+                    delete block.dataset.sbPct;
+                    if (!block.getAttribute('style')) block.removeAttribute('style');
+                    
+                    // 保存到块属性
+                    if (block.dataset.nodeId) {
+                        setTimeout(async () => {
+                            try {
+                                await 设置思源块属性(block.dataset.nodeId, { 'style': block.getAttribute('style') || '' });
+                            } catch (error) {
+                                console.warn('[Savor] 保存样式失败:', error);
+                            }
+                        }, 100);
                     }
-                    setTimeout(scheduleScan, 20);
                 });
-            });
+                
+                // 延迟扫描
+                setTimeout(scheduleScan, 20);
+            };
             
-            window.siyuan?.eventBus?.on('dragend-node', () => {
-                requestAnimationFrame(() => setTimeout(scheduleScan, 15));
-            });
+            // 监听拖拽事件
+            window.siyuan?.eventBus?.on('dragend', clearSuperBlockStyles);
+            window.siyuan?.eventBus?.on('dragend-node', clearSuperBlockStyles);
             
             window.addEventListener('themechange', scheduleScan, { passive: true });
             window.siyuan?.eventBus?.on('loaded-protyle', () => setTimeout(scheduleScan, 500));
@@ -2937,7 +2985,17 @@ if (layoutCenter) {
             bodyObserver?.disconnect(); 
             bodyObserver = null;
             window.removeEventListener('themechange', scheduleScan);
-            document.querySelectorAll('.' + SB_CLASS).forEach(sb => sb.classList.remove(SB_CLASS));
+            document.querySelectorAll('.' + SB_CLASS).forEach(sb => {
+                sb.classList.remove(SB_CLASS);
+                // 清理hover事件处理器
+                if (sb._showHandlers) {
+                    sb.removeEventListener('mouseenter', sb._showHandlers);
+                    sb.removeEventListener('mouseleave', sb._hideHandlers);
+                    delete sb._showHandlers;
+                    delete sb._hideHandlers;
+                    delete sb._hoverHandlersAdded;
+                }
+            });
             document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
             for (const [, ro] of resizeObservers.entries()) ro.disconnect();
             resizeObservers = new WeakMap();
