@@ -854,7 +854,3 @@ span[data-type="a"]::before {
     }
 }
 
-
-.protyle-wysiwyg>.sb-resize-container{
-    width: 100%!important;
-}

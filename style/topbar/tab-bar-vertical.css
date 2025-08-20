@@ -7,12 +7,11 @@ body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]
 }
 body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizontal) .fn__flex:not(.av__views){
     & > .layout-tab-bar{
-	margin:0; 
+	margin:0 -5px 0 0; 
 	border-bottom: none;
     display: block;
 	flex: 1;
     padding-left: 5px;
-    overflow: visible;
     &.layout-tab-bar--readonly {
         flex: initial;
         width: calc(100% - 10px);
@@ -21,6 +20,7 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
     .item:not(.item--readonly) {
         margin:0 -5px 5px 0!important;
         max-width:unset;
+        width: 100%;
         padding: 2.5px 0 ;
         & .item__close{
             margin-left: auto;

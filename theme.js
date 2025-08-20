@@ -313,6 +313,25 @@
     // ========================================
     // 模块：主题按钮
     // ========================================
+    // 主题组工具函数（仅重用，保持原有行为不变）
+    const getThemeGroupButtons = (group) => allButtons.filter(btn => btn.type === 'theme' && btn.group === group);
+    const forEachThemeInGroup = (group, fn) => getThemeGroupButtons(group).forEach(fn);
+    const disableThemeGroup = (group) => forEachThemeInGroup(group, b => b.onDisable && b.onDisable());
+    const clearRememberedThemeGroup = (group) => forEachThemeInGroup(group, b => config.set(b.id, "0"));
+    const unmarkThemeGroupButtons = (group) => forEachThemeInGroup(group, b => document.getElementById(b.id)?.classList.remove('button_on'));
+    const markThemeButton = (id) => document.getElementById(id)?.classList.add('button_on');
+    const applyThemeForGroup = async (group, btn) => {
+        window.theme.applyThemeTransition(async () => {
+            disableThemeGroup(group);
+            if (btn.onEnable) btn.onEnable();
+            updateColorfulHeading(btn.styleId);
+            await applyRememberedFeatures();
+            setTimeout(() => { window.statusObserver?.updatePosition?.(); }, 100);
+        });
+        clearRememberedThemeGroup(group);
+        config.set(btn.id, "1");
+    };
+
     const renderAllButtons = (targetToolbar = null) => {
         const savorToolbar = targetToolbar || document.getElementById("savorToolbar");
         if (!savorToolbar) return;
@@ -348,44 +367,12 @@
             // 点击逻辑
             button.addEventListener("click", async () => {
                 if (btn.type === 'theme') {
-                    // 只移除同组按钮的激活状态
                     const currentGroup = btn.group;
                     if (currentGroup) {
-                        const groupButtons = allButtons.filter(b => b.type === 'theme' && b.group === currentGroup);
-                        groupButtons.forEach(b => {
-                            const groupButton = document.getElementById(b.id);
-                            if (groupButton) groupButton.classList.remove('button_on');
-                        });
+                        unmarkThemeGroupButtons(currentGroup);
                     }
                     button.classList.add('button_on');
-                    
-                    window.theme.applyThemeTransition(async () => {
-                        // 先移除同组所有主题的HTML属性
-                        if (currentGroup) {
-                            const groupButtons = allButtons.filter(b => b.type === 'theme' && b.group === currentGroup);
-                            groupButtons.forEach(b => {
-                                if (b.onDisable) b.onDisable();
-                            });
-                        }
-                        
-                        // 然后启用当前主题
-                        if (btn.onEnable) btn.onEnable();
-                        
-                        updateColorfulHeading(btn.styleId);
-                        await applyRememberedFeatures();
-                        setTimeout(() => {
-                            if (window.statusObserver?.updatePosition) {
-                                window.statusObserver.updatePosition();
-                            }
-                        }, 100);
-                    });
-                    
-                    // 记忆状态 - 只重置同组的状态
-                    if (currentGroup) {
-                        const groupButtons = allButtons.filter(b => b.type === 'theme' && b.group === currentGroup);
-                        groupButtons.forEach(b => config.set(b.id, "0"));
-                    }
-                    config.set(btn.id, "1");
+                    await applyThemeForGroup(currentGroup, btn);
                 } else if (btn.type === 'feature') {
                     const isActive = button.classList.contains("button_on");
                     if (isActive) {
@@ -822,7 +809,7 @@ const tabbarResize = {
     create(tabbar) {
         this.resizer = document.createElement("div");
         Object.assign(this.resizer, { id: "vertical-resize-handle" });
-        this.resizer.style.cssText = "position:absolute;top:0;right:-3px;width:6px;height:100%;cursor:col-resize;background:transparent;z-index:2;";
+        this.resizer.style.cssText = "position:absolute;top:0;right:0px;width:6px;height:100%;cursor:col-resize;background:transparent;z-index:2;";
         tabbar.style.position = "relative";
         tabbar.appendChild(this.resizer);
         this.resizer.onmousedown = e => this.start(e, tabbar);
@@ -2357,7 +2344,6 @@ if (layoutCenter) {
         const MIN_PERCENT = 10;
 
         let bodyObserver = null;
-        let resizeObservers = new WeakMap();
 
         // 样式注入
         function ensureStyles() {
@@ -2376,8 +2362,9 @@ if (layoutCenter) {
             document.head.appendChild(st);
         }
 
-        // 核心工具函数 - 修复this指向问题
+        // 核心工具函数
         const isColLayout = sb => sb?.getAttribute?.('data-sb-layout') === 'col';
+        const hasMultipleColumns = sb => getColumns(sb).length >= 2;
         
         const getColumns = sb => {
             if (!isColLayout(sb)) return [];
@@ -2421,7 +2408,7 @@ if (layoutCenter) {
             const gapShare = count > 0 ? (gap * (count - 1)) / count : 0;
             const calc = `calc(${vRound}% - ${Math.round(gapShare * 10) / 10}px)`;
             
-            Object.assign(col.style, { flex: '0 0 auto', width: calc, flexBasis: 'auto' });
+            Object.assign(col.style, { flex: '0 0 auto', width: calc });
             col.dataset.sbPct = String(vRound);
         };
         
@@ -2457,155 +2444,131 @@ if (layoutCenter) {
             return v.map(x => effMin + (x - effMin) * factor);
         };
 
-        // API和宽度管理 - 大幅简化
-        const apiQueue = new Map();
-        let batchTimer = null;
-        
-        const batchApi = async () => {
-            if (batchTimer) clearTimeout(batchTimer);
-            if (apiQueue.size === 0) return;
-            
-            // 按块ID分组，只保留最新请求
-            const latest = new Map();
-            for (const [key, req] of apiQueue.entries()) {
+        // 新增：超级块列宽持久化保存（批量）
+        const apiRequestQueue = new Map();
+        let widthSaveBatchTimer = null;
+
+        const flushWidthSaves = async () => {
+            if (widthSaveBatchTimer) { clearTimeout(widthSaveBatchTimer); widthSaveBatchTimer = null; }
+            if (apiRequestQueue.size === 0) return;
+            // 按块 ID 只保留最后一次
+            const latestById = new Map();
+            for (const [key, req] of apiRequestQueue.entries()) {
                 const [id] = key.split('-');
-                latest.set(id, req);
+                latestById.set(id, req);
             }
-            apiQueue.clear();
-            
+            apiRequestQueue.clear();
             try {
-                await Promise.all(Array.from(latest.values()).map(req => req()));
-            } catch (e) { console.warn('[Savor] 批量更新失败:', e); }
+                await Promise.all(Array.from(latestById.values()).map(fn => fn()));
+            } catch (e) {
+                console.warn('[Savor] 宽度保存批量更新失败:', e);
+            }
         };
-        
-        const scheduleBatch = (delay = 50) => {
-            if (batchTimer) clearTimeout(batchTimer);
-            batchTimer = setTimeout(batchApi, delay);
+
+        const scheduleWidthSave = (delay = 50) => {
+            if (widthSaveBatchTimer) clearTimeout(widthSaveBatchTimer);
+            widthSaveBatchTimer = setTimeout(flushWidthSaves, delay);
         };
-        
+
         const widthOps = {
-            save: async (el, pct, gapShare) => {
-                const id = el?.dataset?.nodeId;
+            save: async (colEl, pct, gapShare) => {
+                const id = colEl?.dataset?.nodeId;
                 if (!id) return;
-                
                 const vRound = Math.round(pct * 1000) / 1000;
                 const gapRound = Math.round((gapShare || 0) * 10) / 10;
                 const calc = `calc(${vRound}% - ${gapRound}px)`;
-                
-                Object.assign(el.style, { flex: '0 0 auto', width: calc, flexBasis: 'auto' });
-                el.dataset.sbPct = String(vRound);
-                
+                Object.assign(colEl.style, { flex: '0 0 auto', width: calc, flexBasis: 'auto' });
+                colEl.dataset.sbPct = String(vRound);
                 const key = `${id}-${Date.now()}`;
-                apiQueue.set(key, async () => {
-                    try { await 设置思源块属性(id, { 'style': el.getAttribute('style') || '' }); } 
-                    catch (e) { console.warn(`[Savor] 更新块 ${id} 失败:`, e); }
+                apiRequestQueue.set(key, async () => {
+                    try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); }
+                    catch (e) { console.warn(`[Savor] 保存块样式失败 ${id}:`, e); }
                 });
-                scheduleBatch();
             },
-            
-            clear: async (el, skipApi = false) => {
-                const id = el?.dataset?.nodeId; if (!id) return;
-                ['width', 'flex-basis', 'flex'].forEach(prop => el.style.removeProperty(prop));
-                delete el.dataset.sbPct;
-                if (!el.getAttribute('style')) el.removeAttribute('style');
-                
+            clear: async (colEl, skipApi = false) => {
+                const id = colEl?.dataset?.nodeId; if (!id) return;
+                ['width','flex'].forEach(prop => colEl.style.removeProperty(prop));
+                delete colEl.dataset.sbPct;
+                if (!colEl.getAttribute('style')) colEl.removeAttribute('style');
                 if (!skipApi) {
                     setTimeout(async () => {
-                        try { await 设置思源块属性(id, { 'style': el.getAttribute('style') || '' }); } 
-                        catch (_) {}
+                        try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); } catch (_) {}
                     }, 50);
                 }
             },
-            
             clearBatch: (elements, skipApi = false) => {
                 elements.forEach(el => {
-                    ['width', 'flex-basis', 'flex'].forEach(prop => el.style.removeProperty(prop));
+                    ['width','flex'].forEach(prop => el.style.removeProperty(prop));
                     delete el.dataset.sbPct;
                     if (!el.getAttribute('style')) el.removeAttribute('style');
                 });
-                
                 if (!skipApi) {
                     setTimeout(() => {
-                        const calls = elements
-                            .filter(el => el.dataset.nodeId)
-                            .map(el => 设置思源块属性(el.dataset.nodeId, { 'style': el.getAttribute('style') || '' }));
+                        const calls = elements.filter(e => e.dataset.nodeId)
+                            .map(e => 设置思源块属性(e.dataset.nodeId, { 'style': e.getAttribute('style') || '' }));
                         Promise.all(calls).catch(() => {});
                     }, 100);
                 }
             }
         };
 
-                // 列数变化和手柄管理 - 大幅简化
+        // 列数变化和手柄管理
         const handleColumnChange = async (sb, cols, prevCount) => {
-            if (cols.length < 2) {
+            if (!hasMultipleColumns(sb)) {
                 const allCols = getColumns(sb);
                 if (allCols.length === 1) {
-                    await widthOps.clear(allCols[0]);
-                    // 重置为默认的flex布局
-                    allCols[0].style.cssText = '';
-                    if (allCols[0].dataset.type === 'NodeSuperBlock' && allCols[0].dataset.sbLayout === 'col') {
-                        const nested = getColumns(allCols[0]);
-                        if (nested.length < 2) {
-                            await widthOps.clear(nested[0]);
-                            nested[0].style.cssText = '';
-                            await positionHandles(allCols[0]);
-                        }
-                    }
+                    const onlyCol = allCols[0];
+                    // 动画到100%再清理
+                    onlyCol.style.transition = 'width 0.25s ease';
+                    setWidth(sb, onlyCol, 100);
+                    setTimeout(() => {
+                        onlyCol.style.removeProperty('transition');
+                        widthOps.clear(onlyCol, true);
+                    }, 260);
                 }
                 return;
             }
-            
-            const saved = cols.map(readWidth);
-            const hasSaved = saved.some(v => isFinite(v));
-            
-            if (hasSaved) {
-                const newPercents = normalizeWidths(saved, MIN_PERCENT, 100);
-                cols.forEach((col, i) => setWidth(sb, col, newPercents[i]));
-            } else {
-                let targetPercents = cols.map(() => 100 / cols.length);
-                if (cols.length < prevCount) {
-                    const base = 100 / cols.length;
-                    const bonus = Math.min(base * 0.3, 10);
-                    targetPercents = cols.map(() => base + bonus);
-                }
-                
-                const total = targetPercents.reduce((sum, p) => sum + p, 0);
-                if (total !== 100) {
-                    const factor = 100 / total;
-                    targetPercents = targetPercents.map(p => p * factor);
-                }
-                
-                cols.forEach((col, i) => setWidth(sb, col, targetPercents[i]));
-            }
-            
-            try {
-                const host = cols[0]?.parentElement || sb;
-                const gap = getGap(host);
-                const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
-                const percents = measureWidths(sb, cols);
-                await Promise.all(cols.map((c, i) => widthOps.save(c, Math.round(percents[i] * 1000) / 1000, gapShare)));
-            } catch (_) {}
+            			const saved = cols.map(readWidth);
+			const hasSaved = saved.some(v => isFinite(v));
+			let targetPercents = [];
+			if (hasSaved) {
+				targetPercents = normalizeWidths(saved, MIN_PERCENT, 100);
+			} else {
+				targetPercents = cols.map(() => 100 / cols.length);
+				if (cols.length < prevCount) {
+					const base = 100 / cols.length;
+					const bonus = Math.min(base * 0.3, 10);
+					targetPercents = cols.map(() => base + bonus);
+				}
+				const total = targetPercents.reduce((sum, p) => sum + p, 0);
+				if (total !== 100) {
+					const factor = 100 / total;
+					targetPercents = targetPercents.map(p => p * factor);
+				}
+			}
+
+			// 动画到目标百分比，再保存
+			cols.forEach(c => c.style.transition = 'width 0.25s ease');
+			targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
+			setTimeout(() => {
+				cols.forEach(c => c.style.removeProperty('transition'));
+				try {
+					const host = cols[0]?.parentElement || sb;
+					const gap = getGap(host);
+					const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
+					const percents = measureWidths(sb, cols);
+					cols.forEach((c, i) => widthOps.save(c, Math.round(percents[i] * 1000) / 1000, gapShare));
+					scheduleWidthSave(20);
+				} catch (_) {}
+			}, 260);
         };
 
         const removeHandles = sb => sb.querySelectorAll(':scope > .' + HANDLE_CLASS).forEach(h => h.remove());
 
         const positionHandles = async (sb) => {
             const cols = getColumns(sb);
-            if (cols.length < 2) { 
+            if (!hasMultipleColumns(sb)) { 
                 removeHandles(sb); 
-                if (cols.length === 1) {
-                    for (const c of cols) {
-                        if (c.style.width || c.style.flexBasis) {
-                            widthOps.clear(c, true);
-                        }
-                        if (c.dataset.type === 'NodeSuperBlock' && c.dataset.sbLayout === 'col') {
-                            const nestedCols = getColumns(c);
-                            if (nestedCols.length < 2) {
-                                widthOps.clearBatch(nestedCols, true);
-                            }
-                        }
-                    }
-                }
                 return; 
             }
             
@@ -2637,7 +2600,7 @@ if (layoutCenter) {
             }
         };
 
-        // 拖拽功能 - 大幅简化
+        // 拖拽功能
         const attachDrag = (sb, handle, leftEl, rightEl) => {
             let startX = 0, containerWidth = 0, startLeft = 0, startRight = 0, moved = false;
 
@@ -2698,14 +2661,10 @@ if (layoutCenter) {
                     if (percentEl) percentEl.textContent = `${Math.round(percents[i])}%`;
                 });
                 
-                // 减少 positionHandles 调用频率
-                if (!sb._handleUpdateScheduled) {
-                    sb._handleUpdateScheduled = true;
-                    requestAnimationFrame(() => {
-                        positionHandles(sb);
-                        sb._handleUpdateScheduled = false;
-                    });
-                }
+                // 实时更新手柄位置，让拖拽杆子跟手
+                requestAnimationFrame(() => {
+                    positionHandles(sb);
+                });
             }, 16);
 
             const onPointerUp = async () => {
@@ -2714,21 +2673,15 @@ if (layoutCenter) {
                 const cols = getColumns(sb);
                 
                 if (moved) {
-                    try {
-                        const host = cols[0]?.parentElement || sb;
-                        const gap = getGap(host);
-                        const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
-                        const percents = measureWidths(sb, cols);
-                        const normalized = normalizeWidths(percents);
-                        
-                        cols.forEach((c, i) => {
-                            widthOps.save(c, Math.round(normalized[i] * 1000) / 1000, gapShare);
-                        });
-                        
-                        scheduleBatch(20);
-                    } catch (error) {
-                        console.warn('[Savor] 拖拽结束后保存失败:', error);
-                    }
+                    const host = cols[0]?.parentElement || sb;
+                    const gap = getGap(host);
+                    const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
+                    const percents = measureWidths(sb, cols);
+                    const normalized = normalizeWidths(percents);
+                    cols.forEach((c, i) => {
+                        widthOps.save(c, Math.round(normalized[i] * 1000) / 1000, gapShare);
+                    });
+                    scheduleWidthSave(20);
                 }
                 
                 setTimeout(() => sb.querySelectorAll('.sb-percentage').forEach(el => el.remove()), 300);
@@ -2742,33 +2695,38 @@ if (layoutCenter) {
                 e.preventDefault();
                 e.stopPropagation();
                 const cols = getColumns(sb);
-                if (cols.length < 2) return;
-                
-                cols.forEach(c => c.style.removeProperty('transition'));
-                widthOps.clearBatch(cols, true);
-                positionHandles(sb);
-                
+                if (!hasMultipleColumns(sb)) return;
+
+                // 目标：均分宽度并带动画
+                const targetPercents = cols.map(() => 100 / cols.length);
+
+                // 开始动画：设置过渡并应用目标百分比
+                cols.forEach(c => c.style.transition = 'width 0.25s ease');
+                targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
+
+                // 动画结束后清理样式并持久化
                 setTimeout(async () => {
+                    cols.forEach(c => c.style.removeProperty('transition'));
+                    widthOps.clearBatch(cols, true);
+                    positionHandles(sb);
                     try {
                         const calls = cols
                             .filter(c => c.dataset.nodeId)
                             .map(c => 设置思源块属性(c.dataset.nodeId, { 'style': c.getAttribute('style') || '' }));
                         await Promise.all(calls);
                     } catch (_) {}
-                }, 30);
+                }, 260);
             };
             handle.addEventListener('dblclick', onDoubleClick, { capture: true });
         };
 
-        // 应用保存宽度和初始化超级块 - 大幅简化
-        const applySaved = async (sb, skipApi = false) => {
+        // 应用保存宽度和初始化超级块
+        const applySaved = async (sb) => {
             const cols = getColumns(sb); 
-            if (cols.length < 2) {
+            if (!hasMultipleColumns(sb)) {
                 if (cols.length === 1) {
-                    widthOps.clear(cols[0], true);
-                    if (cols[0].dataset.type === 'NodeSuperBlock' && cols[0].dataset.sbLayout === 'col') {
-                        try { await applySaved(cols[0], skipApi); } catch (_) {}
-                    }
+                    cols[0].style.cssText = '';
+                    delete cols[0].dataset.sbPct;
                 }
                 return;
             }
@@ -2778,8 +2736,6 @@ if (layoutCenter) {
                     if (isFinite(saved[i])) setWidth(sb, c, saved[i]);
                 });
             }
-            // 移除自动创建手柄，改为hover时创建
-            // await positionHandles(sb);
         };
 
         const initSuperBlock = async (sb) => {
@@ -2789,8 +2745,6 @@ if (layoutCenter) {
             const cols = getColumns(sb);
             sb._lastColsCount = cols.length;
             await applySaved(sb);
-            // 移除自动创建手柄，改为hover时创建
-            // await positionHandles(sb);
             
             // 添加hover事件监听
             if (!sb._hoverHandlersAdded) {
@@ -2799,14 +2753,13 @@ if (layoutCenter) {
                 const showHandles = () => {
                     if (sb.classList.contains('sb-resizing')) return;
                     const cols = getColumns(sb);
-                    if (cols.length >= 2) {
+                    if (hasMultipleColumns(sb)) {
                         positionHandles(sb);
                     }
                 };
                 
                 const hideHandles = () => {
                     if (sb.classList.contains('sb-resizing')) return;
-                    // 延迟隐藏，避免拖拽时手柄消失
                     setTimeout(() => {
                         if (!sb.matches(':hover') && !sb.classList.contains('sb-resizing')) {
                             removeHandles(sb);
@@ -2817,67 +2770,58 @@ if (layoutCenter) {
                 sb.addEventListener('mouseenter', showHandles);
                 sb.addEventListener('mouseleave', hideHandles);
                 
-                // 保存事件处理器引用，用于清理
                 sb._showHandlers = showHandles;
                 sb._hideHandlers = hideHandles;
             }
-            
-            let lastW = 0;
-            const ro = new ResizeObserver(throttle(async () => {
-                if (sb.classList.contains('sb-resizing')) return;
-                const w = sb.getBoundingClientRect().width;
-                if (Math.abs(w - lastW) < 0.5) return;
-                lastW = w;
-                // 只在hover时更新手柄位置
-                if (sb.matches(':hover')) {
-                    positionHandles(sb);
-                }
-            }, 120));
-            ro.observe(sb);
-            resizeObservers.set(sb, ro);
         };
 
-        // 扫描和清理 - 大幅简化
+        // 扫描和清理
         let scanScheduled = false;
-        let lastScanTime = 0;
         
         const scan = async () => {
             scanScheduled = false;
-            if (lastScanTime && Date.now() - lastScanTime < 200) return;
-            lastScanTime = Date.now();
             
-            // 处理被拖出超级块的块
-            const blocksToClear = [];
-            const allBlocksWithCustomWidth = document.querySelectorAll('.protyle-wysiwyg [data-node-id][style*="width"]');
-            allBlocksWithCustomWidth.forEach(block => {
-                if (block.dataset.sbPct && !block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]')) {
-                    blocksToClear.push(block);
-                }
-                
-                const parentSB = block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
-                if (parentSB) {
-                    const cols = parentSB._cachedCols || getColumns(parentSB);
-                    if (cols.length === 1 && cols[0] === block) blocksToClear.push(block);
-                }
-                
-                if (block.dataset.type === 'NodeSuperBlock' && block.dataset.sbLayout === 'col') {
-                    const grandParent = block.parentElement.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
-                    if (grandParent) {
-                        const directChildren = Array.from(grandParent.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
-                        if (directChildren.length === 1 && directChildren[0] === block) blocksToClear.push(block);
+            // 新增：处理被拖出超级块的块
+            try {
+                const blocksToClear = [];
+                const allBlocksWithCustomWidth = document.querySelectorAll('.protyle-wysiwyg [data-node-id][data-sb-pct], .protyle-wysiwyg [data-node-id][style*="width"]');
+                allBlocksWithCustomWidth.forEach(block => {
+                    // 情况1：块带有 sbPct 但已不在任意列布局超级块内
+                    if (block.dataset.sbPct && !block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]')) {
+                        blocksToClear.push(block);
                     }
+                    // 情况2：仍在某超级块中，但该超级块只剩一个列，且此块就是该唯一列
+                    const parentSB = block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
+                    if (parentSB) {
+                        const cols = parentSB._cachedCols || getColumns(parentSB);
+                        if (cols.length === 1 && cols[0] === block) blocksToClear.push(block);
+                    }
+                    // 情况3：该块本身是列布局的超级块，且它的直接上级不是超级块，则清除样式
+                    if (block.dataset.type === 'NodeSuperBlock' && block.dataset.sbLayout === 'col') {
+                        const parentEl = block.parentElement;
+                        if (parentEl && parentEl.getAttribute?.('data-type') !== 'NodeSuperBlock') {
+                            blocksToClear.push(block);
+                        }
+                    }
+                });
+                if (blocksToClear.length > 0) {
+                    // 先动画到100%宽度，再清理样式
+                    blocksToClear.forEach(block => {
+                        try { block.style.transition = 'width 0.25s ease'; } catch(_) {}
+                        try { block.style.width = '100%'; } catch(_) {}
+                    });
+                    setTimeout(() => {
+                        blocksToClear.forEach(block => { try { block.style.removeProperty('transition'); } catch(_) {} });
+                        widthOps.clearBatch(blocksToClear, true);
+                        setTimeout(() => {
+                            const calls = blocksToClear
+                                .filter(block => block.dataset.nodeId)
+                                .map(block => 设置思源块属性(block.dataset.nodeId, { 'style': block.getAttribute('style') || '' }));
+                            Promise.all(calls).catch(() => {});
+                        }, 30);
+                    }, 260);
                 }
-            });
-            
-            if (blocksToClear.length > 0) {
-                widthOps.clearBatch(blocksToClear, true);
-                setTimeout(() => {
-                    const calls = blocksToClear
-                        .filter(block => block.dataset.nodeId)
-                        .map(block => 设置思源块属性(block.dataset.nodeId, { 'style': block.getAttribute('style') || '' }));
-                    Promise.all(calls).catch(() => {});
-                }, 500);
-            }
+            } catch (_) {}
             
             // 处理超级块
             const superBlocks = document.querySelectorAll('.protyle-wysiwyg [data-type="NodeSuperBlock"][data-sb-layout="col"]');
@@ -2889,18 +2833,11 @@ if (layoutCenter) {
                     initPromises.push(initSuperBlock(sb));
                 } else {
                     const cols = getColumns(sb);
-                    sb._cachedCols = cols;
                     const existingCols = sb._lastColsCount || 0;
                     
                     if (cols.length !== existingCols) {
                         updatePromises.push(handleColumnChange(sb, cols, existingCols));
                         sb._lastColsCount = cols.length;
-                    }
-                    
-                    // 列数变化后需要重新处理手柄，但不在hover时创建
-                    if (cols.length >= 2 && !sb.querySelector(':scope > .' + HANDLE_CLASS)) {
-                        try { applySaved(sb, true); } catch (_) {}
-                        // 不自动创建手柄，只在hover时创建
                     }
                 }
             }
@@ -2909,18 +2846,16 @@ if (layoutCenter) {
             if (updatePromises.length > 0) await Promise.all(updatePromises);
         };
 
-        const scheduleScan = () => {
+        const scheduleScan = debounce(() => {
             if (scanScheduled) return;
             scanScheduled = true;
-            const delay = lastScanTime && Date.now() - lastScanTime < 500 ? 500 : 50;
             setTimeout(() => {
                 scanScheduled = false;
                 scan();
-            }, delay);
-        };
+            }, 50);
+        }, 50);
 
-        // 启动和停止 - 合并相关函数
-        // 启动和停止 - 大幅简化
+        // 启动和停止
         const start = () => {
             ensureStyles();
             scan();
@@ -2942,40 +2877,6 @@ if (layoutCenter) {
                 bodyObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-type', 'data-sb-layout'] });
             }
             
-            // 清除超级块样式的核心函数
-            const clearSuperBlockStyles = () => {
-                const superBlocks = document.querySelectorAll('.protyle-wysiwyg > .sb-resize-container[style*="width"]');
-                if (superBlocks.length === 0) return;
-                
-                console.log('[Savor] 清除超级块样式，数量:', superBlocks.length);
-                
-                superBlocks.forEach(block => {
-                    // 清除样式
-                    block.style.removeProperty('width');
-                    block.style.removeProperty('flex');
-                    delete block.dataset.sbPct;
-                    if (!block.getAttribute('style')) block.removeAttribute('style');
-                    
-                    // 保存到块属性
-                    if (block.dataset.nodeId) {
-                        setTimeout(async () => {
-                            try {
-                                await 设置思源块属性(block.dataset.nodeId, { 'style': block.getAttribute('style') || '' });
-                            } catch (error) {
-                                console.warn('[Savor] 保存样式失败:', error);
-                            }
-                        }, 100);
-                    }
-                });
-                
-                // 延迟扫描
-                setTimeout(scheduleScan, 20);
-            };
-            
-            // 监听拖拽事件
-            window.siyuan?.eventBus?.on('dragend', clearSuperBlockStyles);
-            window.siyuan?.eventBus?.on('dragend-node', clearSuperBlockStyles);
-            
             window.addEventListener('themechange', scheduleScan, { passive: true });
             window.siyuan?.eventBus?.on('loaded-protyle', () => setTimeout(scheduleScan, 500));
         };
@@ -2987,7 +2888,6 @@ if (layoutCenter) {
             window.removeEventListener('themechange', scheduleScan);
             document.querySelectorAll('.' + SB_CLASS).forEach(sb => {
                 sb.classList.remove(SB_CLASS);
-                // 清理hover事件处理器
                 if (sb._showHandlers) {
                     sb.removeEventListener('mouseenter', sb._showHandlers);
                     sb.removeEventListener('mouseleave', sb._hideHandlers);
@@ -2997,15 +2897,7 @@ if (layoutCenter) {
                 }
             });
             document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
-            for (const [, ro] of resizeObservers.entries()) ro.disconnect();
-            resizeObservers = new WeakMap();
             scanScheduled = false;
-            
-            if (batchTimer) {
-                clearTimeout(batchTimer);
-                batchTimer = null;
-            }
-            apiQueue.clear();
         };
 
         return { start, stop, refresh: scan, cleanup: stop };
