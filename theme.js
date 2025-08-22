@@ -2335,586 +2335,570 @@ if (layoutCenter) {
 
 
     
-    // ========================================
-    // 模块：超级块宽度调节
-    // ========================================
-    const superBlockResizer = (() => {
-        const HANDLE_CLASS = 'sb-resize-handle';
-        const SB_CLASS = 'sb-resize-container';
-        const MIN_PERCENT = 10;
+  // ========================================
+// 模块：超级块宽度调节（优化合并版）
+// ========================================
+const superBlockResizer = (() => {
+    const HANDLE_CLASS = 'sb-resize-handle';
+    const SB_CLASS = 'sb-resize-container';
+    const MIN_PERCENT = 10;
+    let bodyObserver = null, scanScheduled = false, widthSaveBatchTimer = null;
+    const apiRequestQueue = new Map();
 
-        let bodyObserver = null;
+    // 样式注入
+    function ensureStyles() {
+        if (document.getElementById('sb-resizer-styles')) return;
+        const st = document.createElement('style');
+        st.id = 'sb-resizer-styles';
+        st.textContent = `
+        .${SB_CLASS}{position:relative;}
+        .${HANDLE_CLASS}{position:absolute;top:0;bottom:0;width:20px;margin-left:-6px;cursor:col-resize;z-index:1;background:transparent;opacity:0;pointer-events:auto;transition:opacity 0.3s ease;}
+        .${HANDLE_CLASS}::after{content:'';position:absolute;top:8px;bottom:8px;left:3px;width:5px;border-radius:3px;background:var(--b3-border-color);opacity:0.5;}
+        .sb-resizing *{user-select:none!important;}
+        .${HANDLE_CLASS}:hover{opacity: 1;}
+        .sb-percentage{position:absolute;top:7px;right:5px;background:var(--Sv-theme-surface);color:var(--b3-theme-on-background);padding:2px 6px;border-radius:6px;font-size:12px;pointer-events:none;z-index:2;opacity:0;transition:opacity 0.3s ease;}
+        .sb-resizing .sb-percentage{opacity:1;}
+        .sb-add-column-btn{position:absolute;top:2px;bottom:0;right:-30px;width:20px;margin:auto 0;border-radius:6px;background:var(--b3-border-color);color:var(--Sv-list-counter-color);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;opacity:0.3;transition:opacity 0.3s ease;user-select:none!important;border:none;font-size:24px;}
+        .sb-add-column-btn::before{content:'';position:absolute;left:-10px;top:0;width:10px;height:100%;background:transparent;}
+        .${SB_CLASS}:hover .sb-add-column-btn{opacity:0.3;}
+        .sb-add-column-btn:hover{opacity:0.6!important;}
+        `;
+        document.head.appendChild(st);
+    }
 
-        // 样式注入
-        function ensureStyles() {
-            if (document.getElementById('sb-resizer-styles')) return;
-            const st = document.createElement('style');
-            st.id = 'sb-resizer-styles';
-            st.textContent = `
-            .${SB_CLASS}{position:relative;}
-            .${HANDLE_CLASS}{position:absolute;top:0;bottom:0;width:20px;margin-left:-6px;cursor:col-resize;z-index:1;background:transparent;opacity:0;pointer-events:auto;transition:opacity 0.3s ease;}
-            .${HANDLE_CLASS}::after{content:'';position:absolute;top:8px;bottom:8px;left:3px;width:5px;border-radius:3px;background:var(--b3-border-color);opacity:0.5;}
-            .sb-resizing *{user-select:none!important;}
-            .${HANDLE_CLASS}:hover{opacity: 1;}
-            .sb-percentage{position:absolute;top:7px;right:5px;background:var(--Sv-theme-surface);color:var(--b3-theme-on-background);padding:2px 6px;border-radius:6px;font-size:12px;pointer-events:none;z-index:2;opacity:0;transition:opacity 0.3s ease;}
-            .sb-resizing .sb-percentage{opacity:1;}
-            `;
-            document.head.appendChild(st);
+    // 核心工具函数
+    const isColLayout = sb => sb?.getAttribute?.('data-sb-layout') === 'col';
+    const hasMultipleColumns = sb => getColumns(sb).length >= 2;
+    
+    const getColumns = sb => {
+        if (!isColLayout(sb)) return [];
+        let cols = Array.from(sb.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
+        if (cols.length < 2 && sb.firstElementChild) {
+            const firstChild = sb.firstElementChild;
+            if (firstChild?.dataset?.type === 'NodeSuperBlock' && firstChild?.getAttribute?.('data-sb-layout') === 'row') return cols;
+            const nested = Array.from(firstChild.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
+            if (nested.length >= 2) cols = nested;
+        }
+        return cols;
+    };
+    
+    const getGap = host => {
+        try {
+            const cs = getComputedStyle(host);
+            let g = parseFloat(cs.columnGap);
+            if (!isFinite(g) && cs.gap) {
+                const parts = cs.gap.split(' ');
+                g = parseFloat(parts.length === 1 ? parts[0] : parts[1]);
+            }
+            return isFinite(g) ? g : 0;
+        } catch (_) { return 0; }
+    };
+    
+    // 宽度操作
+    const readWidth = el => {
+        const ds = parseFloat(el?.dataset?.sbPct || '');
+        if (isFinite(ds)) return ds;
+        const style = el?.getAttribute?.('style') || '';
+        const mCalc = style.match(/width\s*:\s*calc\(([-\d.]+)%\s*-\s*([-\d.]+)px\)/i);
+        if (mCalc && isFinite(parseFloat(mCalc[1]))) return parseFloat(mCalc[1]);
+        const mPct = style.match(/width\s*:\s*([-\d.]+)%/i);
+        return mPct && isFinite(parseFloat(mPct[1])) ? parseFloat(mPct[1]) : NaN;
+    };
+    
+    const setWidth = (sb, col, percent) => {
+        const v = Math.max(0, isFinite(percent) ? percent : 0);
+        const vRound = Math.round(v * 1000) / 1000;
+        const host = col?.parentElement || sb;
+        const count = getColumns(sb).length || 1;
+        const gap = getGap(host);
+        const gapShare = count > 0 ? (gap * (count - 1)) / count : 0;
+        const calc = `calc(${vRound}% - ${Math.round(gapShare * 10) / 10}px)`;
+        Object.assign(col.style, { flex: '0 0 auto', width: calc });
+        col.dataset.sbPct = String(vRound);
+    };
+    
+    const measureWidths = (sb, cols) => {
+        const host = cols[0]?.parentElement || sb;
+        const w = host.getBoundingClientRect().width || 1;
+        const gap = getGap(host);
+        const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
+        return cols.map(col => ((col.getBoundingClientRect().width + gapShare) / w) * 100);
+    };
+    
+    const normalizeWidths = (values, min = MIN_PERCENT, total = 100) => {
+        const n = values.length; if (!n) return [];
+        const effMin = Math.min(min, total / n);
+        let v = values.map(x => Math.max(0, isFinite(x) ? x : 0));
+        const nonEmpty = v.filter(x => x > 0);
+        const emptyCount = v.length - nonEmpty.length;
+        if (emptyCount > 0) {
+            const remaining = Math.max(0, total - nonEmpty.reduce((a, b) => a + b, 0));
+            const avg = remaining / emptyCount;
+            v = v.map(x => x > 0 ? x : avg);
+        }
+        v = v.map(x => Math.max(effMin, x));
+        const sum = v.reduce((a,b) => a + b, 0);
+        const base = effMin * n;
+        const varSum = Math.max(0, sum - base);
+        const targetVar = Math.max(0, total - base);
+        if (varSum === 0) return v.map(() => effMin);
+        const factor = targetVar / varSum;
+        return v.map(x => effMin + (x - effMin) * factor);
+    };
+
+    // 宽度持久化保存（批量）
+    const flushWidthSaves = async () => {
+        if (widthSaveBatchTimer) { clearTimeout(widthSaveBatchTimer); widthSaveBatchTimer = null; }
+        if (apiRequestQueue.size === 0) return;
+        const latestById = new Map();
+        for (const [key, req] of apiRequestQueue.entries()) {
+            const [id] = key.split('-');
+            latestById.set(id, req);
+        }
+        apiRequestQueue.clear();
+        try { await Promise.all(Array.from(latestById.values()).map(fn => fn())); } catch (e) {}
+    };
+
+    const scheduleWidthSave = (delay = 50) => {
+        if (widthSaveBatchTimer) clearTimeout(widthSaveBatchTimer);
+        widthSaveBatchTimer = setTimeout(flushWidthSaves, delay);
+    };
+
+    const widthOps = {
+        save: async (colEl, pct, gapShare) => {
+            const id = colEl?.dataset?.nodeId;
+            if (!id) return;
+            const vRound = Math.round(pct * 1000) / 1000;
+            const gapRound = Math.round((gapShare || 0) * 10) / 10;
+            const calc = `calc(${vRound}% - ${gapRound}px)`;
+            Object.assign(colEl.style, { flex: '0 0 auto', width: calc, flexBasis: 'auto' });
+            colEl.dataset.sbPct = String(vRound);
+            const key = `${id}-${Date.now()}`;
+            apiRequestQueue.set(key, async () => {
+                try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); }
+                catch (e) { /* 保存块样式失败 */ }
+            });
+        },
+        clear: async (colEl, skipApi = false) => {
+            const id = colEl?.dataset?.nodeId; if (!id) return;
+            ['width','flex'].forEach(prop => colEl.style.removeProperty(prop));
+            delete colEl.dataset.sbPct;
+            if (!colEl.getAttribute('style')) colEl.removeAttribute('style');
+            if (!skipApi) {
+                setTimeout(async () => {
+                    try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); } catch (_) {}
+                }, 50);
+            }
+        },
+        clearBatch: (elements, skipApi = false) => {
+            elements.forEach(el => {
+                ['width','flex'].forEach(prop => el.style.removeProperty(prop));
+                delete el.dataset.sbPct;
+                if (!el.getAttribute('style')) el.removeAttribute('style');
+            });
+            if (!skipApi) {
+                setTimeout(() => {
+                    const calls = elements.filter(e => e.dataset.nodeId)
+                        .map(e => 设置思源块属性(e.dataset.nodeId, { 'style': e.getAttribute('style') || '' }));
+                    Promise.all(calls).catch(() => {});
+                }, 100);
+            }
+        }
+    };
+
+    // 列数变化处理
+    const handleColumnChange = async (sb, cols, prevCount) => {
+        if (!hasMultipleColumns(sb)) {
+            const allCols = getColumns(sb);
+            if (allCols.length === 1) {
+                const onlyCol = allCols[0];
+                onlyCol.style.transition = 'width 0.25s ease';
+                setWidth(sb, onlyCol, 100);
+                setTimeout(() => {
+                    onlyCol.style.removeProperty('transition');
+                    widthOps.clear(onlyCol, true);
+                }, 260);
+            }
+            return;
+        }
+        
+        const saved = cols.map(readWidth);
+        const hasSaved = saved.some(v => isFinite(v));
+        let targetPercents = [];
+        if (hasSaved) {
+            targetPercents = normalizeWidths(saved, MIN_PERCENT, 100);
+        } else {
+            targetPercents = cols.map(() => 100 / cols.length);
+            if (cols.length < prevCount) {
+                const base = 100 / cols.length;
+                const bonus = Math.min(base * 0.3, 10);
+                targetPercents = cols.map(() => base + bonus);
+            }
+            const total = targetPercents.reduce((sum, p) => sum + p, 0);
+            if (total !== 100) {
+                const factor = 100 / total;
+                targetPercents = targetPercents.map(p => p * factor);
+            }
         }
 
-        // 核心工具函数
-        const isColLayout = sb => sb?.getAttribute?.('data-sb-layout') === 'col';
-        const hasMultipleColumns = sb => getColumns(sb).length >= 2;
-        
-        const getColumns = sb => {
-            if (!isColLayout(sb)) return [];
-            let cols = Array.from(sb.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
-            if (cols.length < 2 && sb.firstElementChild) {
-                const nested = Array.from(sb.firstElementChild.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
-                if (nested.length >= 2) cols = nested;
-            }
-            return cols;
-        };
-        
-        const getGap = host => {
+        cols.forEach(c => c.style.transition = 'width 0.25s ease');
+        targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
+        setTimeout(() => {
+            cols.forEach(c => c.style.removeProperty('transition'));
             try {
-                const cs = getComputedStyle(host);
-                let g = parseFloat(cs.columnGap);
-                if (!isFinite(g) && cs.gap) {
-                    const parts = cs.gap.split(' ');
-                    g = parseFloat(parts.length === 1 ? parts[0] : parts[1]);
-                }
-                return isFinite(g) ? g : 0;
-            } catch (_) { return 0; }
-        };
-        
-        // 宽度操作
-        const readWidth = el => {
-            const ds = parseFloat(el?.dataset?.sbPct || '');
-            if (isFinite(ds)) return ds;
-            const style = el?.getAttribute?.('style') || '';
-            const mCalc = style.match(/width\s*:\s*calc\(([-\d.]+)%\s*-\s*([-\d.]+)px\)/i);
-            if (mCalc && isFinite(parseFloat(mCalc[1]))) return parseFloat(mCalc[1]);
-            const mPct = style.match(/width\s*:\s*([-\d.]+)%/i);
-            return mPct && isFinite(parseFloat(mPct[1])) ? parseFloat(mPct[1]) : NaN;
-        };
-        
-        const setWidth = (sb, col, percent) => {
-            const v = Math.max(0, isFinite(percent) ? percent : 0);
-            const vRound = Math.round(v * 1000) / 1000;
-            const host = col?.parentElement || sb;
-            const count = getColumns(sb).length || 1;
-            const gap = getGap(host);
-            const gapShare = count > 0 ? (gap * (count - 1)) / count : 0;
-            const calc = `calc(${vRound}% - ${Math.round(gapShare * 10) / 10}px)`;
-            
-            Object.assign(col.style, { flex: '0 0 auto', width: calc });
-            col.dataset.sbPct = String(vRound);
-        };
-        
-        const measureWidths = (sb, cols) => {
-            const host = cols[0]?.parentElement || sb;
-            const w = host.getBoundingClientRect().width || 1;
-            const gap = getGap(host);
-            const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
-            return cols.map(col => ((col.getBoundingClientRect().width + gapShare) / w) * 100);
-        };
-        
-        const normalizeWidths = (values, min = MIN_PERCENT, total = 100) => {
-            const n = values.length; if (!n) return [];
-            const effMin = Math.min(min, total / n);
-            let v = values.map(x => Math.max(0, isFinite(x) ? x : 0));
-            
-            const nonEmpty = v.filter(x => x > 0);
-            const emptyCount = v.length - nonEmpty.length;
-            if (emptyCount > 0) {
-                const remaining = Math.max(0, total - nonEmpty.reduce((a, b) => a + b, 0));
-                const avg = remaining / emptyCount;
-                v = v.map(x => x > 0 ? x : avg);
-            }
-            
-            v = v.map(x => Math.max(effMin, x));
-            const sum = v.reduce((a,b) => a + b, 0);
-            const base = effMin * n;
-            const varSum = Math.max(0, sum - base);
-            const targetVar = Math.max(0, total - base);
-            
-            if (varSum === 0) return v.map(() => effMin);
-            const factor = targetVar / varSum;
-            return v.map(x => effMin + (x - effMin) * factor);
-        };
-
-        // 新增：超级块列宽持久化保存（批量）
-        const apiRequestQueue = new Map();
-        let widthSaveBatchTimer = null;
-
-        const flushWidthSaves = async () => {
-            if (widthSaveBatchTimer) { clearTimeout(widthSaveBatchTimer); widthSaveBatchTimer = null; }
-            if (apiRequestQueue.size === 0) return;
-            // 按块 ID 只保留最后一次
-            const latestById = new Map();
-            for (const [key, req] of apiRequestQueue.entries()) {
-                const [id] = key.split('-');
-                latestById.set(id, req);
-            }
-            apiRequestQueue.clear();
-            try {
-                await Promise.all(Array.from(latestById.values()).map(fn => fn()));
-            } catch (e) {
-                console.warn('[Savor] 宽度保存批量更新失败:', e);
-            }
-        };
-
-        const scheduleWidthSave = (delay = 50) => {
-            if (widthSaveBatchTimer) clearTimeout(widthSaveBatchTimer);
-            widthSaveBatchTimer = setTimeout(flushWidthSaves, delay);
-        };
-
-        const widthOps = {
-            save: async (colEl, pct, gapShare) => {
-                const id = colEl?.dataset?.nodeId;
-                if (!id) return;
-                const vRound = Math.round(pct * 1000) / 1000;
-                const gapRound = Math.round((gapShare || 0) * 10) / 10;
-                const calc = `calc(${vRound}% - ${gapRound}px)`;
-                Object.assign(colEl.style, { flex: '0 0 auto', width: calc, flexBasis: 'auto' });
-                colEl.dataset.sbPct = String(vRound);
-                const key = `${id}-${Date.now()}`;
-                apiRequestQueue.set(key, async () => {
-                    try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); }
-                    catch (e) { console.warn(`[Savor] 保存块样式失败 ${id}:`, e); }
-                });
-            },
-            clear: async (colEl, skipApi = false) => {
-                const id = colEl?.dataset?.nodeId; if (!id) return;
-                ['width','flex'].forEach(prop => colEl.style.removeProperty(prop));
-                delete colEl.dataset.sbPct;
-                if (!colEl.getAttribute('style')) colEl.removeAttribute('style');
-                if (!skipApi) {
-                    setTimeout(async () => {
-                        try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); } catch (_) {}
-                    }, 50);
-                }
-            },
-            clearBatch: (elements, skipApi = false) => {
-                elements.forEach(el => {
-                    ['width','flex'].forEach(prop => el.style.removeProperty(prop));
-                    delete el.dataset.sbPct;
-                    if (!el.getAttribute('style')) el.removeAttribute('style');
-                });
-                if (!skipApi) {
-                    setTimeout(() => {
-                        const calls = elements.filter(e => e.dataset.nodeId)
-                            .map(e => 设置思源块属性(e.dataset.nodeId, { 'style': e.getAttribute('style') || '' }));
-                        Promise.all(calls).catch(() => {});
-                    }, 100);
-                }
-            }
-        };
-
-        // 列数变化和手柄管理
-        const handleColumnChange = async (sb, cols, prevCount) => {
-            if (!hasMultipleColumns(sb)) {
-                const allCols = getColumns(sb);
-                if (allCols.length === 1) {
-                    const onlyCol = allCols[0];
-                    // 动画到100%再清理
-                    onlyCol.style.transition = 'width 0.25s ease';
-                    setWidth(sb, onlyCol, 100);
-                    setTimeout(() => {
-                        onlyCol.style.removeProperty('transition');
-                        widthOps.clear(onlyCol, true);
-                    }, 260);
-                }
-                return;
-            }
-            			const saved = cols.map(readWidth);
-			const hasSaved = saved.some(v => isFinite(v));
-			let targetPercents = [];
-			if (hasSaved) {
-				targetPercents = normalizeWidths(saved, MIN_PERCENT, 100);
-			} else {
-				targetPercents = cols.map(() => 100 / cols.length);
-				if (cols.length < prevCount) {
-					const base = 100 / cols.length;
-					const bonus = Math.min(base * 0.3, 10);
-					targetPercents = cols.map(() => base + bonus);
-				}
-				const total = targetPercents.reduce((sum, p) => sum + p, 0);
-				if (total !== 100) {
-					const factor = 100 / total;
-					targetPercents = targetPercents.map(p => p * factor);
-				}
-			}
-
-			// 动画到目标百分比，再保存
-			cols.forEach(c => c.style.transition = 'width 0.25s ease');
-			targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
-			setTimeout(() => {
-				cols.forEach(c => c.style.removeProperty('transition'));
-				try {
-					const host = cols[0]?.parentElement || sb;
-					const gap = getGap(host);
-					const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
-					const percents = measureWidths(sb, cols);
-					cols.forEach((c, i) => widthOps.save(c, Math.round(percents[i] * 1000) / 1000, gapShare));
-					scheduleWidthSave(20);
-				} catch (_) {}
-			}, 260);
-        };
-
-        const removeHandles = sb => sb.querySelectorAll(':scope > .' + HANDLE_CLASS).forEach(h => h.remove());
-
-        const positionHandles = async (sb) => {
-            const cols = getColumns(sb);
-            if (!hasMultipleColumns(sb)) { 
-                removeHandles(sb); 
-                return; 
-            }
-            
-            const rect = sb.getBoundingClientRect();
-            const need = cols.length - 1;
-            const existing = sb.querySelectorAll(':scope > .' + HANDLE_CLASS);
-            
-            if (existing.length === need) {
-                // 更新现有手柄位置
-                for (let i = 0; i < need; i++) {
-                    const leftRect = cols[i].getBoundingClientRect();
-                    const rightRect = cols[i + 1].getBoundingClientRect();
-                    const centerX = ((leftRect.right + rightRect.left) / 2) - rect.left;
-                    existing[i].style.left = centerX + 'px';
-                }
-            } else {
-                // 重新创建手柄
-                removeHandles(sb);
-                for (let i = 0; i < need; i++) {
-                    const leftRect = cols[i].getBoundingClientRect();
-                    const rightRect = cols[i + 1].getBoundingClientRect();
-                    const centerX = ((leftRect.right + rightRect.left) / 2) - rect.left;
-                    const handle = document.createElement('div');
-                    handle.className = HANDLE_CLASS;
-                    handle.style.left = centerX + 'px';
-                    attachDrag(sb, handle, cols[i], cols[i + 1]);
-                    sb.appendChild(handle);
-                }
-            }
-        };
-
-        // 拖拽功能
-        const attachDrag = (sb, handle, leftEl, rightEl) => {
-            let startX = 0, containerWidth = 0, startLeft = 0, startRight = 0, moved = false;
-
-            const onPointerDown = (e) => {
-                if (e.pointerType === 'mouse' && e.button !== 0) return;
-                e.preventDefault();
-                
-                const rect = sb.getBoundingClientRect();
-                containerWidth = rect.width || 1;
-                startX = e.clientX;
-                const cols = getColumns(sb);
-                const saved = cols.map(readWidth);
-                const measured = measureWidths(sb, cols);
-                const baseline = normalizeWidths(saved.some(v => isFinite(v)) ? saved : measured, MIN_PERCENT, 100);
-                const li = cols.indexOf(leftEl), ri = cols.indexOf(rightEl);
-                startLeft = baseline[li] ?? 50;
-                startRight = baseline[ri] ?? 50;
-                moved = false;
-                
-                sb.classList.add('sb-resizing');
-                cols.forEach(c => c.style.transition = 'none');
-
-                handle.setPointerCapture?.(e.pointerId);
-                window.addEventListener('pointermove', onPointerMove);
-                window.addEventListener('pointerup', onPointerUp, { once: true });
-            };
-
-            const onPointerMove = throttle((e) => {
-                const dx = e.clientX - startX;
-                const dxPct = (dx / (containerWidth || 1)) * 100;
-                if (Math.abs(dx) < 1) return;
-                
-                moved = true;
-                const pairBudget = (startLeft + startRight);
-                const min = Math.min(MIN_PERCENT, pairBudget / 2);
-                let newLeft = Math.min(Math.max(min, startLeft + dxPct), pairBudget - min);
-                const newRight = pairBudget - newLeft;
-                
-                const cols = getColumns(sb);
-                const li = cols.indexOf(leftEl), ri = cols.indexOf(rightEl);
-                if (li >= 0) setWidth(sb, cols[li], newLeft);
-                if (ri >= 0) setWidth(sb, cols[ri], newRight);
-                
-                // 显示百分比
-                if (!sb.querySelector('.sb-percentage')) {
-                    cols.forEach(col => {
-                        if (!col.querySelector('.sb-percentage')) {
-                            const percentEl = document.createElement('div');
-                            percentEl.className = 'sb-percentage';
-                            col.appendChild(percentEl);
-                        }
-                    });
-                }
-                
+                const host = cols[0]?.parentElement || sb;
+                const gap = getGap(host);
+                const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
                 const percents = measureWidths(sb, cols);
-                cols.forEach((col, i) => {
-                    const percentEl = col.querySelector('.sb-percentage');
-                    if (percentEl) percentEl.textContent = `${Math.round(percents[i])}%`;
-                });
-                
-                // 实时更新手柄位置，让拖拽杆子跟手
-                requestAnimationFrame(() => {
-                    positionHandles(sb);
-                });
-            }, 16);
+                cols.forEach((c, i) => widthOps.save(c, Math.round(percents[i] * 1000) / 1000, gapShare));
+                scheduleWidthSave(20);
+            } catch (_) {}
+        }, 260);
+    };
 
-            const onPointerUp = async () => {
-                window.removeEventListener('pointermove', onPointerMove);
-                sb.classList.remove('sb-resizing');
-                const cols = getColumns(sb);
-                
-                if (moved) {
-                    const host = cols[0]?.parentElement || sb;
-                    const gap = getGap(host);
-                    const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
-                    const percents = measureWidths(sb, cols);
-                    const normalized = normalizeWidths(percents);
-                    cols.forEach((c, i) => {
-                        widthOps.save(c, Math.round(normalized[i] * 1000) / 1000, gapShare);
-                    });
-                    scheduleWidthSave(20);
-                }
-                
-                setTimeout(() => sb.querySelectorAll('.sb-percentage').forEach(el => el.remove()), 300);
-                cols.forEach(c => c.style.removeProperty('transition'));
-                positionHandles(sb);
-            };
+    // 移除添加列按钮
+    const removeAddButtons = sb => sb.querySelectorAll(':scope > .sb-add-column-btn').forEach(btn => btn.remove());
 
-            handle.addEventListener('pointerdown', onPointerDown, { capture: true });
-            
-            const onDoubleClick = async (e) => {
+    // 手柄管理
+    const removeHandles = sb => sb.querySelectorAll(':scope > .' + HANDLE_CLASS).forEach(h => h.remove());
+
+    const positionHandles = async (sb) => {
+        const cols = getColumns(sb);
+        if (!hasMultipleColumns(sb)) { 
+            removeHandles(sb); 
+            removeAddButtons(sb);
+            return; 
+        }
+        
+        const rect = sb.getBoundingClientRect();
+        const need = cols.length - 1;
+        const existing = sb.querySelectorAll(':scope > .' + HANDLE_CLASS);
+        
+        if (existing.length === need) {
+            for (let i = 0; i < need; i++) {
+                const leftRect = cols[i].getBoundingClientRect();
+                const rightRect = cols[i + 1].getBoundingClientRect();
+                const centerX = ((leftRect.right + rightRect.left) / 2) - rect.left;
+                existing[i].style.left = centerX + 'px';
+            }
+        } else {
+            removeHandles(sb);
+            for (let i = 0; i < need; i++) {
+                const leftRect = cols[i].getBoundingClientRect();
+                const rightRect = cols[i + 1].getBoundingClientRect();
+                const centerX = ((leftRect.right + rightRect.left) / 2) - rect.left;
+                const handle = document.createElement('div');
+                handle.className = HANDLE_CLASS;
+                handle.style.left = centerX + 'px';
+                attachDrag(sb, handle, cols[i], cols[i + 1]);
+                sb.appendChild(handle);
+            }
+        }
+
+        removeAddButtons(sb);
+        const isTopLevel = !sb.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]:not(:scope)');
+        if (cols.length > 0 && isTopLevel) {
+            const lastCol = cols[cols.length - 1];
+            const btn = document.createElement('div');
+            btn.className = 'sb-add-column-btn protyle-custom';
+            btn.textContent = '+';
+            btn.type = 'div';
+            btn.setAttribute('unselectable', 'on');
+            btn.setAttribute('contenteditable', 'false');
+            sb.appendChild(btn);
+
+            btn.addEventListener('click', async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                const cols = getColumns(sb);
-                if (!hasMultipleColumns(sb)) return;
-
-                // 目标：均分宽度并带动画
-                const targetPercents = cols.map(() => 100 / cols.length);
-
-                // 开始动画：设置过渡并应用目标百分比
-                cols.forEach(c => c.style.transition = 'width 0.25s ease');
-                targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
-
-                // 动画结束后清理样式并持久化
-                setTimeout(async () => {
-                    cols.forEach(c => c.style.removeProperty('transition'));
-                    widthOps.clearBatch(cols, true);
-                    positionHandles(sb);
+                btn.blur();
+                if (window.getSelection) window.getSelection().removeAllRanges();
+                const lastID = lastCol.getAttribute('data-node-id');
+                if (lastID) {
                     try {
-                        const calls = cols
-                            .filter(c => c.dataset.nodeId)
-                            .map(c => 设置思源块属性(c.dataset.nodeId, { 'style': c.getAttribute('style') || '' }));
-                        await Promise.all(calls);
-                    } catch (_) {}
-                }, 260);
-            };
-            handle.addEventListener('dblclick', onDoubleClick, { capture: true });
-        };
-
-        // 应用保存宽度和初始化超级块
-        const applySaved = async (sb) => {
-            const cols = getColumns(sb); 
-            if (!hasMultipleColumns(sb)) {
-                if (cols.length === 1) {
-                    cols[0].style.cssText = '';
-                    delete cols[0].dataset.sbPct;
+                        const response = await fetch('/api/block/insertBlock', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ dataType: 'markdown', data: '', previousID: lastID })
+                        });
+                        if (response.ok) setTimeout(() => scheduleScan(), 100);
+                    } catch (error) { /* 插入新块失败 */ }
                 }
-                return;
-            }
-            const saved = cols.map(readWidth);
-            if (saved.some(v => isFinite(v))) {
-                cols.forEach((c, i) => {
-                    if (isFinite(saved[i])) setWidth(sb, c, saved[i]);
-                });
-            }
-        };
+            });
+        }
+    };
 
-        const initSuperBlock = async (sb) => {
-            if (!sb || sb._sbResizerInit || !isColLayout(sb)) return;
-            sb._sbResizerInit = true;
-            sb.classList.add(SB_CLASS);
+    // 拖拽功能
+    const attachDrag = (sb, handle, leftEl, rightEl) => {
+        let startX = 0, containerWidth = 0, startLeft = 0, startRight = 0, moved = false;
+
+        const onPointerDown = (e) => {
+            if (e.pointerType === 'mouse' && e.button !== 0) return;
+            e.preventDefault();
+            const rect = sb.getBoundingClientRect();
+            containerWidth = rect.width || 1;
+            startX = e.clientX;
             const cols = getColumns(sb);
-            sb._lastColsCount = cols.length;
-            await applySaved(sb);
-            
-            // 添加hover事件监听
-            if (!sb._hoverHandlersAdded) {
-                sb._hoverHandlersAdded = true;
-                
-                const showHandles = () => {
-                    if (sb.classList.contains('sb-resizing')) return;
-                    const cols = getColumns(sb);
-                    if (hasMultipleColumns(sb)) {
-                        positionHandles(sb);
-                    }
-                };
-                
-                const hideHandles = () => {
-                    if (sb.classList.contains('sb-resizing')) return;
-                    setTimeout(() => {
-                        if (!sb.matches(':hover') && !sb.classList.contains('sb-resizing')) {
-                            removeHandles(sb);
-                        }
-                    }, 100);
-                };
-                
-                sb.addEventListener('mouseenter', showHandles);
-                sb.addEventListener('mouseleave', hideHandles);
-                
-                sb._showHandlers = showHandles;
-                sb._hideHandlers = hideHandles;
-            }
+            const saved = cols.map(readWidth);
+            const measured = measureWidths(sb, cols);
+            const baseline = normalizeWidths(saved.some(v => isFinite(v)) ? saved : measured, MIN_PERCENT, 100);
+            const li = cols.indexOf(leftEl), ri = cols.indexOf(rightEl);
+            startLeft = baseline[li] ?? 50;
+            startRight = baseline[ri] ?? 50;
+            moved = false;
+            sb.classList.add('sb-resizing');
+            cols.forEach(c => c.style.transition = 'none');
+            handle.setPointerCapture?.(e.pointerId);
+            window.addEventListener('pointermove', onPointerMove);
+            window.addEventListener('pointerup', onPointerUp, { once: true });
         };
 
-        // 扫描和清理
-        let scanScheduled = false;
+        const onPointerMove = throttle((e) => {
+            const dx = e.clientX - startX;
+            const dxPct = (dx / (containerWidth || 1)) * 100;
+            if (Math.abs(dx) < 1) return;
+            moved = true;
+            const pairBudget = (startLeft + startRight);
+            const min = Math.min(MIN_PERCENT, pairBudget / 2);
+            let newLeft = Math.min(Math.max(min, startLeft + dxPct), pairBudget - min);
+            const newRight = pairBudget - newLeft;
+            const cols = getColumns(sb);
+            const li = cols.indexOf(leftEl), ri = cols.indexOf(rightEl);
+            if (li >= 0) setWidth(sb, cols[li], newLeft);
+            if (ri >= 0) setWidth(sb, cols[ri], newRight);
+            if (!sb.querySelector('.sb-percentage')) {
+                cols.forEach(col => {
+                    if (!col.querySelector('.sb-percentage')) {
+                        const percentEl = document.createElement('div');
+                        percentEl.className = 'sb-percentage';
+                        col.appendChild(percentEl);
+                    }
+                });
+            }
+            const percents = measureWidths(sb, cols);
+            cols.forEach((col, i) => {
+                const percentEl = col.querySelector('.sb-percentage');
+                if (percentEl) percentEl.textContent = `${Math.round(percents[i])}%`;
+            });
+            requestAnimationFrame(() => positionHandles(sb));
+        }, 16);
+
+        const onPointerUp = async () => {
+            window.removeEventListener('pointermove', onPointerMove);
+            sb.classList.remove('sb-resizing');
+            const cols = getColumns(sb);
+            if (moved) {
+                const host = cols[0]?.parentElement || sb;
+                const gap = getGap(host);
+                const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
+                const percents = measureWidths(sb, cols);
+                const normalized = normalizeWidths(percents);
+                cols.forEach((c, i) => widthOps.save(c, Math.round(normalized[i] * 1000) / 1000, gapShare));
+                scheduleWidthSave(20);
+            }
+            setTimeout(() => sb.querySelectorAll('.sb-percentage').forEach(el => el.remove()), 300);
+            cols.forEach(c => c.style.removeProperty('transition'));
+            positionHandles(sb);
+        };
+
+        handle.addEventListener('pointerdown', onPointerDown, { capture: true });
         
-        const scan = async () => {
-            scanScheduled = false;
-            
-            // 新增：处理被拖出超级块的块
-            try {
-                const blocksToClear = [];
-                const allBlocksWithCustomWidth = document.querySelectorAll('.protyle-wysiwyg [data-node-id][data-sb-pct], .protyle-wysiwyg [data-node-id][style*="width"]');
-                allBlocksWithCustomWidth.forEach(block => {
-                    // 情况1：块带有 sbPct 但已不在任意列布局超级块内
-                    if (block.dataset.sbPct && !block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]')) {
-                        blocksToClear.push(block);
+        const onDoubleClick = async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const cols = getColumns(sb);
+            if (!hasMultipleColumns(sb)) return;
+            const targetPercents = cols.map(() => 100 / cols.length);
+            cols.forEach(c => c.style.transition = 'width 0.25s ease');
+            targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
+            setTimeout(async () => {
+                cols.forEach(c => c.style.removeProperty('transition'));
+                widthOps.clearBatch(cols, true);
+                positionHandles(sb);
+                try {
+                    const calls = cols.filter(c => c.dataset.nodeId)
+                        .map(c => 设置思源块属性(c.dataset.nodeId, { 'style': c.getAttribute('style') || '' }));
+                    await Promise.all(calls);
+                } catch (_) {}
+            }, 260);
+        };
+        handle.addEventListener('dblclick', onDoubleClick, { capture: true });
+    };
+
+    // 应用保存宽度和初始化超级块
+    const applySaved = async (sb) => {
+        const cols = getColumns(sb); 
+        if (!hasMultipleColumns(sb)) {
+            if (cols.length === 1) { cols[0].style.cssText = ''; delete cols[0].dataset.sbPct; }
+            return;
+        }
+        const saved = cols.map(readWidth);
+        if (saved.some(v => isFinite(v))) {
+            cols.forEach((c, i) => { if (isFinite(saved[i])) setWidth(sb, c, saved[i]); });
+        }
+    };
+
+    const initSuperBlock = async (sb) => {
+        if (!sb || sb._sbResizerInit || !isColLayout(sb)) return;
+        sb._sbResizerInit = true;
+        sb.classList.add(SB_CLASS);
+        const cols = getColumns(sb);
+        sb._lastColsCount = cols.length;
+        await applySaved(sb);
+        if (!sb._hoverHandlersAdded) {
+            sb._hoverHandlersAdded = true;
+            const showHandles = () => {
+                if (sb.classList.contains('sb-resizing')) return;
+                const cols = getColumns(sb);
+                if (hasMultipleColumns(sb)) positionHandles(sb);
+            };
+            const hideHandles = () => {
+                if (sb.classList.contains('sb-resizing')) return;
+                setTimeout(() => {
+                    if (!sb.matches(':hover') && !sb.classList.contains('sb-resizing')) {
+                        removeHandles(sb);
+                        removeAddButtons(sb);
                     }
-                    // 情况2：仍在某超级块中，但该超级块只剩一个列，且此块就是该唯一列
-                    const parentSB = block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
-                    if (parentSB) {
-                        const cols = parentSB._cachedCols || getColumns(parentSB);
-                        if (cols.length === 1 && cols[0] === block) blocksToClear.push(block);
-                    }
-                    // 情况3：该块本身是列布局的超级块，且它的直接上级不是超级块，则清除样式
-                    if (block.dataset.type === 'NodeSuperBlock' && block.dataset.sbLayout === 'col') {
-                        const parentEl = block.parentElement;
-                        if (parentEl && parentEl.getAttribute?.('data-type') !== 'NodeSuperBlock') {
-                            blocksToClear.push(block);
-                        }
-                    }
-                });
-                if (blocksToClear.length > 0) {
-                    // 先动画到100%宽度，再清理样式
-                    blocksToClear.forEach(block => {
-                        try { block.style.transition = 'width 0.25s ease'; } catch(_) {}
-                        try { block.style.width = '100%'; } catch(_) {}
-                    });
+                }, 100);
+            };
+            sb.addEventListener('mouseenter', showHandles);
+            sb.addEventListener('mouseleave', hideHandles);
+            sb._showHandlers = showHandles;
+            sb._hideHandlers = hideHandles;
+        }
+    };
+
+    // 扫描和清理
+    const scan = async () => {
+        scanScheduled = false;
+        try {
+            const blocksToClear = [];
+            const allBlocksWithCustomWidth = document.querySelectorAll('.protyle-wysiwyg [data-node-id][data-sb-pct], .protyle-wysiwyg [data-node-id][style*="width"]');
+            allBlocksWithCustomWidth.forEach(block => {
+                if (block.dataset.sbPct && !block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]')) blocksToClear.push(block);
+                const parentSB = block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
+                if (parentSB) {
+                    const cols = parentSB._cachedCols || getColumns(parentSB);
+                    if (cols.length === 1 && cols[0] === block) blocksToClear.push(block);
+                }
+                if (block.dataset.type === 'NodeSuperBlock' && block.dataset.sbLayout === 'col') {
+                    const parentEl = block.parentElement;
+                    if (parentEl && parentEl.getAttribute?.('data-type') !== 'NodeSuperBlock') blocksToClear.push(block);
+                }
+            });
+            if (blocksToClear.length > 0) {
+                blocksToClear.forEach(block => { try { block.style.transition = 'width 0.25s ease'; block.style.width = '100%'; } catch(_) {} });
+                setTimeout(() => {
+                    blocksToClear.forEach(block => { try { block.style.removeProperty('transition'); } catch(_) {} });
+                    widthOps.clearBatch(blocksToClear, true);
                     setTimeout(() => {
-                        blocksToClear.forEach(block => { try { block.style.removeProperty('transition'); } catch(_) {} });
-                        widthOps.clearBatch(blocksToClear, true);
-                        setTimeout(() => {
-                            const calls = blocksToClear
-                                .filter(block => block.dataset.nodeId)
-                                .map(block => 设置思源块属性(block.dataset.nodeId, { 'style': block.getAttribute('style') || '' }));
-                            Promise.all(calls).catch(() => {});
-                        }, 30);
-                    }, 260);
-                }
-            } catch (_) {}
-            
-            // 处理超级块
-            const superBlocks = document.querySelectorAll('.protyle-wysiwyg [data-type="NodeSuperBlock"][data-sb-layout="col"]');
-            const initPromises = [];
-            const updatePromises = [];
-            
-            for (const sb of superBlocks) {
-                if (!sb._sbResizerInit) {
-                    initPromises.push(initSuperBlock(sb));
-                } else {
-                    const cols = getColumns(sb);
-                    const existingCols = sb._lastColsCount || 0;
-                    
-                    if (cols.length !== existingCols) {
-                        updatePromises.push(handleColumnChange(sb, cols, existingCols));
-                        sb._lastColsCount = cols.length;
-                    }
+                        const calls = blocksToClear.filter(block => block.dataset.nodeId)
+                            .map(block => 设置思源块属性(block.dataset.nodeId, { 'style': block.getAttribute('style') || '' }));
+                        Promise.all(calls).catch(() => {});
+                    }, 30);
+                }, 260);
+            }
+        } catch (_) {}
+        
+
+        
+        const colSuperBlocks = document.querySelectorAll('.protyle-wysiwyg [data-type="NodeSuperBlock"][data-sb-layout="col"]');
+        const initPromises = [];
+        const updatePromises = [];
+        for (const sb of colSuperBlocks) {
+            if (!sb._sbResizerInit) {
+                initPromises.push(initSuperBlock(sb));
+            } else {
+                const cols = getColumns(sb);
+                const existingCols = sb._lastColsCount || 0;
+                if (cols.length !== existingCols) {
+                    updatePromises.push(handleColumnChange(sb, cols, existingCols));
+                    sb._lastColsCount = cols.length;
                 }
             }
-            
-            if (initPromises.length > 0) await Promise.all(initPromises);
-            if (updatePromises.length > 0) await Promise.all(updatePromises);
-        };
+        }
+        if (initPromises.length > 0) await Promise.all(initPromises);
+        if (updatePromises.length > 0) await Promise.all(updatePromises);
+    };
 
-        const scheduleScan = debounce(() => {
-            if (scanScheduled) return;
-            scanScheduled = true;
-            setTimeout(() => {
-                scanScheduled = false;
-                scan();
-            }, 50);
-        }, 50);
+    const scheduleScan = debounce(() => {
+        if (scanScheduled) return;
+        scanScheduled = true;
+        setTimeout(() => { scanScheduled = false; scan(); }, 50);
+    }, 50);
 
-        // 启动和停止
-        const start = () => {
-            ensureStyles();
-            scan();
-            if (!bodyObserver) {
-                bodyObserver = new MutationObserver(mutations => {
-                    let shouldScan = false;
-                    for (const x of mutations) {
-                        if (x.type === 'childList' && x.target?.closest?.('.protyle-wysiwyg')) {
-                            shouldScan = true;
-                            break;
-                        }
-                        if (x.type === 'attributes' && x.target?.matches?.('[data-type="NodeSuperBlock"]')) {
-                            shouldScan = true;
-                            break;
-                        }
-                    }
-                    if (shouldScan) scheduleScan();
-                });
-                bodyObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-type', 'data-sb-layout'] });
-            }
-            
-            window.addEventListener('themechange', scheduleScan, { passive: true });
-            window.siyuan?.eventBus?.on('loaded-protyle', () => setTimeout(scheduleScan, 500));
-        };
-
-        const stop = () => {
-            try { window.siyuan?.eventBus?.off('loaded-protyle', scan); } catch (_) {}
-            bodyObserver?.disconnect(); 
-            bodyObserver = null;
-            window.removeEventListener('themechange', scheduleScan);
-            document.querySelectorAll('.' + SB_CLASS).forEach(sb => {
-                sb.classList.remove(SB_CLASS);
+    // 启动和停止
+    const start = () => {
+        ensureStyles();
+        scan();
+        if (!bodyObserver) {
+            bodyObserver = new MutationObserver(mutations => {
+                let shouldScan = false;
+                for (const x of mutations) {
+                    if (x.type === 'childList' && x.target?.closest?.('.protyle-wysiwyg')) { shouldScan = true; break; }
+                    if (x.type === 'attributes' && x.target?.matches?.('[data-type="NodeSuperBlock"]')) { shouldScan = true; break; }
+                }
+                if (shouldScan) scheduleScan();
+            });
+            bodyObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-type', 'data-sb-layout'] });
+        }
+        const handleThemeChange = () => {
+            document.querySelectorAll('[data-type="NodeSuperBlock"][data-sb-layout="col"]').forEach(sb => {
+                delete sb._sbResizerInit;
+                delete sb._lastColsCount;
+                delete sb._hoverHandlersAdded;
                 if (sb._showHandlers) {
                     sb.removeEventListener('mouseenter', sb._showHandlers);
                     sb.removeEventListener('mouseleave', sb._hideHandlers);
                     delete sb._showHandlers;
                     delete sb._hideHandlers;
-                    delete sb._hoverHandlersAdded;
                 }
             });
-            document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
-            scanScheduled = false;
+            setTimeout(scan, 100);
         };
-
-        return { start, stop, refresh: scan, cleanup: stop };
-    })();
-
-    // 初始化
-    const initSuperBlockResizer = () => {
-        if (document.readyState === 'complete') {
-            try { superBlockResizer.start(); } catch (e) { console.error('[Savor] 超级块调整启动失败:', e); }
-        } else {
-            window.addEventListener('load', () => {
-                try { superBlockResizer.start(); } catch (e) { console.error('[Savor] 超级块调整启动失败:', e); }
-                }, { once: true });
-        }
+        window._superBlockThemeChangeHandler = handleThemeChange;
+        window.addEventListener('themechange', handleThemeChange, { passive: true });
+        setTimeout(() => {window.dispatchEvent(new Event('themechange'));}, 1000);
+        window.siyuan?.eventBus?.on('loaded-protyle', () => setTimeout(scheduleScan, 500));
     };
-    
-    setTimeout(initSuperBlockResizer, 300);
+
+    const stop = () => {
+        try { window.siyuan?.eventBus?.off('loaded-protyle', scan); } catch (_) {}
+        bodyObserver?.disconnect(); bodyObserver = null;
+        if (window._superBlockThemeChangeHandler) {
+            window.removeEventListener('themechange', window._superBlockThemeChangeHandler);
+            delete window._superBlockThemeChangeHandler;
+        }
+        document.querySelectorAll('.' + SB_CLASS).forEach(sb => {
+            sb.classList.remove(SB_CLASS);
+            removeAddButtons(sb);
+            if (sb._showHandlers) {
+                sb.removeEventListener('mouseenter', sb._showHandlers);
+                sb.removeEventListener('mouseleave', sb._hideHandlers);
+                delete sb._showHandlers;
+                delete sb._hideHandlers;
+                delete sb._hoverHandlersAdded;
+            }
+        });
+        document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
+        document.querySelectorAll('.sb-add-column-btn').forEach(btn => btn.remove());
+        scanScheduled = false;
+    };
+
+    return { start, stop, refresh: scan, cleanup: stop };
+})();
+
+// 初始化
+const initSuperBlockResizer = () => {
+    if (document.readyState === 'complete') {
+        try { superBlockResizer.start(); } catch (e) { /* 超级块调整启动失败 */ }
+    } else {
+        window.addEventListener('load', () => {
+            try { superBlockResizer.start(); } catch (e) { /* 超级块调整启动失败 */ }
+        }, { once: true });
+    }
+};
+
+setTimeout(initSuperBlockResizer, 300);
 
 })();
 
