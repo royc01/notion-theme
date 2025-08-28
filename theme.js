@@ -1802,6 +1802,13 @@ if (layoutCenter) {
             },
             getBlockNode(el) {
                 while (el && !el.dataset.nodeId) el = el.parentElement;
+                // 检查是否在嵌入块内，如果是，返回嵌入块而不是内容块
+                if (el) {
+                    const embedBlock = el.closest('[data-type="NodeBlockQueryEmbed"]');
+                    if (embedBlock && embedBlock.dataset.nodeId) {
+                        return embedBlock;
+                    }
+                }
                 return el;
             },
             toggleMemoHighlight(main, nodeId, index, highlight) {
@@ -1943,7 +1950,7 @@ if (layoutCenter) {
                     div.style.cursor = 'pointer';
                 }
                 e.stopPropagation();
-                const blockEl = main.querySelector(`div[data-node-id="${el.closest('[data-node-id]').dataset.nodeId}"]`);
+                const blockEl = main.querySelector(`div[data-node-id="${utils.getBlockNode(el).dataset.nodeId}"]`);
                 if (memoDiv.classList.contains('editing')) return;
                 memoDiv.classList.add('editing');
                 memoDiv.style.zIndex = '999';
@@ -2163,8 +2170,7 @@ if (layoutCenter) {
         // 更新内联备注到思源
         async function updateInlineMemo(el, content) {
             try {
-                let blockEl = el;
-                while (blockEl && !blockEl.dataset.nodeId) blockEl = blockEl.parentElement;
+                const blockEl = utils.getBlockNode(el);
                 if (!blockEl?.dataset.nodeId) return;
                 const blockId = blockEl.dataset.nodeId;
                 const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
@@ -2527,22 +2533,13 @@ const superBlockResizer = (() => {
         let targetPercents = [];
         if (hasSaved) {
             targetPercents = normalizeWidths(saved, MIN_PERCENT, 100);
+            
+            cols.forEach(c => c.style.transition = 'width 0.25s ease');
+            targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
         } else {
-            targetPercents = cols.map(() => 100 / cols.length);
-            if (cols.length < prevCount) {
-                const base = 100 / cols.length;
-                const bonus = Math.min(base * 0.3, 10);
-                targetPercents = cols.map(() => base + bonus);
-            }
-            const total = targetPercents.reduce((sum, p) => sum + p, 0);
-            if (total !== 100) {
-                const factor = 100 / total;
-                targetPercents = targetPercents.map(p => p * factor);
-            }
+            // 如果没有保存的宽度，不自动分配宽度，保持原样
+            return;
         }
-
-        cols.forEach(c => c.style.transition = 'width 0.25s ease');
-        targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
         setTimeout(() => {
             cols.forEach(c => c.style.removeProperty('transition'));
             try {
@@ -2690,9 +2687,16 @@ const superBlockResizer = (() => {
                 const host = cols[0]?.parentElement || sb;
                 const gap = getGap(host);
                 const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
-                const percents = measureWidths(sb, cols);
-                const normalized = normalizeWidths(percents);
-                cols.forEach((c, i) => widthOps.save(c, Math.round(normalized[i] * 1000) / 1000, gapShare));
+                // 只保存拖动过的左右侧块的宽度
+                const li = cols.indexOf(leftEl), ri = cols.indexOf(rightEl);
+                if (li >= 0) {
+                    const percentLeft = ((leftEl.getBoundingClientRect().width + gapShare) / (host.getBoundingClientRect().width || 1)) * 100;
+                    widthOps.save(leftEl, Math.round(percentLeft * 1000) / 1000, gapShare);
+                }
+                if (ri >= 0) {
+                    const percentRight = ((rightEl.getBoundingClientRect().width + gapShare) / (host.getBoundingClientRect().width || 1)) * 100;
+                    widthOps.save(rightEl, Math.round(percentRight * 1000) / 1000, gapShare);
+                }
                 scheduleWidthSave(20);
             }
             setTimeout(() => sb.querySelectorAll('.sb-percentage').forEach(el => el.remove()), 300);
@@ -2735,6 +2739,7 @@ const superBlockResizer = (() => {
         if (saved.some(v => isFinite(v))) {
             cols.forEach((c, i) => { if (isFinite(saved[i])) setWidth(sb, c, saved[i]); });
         }
+        // 不自动为没有保存宽度的块分配宽度
     };
 
     const initSuperBlock = async (sb) => {

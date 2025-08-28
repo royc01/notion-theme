@@ -813,7 +813,8 @@ span[data-type="a"]::before {
         flex-direction: column !important;
         gap: 5px !important;
         position: relative;
-        padding-left: 30px;
+        padding-left: 25px;
+        width: calc(100% - 25px);
     }
 
     .av__gallery::before {
