@@ -48,8 +48,8 @@
 
     /* 引用 */
     --Sv-block-ref-background: transparent;
-    --Sv-block-ref-bottom: 3px solid;
-    --Sv-block-ref-bottom-image: linear-gradient(to bottom right, #8788ff, #c796f1) 1;
+    --Sv-block-ref-bottom: 3px solid #9d80ec;
+    --Sv-block-ref-bottom-d: 3px dashed #9d80ec;
 
     /* 代码块 */
     --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.02) var(--b3-theme-surface-base-ch));

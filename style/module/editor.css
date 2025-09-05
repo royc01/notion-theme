@@ -495,6 +495,9 @@
 	border-bottom: var(--Sv-block-ref-bottom);
     border-image: var(--Sv-block-ref-bottom-image);
     transition: none;
+    &[data-subtype="d"]{
+        border-bottom: var(--Sv-block-ref-bottom-d);
+    }
 }
 .protyle-wysiwyg [data-node-id] span[data-type*="block-ref"]:not([data-type="virtual-block-ref"]):not([data-type*="sup"]):not([data-type*="sub"]):not(.av__celltext--ref):hover{
 	background-color:var(--Sv-block-ref-background-hover);

@@ -7,14 +7,14 @@ body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]
 }
 body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizontal) .fn__flex:not(.av__views){
     & > .layout-tab-bar{
-	margin:0 -5px 0 0; 
+	margin:0 -10px 0 0; 
 	border-bottom: none;
     display: block;
 	flex: 1;
     padding-left: 5px;
     &.layout-tab-bar--readonly {
         flex: initial;
-        width: calc(100% - 10px);
+        width: calc(100% - 5px);
         padding: 5px;
     }
     .item:not(.item--readonly) {

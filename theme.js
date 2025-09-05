@@ -1,4 +1,4 @@
-﻿(function () {
+﻿﻿(function () {
 
     // ========================================
     // 模块：工具函数
@@ -107,7 +107,7 @@
             { id: "colorFolder", type: "feature", label: i18n.t("彩色文档树"), styleId: "Sv-theme-color-彩色文档树", attrName: "彩色文档树", svg: "M11.6 14.933c0-0.133 0-0.267 0-0.4 0-2.533 2-4.533 4.4-4.533s4.4 2 4.4 4.533c0 0.133 0 0.267 0 0.4 1.467 0.667 2.533 2.267 2.533 4.133 0 2.533-2 4.533-4.4 4.533-0.933 0-1.867-0.267-2.533-0.8-0.8 0.533-1.6 0.8-2.533 0.8-2.4 0-4.4-2-4.4-4.533 0-1.867 0.933-3.467 2.533-4.133zM11.867 16.267c-0.933 0.533-1.6 1.6-1.6 2.8 0 1.733 1.467 3.2 3.2 3.2 0.533 0 1.067-0.133 1.6-0.4-0.667-0.8-0.933-1.733-0.933-2.8 0-0.133 0-0.267 0-0.4-1.067-0.533-1.867-1.467-2.267-2.4v0zM15.333 18.933v0c0 1.867 1.467 3.2 3.2 3.2s3.2-1.467 3.2-3.2c0-1.2-0.667-2.267-1.6-2.8-0.667 1.6-2.267 2.8-4.133 2.8-0.267 0.133-0.4 0-0.667 0v0zM16 17.733c1.733 0 3.2-1.467 3.2-3.2s-1.467-3.2-3.2-3.2-3.2 1.467-3.2 3.2 1.467 3.2 3.2 3.2z", onEnable: () => { document.documentElement.setAttribute('savor-color-folder', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-color-folder'); } },
             { id: "headingDots", type: "feature", label: i18n.t("标题点标识"), styleId: "Sv-theme-color-标题点标识", attrName: "标题点标识", svg: "M18.533 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM13.467 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM18.533 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM13.467 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM18.533 13.467c0.8 0 1.467-0.667 1.467-1.467s-0.667-1.467-1.467-1.467-1.467 0.667-1.467 1.467 0.667 1.467 1.467 1.467zM13.467 10.667c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.933-0.667-1.467-1.467-1.467z", onEnable: () => { document.documentElement.setAttribute('savor-heading-dots', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-heading-dots'); } },
             { id: "typewriterMode", type: "feature", label: i18n.t("打字机模式"), styleId: "Sv-theme-typewriter-mode", attrName: "typewriterMode", svg: "M20.133 10.667c1.6 0 2.8 1.2 2.8 2.8v0 6.933c0 1.6-1.2 2.8-2.8 2.8v0h-8.267c-1.6 0-2.8-1.2-2.8-2.8v0-7.067c0-1.467 1.2-2.667 2.8-2.667 0 0 8.267 0 8.267 0zM20.133 12h-8.267c-0.8 0-1.333 0.533-1.333 1.333v0 6.933c0 0.8 0.533 1.333 1.333 1.333h8.533c0.8 0 1.333-0.533 1.333-1.333v-6.933c-0.133-0.667-0.667-1.333-1.6-1.333v0zM19.467 18.933c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.933c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h6.933zM12.533 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM12.533 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667z", onEnable: () => { enableTypewriterMode(); }, onDisable: () => { disableTypewriterMode(); } },
-            { id: "sidebarMemo", type: "feature", label: i18n.t("侧边栏备注"), styleId: "Sv-theme-sidebar-memo", attrName: "sidebarMemo", svg: "M19.2 13.733h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM19.2 16.267h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM20.533 10.533h-9.067c-1.067 0-1.867 0.8-1.867 1.867v6.4c0 1.067 0.8 1.867 1.867 1.867h7.467l2.4 2.4c0.133 0.133 0.267 0.133 0.4 0.133s0.133 0 0.267 0c0.267-0.133 0.4-0.267 0.4-0.533v-10.267c0-1.067-0.8-1.867-1.867-1.867zM21.067 21.2l-1.467-1.467c-0.133-0.133-0.267-0.133-0.4-0.133h-7.733c-0.4 0-0.667-0.267-0.667-0.667v-6.533c0-0.4 0.267-0.667 0.667-0.667h8.933c0.4 0 0.667 0.267 0.667 0.667v8.8z", onEnable: () => { document.documentElement.setAttribute('savor-sidebar-memo', 'true'); sidebarMemo.openSideBar(true, true); }, onDisable: () => { document.documentElement.removeAttribute('savor-sidebar-memo'); sidebarMemo.openSideBar(false, true); } },
+            { id: "sidebarMemo", type: "feature", label: i18n.t("侧边栏备注"), styleId: "Sv-theme-sidebar-memo", attrName: "sidebarMemo", svg: "M19.2 13.733h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM19.2 16.267h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM20.533 10.533h-9.067c-1.067 0-1.867 0.8-1.867 1.867v6.4c0 1.067 0.8 1.867 1.867 1.867h7.467l2.4 2.4c0.133 0.133 0.267 0.133 0.4 0.133s0.133 0 0.267 0c0.267-0.133 0.4-0.267 0.4-0.533v-10.267c0-1.067-0.8-1.867-1.867-1.867zM21.067 21.2l-1.467-1.467c-0.133-0.133-0.267-0.133-0.4-0.133h-7.733c-0.4 0-0.667-0.267-0.667-0.667v-6.533c0-0.4 0.267-0.667 0.667-0.667h8.933c0.4 0 0.667 0.267 0.667 0.667v8.8z", onEnable: () => { document.documentElement.setAttribute('savor-sidebar-memo', 'true'); setTimeout(() => window.sidebarMemo?.openSideBar(true, true), 10); }, onDisable: () => { document.documentElement.removeAttribute('savor-sidebar-memo'); window.sidebarMemo?.openSideBar(false, true); } },
             { id: "officialFontColors", type: "feature", label: i18n.t("官方字体配色"), styleId: "Sv-theme-official-font-colors", attrName: "officialFontColors", svg: "M13.067 10.667v7.467l2.933 2.933v-7.6l-2.933-2.8zM13.733 17.733v-5.333l1.733 1.6v5.333l-1.733-1.6zM9.333 22l3.733-3.733v-7.467l-3.733 3.6v7.6zM16 21.067l2.933-2.933v-7.467l-2.933 2.8v7.6zM18.933 10.667v7.467l3.733 3.733v-7.6l-3.733-3.6zM22 20.133l-2.533-2.4v-5.333l2.533 2.4v5.333z", onEnable: () => { document.documentElement.setAttribute('savor-official-font-colors', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-official-font-colors'); } }
         ];
     }
@@ -1755,149 +1755,39 @@ if (layoutCenter) {
 
 
 
+const sidebarMemo = (() => {
+        let isEnabled = false, observers = {}, editorNode = null, dragTimeout = null, dragMutationObserver = null, connectionCleanup = null;
+        const autoResizeDiv = div => { div.style.height = 'auto'; div.style.height = (div.scrollHeight + 1) + 'px'; };
+        const setEndOfContenteditable = el => { const range = document.createRange(); range.selectNodeContents(el); range.collapse(false); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range); };
+        // 移除了图片相关功能，因为思源笔记会过滤掉<img>标签
+        const getBlockNode = el => { while (el && !el.dataset.nodeId) el = el.parentElement; if (el) { const embedBlock = el.closest('[data-type="NodeBlockQueryEmbed"]'); if (embedBlock?.dataset.nodeId) return embedBlock; } return el; };
+        const toggleMemoHighlight = (main, nodeId, index, highlight, memoDiv) => { const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`); if (!blockEl) return; const memoSpans = blockEl.querySelectorAll('span[data-type*="inline-memo"]'); const target = memoSpans[index]; if (target) { target.classList.toggle('memo-span-highlight', highlight); if (highlight && memoDiv) createMemoConnection(memoDiv, target); else removeMemoConnection(); } };
+        const createMemoConnection = (memoDiv, memoSpan) => { removeMemoConnection(); if (!memoDiv || !memoSpan) return; const container = document.createElement('div'); container.id = 'memo-connection-container'; container.style = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9998;'; container.innerHTML = `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"><path stroke="var(--Sv-dock-item--activefocus-background)" stroke-width="2" fill="none" stroke-dasharray="6,4"></path></svg>`; document.body.appendChild(container); const path = container.querySelector('path'); const update = () => { const a = memoDiv.getBoundingClientRect(), b = memoSpan.getBoundingClientRect(); if (!a.width || !b.width) return; const sx = b.right, sy = b.top + b.height / 2, ex = a.left - 6, ey = a.top + a.height / 2; const o = Math.min(Math.abs(ex - sx) * 0.5, 200); path.setAttribute('d', `M${sx} ${sy}C${sx + o} ${sy},${ex - o} ${ey},${ex} ${ey}`); }; update(); const onScroll = () => requestAnimationFrame(update); window.addEventListener('scroll', onScroll, true); window.addEventListener('resize', onScroll); connectionCleanup = () => { window.removeEventListener('scroll', onScroll, true); window.removeEventListener('resize', onScroll); container.remove(); connectionCleanup = null; }; };
+        const removeMemoConnection = () => connectionCleanup?.();
 
-
-
-
-    
-    // ========================================
-    // 模块：侧边栏备注功能
-    // ========================================
-    const sidebarMemo = (() => {
-        let isEnabled = false, observers = {}, editorNode = null;
-        let dragTimeout = null, dragMutationObserver = null;
-
-        // 工具函数集合
-        const utils = {
-            autoResizeDiv(div) {
-                div.style.height = 'auto';
-                div.style.height = (div.scrollHeight + 1) + 'px';
-            },
-            setEndOfContenteditable(el) {
-                let range = document.createRange();
-                range.selectNodeContents(el); range.collapse(false);
-                let sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
-            },
-            insertAtCursor(editableDiv, node) {
-                let sel = window.getSelection();
-                if (!sel.rangeCount) { editableDiv.appendChild(node); return; }
-                let range = sel.getRangeAt(0);
-                range.deleteContents(); range.insertNode(node);
-                range.setStartAfter(node); range.collapse(true);
-                sel.removeAllRanges(); sel.addRange(range);
-            },
-            bindImageZoom(img) {
-                img.style.cursor = 'zoom-in';
-                img.ondblclick = e => {
-                    e.stopPropagation();
-                    let overlay = document.createElement('div');
-                    overlay.style.cssText = 'position:fixed;z-index:99999;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
-                    let bigImg = document.createElement('img');
-                    bigImg.src = img.src;
-                    bigImg.style.cssText = 'max-width:90vw;max-height:90vh;box-shadow:0 4px 32px rgba(0,0,0,0.5);border-radius:8px;';
-                    overlay.appendChild(bigImg);
-                    document.body.appendChild(overlay);
-                    overlay.onclick = () => overlay.remove();
-                };
-            },
-            getBlockNode(el) {
-                while (el && !el.dataset.nodeId) el = el.parentElement;
-                // 检查是否在嵌入块内，如果是，返回嵌入块而不是内容块
-                if (el) {
-                    const embedBlock = el.closest('[data-type="NodeBlockQueryEmbed"]');
-                    if (embedBlock && embedBlock.dataset.nodeId) {
-                        return embedBlock;
-                    }
-                }
-                return el;
-            },
-            toggleMemoHighlight(main, nodeId, index, highlight) {
-                const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
-                if (!blockEl) return;
-                const memoSpans = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
-                const target = memoSpans[index];
-                if (target) {
-                    target.classList.toggle('memo-span-highlight', highlight);
-                }
-            },
-
-            // 创建连线功能
-            createMemoConnection(main, sidebar, memoDiv, nodeId, text, memoIndex) {
-                this.removeMemoConnection();
-                const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
-                if (!blockEl || !memoDiv) return;
-                const memoSpans = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
-                const memoSpan = memoSpans[memoIndex] || memoSpans[0];
-                if (!memoSpan) return;
-
-                const container = document.createElement('div');
-                container.id = 'memo-connection-container';
-                container.style = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9998;';
-                container.innerHTML = `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"><path stroke="var(--Sv-dock-item--activefocus-background)" stroke-width="2" fill="none" stroke-dasharray="6,4"></path></svg>`;
-                document.body.appendChild(container);
-                const path = container.querySelector('path');
-
-                const update = () => {
-                    const a = memoDiv.getBoundingClientRect(), b = memoSpan.getBoundingClientRect();
-                    if (!a.width || !b.width) return;
-                    const sx = b.right, sy = b.top + b.height / 2, ex = a.left - 6, ey = a.top + a.height / 2;
-                    const o = Math.min(Math.abs(ex - sx) * 0.5, 200);
-                    path.setAttribute('d', `M${sx} ${sy}C${sx + o} ${sy},${ex - o} ${ey},${ex} ${ey}`);
-                };
-                update();
-                const onScroll = () => requestAnimationFrame(update);
-                window.addEventListener('scroll', onScroll, true);
-                window.addEventListener('resize', onScroll);
-
-                this.connectionCleanup = () => {
-                    window.removeEventListener('scroll', onScroll, true);
-                    window.removeEventListener('resize', onScroll);
-                    container.remove();
-                    this.connectionCleanup = null;
-                };
-            },
-
-            // 移除连线
-            removeMemoConnection() {
-                this.connectionCleanup?.();
-            }
-        };
-
-        // 监听 #drag 的 title 属性变化
+        // 拖拽监听
         function observeDragTitle() {
             if (dragMutationObserver) return;
             function waitForDrag() {
                 const dragEl = document.getElementById('drag');
-                if (!dragEl) {
-                    dragTimeout = setTimeout(waitForDrag, 1000);
-                    return;
-                }
+                if (!dragEl) { dragTimeout = setTimeout(waitForDrag, 1000); return; }
                 const debouncedRefresh = debounce(refreshEditor, 1000);
-                dragMutationObserver = new MutationObserver(() => {
-                    debouncedRefresh();
-                });
+                dragMutationObserver = new MutationObserver(debouncedRefresh);
                 dragMutationObserver.observe(dragEl, { attributes: true, attributeFilter: ['title'] });
             }
             waitForDrag();
         }
         function unobserveDragTitle() {
-            if (dragMutationObserver) {
-                dragMutationObserver.disconnect();
-                dragMutationObserver = null;
-            }
-            if (dragTimeout) {
-                clearTimeout(dragTimeout);
-                dragTimeout = null;
-            }
+            dragMutationObserver?.disconnect(); dragMutationObserver = null;
+            if (dragTimeout) { clearTimeout(dragTimeout); dragTimeout = null; }
         }
 
         // 刷新侧边栏备注位置
         function refreshMemoOffset(main, sidebar) {
             requestAnimationFrame(() => {
-                const MARGIN = 10;
-                const memoGroups = {};
+                const MARGIN = 10, memoGroups = {};
                 sidebar.querySelectorAll('.memo-item').forEach(memoItem => {
-                    if (memoItem.style.display === 'none') return; // 跳过隐藏的备注
+                    if (memoItem.style.display === 'none') return;
                     const nodeId = memoItem.getAttribute('data-node-id');
                     if (!memoGroups[nodeId]) memoGroups[nodeId] = { items: [], totalHeight: 0 };
                     memoGroups[nodeId].items.push(memoItem);
@@ -1907,16 +1797,14 @@ if (layoutCenter) {
                 Object.values(memoGroups).forEach(group => {
                     const block = main.querySelector(`div[data-node-id="${group.items[0].getAttribute('data-node-id')}"]`);
                     if (!block) return;
-                    const blockRect = block.getBoundingClientRect();
-                    const mainRect = main.getBoundingClientRect();
+                    const blockRect = block.getBoundingClientRect(), mainRect = main.getBoundingClientRect();
                     const blockCenter = blockRect.top - mainRect.top + blockRect.height / 2;
                     const groupCenter = group.totalHeight / 2;
                     let top = Math.max(0, blockCenter - groupCenter);
                     if (top < lastBottom + MARGIN) top = lastBottom + MARGIN;
                     let currentTop = top;
                     group.items.forEach(item => {
-                        item.style.position = 'absolute';
-                        item.style.top = `${currentTop}px`;
+                        item.style.position = 'absolute'; item.style.top = `${currentTop}px`;
                         item.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1),transform 0.3s cubic-bezier(0.4,0,0.2,1)';
                         currentTop += item.offsetHeight + MARGIN;
                     });
@@ -1930,297 +1818,184 @@ if (layoutCenter) {
             let sidebar = main.parentElement.querySelector('#protyle-sidebar');
             const title = main.parentElement.querySelector('div.protyle-title');
             if (!sidebar && title) {
-                sidebar = document.createElement('div');
-                sidebar.id = 'protyle-sidebar';
+                sidebar = document.createElement('div'); sidebar.id = 'protyle-sidebar';
                 title.insertAdjacentElement('beforeend', sidebar);
-                sidebar.style.cssText = 'position:absolute;right:-230px;width:230px;';
-                main.style.minWidth = '90%';
+                sidebar.style.cssText = 'position:absolute;right:-230px;width:230px;'; main.style.minWidth = '90%';
             }
             return sidebar;
         }
 
-        // 编辑备注内容
-        function bindMemoEdit(div, memoDiv, el, main, sidebar) {
-            div.onclick = e => {
-                // 只读模式下禁止编辑
-                if (main.getAttribute && main.getAttribute('data-readonly') === 'true') {
-                    div.style.cursor = 'auto';
-                    return;
-                } else {
-                    div.style.cursor = 'pointer';
-                }
-                e.stopPropagation();
-                const blockEl = main.querySelector(`div[data-node-id="${utils.getBlockNode(el).dataset.nodeId}"]`);
-                if (memoDiv.classList.contains('editing')) return;
-                memoDiv.classList.add('editing');
-                memoDiv.style.zIndex = '999';
-                const old = el.getAttribute('data-inline-memo-content') || '';
-                const input = document.createElement('div');
-                input.className = 'memo-edit-input';
-                input.contentEditable = 'true';
-                input.innerHTML = old.replace(/\n/g, '<br>');
-                input.setAttribute('placeholder', '输入备注内容...');
-                input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.8em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;overflow-y:hidden;';
-                input.addEventListener('input', () => utils.autoResizeDiv(input));
-                utils.autoResizeDiv(input);
-                div.replaceWith(input);
-                input.focus(); utils.setEndOfContenteditable(input);
-                requestAnimationFrame(() => { utils.autoResizeDiv(input); refreshMemoOffset(main, sidebar); });
-                const save = () => {
-                    let val = input.innerHTML
-                        .replace(/<div>/gi, '\n')
-                        .replace(/<\/div>/gi, '')
-                        .replace(/<br\s*\/?>(?!$)/gi, '\n')
-                        .replace(/<p>/gi, '\n')
-                        .replace(/<\/p>/gi, '')
-                        .replace(/&nbsp;/g, ' ')
-                        .replace(/\n\s*\n\s*\n+/g, '\n\n')
-                        .trim();
-                    if (val !== old) {
-                        el.setAttribute('data-inline-memo-content', val);
-                        updateInlineMemo(el, val);
-                    }
-                    const newDiv = document.createElement('div');
-                    newDiv.className = 'memo-content-view';
-                    newDiv.style.cssText = div.style.cssText;
-                    newDiv.innerHTML = (val ? val.replace(/\n/g, '<br>') : '') || '<span style="color:#bbb;">点击编辑备注...</span>';
-                    bindMemoEdit(newDiv, memoDiv, el, main, sidebar);
-                    input.replaceWith(newDiv);
-                    newDiv.querySelectorAll('img').forEach(utils.bindImageZoom);
-                    memoDiv.classList.remove('editing');
-                    memoDiv.style.zIndex = '';
-                    setTimeout(() => refreshMemoOffset(main, sidebar), 100);
-                };
-                input.onblur = () => setTimeout(() => { if (document.activeElement !== input) save(); }, 100);
-                input.onkeydown = e => { 
-                    if ((e.key === 'Enter' && e.ctrlKey) || e.key === 'Escape') { 
-                        e.preventDefault(); 
-                        save(); 
-                    } else if (e.key === 'a' && e.ctrlKey) {
-                        e.preventDefault();
-                        const range = document.createRange();
-                        range.selectNodeContents(input);
-                        const selection = window.getSelection();
-                        selection.removeAllRanges();
-                        selection.addRange(range);
-                    }
-                };
-                input.addEventListener('paste', e => {
-                    e.preventDefault();
-                    const items = e.clipboardData?.items;
-                    if (items) for (let i = 0; i < items.length; i++) {
-                        const item = items[i];
-                        if (item.type.indexOf('image') !== -1) {
-                            const file = item.getAsFile();
-                            const reader = new FileReader();
-                            reader.onload = evt => {
-                                const img = document.createElement('img');
-                                img.src = evt.target.result;
-                                img.style.maxWidth = '100%';
-                                utils.bindImageZoom(img);
-                                utils.insertAtCursor(input, img);
-                            };
-                            reader.readAsDataURL(file);
-                            return;
-                        }
-                    }
-                    const text = e.clipboardData?.getData('text');
-                    if (text && /^\/?assets\//.test(text)) {
-                        const url = text.startsWith('/') ? text : '/' + text;
-                        fetch(url).then(res => res.blob()).then(blob => {
-                            const reader = new FileReader();
-                            reader.onload = evt => {
-                                const img = document.createElement('img');
-                                img.src = evt.target.result;
-                                img.style.maxWidth = '100%';
-                                utils.bindImageZoom(img);
-                                utils.insertAtCursor(input, img);
-                            };
-                            reader.readAsDataURL(blob);
-                        });
-                        return;
-                    }
-                    if (text) document.execCommand('insertText', false, text);
-                }, true);
-                input.querySelectorAll('img').forEach(utils.bindImageZoom);
+        // 创建编辑输入框
+        function createEditInput(old, autoResizeDiv, setEndOfContenteditable) {
+            const input = document.createElement('div');
+            input.className = 'memo-edit-input'; input.contentEditable = 'true';
+            input.innerHTML = old.replace(/\n/g, '<br>'); input.setAttribute('placeholder', '输入备注内容...');
+            input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.8em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;overflow-y:hidden;';
+            input.addEventListener('input', () => autoResizeDiv(input));
+            return input;
+        }
+
+        // 创建保存函数
+        function createSaveFunction(input, old, el, div, memoDiv, main, sidebar, refreshMemoOffset, updateInlineMemo, bindMemoEdit) {
+            return () => {
+                const val = input.innerHTML.replace(/<div>/gi, '\n').replace(/<\/div>/gi, '').replace(/<br\s*\/?>/gi, '\n').replace(/<p>/gi, '\n').replace(/<\/p>/gi, '').replace(/&nbsp;/g, ' ').replace(/\n\s*\n\s*\n+/g, '\n\n').trim();
+                if (val !== old) { el.setAttribute('data-inline-memo-content', val); updateInlineMemo(el, val); }
+                const newDiv = document.createElement('div'); newDiv.className = 'memo-content-view'; newDiv.style.cssText = div.style.cssText;
+                newDiv.innerHTML = val ? val.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>';
+                bindMemoEdit(newDiv, memoDiv, el, main, sidebar); input.replaceWith(newDiv);
+                memoDiv.classList.remove('editing'); memoDiv.style.zIndex = '';
+                setTimeout(() => refreshMemoOffset(main, sidebar), 100);
             };
         }
+
+        // 设置输入框事件
+        function setupInputEvents(input, save) {
+            input.onblur = () => setTimeout(() => { if (document.activeElement !== input) save(); }, 100);
+            input.onkeydown = e => { 
+                if ((e.key === 'Enter' && e.ctrlKey) || e.key === 'Escape') { e.preventDefault(); save(); }
+                else if (e.key === 'a' && e.ctrlKey) { e.preventDefault(); const range = document.createRange(); range.selectNodeContents(input); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); }
+            };
+            input.addEventListener('paste', e => {
+                e.preventDefault();
+                const text = e.clipboardData?.getData('text');
+                if (text) document.execCommand('insertText', false, text);
+            }, true);
+        }
+
+        // 编辑备注内容（重构后）
+        function bindMemoEdit(div, memoDiv, el, main, sidebar) {
+            div.onclick = e => {
+                const isReadonly = main.getAttribute?.('data-readonly') === 'true';
+                if (isReadonly) { div.style.cursor = 'auto'; return; } else { div.style.cursor = 'pointer'; }
+                e.stopPropagation();
+                if (memoDiv.classList.contains('editing')) return;
+                memoDiv.classList.add('editing'); memoDiv.style.zIndex = '999';
+                
+                const old = el.getAttribute('data-inline-memo-content') || '';
+                const input = createEditInput(old, autoResizeDiv, setEndOfContenteditable);
+                const save = createSaveFunction(input, old, el, div, memoDiv, main, sidebar, refreshMemoOffset, updateInlineMemo, bindMemoEdit);
+                
+                autoResizeDiv(input); div.replaceWith(input); input.focus(); setEndOfContenteditable(input);
+                requestAnimationFrame(() => { autoResizeDiv(input); refreshMemoOffset(main, sidebar); });
+                
+                setupInputEvents(input, save);
+            };
+        }
+
 
         // 刷新侧边栏备注
         function refreshSideBarMemos(main, sidebar) {
             const memos = main.querySelectorAll('span[data-type*="inline-memo"]');
-            sidebar.innerHTML = '';
-            const frag = document.createDocumentFragment();
+            sidebar.innerHTML = ''; const frag = document.createDocumentFragment();
             if (!memos.length) { sidebar.removeAttribute('data-memo-count'); return; }
-            const isReadonly = main.getAttribute && main.getAttribute('data-readonly') === 'true';
-            const blockMemos = {};
+            const isReadonly = main.getAttribute?.('data-readonly') === 'true', blockMemos = {};
             memos.forEach(el => {
-                const block = utils.getBlockNode(el);
+                const block = getBlockNode(el);
                 if (!blockMemos[block.dataset.nodeId]) blockMemos[block.dataset.nodeId] = [];
                 blockMemos[block.dataset.nodeId].push(el);
             });
 
             let visibleMemoCount = 0;
             Object.entries(blockMemos).forEach(([nodeId, memosInBlock]) => {
-                // 检查块及其父级是否被折叠
                 const block = main.querySelector(`div[data-node-id="${nodeId}"]`);
                 const isBlockFolded = block && isAnyAncestorFolded(block);
-
                 memosInBlock.forEach((el, idxInBlock) => {
-                    const block = utils.getBlockNode(el);
-                    const memo = el.getAttribute('data-inline-memo-content') || '';
-                    const text = el.textContent || '';
+                    const block = getBlockNode(el), memo = el.getAttribute('data-inline-memo-content') || '', text = el.textContent || '';
                     const memoDiv = document.createElement('div');
-                    memoDiv.className = 'memo-item';
-                    memoDiv.setAttribute('data-node-id', block.dataset.nodeId);
-                    memoDiv.setAttribute('data-memo-index', idxInBlock);
+                    memoDiv.className = 'memo-item'; memoDiv.setAttribute('data-node-id', block.dataset.nodeId); memoDiv.setAttribute('data-memo-index', idxInBlock);
                     memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
-                    // 如果块或其父级被折叠，隐藏对应的侧栏备注
-                    if (isBlockFolded) {
-                        memoDiv.style.display = 'none';
-                    } else {
-                        visibleMemoCount++;
-                    }
-                    // 只读样式
+                    if (isBlockFolded) { memoDiv.style.display = 'none'; } else { visibleMemoCount++; }
                     const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
-                    memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:0.9em;display:flex;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.8em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style=\"color:#bbb;\">点击编辑备注...</span>'}</div>`;
-                    // 新增：删除按钮（按索引定位）
+                    memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:0.9em;display:flex;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.8em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>'}</div>`;
                     const titleDiv = memoDiv.querySelector('.memo-title-with-dot');
                     if (titleDiv && !isReadonly) {
                         const deleteBtn = document.createElement('button');
                         deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconTrashcan"></use></svg>`;
-                        deleteBtn.style.cssText = 'position:absolute;top:4px;right:4px;padding:0;background: var(--Sv-dock-item--activefocus-background);border:none;border-radius:6px;cursor:pointer;z-index:2;';
-                        deleteBtn.setAttribute('data-action', 'delete');
-                        titleDiv.appendChild(deleteBtn);
+                        deleteBtn.style.cssText = 'position:absolute;top:6px;right:6px;padding:0;border:none;border-radius:6px;cursor:pointer;z-index:2;';
+                        deleteBtn.setAttribute('data-action', 'delete'); titleDiv.appendChild(deleteBtn);
                     }
                     const memoContentDiv = memoDiv.querySelector('.memo-content-view');
-                    bindMemoEdit(memoContentDiv, memoDiv, el, main, sidebar);
-                    frag.appendChild(memoDiv);
+                    bindMemoEdit(memoContentDiv, memoDiv, el, main, sidebar); frag.appendChild(memoDiv);
                 });
             });
-            sidebar.setAttribute('data-memo-count', `共 ${visibleMemoCount} 个备注`);
-            sidebar.appendChild(frag);
+            sidebar.setAttribute('data-memo-count', `共 ${visibleMemoCount} 个备注`); sidebar.appendChild(frag);
 
-            // 侧栏事件委托：hover 高亮 + 连线、点击删除
             if (!sidebar._delegated) {
                 sidebar.addEventListener('mouseover', e => {
                     const item = e.target.closest('.memo-item');
-                    if (!item || !sidebar.contains(item)) return;
-                    const rt = e.relatedTarget;
-                    if (rt && item.contains(rt)) return; // 仍在同一 memo-item 内部移动时不重新触发
-                    const nodeId = item.getAttribute('data-node-id');
-                    const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
-                    utils.toggleMemoHighlight(main, nodeId, memoIndex, true);
-                    utils.createMemoConnection(main, sidebar, item, nodeId, '', memoIndex);
+                    if (!item || !sidebar.contains(item)) return; const rt = e.relatedTarget;
+                    if (rt && item.contains(rt)) return;
+                    const nodeId = item.getAttribute('data-node-id'), memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
+                    toggleMemoHighlight(main, nodeId, memoIndex, true, item);
                 }, { passive: true });
                 sidebar.addEventListener('mouseout', e => {
                     const item = e.target.closest('.memo-item');
-                    if (!item || !sidebar.contains(item)) return;
-                    const rt = e.relatedTarget;
-                    if (rt && item.contains(rt)) return; // 仍在同一 memo-item 内部移动时不移除
-                    const nodeId = item.getAttribute('data-node-id');
-                    const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
-                    utils.toggleMemoHighlight(main, nodeId, memoIndex, false);
-                    utils.removeMemoConnection();
+                    if (!item || !sidebar.contains(item)) return; const rt = e.relatedTarget;
+                    if (rt && item.contains(rt)) return;
+                    const nodeId = item.getAttribute('data-node-id'), memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
+                    toggleMemoHighlight(main, nodeId, memoIndex, false);
                 }, { passive: true });
                 sidebar.addEventListener('click', e => {
                     const btn = e.target.closest('button[data-action="delete"]');
-                    if (!btn) return;
-                    const item = btn.closest('.memo-item');
-                    if (!item) return;
+                    if (!btn) return; const item = btn.closest('.memo-item'); if (!item) return;
                     e.stopPropagation();
-                    const nodeId = item.getAttribute('data-node-id');
-                    const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
+                    const nodeId = item.getAttribute('data-node-id'), memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
                     const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
-                    item.remove();
-                    utils.removeMemoConnection();
+                    item.remove(); removeMemoConnection();
                     if (blockEl) {
                         const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
                         const targetSpan = memoSpans[memoIndex];
                         if (targetSpan) {
                             let types = (targetSpan.getAttribute("data-type") || "").split(" ").filter(t => t !== "inline-memo");
-                            if (types.length) {
-                                targetSpan.setAttribute("data-type", types.join(" "));
-                                targetSpan.removeAttribute("data-inline-memo-content");
-                            } else {
-                                targetSpan.outerHTML = targetSpan.innerHTML;
-                            }
+                            if (types.length) { targetSpan.setAttribute("data-type", types.join(" ")); targetSpan.removeAttribute("data-inline-memo-content"); }
+                            else { targetSpan.outerHTML = targetSpan.innerHTML; }
                         }
-                        fetch('/api/block/updateBlock', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` },
-                            body: JSON.stringify({ dataType: 'html', data: blockEl.outerHTML, id: blockEl.dataset.nodeId })
-                        });
+                        fetch('/api/block/updateBlock', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` }, body: JSON.stringify({ dataType: 'html', data: blockEl.outerHTML, id: blockEl.dataset.nodeId }) });
                     }
                 });
                 sidebar._delegated = true;
             }
-
             refreshMemoOffset(main, sidebar);
             const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
             if (protyleContent) {
-                if (visibleMemoCount > 0) {
-                    protyleContent.classList.add('Sv-memo');
-                } else {
-                    protyleContent.classList.remove('Sv-memo');
-                }
+                if (visibleMemoCount > 0) { protyleContent.classList.add('Sv-memo'); } else { protyleContent.classList.remove('Sv-memo'); }
             }
         }
 
         // 更新内联备注到思源
         async function updateInlineMemo(el, content) {
             try {
-                const blockEl = utils.getBlockNode(el);
+                const blockEl = getBlockNode(el);
                 if (!blockEl?.dataset.nodeId) return;
-                const blockId = blockEl.dataset.nodeId;
-                const allMemos = blockEl.querySelectorAll('span[data-type*="inline-memo"]');
-                let targetMemo = null;
-                for (const m of allMemos) {
-                    if (m.isSameNode(el)) { targetMemo = m; break; }
-                }
-                if (!targetMemo) return;
-                targetMemo.setAttribute('data-inline-memo-content', content);
-                const newHtml = blockEl.outerHTML;
-                await fetch('/api/block/updateBlock', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` },
-                    body: JSON.stringify({ dataType: 'html', data: newHtml, id: blockId })
-                });
+                el.setAttribute('data-inline-memo-content', content);
+                await fetch('/api/block/updateBlock', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` }, body: JSON.stringify({ dataType: 'html', data: blockEl.outerHTML, id: blockEl.dataset.nodeId }) });
             } catch (e) { console.error('[Savor] 更新备注出错:', e); }
         }
 
-        // 刷新编辑器（observer 回调加防抖）
+        // 刷新编辑器
         function refreshEditor() {
             if (!editorNode) return;
-            Object.values(observers).flat().forEach(o => o.disconnect());
-            observers = {};
+            Object.values(observers).flat().forEach(o => o.disconnect()); observers = {};
             editorNode.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
                 let sidebar = main.parentElement.querySelector('#protyle-sidebar');
-                if (!sidebar && isEnabled) sidebar = addSideBar(main);
-                if (!sidebar) return;
+                if (!sidebar && isEnabled) sidebar = addSideBar(main); if (!sidebar) return;
                 const mainId = main.parentElement.parentElement.getAttribute('data-id');
                 let refreshTimer = null;
                 const observer = new MutationObserver(() => {
                     clearTimeout(refreshTimer);
                     refreshTimer = setTimeout(() => {
-                        isEnabled && refreshSideBarMemos(main, sidebar);
-                        refreshMemoOffset(main, sidebar); // 新增：DOM 变动时自动刷新侧边栏备注定位
+                        if (isEnabled) refreshSideBarMemos(main, sidebar);
+                        refreshMemoOffset(main, sidebar);
                     }, 100);
                 });
                 observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content', 'data-readonly', 'fold'] });
-                observers[mainId] = [observer];
-                refreshSideBarMemos(main, sidebar);
-                // 新增：滚动编辑器时侧边栏自动刷新定位（监听 .protyle-content）
+                observers[mainId] = [observer]; refreshSideBarMemos(main, sidebar);
                 const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
                 if (protyleContent && !protyleContent._sidebarMemoScrollBinded) {
                     let scheduled = false;
                     const onScroll = () => {
-                        if (scheduled) return;
-                        scheduled = true;
-                        requestAnimationFrame(() => {
-                            refreshMemoOffset(main, sidebar);
-                            scheduled = false;
-                        });
+                        if (scheduled) return; scheduled = true;
+                        requestAnimationFrame(() => { refreshMemoOffset(main, sidebar); scheduled = false; });
                     };
                     protyleContent.addEventListener('scroll', onScroll, { passive: true });
                     protyleContent._sidebarMemoScrollBinded = true;
@@ -2228,9 +2003,7 @@ if (layoutCenter) {
             });
             document.querySelectorAll('.protyle-content').forEach(pc => {
                 const main = pc.closest('.protyle')?.querySelector('.protyle-wysiwyg');
-                if (main && !main.querySelector('span[data-type*="inline-memo"]')) {
-                    pc.classList.remove('Sv-memo');
-                }
+                if (main && !main.querySelector('span[data-type*="inline-memo"]')) { pc.classList.remove('Sv-memo'); }
             });
         }
 
@@ -2240,49 +2013,38 @@ if (layoutCenter) {
             if (!editorNode && open) {
                 (function wait() {
                     editorNode = document.querySelector('div.layout__center');
-                    if (editorNode) openSideBar(open, save);
-                    else setTimeout(wait, 100);
+                    if (editorNode) openSideBar(open, save); else setTimeout(wait, 100);
                 })();
                 return;
             }
             isEnabled = open;
             if (open) {
                 window.siyuan?.eventBus?.on('loaded-protyle', refreshEditor);
-                refreshEditor();
-                observeDragTitle();
+                refreshEditor(); observeDragTitle();
             } else {
                 window.siyuan?.eventBus?.off('loaded-protyle', refreshEditor);
-                Object.values(observers).flat().forEach(o => o.disconnect());
-                observers = {};
+                Object.values(observers).flat().forEach(o => o.disconnect()); observers = {};
                 editorNode?.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
                     main.parentElement.querySelector('#protyle-sidebar')?.remove();
-                    // 清除 Sv-memo 类
                     const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
-                    if (protyleContent) {
-                        protyleContent.classList.remove('Sv-memo');
-                    }
+                    if (protyleContent) { protyleContent.classList.remove('Sv-memo'); }
                 });
                 unobserveDragTitle();
             }
             if (save) config.set('sidebarMemoEnabled', open ? '1' : '0');
         }
 
-        // 初始化
         function init() {
             editorNode = document.querySelector('div.layout__center');
-            // 检查是否通过属性控制
             const shouldEnable = document.documentElement.hasAttribute('savor-sidebar-memo');
             openSideBar(shouldEnable, true);
         }
 
-        return {
-            init,
-            openSideBar,
-            isEnabled: () => isEnabled,
-            setEnabled: enabled => openSideBar(enabled, true),
-            unobserveDragTitle,
-        };
+        return { init, openSideBar, isEnabled: () => isEnabled, setEnabled: enabled => openSideBar(enabled, true), unobserveDragTitle };
     })();
+    // 将sidebarMemo暴露到window对象
+    window.sidebarMemo = sidebarMemo;
+
     // 判断某块及其所有父块是否有折叠
     function isAnyAncestorFolded(block) {
         let current = block;
@@ -2341,13 +2103,11 @@ if (layoutCenter) {
 
 
     
-  // ========================================
-// 模块：超级块宽度调节（优化合并版）
+// ========================================
+// 模块：超级块宽度调节
 // ========================================
 const superBlockResizer = (() => {
-    const HANDLE_CLASS = 'sb-resize-handle';
-    const SB_CLASS = 'sb-resize-container';
-    const MIN_PERCENT = 10;
+    const HANDLE_CLASS = 'sb-resize-handle', SB_CLASS = 'sb-resize-container', MIN_PERCENT = 10;
     let bodyObserver = null, scanScheduled = false, widthSaveBatchTimer = null;
     const apiRequestQueue = new Map();
 
@@ -2368,14 +2128,22 @@ const superBlockResizer = (() => {
         .sb-add-column-btn::before{content:'';position:absolute;left:-10px;top:0;width:10px;height:100%;background:transparent;}
         .${SB_CLASS}:hover .sb-add-column-btn{opacity:0.3;}
         .sb-add-column-btn:hover{opacity:0.6!important;}
-        `;
+        `;                        
         document.head.appendChild(st);
     }
 
     // 核心工具函数
     const isColLayout = sb => sb?.getAttribute?.('data-sb-layout') === 'col';
-    const hasMultipleColumns = sb => getColumns(sb).length >= 2;
-    
+    const hasMultipleColumns = sb => {
+        if (!isColLayout(sb)) return false;
+        let cols = Array.from(sb.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
+        if (cols.length < 2 && sb.firstElementChild) {
+            const firstChild = sb.firstElementChild;
+            if (firstChild?.dataset?.type === 'NodeSuperBlock' && firstChild?.getAttribute?.('data-sb-layout') === 'row') return cols.length >= 2;
+            cols = Array.from(firstChild.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
+        }
+        return cols.length >= 2;
+    };
     const getColumns = sb => {
         if (!isColLayout(sb)) return [];
         let cols = Array.from(sb.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
@@ -2392,10 +2160,7 @@ const superBlockResizer = (() => {
         try {
             const cs = getComputedStyle(host);
             let g = parseFloat(cs.columnGap);
-            if (!isFinite(g) && cs.gap) {
-                const parts = cs.gap.split(' ');
-                g = parseFloat(parts.length === 1 ? parts[0] : parts[1]);
-            }
+            if (!isFinite(g) && cs.gap) g = parseFloat(cs.gap.split(' ')[1] || cs.gap.split(' ')[0]);
             return isFinite(g) ? g : 0;
         } catch (_) { return 0; }
     };
@@ -2416,18 +2181,15 @@ const superBlockResizer = (() => {
         const vRound = Math.round(v * 1000) / 1000;
         const host = col?.parentElement || sb;
         const count = getColumns(sb).length || 1;
-        const gap = getGap(host);
-        const gapShare = count > 0 ? (gap * (count - 1)) / count : 0;
-        const calc = `calc(${vRound}% - ${Math.round(gapShare * 10) / 10}px)`;
-        Object.assign(col.style, { flex: '0 0 auto', width: calc });
+        const gapShare = count > 0 ? (getGap(host) * (count - 1)) / count : 0;
+        Object.assign(col.style, { flex: '0 0 auto', width: `calc(${vRound}% - ${Math.round(gapShare * 10) / 10}px)` });
         col.dataset.sbPct = String(vRound);
     };
     
     const measureWidths = (sb, cols) => {
         const host = cols[0]?.parentElement || sb;
         const w = host.getBoundingClientRect().width || 1;
-        const gap = getGap(host);
-        const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
+        const gapShare = cols.length > 0 ? (getGap(host) * (cols.length - 1)) / cols.length : 0;
         return cols.map(col => ((col.getBoundingClientRect().width + gapShare) / w) * 100);
     };
     
@@ -2435,18 +2197,14 @@ const superBlockResizer = (() => {
         const n = values.length; if (!n) return [];
         const effMin = Math.min(min, total / n);
         let v = values.map(x => Math.max(0, isFinite(x) ? x : 0));
-        const nonEmpty = v.filter(x => x > 0);
-        const emptyCount = v.length - nonEmpty.length;
+        const nonEmpty = v.filter(x => x > 0), emptyCount = v.length - nonEmpty.length;
         if (emptyCount > 0) {
-            const remaining = Math.max(0, total - nonEmpty.reduce((a, b) => a + b, 0));
-            const avg = remaining / emptyCount;
+            const avg = Math.max(0, total - nonEmpty.reduce((a, b) => a + b, 0)) / emptyCount;
             v = v.map(x => x > 0 ? x : avg);
         }
         v = v.map(x => Math.max(effMin, x));
-        const sum = v.reduce((a,b) => a + b, 0);
-        const base = effMin * n;
-        const varSum = Math.max(0, sum - base);
-        const targetVar = Math.max(0, total - base);
+        const sum = v.reduce((a,b) => a + b, 0), base = effMin * n;
+        const varSum = Math.max(0, sum - base), targetVar = Math.max(0, total - base);
         if (varSum === 0) return v.map(() => effMin);
         const factor = targetVar / varSum;
         return v.map(x => effMin + (x - effMin) * factor);
@@ -2474,45 +2232,36 @@ const superBlockResizer = (() => {
         save: async (colEl, pct, gapShare) => {
             const id = colEl?.dataset?.nodeId;
             if (!id) return;
-            const vRound = Math.round(pct * 1000) / 1000;
-            const gapRound = Math.round((gapShare || 0) * 10) / 10;
-            const calc = `calc(${vRound}% - ${gapRound}px)`;
-            Object.assign(colEl.style, { flex: '0 0 auto', width: calc, flexBasis: 'auto' });
+            const vRound = Math.round(pct * 1000) / 1000, gapRound = Math.round((gapShare || 0) * 10) / 10;
+            Object.assign(colEl.style, { flex: '0 0 auto', width: `calc(${vRound}% - ${gapRound}px)`, flexBasis: 'auto' });
             colEl.dataset.sbPct = String(vRound);
-            const key = `${id}-${Date.now()}`;
-            apiRequestQueue.set(key, async () => {
-                try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); }
-                catch (e) { /* 保存块样式失败 */ }
+            apiRequestQueue.set(`${id}-${Date.now()}`, async () => {
+                try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); } catch (e) {}
             });
-        },
+        },        
         clear: async (colEl, skipApi = false) => {
-            const id = colEl?.dataset?.nodeId; if (!id) return;
+            const id = colEl?.dataset?.nodeId; 
+            if (!id) return;
             ['width','flex'].forEach(prop => colEl.style.removeProperty(prop));
             delete colEl.dataset.sbPct;
             if (!colEl.getAttribute('style')) colEl.removeAttribute('style');
-            if (!skipApi) {
-                setTimeout(async () => {
-                    try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); } catch (_) {}
-                }, 50);
-            }
-        },
+            if (!skipApi) setTimeout(async () => {
+                try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); } catch (_) {}
+            }, 50);
+        },        
         clearBatch: (elements, skipApi = false) => {
             elements.forEach(el => {
                 ['width','flex'].forEach(prop => el.style.removeProperty(prop));
                 delete el.dataset.sbPct;
                 if (!el.getAttribute('style')) el.removeAttribute('style');
             });
-            if (!skipApi) {
-                setTimeout(() => {
-                    const calls = elements.filter(e => e.dataset.nodeId)
-                        .map(e => 设置思源块属性(e.dataset.nodeId, { 'style': e.getAttribute('style') || '' }));
-                    Promise.all(calls).catch(() => {});
-                }, 100);
-            }
+            if (!skipApi) setTimeout(() => {
+                const calls = elements.filter(e => e.dataset.nodeId).map(e => 设置思源块属性(e.dataset.nodeId, { 'style': e.getAttribute('style') || '' }));
+                Promise.all(calls).catch(() => {});
+            }, 100);
         }
     };
 
-    // 列数变化处理
     const handleColumnChange = async (sb, cols, prevCount) => {
         if (!hasMultipleColumns(sb)) {
             const allCols = getColumns(sb);
@@ -2520,37 +2269,27 @@ const superBlockResizer = (() => {
                 const onlyCol = allCols[0];
                 onlyCol.style.transition = 'width 0.25s ease';
                 setWidth(sb, onlyCol, 100);
-                setTimeout(() => {
-                    onlyCol.style.removeProperty('transition');
-                    widthOps.clear(onlyCol, true);
-                }, 260);
+                setTimeout(() => { onlyCol.style.removeProperty('transition'); widthOps.clear(onlyCol, true); }, 260);
             }
             return;
         }
         
         const saved = cols.map(readWidth);
-        const hasSaved = saved.some(v => isFinite(v));
-        let targetPercents = [];
-        if (hasSaved) {
-            targetPercents = normalizeWidths(saved, MIN_PERCENT, 100);
-            
+        if (saved.some(v => isFinite(v))) {
+            const targetPercents = normalizeWidths(saved, MIN_PERCENT, 100);
             cols.forEach(c => c.style.transition = 'width 0.25s ease');
             targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
-        } else {
-            // 如果没有保存的宽度，不自动分配宽度，保持原样
-            return;
+            setTimeout(() => {
+                cols.forEach(c => c.style.removeProperty('transition'));
+                try {
+                    const host = cols[0]?.parentElement || sb;
+                    const gapShare = cols.length > 0 ? (getGap(host) * (cols.length - 1)) / cols.length : 0;
+                    const percents = measureWidths(sb, cols);
+                    cols.forEach((c, i) => widthOps.save(c, Math.round(percents[i] * 1000) / 1000, gapShare));
+                    scheduleWidthSave(20);
+                } catch (_) {}
+            }, 260);
         }
-        setTimeout(() => {
-            cols.forEach(c => c.style.removeProperty('transition'));
-            try {
-                const host = cols[0]?.parentElement || sb;
-                const gap = getGap(host);
-                const gapShare = cols.length > 0 ? (gap * (cols.length - 1)) / cols.length : 0;
-                const percents = measureWidths(sb, cols);
-                cols.forEach((c, i) => widthOps.save(c, Math.round(percents[i] * 1000) / 1000, gapShare));
-                scheduleWidthSave(20);
-            } catch (_) {}
-        }, 260);
     };
 
     // 移除添加列按钮
@@ -2711,6 +2450,10 @@ const superBlockResizer = (() => {
             e.stopPropagation();
             const cols = getColumns(sb);
             if (!hasMultipleColumns(sb)) return;
+            // 双击瞬间隐藏调整杆
+            handle.style.opacity = '0';
+            handle.style.transition = 'opacity 0s';
+            
             const targetPercents = cols.map(() => 100 / cols.length);
             cols.forEach(c => c.style.transition = 'width 0.25s ease');
             targetPercents.forEach((p, i) => setWidth(sb, cols[i], p));
@@ -2718,6 +2461,9 @@ const superBlockResizer = (() => {
                 cols.forEach(c => c.style.removeProperty('transition'));
                 widthOps.clearBatch(cols, true);
                 positionHandles(sb);
+                handle.style.opacity = '';
+                handle.style.removeProperty('transition');
+                
                 try {
                     const calls = cols.filter(c => c.dataset.nodeId)
                         .map(c => 设置思源块属性(c.dataset.nodeId, { 'style': c.getAttribute('style') || '' }));
@@ -2728,7 +2474,6 @@ const superBlockResizer = (() => {
         handle.addEventListener('dblclick', onDoubleClick, { capture: true });
     };
 
-    // 应用保存宽度和初始化超级块
     const applySaved = async (sb) => {
         const cols = getColumns(sb); 
         if (!hasMultipleColumns(sb)) {
@@ -2736,10 +2481,7 @@ const superBlockResizer = (() => {
             return;
         }
         const saved = cols.map(readWidth);
-        if (saved.some(v => isFinite(v))) {
-            cols.forEach((c, i) => { if (isFinite(saved[i])) setWidth(sb, c, saved[i]); });
-        }
-        // 不自动为没有保存宽度的块分配宽度
+        if (saved.some(v => isFinite(v))) cols.forEach((c, i) => { if (isFinite(saved[i])) setWidth(sb, c, saved[i]); });
     };
 
     const initSuperBlock = async (sb) => {
@@ -2753,45 +2495,42 @@ const superBlockResizer = (() => {
             sb._hoverHandlersAdded = true;
             const showHandles = () => {
                 if (sb.classList.contains('sb-resizing')) return;
-                const cols = getColumns(sb);
                 if (hasMultipleColumns(sb)) positionHandles(sb);
             };
             const hideHandles = () => {
                 if (sb.classList.contains('sb-resizing')) return;
                 setTimeout(() => {
                     if (!sb.matches(':hover') && !sb.classList.contains('sb-resizing')) {
-                        removeHandles(sb);
-                        removeAddButtons(sb);
+                        removeHandles(sb); removeAddButtons(sb);
                     }
                 }, 100);
             };
             sb.addEventListener('mouseenter', showHandles);
             sb.addEventListener('mouseleave', hideHandles);
-            sb._showHandlers = showHandles;
-            sb._hideHandlers = hideHandles;
+            sb._showHandlers = showHandles; sb._hideHandlers = hideHandles;
         }
     };
 
-    // 扫描和清理
     const scan = async () => {
         scanScheduled = false;
         try {
             const blocksToClear = [];
-            const allBlocksWithCustomWidth = document.querySelectorAll('.protyle-wysiwyg [data-node-id][data-sb-pct], .protyle-wysiwyg [data-node-id][style*="width"]');
-            allBlocksWithCustomWidth.forEach(block => {
+            document.querySelectorAll('.protyle-wysiwyg [data-node-id][data-sb-pct], .protyle-wysiwyg [data-node-id][style*="width"]').forEach(block => {
                 if (block.dataset.sbPct && !block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]')) blocksToClear.push(block);
                 const parentSB = block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
-                if (parentSB) {
-                    const cols = parentSB._cachedCols || getColumns(parentSB);
-                    if (cols.length === 1 && cols[0] === block) blocksToClear.push(block);
-                }
+                if (parentSB && getColumns(parentSB).length === 1 && getColumns(parentSB)[0] === block) blocksToClear.push(block);
                 if (block.dataset.type === 'NodeSuperBlock' && block.dataset.sbLayout === 'col') {
                     const parentEl = block.parentElement;
                     if (parentEl && parentEl.getAttribute?.('data-type') !== 'NodeSuperBlock') blocksToClear.push(block);
                 }
             });
             if (blocksToClear.length > 0) {
-                blocksToClear.forEach(block => { try { block.style.transition = 'width 0.25s ease'; block.style.width = '100%'; } catch(_) {} });
+                blocksToClear.forEach(block => { 
+                    try { 
+                        block.style.transition = 'width 0.25s ease'; 
+                        block.style.width = '100%'; 
+                    } catch(_) {} 
+                });
                 setTimeout(() => {
                     blocksToClear.forEach(block => { try { block.style.removeProperty('transition'); } catch(_) {} });
                     widthOps.clearBatch(blocksToClear, true);
@@ -2804,17 +2543,13 @@ const superBlockResizer = (() => {
             }
         } catch (_) {}
         
-
-        
         const colSuperBlocks = document.querySelectorAll('.protyle-wysiwyg [data-type="NodeSuperBlock"][data-sb-layout="col"]');
-        const initPromises = [];
-        const updatePromises = [];
+        const initPromises = [], updatePromises = [];
         for (const sb of colSuperBlocks) {
             if (!sb._sbResizerInit) {
                 initPromises.push(initSuperBlock(sb));
             } else {
-                const cols = getColumns(sb);
-                const existingCols = sb._lastColsCount || 0;
+                const cols = getColumns(sb), existingCols = sb._lastColsCount || 0;
                 if (cols.length !== existingCols) {
                     updatePromises.push(handleColumnChange(sb, cols, existingCols));
                     sb._lastColsCount = cols.length;
@@ -2848,14 +2583,11 @@ const superBlockResizer = (() => {
         }
         const handleThemeChange = () => {
             document.querySelectorAll('[data-type="NodeSuperBlock"][data-sb-layout="col"]').forEach(sb => {
-                delete sb._sbResizerInit;
-                delete sb._lastColsCount;
-                delete sb._hoverHandlersAdded;
+                delete sb._sbResizerInit; delete sb._lastColsCount; delete sb._hoverHandlersAdded;
                 if (sb._showHandlers) {
                     sb.removeEventListener('mouseenter', sb._showHandlers);
                     sb.removeEventListener('mouseleave', sb._hideHandlers);
-                    delete sb._showHandlers;
-                    delete sb._hideHandlers;
+                    delete sb._showHandlers; delete sb._hideHandlers;
                 }
             });
             setTimeout(scan, 100);
@@ -2874,14 +2606,11 @@ const superBlockResizer = (() => {
             delete window._superBlockThemeChangeHandler;
         }
         document.querySelectorAll('.' + SB_CLASS).forEach(sb => {
-            sb.classList.remove(SB_CLASS);
-            removeAddButtons(sb);
+            sb.classList.remove(SB_CLASS); removeAddButtons(sb);
             if (sb._showHandlers) {
                 sb.removeEventListener('mouseenter', sb._showHandlers);
                 sb.removeEventListener('mouseleave', sb._hideHandlers);
-                delete sb._showHandlers;
-                delete sb._hideHandlers;
-                delete sb._hoverHandlersAdded;
+                delete sb._showHandlers; delete sb._hideHandlers; delete sb._hoverHandlersAdded;
             }
         });
         document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());

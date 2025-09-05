@@ -2,7 +2,8 @@
 body:not(.body--mobile,.body--window)>#toolbar{
 	background-color: var(--Sv-toolbar-background);
 	border:none;
-    height: unset;
+    height: 38px;
+	margin-bottom: -5px;
     transition: margin-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     .toolbar__item:not(#barWorkspace,#closeWindow){
         height: 28px;

@@ -3,12 +3,14 @@
 .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
     background-color: transparent;
     border: none;
+    padding-top: 5px;
     margin-bottom: -5px;
-    padding-right: 10px;
+    padding-right:10px;
+    padding-left: 5px;
     border-radius: 6px 6px 0 0;
     /*overflow: visible;这个不能加*/
     .item:not(.item--readonly){
-        min-height: 32px;
+        min-height: 28px;
         border-radius: var(--Sv-tab-bar-item-radius);
         padding: 1px 0 4px 0 ;
         margin-bottom: 5px;
@@ -55,20 +57,25 @@
         &.item--focus{
             background-color: var(--Sv-tab-bar-item-background-focus);
             border-radius: var(--Sv-tab-bar-item--focus-radius);
-            box-shadow:unset!important;
+            box-shadow:  rgba(0, 0, 0, 0.05) 0px 0px 5px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
             transition: opacity .2s cubic-bezier(0, 0, .2, 1) 0ms;
-                &::after{
-                    background-color:transparent;
-                    background-image: var(--Sv-tab-bar-item-focus-after);
-                    z-index: 2;
-                    opacity: 1;
-                    box-shadow: var(--Sv-tab-bar-item-background-focus) 0 8px 0 0;
-                    }
+            &::after{
+                background-color:transparent;
+                background-image: var(--Sv-tab-bar-item-focus-after);
+                z-index: 2;
+                opacity: 1;
+                box-shadow: var(--Sv-tab-bar-item-background-focus) 0 8px 0 0; 
+                }
+            }
+            &:first-child::after{
+                left: calc(-1 * var(--Sv-dock-item-radius) + 8px) ;
+                width: calc(100% + var(--Sv-dock-item-radius)*2 - 6px);
+                box-shadow: var(--Sv-tab-bar-item-background-focus) 0px 10.5px 0 0; 
             }
         }
     &.layout-tab-bar--readonly{
         padding-left: 5px;
-        padding-right: 5px;
+        padding-right: 8px;
         overflow: visible;
         z-index: 2;
         /*background-color: var(--Sv-dock-background);*/
@@ -112,6 +119,9 @@
         margin-bottom: 9px;
         &:first-child{
             margin-left: 0px;
+            &::after{
+                box-shadow: var(--Sv-tab-bar-item-background-focus) 0px 10.5px 0 0,var(--Sv-tab-bar-item-background-focus) 10px 0 0 inset; 
+            }
         }
         &:hover::after{
             opacity: 0;
@@ -120,7 +130,7 @@
             display: none;
         }
         & .item__icon{
-            padding:0px 9px;
+            padding:0px 7.5px;
         }
         & .item__graphic{
             padding:4px;
@@ -138,7 +148,7 @@
             box-shadow:0 0 0 2px var(--b3-font-background9) inset, 0 0 0 2px var(--b3-font-background9) inset;
         }
         &.item--focus{
-            box-shadow: none;
+            box-shadow:  rgba(0, 0, 0, 0.05) 0px 0px 5px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
             &::after{
                 bottom: -4px;
             }

@@ -50,8 +50,8 @@
 
     /* 块引用 */
     --Sv-block-ref-background: transparent;
-    --Sv-block-ref-bottom: 3px solid;
-    --Sv-block-ref-bottom-image: linear-gradient(to bottom right,#cdff3b, #cdff3b) 1;
+    --Sv-block-ref-bottom: 3px solid #cdff3b;
+    --Sv-block-ref-bottom-d: 3px dashed #cdff3b;
 
 }
 

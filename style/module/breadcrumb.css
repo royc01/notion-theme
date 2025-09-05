@@ -1,7 +1,7 @@
 /* ————————————————————面包屑———————————————————— */
-.protyle-breadcrumb{
+.protyle-breadcrumb,.protyle-breadcrumb__bar{
 	min-height: 35px;
-	padding: 0 6px;
+	padding: 0 5px 0 3px;
 	&>.protyle-breadcrumb__bar .protyle-breadcrumb__item{
 		&:hover{
 			background-color: var(--Sv-breadcrumb-hover);
@@ -51,9 +51,9 @@
 	.protyle-breadcrumb__arrow{
 		width: 0px;
 		height: 13px;
-		margin-top:1px;
-		transform: rotate(22deg);
+		transform: rotate(18deg);
 		border-left: 1px solid var(--Sv-breadcrumb-arrow);
+		opacity: 0.6;
 	}
 }
 

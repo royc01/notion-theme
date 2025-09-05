@@ -56,3 +56,6 @@
 		background-color: var(--Sv-dock-item-active-background-hover);
 	}
 }
+#dockLeft,#dockRight,.layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
+    padding-top: 5px;
+}

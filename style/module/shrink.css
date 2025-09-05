@@ -22,7 +22,7 @@
 	.block__icons{
 		padding: 0px 9px 0px 8px; 
 		border-bottom: none;
-		min-height: 35px;
+		min-height: 33px;
 		/*面板标题图标*/
 		.block__logo{
 			font-weight: 700;
@@ -361,3 +361,13 @@
 }
 
 
+.layout__dockl{
+    margin-right: -5px;
+    margin-left: 5px;
+	margin-bottom: 5px;
+}
+.layout__dockr{ 
+    margin-right: 5px;
+    margin-left: -5px;
+	margin-bottom: 5px;
+}  

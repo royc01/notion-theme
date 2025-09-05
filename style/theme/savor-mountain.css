@@ -42,7 +42,7 @@
     
     /* 块引用 */
     --Sv-block-ref-background: transparent;
-    --Sv-block-ref-bottom: 3px solid;
-    --Sv-block-ref-bottom-image: linear-gradient(to bottom right,#ff6000, #ff6000) 1;
+    --Sv-block-ref-bottom: 3px solid #ff6000;
+    --Sv-block-ref-bottom-d: 3px dashed #ff6000;
 
 }

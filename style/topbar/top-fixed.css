@@ -2,7 +2,7 @@
 body:not(.body--mobile,.body--window)>#toolbar{
 	z-index: 3;
 	height: 38px;
-	margin-bottom: -33px;
+	margin-bottom: -38px;
 	pointer-events: none;
 	counter-reset:plugin-counter;
 	background-color: transparent;
@@ -17,7 +17,7 @@ body:not(.body--mobile,.body--window)>#toolbar{
 }
 
 #dockLeft,#dockRight,.layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
-    padding-top: 33px;
+    padding-top: 38px;
 }
 
 body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
@@ -63,7 +63,7 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
     box-shadow: 0 33px 0 0 var(--Sv-theme-surface) inset;
 }
 body:not(.body--mobile,.body--window) #layouts{
-    margin: var(--Sv-layout-margin-fixed);
+    /*margin: var(--Sv-layout-margin-fixed);*/
 }
 
 
@@ -86,7 +86,6 @@ body:not(.body--mobile,.body--window) #layouts{
 
 
 .layout__center .layout__resize + .fn__flex [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
-    padding-left: 0px!important;
     margin-left: 0!important;
 }
 /* 左侧间距 

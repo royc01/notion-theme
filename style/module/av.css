@@ -21,7 +21,9 @@
 		padding: 6px 4px 4px 7px;
 	}
 }
-
+.av__cell--header .av__celltext{
+	color: var(--b3-theme-on-surface);
+}
 .av__title{
 	padding: 5px 0px 5px 6px;
 	order: 1;
