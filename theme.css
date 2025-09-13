@@ -15,6 +15,7 @@
 @import url( style/module/blockquote.css);/* 引述 */
 @import url( style/module/search.css);/* 搜索 */
 @import url( style/module/main.css);/* 主要结构 */
+@import url( style/module/mobile.css);/* 无线端 */
 @import url( style/custom/function.css);/* 自定义功能按钮 */
 @import url( style/custom/list2map.css);/* 列表转导图 */
 @import url( style/custom/list2table.css);/* 列表转表格 */

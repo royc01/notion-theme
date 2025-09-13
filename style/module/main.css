@@ -84,7 +84,7 @@ body:not(.body--mobile,.body--window) #layouts{
         background-color: var(--Sv-toolbar-background)!important;
     & > .fn__flex > .layout-tab-bar {
         border-radius: 6px 0 0 6px;
-        margin-top:5px;
+        margin-top:0px;
         background-color: transparent;
         .item:not(.item--readonly) {
             margin-left: 5px;
@@ -104,7 +104,7 @@ body:not(.body--mobile,.body--window) #layouts{
         }
         &.layout-tab-bar--readonly{
             margin-right: 0px!important;
-            margin-top:5px;
+            margin-top:0px;
             height: 33px;
     }
     }
@@ -146,7 +146,7 @@ body:not(.body--mobile,.body--window) #layouts{
 
 .layout__center{
     .sy__outline,.sy__graph,.sy__backlink,[data-timeout]{
-            & .block__icons,& .fn__flex-1{
+            & .block__icons{
         background-color: var(--b3-theme-background);
     }
 } 
@@ -157,4 +157,9 @@ body:not(.body--mobile,.body--window) #layouts{
 
 .layout__center [data-type="wnd"] .layout-tab-container .fn__flex-column{
     box-shadow: var(--b3-theme-background) 0 0 0 7px inset;
+}
+
+/*导出预览*/
+#action {
+    background: var(--Sv-theme-surface)!important;
 }

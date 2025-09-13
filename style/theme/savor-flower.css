@@ -50,8 +50,8 @@
     
     /* 块引用 */
     --Sv-block-ref-background: transparent;
-    --Sv-block-ref-bottom: 3px solid #ff5f40;
-    --Sv-block-ref-bottom-d: 3px dashed #ff5f40;
+    --Sv-block-ref-bottom: 2px solid #ff5f40;
+    --Sv-block-ref-bottom-d: 2px dashed #ff5f40;
 
 
     .sy__file .b3-list--background:nth-child(4n-3) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow,

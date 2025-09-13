@@ -14,17 +14,17 @@
     &[data-subtype="u"] .en_item_bullet_line:not(.protyle-wysiwyg--select)::after{
       width: 32px;
       height: calc(var(--en-bullet-line-height) - 1px);
-      top: calc(var(--en-bullet-line-height) * -1 + 20px);
+      top: calc(var(--en-bullet-line-height) * -1 + 20px + ((var(--b3-font-size-editor) - 16px) * 0.75));
     }
     &[data-subtype="o"] .en_item_bullet_line:not(.protyle-wysiwyg--select)::after{
       width: 24px;
       height: calc(var(--en-bullet-line-height) - 8px);
-      top: calc(var(--en-bullet-line-height) * -1 + 25px);
+      top: calc(var(--en-bullet-line-height) * -1 + 25px + ((var(--b3-font-size-editor) - 16px) * 0.75));
     }    
     &[data-subtype="t"] .en_item_bullet_line:not(.protyle-wysiwyg--select)::after{
       width: 30px;
       height: calc(var(--en-bullet-line-height) - 4px);
-      top: calc(var(--en-bullet-line-height) * -1 + 21px);
+      top: calc(var(--en-bullet-line-height) * -1 + 22px + ((var(--b3-font-size-editor) - 16px) * 0.75));
     }
     /* 激活状态样式 */
     &[data-subtype="u"] .en_item_bullet_actived:not(.protyle-task--done) > .protyle-action::before{

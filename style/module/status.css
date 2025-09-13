@@ -72,7 +72,12 @@
             }
     }
 }
-
+.body--window #status{
+    padding-right: 26px!important;
+    #statusHelp{
+        right: 0px!important;
+    }
+}
 
 .status.fn__none{/*隐藏底栏保留停靠栏按钮*/
     display: flex!important;

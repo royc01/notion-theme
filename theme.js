@@ -288,18 +288,8 @@
         
         setBlockFold: (id, fold) => {
             if (!id || (window._lastFoldedId === id && window._lastFoldedState === fold)) return;
-            
-            window._lastFoldedId = id;
-            window._lastFoldedState = fold;
-            
-            fetch('/api/attr/setBlockAttrs', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Token ${window.siyuan?.config?.api?.token || ''}`
-                },
-                body: JSON.stringify({ id, attrs: { fold } })
-            });
+            window._lastFoldedId = id; window._lastFoldedState = fold;
+            设置思源块属性(id, { fold });
         }
     };
 
@@ -1094,39 +1084,12 @@ if (layoutCenter) {
 
 
     // ===================== 新增：list2map 提示 i18n 赋值 =====================
-    function setList2MapI18nTip(root = document) {
-        const tip = i18n.t("list2map.tip");
-        root.querySelectorAll?.('[custom-f="dt"]').forEach(el => {
-            el.setAttribute('data-i18n-tip', tip);
-        });
-    }
+    const updateMapTips = () => document.querySelectorAll('[custom-f="dt"]').forEach(el => el.setAttribute('data-i18n-tip', i18n.t("list2map.tip")));
     i18n.ready().then(() => {
-        setList2MapI18nTip();
-        // 监听 DOM 变化，增量赋值
-        const observer = new MutationObserver(mutations => {
-            for (const mutation of mutations) {
-                if (mutation.type === "attributes") {
-                    const t = mutation.target;
-                    if (t.getAttribute?.("custom-f") === "dt") {
-                        setList2MapI18nTip(t);
-                    }
-                } else if (mutation.type === "childList") {
-                    mutation.addedNodes.forEach(node => {
-                        if (node.nodeType === 1) {
-                            if (node.getAttribute?.("custom-f") === "dt") setList2MapI18nTip(node);
-                            const dtNodes = node.querySelectorAll?.('[custom-f="dt"]');
-                            if (dtNodes?.length) setList2MapI18nTip(node);
-                        }
-                    });
-                }
-            }
-        });
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ["custom-f"]
-        });
+        updateMapTips();
+        // 存储观察器引用，以便后续清理
+        window._listMapTipObserver = new MutationObserver(() => setTimeout(updateMapTips, 16));
+        window._listMapTipObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["custom-f"] });
     });
 
 
@@ -1214,14 +1177,16 @@ if (layoutCenter) {
     }, true);
 
     const initMenuMonitor = () => {
-        window.addEventListener("mouseup", () => {
+        // 存储事件监听器引用，以便后续清理
+        window._listMapMenuHandler = () => {
             requestAnimationFrame(() => {
                 const selectinfo = getBlockSelected();
                 if (selectinfo && (selectinfo.type === "NodeList" || selectinfo.type === "NodeTable")) {
                     InsertMenuItem(selectinfo.id, selectinfo.type);
                 }
             });
-        });
+        };
+        window.addEventListener("mouseup", window._listMapMenuHandler);
     }
 
     const InsertMenuItem = (selectid, selecttype) => {
@@ -1240,56 +1205,33 @@ if (layoutCenter) {
         }
     }
 
-    // 添加API请求限流和重试机制
-    const apiRequestQueue = new Map();
-    const apiRequestDelay = 100; // 请求间隔100ms
-    
-    const 设置思源块属性 = async (id, attrs) => {
-        const key = `${id}-${JSON.stringify(attrs)}`;
-        
-        // 如果相同请求正在处理中，跳过
-        if (apiRequestQueue.has(key)) {
-            return;
-        }
-        
-        // 添加到队列
-        apiRequestQueue.set(key, true);
-        
+    // 统一API请求函数
+    const apiRequest = async (url, data) => {
         try {
-            // 延迟执行，避免频繁请求
-            await new Promise(resolve => setTimeout(resolve, apiRequestDelay));
-            
-            const response = await fetch("/api/attr/setBlockAttrs", {
+            return await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Token ${window.siyuan?.config?.api?.token ?? ""}`
                 },
-                body: JSON.stringify({
-                    id,
-                    attrs
-                })
+                body: JSON.stringify(data)
             });
-            
-            if (!response.ok) {
-                console.warn("[Savor] 设置块属性失败:", response.statusText);
-                // 失败时延迟重试
-                setTimeout(() => {
-                    apiRequestQueue.delete(key);
-                }, 1000);
-                return;
-            }
-            
-            // 成功时从队列移除
+        } catch (e) { console.warn("[Savor] API请求失败:", e); }
+    };
+
+    const apiRequestQueue = new Map();
+    const 设置思源块属性 = async (id, attrs) => {
+        const key = `${id}-${JSON.stringify(attrs)}`;
+        if (apiRequestQueue.has(key)) return;
+        apiRequestQueue.set(key, true);
+        try {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            await apiRequest("/api/attr/setBlockAttrs", { id, attrs });
             apiRequestQueue.delete(key);
-        } catch (error) {
-            console.warn("[Savor] 设置块属性出错:", error);
-            // 错误时延迟重试
-            setTimeout(() => {
-                apiRequestQueue.delete(key);
-            }, 1000);
+        } catch (e) {
+            setTimeout(() => apiRequestQueue.delete(key), 1000);
         }
-    }
+    };
 
     const clearTransformData = (id, blocks) => {
         try {
@@ -1569,8 +1511,6 @@ if (layoutCenter) {
         if (isPhone()) {
             document.body.classList.add("body--mobile");
             const mobileStyle = document.createElement("link");
-            mobileStyle.rel = "stylesheet";
-            mobileStyle.href = "/appearance/themes/Savor/style/module/mobile.css";
             document.head.appendChild(mobileStyle);
             initMobileMenu();
         }
@@ -1750,6 +1690,42 @@ if (layoutCenter) {
             document.querySelectorAll('.sb-resize-handle').forEach(el => el.remove());
             document.querySelectorAll('.sb-resize-container').forEach(el => el.classList.remove('sb-resize-container'));
         } catch (_) {}
+
+        // 删除列表转导图功能
+        if (window._listMapMenuHandler) {
+            window.removeEventListener('mouseup', window._listMapMenuHandler);
+            window._listMapMenuHandler = null;
+        }
+
+        // 清理列表转导图相关观察器和资源
+        if (window._listMapTipObserver) {
+            window._listMapTipObserver.disconnect();
+            window._listMapTipObserver = null;
+        }
+
+        // 清理导图拖拽相关的样式和功能
+        try {
+            document.getElementById('dt-inline-styles')?.remove();
+            window.__dtStylesInjected = false;
+            
+            // 清理所有已设置拖拽属性的元素
+            $$('[custom-f="dt"][data-draggable]').forEach(cleanupDraggable);
+            $$('[data-type="NodeListItem"][data-draggable]').forEach(item => {
+                item.removeAttribute('data-draggable');
+                item.style.removeProperty('--tx');
+                item.style.removeProperty('--ty');
+                delete item.dataset.tx;
+                delete item.dataset.ty;
+            });
+            
+            // 清理localStorage中的位置数据
+            try {
+                const positions = JSON.parse(localStorage.getItem("dt-positions") || "{}");
+                if (Object.keys(positions).length > 0) {
+                    localStorage.removeItem("dt-positions");
+                }
+            } catch (e) {}
+        } catch (e) {}
     };
     
 
@@ -2124,9 +2100,8 @@ const superBlockResizer = (() => {
         .${HANDLE_CLASS}:hover{opacity: 1;}
         .sb-percentage{position:absolute;top:7px;right:5px;background:var(--Sv-theme-surface);color:var(--b3-theme-on-background);padding:2px 6px;border-radius:6px;font-size:12px;pointer-events:none;z-index:2;opacity:0;transition:opacity 0.3s ease;}
         .sb-resizing .sb-percentage{opacity:1;}
-        .sb-add-column-btn{position:absolute;top:2px;bottom:0;right:-30px;width:20px;margin:auto 0;border-radius:6px;background:var(--b3-border-color);color:var(--Sv-list-counter-color);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;opacity:0.3;transition:opacity 0.3s ease;user-select:none!important;border:none;font-size:24px;}
-        .sb-add-column-btn::before{content:'';position:absolute;left:-10px;top:0;width:10px;height:100%;background:transparent;}
-        .${SB_CLASS}:hover .sb-add-column-btn{opacity:0.3;}
+        .sb-add-column-btn{position:absolute;top:2px;bottom:0;right:-30px;width:20px;margin:auto 0;border-radius:6px;background:var(--b3-border-color);color:var(--Sv-list-counter-color);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;opacity:0;transition:opacity 0.3s ease, transform 0.2s ease;user-select:none!important;border:none;font-size:24px;}
+        .sb-add-column-btn::before{content:'';position:absolute;left:-15px;top:0;width:25px;height:100%;background:transparent;}
         .sb-add-column-btn:hover{opacity:0.6!important;}
         `;                        
         document.head.appendChild(st);
@@ -2353,7 +2328,7 @@ const superBlockResizer = (() => {
                     try {
                         const response = await fetch('/api/block/insertBlock', {
                             method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
+                            headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` },
                             body: JSON.stringify({ dataType: 'markdown', data: '', previousID: lastID })
                         });
                         if (response.ok) setTimeout(() => scheduleScan(), 100);
@@ -2505,9 +2480,59 @@ const superBlockResizer = (() => {
                     }
                 }, 100);
             };
+            
+            // 为最后一列添加特殊的悬浮检测，使用节流优化性能
+            const handleLastColumnHover = () => {
+                const cols = getColumns(sb);
+                if (cols.length > 0) {
+                    const lastCol = cols[cols.length - 1];
+                    
+                    const lastColShowBtn = (e) => {
+                        if (sb.classList.contains('sb-resizing')) return;
+                        const isTopLevel = !sb.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]:not(:scope)');
+                        if (isTopLevel && hasMultipleColumns(sb)) {
+                            // 检查鼠标位置是否在最后一列的中后部分
+                            const rect = lastCol.getBoundingClientRect();
+                            const mouseX = e.clientX;
+                            const colMiddle = rect.left + rect.width * 0.5; // 列的中点
+                            
+                            // 只有当鼠标在列的中点之后才显示按钮
+                            if (mouseX >= colMiddle) {
+                                const btn = sb.querySelector('.sb-add-column-btn');
+                                if (btn) {
+                                    btn.style.opacity = '0.3';
+                                }
+                            }
+                        }
+                    };
+                    
+                    const lastColHideBtn = () => {
+                        setTimeout(() => {
+                            const btn = sb.querySelector('.sb-add-column-btn');
+                            if (btn && !btn.matches(':hover')) {
+                                btn.style.opacity = '0';
+                            }
+                        }, 150);
+                    };
+                    
+                    // 使用mousemove来实时检测鼠标位置
+                    const lastColMouseMove = (e) => {
+                        lastColShowBtn(e);
+                    };
+                    
+                    lastCol.addEventListener('mousemove', lastColMouseMove);
+                    lastCol.addEventListener('mouseleave', lastColHideBtn);
+                    sb._lastColHandlers = { mouseMove: lastColMouseMove, hideBtn: lastColHideBtn, lastCol };
+                }
+            };
+            
             sb.addEventListener('mouseenter', showHandles);
             sb.addEventListener('mouseleave', hideHandles);
             sb._showHandlers = showHandles; sb._hideHandlers = hideHandles;
+            
+            // 初始化最后一列的悬浮检测
+            handleLastColumnHover();
+            sb._handleLastColumnHover = handleLastColumnHover;
         }
     };
 
@@ -2553,6 +2578,19 @@ const superBlockResizer = (() => {
                 if (cols.length !== existingCols) {
                     updatePromises.push(handleColumnChange(sb, cols, existingCols));
                     sb._lastColsCount = cols.length;
+                    
+                    if (sb._lastColHandlers) {
+                        const { mouseMove, showBtn, hideBtn, lastCol } = sb._lastColHandlers;
+                        if (mouseMove) lastCol.removeEventListener('mousemove', mouseMove);
+                        if (showBtn) lastCol.removeEventListener('mouseenter', showBtn);
+                        if (hideBtn) lastCol.removeEventListener('mouseleave', hideBtn);
+                        delete sb._lastColHandlers;
+                    }
+                    
+                    // 重新初始化最后一列的悬浮检测
+                    if (sb._handleLastColumnHover) {
+                        sb._handleLastColumnHover();
+                    }
                 }
             }
         }
@@ -2612,6 +2650,14 @@ const superBlockResizer = (() => {
                 sb.removeEventListener('mouseleave', sb._hideHandlers);
                 delete sb._showHandlers; delete sb._hideHandlers; delete sb._hoverHandlersAdded;
             }
+            if (sb._lastColHandlers) {
+                const { mouseMove, showBtn, hideBtn, lastCol } = sb._lastColHandlers;
+                if (mouseMove) lastCol.removeEventListener('mousemove', mouseMove);
+                if (showBtn) lastCol.removeEventListener('mouseenter', showBtn);
+                if (hideBtn) lastCol.removeEventListener('mouseleave', hideBtn);
+                delete sb._lastColHandlers;
+            }
+            delete sb._handleLastColumnHover;
         });
         document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
         document.querySelectorAll('.sb-add-column-btn').forEach(btn => btn.remove());

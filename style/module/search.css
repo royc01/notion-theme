@@ -27,12 +27,6 @@
             .fn__flex-1{
                 border-radius: 10px 10px 0 0;
             }
-            #searchHistoryBtn,#replaceHistoryBtn,#assetHistoryBtn{
-                margin-left: 5px;
-                .search__arrowdown{
-                    margin-left: 5px;
-                }
-            }
             #searchInput,#replaceInput,#searchAssetInput{
                 padding: 5px 8px 5px 60px !important;
                 background-color: transparent;
@@ -86,53 +80,10 @@
         }
     }
     .search__layout:not(.search__layout--row){
-        #searchList,#searchAssetList{
-            border-radius: 8px;
+        #searchPreview,#searchAssetPreview,#searchList,#searchAssetList{
             margin: 0 8px;
-        }
-        .search__drag{
-            height: 8px;
-            margin-bottom: 0px;
-            &::after{
-                height: 8px;
-                border-radius: 8px;
-                background-color: transparent;
-            }   
-            &:hover::after{
-                background-color: var(--b3-scroll-color);
-            }
-        }
-        #searchPreview,#searchAssetPreview{
-            border-radius: 8px;
-            margin: 0 8px;
-            border:none;
         }
     }
-	#criteria {
-        border-top:none;
-        background-color: transparent;
-        .search__list{
-            padding-top:0;
-        }
-        
-		.b3-button{
-			height: 28px;
-			border-radius: 8px;
-			background-color:var(--b3-theme-on-background);
-            padding: 2px 8px;
-		}
-		.b3-chips .b3-chip{
-			height: 28px;
-			margin-left: 4px;
-            padding: 0 10px;
-			border-radius: 8px;
-            background-color: var(--b3-theme-background);
-            &.b3-chip--primary, &.b3-chip--current {
-                background-color: var(--b3-theme-primary);
-                color: var(--b3-theme-on-primary);
-            }
-		}
-	}
 	.search__tip{
 		background-color:var(--Sv-search-result-tip);
 		border-radius: 0 0 10px 10px;
@@ -247,4 +198,59 @@
 }
 .search__layout:not(.search__layout--row) .search__list,.search__layout--row{
     border-top:none;
+}
+
+	#criteria {
+        border-top:none;
+        background-color: var(--Sv--dialog-container);
+        .search__list{
+            padding-top:0;
+        }
+        
+		.b3-button{
+			height: 28px;
+			border-radius: 8px;
+			background-color:var(--b3-theme-on-background);
+            padding: 2px 8px;
+		}
+		.b3-chips .b3-chip{
+			height: 28px;
+			margin-left: 4px;
+            padding: 0 10px;
+			border-radius: 8px;
+            background-color: var(--b3-theme-background);
+            &.b3-chip--primary, &.b3-chip--current {
+                background-color: var(--b3-theme-primary);
+                color: var(--b3-theme-on-primary);
+            }
+		}
+	}
+
+.search__layout:not(.search__layout--row){
+        background-color: var(--Sv--dialog-container);
+    #searchList,#searchAssetList{
+        border-radius: 8px;
+    }
+    .search__drag{
+        height: 8px;
+        margin-bottom: 0px;
+        &::after{
+            height: 8px;
+            border-radius: 8px;
+            background-color: transparent;
+        }   
+        &:hover::after{
+            background-color: var(--b3-scroll-color);
+        }
+    }
+    #searchPreview,#searchAssetPreview{
+        border-radius: 8px;
+        border:none;
+    }
+}
+
+#searchHistoryBtn,#replaceHistoryBtn,#assetHistoryBtn{
+    .b3-form__icon-icon,.search__arrowdown{
+        margin-left: 5px;
+    }
 }

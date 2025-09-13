@@ -112,7 +112,6 @@
     }
     .item--pin:not(.item--readonly){
         min-width: 28px;
-        background-color: var(--b3-theme-background)!important;
         margin-left: -4px;
         margin-right: 8px;
         padding:1px 0 0 0;
@@ -136,19 +135,32 @@
             padding:4px;
         }
         &:nth-child(4n-3){
-            box-shadow:0 0 0 2px var(--b3-font-background13) inset, 0 0 0 2px var(--b3-font-background13) inset;
+            background-color:var(--b3-font-background5);
+            &:hover{
+                box-shadow:0 0 0 2px var(--b3-font-background5) inset, 0 0 0 2px var(--b3-font-background5) inset;
+            }
         }
         &:nth-child(4n-2){
-            box-shadow:0 0 0 2px var(--b3-font-background5) inset, 0 0 0 2px var(--b3-font-background5) inset;
+            background-color:var(--b3-font-background7);
+            &:hover{
+                box-shadow:0 0 0 2px var(--b3-font-background7) inset, 0 0 0 2px var(--b3-font-background7) inset;
+            }
         }
         &:nth-child(4n-1){
-            box-shadow:0 0 0 2px var(--b3-font-background10) inset, 0 0 0 2px var(--b3-font-background10) inset;
+            background-color:var(--b3-font-background8);
+            &:hover{
+                box-shadow:0 0 0 2px var(--b3-font-background8) inset, 0 0 0 2px var(--b3-font-background8) inset;
+            }
         }
         &:nth-child(4n){
-            box-shadow:0 0 0 2px var(--b3-font-background9) inset, 0 0 0 2px var(--b3-font-background9) inset;
+            background-color:var(--b3-font-background10);
+            &:hover{
+                box-shadow:0 0 0 2px var(--b3-font-background10) inset, 0 0 0 2px var(--b3-font-background10) inset;
+            }
         }
         &.item--focus{
-            box-shadow:  rgba(0, 0, 0, 0.05) 0px 0px 5px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
+            background-color:var(--Sv-tab-bar-item-background-focus);
+            box-shadow:  rgba(0, 0, 0, 0.05) 0px 0px 5px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px!important;
             &::after{
                 bottom: -4px;
             }

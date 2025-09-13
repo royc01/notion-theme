@@ -4,7 +4,7 @@
 {
     display: grid;
     flex-direction: row;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     margin-bottom: 10px;
 }
 
@@ -16,7 +16,7 @@
     background-color: var(--Sv-list-background);
     padding: 8px 8px 2px 8px;
     margin-right: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 10px!important;
     margin-top: 0px;
     border-radius: 8px;
     >[data-node-id]{
