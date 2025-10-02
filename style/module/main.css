@@ -163,3 +163,9 @@ body:not(.body--mobile,.body--window) #layouts{
 #action {
     background: var(--Sv-theme-surface)!important;
 }
+
+
+.layout__center div[data-type=wnd]{
+    padding-top: 5px;
+    min-height: 90%;
+}

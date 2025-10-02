@@ -1,9 +1,16 @@
 :root[savor-tabbar="vertical"]  {
     --custom-tab-width: 150px;
 
+    body:not(.body--mobile,.body--window)>#toolbar{
+	margin-bottom: 0px;
+}
+#dockLeft,#dockRight,.layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
+    padding-top: 0px;
+}
+
 body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]:not(.tab-horizontal){
-    background-color: var(--Sv-vertical-bg);
     border-radius: 8px;
+    padding-top: 0px;
 }
 body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizontal) .fn__flex:not(.av__views){
     & > .layout-tab-bar{
@@ -15,7 +22,7 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
     &.layout-tab-bar--readonly {
         flex: initial;
         width: calc(100% - 5px);
-        padding: 5px;
+        border-radius: 0 8px 0 0;
     }
     .item:not(.item--readonly) {
         margin:0 -5px 5px 0!important;
@@ -67,6 +74,11 @@ body:not(.body--mobile,.body--window)  .layout__center [data-type='wnd'][data-id
 body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]:not(.tab-horizontal)>.fn__flex>.layout-tab-bar {
     width: var(--custom-tab-width);
     transition: width 0.3s ease;
+    background-color: var(--Sv-vertical-bg);
+    &:not(.layout-tab-bar--readonly) {
+        margin-bottom: 5px;
+        border-radius: 0 0 0 8px;
+    }
 }
 
 

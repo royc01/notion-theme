@@ -60,7 +60,6 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 
 .layout__empty{
     border-radius: 6px;
-    box-shadow: 0 33px 0 0 var(--Sv-theme-surface) inset;
 }
 body:not(.body--mobile,.body--window) #layouts{
     /*margin: var(--Sv-layout-margin-fixed);*/

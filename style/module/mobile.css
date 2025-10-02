@@ -17,7 +17,7 @@
 }
 }
 body>.toolbar--border{
-    margin: 5px 10px;
+    margin: 0px 6px;
     border: none;
     border-radius: 6px;
     background-color: var(--Sv-theme-surface);
@@ -25,14 +25,14 @@ body>.toolbar--border{
 #sidebar.side-panel{
 	background-color: var(--Sv-theme-surface);
     &>.toolbar--border{
-        margin: 6px 10px 0px 10px;
+        margin: 0px 6px;
         border-radius: 6px;
         border: none;
         background-color: var(--Sv-theme-surface);
     }
 }
 .b3-list--mobile{
-	margin: 10px 10px 0px 10px;
+	 margin: 0px 10px;
 	border-radius: 6px;
 	& .toolbar--border{
         border: none;
@@ -52,7 +52,7 @@ body>.toolbar--border{
         background-color: var(--Sv-theme-surface);
     }
     &>div{
-        margin: 5px 10px;
+        margin: 0px 10px;
         border: none;
         border-radius: 6px;
     }
@@ -76,7 +76,7 @@ body>.toolbar--border{
     }
 }
 #editor{
-    margin: 5px 10px;
+    margin: 0px 10px;
     border-radius: 6px;
 }
 

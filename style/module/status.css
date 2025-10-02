@@ -17,7 +17,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-right: 52px;
     height: 24px;
     line-height: 24px;
     right: 0px;
@@ -27,6 +26,7 @@
     background-color: var(--Sv-status-msg-background);
     transform-origin: 100% 100%;
     animation: statusExpand .1s ;
+    padding: 0;
     .toolbar__item:not(.toolbar__item--close) {
         padding:2px;
         margin: unset;
@@ -46,19 +46,8 @@
     >.fn__flex-1{
         display: none;
     }
-    #statusHelp{
-        position: absolute;
-        right: 26px;
-        color: var(--Sv-status-barDock-color);
-        box-shadow: 4px 0 0 0 var(--b3-theme-background);
-        background-color: var(--Sv-status-msg-background);
-    }
     #barDock{
-        position: absolute;
-        right: 0px;
-        margin-left: 4px;
-        background-color: var(--Sv-status-msg-background);
-        box-shadow: -4px 0 0 0 var(--b3-theme-background);
+        order: 99;
     }
     .status__msg:not(:empty){
             padding-left: 26px!important;
@@ -70,12 +59,6 @@
                 position: absolute;
                 left: 0px;
             }
-    }
-}
-.body--window #status{
-    padding-right: 26px!important;
-    #statusHelp{
-        right: 0px!important;
     }
 }
 
@@ -95,7 +78,6 @@
     transition: all 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
     position: relative;
     cursor: pointer;
-    width: 48px!important;
     background-color: transparent!important;
     & div{
         opacity: 0;
