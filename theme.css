@@ -126,7 +126,7 @@
     --b3-font-color13: oklch(var(--b3-font-color13-base-l) var(--b3-font-color13-base-ch));
 
 
-    --b3-font-background1: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.13);
+    /*--b3-font-background1: oklch(calc(var(--b3-font-color1-base-l)*0.95) var(--b3-font-color1-base-ch) / 0.13);
     --b3-font-background2: oklch(calc(var(--b3-font-color2-base-l)*0.95) var(--b3-font-color2-base-ch) / 0.13);
     --b3-font-background3: oklch(calc(var(--b3-font-color13-base-l)*0.95) var(--b3-font-color13-base-ch) / 0.13);
     --b3-font-background4: oklch(calc(var(--b3-font-color3-base-l)*0.95) var(--b3-font-color3-base-ch) / 0.13);
@@ -138,7 +138,7 @@
     --b3-font-background10: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.13);
     --b3-font-background11: oklch(calc(var(--b3-font-color10-base-l)*0.95) var(--b3-font-color10-base-ch) / 0.13);
     --b3-font-background12: oklch(calc(var(--b3-font-color11-base-l)*0.95) var(--b3-font-color11-base-ch) / 0.13);
-    --b3-font-background13: oklch(calc(var(--b3-font-color12-base-l)*0.95) var(--b3-font-color12-base-ch) / 0.13);
+    --b3-font-background13: oklch(calc(var(--b3-font-color12-base-l)*0.95) var(--b3-font-color12-base-ch) / 0.13);*/
 
     /* 动画效果 */
     --b3-transition: all .2s cubic-bezier(0, 0, .2, 1) 0ms;
