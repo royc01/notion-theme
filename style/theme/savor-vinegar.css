@@ -32,6 +32,18 @@
 
     --b3-select-background: url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M12.8,15.6l4-4.1c0.2-0.2,0.2-0.4,0.2-0.6c0-0.5-0.4-0.9-0.9-0.9c-0.3,0-0.5,0.1-0.6,0.3L12,13.9l-3.4-3.6C8.3,10.1,8.1,10,7.9,10C7.4,10,7,10.4,7,10.9c0,0.2,0.1,0.4,0.2,0.6l4,4.1c0.2,0.2,0.4,0.3,0.7,0.3C12.3,15.9,12.5,15.8,12.8,15.6z'/></svg>") no-repeat right 2px center #303030;
 
-
+    --b3-font-background1: #3d3d3d;
+    --b3-font-background2: #2b2c2c;
+    --b3-font-background3: #3a2827;
+    --b3-font-background4: #302c2a;
+	--b3-font-background5: #3d3125;
+    --b3-font-background6: #3d3425;
+    --b3-font-background7: #3d3925;
+	--b3-font-background8: #263331;
+    --b3-font-background9: #273437;
+    --b3-font-background10: #273137;
+    --b3-font-background11: #312b39;
+    --b3-font-background12: #3a2832;
+    --b3-font-background13: #3d2b2a;
 
 }

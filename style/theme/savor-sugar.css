@@ -36,7 +36,19 @@
     --Sv-Splugin-off:url("data:image/svg+xml;utf8,<svg fill='rgb(144, 140, 134)' height='28' viewBox='0 0 24 24' width='28' xmlns='http://www.w3.org/2000/svg'><path d='M20.4 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133-0.133-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333zM16.533 17.2c0.133-0.133 0.133-0.267 0.133-0.4s0-0.267-0.133-0.4l-3.333-3.333c-0.133 0-0.267-0.133-0.4-0.133-0.267 0-0.533 0.267-0.533 0.533 0 0.133 0 0.267 0.133 0.4l3.067 2.933-3.067 2.933c-0.133 0.133-0.133 0.267-0.133 0.4 0 0.267 0.267 0.533 0.533 0.533 0.133 0 0.267 0 0.4-0.133l3.333-3.333z'/></svg>") no-repeat left -10px top -6px;
     /*——————————————————————————————————————————————————————————————*/
 
-
+    --b3-font-background1: #d9d8d5;
+    --b3-font-background2: #e9e8e5;
+    --b3-font-background3: #f6d8d8;
+    --b3-font-background4: #e5e0dc;
+	--b3-font-background5: #f4e6d5;
+    --b3-font-background6: #f7e7d9;
+    --b3-font-background7: #f4edd5;
+	--b3-font-background8: #e5eedd;
+    --b3-font-background9: #d9e7e2;
+    --b3-font-background10: #d9e5e8;
+    --b3-font-background11: #e6dfe9;
+    --b3-font-background12: #eed9e3;
+    --b3-font-background13: #f5dfdc;
 
     .sy__file .b3-list--background:nth-child(4n-3) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
         color:#f67563;
@@ -50,5 +62,6 @@
     .sy__file .b3-list--background:nth-child(4n) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow{
         color:#49adbb;
     }
+
 }
 

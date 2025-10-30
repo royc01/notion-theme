@@ -362,9 +362,11 @@
 
 
 .layout__dockl{
-    margin-right: -5px;
     margin-left: 5px;
 	margin-bottom: 5px;
+	& + .layout__resize--lr{
+		margin: 0 -11px 0 0;
+	}
 }
 .layout__dockr{ 
     margin-right: 5px;

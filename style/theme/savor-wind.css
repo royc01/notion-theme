@@ -58,6 +58,22 @@
     /* 代码块 */
     --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.02) var(--b3-theme-surface-base-ch));
 
+
+    --b3-font-background1: #dedbde;
+    --b3-font-background2: #eeebee;
+    --b3-font-background3: #fbdbe1;
+    --b3-font-background4: #eae3e5;
+	--b3-font-background5: #f9e9de;
+    --b3-font-background6: #fceae2;
+    --b3-font-background7: #f9f0de;
+	--b3-font-background8: #eaf1e6;
+    --b3-font-background9: #deeaeb;
+    --b3-font-background10: #dee8f1;
+    --b3-font-background11: #ebe2f2;
+    --b3-font-background12: #f3dcec;
+    --b3-font-background13: #fae2e5;
+
+
     .b3-list-item{
         filter: grayscale(50%);
     }

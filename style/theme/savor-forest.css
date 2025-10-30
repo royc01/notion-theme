@@ -54,4 +54,18 @@
     /* 代码块 */
     --Sv-code-block-background: oklch(calc(var(--b3-theme-surface-base-l)*1.02) var(--b3-theme-surface-base-ch));
 
+    --b3-font-background1: #dedede;
+    --b3-font-background2: #eeeeee;
+    --b3-font-background3: #fbdee1;
+    --b3-font-background4: #eae6e5;
+	--b3-font-background5: #f9ecde;
+    --b3-font-background6: #fcede2;
+    --b3-font-background7: #f9f3de;
+	--b3-font-background8: #eaf4e6;
+    --b3-font-background9: #deedeb;
+    --b3-font-background10: #deebf1;
+    --b3-font-background11: #ebe5f2;
+    --b3-font-background12: #f3dfec;
+    --b3-font-background13: #fae5e5;
+
 }

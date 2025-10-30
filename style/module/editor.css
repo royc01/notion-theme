@@ -106,13 +106,14 @@
 
 	}
 	& .b3-chip{
-		padding: 0 0 1px 8px;
+		padding: 3px 8px;
 		font-size:90%;
         font-weight: 600;
 		& .b3-chip__close{
                 width: 14;
                 margin-top: -20px;
-                margin-right: -8px;
+                margin-right: -16px;
+                margin-left: 0px;
                 opacity: 0;
 		}
 		&:hover .b3-chip__close{

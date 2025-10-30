@@ -53,6 +53,20 @@
     --Sv-block-ref-bottom: 2px solid #ff5f40;
     --Sv-block-ref-bottom-d: 2px dashed #ff5f40;
 
+    --b3-font-background1: #dedbde;
+    --b3-font-background2: #eeebee;
+    --b3-font-background3: #fbdbe1;
+    --b3-font-background4: #eae3e5;
+	--b3-font-background5: #f9e9de;
+    --b3-font-background6: #fceae2;
+    --b3-font-background7: #f9f0de;
+	--b3-font-background8: #eaf1e6;
+    --b3-font-background9: #deeaeb;
+    --b3-font-background10: #dee8f1;
+    --b3-font-background11: #ebe2f2;
+    --b3-font-background12: #f3dcec;
+    --b3-font-background13: #fae2e5;
+
 
     .sy__file .b3-list--background:nth-child(4n-3) [data-type="navigation-root"]>.b3-list-item__toggle>.b3-list-item__arrow,
     .sy__file .b3-list--background:nth-child(4n-3) [data-type="navigation-root"]+ul .b3-list-item__toggle>.b3-list-item__arrow{

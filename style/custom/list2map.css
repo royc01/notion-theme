@@ -235,3 +235,10 @@ div *[custom-f="dt"] > [data-type="NodeListItem"].li::after {
     opacity: 0.8;
     pointer-events: none;
 }
+
+/*————————————————————————光标样式————————————————————————*/
+/* 列表项内部使用默认光标 */
+.protyle-wysiwyg *[custom-f="dt"] .li div > div[spellcheck] {
+    cursor: text;
+}
+
