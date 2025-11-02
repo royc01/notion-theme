@@ -67,6 +67,10 @@ body:not(.body--mobile,.body--window) #layouts{
         margin: 0 5px 5px 5px;
         box-shadow:  rgba(0, 0, 0, 0.08) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
     }
+    .layout__center div[data-type=wnd]{
+    padding-top: 5px;
+    min-height: 90%;
+    }
 }
 
 #savorPlugins{
@@ -84,7 +88,7 @@ body:not(.body--mobile,.body--window) #layouts{
         background-color: var(--Sv-toolbar-background)!important;
     & > .fn__flex > .layout-tab-bar {
         border-radius: 6px 0 0 6px;
-        margin-top:0px;
+        margin-top:5px;
         background-color: transparent;
         .item:not(.item--readonly) {
             margin-left: 5px;
@@ -104,7 +108,6 @@ body:not(.body--mobile,.body--window) #layouts{
         }
         &.layout-tab-bar--readonly{
             margin-right: 0px!important;
-            margin-top:0px;
             height: 33px;
     }
     }
@@ -164,8 +167,3 @@ body:not(.body--mobile,.body--window) #layouts{
     background: var(--Sv-theme-surface)!important;
 }
 
-
-.layout__center div[data-type=wnd]{
-    padding-top: 5px;
-    min-height: 90%;
-}
