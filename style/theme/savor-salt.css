@@ -52,5 +52,8 @@
     --b3-font-background12: #e1d4e1;
     --b3-font-background13: #e8dada;
 
+    body::before {
+        display: none;
+    }
 }
 

@@ -107,7 +107,36 @@
             { id: "colorFolder", type: "feature", label: i18n.t("彩色文档树"), styleId: "Sv-theme-color-彩色文档树", attrName: "彩色文档树", svg: "M11.6 14.933c0-0.133 0-0.267 0-0.4 0-2.533 2-4.533 4.4-4.533s4.4 2 4.4 4.533c0 0.133 0 0.267 0 0.4 1.467 0.667 2.533 2.267 2.533 4.133 0 2.533-2 4.533-4.4 4.533-0.933 0-1.867-0.267-2.533-0.8-0.8 0.533-1.6 0.8-2.533 0.8-2.4 0-4.4-2-4.4-4.533 0-1.867 0.933-3.467 2.533-4.133zM11.867 16.267c-0.933 0.533-1.6 1.6-1.6 2.8 0 1.733 1.467 3.2 3.2 3.2 0.533 0 1.067-0.133 1.6-0.4-0.667-0.8-0.933-1.733-0.933-2.8 0-0.133 0-0.267 0-0.4-1.067-0.533-1.867-1.467-2.267-2.4v0zM15.333 18.933v0c0 1.867 1.467 3.2 3.2 3.2s3.2-1.467 3.2-3.2c0-1.2-0.667-2.267-1.6-2.8-0.667 1.6-2.267 2.8-4.133 2.8-0.267 0.133-0.4 0-0.667 0v0zM16 17.733c1.733 0 3.2-1.467 3.2-3.2s-1.467-3.2-3.2-3.2-3.2 1.467-3.2 3.2 1.467 3.2 3.2 3.2z", onEnable: () => { document.documentElement.setAttribute('savor-color-folder', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-color-folder'); } },
             { id: "headingDots", type: "feature", label: i18n.t("标题点标识"), styleId: "Sv-theme-color-标题点标识", attrName: "标题点标识", svg: "M18.533 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM13.467 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM18.533 20.4c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.8-0.667-1.467-1.467-1.467zM13.467 15.467c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467-0.667-1.467-1.467-1.467zM18.533 13.467c0.8 0 1.467-0.667 1.467-1.467s-0.667-1.467-1.467-1.467-1.467 0.667-1.467 1.467 0.667 1.467 1.467 1.467zM13.467 10.667c-0.8 0-1.467 0.667-1.467 1.467s0.667 1.467 1.467 1.467 1.467-0.667 1.467-1.467c0-0.933-0.667-1.467-1.467-1.467z", onEnable: () => { document.documentElement.setAttribute('savor-heading-dots', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-heading-dots'); } },
             { id: "typewriterMode", type: "feature", label: i18n.t("打字机模式"), styleId: "Sv-theme-typewriter-mode", attrName: "typewriterMode", svg: "M20.133 10.667c1.6 0 2.8 1.2 2.8 2.8v0 6.933c0 1.6-1.2 2.8-2.8 2.8v0h-8.267c-1.6 0-2.8-1.2-2.8-2.8v0-7.067c0-1.467 1.2-2.667 2.8-2.667 0 0 8.267 0 8.267 0zM20.133 12h-8.267c-0.8 0-1.333 0.533-1.333 1.333v0 6.933c0 0.8 0.533 1.333 1.333 1.333h8.533c0.8 0 1.333-0.533 1.333-1.333v-6.933c-0.133-0.667-0.667-1.333-1.6-1.333v0zM19.467 18.933c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667h-6.933c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667h6.933zM12.533 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 16.133c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM12.533 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667-0.667-0.267-0.667-0.667 0.267-0.667 0.667-0.667zM16 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667zM19.467 13.333c0.4 0 0.667 0.267 0.667 0.667s-0.267 0.667-0.667 0.667v0c-0.4 0-0.667-0.267-0.667-0.667s0.267-0.667 0.667-0.667z", onEnable: () => { enableTypewriterMode(); }, onDisable: () => { disableTypewriterMode(); } },
-            { id: "sidebarMemo", type: "feature", label: i18n.t("侧边栏备注"), styleId: "Sv-theme-sidebar-memo", attrName: "sidebarMemo", svg: "M19.2 13.733h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM19.2 16.267h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM20.533 10.533h-9.067c-1.067 0-1.867 0.8-1.867 1.867v6.4c0 1.067 0.8 1.867 1.867 1.867h7.467l2.4 2.4c0.133 0.133 0.267 0.133 0.4 0.133s0.133 0 0.267 0c0.267-0.133 0.4-0.267 0.4-0.533v-10.267c0-1.067-0.8-1.867-1.867-1.867zM21.067 21.2l-1.467-1.467c-0.133-0.133-0.267-0.133-0.4-0.133h-7.733c-0.4 0-0.667-0.267-0.667-0.667v-6.533c0-0.4 0.267-0.667 0.667-0.667h8.933c0.4 0 0.667 0.267 0.667 0.667v8.8z", onEnable: () => { document.documentElement.setAttribute('savor-sidebar-memo', 'true'); setTimeout(() => window.sidebarMemo?.openSideBar(true, true), 10); }, onDisable: () => { document.documentElement.removeAttribute('savor-sidebar-memo'); window.sidebarMemo?.openSideBar(false, true); } },
+            { id: "sidebarMemo", type: "feature", label: i18n.t("侧边栏备注"), styleId: "Sv-theme-sidebar-memo", attrName: "sidebarMemo", svg: "M19.2 13.733h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM19.2 16.267h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM20.533 10.533h-9.067c-1.067 0-1.867 0.8-1.867 1.867v6.4c0 1.067 0.8 1.867 1.867 1.867h7.467l2.4 2.4c0.133 0.133 0.267 0.133 0.4 0.133s0.133 0 0.267 0c0.267-0.133 0.4-0.267 0.4-0.533v-10.267c0-1.067-0.8-1.867-1.867-1.867zM21.067 21.2l-1.467-1.467c-0.133-0.133-0.267-0.133-0.4-0.133h-7.733c-0.4 0-0.667-0.267-0.667-0.667v-6.533c0-0.4 0.267-0.667 0.667-0.667h8.933c0.4 0 0.667 0.267 0.667 0.667v8.8z", onEnable: () => { 
+                // 互斥功能：关闭另一个侧边栏功能
+                if (config.get("sidebarBlockMemo") === "1") {
+                    config.set("sidebarBlockMemo", "0");
+                    document.documentElement.removeAttribute('savor-sidebar-block-memo');
+                    window.sidebarBlockMemo?.openSideBar(false, true);
+                    // 更新按钮UI状态
+                    const blockMemoButton = document.getElementById("sidebarBlockMemo");
+                    if (blockMemoButton) {
+                        blockMemoButton.classList.remove("button_on");
+                    }
+                }
+                document.documentElement.setAttribute('savor-sidebar-memo', 'true'); 
+                setTimeout(() => window.sidebarMemo?.openSideBar(true, true), 10); 
+            }, onDisable: () => { document.documentElement.removeAttribute('savor-sidebar-memo'); window.sidebarMemo?.openSideBar(false, true); } },
+            { id: "sidebarBlockMemo", type: "feature", label: i18n.t("行内顶部备注"), styleId: "Sv-theme-sidebar-block-memo", attrName: "sidebarBlockMemo", svg: "M19.2 13.733h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM19.2 16.267h-6.4c-0.4 0-0.667 0.267-0.667 0.667s0.267 0.667 0.667 0.667h6.4c0.4 0 0.667-0.267 0.667-0.667s-0.267-0.667-0.667-0.667zM20.533 10.533h-9.067c-1.067 0-1.867 0.8-1.867 1.867v6.4c0 1.067 0.8 1.867 1.867 1.867h7.467l2.4 2.4c0.133 0.133 0.267 0.133 0.4 0.133s0.133 0 0.267 0c0.267-0.133 0.4-0.267 0.4-0.533v-10.267c0-1.067-0.8-1.867-1.867-1.867zM21.067 21.2l-1.467-1.467c-0.133-0.133-0.267-0.133-0.4-0.133h-7.733c-0.4 0-0.667-0.267-0.667-0.667v-6.533c0-0.4 0.267-0.667 0.667-0.667h8.933c0.4 0 0.667 0.267 0.667 0.667v8.8z", onEnable: () => { 
+                // 互斥功能：关闭另一个侧边栏功能
+                if (config.get("sidebarMemo") === "1") {
+                    config.set("sidebarMemo", "0");
+                    document.documentElement.removeAttribute('savor-sidebar-memo');
+                    window.sidebarMemo?.openSideBar(false, true);
+                    // 更新按钮UI状态
+                    const memoButton = document.getElementById("sidebarMemo");
+                    if (memoButton) {
+                        memoButton.classList.remove("button_on");
+                    }
+                }
+                document.documentElement.setAttribute('savor-sidebar-block-memo', 'true'); 
+                setTimeout(() => window.sidebarBlockMemo?.openSideBar(true, true), 10); 
+            }, onDisable: () => { document.documentElement.removeAttribute('savor-sidebar-block-memo'); window.sidebarBlockMemo?.openSideBar(false, true); } },
             { id: "officialFontColors", type: "feature", label: i18n.t("官方字体配色"), styleId: "Sv-theme-official-font-colors", attrName: "officialFontColors", svg: "M13.067 10.667v7.467l2.933 2.933v-7.6l-2.933-2.8zM13.733 17.733v-5.333l1.733 1.6v5.333l-1.733-1.6zM9.333 22l3.733-3.733v-7.467l-3.733 3.6v7.6zM16 21.067l2.933-2.933v-7.467l-2.933 2.8v7.6zM18.933 10.667v7.467l3.733 3.733v-7.6l-3.733-3.6zM22 20.133l-2.533-2.4v-5.333l2.533 2.4v5.333z", onEnable: () => { document.documentElement.setAttribute('savor-official-font-colors', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-official-font-colors'); } }
         ];
     }
@@ -1255,6 +1284,7 @@ if (layoutCenter) {
     // 模块：导图拖拽功能
     // ========================================
     if (typeof window.dragDebounce === "undefined") {
+        // 拖拽功能防抖
         window.dragDebounce = (fn) => {
             let timer = null;
             return (...args) => {
@@ -1263,87 +1293,78 @@ if (layoutCenter) {
             };
         };
 
-        // 注入一次性样式，使用 CSS 变量驱动 transform 与光标
+        // 注入拖拽样式
         const ensureDTStyles = () => {
             if (window.__dtStylesInjected) return;
-            const style = document.createElement("style");
-            style.id = "dt-inline-styles";
-            style.textContent = `
-            [custom-f="dt"][data-draggable] { --dt-scale: 1; }
-            [custom-f="dt"] [data-type="NodeListItem"][data-draggable] {
-            cursor: grab;
-            transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(var(--dt-scale, 1));
-            }
-            [custom-f="dt"][data-animating] [data-type="NodeListItem"][data-draggable] {
-            transition: transform 0.25s ease;
-            }
-            `;
-                document.head.appendChild(style);
-                window.__dtStylesInjected = true;
-            };
+            document.head.appendChild(Object.assign(document.createElement("style"), {
+                id: "dt-inline-styles",
+                textContent: `[custom-f="dt"][data-draggable] { --dt-scale: 1; }
+[custom-f="dt"] [data-type="NodeListItem"][data-draggable] {
+cursor: grab;
+transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(var(--dt-scale, 1));
+}
+[custom-f="dt"][data-animating] [data-type="NodeListItem"][data-draggable] {
+transition: transform 0.25s ease;
+}`
+            }));
+            window.__dtStylesInjected = true;
+        };
 
-            const initDraggable = (element) => {
-                const listItems = element.querySelectorAll(`:scope > [data-type="NodeListItem"]`);
-                if (!listItems.length) return;
+        // 初始化拖拽功能
+        const initDraggable = (element) => {
+            const listItems = element.querySelectorAll(':scope > [data-type="NodeListItem"]');
+            if (!listItems.length) return;
 
             ensureDTStyles();
 
-            // 初始化容器状态（一次）
+            // 初始化容器状态
             if (!element.hasAttribute("data-draggable")) {
                 element.setAttribute("data-draggable", "true");
                 element._scale = 1;
                 element.style.setProperty("--dt-scale", "1");
 
-                const onWheel = e => {
+                // 滚轮缩放和双击重置
+                element.addEventListener("wheel", element._onWheel = e => {
                     if (e.target.getAttribute("contenteditable") === "true" || !e.altKey) return;
                     e.preventDefault();
-                    const scaleChange = e.deltaY > 0 ? 0.9 : 1.1;
-                    element._scale = Math.min(Math.max((element._scale || 1) * scaleChange, 0.1), 5);
+                    element._scale = Math.min(Math.max((element._scale || 1) * (e.deltaY > 0 ? 0.9 : 1.1), 0.1), 5);
                     element.style.setProperty("--dt-scale", String(element._scale));
-                };
-
-                const onDoubleClick = e => {
+                }, { passive: false });
+                
+                element.addEventListener("dblclick", element._onDoubleClick = e => {
                     if (e.target.getAttribute("contenteditable") === "true") return;
                     element._scale = 1;
                     element.style.setProperty("--dt-scale", "1");
-                    // 开启动画
                     element.setAttribute("data-animating", "true");
-                    const allListItems = element.querySelectorAll(`[data-type="NodeListItem"]`);
-                    allListItems.forEach(item => {
-                        // 清零位移（CSS 变量 + dataset）
+                    element.querySelectorAll('[data-type="NodeListItem"]').forEach(item => {
                         item.style.removeProperty("--tx");
                         item.style.removeProperty("--ty");
                         item.dataset.tx = "0";
                         item.dataset.ty = "0";
                     });
-                    // 动画结束后移除标记
                     setTimeout(() => element.removeAttribute("data-animating"), 260);
-                };
-
-                element.addEventListener("wheel", onWheel, { passive: false });
-                element.addEventListener("dblclick", onDoubleClick);
-                element._onWheel = onWheel;
-                element._onDoubleClick = onDoubleClick;
+                });
             }
 
-            // 标记子项为可拖拽（利用样式规则）
-            listItems.forEach(listItem => {
-                if (!listItem.hasAttribute("data-draggable")) listItem.setAttribute("data-draggable", "true");
+            // 标记子项为可拖拽
+            listItems.forEach(item => {
+                if (!item.hasAttribute("data-draggable")) 
+                    item.setAttribute("data-draggable", "true");
             });
 
-            // 使用 Pointer 事件简化移动/释放与触屏支持
+            // 指针事件处理
             if (!element._onItemPointerDown) {
-                element._onItemPointerDown = e => {
-                    // 鼠标：仅左键；触屏/笔：允许
-                    if (e.pointerType === "mouse" && e.button !== 0) return;
-                    if (e.target.getAttribute?.("contenteditable") === "true") return;
+                element.addEventListener("pointerdown", element._onItemPointerDown = e => {
+                    // 限制鼠标左键和非编辑元素
+                    if ((e.pointerType === "mouse" && e.button !== 0) || 
+                        e.target.getAttribute?.("contenteditable") === "true" || 
+                        e.target.closest?.('[data-type="a"]')) return;
+                    
                     const listItem = e.target.closest?.('[data-type="NodeListItem"]');
                     if (!listItem || !element.contains(listItem)) return;
-                    e.preventDefault();
 
-                    listItem.style.cursor = "grabbing";
-                    listItem.setPointerCapture?.(e.pointerId);
-
+                    // 拖拽阈值和初始位置
+                    let moved = false;
                     const baseTx = parseFloat(listItem.dataset.tx || "0");
                     const baseTy = parseFloat(listItem.dataset.ty || "0");
                     const startX = e.clientX - baseTx;
@@ -1351,52 +1372,60 @@ if (layoutCenter) {
 
                     let rafId = 0;
                     const onPointerMove = (ev) => {
-                        if (rafId) cancelAnimationFrame(rafId);
-                        rafId = requestAnimationFrame(() => {
-                            const tx = ev.clientX - startX;
-                            const ty = ev.clientY - startY;
-                            listItem.dataset.tx = String(tx);
-                            listItem.dataset.ty = String(ty);
-                            listItem.style.setProperty("--tx", `${tx}px`);
-                            listItem.style.setProperty("--ty", `${ty}px`);
-                        });
+                        const deltaX = Math.abs(ev.clientX - startX);
+                        const deltaY = Math.abs(ev.clientY - startY);
+                        
+                        // 超过阈值才触发拖拽
+                        if (!moved && (deltaX > 5 || deltaY > 5)) {
+                            e.preventDefault();
+                            listItem.style.cursor = "grabbing";
+                            moved = true;
+                        }
+                        
+                        // 执行拖拽
+                        if (moved) {
+                            rafId && cancelAnimationFrame(rafId);
+                            rafId = requestAnimationFrame(() => {
+                                const tx = ev.clientX - startX;
+                                const ty = ev.clientY - startY;
+                                listItem.dataset.tx = String(tx);
+                                listItem.dataset.ty = String(ty);
+                                listItem.style.setProperty("--tx", `${tx}px`);
+                                listItem.style.setProperty("--ty", `${ty}px`);
+                            });
+                        }
                     };
 
                     const onPointerUp = () => {
-                        listItem.style.cursor = "grab";
                         listItem.releasePointerCapture?.(e.pointerId);
-                        listItem.removeEventListener("pointermove", onPointerMove);
-                        listItem.removeEventListener("pointerup", onPointerUp);
-                        listItem.removeEventListener("pointercancel", onPointerUp);
+                        ["pointermove", "pointerup", "pointercancel"].forEach(evt => 
+                            listItem.removeEventListener(evt, evt === "pointermove" ? onPointerMove : onPointerUp));
+                        listItem.style.cursor = "grab";
                     };
 
                     listItem.addEventListener("pointermove", onPointerMove);
-                    listItem.addEventListener("pointerup", onPointerUp);
-                    listItem.addEventListener("pointercancel", onPointerUp);
-                };
-                element.addEventListener("pointerdown", element._onItemPointerDown);
+                    ["pointerup", "pointercancel"].forEach(evt => 
+                        listItem.addEventListener(evt, onPointerUp));
+                });
             }
-        }
+        };
 
+        // 初始化观察器
         const initObserver = () => {
             const observer = new MutationObserver(mutations => {
-                for (const mutation of mutations) {
+                mutations.forEach(mutation => {
                     if (mutation.type === "attributes" && mutation.target.getAttribute("custom-f") === "dt") {
                         initDraggable(mutation.target);
                     } else if (mutation.type === "childList") {
                         mutation.addedNodes.forEach(node => {
                             if (node.nodeType === 1) {
-                                if (node.getAttribute?.("custom-f") === "dt") {
-                                    initDraggable(node);
-                                }
-                                const dtElements = node.querySelectorAll?.(`[custom-f="dt"]`);
-                                if (dtElements) {
-                                    dtElements.forEach(initDraggable);
-                                }
+                                const attr = node.getAttribute?.("custom-f");
+                                attr === "dt" && initDraggable(node);
+                                node.querySelectorAll?.(`[custom-f="dt"]`)?.forEach(initDraggable);
                             }
                         });
                     }
-                }
+                });
             });
 
             observer.observe(document.body, {
@@ -1407,7 +1436,7 @@ if (layoutCenter) {
             });
 
             document.querySelectorAll(`[custom-f="dt"]`).forEach(initDraggable);
-        }
+        };
 
         initObserver();
     }
@@ -1801,132 +1830,310 @@ const sidebarMemo = (() => {
             return sidebar;
         }
 
-        // 创建编辑输入框
-        function createEditInput(old, autoResizeDiv, setEndOfContenteditable) {
+        // 处理备注编辑和保存
+        function handleMemoEdit(memoDiv, el, main, sidebar) {
+            const memoType = memoDiv.getAttribute('data-memo-type');
+            let old = '';
+            
+            if (memoType === 'block') {
+                old = el.getAttribute('memo') || '';
+            } else {
+                old = el.getAttribute('data-inline-memo-content') || '';
+            }
+            
             const input = document.createElement('div');
-            input.className = 'memo-edit-input'; input.contentEditable = 'true';
-            input.innerHTML = old.replace(/\n/g, '<br>'); input.setAttribute('placeholder', '输入备注内容...');
+            input.className = 'memo-edit-input';
+            input.contentEditable = 'true';
+            input.innerHTML = old.replace(/\n/g, '<br>');
+            input.setAttribute('placeholder', '输入备注内容...');
             input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.8em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;overflow-y:hidden;';
             input.addEventListener('input', () => autoResizeDiv(input));
-            return input;
-        }
-
-        // 创建保存函数
-        function createSaveFunction(input, old, el, div, memoDiv, main, sidebar, refreshMemoOffset, updateInlineMemo, bindMemoEdit) {
-            return () => {
+            
+            const save = () => {
                 const val = input.innerHTML.replace(/<div>/gi, '\n').replace(/<\/div>/gi, '').replace(/<br\s*\/?>/gi, '\n').replace(/<p>/gi, '\n').replace(/<\/p>/gi, '').replace(/&nbsp;/g, ' ').replace(/\n\s*\n\s*\n+/g, '\n\n').trim();
-                if (val !== old) { el.setAttribute('data-inline-memo-content', val); updateInlineMemo(el, val); }
-                const newDiv = document.createElement('div'); newDiv.className = 'memo-content-view'; newDiv.style.cssText = div.style.cssText;
+                
+                if (val !== old) {
+                    if (memoType === 'block') {
+                        el.setAttribute('memo', val);
+                        fetch('/api/block/updateBlock', { 
+                            method: 'POST', 
+                            headers: { 
+                                'Content-Type': 'application/json', 
+                                'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
+                            }, 
+                            body: JSON.stringify({ 
+                                dataType: 'html', 
+                                data: el.outerHTML, 
+                                id: el.dataset.nodeId 
+                            }) 
+                        });
+                    } else {
+                        el.setAttribute('data-inline-memo-content', val);
+                        updateInlineMemo(el, val);
+                    }
+                }
+                
+                const newDiv = document.createElement('div'); 
+                newDiv.className = 'memo-content-view'; 
+                newDiv.style.cssText = 'font-size:0.8em;margin-bottom:4px;cursor:pointer;';
                 newDiv.innerHTML = val ? val.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>';
-                bindMemoEdit(newDiv, memoDiv, el, main, sidebar); input.replaceWith(newDiv);
-                memoDiv.classList.remove('editing'); memoDiv.style.zIndex = '';
+                newDiv.onclick = (e) => handleMemoEdit(memoDiv, el, main, sidebar);
+                input.replaceWith(newDiv);
+                memoDiv.classList.remove('editing'); 
+                memoDiv.style.zIndex = '';
                 setTimeout(() => refreshMemoOffset(main, sidebar), 100);
             };
-        }
-
-        // 设置输入框事件
-        function setupInputEvents(input, save) {
+            
+            // 设置输入框事件
             input.onblur = () => setTimeout(() => { if (document.activeElement !== input) save(); }, 100);
             input.onkeydown = e => { 
-                if ((e.key === 'Enter' && e.ctrlKey) || e.key === 'Escape') { e.preventDefault(); save(); }
-                else if (e.key === 'a' && e.ctrlKey) { e.preventDefault(); const range = document.createRange(); range.selectNodeContents(input); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); }
+                if ((e.key === 'Enter' && e.ctrlKey) || e.key === 'Escape') { 
+                    e.preventDefault(); 
+                    save(); 
+                } else if (e.key === 'a' && e.ctrlKey) { 
+                    e.preventDefault(); 
+                    const range = document.createRange(); 
+                    range.selectNodeContents(input); 
+                    const selection = window.getSelection(); 
+                    selection.removeAllRanges(); 
+                    selection.addRange(range); 
+                }
             };
             input.addEventListener('paste', e => {
                 e.preventDefault();
                 const text = e.clipboardData?.getData('text');
                 if (text) document.execCommand('insertText', false, text);
             }, true);
-        }
-
-        // 编辑备注内容（重构后）
-        function bindMemoEdit(div, memoDiv, el, main, sidebar) {
-            div.onclick = e => {
-                const isReadonly = main.getAttribute?.('data-readonly') === 'true';
-                if (isReadonly) { div.style.cursor = 'auto'; return; } else { div.style.cursor = 'pointer'; }
-                e.stopPropagation();
-                if (memoDiv.classList.contains('editing')) return;
-                memoDiv.classList.add('editing'); memoDiv.style.zIndex = '999';
-                
-                const old = el.getAttribute('data-inline-memo-content') || '';
-                const input = createEditInput(old, autoResizeDiv, setEndOfContenteditable);
-                const save = createSaveFunction(input, old, el, div, memoDiv, main, sidebar, refreshMemoOffset, updateInlineMemo, bindMemoEdit);
-                
-                autoResizeDiv(input); div.replaceWith(input); input.focus(); setEndOfContenteditable(input);
-                requestAnimationFrame(() => { autoResizeDiv(input); refreshMemoOffset(main, sidebar); });
-                
-                setupInputEvents(input, save);
-            };
+            
+            autoResizeDiv(input); 
+            return { input, save };
         }
 
 
         // 刷新侧边栏备注
         function refreshSideBarMemos(main, sidebar) {
-            const memos = main.querySelectorAll('span[data-type*="inline-memo"]');
-            sidebar.innerHTML = ''; const frag = document.createDocumentFragment();
-            if (!memos.length) { sidebar.removeAttribute('data-memo-count'); return; }
-            const isReadonly = main.getAttribute?.('data-readonly') === 'true', blockMemos = {};
-            memos.forEach(el => {
-                const block = getBlockNode(el);
-                if (!blockMemos[block.dataset.nodeId]) blockMemos[block.dataset.nodeId] = [];
-                blockMemos[block.dataset.nodeId].push(el);
-            });
-
+            // 清除之前的内容
+            sidebar.innerHTML = ''; 
+            const frag = document.createDocumentFragment();
+            
+            const isReadonly = main.getAttribute?.('data-readonly') === 'true';
             let visibleMemoCount = 0;
-            Object.entries(blockMemos).forEach(([nodeId, memosInBlock]) => {
-                const block = main.querySelector(`div[data-node-id="${nodeId}"]`);
-                const isBlockFolded = block && isAnyAncestorFolded(block);
-                memosInBlock.forEach((el, idxInBlock) => {
-                    const block = getBlockNode(el), memo = el.getAttribute('data-inline-memo-content') || '', text = el.textContent || '';
-                    const memoDiv = document.createElement('div');
-                    memoDiv.className = 'memo-item'; memoDiv.setAttribute('data-node-id', block.dataset.nodeId); memoDiv.setAttribute('data-memo-index', idxInBlock);
-                    memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
-                    if (isBlockFolded) { memoDiv.style.display = 'none'; } else { visibleMemoCount++; }
-                    const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
-                    memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:0.9em;display:flex;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.8em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>'}</div>`;
-                    const titleDiv = memoDiv.querySelector('.memo-title-with-dot');
-                    if (titleDiv && !isReadonly) {
-                        const deleteBtn = document.createElement('button');
-                        deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconTrashcan"></use></svg>`;
-                        deleteBtn.style.cssText = 'position:absolute;top:6px;right:6px;padding:0;border:none;border-radius:6px;cursor:pointer;z-index:2;';
-                        deleteBtn.setAttribute('data-action', 'delete'); titleDiv.appendChild(deleteBtn);
-                    }
-                    const memoContentDiv = memoDiv.querySelector('.memo-content-view');
-                    bindMemoEdit(memoContentDiv, memoDiv, el, main, sidebar); frag.appendChild(memoDiv);
+            
+            // 使用Set来避免重复的块ID
+            const processedBlocks = new Set();
+            // 使用Set来存储已经处理过的备注内容，避免内容重复显示
+            const processedMemoContents = new Set();
+            
+            // 按照文档顺序遍历所有块
+            const allBlocks = main.querySelectorAll('[data-node-id]');
+            const allMemos = [];
+            
+            allBlocks.forEach(block => {
+                const blockId = block.dataset.nodeId;
+                // 避免重复处理同一个块
+                if (processedBlocks.has(blockId)) return;
+                processedBlocks.add(blockId);
+                
+                // 收集块内的行内备注
+                const inlineMemos = block.querySelectorAll('span[data-type*="inline-memo"]');
+                inlineMemos.forEach((el, index) => {
+                    const memoContent = el.getAttribute('data-inline-memo-content') || '';
+                    const memoText = el.textContent || '';
+                    // 创建内容标识符，用于检查是否重复
+                    const contentKey = memoText + '|' + memoContent;
+                    
+                    // 检查是否已经处理过相同内容的备注（解决内容重复显示问题）
+                    if (processedMemoContents.has(contentKey)) return;
+                    processedMemoContents.add(contentKey);
+                    
+                    allMemos.push({
+                        element: el,
+                        type: 'inline',
+                        content: memoContent,
+                        text: memoText,
+                        blockId: blockId,
+                        index: index
+                    });
                 });
+                
+                // 检查块是否有块备注
+                if (block.hasAttribute('memo')) {
+                    allMemos.push({
+                        element: block,
+                        type: 'block',
+                        content: block.getAttribute('memo') || '',
+                        text: '<svg width="14" height="14"><use xlink:href="#iconM"></use></svg> ',
+                        blockId: blockId,
+                        index: -1 // 块备注使用特殊索引
+                    });
+                }
             });
-            sidebar.setAttribute('data-memo-count', `共 ${visibleMemoCount} 个备注`); sidebar.appendChild(frag);
+            
+            // 如果没有备注，直接返回
+            if (allMemos.length === 0) { 
+                sidebar.removeAttribute('data-memo-count'); 
+                return; 
+            }
+            
+            // 按照收集顺序显示备注
+            allMemos.forEach((memoData, idx) => {
+                const block = main.querySelector(`div[data-node-id="${memoData.blockId}"]`);
+                // 如果块不存在，跳过
+                if (!block) return;
+                
+                const isBlockFolded = block && isAnyAncestorFolded(block);
+                
+                const memo = memoData.content;
+                const text = memoData.text;
+                
+                const memoDiv = document.createElement('div');
+                memoDiv.className = 'memo-item';
+                memoDiv.setAttribute('data-node-id', memoData.blockId);
+                memoDiv.setAttribute('data-memo-index', memoData.index);
+                memoDiv.setAttribute('data-memo-type', memoData.type); // 标记备注类型
+                memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
+                if (isBlockFolded) { 
+                    memoDiv.style.display = 'none'; 
+                } else { 
+                    visibleMemoCount++; 
+                }
+                
+                const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
+                memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:0.9em;display:flex;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.8em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>'}</div>`;
+                
+                const titleDiv = memoDiv.querySelector('.memo-title-with-dot');
+                if (titleDiv && !isReadonly) {
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconTrashcan"></use></svg>`;
+                    deleteBtn.style.cssText = 'position:absolute;top:6px;right:6px;padding:0;border:none;border-radius:6px;cursor:pointer;z-index:2;';
+                    deleteBtn.setAttribute('data-action', 'delete'); 
+                    titleDiv.appendChild(deleteBtn);
+                }
+                
+                const memoContentDiv = memoDiv.querySelector('.memo-content-view');
+                // 为不同类型的备注绑定不同的编辑处理
+                if (!isReadonly) {
+                    memoContentDiv.onclick = (e) => {
+                        e.stopPropagation();
+                        if (memoDiv.classList.contains('editing')) return;
+                        memoDiv.classList.add('editing'); memoDiv.style.zIndex = '999';
+                        
+                        const { input, save } = handleMemoEdit(memoDiv, memoData.element, main, sidebar);
+                        memoContentDiv.replaceWith(input);
+                        input.focus();
+                        setEndOfContenteditable(input);
+                        requestAnimationFrame(() => {
+                            autoResizeDiv(input);
+                            refreshMemoOffset(main, sidebar);
+                        });
+                    };
+                }
+                frag.appendChild(memoDiv);
+            });
+            
+            sidebar.setAttribute('data-memo-count', `共 ${visibleMemoCount} 个备注`); 
+            sidebar.appendChild(frag);
 
+            // 只有当事件监听器尚未添加时才添加
             if (!sidebar._delegated) {
                 sidebar.addEventListener('mouseover', e => {
                     const item = e.target.closest('.memo-item');
-                    if (!item || !sidebar.contains(item)) return; const rt = e.relatedTarget;
+                    if (!item || !sidebar.contains(item)) return; 
+                    const rt = e.relatedTarget;
                     if (rt && item.contains(rt)) return;
-                    const nodeId = item.getAttribute('data-node-id'), memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
-                    toggleMemoHighlight(main, nodeId, memoIndex, true, item);
+                    const nodeId = item.getAttribute('data-node-id');
+                    const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
+                    const memoType = item.getAttribute('data-memo-type');
+                    
+                    // 根据备注类型进行高亮处理
+                    if (memoType === 'block') {
+                        // 块备注高亮整个块
+                        const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
+                        if (blockEl) {
+                            blockEl.classList.add('memo-span-highlight');
+                            createMemoConnection(item, blockEl);
+                        }
+                    } else {
+                        // 行内备注高亮具体的span元素
+                        const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
+                        if (blockEl) {
+                            const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
+                            const targetSpan = memoSpans[memoIndex];
+                            if (targetSpan) {
+                                targetSpan.classList.add('memo-span-highlight');
+                                createMemoConnection(item, targetSpan);
+                            }
+                        }
+                    }
                 }, { passive: true });
+                
                 sidebar.addEventListener('mouseout', e => {
                     const item = e.target.closest('.memo-item');
-                    if (!item || !sidebar.contains(item)) return; const rt = e.relatedTarget;
+                    if (!item || !sidebar.contains(item)) return; 
+                    const rt = e.relatedTarget;
                     if (rt && item.contains(rt)) return;
-                    const nodeId = item.getAttribute('data-node-id'), memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
-                    toggleMemoHighlight(main, nodeId, memoIndex, false);
+                    removeMemoConnection();
+                    // 移除所有高亮
+                    main.querySelectorAll('.memo-span-highlight').forEach(el => el.classList.remove('memo-span-highlight'));
                 }, { passive: true });
+                
                 sidebar.addEventListener('click', e => {
                     const btn = e.target.closest('button[data-action="delete"]');
-                    if (!btn) return; const item = btn.closest('.memo-item'); if (!item) return;
+                    if (!btn) return; 
+                    const item = btn.closest('.memo-item'); 
+                    if (!item) return;
                     e.stopPropagation();
-                    const nodeId = item.getAttribute('data-node-id'), memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
+                    
+                    const nodeId = item.getAttribute('data-node-id');
+                    const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
+                    const memoType = item.getAttribute('data-memo-type');
+                    
                     const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
-                    item.remove(); removeMemoConnection();
+                    item.remove(); 
+                    removeMemoConnection();
+                    
                     if (blockEl) {
-                        const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
-                        const targetSpan = memoSpans[memoIndex];
-                        if (targetSpan) {
-                            let types = (targetSpan.getAttribute("data-type") || "").split(" ").filter(t => t !== "inline-memo");
-                            if (types.length) { targetSpan.setAttribute("data-type", types.join(" ")); targetSpan.removeAttribute("data-inline-memo-content"); }
-                            else { targetSpan.outerHTML = targetSpan.innerHTML; }
+                        if (memoType === 'block') {
+                            // 删除块备注
+                            blockEl.removeAttribute('memo');
+                            fetch('/api/block/updateBlock', { 
+                                method: 'POST', 
+                                headers: { 
+                                    'Content-Type': 'application/json', 
+                                    'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
+                                }, 
+                                body: JSON.stringify({ 
+                                    dataType: 'html', 
+                                    data: blockEl.outerHTML, 
+                                    id: blockEl.dataset.nodeId 
+                                }) 
+                            });
+                        } else {
+                            // 删除行内备注
+                            const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
+                            const targetSpan = memoSpans[memoIndex];
+                            if (targetSpan) {
+                                let types = (targetSpan.getAttribute("data-type") || "").split(" ").filter(t => t !== "inline-memo");
+                                if (types.length) { 
+                                    targetSpan.setAttribute("data-type", types.join(" ")); 
+                                    targetSpan.removeAttribute("data-inline-memo-content"); 
+                                } else { 
+                                    targetSpan.outerHTML = targetSpan.innerHTML; 
+                                }
+                                fetch('/api/block/updateBlock', { 
+                                    method: 'POST', 
+                                    headers: { 
+                                        'Content-Type': 'application/json', 
+                                        'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
+                                    }, 
+                                    body: JSON.stringify({ 
+                                        dataType: 'html', 
+                                        data: blockEl.outerHTML, 
+                                        id: blockEl.dataset.nodeId 
+                                    }) 
+                                });
+                            }
                         }
-                        fetch('/api/block/updateBlock', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` }, body: JSON.stringify({ dataType: 'html', data: blockEl.outerHTML, id: blockEl.dataset.nodeId }) });
                     }
                 });
                 sidebar._delegated = true;
@@ -1934,7 +2141,11 @@ const sidebarMemo = (() => {
             refreshMemoOffset(main, sidebar);
             const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
             if (protyleContent) {
-                if (visibleMemoCount > 0) { protyleContent.classList.add('Sv-memo'); } else { protyleContent.classList.remove('Sv-memo'); }
+                if (visibleMemoCount > 0) { 
+                    protyleContent.classList.add('Sv-memo'); 
+                } else { 
+                    protyleContent.classList.remove('Sv-memo'); 
+                }
             }
         }
 
@@ -1964,8 +2175,15 @@ const sidebarMemo = (() => {
                         refreshMemoOffset(main, sidebar);
                     }, 100);
                 });
-                observer.observe(main, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-inline-memo-content', 'data-readonly', 'fold'] });
-                observers[mainId] = [observer]; refreshSideBarMemos(main, sidebar);
+                // 监听行内备注和块级备注的变化
+                observer.observe(main, { 
+                    childList: true, 
+                    subtree: true, 
+                    attributes: true, 
+                    attributeFilter: ['data-inline-memo-content', 'data-readonly', 'fold', 'memo'] 
+                });
+                observers[mainId] = [observer]; 
+                refreshSideBarMemos(main, sidebar);
                 const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
                 if (protyleContent && !protyleContent._sidebarMemoScrollBinded) {
                     let scheduled = false;
@@ -1979,7 +2197,10 @@ const sidebarMemo = (() => {
             });
             document.querySelectorAll('.protyle-content').forEach(pc => {
                 const main = pc.closest('.protyle')?.querySelector('.protyle-wysiwyg');
-                if (main && !main.querySelector('span[data-type*="inline-memo"]')) { pc.classList.remove('Sv-memo'); }
+                // 检查是否存在任何类型的备注
+                if (main && !main.querySelector('span[data-type*="inline-memo"]') && !main.querySelector('[memo]')) { 
+                    pc.classList.remove('Sv-memo'); 
+                }
             });
         }
 
@@ -2033,6 +2254,409 @@ const sidebarMemo = (() => {
         return false;
     }
 
+
+    // 侧栏块备注功能实现
+    window.sidebarBlockMemo = (() => {
+        let isEnabled = false, observers = {}, editorNode = null, dragTimeout = null, dragMutationObserver = null, connectionCleanup = null;
+        const autoResizeDiv = div => { div.style.height = 'auto'; div.style.height = (div.scrollHeight + 1) + 'px'; };
+        const setEndOfContenteditable = el => { const range = document.createRange(); range.selectNodeContents(el); range.collapse(false); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range); };
+        const getBlockNode = el => { while (el && !el.dataset.nodeId) el = el.parentElement; if (el) { const embedBlock = el.closest('[data-type="NodeBlockQueryEmbed"]'); if (embedBlock?.dataset.nodeId) return embedBlock; } return el; };
+        const createMemoConnection = (memoDiv, memoSpan) => { removeMemoConnection(); if (!memoDiv || !memoSpan) return; const container = document.createElement('div'); container.id = 'memo-connection-container'; container.style = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9998;'; container.innerHTML = `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"><path stroke="var(--Sv-dock-item--activefocus-background)" stroke-width="2" fill="none" stroke-dasharray="6,4"></path></svg>`; document.body.appendChild(container); const path = container.querySelector('path'); const update = () => { const a = memoDiv.getBoundingClientRect(), b = memoSpan.getBoundingClientRect(); if (!a.width || !b.width) return; const sx = b.right, sy = b.top + b.height / 2, ex = a.left - 6, ey = a.top + a.height / 2; const o = Math.min(Math.abs(ex - sx) * 0.5, 200); path.setAttribute('d', `M${sx} ${sy}C${sx + o} ${sy},${ex - o} ${ey},${ex} ${ey}`); }; update(); const onScroll = () => requestAnimationFrame(update); window.addEventListener('scroll', onScroll, true); window.addEventListener('resize', onScroll); connectionCleanup = () => { window.removeEventListener('scroll', onScroll, true); window.removeEventListener('resize', onScroll); container.remove(); connectionCleanup = null; }; };
+        const removeMemoConnection = () => connectionCleanup?.();
+
+        // 拖拽监听
+        function observeDragTitle() {
+            if (dragMutationObserver) return;
+            function waitForDrag() {
+                const dragEl = document.getElementById('drag');
+                if (!dragEl) { dragTimeout = setTimeout(waitForDrag, 1000); return; }
+                const debouncedRefresh = debounce(refreshEditor, 1000);
+                dragMutationObserver = new MutationObserver(debouncedRefresh);
+                dragMutationObserver.observe(dragEl, { attributes: true, attributeFilter: ['title'] });
+            }
+            waitForDrag();
+        }
+        function unobserveDragTitle() {
+            dragMutationObserver?.disconnect(); dragMutationObserver = null;
+            if (dragTimeout) { clearTimeout(dragTimeout); dragTimeout = null; }
+        }
+
+        // 刷新侧边栏备注位置
+        function refreshMemoOffset(main, sidebar) {
+            requestAnimationFrame(() => {
+                const MARGIN = 10, memoGroups = {};
+                sidebar.querySelectorAll('.memo-item').forEach(memoItem => {
+                    if (memoItem.style.display === 'none') return;
+                    const nodeId = memoItem.getAttribute('data-node-id');
+                    if (!memoGroups[nodeId]) memoGroups[nodeId] = { items: [], totalHeight: 0 };
+                    memoGroups[nodeId].items.push(memoItem);
+                    memoGroups[nodeId].totalHeight += memoItem.offsetHeight + MARGIN;
+                });
+                let lastBottom = 0;
+                Object.values(memoGroups).forEach(group => {
+                    const block = main.querySelector(`div[data-node-id="${group.items[0].getAttribute('data-node-id')}"]`);
+                    if (!block) return;
+                    const blockRect = block.getBoundingClientRect(), mainRect = main.getBoundingClientRect();
+                    const blockCenter = blockRect.top - mainRect.top + blockRect.height / 2;
+                    const groupCenter = group.totalHeight / 2;
+                    let top = Math.max(0, blockCenter - groupCenter);
+                    if (top < lastBottom + MARGIN) top = lastBottom + MARGIN;
+                    let currentTop = top;
+                    group.items.forEach(item => {
+                        item.style.position = 'absolute'; item.style.top = `${currentTop}px`;
+                        item.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1),transform 0.3s cubic-bezier(0.4,0,0.2,1)';
+                        currentTop += item.offsetHeight + MARGIN;
+                    });
+                    lastBottom = currentTop - MARGIN;
+                });
+            });
+        }
+
+        // 添加侧边栏
+        function addSideBar(main) {
+            let sidebar = main.parentElement.querySelector('#protyle-sidebar-block-memo');
+            const title = main.parentElement.querySelector('div.protyle-title');
+            if (!sidebar && title) {
+                sidebar = document.createElement('div'); sidebar.id = 'protyle-sidebar-block-memo';
+                title.insertAdjacentElement('beforeend', sidebar);
+                sidebar.style.cssText = 'position:absolute;right:-230px;width:230px;'; main.style.minWidth = '90%';
+            }
+            return sidebar;
+        }
+
+        // 处理备注编辑和保存
+        function handleMemoEdit(memoDiv, el, main, sidebar) {
+            const memoType = memoDiv.getAttribute('data-memo-type');
+            let old = '';
+            
+            if (memoType === 'block') {
+                old = el.getAttribute('memo') || '';
+            }
+            
+            const input = document.createElement('div');
+            input.className = 'memo-edit-input';
+            input.contentEditable = 'true';
+            input.innerHTML = old.replace(/\n/g, '<br>');
+            input.setAttribute('placeholder', '输入备注内容...');
+            input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.8em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;overflow-y:hidden;';
+            input.addEventListener('input', () => autoResizeDiv(input));
+            
+            const save = () => {
+                const val = input.innerHTML.replace(/<div>/gi, '\n').replace(/<\/div>/gi, '').replace(/<br\s*\/?>/gi, '\n').replace(/<p>/gi, '\n').replace(/<\/p>/gi, '').replace(/&nbsp;/g, ' ').replace(/\n\s*\n\s*\n+/g, '\n\n').trim();
+                
+                if (val !== old) {
+                    if (memoType === 'block') {
+                        el.setAttribute('memo', val);
+                        fetch('/api/block/updateBlock', { 
+                            method: 'POST', 
+                            headers: { 
+                                'Content-Type': 'application/json', 
+                                'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
+                            }, 
+                            body: JSON.stringify({ 
+                                dataType: 'html', 
+                                data: el.outerHTML, 
+                                id: el.dataset.nodeId 
+                            }) 
+                        });
+                    }
+                }
+                
+                const newDiv = document.createElement('div'); 
+                newDiv.className = 'memo-content-view'; 
+                newDiv.style.cssText = 'font-size:0.8em;margin-bottom:4px;cursor:pointer;';
+                newDiv.innerHTML = val ? val.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>';
+                newDiv.onclick = (e) => handleMemoEdit(memoDiv, el, main, sidebar);
+                input.replaceWith(newDiv);
+                memoDiv.classList.remove('editing'); 
+                memoDiv.style.zIndex = '';
+                setTimeout(() => refreshMemoOffset(main, sidebar), 100);
+            };
+            
+            // 设置输入框事件
+            input.onblur = () => setTimeout(() => { if (document.activeElement !== input) save(); }, 100);
+            input.onkeydown = e => { 
+                if ((e.key === 'Enter' && e.ctrlKey) || e.key === 'Escape') { 
+                    e.preventDefault(); 
+                    save(); 
+                } else if (e.key === 'a' && e.ctrlKey) { 
+                    e.preventDefault(); 
+                    const range = document.createRange(); 
+                    range.selectNodeContents(input); 
+                    const selection = window.getSelection(); 
+                    selection.removeAllRanges(); 
+                    selection.addRange(range); 
+                }
+            };
+            input.addEventListener('paste', e => {
+                e.preventDefault();
+                const text = e.clipboardData?.getData('text');
+                if (text) document.execCommand('insertText', false, text);
+            }, true);
+            
+            autoResizeDiv(input); 
+            return { input, save };
+        }
+
+
+        // 刷新侧边栏块备注
+        function refreshSideBarMemos(main, sidebar) {
+            // 清除之前的内容
+            sidebar.innerHTML = ''; 
+            const frag = document.createDocumentFragment();
+            
+            const isReadonly = main.getAttribute?.('data-readonly') === 'true';
+            let visibleMemoCount = 0;
+            
+            // 使用Set来避免重复的块ID
+            const processedBlocks = new Set();
+            
+            // 按照文档顺序遍历所有块
+            const allBlocks = main.querySelectorAll('[data-node-id]');
+            const allMemos = [];
+            
+            allBlocks.forEach(block => {
+                const blockId = block.dataset.nodeId;
+                // 避免重复处理同一个块
+                if (processedBlocks.has(blockId)) return;
+                processedBlocks.add(blockId);
+                
+                // 只检查块是否有块备注（不处理行内备注）
+                if (block.hasAttribute('memo')) {
+                    allMemos.push({
+                        element: block,
+                        type: 'block',
+                        content: block.getAttribute('memo') || '',
+                        text: '<svg width="14" height="14"><use xlink:href="#iconM"></use></svg> ',
+                        blockId: blockId,
+                        index: -1 // 块备注使用特殊索引
+                    });
+                }
+            });
+            
+            // 如果没有备注，直接返回
+            if (allMemos.length === 0) { 
+                sidebar.removeAttribute('data-memo-count'); 
+                return; 
+            }
+            
+            // 按照收集顺序显示备注
+            allMemos.forEach((memoData, idx) => {
+                const block = main.querySelector(`div[data-node-id="${memoData.blockId}"]`);
+                // 如果块不存在，跳过
+                if (!block) return;
+                
+                const isBlockFolded = block && isAnyAncestorFolded(block);
+                
+                const memo = memoData.content;
+                const text = memoData.text;
+                
+                const memoDiv = document.createElement('div');
+                memoDiv.className = 'memo-item';
+                memoDiv.setAttribute('data-node-id', memoData.blockId);
+                memoDiv.setAttribute('data-memo-index', memoData.index);
+                memoDiv.setAttribute('data-memo-type', memoData.type); // 标记备注类型
+                memoDiv.style.cssText = 'margin:8px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
+                if (isBlockFolded) { 
+                    memoDiv.style.display = 'none'; 
+                } else { 
+                    visibleMemoCount++; 
+                }
+                
+                const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
+                memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:0.9em;display:flex;"><span class="memo-title-dot"></span>${text}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.8em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>'}</div>`;
+                
+                const titleDiv = memoDiv.querySelector('.memo-title-with-dot');
+                if (titleDiv && !isReadonly) {
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconTrashcan"></use></svg>`;
+                    deleteBtn.style.cssText = 'position:absolute;top:6px;right:6px;padding:0;border:none;border-radius:6px;cursor:pointer;z-index:2;';
+                    deleteBtn.setAttribute('data-action', 'delete'); 
+                    titleDiv.appendChild(deleteBtn);
+                }
+                
+                const memoContentDiv = memoDiv.querySelector('.memo-content-view');
+                // 为块备注绑定编辑处理
+                if (!isReadonly) {
+                    memoContentDiv.onclick = (e) => {
+                        e.stopPropagation();
+                        if (memoDiv.classList.contains('editing')) return;
+                        memoDiv.classList.add('editing'); memoDiv.style.zIndex = '999';
+                        
+                        const { input, save } = handleMemoEdit(memoDiv, memoData.element, main, sidebar);
+                        memoContentDiv.replaceWith(input);
+                        input.focus();
+                        setEndOfContenteditable(input);
+                        requestAnimationFrame(() => {
+                            autoResizeDiv(input);
+                            refreshMemoOffset(main, sidebar);
+                        });
+                    };
+                }
+                frag.appendChild(memoDiv);
+            });
+            
+            sidebar.setAttribute('data-memo-count', `共 ${visibleMemoCount} 个备注`); 
+            sidebar.appendChild(frag);
+
+            // 只有当事件监听器尚未添加时才添加
+            if (!sidebar._delegated) {
+                sidebar.addEventListener('mouseover', e => {
+                    const item = e.target.closest('.memo-item');
+                    if (!item || !sidebar.contains(item)) return; 
+                    const rt = e.relatedTarget;
+                    if (rt && item.contains(rt)) return;
+                    const nodeId = item.getAttribute('data-node-id');
+                    const memoType = item.getAttribute('data-memo-type');
+                    
+                    // 块备注高亮整个块
+                    if (memoType === 'block') {
+                        const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
+                        if (blockEl) {
+                            blockEl.classList.add('memo-span-highlight');
+                            createMemoConnection(item, blockEl);
+                        }
+                    }
+                }, { passive: true });
+                
+                sidebar.addEventListener('mouseout', e => {
+                    const item = e.target.closest('.memo-item');
+                    if (!item || !sidebar.contains(item)) return; 
+                    const rt = e.relatedTarget;
+                    if (rt && item.contains(rt)) return;
+                    removeMemoConnection();
+                    // 移除所有高亮
+                    main.querySelectorAll('.memo-span-highlight').forEach(el => el.classList.remove('memo-span-highlight'));
+                }, { passive: true });
+                
+                sidebar.addEventListener('click', e => {
+                    const btn = e.target.closest('button[data-action="delete"]');
+                    if (!btn) return; 
+                    const item = btn.closest('.memo-item'); 
+                    if (!item) return;
+                    e.stopPropagation();
+                    
+                    const nodeId = item.getAttribute('data-node-id');
+                    const memoType = item.getAttribute('data-memo-type');
+                    
+                    const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
+                    item.remove(); 
+                    removeMemoConnection();
+                    
+                    if (blockEl) {
+                        if (memoType === 'block') {
+                            // 删除块备注
+                            blockEl.removeAttribute('memo');
+                            fetch('/api/block/updateBlock', { 
+                                method: 'POST', 
+                                headers: { 
+                                    'Content-Type': 'application/json', 
+                                    'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
+                                }, 
+                                body: JSON.stringify({ 
+                                    dataType: 'html', 
+                                    data: blockEl.outerHTML, 
+                                    id: blockEl.dataset.nodeId 
+                                }) 
+                            });
+                        }
+                    }
+                });
+                sidebar._delegated = true;
+            }
+            refreshMemoOffset(main, sidebar);
+            const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
+            if (protyleContent) {
+                if (visibleMemoCount > 0) { 
+                    protyleContent.classList.add('Sv-block-memo'); 
+                } else { 
+                    protyleContent.classList.remove('Sv-block-memo'); 
+                }
+            }
+        }
+
+        // 刷新编辑器
+        function refreshEditor() {
+            if (!editorNode) return;
+            Object.values(observers).flat().forEach(o => o.disconnect()); observers = {};
+            editorNode.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
+                let sidebar = main.parentElement.querySelector('#protyle-sidebar-block-memo');
+                if (!sidebar && isEnabled) sidebar = addSideBar(main); if (!sidebar) return;
+                const mainId = main.parentElement.parentElement.getAttribute('data-id');
+                let refreshTimer = null;
+                const observer = new MutationObserver(() => {
+                    clearTimeout(refreshTimer);
+                    refreshTimer = setTimeout(() => {
+                        if (isEnabled) refreshSideBarMemos(main, sidebar);
+                        refreshMemoOffset(main, sidebar);
+                    }, 100);
+                });
+                // 只监听块级备注的变化
+                observer.observe(main, { 
+                    childList: true, 
+                    subtree: true, 
+                    attributes: true, 
+                    attributeFilter: ['data-readonly', 'fold', 'memo'] 
+                });
+                observers[mainId] = [observer]; 
+                refreshSideBarMemos(main, sidebar);
+                const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
+                if (protyleContent && !protyleContent._sidebarBlockMemoScrollBinded) {
+                    let scheduled = false;
+                    const onScroll = () => {
+                        if (scheduled) return; scheduled = true;
+                        requestAnimationFrame(() => { refreshMemoOffset(main, sidebar); scheduled = false; });
+                    };
+                    protyleContent.addEventListener('scroll', onScroll, { passive: true });
+                    protyleContent._sidebarBlockMemoScrollBinded = true;
+                }
+            });
+            document.querySelectorAll('.protyle-content').forEach(pc => {
+                const main = pc.closest('.protyle')?.querySelector('.protyle-wysiwyg');
+                // 检查是否存在块备注
+                if (main && !main.querySelector('[memo]')) { 
+                    pc.classList.remove('Sv-block-memo'); 
+                }
+            });
+        }
+
+        // 开关侧边栏
+        function openSideBar(open, save = false) {
+            if (isEnabled === open) return;
+            if (!editorNode && open) {
+                (function wait() {
+                    editorNode = document.querySelector('div.layout__center');
+                    if (editorNode) openSideBar(open, save); else setTimeout(wait, 100);
+                })();
+                return;
+            }
+            isEnabled = open;
+            if (open) {
+                window.siyuan?.eventBus?.on('loaded-protyle', refreshEditor);
+                refreshEditor(); observeDragTitle();
+            } else {
+                window.siyuan?.eventBus?.off('loaded-protyle', refreshEditor);
+                Object.values(observers).flat().forEach(o => o.disconnect()); observers = {};
+                editorNode?.querySelectorAll('div.protyle-wysiwyg').forEach(main => {
+                    main.parentElement.querySelector('#protyle-sidebar-block-memo')?.remove();
+                    const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
+                    if (protyleContent) { protyleContent.classList.remove('Sv-block-memo'); }
+                });
+                unobserveDragTitle();
+            }
+            if (save) config.set('sidebarBlockMemoEnabled', open ? '1' : '0');
+        }
+
+        function init() {
+            editorNode = document.querySelector('div.layout__center');
+            const shouldEnable = document.documentElement.hasAttribute('savor-sidebar-block-memo');
+            openSideBar(shouldEnable, true);
+        }
+
+        return { init, openSideBar, isEnabled: () => isEnabled, setEnabled: enabled => openSideBar(enabled, true), unobserveDragTitle };
+    })();
+    // 将sidebarBlockMemo暴露到window对象
+    window.sidebarBlockMemo = sidebarBlockMemo;
 
     // 斜杠菜单左右键导航（内联极简版）
     if (!window.__slashMenuNavInstalled) {

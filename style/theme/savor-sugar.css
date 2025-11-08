@@ -63,5 +63,8 @@
         color:#49adbb;
     }
 
+    body::before {
+        display: none;
+    }
 }
 

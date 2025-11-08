@@ -101,3 +101,17 @@ body:not(.body--mobile){
     max-height: 282px;
     overflow-y: auto;
 }
+
+[data-memo-type="block"]{
+    .memo-title-dot{
+        display: none!important;
+    }
+    svg{
+        color: var(--b3-theme-primary);
+    }
+    &:hover{
+            svg{
+            color: var(--Sv-dock-item--activefocus-background);
+        }
+    }
+}

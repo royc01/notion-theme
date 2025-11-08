@@ -58,4 +58,8 @@
     --b3-font-background11: #3a3742;
     --b3-font-background12: #43343b;
     --b3-font-background13: #463733;
+
+    body::before {
+        display: none;
+    }
 }

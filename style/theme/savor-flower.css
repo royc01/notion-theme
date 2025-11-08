@@ -90,4 +90,7 @@
     color:unset;
    }
 
+   body::before {
+        display: none;
+    }
 }

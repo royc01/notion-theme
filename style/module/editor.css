@@ -185,8 +185,11 @@
 /*块标*/ 
 .protyle-gutters{
 	transition: top 150ms ease-out;
-    & button{
-        padding:5px 0px;
+    svg {
+            color: var(--Sv-gutters-color);
+    }
+    /*& button{
+         padding:5px 0px;
         svg {
             color: var(--Sv-gutters-color);
             padding:0 5px;
@@ -199,7 +202,7 @@
         &:hover svg {
             background-color: var(--Sv-gutters-background);
         }
-    }
+    }*/
 }
 /* 无序列表 */
 .protyle-wysiwyg [data-node-id].li>.protyle-action{
@@ -624,6 +627,10 @@
 	background-color:var(--b3-theme-background);
 	box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
 	padding:10px;
+}
+/* 块级备注高亮样式 */
+.protyle-wysiwyg div[data-node-id].memo-span-highlight {
+    background-color: rgba(255,212,0,0.15) !important;
 }
 
 /* 标记 */

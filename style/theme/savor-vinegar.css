@@ -46,4 +46,7 @@
     --b3-font-background12: #3a2832;
     --b3-font-background13: #3d2b2a;
 
+    body::before {
+        display: none;
+    }
 }

@@ -39,5 +39,9 @@
     .protyle-attr--refcount{
         background-color: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));
     }
+
+    body::before {
+        display: none;
+    }
 }
 

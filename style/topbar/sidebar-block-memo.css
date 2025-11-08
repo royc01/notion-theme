@@ -1,0 +1,47 @@
+
+body:not(.body--mobile){
+    .Sv-block-memo[data-fullwidth="true"]{
+        .protyle-wysiwyg {
+            width: calc(100% - 230px) !important;
+            min-width: unset !important
+        }
+            #protyle-sidebar-block-memo {
+            right: 0px !important
+        }
+    }
+}
+
+.memo-content-view{
+    word-wrap: break-word;
+    white-space: break-spaces;
+    max-height: 282px;
+    overflow-y: auto;
+}
+
+
+.protyle-wysiwyg span[data-type~="inline-memo"][data-inline-memo-content] {
+    position: relative; /* 为伪元素定位提供参考 */
+}
+[savor-sidebar-block-memo="true"] {
+        .protyle-wysiwyg span[data-type~="inline-memo"][data-inline-memo-content]::before {
+        content: attr(data-inline-memo-content);
+        position: absolute;
+        top: -65%; /* 显示在文本上方 */
+        left: 50%; /* 水平居中 */
+        transform: translateX(-50%); /* 通过转换实现精确居中 */
+        z-index: 3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+        font-size: 0.7em;
+        color: var(--b3-font-color5);
+        pointer-events: none;
+        display: block;
+        font-weight: 500;
+    }
+        b3-typography span[data-type~=inline-memo], .protyle-wysiwyg span[data-type~=inline-memo] {
+        background-color: transparent !important;
+        border-bottom: 2px solid var(--b3-font-color5);
+    }
+}
