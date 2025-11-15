@@ -13,9 +13,9 @@ body:not(.body--mobile,.body--window)>#toolbar{
             background-color: var(--Sv-toolbar-item-hover);
         }
     }
-    .toolbar__item:not(#barWorkspace,.toolbar__item--win,#closeWindow){
+    /*.toolbar__item:not(#barWorkspace,.toolbar__item--win,#closeWindow){
         background-color: var(--Sv-list-background);
-    }
+    }*/
     #barWorkspace/*工作空间*/ {
         height:28px;
         border-radius: var(--Sv-dock-item-radius);

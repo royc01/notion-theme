@@ -4,6 +4,7 @@
     background-color: transparent;
     border: none;
     margin-bottom: -5px;
+    padding-top: 5px;
     padding-right:10px;
     padding-left: 5px;
     border-radius: 6px 6px 0 0;
@@ -19,12 +20,12 @@
             bottom: 0;
             position: absolute;
             background-color:transparent;
-            height: 11px;  
-            left: calc(-1 * var(--Sv-dock-item-radius) - 2px) ;
+            height: 8px;  
+            left: calc(-1 * var(--Sv-dock-item-radius)) ;
             border-radius: 0;
-            width: calc(100% + var(--Sv-dock-item-radius)*2 + 4px);
-            background-image: var(--Sv-tab-bar-item-after);
-            background-size: 12px 12px,12px 12px,calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
+            width: calc(100% + var(--Sv-dock-item-radius)*2 );
+            /*background-image: var(--Sv-tab-bar-item-after);*/
+            background-size: 8px 8px,8px 8px,calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
             background-position: right bottom, left bottom, center top;
             background-repeat: no-repeat;
             z-index: 1;
@@ -56,7 +57,7 @@
         &.item--focus{
             background-color: var(--Sv-tab-bar-item-background-focus);
             border-radius: var(--Sv-tab-bar-item--focus-radius);
-            box-shadow:  rgba(0, 0, 0, 0.05) 0px 0px 5px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
+            box-shadow:  rgba(0, 0, 0, 0.08) 0px 0px 5px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
             transition: opacity .2s cubic-bezier(0, 0, .2, 1) 0ms;
             &::after{
                 background-color:transparent;
@@ -68,13 +69,13 @@
             }
             &:first-child::after{
                 left: calc(-1 * var(--Sv-dock-item-radius) + 8px) ;
-                width: calc(100% + var(--Sv-dock-item-radius)*2 - 6px);
-                box-shadow: var(--Sv-tab-bar-item-background-focus) 0px 10.5px 0 0; 
+                width: calc(100% + var(--Sv-dock-item-radius)*2 - 8px);
+                box-shadow: var(--Sv-tab-bar-item-background-focus) 0px 8px 0 0; 
             }
         }
     &.layout-tab-bar--readonly{
         padding-left: 5px;
-        padding-right: 8px;
+        padding-right: 5px;
         overflow: visible;
         z-index: 2;
         /*background-color: var(--Sv-dock-background);*/

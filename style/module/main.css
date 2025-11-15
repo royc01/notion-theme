@@ -65,11 +65,10 @@ body:not(.body--mobile,.body--window) #layouts{
         border-radius: var(--Sv-center-radius);
         /*border: 1px solid oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));*/
         margin: 0 5px 5px 5px;
-        box-shadow:  rgba(0, 0, 0, 0.08) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
+        box-shadow:  rgba(0, 0, 0, 0.09) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
     }
     .layout__center div[data-type=wnd]{
-    padding-top: 5px;
-    min-height: 90%;
+        min-height: 90%;
     }
 }
 
