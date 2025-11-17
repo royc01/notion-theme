@@ -41,19 +41,23 @@
 		&:hover{
 			color: var(--Sv-dock-item-hover-color);
 			background-color: var(--Sv-dock-item-active-background);
+			box-shadow:  rgba(0, 0, 0, 0.09) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
 		}
 		&.dock__item--activefocus{
 			background: var(--Sv-dock-item--activefocus-background)!important;
 			color:var(--Sv-dock-item--activefocus-color)!important;
+			box-shadow:  rgba(0, 0, 0, 0.09) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
 		}/*dock焦点状态*/
 	}
 	& .dock__item--active{
 		color: var(--Sv-dock-item-hover-color);
 		background-color: var(--Sv-dock-item-active-background);
+		box-shadow:  rgba(0, 0, 0, 0.09) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
 	}
 	& .dock__item--active:hover{
 		color: var(--Sv-dock-item-hover-color);
 		background-color: var(--Sv-dock-item-active-background-hover);
+		box-shadow:  rgba(0, 0, 0, 0.09) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
 	}
 }
 #dockLeft,#dockRight,.layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){

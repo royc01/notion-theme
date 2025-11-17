@@ -2,8 +2,8 @@
 .layout__resize:not(.layout__resize--lr) {
     margin: var(--Sv-layout--resize-margin);
     &:after{
-        height: 7px;
-        top: 0px;
+        height: 6px;
+        top: -5px;
         border-radius: 3px;
         background-color: var(--Sv-layout--resize);
     }
@@ -153,7 +153,10 @@ body:not(.body--mobile,.body--window) #layouts{
     }
 } 
     & + .layout__resize--lr:after{
-            margin-left: -5px;
+        margin-left: -5px;
+    }
+        .layout__resize:not(.layout__resize--lr){
+        height: 0px;
     }
 }
 
