@@ -96,7 +96,7 @@
         }*/
     }
     .item--readonly {
-        min-height: 32px;
+        min-height: 28px;
         padding: 0;
         .block__icon{
         padding: 7.5px;

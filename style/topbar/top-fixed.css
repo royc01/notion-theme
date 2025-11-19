@@ -32,7 +32,6 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
 		& .item--readonly{
             pointer-events: none;
             app-region: drag;
-            min-height: 28px;
 		& .block__icon--show{
 			pointer-events: visibleFill;
 			app-region: no-drag;

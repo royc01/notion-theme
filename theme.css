@@ -508,7 +508,7 @@
     --Sv-menu-background: oklch(calc(var(--b3-theme-surface-base-l)*1.1) var(--b3-theme-surface-base-ch));
 
 	/* 边栏 */
-    --Sv-dock-background: oklch(calc(var(--b3-theme-surface-base-l)*0.98) var(--b3-theme-surface-base-ch));
+    --Sv-dock-background: /*oklch(calc(var(--b3-theme-surface-base-l)*0.98) var(--b3-theme-surface-base-ch));*/ var(--Sv-theme-surface);
     --Sv-dock-item-color: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.4);
 
     --Sv-vertical-bg:oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.03);
