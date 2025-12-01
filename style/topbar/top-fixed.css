@@ -24,7 +24,6 @@ body:not(.body--window) .layout__center .fn__flex-column > .fn__flex > .layout-t
     min-width: 62px;
     z-index: 2;
     app-region: no-drag;
-	border: none;
 	& .item:not(.item--readonly)[data-type="tab-header"]{
 			pointer-events: visibleFill;
             min-height: 28px;

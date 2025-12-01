@@ -6,8 +6,8 @@
     margin-bottom: -5px;
     padding-top: 5px;
     padding-right:10px;
-    padding-left: 5px;
     border-radius: 6px 6px 0 0;
+    border-left: 5px solid transparent;
     /*overflow: visible;这个不能加*/
     .item:not(.item--readonly){
         min-height: 28px;
@@ -57,7 +57,7 @@
         &.item--focus{
             background-color: var(--Sv-tab-bar-item-background-focus);
             border-radius: var(--Sv-tab-bar-item--focus-radius);
-            box-shadow:  rgba(0, 0, 0, 0.08) 0px 0px 5px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
+            box-shadow:  rgba(0, 0, 0, 0.03) 0px 0px 5px 0px;
             transition: opacity .2s cubic-bezier(0, 0, .2, 1) 0ms;
             &::after{
                 background-color:transparent;
@@ -181,9 +181,9 @@
         }
     }
     .item__close{
-        padding: 5px 8px 5px 0;
+        padding: 5px 6px 5px 0;
         svg {
-            border-radius: 3px;
+            border-radius: 4px;
         }
     }
 }

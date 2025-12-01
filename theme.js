@@ -1280,11 +1280,11 @@ if (layoutCenter) {
 
 
 
-    // ========================================
+        // ========================================
     // 模块：导图拖拽功能
     // ========================================
     if (typeof window.dragDebounce === "undefined") {
-        // 拖拽功能防抖
+        // 拖拽功能防抖（已简化）
         window.dragDebounce = (fn) => {
             let timer = null;
             return (...args) => {
@@ -1296,17 +1296,17 @@ if (layoutCenter) {
         // 注入拖拽样式
         const ensureDTStyles = () => {
             if (window.__dtStylesInjected) return;
-            document.head.appendChild(Object.assign(document.createElement("style"), {
-                id: "dt-inline-styles",
-                textContent: `[custom-f="dt"][data-draggable] { --dt-scale: 1; }
-                [custom-f="dt"] [data-type="NodeListItem"][data-draggable] {
-                cursor: grab;
-                transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(var(--dt-scale, 1));
-                }
-                [custom-f="dt"][data-animating] [data-type="NodeListItem"][data-draggable] {
-                transition: transform 0.25s ease;
-                }`
-            }));
+            const style = document.createElement("style");
+            style.id = "dt-inline-styles";
+            style.textContent = `[custom-f="dt"][data-draggable] { --dt-scale: 1; }
+[custom-f="dt"] [data-type="NodeListItem"][data-draggable] {
+cursor: grab;
+transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(var(--dt-scale, 1));
+}
+[custom-f="dt"][data-animating] [data-type="NodeListItem"][data-draggable] {
+transition: transform 0.25s ease;
+}`;
+            document.head.appendChild(style);
             window.__dtStylesInjected = true;
         };
 
@@ -1351,6 +1351,12 @@ if (layoutCenter) {
                 if (!item.hasAttribute("data-draggable")) 
                     item.setAttribute("data-draggable", "true");
             });
+            
+            // 为每个NodeList元素添加折叠按钮
+            const nodeLists = element.querySelectorAll('[data-type="NodeList"]');
+            nodeLists.forEach(list => {
+                addCollapseButton(list, true);
+            });
 
             // 指针事件处理
             if (!element._onItemPointerDown) {
@@ -1371,6 +1377,8 @@ if (layoutCenter) {
                     const startY = e.clientY - baseTy;
 
                     let rafId = 0;
+                    
+                    // 处理鼠标移动
                     const onPointerMove = (ev) => {
                         const deltaX = Math.abs(ev.clientX - startX);
                         const deltaY = Math.abs(ev.clientY - startY);
@@ -1396,17 +1404,182 @@ if (layoutCenter) {
                         }
                     };
 
+                    // 处理鼠标释放和取消
                     const onPointerUp = () => {
                         listItem.releasePointerCapture?.(e.pointerId);
-                        ["pointermove", "pointerup", "pointercancel"].forEach(evt => 
-                            listItem.removeEventListener(evt, evt === "pointermove" ? onPointerMove : onPointerUp));
+                        listItem.removeEventListener("pointermove", onPointerMove);
+                        listItem.removeEventListener("pointerup", onPointerUp);
+                        listItem.removeEventListener("pointercancel", onPointerUp);
+                        element.removeEventListener("pointerleave", onPointerLeave);
                         listItem.style.cursor = "grab";
                     };
 
+                    // 处理鼠标离开容器区域
+                    const onPointerLeave = (ev) => {
+                        // 只有在拖拽状态下才处理
+                        if (moved) {
+                            onPointerUp();
+                        }
+                    };
+
+                    // 添加事件监听器
                     listItem.addEventListener("pointermove", onPointerMove);
-                    ["pointerup", "pointercancel"].forEach(evt => 
-                        listItem.addEventListener(evt, onPointerUp));
+                    listItem.addEventListener("pointerup", onPointerUp);
+                    listItem.addEventListener("pointercancel", onPointerUp);
+                    element.addEventListener("pointerleave", onPointerLeave);
+                    
+                    // 设置指针捕获以确保能接收到事件
+                    listItem.setPointerCapture?.(e.pointerId);
                 });
+            }
+        };
+
+        // 创建并添加折叠按钮的通用函数
+        const addCollapseButton = (targetElement, isListButton = false) => {
+            // 更严格的检查是否已经有折叠按钮，通过唯一的类名标识
+            if (targetElement.querySelector?.('.collapse-btn.protyle-custom')) return;
+
+            // 获取关联的列表项和子列表
+            let listItem, subList, list;
+            if (isListButton) {
+                // 对于列表按钮
+                list = targetElement;
+                if (!list.parentElement || !list.parentElement.closest('[data-type="NodeList"]')) return;
+                listItem = list.parentElement.closest('[data-type="NodeListItem"]');
+                if (!listItem) return;
+            } else {
+                // 对于列表项按钮
+                listItem = targetElement;
+                subList = listItem.querySelector(':scope > .list');
+                if (!subList) return;
+            }
+
+            // 创建折叠按钮
+            const collapseBtn = document.createElement('div');
+            collapseBtn.className = 'collapse-btn protyle-custom';
+            collapseBtn.innerHTML = `
+                <svg viewBox="0 0 32 32" width="16" height="16">
+                    <path d="M16 24L8 16L16 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            `;
+
+            // 添加唯一的data-id属性，用于进一步防止重复
+            const uniqueId = `collapse-btn-${listItem.getAttribute('data-node-id') || Date.now()}`;
+            collapseBtn.setAttribute('data-id', uniqueId);
+
+            // 添加点击事件
+            collapseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                const nodeId = listItem.getAttribute('data-node-id');
+                if (nodeId) {
+                    const fold = listItem.getAttribute('fold');
+                    const newFoldState = fold === '1' ? '0' : '1';
+                    
+                    // 直接发送API请求设置折叠状态
+                    fetch('/api/attr/setBlockAttrs', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ""}`
+                        },
+                        body: JSON.stringify({
+                            id: nodeId,
+                            attrs: { fold: newFoldState }
+                        })
+                    }).then(() => {
+                        // 更新本地属性
+                        listItem.setAttribute('fold', newFoldState);
+                    });
+                }
+            });
+
+            // 阻止拖拽事件影响按钮点击
+            collapseBtn.addEventListener('mousedown', e => e.stopPropagation());
+            collapseBtn.addEventListener('pointerdown', e => {
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+            });
+
+            // 插入按钮到DOM
+            if (isListButton) {
+                // 将按钮插入到正确位置：在NodeParagraph元素内部
+                const paragraph = listItem.querySelector(':scope > [data-type="NodeParagraph"]');
+                if (paragraph) {
+                    // 在插入前再次检查是否已存在相同ID的按钮
+                    if (paragraph.querySelector(`.collapse-btn.protyle-custom[data-id="${uniqueId}"]`)) return;
+                    paragraph.appendChild(collapseBtn);
+                    if (getComputedStyle(paragraph).position === 'static') {
+                        paragraph.style.position = 'relative';
+                    }
+                } else {
+                    const parent = list.parentElement;
+                    if (parent && getComputedStyle(parent).position === 'static') {
+                        parent.style.position = 'relative';
+                    }
+                    // 在插入前再次检查是否已存在相同ID的按钮
+                    if (parent.querySelector(`.collapse-btn.protyle-custom[data-id="${uniqueId}"]`)) return;
+                    parent.insertBefore(collapseBtn, list);
+                    const buttonParent = collapseBtn.parentElement;
+                    if (buttonParent && getComputedStyle(buttonParent).position === 'static') {
+                        buttonParent.style.position = 'relative';
+                    }
+                }
+            } else {
+                // 将按钮添加到列表项
+                if (getComputedStyle(listItem).position === 'static') {
+                    listItem.style.position = 'relative';
+                }
+                // 在插入前再次检查是否已存在相同ID的按钮
+                if (listItem.querySelector(`.collapse-btn.protyle-custom[data-id="${uniqueId}"]`)) return;
+                listItem.appendChild(collapseBtn);
+                if (subList && getComputedStyle(subList).position === 'static') {
+                    subList.style.position = 'relative';
+                }
+            }
+
+            // 更新按钮内容的函数
+            const updateButtonIcon = () => {
+                const isFolded = listItem.getAttribute('fold') === '1';
+                
+                if (isFolded) {
+                    // 折叠状态：显示子项数量
+                    const childItems = isListButton ? 
+                        list.querySelectorAll(':scope > .li') : 
+                        subList.querySelectorAll(':scope > .li');
+                    const childCount = childItems.length;
+                    collapseBtn.innerHTML = childCount;
+                } else {
+                    // 展开状态：显示箭头图标
+                    collapseBtn.innerHTML = `
+                        <svg viewBox="0 0 32 32" width="16" height="16">
+                            <path d="M16 24L8 16L16 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    `;
+                }
+            };
+
+            // 初始化按钮状态
+            updateButtonIcon();
+
+            // 使用MutationObserver监听属性变化
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'fold') {
+                        updateButtonIcon();
+                    }
+                });
+            });
+
+            observer.observe(listItem, { attributes: true, attributeFilter: ['fold'] });
+
+            // 存储observer引用，以便后续清理
+            if (isListButton) {
+                if (!list._collapseObservers) list._collapseObservers = [];
+                list._collapseObservers.push(observer);
+            } else {
+                if (!listItem._collapseObservers) listItem._collapseObservers = [];
+                listItem._collapseObservers.push(observer);
             }
         };
 
@@ -1424,6 +1597,14 @@ if (layoutCenter) {
                                 node.querySelectorAll?.(`[custom-f="dt"]`)?.forEach(initDraggable);
                             }
                         });
+                    } else if (mutation.type === "attributes" && mutation.attributeName === "fold") {
+                        // 当折叠状态改变时，确保按钮仍然存在
+                        const target = mutation.target;
+                        if (target.matches('[data-type="NodeListItem"]')) {
+                            addCollapseButton(target);
+                        } else if (target.matches('[data-type="NodeList"]')) {
+                            addCollapseButtonToList(target);
+                        }
                     }
                 });
             });
@@ -1432,11 +1613,20 @@ if (layoutCenter) {
                 childList: true,
                 subtree: true,
                 attributes: true,
-                attributeFilter: ["custom-f"]
+                attributeFilter: ["custom-f", "fold"]
             });
 
             document.querySelectorAll(`[custom-f="dt"]`).forEach(initDraggable);
         };
+
+        // 添加主题切换处理函数
+        const handleThemeChange = () => {
+            // 重新初始化所有导图元素
+            document.querySelectorAll(`[custom-f="dt"]`).forEach(initDraggable);
+        };
+
+        // 监听主题切换事件
+        window.addEventListener('themechange', handleThemeChange, { passive: true });
 
         initObserver();
     }
@@ -1445,13 +1635,27 @@ if (layoutCenter) {
     // 模块：清理导图拖拽功能
     // ========================================
     const cleanupDraggable = (element) => {
-        // 重置所有列表项的位置
-        element.querySelectorAll('[data-type="NodeListItem"]').forEach(item => {
-            item.style.removeProperty("--tx");
-            item.style.removeProperty("--ty");
-            delete item.dataset.tx;
-            delete item.dataset.ty;
-            item.removeAttribute("data-draggable");
+        // 重置所有列表项和NodeList元素
+        [...element.querySelectorAll('[data-type="NodeListItem"]'), 
+         ...element.querySelectorAll('[data-type="NodeList"]')].forEach(target => {
+            // 移除折叠按钮
+            const collapseBtn = target.querySelector('.collapse-btn');
+            if (collapseBtn) collapseBtn.remove();
+            
+            // 断开并清理观察器
+            if (target._collapseObservers) {
+                target._collapseObservers.forEach(observer => observer.disconnect());
+                target._collapseObservers = null;
+            }
+            
+            // 如果是列表项，还需要清理位置属性
+            if (target.matches('[data-type="NodeListItem"]')) {
+                target.style.removeProperty("--tx");
+                target.style.removeProperty("--ty");
+                delete target.dataset.tx;
+                delete target.dataset.ty;
+                target.removeAttribute("data-draggable");
+            }
         });
 
         // 移除自身属性
@@ -1460,22 +1664,12 @@ if (layoutCenter) {
         element.style.removeProperty("--dt-scale");
 
         // 清理事件监听器
-        if (element._onWheel) {
-            element.removeEventListener('wheel', element._onWheel);
-            delete element._onWheel;
-        }
-        if (element._onDoubleClick) {
-            element.removeEventListener('dblclick', element._onDoubleClick);
-            delete element._onDoubleClick;
-        }
-        if (element._onItemPointerDown) {
-            element.removeEventListener('pointerdown', element._onItemPointerDown);
-            delete element._onItemPointerDown;
-        }
-        if (element._onItemMouseDown) { // 兼容旧实现的清理
-            element.removeEventListener('mousedown', element._onItemMouseDown);
-            delete element._onItemMouseDown;
-        }
+        ['wheel', 'dblclick', 'pointerdown'].forEach(name => {
+            if (element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`]) {
+                element.removeEventListener(name, element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`]);
+                delete element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`];
+            }
+        });
     };
 
 
@@ -1485,23 +1679,30 @@ if (layoutCenter) {
     window.topBarPluginMenuObserver = new MutationObserver(() => {
         const commonMenu = document.getElementById("commonMenu");
         if (!commonMenu || commonMenu.getAttribute("data-name") !== "topBarPlugin") return;
+        
         commonMenu.querySelectorAll(".b3-menu__submenu").forEach(submenu => {
             const parentItem = submenu.parentElement;
             const buttons = Array.from(submenu.querySelectorAll(".b3-menu__item"));
+            
             buttons.forEach(btn => {
                 btn.classList.add("submenu-inline");
                 const iconSmall = parentItem.querySelector(".b3-menu__icon--small");
-                if (iconSmall && iconSmall.nextSibling) {
-                    parentItem.insertBefore(btn, iconSmall.nextSibling);
-                } else if (iconSmall) {
-                    parentItem.appendChild(btn);
+                
+                // 根据图标位置决定按钮插入位置
+                if (iconSmall) {
+                    const insertRef = iconSmall.nextSibling || parentItem;
+                    (insertRef === parentItem ? insertRef.appendChild : insertRef.parentElement.insertBefore)
+                        .call(insertRef === parentItem ? insertRef : insertRef.parentElement, btn, insertRef);
                 } else {
                     parentItem.appendChild(btn);
                 }
             });
+            
+            // 如果子菜单为空则移除
             if (!submenu.querySelector(".b3-menu__item")) submenu.remove();
         });
     });
+    
     const _topBarObserveTarget = document.getElementById("commonMenu") || document.body;
     window.topBarPluginMenuObserver.observe(_topBarObserveTarget, { childList: true, subtree: true });
 
@@ -1745,6 +1946,32 @@ if (layoutCenter) {
                 item.style.removeProperty('--ty');
                 delete item.dataset.tx;
                 delete item.dataset.ty;
+                
+                // 移除折叠按钮
+                const collapseBtn = item.querySelector('.collapse-btn');
+                if (collapseBtn) {
+                    collapseBtn.remove();
+                }
+                
+                // 断开并清理观察器
+                if (item._collapseObservers) {
+                    item._collapseObservers.forEach(observer => observer.disconnect());
+                    item._collapseObservers = null;
+                }
+            });
+            
+            // 清理所有NodeList上的折叠按钮
+            $$('[data-type="NodeList"]').forEach(list => {
+                const collapseBtn = list.querySelector('.collapse-btn');
+                if (collapseBtn) {
+                    collapseBtn.remove();
+                }
+                
+                // 断开并清理观察器
+                if (list._collapseObservers) {
+                    list._collapseObservers.forEach(observer => observer.disconnect());
+                    list._collapseObservers = null;
+                }
             });
             
             // 清理localStorage中的位置数据
@@ -1778,8 +2005,8 @@ window.sidebarMemo = (() => {
     const autoResizeDiv = div => { div.style.height = 'auto'; div.style.height = (div.scrollHeight + 1) + 'px'; };
     const setEndOfContenteditable = el => { const range = document.createRange(); range.selectNodeContents(el); range.collapse(false); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range); };
     // 移除了图片相关功能，因为思源笔记会过滤掉<img>标签
-    const getBlockNode = el => { while (el && !el.dataset.nodeId) el = el.parentElement; if (el) { const embedBlock = el.closest('[data-type="NodeBlockQueryEmbed"]'); if (embedBlock?.dataset.nodeId) return embedBlock; } return el; };
-    const toggleMemoHighlight = (main, nodeId, index, highlight, memoDiv) => { const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`); if (!blockEl) return; const memoSpans = blockEl.querySelectorAll('span[data-type*="inline-memo"]'); const target = memoSpans[index]; if (target) { target.classList.toggle('memo-span-highlight', highlight); if (highlight && memoDiv) createMemoConnection(memoDiv, target); else removeMemoConnection(); } };
+    const getBlockNode = el => { while (el && !el.dataset.nodeId) el = el.parentElement; if (el) { const embedBlock = el.closest('[data-type="NodeBlockQueryEmbed"]'); return embedBlock?.dataset.nodeId ? embedBlock : el; } return el; };
+    const toggleMemoHighlight = (main, nodeId, index, highlight, memoDiv) => { const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`); if (!blockEl) return; const memoSpans = blockEl.querySelectorAll('span[data-type*="inline-memo"]'); const target = memoSpans[index]; if (target) { target.classList.toggle('memo-span-highlight', highlight); highlight && memoDiv ? createMemoConnection(memoDiv, target) : removeMemoConnection(); } };
     const createMemoConnection = (memoDiv, memoSpan) => { removeMemoConnection(); if (!memoDiv || !memoSpan) return; const container = document.createElement('div'); container.id = 'memo-connection-container'; container.style = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9998;'; container.innerHTML = `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"><path stroke="var(--Sv-dock-item--activefocus-background)" stroke-width="2" fill="none" stroke-dasharray="6,4"></path></svg>`; document.body.appendChild(container); const path = container.querySelector('path'); const update = () => { const a = memoDiv.getBoundingClientRect(), b = memoSpan.getBoundingClientRect(); if (!a.width || !b.width) return; const sx = b.right, sy = b.top + b.height / 2, ex = a.left - 6, ey = a.top + a.height / 2; const o = Math.min(Math.abs(ex - sx) * 0.5, 200); path.setAttribute('d', `M${sx} ${sy}C${sx + o} ${sy},${ex - o} ${ey},${ex} ${ey}`); }; update(); const onScroll = () => requestAnimationFrame(update); window.addEventListener('scroll', onScroll, true); window.addEventListener('resize', onScroll); connectionCleanup = () => { window.removeEventListener('scroll', onScroll, true); window.removeEventListener('resize', onScroll); container.remove(); connectionCleanup = null; }; };
     const removeMemoConnection = () => connectionCleanup?.();
 
@@ -1834,22 +2061,11 @@ window.sidebarMemo = (() => {
                 let targetTop = 0;
                 
                 if (memoType === 'block') {
-                    // 块备注：定位到块的顶部
+                    // 块备注：与块的顶部对齐并在顶部区域内垂直居中
                     const blockRect = block.getBoundingClientRect();
                     const mainRect = main.getBoundingClientRect();
-                    targetTop = blockRect.top - mainRect.top;
-                    
-                    // 如果这是该块的第一个备注且为块备注，则与块的第一行垂直居中
-                    if (firstMemoPerBlock.get(nodeId)?.memoItem === memoItem) {
-                        // 获取块内第一行的高度
-                        const firstLine = block.querySelector('*');
-                        if (firstLine) {
-                            const firstLineRect = firstLine.getBoundingClientRect();
-                            const firstLineHeight = firstLineRect.height;
-                            // 调整位置使备注与第一行垂直居中
-                            targetTop = firstLineRect.top - mainRect.top + (firstLineHeight / 2) - (memoItem.offsetHeight / 2);
-                        }
-                    }
+                    // 定位到块的顶部，并在顶部区域垂直居中
+                    targetTop = blockRect.top - mainRect.top  - (memoItem.offsetHeight / 2);
                 } else {
                     // 行内备注：定位到具体的行
                     const blockRect = block.getBoundingClientRect();
@@ -2263,11 +2479,7 @@ window.sidebarMemo = (() => {
         refreshMemoOffset(main, sidebar);
         const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
         if (protyleContent) {
-            if (visibleMemoCount > 0) { 
-                protyleContent.classList.add('Sv-memo'); 
-            } else { 
-                protyleContent.classList.remove('Sv-memo'); 
-            }
+            visibleMemoCount > 0 ? protyleContent.classList.add('Sv-memo') : protyleContent.classList.remove('Sv-memo');
         }
     }
 
@@ -2307,7 +2519,7 @@ window.sidebarMemo = (() => {
             observers[mainId] = [observer]; 
             refreshSideBarMemos(main, sidebar);
             const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
-            if (protyleContent && !protyleContent._sidebarMemoScrollBinded) {
+            if (protyleContent?._sidebarMemoScrollBinded === undefined) {
                 let scheduled = false;
                 const onScroll = () => {
                     if (scheduled) return; scheduled = true;
@@ -2350,7 +2562,7 @@ window.sidebarMemo = (() => {
             });
             unobserveDragTitle();
         }
-        if (save) config.set('sidebarMemoEnabled', open ? '1' : '0');
+        save && config.set('sidebarMemoEnabled', open ? '1' : '0');
     }
 
     function init() {
@@ -2414,7 +2626,7 @@ window.sidebarMemo = sidebarMemo;
 
     
 // ========================================
-// 模块：超级块宽度调节（简化版）
+// 模块：超级块宽度调节
 // ========================================
 const superBlockResizer = (() => {
     const HANDLE_CLASS = 'sb-resize-handle', SB_CLASS = 'sb-resize-container', MIN_PERCENT = 10;
@@ -2442,22 +2654,16 @@ const superBlockResizer = (() => {
 
     // 核心工具函数
     const isColLayout = sb => sb?.getAttribute?.('data-sb-layout') === 'col';
-    const hasMultipleColumns = sb => {
-        if (!isColLayout(sb)) return false;
-        let cols = Array.from(sb.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
-        if (cols.length < 2 && sb.firstElementChild) {
-            const firstChild = sb.firstElementChild;
-            if (firstChild?.dataset?.type === 'NodeSuperBlock' && firstChild?.getAttribute?.('data-sb-layout') === 'row') return cols.length >= 2;
-            cols = Array.from(firstChild.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
-        }
-        return cols.length >= 2;
-    };
+    
+    // 获取列信息
     const getColumns = sb => {
         if (!isColLayout(sb)) return [];
         let cols = Array.from(sb.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
         if (cols.length < 2 && sb.firstElementChild) {
             const firstChild = sb.firstElementChild;
-            if (firstChild?.dataset?.type === 'NodeSuperBlock' && firstChild?.getAttribute?.('data-sb-layout') === 'row') return cols;
+            if (firstChild?.dataset?.type === 'NodeSuperBlock' && firstChild?.getAttribute?.('data-sb-layout') === 'row') {
+                return cols;
+            }
             const nested = Array.from(firstChild.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
             if (nested.length >= 2) cols = nested;
         }
@@ -2501,21 +2707,12 @@ const superBlockResizer = (() => {
         return cols.map(col => ((col.getBoundingClientRect().width + gapShare) / w) * 100);
     };
     
+    // 简化 normalizeWidths 函数
     const normalizeWidths = (values, min = MIN_PERCENT, total = 100) => {
-        const n = values.length; if (!n) return [];
-        const effMin = Math.min(min, total / n);
-        let v = values.map(x => Math.max(0, isFinite(x) ? x : 0));
-        const nonEmpty = v.filter(x => x > 0), emptyCount = v.length - nonEmpty.length;
-        if (emptyCount > 0) {
-            const avg = Math.max(0, total - nonEmpty.reduce((a, b) => a + b, 0)) / emptyCount;
-            v = v.map(x => x > 0 ? x : avg);
-        }
-        v = v.map(x => Math.max(effMin, x));
-        const sum = v.reduce((a,b) => a + b, 0), base = effMin * n;
-        const varSum = Math.max(0, sum - base), targetVar = Math.max(0, total - base);
-        if (varSum === 0) return v.map(() => effMin);
-        const factor = targetVar / varSum;
-        return v.map(x => effMin + (x - effMin) * factor);
+        const n = values.length;
+        if (!n) return [];
+        const avg = total / n;
+        return values.map(x => isFinite(x) && x > 0 ? x : avg);
     };
 
     // 简化的宽度保存
@@ -2539,17 +2736,17 @@ const superBlockResizer = (() => {
         try { await 设置思源块属性(id, { 'style': colEl.getAttribute('style') || '' }); } catch (_) {}
     };
 
-    // 移除添加列按钮
-    const removeAddButtons = sb => sb.querySelectorAll(':scope > .sb-add-column-btn').forEach(btn => btn.remove());
+    // 通用元素移除函数
+    const removeElements = (sb, selector) => sb.querySelectorAll(':scope > ' + selector).forEach(el => el.remove());
 
     // 手柄管理
-    const removeHandles = sb => sb.querySelectorAll(':scope > .' + HANDLE_CLASS).forEach(h => h.remove());
-
     const positionHandles = async (sb) => {
         const cols = getColumns(sb);
-        if (!hasMultipleColumns(sb)) { 
-            removeHandles(sb); 
-            removeAddButtons(sb);
+        const hasMultiple = cols.length >= 2;
+        
+        if (!hasMultiple) { 
+            removeElements(sb, '.' + HANDLE_CLASS);
+            removeElements(sb, '.sb-add-column-btn');
             return; 
         }
         
@@ -2565,7 +2762,7 @@ const superBlockResizer = (() => {
                 existing[i].style.left = centerX + 'px';
             }
         } else {
-            removeHandles(sb);
+            removeElements(sb, '.' + HANDLE_CLASS);
             for (let i = 0; i < need; i++) {
                 const leftRect = cols[i].getBoundingClientRect();
                 const rightRect = cols[i + 1].getBoundingClientRect();
@@ -2578,7 +2775,7 @@ const superBlockResizer = (() => {
             }
         }
 
-        removeAddButtons(sb);
+        removeElements(sb, '.sb-add-column-btn');
         const isTopLevel = !sb.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]:not(:scope)');
         if (cols.length > 0 && isTopLevel) {
             const lastCol = cols[cols.length - 1];
@@ -2695,7 +2892,7 @@ const superBlockResizer = (() => {
             e.preventDefault();
             e.stopPropagation();
             const cols = getColumns(sb);
-            if (!hasMultipleColumns(sb)) return;
+            if (cols.length < 2) return;
             // 双击瞬间隐藏调整杆
             handle.style.opacity = '0';
             handle.style.transition = 'opacity 0s';
@@ -2715,8 +2912,9 @@ const superBlockResizer = (() => {
     };
 
     const applySaved = async (sb) => {
-        const cols = getColumns(sb); 
-        if (!hasMultipleColumns(sb)) {
+        const cols = getColumns(sb);
+        const hasMultiple = cols.length >= 2;
+        if (!hasMultiple) {
             if (cols.length === 1) { cols[0].style.cssText = ''; delete cols[0].dataset.sbPct; }
             return;
         }
@@ -2735,13 +2933,15 @@ const superBlockResizer = (() => {
             sb._hoverHandlersAdded = true;
             const showHandles = () => {
                 if (sb.classList.contains('sb-resizing')) return;
-                if (hasMultipleColumns(sb)) positionHandles(sb);
+                const hasMultiple = getColumns(sb).length >= 2;
+                if (hasMultiple) positionHandles(sb);
             };
             const hideHandles = () => {
                 if (sb.classList.contains('sb-resizing')) return;
                 setTimeout(() => {
                     if (!sb.matches(':hover') && !sb.classList.contains('sb-resizing')) {
-                        removeHandles(sb); removeAddButtons(sb);
+                        removeElements(sb, '.' + HANDLE_CLASS);
+                        removeElements(sb, '.sb-add-column-btn');
                     }
                 }, 100);
             };
@@ -2755,7 +2955,8 @@ const superBlockResizer = (() => {
                     const lastColShowBtn = (e) => {
                         if (sb.classList.contains('sb-resizing')) return;
                         const isTopLevel = !sb.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]:not(:scope)');
-                        if (isTopLevel && hasMultipleColumns(sb)) {
+                        const hasMultiple = getColumns(sb).length >= 2;
+                        if (isTopLevel && hasMultiple) {
                             // 检查鼠标位置是否在最后一列的中后部分
                             const rect = lastCol.getBoundingClientRect();
                             const mouseX = e.clientX;
@@ -2808,7 +3009,10 @@ const superBlockResizer = (() => {
             document.querySelectorAll('.protyle-wysiwyg [data-node-id][data-sb-pct], .protyle-wysiwyg [data-node-id][style*="width"]').forEach(block => {
                 if (block.dataset.sbPct && !block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]')) blocksToClear.push(block);
                 const parentSB = block.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
-                if (parentSB && getColumns(parentSB).length === 1 && getColumns(parentSB)[0] === block) blocksToClear.push(block);
+                if (parentSB) {
+                    const columns = getColumns(parentSB);
+                    if (columns.length === 1 && columns[0] === block) blocksToClear.push(block);
+                }
                 if (block.dataset.type === 'NodeSuperBlock' && block.dataset.sbLayout === 'col') {
                     const parentEl = block.parentElement;
                     if (parentEl && parentEl.getAttribute?.('data-type') !== 'NodeSuperBlock') blocksToClear.push(block);
@@ -2829,12 +3033,13 @@ const superBlockResizer = (() => {
         } catch (_) {}
         
         const colSuperBlocks = document.querySelectorAll('.protyle-wysiwyg [data-type="NodeSuperBlock"][data-sb-layout="col"]');
-        const initPromises = [], updatePromises = [];
+        const initPromises = [];
         for (const sb of colSuperBlocks) {
             if (!sb._sbResizerInit) {
                 initPromises.push(initSuperBlock(sb));
             } else {
-                const cols = getColumns(sb), existingCols = sb._lastColsCount || 0;
+                const cols = getColumns(sb);
+                const existingCols = sb._lastColsCount || 0;
                 if (cols.length !== existingCols) {
                     // 处理列数变化的情况
                     if (cols.length === 1) {
@@ -2911,23 +3116,30 @@ const superBlockResizer = (() => {
             window.removeEventListener('themechange', window._superBlockThemeChangeHandler);
             delete window._superBlockThemeChangeHandler;
         }
+        
+        // 简化清理逻辑
         document.querySelectorAll('.' + SB_CLASS).forEach(sb => {
-            sb.classList.remove(SB_CLASS); removeAddButtons(sb);
+            sb.classList.remove(SB_CLASS);
+            removeElements(sb, '.' + HANDLE_CLASS);
+            removeElements(sb, '.sb-add-column-btn');
+            
+            // 统一清理事件处理器
             if (sb._showHandlers) {
                 sb.removeEventListener('mouseenter', sb._showHandlers);
                 sb.removeEventListener('mouseleave', sb._hideHandlers);
                 delete sb._showHandlers; delete sb._hideHandlers; delete sb._hoverHandlersAdded;
             }
+            
             if (sb._lastColHandlers) {
                 const { mouseMove, hideBtn, lastCol } = sb._lastColHandlers;
                 if (mouseMove) lastCol.removeEventListener('mousemove', mouseMove);
                 if (hideBtn) lastCol.removeEventListener('mouseleave', hideBtn);
                 delete sb._lastColHandlers;
             }
+            
             delete sb._handleLastColumnHover;
         });
-        document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
-        document.querySelectorAll('.sb-add-column-btn').forEach(btn => btn.remove());
+        
         scanScheduled = false;
     };
 

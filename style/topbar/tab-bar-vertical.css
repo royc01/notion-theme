@@ -41,10 +41,10 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
             right: -5px; 
             left: auto; 
             height: calc(100% + var(--Sv-dock-item-radius)* 2 + 4px);
-            width: 12px;
+            width: 10px;
             border-radius: 0;
             background-image: var(--Sv-tab-bar-V-item-after);
-            background-size: 12px 12px, 12px 12px, calc(100% + var(--Sv-dock-item-radius)* 2 + 8px) calc(100% - var(--Sv-dock-item-radius)* 2 - 4px);
+            background-size: 10px 10px, 10px 10px, calc(100% + var(--Sv-dock-item-radius)* 2 + 8px) calc(100% - var(--Sv-dock-item-radius)* 2 - 4px);
             background-position: left bottom, left top, center right;
             background-repeat: no-repeat;
             box-shadow: none; 

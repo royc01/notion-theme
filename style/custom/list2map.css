@@ -1,67 +1,57 @@
-/*————————————————————————列表转导图————————————————————————*/
-
-/*————————————————————————基础布局————————————————————————*/
-/*整个导图取消缩进*/
-.protyle-wysiwyg *[custom-f="dt"] .li .list {
-    padding: 0;
-    margin: 0;
-    transition: all 0.5s;
-} 
-
-.protyle-wysiwyg *[custom-f="dt"].list {
-    overflow-x: auto; /*溢出滚动*/
-    padding: 60px 30px !important;
-    margin: 10px 0;
-    border: 1px solid var(--Sv-fold-border);
-    background: radial-gradient(var(--Sv-list-background) 1.5px, transparent 1px) 0 0 / 20px 20px;
+.protyle-wysiwyg *[custom-f="dt"]{
+    .li{
+        display: flex;
+        flex-direction: unset;
+        margin: 0;
+        .list {
+            padding: 0;
+            margin: 0;
+            transition: all 0.5s;
+        }
+        & > :before {
+            display: none;
+        }   
+        .p,[data-type="NodeHeading"] {
+            display: flex;
+            align-items: center;
+            left: 6px;
+            margin: 0;
+            flex-shrink: 0; /*不压缩宽度*/
+        }
+        [data-type="NodeHeading"] > [spellcheck]:after {
+            display: none;
+        } /*取消标题层级提示*/
+        div {
+            border-right: 10px solid transparent;
+            & > div[spellcheck] {
+                margin-left: -8px;
+                padding: 5px 0 5px 10px;
+                margin-top: 2px;
+                background-color: var(--b3-block-daotu);
+                border-radius: 8px;
+                box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
+                max-width: 15vw;
+                cursor: text;
+            }
+        }
+    }
+    &.list {
+        overflow-x: auto; /*溢出滚动*/
+        padding: 60px 30px !important;
+        margin: 10px 0;
+        border: 1px solid var(--Sv-fold-border);
+        background: radial-gradient(var(--Sv-list-background) 1.5px, transparent 1px) 0 0 / 20px 20px;
+    }
+    /*子项设偏移调整*/
+    [data-node-id].li > [data-node-id] {
+        margin-left: 20px !important;
+        margin-right: -28px !important;
+    }
+     [data-node-id].li > .list {
+        padding-left: 20px;
+    }
 }
 
-/*子项设偏移调整*/
-.protyle-wysiwyg *[custom-f="dt"] [data-node-id].li > [data-node-id] {
-    margin-left: 20px !important;
-    margin-right: -28px !important;
-}
-
-.protyle-wysiwyg *[custom-f="dt"] [data-node-id].li > .list {
-    padding-left: 20px;
-}
-
-/*————————————————————————文字布局————————————————————————*/
-/*文字设置居中*/
-.protyle-wysiwyg *[custom-f="dt"] .li {
-    display: flex;
-    flex-direction: unset;
-    margin: 0;
-}
-
-.protyle-wysiwyg *[custom-f="dt"] .li .p,
-.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"] {
-    display: flex;
-    align-items: center;
-    left: 6px;
-    margin: 0;
-    flex-shrink: 0; /*不压缩宽度*/
-}
-
-.protyle-wysiwyg *[custom-f="dt"] .li [data-type="NodeHeading"] > [spellcheck]:after {
-    display: none;
-} /*取消标题层级提示*/
-
-.protyle-wysiwyg *[custom-f="dt"] .li div {
-    border-right: 10px solid transparent;
-}
-
-/*————————————————————————文字框样式————————————————————————*/
-/*文字框*/
-.protyle-wysiwyg *[custom-f="dt"] .li div > div[spellcheck] {
-    margin-left: -8px;
-    padding: 5px 0 5px 10px;
-    margin-top: 2px;
-    background-color: var(--b3-block-daotu);
-    border-radius: 8px;
-    box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;
-    max-width: 15vw;
-}
 
 /* 合并重复的代码块样式 */
 .protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"] > [data-node-id] > div[spellcheck],
@@ -95,11 +85,6 @@
     background-color: var(--b3-menu-background);
 }
 
-/*————————————————————————列表符号————————————————————————*/
-/*去除竖线*/
-.list[custom-f="dt"][data-node-id] .li > :before {
-    display: none;
-}
 
 /*圆点符号居中对齐*/
 .protyle-content *[custom-f~=dt] [data-subtype="u"][data-node-id].li > div.protyle-action {
@@ -158,6 +143,7 @@
     border-left: var(--b3-border-daotu);  
     width: 20px;  
     height: 50%; 
+    background-color: transparent;
 }
 /*————————————————————————特殊状态————————————————————————*/
 /*单个子项直线*/
@@ -236,9 +222,50 @@ div *[custom-f="dt"] > [data-type="NodeListItem"].li::after {
     pointer-events: none;
 }
 
-/*————————————————————————光标样式————————————————————————*/
-/* 列表项内部使用默认光标 */
-.protyle-wysiwyg *[custom-f="dt"] .li div > div[spellcheck] {
-    cursor: text;
+/*————————————————————————折叠按钮样式————————————————————————*/
+.collapse-btn {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    z-index: 999;  /* 提高z-index确保按钮在最上层 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--b3-block-daotu);
+    border: var(--b3-border-daotu) !important;
+    border-radius: 50%;
+    opacity: 1;
+    pointer-events: auto;  /* 确保按钮可以接收点击事件 */
+    left: 100%;
+    margin-left: 8px;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--b3-theme-on-background);
+    caret-color: transparent;
+}
+/*.protyle-wysiwyg *[custom-f="dt"] [data-type="NodeParagraph"]:hover>.collapse-btn {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; 
+}
+.protyle-wysiwyg *[custom-f="dt"] [data-type="NodeListItem"][fold="1"]>[data-type="NodeParagraph"]>.collapse-btn {
+    opacity: 1;
+}*/
+.collapse-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 14px;
+    height: 2px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    border-bottom: var(--b3-border-daotu) ;
+}
+
+.collapse-btn svg {
+    width: 12px;
+    height: 12px;
+    color: var(--b3-theme-on-background);
 }
 

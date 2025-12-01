@@ -107,7 +107,7 @@
     height: 40px;
     margin: 6px 6px 0px 6px;
     padding: 0 16px 0 10px;
-    background-color: var(--Sv-card--current) !important;
+    background-color: var(--Sv-list-focus-active) !important;
     box-shadow: var(--Sv-card-current-shadow) inset !important;
 }
 
