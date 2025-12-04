@@ -272,9 +272,9 @@ const attachDrag = (sb, handle, leftEl, rightEl) => {
         e.stopImmediatePropagation();
         const cols = getColumns(sb);
         if (cols.length < 2) return;
-        
-        handle.style.opacity = '1';
-        handle.style.transition = 'opacity 0.25s ease';
+        // 双击瞬间隐藏调整杆
+        handle.style.opacity = '0';
+        handle.style.transition = 'opacity 0s';
         
         const targetPercents = cols.map(() => 100 / cols.length);
         cols.forEach(c => c.style.transition = 'width 0.25s ease');
