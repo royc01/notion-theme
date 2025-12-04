@@ -775,5 +775,5 @@
 
 
 #commonMenu:not([data-name="barmode"]) #savorToolbar{
-    display: none;
+    display: none!important;
 }
