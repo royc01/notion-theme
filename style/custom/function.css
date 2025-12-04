@@ -75,6 +75,7 @@
     align-items: center;
     border-radius: 4px;
     padding: 0 0 0 8px;;
+    margin-top: -3px;
     .b3-menu__icon {
         margin-right: 8px;
         width: 16px;
@@ -137,6 +138,18 @@
             }
         }
         
+    }
+    #concealButton{
+        margin-top: 8px!important;
+        &::before{
+            content: "";
+            height: 1px;
+            width: calc(100% - 0px);
+            border-bottom: 1px solid var(--b3-theme-surface-lighter);
+            position: absolute;
+            top:-7px;
+            left: 0px;
+        }
     }
     & #savorToolbar{
         order: 2;
