@@ -52,6 +52,16 @@
     }
 }
 
+/* 折叠按钮默认隐藏 */
+.collapse-btn.protyle-custom {
+    display: none;
+}
+
+/* 只在custom-f="dt"的情况下显示折叠按钮 */
+.protyle-wysiwyg *[custom-f="dt"] .collapse-btn.protyle-custom {
+    display: flex;
+}
+
 
 /* 合并重复的代码块样式 */
 .protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"] > [data-node-id] > div[spellcheck],

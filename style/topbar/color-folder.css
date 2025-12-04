@@ -1,7 +1,7 @@
 html[savor-color-folder="true"] {
 .sy__file .b3-list--background:nth-child(4n-3){
     background-color: var(--Sv-bq-background5) !important;
-    box-shadow: 0 0 0 1px var(--b3-font-background5) inset;
+    box-shadow: 0 0 0 1px var(--Sv-bq-background5) inset;
     border-radius: 6px;
     & [data-type="navigation-root"]{
         background-color: oklch(calc(var(--b3-font-color4-base-l)*0.95) var(--b3-font-color4-base-ch) / 0.1) !important;
@@ -15,7 +15,7 @@ html[savor-color-folder="true"] {
 }
 .sy__file .b3-list--background:nth-child(4n-2){
     background-color: var(--Sv-bq-background7) !important;
-    box-shadow: 0 0 0 1px var(--b3-font-background7) inset;
+    box-shadow: 0 0 0 1px var(--Sv-bq-background7) inset;
     border-radius: 6px;
     & [data-type="navigation-root"]{
         background-color: oklch(calc(var(--b3-font-color6-base-l)*0.95) var(--b3-font-color6-base-ch) / 0.1) !important;
@@ -29,7 +29,7 @@ html[savor-color-folder="true"] {
 }
 .sy__file .b3-list--background:nth-child(4n-1){
     background-color: var(--Sv-bq-background9) !important;
-    box-shadow: 0 0 0 1px var(--b3-font-background9) inset;
+    box-shadow: 0 0 0 1px var(--Sv-bq-background9) inset;
     border-radius: 6px;
     & [data-type="navigation-root"]{
         background-color: oklch(calc(var(--b3-font-color8-base-l)*0.95) var(--b3-font-color8-base-ch) / 0.1) !important;
@@ -43,7 +43,7 @@ html[savor-color-folder="true"] {
 }
 .sy__file .b3-list--background:nth-child(4n){
     background-color: var(--Sv-bq-background10) !important;
-    box-shadow: 0 0 0 1px var(--b3-font-background10) inset;
+    box-shadow: 0 0 0 1px var(--Sv-bq-background10) inset;
     border-radius: 6px;
     & [data-type="navigation-root"]{
         background-color: oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.1) !important;

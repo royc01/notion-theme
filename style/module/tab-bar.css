@@ -8,6 +8,7 @@
     padding-right:10px;
     border-radius: 6px 6px 0 0;
     border-left: 5px solid transparent;
+    
     /*overflow: visible;这个不能加*/
     .item:not(.item--readonly){
         min-height: 28px;

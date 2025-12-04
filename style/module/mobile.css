@@ -11,8 +11,8 @@
         display: none;
     }
     #savorToolbar button{
-    &#tabbarVertical,&#topBar,&#colorFolder,&#typewriterMode,&#sidebarMemo{
-        display: none;
+    &#tabbarVertical,&#topBar,&#colorFolder,&#typewriterMode,&#sidebarMemo,&#sidebarBlockMemo{
+        display: none!important;
     }
 }
 }

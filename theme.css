@@ -86,7 +86,7 @@
     --b3-theme-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
     --b3-theme-error: #eb5757;
     --b3-theme-success: #65b84d;
-
+    
       /* 文字颜色 */
     --b3-theme-on-background: oklch(var(--b3-theme-on-background-base));
 

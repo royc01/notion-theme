@@ -12,10 +12,10 @@
   "挖空": "Conceal",
   "垂直页签": "Vertical Tab",
   "顶栏合并": "Topbar Merge",
-  "列表子弹线": "Bullet Threading",
+  "列表子弹线": "BulletThreading",
   "彩色文档树": "Color Folder",
   "标题点标识": "Heading Dots",
-  "打字机模式": "Typewriter Mode",
+  "打字机模式": "Typewriter",
   "收缩/展开插件": "Collapse/Expand Plugin",
   "转换为导图": "To Mindmap",
   "转换为表格": "To Table",
@@ -32,5 +32,5 @@
   "list2map.tip": "Drag: Drag node with mouse | Zoom: Alt + Mouse Wheel | Double Click: Reset node",
   "侧边栏备注": "Sidebar Memo",
   "行内顶部备注": "Top Memo",
-  "官方字体配色": "Official Font Colors"
+  "官方字体配色": "SY Font Colors"
 } 

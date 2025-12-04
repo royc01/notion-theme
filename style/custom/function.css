@@ -12,6 +12,82 @@
 }
 
 
+#savorToolbar {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* 每行2个 */
+    gap: 4px;
+}
+
+#savorToolbar .b3-menu__item[data-type="theme"] {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    padding: 0px;
+    border: 2px solid var(--Sv-scroll-color);
+    box-sizing: border-box;
+    .b3-menu__icon {
+        width: 64px;
+        height: 36px;
+        margin: 0px;
+        border-radius: 4px;
+    }
+    .b3-menu__label{
+        position: absolute;
+        right: 4px;
+        bottom: 0px;
+        color: var(--b3-theme-on-surface);
+        height: 18px;
+        line-height: 18px;
+        font-size: 10px;
+        min-width:unset;
+    }
+    &:hover {
+        border: 2px solid var(--Sv-scroll-color-hover);
+        .b3-menu__label{
+            color: var(--b3-theme-on-background);
+        }
+    }
+    &.button_on {
+        border: 2px solid var(--Sv-dock-item--activefocus-background);
+        .b3-menu__label{
+            color: var(--Sv-dock-item--activefocus-background);
+        }
+        &::before {
+            content: "" !important;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: 2px;
+            left: 2px;
+            background-color: var(--Sv-dock-item--activefocus-background);
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='currentColor' d='M16 0c8.836 0 16 7.164 16 16s-7.164 16-16 16-16-7.164-16-16 7.164-16 16-16zM24.673 9.905c-0.364-0.377-0.874-0.611-1.439-0.611-0.54 0-1.029 0.214-1.389 0.561l0.001-0.001-8.38 8.087-3.313-3.107-0.156-0.132c-0.333-0.257-0.757-0.413-1.217-0.413-1.105 0-2 0.895-2 2 0 0.577 0.244 1.097 0.635 1.462l0.001 0.001 4.392 4.117 0.157 0.133c0.443 0.337 0.992 0.464 1.515 0.384 0.596 0.092 1.227-0.087 1.693-0.537l9.449-9.117 0.14-0.149c0.293-0.346 0.471-0.797 0.471-1.29 0-0.54-0.214-1.030-0.561-1.389l0.001 0.001z'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='currentColor' d='M16 0c8.836 0 16 7.164 16 16s-7.164 16-16 16-16-7.164-16-16 7.164-16 16-16zM24.673 9.905c-0.364-0.377-0.874-0.611-1.439-0.611-0.54 0-1.029 0.214-1.389 0.561l0.001-0.001-8.38 8.087-3.313-3.107-0.156-0.132c-0.333-0.257-0.757-0.413-1.217-0.413-1.105 0-2 0.895-2 2 0 0.577 0.244 1.097 0.635 1.462l0.001 0.001 4.392 4.117 0.157 0.133c0.443 0.337 0.992 0.464 1.515 0.384 0.596 0.092 1.227-0.087 1.693-0.537l9.449-9.117 0.14-0.149c0.293-0.346 0.471-0.797 0.471-1.29 0-0.54-0.214-1.030-0.561-1.389l0.001 0.001z'/%3E%3C/svg%3E");
+        }
+    }
+}
+
+
+#savorToolbar .b3-menu__item[data-type="feature"] {
+    grid-column: 1 / -1 !important; /* 占据整行 */
+    display: flex !important;
+    align-items: center;
+    border-radius: 4px;
+    padding: 0 0 0 8px;;
+    .b3-menu__icon {
+        margin-right: 8px;
+        width: 16px;
+        height: 16px;
+    }
+    &:hover {
+        background-color: var(--Sv-menu-item-hover);
+    }
+    &.button_on {
+        background-color: var(--Sv-menu-selected);
+    }
+}
+
 [data-name="barmode"]{
     display: grid;
     .b3-menu__items {
@@ -66,21 +142,7 @@
         order: 2;
     }
 }
-#concealButton{
-    margin-top: 8px;
-    &::before{
-        content: "";
-        height: 1px;
-        width: calc(100% - 10px);
-        border-bottom: 1px solid var(--b3-theme-surface-lighter);
-        position: absolute;
-        top:-5px;
-        left: 5px;
-    }
-}
 
 .savor-icon{
     margin-bottom: -2px;
 }
-
-
