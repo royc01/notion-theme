@@ -86,7 +86,7 @@ const initMobileMenu = () => {
             
             toggleBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
-                savorToolbar.style.display = (savorToolbar.style.display === "none" ? "block" : "none");
+                savorToolbar.style.display = (savorToolbar.style.display === "none" ? "grid" : "none");
             });
 
             toolbarMore.parentNode.insertBefore(toggleBtn, toolbarMore);
