@@ -12,8 +12,10 @@
 }
 
 
-#savorToolbar {
+[data-name="barmode"] #savorToolbar {
     display: grid !important;
+}
+#savorToolbar {
     grid-template-columns: repeat(2, 1fr) !important; /* 每行2个 */
     gap: 4px;
 }
