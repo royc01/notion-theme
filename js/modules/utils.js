@@ -31,6 +31,6 @@ export const $$ = (selector) => document.querySelectorAll(selector);
 export const initUtils = () => {
     window.debounce = debounce;
     window.throttle = throttle;
-    window.$ = $;
-    window.$$ = $$;
+    window.Savor$ = $;
+    window.Savor$$ = $$;
 };
