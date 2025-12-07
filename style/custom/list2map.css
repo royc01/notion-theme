@@ -221,7 +221,7 @@ div *[custom-f="dt"] > [data-type="NodeListItem"].li::after {
     content: attr(data-i18n-tip);
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 44px;
     font-size: 12px;
     color: var(--b3-theme-on-surface);
     background-color: var(--Sv-theme-surface);
@@ -279,3 +279,43 @@ div *[custom-f="dt"] > [data-type="NodeListItem"].li::after {
     color: var(--b3-theme-on-background);
 }
 
+/* 导图最大化按钮样式 */
+.maximize-btn.protyle-custom {
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 6px !important;
+        background-color: var(--Sv-theme-surface) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    z-index: 3 !important;
+    opacity: 0.7 !important;
+    transition: opacity 0.2s ease !important;
+    user-select: none !important;
+    pointer-events: auto !important;
+    padding: 6px;
+}
+.maximize-btn.protyle-custom:hover {
+    opacity: 1 !important;
+    background-color: var(--Sv-list-focus-hover) !important;
+}
+
+/* 导图最大化样式 */
+.savor-mindmap-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    min-height: 100vh !important;
+    z-index: 999 !important;
+    background: radial-gradient(var(--Sv-list-background) 1.5px, transparent 1px) 0 0 / 20px 20px !important;
+    background-color:  var(--b3-theme-background) !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    overflow: auto !important;
+    box-sizing: border-box !important;
+}

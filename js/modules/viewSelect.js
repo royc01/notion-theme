@@ -10,6 +10,7 @@ const viewButtons = {
         { id: "GraphView", attrName: "f", attrValue: "dt", icon: "iconFiles", labelKey: "转换为导图" },
         { id: "TableView", attrName: "f", attrValue: "bg", icon: "iconTable", labelKey: "转换为表格" },
         { id: "kanbanView", attrName: "f", attrValue: "kb", icon: "iconMenu", labelKey: "转换为看板" },
+        { id: "timelineView", attrName: "f", attrValue: "tl", icon: "iconList", labelKey: "转换为时间线" },
         { id: "DefaultView", attrName: "f", attrValue: "", icon: "iconList", labelKey: "恢复为列表" }
     ],
     NodeTable: [

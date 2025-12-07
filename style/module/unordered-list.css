@@ -7,6 +7,7 @@
     font-family: Arial;
 	content: "•";
 	position: absolute;
+	z-index: 2;
 }
 [data-subtype="u"]>[data-subtype="u"] .li[data-subtype="u"]>.protyle-action::before{
 	content: "◦";

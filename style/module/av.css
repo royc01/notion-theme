@@ -201,6 +201,6 @@
 .av__kanban--bg .av__gallery-item,.av__kanban--bg .av__gallery-add {
     box-shadow:oklch(var(--b3-theme-on-background-base) / 0.05) 0 0 0 1px, rgba(0, 0, 0, .04) 0 2px 4px 0, var(--b3-av-kanban-background) 0 0 0 1px;
 }
-.av__kanban-group{
+.av__kanban:not(.av__kanban--bg) .av__kanban-group{
     background-color: oklch(calc(var(--b3-theme-surface-base-l)) var(--b3-theme-surface-base-ch) / 0.6);
 }

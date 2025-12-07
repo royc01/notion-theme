@@ -4,13 +4,22 @@
 
 import { i18n } from './i18n.js';
 
-// 拖拽功能防抖（已简化）
+// 拖拽功能防抖
 export const dragDebounce = (fn) => {
     let timer = null;
     return (...args) => {
         if (timer) cancelAnimationFrame(timer);
         timer = requestAnimationFrame(() => fn(...args));
     };
+};
+
+// SVG图标常量
+const SVG_ICONS = {
+    COLLAPSE: `<svg viewBox="0 0 32 32" width="16" height="16">
+        <path d="M16 24L8 16L16 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`,
+    MAXIMIZE: `<svg><use xlink:href="#iconFullscreen"></use></svg>`,
+    MINIMIZE: `<svg><use xlink:href="#iconFullscreenExit"></use></svg>`
 };
 
 // 注入拖拽样式
@@ -21,47 +30,62 @@ const ensureDTStyles = () => {
     style.textContent = `[custom-f="dt"][data-draggable] { --dt-scale: 1; }
 [custom-f="dt"] [data-type="NodeListItem"][data-draggable] {
 cursor: grab;
+}
+/* 只在根列表项上应用变换 */
+[custom-f="dt"] [data-type="NodeListItem"][data-draggable]:not([data-type="NodeListItem"] [data-type="NodeListItem"]) {
 transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(var(--dt-scale, 1));
 }
-[custom-f="dt"][data-animating] [data-type="NodeListItem"][data-draggable] {
+[custom-f="dt"][data-animating] [data-type="NodeListItem"][data-draggable]:not([data-type="NodeListItem"] [data-type="NodeListItem"]) {
 transition: transform 0.25s ease;
 }`;
     document.head.appendChild(style);
     window.__dtStylesInjected = true;
 };
 
+// 创建通用按钮的工厂函数
+const createButton = (className, htmlContent, uniqueId) => {
+    const button = document.createElement('div');
+    button.className = className;
+    button.innerHTML = htmlContent;
+    button.setAttribute('data-id', uniqueId);
+    
+    // 阻止拖拽事件影响按钮点击
+    ['mousedown', 'pointerdown'].forEach(event => {
+        button.addEventListener(event, e => {
+            e.stopPropagation();
+            if (event === 'pointerdown') e.stopImmediatePropagation();
+        });
+    });
+    
+    return button;
+};
+
+// 更新折叠按钮内容
+const updateCollapseButton = (btn, isFolded, childCount) => {
+    btn.innerHTML = isFolded ? (childCount || '') : SVG_ICONS.COLLAPSE;
+};
+
 // 创建并添加折叠按钮的通用函数
 const addCollapseButton = (targetElement, isListButton = false) => {
-    // 更严格的检查是否已经有折叠按钮，通过唯一的类名标识
+    // 检查是否已经有折叠按钮
     if (targetElement.querySelector?.('.collapse-btn.protyle-custom')) return;
 
     // 获取关联的列表项和子列表
     let listItem, subList, list;
     if (isListButton) {
-        // 对于列表按钮
         list = targetElement;
         if (!list.parentElement || !list.parentElement.closest('[data-type="NodeList"]')) return;
         listItem = list.parentElement.closest('[data-type="NodeListItem"]');
         if (!listItem) return;
     } else {
-        // 对于列表项按钮
         listItem = targetElement;
         subList = listItem.querySelector(':scope > .list');
         if (!subList) return;
     }
 
     // 创建折叠按钮
-    const collapseBtn = document.createElement('div');
-    collapseBtn.className = 'collapse-btn protyle-custom';
-    collapseBtn.innerHTML = `
-        <svg viewBox="0 0 32 32" width="16" height="16">
-            <path d="M16 24L8 16L16 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    `;
-
-    // 添加唯一的data-id属性，用于进一步防止重复
     const uniqueId = `collapse-btn-${listItem.getAttribute('data-node-id') || Date.now()}`;
-    collapseBtn.setAttribute('data-id', uniqueId);
+    const collapseBtn = createButton('collapse-btn protyle-custom', SVG_ICONS.COLLAPSE, uniqueId);
 
     // 添加点击事件
     collapseBtn.addEventListener('click', (e) => {
@@ -90,44 +114,25 @@ const addCollapseButton = (targetElement, isListButton = false) => {
         }
     });
 
-    // 阻止拖拽事件影响按钮点击
-    collapseBtn.addEventListener('mousedown', e => e.stopPropagation());
-    collapseBtn.addEventListener('pointerdown', e => {
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-    });
-
     // 插入按钮到DOM
     if (isListButton) {
-        // 将按钮插入到正确位置：在NodeParagraph元素内部
         const paragraph = listItem.querySelector(':scope > [data-type="NodeParagraph"]');
         if (paragraph) {
-            // 在插入前再次检查是否已存在相同ID的按钮
-            if (paragraph.querySelector(`.collapse-btn.protyle-custom[data-id="${uniqueId}"]`)) return;
-            paragraph.appendChild(collapseBtn);
             if (getComputedStyle(paragraph).position === 'static') {
                 paragraph.style.position = 'relative';
             }
+            paragraph.appendChild(collapseBtn);
         } else {
             const parent = list.parentElement;
             if (parent && getComputedStyle(parent).position === 'static') {
                 parent.style.position = 'relative';
             }
-            // 在插入前再次检查是否已存在相同ID的按钮
-            if (parent.querySelector(`.collapse-btn.protyle-custom[data-id="${uniqueId}"]`)) return;
             parent.insertBefore(collapseBtn, list);
-            const buttonParent = collapseBtn.parentElement;
-            if (buttonParent && getComputedStyle(buttonParent).position === 'static') {
-                buttonParent.style.position = 'relative';
-            }
         }
     } else {
-        // 将按钮添加到列表项
         if (getComputedStyle(listItem).position === 'static') {
             listItem.style.position = 'relative';
         }
-        // 在插入前再次检查是否已存在相同ID的按钮
-        if (listItem.querySelector(`.collapse-btn.protyle-custom[data-id="${uniqueId}"]`)) return;
         listItem.appendChild(collapseBtn);
         if (subList && getComputedStyle(subList).position === 'static') {
             subList.style.position = 'relative';
@@ -137,36 +142,17 @@ const addCollapseButton = (targetElement, isListButton = false) => {
     // 更新按钮内容的函数
     const updateButtonIcon = () => {
         const isFolded = listItem.getAttribute('fold') === '1';
-        
-        if (isFolded) {
-            // 折叠状态：显示子项数量
-            const childItems = isListButton ? 
-                list.querySelectorAll(':scope > .li') : 
-                subList.querySelectorAll(':scope > .li');
-            const childCount = childItems.length;
-            collapseBtn.innerHTML = childCount;
-        } else {
-            // 展开状态：显示箭头图标
-            collapseBtn.innerHTML = `
-                <svg viewBox="0 0 32 32" width="16" height="16">
-                    <path d="M16 24L8 16L16 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            `;
-        }
+        const childItems = isListButton ? 
+            list.querySelectorAll(':scope > .li') : 
+            subList.querySelectorAll(':scope > .li');
+        updateCollapseButton(collapseBtn, isFolded, childItems.length);
     };
 
     // 初始化按钮状态
     updateButtonIcon();
 
     // 使用MutationObserver监听属性变化
-    const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'fold') {
-                updateButtonIcon();
-            }
-        });
-    });
-
+    const observer = new MutationObserver(() => updateButtonIcon());
     observer.observe(listItem, { attributes: true, attributeFilter: ['fold'] });
 
     // 存储observer引用，以便后续清理
@@ -179,9 +165,35 @@ const addCollapseButton = (targetElement, isListButton = false) => {
     }
 };
 
+// 创建并添加最大化按钮的函数
+const addMaximizeButton = (targetElement) => {
+    // 检查是否已经添加了最大化按钮
+    if (targetElement.querySelector?.('.maximize-btn.protyle-custom')) return;
+
+    // 创建最大化按钮
+    const uniqueId = `maximize-btn-${targetElement.getAttribute('data-node-id') || Date.now()}`;
+    const maximizeBtn = createButton('maximize-btn protyle-custom', SVG_ICONS.MAXIMIZE, uniqueId);
+
+    // 添加点击事件
+    maximizeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        targetElement.classList.toggle('savor-mindmap-fullscreen');
+        maximizeBtn.innerHTML = targetElement.classList.contains('savor-mindmap-fullscreen') ? 
+            SVG_ICONS.MINIMIZE : SVG_ICONS.MAXIMIZE;
+    });
+
+    // 将按钮添加到目标元素
+    if (getComputedStyle(targetElement).position === 'static') {
+        targetElement.style.position = 'relative';
+    }
+    targetElement.appendChild(maximizeBtn);
+};
+
 // 初始化拖拽功能
 export const initDraggable = (element) => {
-    const listItems = element.querySelectorAll(':scope > [data-type="NodeListItem"]');
+    // 选择所有层级的 NodeListItem，而不仅仅是直接子级
+    const listItems = element.querySelectorAll('[data-type="NodeListItem"]');
     if (!listItems.length) return;
 
     ensureDTStyles();
@@ -205,7 +217,8 @@ export const initDraggable = (element) => {
             element._scale = 1;
             element.style.setProperty("--dt-scale", "1");
             element.setAttribute("data-animating", "true");
-            element.querySelectorAll('[data-type="NodeListItem"]').forEach(item => {
+            // 只重置根列表项的坐标
+            element.querySelectorAll('[data-type="NodeListItem"]:not([data-type="NodeListItem"] [data-type="NodeListItem"])').forEach(item => {
                 item.style.removeProperty("--tx");
                 item.style.removeProperty("--ty");
                 item.dataset.tx = "0";
@@ -215,17 +228,19 @@ export const initDraggable = (element) => {
         });
     }
 
-    // 标记子项为可拖拽
+    // 标记所有子项为可拖拽（包括嵌套的）
     listItems.forEach(item => {
         if (!item.hasAttribute("data-draggable")) 
             item.setAttribute("data-draggable", "true");
     });
     
     // 为每个NodeList元素添加折叠按钮
-    const nodeLists = element.querySelectorAll('[data-type="NodeList"]');
-    nodeLists.forEach(list => {
-        addCollapseButton(list, true);
-    });
+    element.querySelectorAll('[data-type="NodeList"]').forEach(list => addCollapseButton(list, true));
+
+    // 为导图容器添加最大化按钮
+    if (element.hasAttribute('custom-f') && element.getAttribute('custom-f') === 'dt') {
+        addMaximizeButton(element);
+    }
 
     // 指针事件处理
     if (!element._onItemPointerDown) {
@@ -235,13 +250,23 @@ export const initDraggable = (element) => {
                 e.target.getAttribute?.("contenteditable") === "true" || 
                 e.target.closest?.('[data-type="a"]')) return;
             
-            const listItem = e.target.closest?.('[data-type="NodeListItem"]');
-            if (!listItem || !element.contains(listItem)) return;
+            // 找到被点击的列表项
+            const clickedItem = e.target.closest?.('[data-type="NodeListItem"]');
+            if (!clickedItem || !element.contains(clickedItem)) return;
+            
+            // 获取根列表项（最顶层的列表项）
+            let rootItem = clickedItem;
+            while (rootItem.parentElement && rootItem.parentElement.closest?.('[data-type="NodeListItem"]')) {
+                rootItem = rootItem.parentElement.closest('[data-type="NodeListItem"]');
+            }
+            
+            // 如果根项不存在或不在当前元素内，则返回
+            if (!rootItem || !element.contains(rootItem)) return;
 
-            // 拖拽阈值和初始位置
+            // 拖拽阈值和初始位置（只针对根项）
             let moved = false;
-            const baseTx = parseFloat(listItem.dataset.tx || "0");
-            const baseTy = parseFloat(listItem.dataset.ty || "0");
+            const baseTx = parseFloat(rootItem.dataset.tx || "0");
+            const baseTy = parseFloat(rootItem.dataset.ty || "0");
             const startX = e.clientX - baseTx;
             const startY = e.clientY - baseTy;
 
@@ -255,50 +280,49 @@ export const initDraggable = (element) => {
                 // 超过阈值才触发拖拽
                 if (!moved && (deltaX > 5 || deltaY > 5)) {
                     e.preventDefault();
-                    listItem.style.cursor = "grabbing";
+                    clickedItem.style.cursor = "grabbing";
                     moved = true;
                 }
                 
-                // 执行拖拽
+                // 执行拖拽，但移动的是根项
                 if (moved) {
                     rafId && cancelAnimationFrame(rafId);
                     rafId = requestAnimationFrame(() => {
                         const tx = ev.clientX - startX;
                         const ty = ev.clientY - startY;
-                        listItem.dataset.tx = String(tx);
-                        listItem.dataset.ty = String(ty);
-                        listItem.style.setProperty("--tx", `${tx}px`);
-                        listItem.style.setProperty("--ty", `${ty}px`);
+                        rootItem.dataset.tx = String(tx);
+                        rootItem.dataset.ty = String(ty);
+                        rootItem.style.setProperty("--tx", `${tx}px`);
+                        rootItem.style.setProperty("--ty", `${ty}px`);
                     });
                 }
             };
 
             // 处理鼠标释放和取消
             const onPointerUp = () => {
-                listItem.releasePointerCapture?.(e.pointerId);
-                listItem.removeEventListener("pointermove", onPointerMove);
-                listItem.removeEventListener("pointerup", onPointerUp);
-                listItem.removeEventListener("pointercancel", onPointerUp);
+                rootItem.releasePointerCapture?.(e.pointerId);
+                rootItem.removeEventListener("pointermove", onPointerMove);
+                rootItem.removeEventListener("pointerup", onPointerUp);
+                rootItem.removeEventListener("pointercancel", onPointerUp);
                 element.removeEventListener("pointerleave", onPointerLeave);
-                listItem.style.cursor = "grab";
+                clickedItem.style.cursor = "";
             };
 
             // 处理鼠标离开容器区域
             const onPointerLeave = (ev) => {
-                // 只有在拖拽状态下才处理
                 if (moved) {
                     onPointerUp();
                 }
             };
 
-            // 添加事件监听器
-            listItem.addEventListener("pointermove", onPointerMove);
-            listItem.addEventListener("pointerup", onPointerUp);
-            listItem.addEventListener("pointercancel", onPointerUp);
+            // 添加事件监听器到根项上
+            rootItem.addEventListener("pointermove", onPointerMove);
+            rootItem.addEventListener("pointerup", onPointerUp);
+            rootItem.addEventListener("pointercancel", onPointerUp);
             element.addEventListener("pointerleave", onPointerLeave);
             
             // 设置指针捕获以确保能接收到事件
-            listItem.setPointerCapture?.(e.pointerId);
+            rootItem.setPointerCapture?.(e.pointerId);
         });
     }
 };
@@ -312,6 +336,11 @@ const updateMapTips = () => {
 
 // 初始化观察器
 const initObserver = () => {
+    // 如果主观察器已经存在，则先断开连接
+    if (window._mindmapMainObserver) {
+        window._mindmapMainObserver.disconnect();
+    }
+    
     const observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
             if (mutation.type === "attributes" && mutation.target.getAttribute("custom-f") === "dt") {
@@ -330,7 +359,13 @@ const initObserver = () => {
                 if (target.matches('[data-type="NodeListItem"]')) {
                     addCollapseButton(target);
                 } else if (target.matches('[data-type="NodeList"]')) {
-                    addCollapseButtonToList(target);
+                    addCollapseButton(target, true);
+                }
+            } else if (mutation.type === "attributes" && mutation.attributeName === "custom-f") {
+                // 当custom-f属性改变时，如果是从dt变为其他值，则清理相关属性
+                const target = mutation.target;
+                if (mutation.oldValue === "dt" && target.getAttribute("custom-f") !== "dt") {
+                    cleanupDraggable(target);
                 }
             }
         });
@@ -340,8 +375,12 @@ const initObserver = () => {
         childList: true,
         subtree: true,
         attributes: true,
-        attributeFilter: ["custom-f", "fold"]
+        attributeFilter: ["custom-f", "fold"],
+        attributeOldValue: true
     });
+
+    // 存储主观察器引用，以便后续清理
+    window._mindmapMainObserver = observer;
 
     document.querySelectorAll(`[custom-f="dt"]`).forEach(initDraggable);
     
@@ -353,6 +392,30 @@ const initObserver = () => {
 const handleThemeChange = () => {
     // 先清理所有现有的导图元素
     document.querySelectorAll(`[custom-f="dt"]`).forEach(cleanupDraggable);
+    
+    // 清理主观察器（如果存在）
+    if (window._mindmapMainObserver) {
+        window._mindmapMainObserver.disconnect();
+        window._mindmapMainObserver = null;
+    }
+    
+    // 清理提示文本观察器（如果存在）
+    if (window._listMapTipObserver) {
+        window._listMapTipObserver.disconnect();
+        window._listMapTipObserver = null;
+    }
+    
+    // 重新初始化观察器
+    initObserver();
+    
+    // 重新初始化提示文本观察器
+    window._listMapTipObserver = new MutationObserver(() => setTimeout(updateMapTips, 16));
+    window._listMapTipObserver.observe(document.body, { 
+        childList: true, 
+        subtree: true, 
+        attributes: true, 
+        attributeFilter: ["custom-f"] 
+    });
     
     // 重新初始化所有导图元素
     document.querySelectorAll(`[custom-f="dt"]`).forEach(initDraggable);
@@ -369,11 +432,12 @@ export const initMindmapDrag = async () => {
     // 等待i18n资源加载完成
     await i18n.ready();
     
-    if (typeof window.dragDebounce === "undefined") {
-        window.dragDebounce = dragDebounce;
-        initObserver();
-        
-        // 存储观察器引用，以便后续清理
+    // 总是初始化观察器，确保在主题切换后能正确重新初始化
+    window.dragDebounce = dragDebounce;
+    initObserver();
+    
+    // 存储观察器引用，以便后续清理
+    if (!window._listMapTipObserver) {
         window._listMapTipObserver = new MutationObserver(() => setTimeout(updateMapTips, 16));
         window._listMapTipObserver.observe(document.body, { 
             childList: true, 
@@ -390,6 +454,24 @@ export const initMindmapDrag = async () => {
 
 // 清理导图拖拽功能
 export const cleanupDraggable = (element) => {
+    // 清理所有列表项的拖拽相关属性（包括嵌套的）
+    element.querySelectorAll('[data-type="NodeListItem"]').forEach(item => {
+        item.removeAttribute("data-draggable");
+        // 只清理根列表项的坐标属性
+        if (!item.matches('[data-type="NodeListItem"] [data-type="NodeListItem"]')) {
+            item.style.removeProperty("--tx");
+            item.style.removeProperty("--ty");
+            delete item.dataset.tx;
+            delete item.dataset.ty;
+        }
+    });
+    
+    // 清理所有列表容器的相关属性
+    element.querySelectorAll('[data-type="NodeList"]').forEach(list => {
+        list.style.removeProperty("--dt-scale");
+        list.style.removeProperty("cursor");
+    });
+
     // 重置所有列表项和NodeList元素
     [...element.querySelectorAll('[data-type="NodeListItem"]'), 
      ...element.querySelectorAll('[data-type="NodeList"]')].forEach(target => {
@@ -402,21 +484,18 @@ export const cleanupDraggable = (element) => {
             target._collapseObservers.forEach(observer => observer.disconnect());
             target._collapseObservers = null;
         }
-        
-        // 如果是列表项，还需要清理位置属性
-        if (target.matches('[data-type="NodeListItem"]')) {
-            target.style.removeProperty("--tx");
-            target.style.removeProperty("--ty");
-            delete target.dataset.tx;
-            delete target.dataset.ty;
-            target.removeAttribute("data-draggable");
-        }
     });
 
-    // 移除自身属性
+    // 移除最大化按钮
+    const maximizeBtn = element.querySelector('.maximize-btn.protyle-custom');
+    if (maximizeBtn) maximizeBtn.remove();
+
+    // 移除根元素自身属性
     element.removeAttribute("data-draggable");
     element._scale = 1;
     element.style.removeProperty("--dt-scale");
+    element.removeAttribute("data-i18n-tip");
+    element.style.removeProperty("cursor");
 
     // 清理事件监听器
     ['wheel', 'dblclick', 'pointerdown'].forEach(name => {
@@ -434,19 +513,34 @@ export const cleanupMindmapDrag = () => {
         document.getElementById('dt-inline-styles')?.remove();
         window.__dtStylesInjected = false;
         
+        // 清理主观察器（如果存在）
+        if (window._mindmapMainObserver) {
+            window._mindmapMainObserver.disconnect();
+            window._mindmapMainObserver = null;
+        }
+        
         // 清理所有已设置拖拽属性的元素
         document.querySelectorAll('[custom-f="dt"][data-draggable]').forEach(cleanupDraggable);
         
-        // 统一清理所有NodeListItem和NodeList元素
+        // 统一清理所有NodeListItem和NodeList元素（包括嵌套的）
         [...document.querySelectorAll('[data-type="NodeListItem"][data-draggable]'), 
          ...document.querySelectorAll('[data-type="NodeList"]')].forEach(target => {
             // 移除拖拽属性
             if (target.matches('[data-type="NodeListItem"]')) {
                 target.removeAttribute('data-draggable');
-                target.style.removeProperty('--tx');
-                target.style.removeProperty('--ty');
-                delete target.dataset.tx;
-                delete target.dataset.ty;
+                // 只清理根列表项的坐标属性
+                if (!target.matches('[data-type="NodeListItem"] [data-type="NodeListItem"]')) {
+                    target.style.removeProperty('--tx');
+                    target.style.removeProperty('--ty');
+                    delete target.dataset.tx;
+                    delete target.dataset.ty;
+                }
+            }
+            
+            // 如果是列表容器，也需要清理相关属性
+            if (target.matches('[data-type="NodeList"]')) {
+                target.style.removeProperty('--dt-scale');
+                target.style.removeProperty('cursor');
             }
             
             // 移除折叠按钮（使用与创建时相同的类名）

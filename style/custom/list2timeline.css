@@ -1,0 +1,73 @@
+/* ========================================
+   模块：列表转时间线样式
+   ======================================== */
+[data-type="NodeList"][custom-f~="tl"] {
+    overflow: hidden;
+    >[data-type="NodeListItem"] {
+        padding-top: 10px !important;
+        padding-bottom: 20px !important;
+        >[data-type="NodeList"]>[data-type="NodeListItem"]{
+            >.protyle-action,&::before{
+            display: none;
+            }
+            >.protyle-action~div{
+                transform: translateX(-34px);
+            }
+        }
+        /* 图标 */
+        >.protyle-action {
+            top: 12px;
+            left: 125px;
+            scale: 1.5;
+            &::after,&:hover:after{
+                background-color: var(--b3-theme-background)!important;
+            }
+        }
+
+        /* 第一个内容块：时间 */
+        >.protyle-action+[data-node-id] {
+            position: absolute;
+            right: calc(100% - 120px);
+            margin-left: 0px;
+            display: flex;
+            justify-content: flex-end;
+            font-weight: 700;
+            font-size: 1.3em;
+            top: 6px;
+        }
+
+        /* 内容溢出省略 */
+        >.protyle-action+[data-node-id]>div[spellcheck="false"] {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        /* 第二个内容块到最后一个内容块：内容 */
+        >[data-type]:not(.protyle-action+[data-node-id]) {
+            margin-left: 160px;
+            margin-right: 2px;
+            border-radius: 8px;
+            /*box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 2px 4px;*/
+        }
+
+
+    }
+
+    /* 线条 */
+    >[data-type="NodeListItem"]::before {
+        content: "";
+        position: absolute;
+        top: 1px;
+        left: 140.2px;
+        height: 100%;
+        width: 4px;
+        background: radial-gradient(circle at center,var(--b3-theme-on-background) 1.5px,transparent 2px);
+        background-size: 4px 8px;
+        background-repeat: repeat-y;
+        opacity: 0.2;
+        border: none;
+    }
+}
