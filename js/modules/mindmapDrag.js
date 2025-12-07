@@ -341,6 +341,11 @@ const initObserver = () => {
         window._mindmapMainObserver.disconnect();
     }
     
+    // 如果提示文本观察器已经存在，则先断开连接
+    if (window._listMapTipObserver) {
+        window._listMapTipObserver.disconnect();
+    }
+    
     const observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => {
             if (mutation.type === "attributes" && mutation.target.getAttribute("custom-f") === "dt") {
@@ -382,6 +387,15 @@ const initObserver = () => {
     // 存储主观察器引用，以便后续清理
     window._mindmapMainObserver = observer;
 
+    // 初始化提示文本观察器
+    window._listMapTipObserver = new MutationObserver(() => setTimeout(updateMapTips, 16));
+    window._listMapTipObserver.observe(document.body, { 
+        childList: true, 
+        subtree: true, 
+        attributes: true, 
+        attributeFilter: ["custom-f"] 
+    });
+
     document.querySelectorAll(`[custom-f="dt"]`).forEach(initDraggable);
     
     // 更新提示文本
@@ -393,13 +407,12 @@ const handleThemeChange = () => {
     // 先清理所有现有的导图元素
     document.querySelectorAll(`[custom-f="dt"]`).forEach(cleanupDraggable);
     
-    // 清理主观察器（如果存在）
+    // 清理所有观察器（如果存在）
     if (window._mindmapMainObserver) {
         window._mindmapMainObserver.disconnect();
         window._mindmapMainObserver = null;
     }
     
-    // 清理提示文本观察器（如果存在）
     if (window._listMapTipObserver) {
         window._listMapTipObserver.disconnect();
         window._listMapTipObserver = null;
@@ -407,15 +420,6 @@ const handleThemeChange = () => {
     
     // 重新初始化观察器
     initObserver();
-    
-    // 重新初始化提示文本观察器
-    window._listMapTipObserver = new MutationObserver(() => setTimeout(updateMapTips, 16));
-    window._listMapTipObserver.observe(document.body, { 
-        childList: true, 
-        subtree: true, 
-        attributes: true, 
-        attributeFilter: ["custom-f"] 
-    });
     
     // 重新初始化所有导图元素
     document.querySelectorAll(`[custom-f="dt"]`).forEach(initDraggable);
@@ -432,20 +436,11 @@ export const initMindmapDrag = async () => {
     // 等待i18n资源加载完成
     await i18n.ready();
     
-    // 总是初始化观察器，确保在主题切换后能正确重新初始化
+    // 设置防抖函数
     window.dragDebounce = dragDebounce;
-    initObserver();
     
-    // 存储观察器引用，以便后续清理
-    if (!window._listMapTipObserver) {
-        window._listMapTipObserver = new MutationObserver(() => setTimeout(updateMapTips, 16));
-        window._listMapTipObserver.observe(document.body, { 
-            childList: true, 
-            subtree: true, 
-            attributes: true, 
-            attributeFilter: ["custom-f"] 
-        });
-    }
+    // 初始化观察器
+    initObserver();
 };
 
 // ========================================
@@ -565,3 +560,6 @@ export const cleanupMindmapDrag = () => {
         // 清理导图拖拽功能时出错: e
     }
 };
+
+// 导出清理函数到全局作用域
+window.cleanupMindmapDrag = cleanupMindmapDrag;

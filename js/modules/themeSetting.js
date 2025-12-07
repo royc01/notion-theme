@@ -423,63 +423,9 @@ export const destroyTheme = () => {
     
     // 清理导图拖拽功能
     try {
-        // 移除导图拖拽样式
-        document.getElementById('dt-inline-styles')?.remove();
-        window.__dtStylesInjected = false;
-        
-        // 清理主观察器（如果存在）
-        if (window._mindmapMainObserver) {
-            window._mindmapMainObserver.disconnect();
-            window._mindmapMainObserver = null;
-        }
-        
-        // 清理所有导图元素的拖拽属性和事件监听器
-        document.querySelectorAll('[custom-f="dt"][data-draggable]').forEach(element => {
-            // 移除拖拽属性
-            element.removeAttribute("data-draggable");
-            element._scale = 1;
-            element.style.removeProperty("--dt-scale");
-            
-            // 清理事件监听器
-            ['wheel', 'dblclick', 'pointerdown'].forEach(name => {
-                if (element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`]) {
-                    element.removeEventListener(name, element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`]);
-                    delete element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`];
-                }
-            });
-        });
-        
-        // 清理所有列表项的拖拽属性和位置信息
-        document.querySelectorAll('[data-type="NodeListItem"][data-draggable]').forEach(item => {
-            item.removeAttribute('data-draggable');
-            item.style.removeProperty('--tx');
-            item.style.removeProperty('--ty');
-            delete item.dataset.tx;
-            delete item.dataset.ty;
-        });
-        
-        // 移除所有折叠按钮
-        document.querySelectorAll('.collapse-btn.protyle-custom').forEach(btn => {
-            btn.remove();
-        });
-        
-        // 移除所有最大化按钮
-        document.querySelectorAll('.maximize-btn.protyle-custom').forEach(btn => {
-            btn.remove();
-        });
-        
-        // 清理所有元素的折叠观察器
-        document.querySelectorAll('[data-type="NodeListItem"], [data-type="NodeList"]').forEach(target => {
-            if (target._collapseObservers) {
-                target._collapseObservers.forEach(observer => observer.disconnect());
-                target._collapseObservers = null;
-            }
-        });
-        
-        // 清理提示文本观察器
-        if (window._listMapTipObserver) {
-            window._listMapTipObserver.disconnect();
-            window._listMapTipObserver = null;
+        // 直接调用导图模块的清理函数
+        if (typeof window.cleanupMindmapDrag === 'function') {
+            window.cleanupMindmapDrag();
         }
     } catch (e) {
         // [Savor] 清理导图拖拽功能时出错: ${e.message}
