@@ -67,6 +67,9 @@ const updateCollapseButton = (btn, isFolded, childCount) => {
 
 // 创建并添加折叠按钮的通用函数
 const addCollapseButton = (targetElement, isListButton = false) => {
+    // 检查是否在导图模式下，如果不是则不添加折叠按钮
+    if (!targetElement.closest('[custom-f="dt"]')) return;
+    
     // 检查是否已经有折叠按钮
     if (targetElement.querySelector?.('.collapse-btn.protyle-custom')) return;
 
@@ -372,6 +375,10 @@ const initObserver = () => {
                 if (mutation.oldValue === "dt" && target.getAttribute("custom-f") !== "dt") {
                     cleanupDraggable(target);
                 }
+                // 当custom-f属性从其他值变为dt时，初始化拖拽功能
+                else if (mutation.oldValue !== "dt" && target.getAttribute("custom-f") === "dt") {
+                    initDraggable(target);
+                }
             }
         });
     });
@@ -499,6 +506,9 @@ export const cleanupDraggable = (element) => {
             delete element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`];
         }
     });
+    
+    // 特别处理：确保所有折叠按钮都被移除
+    element.querySelectorAll('.collapse-btn.protyle-custom').forEach(btn => btn.remove());
 };
 
 // 清理导图拖拽功能

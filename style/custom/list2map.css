@@ -52,16 +52,6 @@
     }
 }
 
-/* 折叠按钮默认隐藏 */
-.collapse-btn.protyle-custom {
-    display: none;
-}
-
-/* 只在custom-f="dt"的情况下显示折叠按钮 */
-.protyle-wysiwyg *[custom-f="dt"] .collapse-btn.protyle-custom {
-    display: flex;
-}
-
 
 /* 合并重复的代码块样式 */
 .protyle-wysiwyg *[custom-f="dt"] .li[data-subtype="t"] > [data-node-id] > div[spellcheck],
@@ -233,7 +223,8 @@ div *[custom-f="dt"] > [data-type="NodeListItem"].li::after {
 }
 
 /*————————————————————————折叠按钮样式————————————————————————*/
-.collapse-btn {
+.protyle-wysiwyg *[custom-f="dt"] .collapse-btn.protyle-custom {
+    display: flex;
     position: absolute;
     width: 14px;
     height: 14px;
@@ -261,7 +252,7 @@ div *[custom-f="dt"] > [data-type="NodeListItem"].li::after {
 .protyle-wysiwyg *[custom-f="dt"] [data-type="NodeListItem"][fold="1"]>[data-type="NodeParagraph"]>.collapse-btn {
     opacity: 1;
 }*/
-.collapse-btn::before {
+.protyle-wysiwyg *[custom-f="dt"] .collapse-btn::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -273,7 +264,7 @@ div *[custom-f="dt"] > [data-type="NodeListItem"].li::after {
     border-bottom: var(--b3-border-daotu) ;
 }
 
-.collapse-btn svg {
+.protyle-wysiwyg *[custom-f="dt"] .collapse-btn svg {
     width: 12px;
     height: 12px;
     color: var(--b3-theme-on-background);

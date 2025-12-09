@@ -296,8 +296,9 @@ function refreshSideBarMemos(main, sidebar) {
     
     // 使用Set来避免重复的块ID
     const processedBlocks = new Set();
-    // 使用Set来存储已经处理过的备注内容，避免内容重复显示
-    const processedMemoContents = new Set();
+    // 使用Map来存储已经处理过的备注内容，避免内容重复显示
+    // Key为内容标识符，Value为备注元素数组
+    const processedMemoContents = new Map();
     
     // 提前检查当前启用的模式，避免重复DOM查询
     const isBlockMemoMode = document.documentElement.hasAttribute('savor-sidebar-block-memo');
@@ -344,8 +345,21 @@ function refreshSideBarMemos(main, sidebar) {
                 const contentKey = memoText + '|' + memoContent;
                 
                 // 检查是否已经处理过相同内容的备注（解决内容重复显示问题）
-                if (processedMemoContents.has(contentKey)) return;
-                processedMemoContents.add(contentKey);
+                // 但允许多个具有相同内容的不同元素
+                const existingMemos = processedMemoContents.get(contentKey) || [];
+                
+                // 检查是否是完全相同的元素（通过比较元素引用）
+                const isDuplicate = existingMemos.some(existingMemo => existingMemo.element === el);
+                
+                if (isDuplicate) return;
+                
+                // 添加到已处理的备注中
+                existingMemos.push({
+                    element: el,
+                    blockId: blockId,
+                    index: index
+                });
+                processedMemoContents.set(contentKey, existingMemos);
                 
                 // 获取行内备注所属的块ID，确保使用正确的块ID
                 const memoBlock = getBlockNode(el);
