@@ -109,8 +109,8 @@ const handleMouseEnter = (e) => {
     const X = tempDiv.offsetLeft, Y = tempDiv.offsetTop;
     tempDiv.remove();
     
-    createTriggerBlock(grandParent, obj, X + 45, Y + 2);
-    createTriggerBlock(grandParent, obj, obj.offsetLeft + 35, Y + 35);
+    createTriggerBlock(grandParent, obj, X + 2, Y + 2);
+    //createTriggerBlock(grandParent, obj, obj.offsetLeft + 35, Y + 35);
 };
 
 // 鼠标离开事件处理
@@ -123,14 +123,28 @@ const createTriggerBlock = (container, refObj, left, top) => {
     const previewID = container.getAttribute("data-node-id");
     if (!previewID) return;
     
+    // 统计折叠的直接子项数量
+    const foldedChildren = container.querySelectorAll(':scope > .list > .li');
+    const childCount = foldedChildren.length;
+    
     const triggerBlock = document.createElement("div");
     if (!triggerBlock) return;
     
     triggerBlock.setAttribute("triggerBlock", "true");
-    triggerBlock.setAttribute("contenteditable", "false");
-    triggerBlock.className = "protyle-attr";
+    triggerBlock.className = "triggerBlock protyle-custom";
     triggerBlock.style.cssText = `position:absolute;width:20px;height:15px;display:flex;z-index:999;cursor:pointer;WebkitUserModify:read-only;background:transparent;top:${top}px;left:${left}px;`;
     triggerBlock.innerHTML = `<span data-type='a' class='list-A' data-href='siyuan://blocks/${previewID}' style='font-size:15px;line-height:15px;color:transparent;text-shadow:none;border:none;'>####</span>`;
     
-    container.appendChild(triggerBlock);
+    // 查找具有 data-type="NodeParagraph" 的元素
+    const paragraphElement = container.querySelector('[data-type="NodeParagraph"]');
+    if (paragraphElement) {
+        // 将子项数量作为属性插入到 contenteditable 的 div 元素中
+        const contentEditableDiv = paragraphElement.querySelector('div[contenteditable]');
+        if (contentEditableDiv) {
+            contentEditableDiv.setAttribute('data-child-count', childCount);
+        }
+        paragraphElement.appendChild(triggerBlock);
+    } else {
+        container.appendChild(triggerBlock);
+    }
 };

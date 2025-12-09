@@ -1,16 +1,35 @@
 
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h1>[spellcheck]:not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h1>[spellcheck])::after, 
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h2>[spellcheck]:not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h2>[spellcheck])::after, 
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h3>[spellcheck]:not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h3>[spellcheck])::after, 
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h4>[spellcheck]:not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h4>[spellcheck])::after, 
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h5>[spellcheck]:not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h5>[spellcheck])::after, 
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.h6>[spellcheck]:not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.h6>[spellcheck])::after, 
-.protyle-wysiwyg [data-node-id].li[fold="1"]>.p>[spellcheck]:not(.fn__flex-1.history__text.protyle [data-node-id].li[fold="1"]>.p>[spellcheck])::after{
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h1>[spellcheck][data-child-count]::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h2>[spellcheck][data-child-count]::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h3>[spellcheck][data-child-count]::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h4>[spellcheck][data-child-count]::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h5>[spellcheck][data-child-count]::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h6>[spellcheck][data-child-count]::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.p>[spellcheck][data-child-count]::after{
+    content: " " attr(data-child-count) " ";
+    display: inline;
+    vertical-align: 6%;
+    font-size: 0.9em;
+    color: var(--b3-theme-on-background);
+    margin-left: 6px;
+    border-radius: 4px;
+	background-color: var(--b3-font-background10);
+	padding:1px 1.5px;
+    min-width: 20px;
+}
+
+/* 兼容旧版本，没有 data-child-count 属性时仍然显示原始图标 */
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h1>[spellcheck]:not([data-child-count])::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h2>[spellcheck]:not([data-child-count])::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h3>[spellcheck]:not([data-child-count])::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h4>[spellcheck]:not([data-child-count])::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h5>[spellcheck]:not([data-child-count])::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.h6>[spellcheck]:not([data-child-count])::after, 
+.protyle-wysiwyg [data-node-id].li[fold="1"]>.p>[spellcheck]:not([data-child-count])::after{
     content: "🔗";
     display: inline;
     vertical-align: 6%;
     font-size: 0.7em;
-    color: var(--h1-list-graphic);
     margin-left: 6px;
     border-radius: 4px;
 	background-color: var(--b3-font-background10);
