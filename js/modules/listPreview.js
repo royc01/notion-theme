@@ -7,6 +7,7 @@ import { debounce } from './utils.js';
 // 模块状态变量
 let listPreviewActive = false;
 let listPreviewHandler = null;
+let foldObserver = null;
 
 // 初始化列表折叠内容预览查看功能
 export const initListPreview = () => {
@@ -17,9 +18,16 @@ export const initListPreview = () => {
     // 使用原生事件监听器替代 window.theme.BodyEventRunFun
     document.body.addEventListener("mouseover", listPreviewHandler);
     
-    setTimeout(() => {
-        collapsedListPreviewEvent();
-    }, 500);
+    // 监听折叠状态变化
+    foldObserver = new MutationObserver(debounce(collapsedListPreviewEvent, 100));
+    foldObserver.observe(document.body, {
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['fold']
+    });
+    
+    // 页面加载完成后初始化一次
+    setTimeout(collapsedListPreviewEvent, 500);
 };
 
 // 禁用列表折叠内容预览查看功能
@@ -28,6 +36,12 @@ export const disableListPreview = () => {
     
     listPreviewActive = false;
     listPreviewHandler = null;
+    
+    // 断开观察器
+    if (foldObserver) {
+        foldObserver.disconnect();
+        foldObserver = null;
+    }
     
     cleanupListPreview();
     document.querySelectorAll('[triggerBlock]').forEach(el => el.remove());
@@ -54,6 +68,29 @@ const collapsedListPreviewEvent = () => {
     
     cleanupListPreview();
     previewTargets.forEach(registerPreviewEvents);
+    
+    // 立即为所有折叠项设置data-child-count属性
+    foldedItems.forEach(item => {
+        const contentElement = item.children[1];
+        if (contentElement) {
+            const targetElement = contentElement.children[0];
+            if (targetElement) {
+                // 统计折叠的直接子项数量
+                const foldedChildren = item.querySelectorAll(':scope > .list > .li');
+                const childCount = foldedChildren.length;
+                
+                // 查找具有 data-type="NodeParagraph" 或者是标题类型(NodeHeading)的元素
+                const parentElement = item.querySelector('[data-type="NodeParagraph"], [data-type="NodeHeading"]');
+                if (parentElement) {
+                    // 将子项数量作为属性插入到 contenteditable 的 div 元素中
+                    const contentEditableDiv = parentElement.querySelector('div[contenteditable]');
+                    if (contentEditableDiv) {
+                        contentEditableDiv.setAttribute('data-child-count', childCount);
+                    }
+                }
+            }
+        }
+    });
 };
 
 // 清理列表预览
@@ -110,7 +147,6 @@ const handleMouseEnter = (e) => {
     tempDiv.remove();
     
     createTriggerBlock(grandParent, obj, X + 2, Y + 2);
-    //createTriggerBlock(grandParent, obj, obj.offsetLeft + 35, Y + 35);
 };
 
 // 鼠标离开事件处理
