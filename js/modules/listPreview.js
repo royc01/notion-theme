@@ -135,15 +135,15 @@ const createTriggerBlock = (container, refObj, left, top) => {
     triggerBlock.style.cssText = `position:absolute;width:20px;height:15px;display:flex;z-index:999;cursor:pointer;WebkitUserModify:read-only;background:transparent;top:${top}px;left:${left}px;`;
     triggerBlock.innerHTML = `<span data-type='a' class='list-A' data-href='siyuan://blocks/${previewID}' style='font-size:15px;line-height:15px;color:transparent;text-shadow:none;border:none;'>####</span>`;
     
-    // 查找具有 data-type="NodeParagraph" 的元素
-    const paragraphElement = container.querySelector('[data-type="NodeParagraph"]');
-    if (paragraphElement) {
+    // 查找具有 data-type="NodeParagraph" 或者是标题类型(NodeHeading)的元素
+    const targetElement = container.querySelector('[data-type="NodeParagraph"], [data-type="NodeHeading"]');
+    if (targetElement) {
         // 将子项数量作为属性插入到 contenteditable 的 div 元素中
-        const contentEditableDiv = paragraphElement.querySelector('div[contenteditable]');
+        const contentEditableDiv = targetElement.querySelector('div[contenteditable]');
         if (contentEditableDiv) {
             contentEditableDiv.setAttribute('data-child-count', childCount);
         }
-        paragraphElement.appendChild(triggerBlock);
+        targetElement.appendChild(triggerBlock);
     } else {
         container.appendChild(triggerBlock);
     }
