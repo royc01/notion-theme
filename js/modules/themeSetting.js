@@ -79,6 +79,13 @@ const applyRememberedFeatures = async () => {
             btn.onEnable?.();
         }
     }
+    
+    // 确保超级块宽度调节功能已初始化
+    if (typeof window.superBlockResizer?.start === 'function') {
+        window.superBlockResizer.start();
+    } else if (typeof window.initSuperBlockResizer === 'function') {
+        window.initSuperBlockResizer();
+    }
 };
 
 // 主题组工具函数
@@ -301,6 +308,15 @@ export const initThemeObserver = () => {
             } else if (existingSavorToolbar) {
                 // 不再移除，交由 CSS 控制显示
             }
+            
+            // 确保超级块调节功能在主题切换后正常工作
+            try {
+                if (typeof window.superBlockResizer?.refresh === 'function') {
+                    setTimeout(() => window.superBlockResizer.refresh(), 100);
+                }
+            } catch (e) {
+                // 超级块调节功能刷新出错: e
+            }
         }
         
         previousThemeMode = newThemeMode;
@@ -403,7 +419,7 @@ export const destroyTheme = () => {
         // [Savor] 清理视图选择功能时出错: ${e.message}
     }
     
-    // 清理超级块宽度调节功能
+    // 重新初始化超级块宽度调节功能
     try {
         // 停止功能
         if (typeof window.superBlockResizer?.stop === 'function') {
@@ -416,10 +432,13 @@ export const destroyTheme = () => {
             styleElement.remove();
         }
         
-        // 清理全局变量
+        // 重新初始化功能
         window.superBlockResizer = null;
+        if (typeof window.initSuperBlockResizer === 'function') {
+            window.initSuperBlockResizer();
+        }
     } catch (e) {
-        // [Savor] 清理超级块宽度调节功能时出错: ${e.message}
+        // [Savor] 重新初始化超级块宽度调节功能时出错: ${e.message}
     }
     
     // 清理导图拖拽功能
