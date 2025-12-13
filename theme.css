@@ -571,6 +571,20 @@
    /* --Sv-tab-bar-item-focus-after:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23fff'/></svg>"),
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23fff'/></svg>"),
     url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect y='15%' width='100%' height='80%' fill='%23fff'/></svg>");*/
+    /*callout*/
+	--Sv-callout-background1: rgb(198, 203, 208 , .5);
+    --Sv-callout-background2: rgb(225, 225, 225 , .5);
+    --Sv-callout-background3: rgb(235, 236, 237 , .5);
+    --Sv-callout-background4: rgb(233, 229, 227 , .5);
+	--Sv-callout-background5: rgb(246, 225, 205 , .5);
+    --Sv-callout-background6: rgb(250, 235, 221 , .5);
+    --Sv-callout-background7: rgb(251, 243, 219 , .5);
+	--Sv-callout-background8: rgba(221, 237, 226 , .5);
+    --Sv-callout-background9: rgb(221, 237, 234 , .5);
+    --Sv-callout-background10: rgb(221, 235, 241 , .5);
+    --Sv-callout-background11: rgb(234, 228, 242 , .5);
+    --Sv-callout-background12: rgb(244, 223, 235 , .5);
+    --Sv-callout-background13: rgb(251, 228, 228 , .5);
     
 }
 
@@ -654,6 +668,20 @@
     --b3-av-gallery-shadow:  var(--Sv-breadcrumb-hover) 0px 0px 0px 1px,rgba(15, 15, 15, 0.3) 0px 2px 5px;
 
 
+    /*callout*/
+	--Sv-callout-background1: rgb(35, 38, 40 , .3);
+    --Sv-callout-background2: rgb(63, 68, 71 , .3);
+    --Sv-callout-background3: rgb(69, 75, 78 , .3);
+    --Sv-callout-background4: rgb(67, 64, 64 , .3);
+	--Sv-callout-background5: rgb(89, 74, 58 , .3);
+    --Sv-callout-background6: rgb(89, 79, 59 , .3);
+    --Sv-callout-background7: rgb(89, 86, 59 , .3);
+	--Sv-callout-background8: rgba(53, 76, 75 , .3);
+    --Sv-callout-background9: rgb(54, 79, 84 , .3);
+    --Sv-callout-background10: rgb(54, 73, 84 , .3);
+    --Sv-callout-background11: rgb(68, 63, 87 , .3);
+    --Sv-callout-background12: rgb(83, 59, 76 , .3);
+    --Sv-callout-background13: rgb(89, 65, 65 , .3);
 	/*导图*/
 	--b3-border-daotu: 2px solid rgba(69, 74, 77);
 	--b3-block-daotu:var(--b3-theme-surface-light);
@@ -862,3 +890,37 @@ span[data-type="a"]::before {
 
 
 
+
+.b3-typography .callout, .protyle-wysiwyg .callout{
+    padding-left:5px;
+    &[data-subtype="TIP"]{
+        background-color: var(--Sv-callout-background8);
+        box-shadow: 0 0 0 2px oklch(calc(var(--b3-font-color7-base-l)*0.95) var(--b3-font-color7-base-ch) / 0.1) inset;
+    }
+    &[data-subtype="NOTE"]{
+        background-color: var(--Sv-callout-background10);
+        box-shadow: 0 0 0 2px oklch(calc(var(--b3-font-color9-base-l)*0.95) var(--b3-font-color9-base-ch) / 0.1) inset;
+    }
+    &[data-subtype="IMPORTANT"]{
+        background-color: var(--Sv-callout-background11);
+        box-shadow: 0 0 0 2px oklch(calc(var(--b3-font-color10-base-l)*0.95) var(--b3-font-color10-base-ch) / 0.1) inset;
+    }   
+    &[data-subtype="WARNING"]{
+        background-color: var(--Sv-callout-background6);
+        box-shadow: 0 0 0 2px oklch(calc(var(--b3-font-color5-base-l)*0.95) var(--b3-font-color5-base-ch) / 0.1) inset;
+    }   
+    &[data-subtype="CAUTION"]{
+        background-color: var(--Sv-callout-background13);
+        box-shadow: 0 0 0 2px oklch(calc(var(--b3-font-color13-base-l)*0.95) var(--b3-font-color13-base-ch) / 0.1) inset;
+    }
+    &::before{
+        display: none;
+    }
+    .callout-title{
+        color: var(--b3-theme-on-background);
+        font-weight: 700;
+    }
+    .callout-content [data-node-id] [spellcheck]{
+        padding-left: 28px;
+    }
+}

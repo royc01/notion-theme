@@ -380,7 +380,8 @@ export const destroyTheme = () => {
         'cleanupSidebarMemo',
         'cleanupMiddleClickCollapse',
         'cleanupPlatformDetection',
-        'cleanupMobileMenu'
+        'cleanupMobileMenu',
+        'disableListPreview'
     ];
     
     cleanupFunctions.forEach(funcName => {
@@ -450,7 +451,7 @@ export const destroyTheme = () => {
 };
 
 // 初始化主题功能
-export const initTheme = () => {
+export const initTheme = () => { 
     // [Savor] 初始化主题功能
     
     // 将函数添加到全局作用域
@@ -582,7 +583,7 @@ export const initTheme = () => {
         cleanupBulletThreading: window.cleanupBulletThreading,
         cleanupTypewriterMode: window.cleanupTypewriterMode,
         cleanupSidebarMemo: window.cleanupSidebarMemo,
-        cleanupMiddleClickCollapse
+        cleanupMiddleClickCollapse: cleanupMiddleClickCollapse
     });
     
     // 初始化topBarPlugin菜单观察器

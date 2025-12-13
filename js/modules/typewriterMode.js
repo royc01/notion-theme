@@ -41,13 +41,8 @@ export const initTypewriterModeModule = () => {
 
 // 清理打字机模式功能
 export const cleanupTypewriterMode = () => {
-    
     // 禁用打字机模式
-    try {
-        disableTypewriterMode();
-    } catch (e) {
-        // disableTypewriterMode执行失败: e
-    }
+    disableTypewriterMode();
     
     // 清理全局变量
     window.enableTypewriterMode = null;

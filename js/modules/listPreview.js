@@ -11,7 +11,11 @@ let foldObserver = null;
 
 // 初始化列表折叠内容预览查看功能
 export const initListPreview = () => {
-    if (listPreviewActive) return;
+    // 在初始化之前先清理之前的实例
+    if (listPreviewActive) {
+        disableListPreview();
+    }
+    
     listPreviewActive = true;
     
     listPreviewHandler = debounce(collapsedListPreviewEvent, 100);
@@ -49,6 +53,11 @@ export const disableListPreview = () => {
 
 // 折叠列表预览事件处理
 const collapsedListPreviewEvent = () => {
+    // 简单检查确保功能处于激活状态
+    if (!listPreviewActive) {
+        return;
+    }
+    
     const foldedItems = [
         ...document.querySelectorAll(".layout-tab-container>.fn__flex-1.protyle:not(.fn__none) [data-node-id].li[fold='1']"),
         ...document.querySelectorAll("[data-oid] [data-node-id].li[fold='1']"),
@@ -129,12 +138,20 @@ const registerPreviewEvents = (element) => {
     }
     
     parent.setAttribute("ListPreview", true);
-    element.addEventListener("mouseenter", handleMouseEnter);
-    grandParent.addEventListener("mouseleave", handleMouseLeave);
+    // 确保功能处于激活状态才注册事件
+    if (listPreviewActive) {
+        element.addEventListener("mouseenter", handleMouseEnter);
+        grandParent.addEventListener("mouseleave", handleMouseLeave);
+    }
 };
 
 // 鼠标进入事件处理
 const handleMouseEnter = (e) => {
+    // 确保功能处于激活状态
+    if (!listPreviewActive) {
+        return;
+    }
+    
     const obj = e.target, parent = obj.parentElement, grandParent = parent?.parentElement;
     if (!grandParent) return;
     if ([...grandParent.children].some(child => child.getAttribute?.("triggerBlock") != null)) return;
@@ -150,12 +167,17 @@ const handleMouseEnter = (e) => {
 };
 
 // 鼠标离开事件处理
-const handleMouseLeave = (e) => {
+function handleMouseLeave(e) {
     e.target.querySelectorAll('[triggerBlock]').forEach(el => el.remove());
-};
+}
 
 // 创建触发块
 const createTriggerBlock = (container, refObj, left, top) => {
+    // 确保功能处于激活状态
+    if (!listPreviewActive) {
+        return;
+    }
+    
     const previewID = container.getAttribute("data-node-id");
     if (!previewID) return;
     
@@ -184,3 +206,6 @@ const createTriggerBlock = (container, refObj, left, top) => {
         container.appendChild(triggerBlock);
     }
 };
+
+// 将禁用函数也添加到window对象上，以便在destroyTheme中正确调用
+window.disableListPreview = disableListPreview;

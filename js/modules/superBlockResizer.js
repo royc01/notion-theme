@@ -172,18 +172,49 @@ const positionHandles = async (sb) => {
             e.stopPropagation();
             btn.blur();
             if (window.getSelection) window.getSelection().removeAllRanges();
-            // 这里需要替换成实际的思源API调用函数
-            // const lastID = lastCol.getAttribute('data-node-id');
-            // if (lastID) {
-            //     try {
-            //         const response = await fetch('/api/block/insertBlock', {
-            //             method: 'POST',
-            //             headers: { 'Content-Type': 'application/json', 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` },
-            //             body: JSON.stringify({ dataType: 'markdown', data: '', previousID: lastID })
-            //         });
-            //         if (response.ok) setTimeout(() => scheduleScan(), 100);
-            //     } catch (error) { /* 插入新块失败 */ }
-            // }
+            
+            // 获取最后一个列块的ID和父级超级块
+            const lastID = lastCol.getAttribute('data-node-id');
+            const parentSB = lastCol.closest('[data-type="NodeSuperBlock"][data-sb-layout="col"]');
+            
+            if (lastID) {
+                try {
+                    // 准备请求头
+                    const headers = {
+                        'Content-Type': 'application/json'
+                    };
+                    
+                    // 添加认证令牌（如果存在）
+                    if (window.siyuan?.config?.api?.token) {
+                        headers['Authorization'] = `Token ${window.siyuan.config.api.token}`;
+                    }
+                    
+                    // 调用思源API插入新块
+                    const response = await fetch('/api/block/insertBlock', {
+                        method: 'POST',
+                        headers: headers,
+                        body: JSON.stringify({
+                            dataType: 'markdown',
+                            data: '',
+                            previousID: lastID
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        // 插入成功后重新扫描超级块并更新调节杆
+                        setTimeout(() => {
+                            scheduleScan();
+                            if (parentSB) {
+                                positionHandles(parentSB);
+                            }
+                        }, 100);
+                    } else {
+                        console.error('插入新列失败，服务器返回:', response.status, response.statusText);
+                    }
+                } catch (error) {
+                    console.error('插入新列失败:', error);
+                }
+            }
         });
     }
 };
