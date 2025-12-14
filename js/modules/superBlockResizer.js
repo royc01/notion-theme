@@ -1,7 +1,4 @@
-// ========================================
-// 模块：超级块宽度调节
-// ========================================
-
+// 超级块宽度调节模块
 import { throttle, debounce } from './utils.js';
 
 // 常量定义
@@ -25,30 +22,27 @@ function ensureStyles() {
     .sb-add-column-btn{position:absolute;top:2px;bottom:0;right:-30px;width:20px;margin:auto 0;border-radius:6px;background:var(--b3-border-color);color:var(--Sv-list-counter-color);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;opacity:0;transition:opacity 0.3s ease, transform 0.2s ease;user-select:none!important;border:none;font-size:24px;}
     .sb-add-column-btn::before{content:'';position:absolute;left:-15px;top:0;width:25px;height:100%;background:transparent;}
     .sb-add-column-btn:hover{opacity:0.6!important;}
-    `;                        
+    `;
     document.head.appendChild(st);
 }
 
 // 核心工具函数
 const isColLayout = sb => sb?.getAttribute?.('data-sb-layout') === 'col';
 
-// 获取列信息和检查是否有多列
-const getColumnsInfo = sb => {
-    if (!isColLayout(sb)) return { cols: [], hasMultiple: false };
+// 获取列信息
+const getColumns = sb => {
+    if (!isColLayout(sb)) return [];
     let cols = Array.from(sb.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
     if (cols.length < 2 && sb.firstElementChild) {
         const firstChild = sb.firstElementChild;
         if (firstChild?.dataset?.type === 'NodeSuperBlock' && firstChild?.getAttribute?.('data-sb-layout') === 'row') {
-            return { cols, hasMultiple: cols.length >= 2 };
+            return cols;
         }
         const nested = Array.from(firstChild.children).filter(el => el?.dataset?.nodeId && el.offsetParent !== null);
         if (nested.length >= 2) cols = nested;
     }
-    return { cols, hasMultiple: cols.length >= 2 };
+    return cols;
 };
-
-const getColumns = sb => getColumnsInfo(sb).cols;
-const hasMultipleColumns = sb => getColumnsInfo(sb).hasMultiple;
 
 const getGap = host => {
     try {
@@ -57,7 +51,7 @@ const getGap = host => {
         if (!isFinite(g) && cs.gap) g = parseFloat(cs.gap.split(' ')[1] || cs.gap.split(' ')[0]);
         return isFinite(g) ? g : 0;
     } catch (_) { return 0; }
-};
+}
 
 // 宽度操作
 const readWidth = el => {
@@ -68,7 +62,7 @@ const readWidth = el => {
     if (mCalc && isFinite(parseFloat(mCalc[1]))) return parseFloat(mCalc[1]);
     const mPct = style.match(/width\s*:\s*([\d.]+)%/i);
     return mPct && isFinite(parseFloat(mPct[1])) ? parseFloat(mPct[1]) : NaN;
-};
+}
 
 const setWidth = (sb, col, percent) => {
     const v = Math.max(0, isFinite(percent) ? percent : 0);
@@ -78,16 +72,16 @@ const setWidth = (sb, col, percent) => {
     const gapShare = count > 0 ? (getGap(host) * (count - 1)) / count : 0;
     Object.assign(col.style, { flex: '0 0 auto', width: `calc(${vRound}% - ${Math.round(gapShare * 10) / 10}px)` });
     col.dataset.sbPct = String(vRound);
-};
+}
 
 const measureWidths = (sb, cols) => {
     const host = cols[0]?.parentElement || sb;
     const w = host.getBoundingClientRect().width || 1;
     const gapShare = cols.length > 0 ? (getGap(host) * (cols.length - 1)) / cols.length : 0;
     return cols.map(col => ((col.getBoundingClientRect().width + gapShare) / w) * 100);
-};
+}
 
-// 简化 normalizeWidths 函数
+// normalizeWidths 函数
 const normalizeWidths = (values, min = MIN_PERCENT, total = 100) => {
     const n = values.length; if (!n) return [];
     const effMin = Math.min(min, total / n);
@@ -103,9 +97,9 @@ const normalizeWidths = (values, min = MIN_PERCENT, total = 100) => {
     if (varSum === 0) return v.map(() => effMin);
     const factor = targetVar / varSum;
     return v.map(x => effMin + (x - effMin) * factor);
-};
+}
 
-// 简化的宽度保存
+// 宽度保存
 const saveWidth = async (colEl, pct, gapShare) => {
     const id = colEl?.dataset?.nodeId;
     if (!id) return;
@@ -113,21 +107,13 @@ const saveWidth = async (colEl, pct, gapShare) => {
     Object.assign(colEl.style, { flex: '0 0 auto', width: `calc(${vRound}% - ${gapRound}px)`, flexBasis: 'auto' });
     colEl.dataset.sbPct = String(vRound);
     try { 
-        // 使用思源API保存块属性
         await fetch('/api/attr/setBlockAttrs', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: id,
-                attrs: {
-                    'style': colEl.getAttribute('style') || ''
-                }
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, attrs: { 'style': colEl.getAttribute('style') || '' } })
         });
     } catch (e) {}
-};
+}
 
 const clearWidth = async (colEl) => {
     const id = colEl?.dataset?.nodeId; 
@@ -136,28 +122,20 @@ const clearWidth = async (colEl) => {
     delete colEl.dataset.sbPct;
     if (!colEl.getAttribute('style')) colEl.removeAttribute('style');
     try { 
-        // 使用思源API清除块属性
         await fetch('/api/attr/setBlockAttrs', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: id,
-                attrs: {
-                    'style': colEl.getAttribute('style') || ''
-                }
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, attrs: { 'style': colEl.getAttribute('style') || '' } })
         });
     } catch (_) {}
-};
+}
 
-// 通用元素移除函数
-const removeElements = (sb, selector) => sb.querySelectorAll(':scope > ' + selector).forEach(el => el.remove());
+// 元素移除函数
+const removeElements = (sb, selector) => sb.querySelectorAll(':scope > ' + selector).forEach(el => el.remove())
 
 const positionHandles = async (sb) => {
     const cols = getColumns(sb);
-    if (!hasMultipleColumns(sb)) { 
+    if (cols.length < 2) { 
         removeElements(sb, '.' + HANDLE_CLASS);
         removeElements(sb, '.sb-add-column-btn');
         return; 
@@ -225,7 +203,7 @@ const positionHandles = async (sb) => {
             });
         }
     }
-};
+}
 
 // 拖拽功能
 const attachDrag = (sb, handle, leftEl, rightEl) => {
@@ -304,7 +282,7 @@ const attachDrag = (sb, handle, leftEl, rightEl) => {
         setTimeout(() => sb.querySelectorAll('.sb-percentage').forEach(el => el.remove()), 300);
         cols.forEach(c => c.style.removeProperty('transition'));
         positionHandles(sb);
-    };
+    }
 
     const onDoubleClick = (e) => {
         e.preventDefault();
@@ -329,17 +307,17 @@ const attachDrag = (sb, handle, leftEl, rightEl) => {
     handle.addEventListener('dblclick', onDoubleClick, { capture: true });
     
     handle.addEventListener('pointerdown', onPointerDown);
-};
+}
 
 const applySaved = async (sb) => {
     const cols = getColumns(sb); 
-    if (!hasMultipleColumns(sb)) {
+    if (cols.length < 2) {
         if (cols.length === 1) { cols[0].style.cssText = ''; delete cols[0].dataset.sbPct; }
         return;
     }
     const saved = cols.map(readWidth);
     if (saved.some(v => isFinite(v))) cols.forEach((c, i) => { if (isFinite(saved[i])) setWidth(sb, c, saved[i]); });
-};
+}
 
 const initSuperBlock = async (sb) => {
     if (!sb || sb._sbResizerInit || !isColLayout(sb)) return;
@@ -352,7 +330,7 @@ const initSuperBlock = async (sb) => {
         sb._hoverHandlersAdded = true;
         const showHandles = () => {
             if (sb.classList.contains('sb-resizing')) return;
-            if (hasMultipleColumns(sb)) positionHandles(sb);
+            if (cols.length >= 2) positionHandles(sb);
         };
         const hideHandles = () => {
             if (sb.classList.contains('sb-resizing')) return;
@@ -368,7 +346,7 @@ const initSuperBlock = async (sb) => {
         sb.addEventListener('mouseleave', hideHandles);
         sb._showHandlers = showHandles; sb._hideHandlers = hideHandles;
     }
-};
+}
 
 let bodyObserver = null;
 let scanScheduled = false;
@@ -424,22 +402,18 @@ const scan = async () => {
         }
     }
     if (initPromises.length > 0) await Promise.all(initPromises);
-};
+}
 
-// 使用防抖函数优化性能
+// 防抖函数优化性能
 const scheduleScan = debounce(() => {
     if (scanScheduled) return;
     scanScheduled = true;
     setTimeout(() => { scanScheduled = false; scan(); }, 30);
-}, 30);  // 减少防抖延迟从50ms到30ms，提高响应速度
+}, 30);
 
-// 启动和停止
 export const start = () => {
     ensureStyles();
-    // 延迟初始扫描，避免阻塞页面加载
-    setTimeout(() => {
-        scan();
-    }, 100);
+    setTimeout(() => scan(), 100);
     if (!bodyObserver) {
         bodyObserver = new MutationObserver(mutations => {
             let shouldScan = false;
@@ -459,17 +433,14 @@ export const start = () => {
                 sb.removeEventListener('mouseleave', sb._hideHandlers);
                 delete sb._showHandlers; delete sb._hideHandlers;
             }
-            // 保留已保存的宽度设置，在重新初始化时应用
             setTimeout(() => initSuperBlock(sb), 100);
         });
     };
     window._superBlockThemeChangeHandler = handleThemeChange;
     window.addEventListener('themechange', handleThemeChange, { passive: true });
-    // 减少主题切换时的延时
-    setTimeout(() => {window.dispatchEvent(new Event('themechange'));}, 500);
-    // 减少初始扫描延时
+    setTimeout(() => window.dispatchEvent(new Event('themechange')), 500);
     window.siyuan?.eventBus?.on('loaded-protyle', () => setTimeout(scheduleScan, 200));
-};
+}
 
 export const stop = () => {
     try { window.siyuan?.eventBus?.off('loaded-protyle', scan); } catch (_) {}
@@ -489,27 +460,17 @@ export const stop = () => {
     document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
     document.querySelectorAll('.sb-add-column-btn').forEach(btn => btn.remove());
     scanScheduled = false;
-};
+}
 
 export const refresh = scan;
 export const cleanup = stop;
 
-// 初始化超级块宽度调节功能
 export const initSuperBlockResizer = () => {
-    
-    // 将函数添加到全局作用域
-    window.superBlockResizer = {
-        start,
-        stop,
-        refresh,
-        cleanup
-    };
-    
-    // 启动功能
+    window.superBlockResizer = { start, stop, refresh, cleanup };
     if (document.readyState === 'complete') {
         start();
     } else {
         window.addEventListener('load', start);
     }
-};
+}
 
