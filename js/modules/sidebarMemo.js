@@ -21,7 +21,7 @@ const setEndOfContenteditable = el => {
     sel.addRange(range); 
 };
 
-// 移除了图片相关功能，因为思源笔记会过滤掉<img>标签
+// 获取块节点
 const getBlockNode = el => { 
     while (el && !el.dataset.nodeId) el = el.parentElement; 
     if (el) { 
@@ -31,17 +31,7 @@ const getBlockNode = el => {
     return el; 
 };
 
-const toggleMemoHighlight = (main, nodeId, index, highlight, memoDiv) => { 
-    const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`); 
-    if (!blockEl) return; 
-    const memoSpans = blockEl.querySelectorAll('span[data-type*="inline-memo"]'); 
-    const target = memoSpans[index]; 
-    if (target) { 
-        target.classList.toggle('memo-span-highlight', highlight); 
-        highlight && memoDiv ? createMemoConnection(memoDiv, target) : removeMemoConnection(); 
-    } 
-};
-
+// 创建备忘录连接线
 const createMemoConnection = (memoDiv, memoSpan) => { 
     removeMemoConnection(); 
     if (!memoDiv || !memoSpan) return; 
@@ -73,7 +63,7 @@ const createMemoConnection = (memoDiv, memoSpan) => {
 const removeMemoConnection = () => connectionCleanup?.();
 
 // 判断某块及其所有父块是否有折叠
-function isAnyAncestorFolded(block) {
+const isAnyAncestorFolded = block => {
     let current = block;
     while (current) {
         if (current.getAttribute && current.getAttribute('fold') === '1') {
@@ -82,49 +72,43 @@ function isAnyAncestorFolded(block) {
         current = current.parentElement;
     }
     return false;
-}
+};
 
 // 拖拽监听
-function observeDragTitle() {
+const observeDragTitle = () => {
     if (dragMutationObserver) return;
-    function waitForDrag() {
+    const waitForDrag = () => {
         const dragEl = document.getElementById('drag');
-        if (!dragEl) { dragTimeout = setTimeout(waitForDrag, 1000); return; }
-        // 简化防抖调用，直接使用 refreshEditor 而不是包装
+        if (!dragEl) { 
+            dragTimeout = setTimeout(waitForDrag, 1000); 
+            return; 
+        }
         dragMutationObserver = new MutationObserver(refreshEditor);
         dragMutationObserver.observe(dragEl, { attributes: true, attributeFilter: ['title'] });
-    }
+    };
     waitForDrag();
-}
+};
 
-function unobserveDragTitle() {
-    dragMutationObserver?.disconnect(); dragMutationObserver = null;
-    if (dragTimeout) { clearTimeout(dragTimeout); dragTimeout = null; }
-}
+const unobserveDragTitle = () => {
+    dragMutationObserver?.disconnect(); 
+    dragMutationObserver = null;
+    if (dragTimeout) { 
+        clearTimeout(dragTimeout); 
+        dragTimeout = null; 
+    }
+};
 
 // 刷新侧边栏备注位置
-function refreshMemoOffset(main, sidebar) {
+const refreshMemoOffset = (main, sidebar) => {
     requestAnimationFrame(() => {
         const MARGIN = 10;
         let lastBottom = 0;
         
-        // 按照DOM顺序处理所有可见备注项，不再重新排序
+        // 按照DOM顺序处理所有可见备注项
         const memoItems = Array.from(sidebar.querySelectorAll('.memo-item'))
             .filter(memoItem => memoItem.style.display !== 'none');
         
-        // 用于跟踪每个块的第一个备注
-        const firstMemoPerBlock = new Map();
-        
-        // 第一遍：识别每个块的第一个备注
-        memoItems.forEach((memoItem, index) => {
-            const nodeId = memoItem.getAttribute('data-node-id');
-            if (!firstMemoPerBlock.has(nodeId)) {
-                firstMemoPerBlock.set(nodeId, { memoItem, index });
-            }
-        });
-        
-        // 第二遍：定位备注项
-        memoItems.forEach((memoItem, index) => {
+        memoItems.forEach(memoItem => {
             const nodeId = memoItem.getAttribute('data-node-id');
             const memoIndex = Number(memoItem.getAttribute('data-memo-index')) || 0;
             const memoType = memoItem.getAttribute('data-memo-type');
@@ -136,11 +120,10 @@ function refreshMemoOffset(main, sidebar) {
             let targetTop = 0;
             
             if (memoType === 'block') {
-                // 块备注：与块的顶部对齐并在顶部区域内垂直居中
+                // 块备注：与块的顶部对齐
                 const blockRect = block.getBoundingClientRect();
                 const mainRect = main.getBoundingClientRect();
-                // 定位到块的顶部，并在顶部区域垂直居中
-                targetTop = blockRect.top - mainRect.top  - (memoItem.offsetHeight / 2);
+                targetTop = blockRect.top - mainRect.top - (memoItem.offsetHeight / 2);
             } else {
                 // 行内备注：定位到具体的行
                 const blockRect = block.getBoundingClientRect();
@@ -171,10 +154,10 @@ function refreshMemoOffset(main, sidebar) {
             lastBottom = targetTop + memoItem.offsetHeight;
         });
     });
-}
+};
 
 // 添加侧边栏
-function addSideBar(main) {
+const addSideBar = main => {
     let sidebar = main.parentElement.querySelector('#protyle-sidebar');
     const title = main.parentElement.querySelector('div.protyle-title');
     if (!sidebar && title) {
@@ -185,10 +168,10 @@ function addSideBar(main) {
         main.style.minWidth = '90%';
     }
     return sidebar;
-}
+};
 
 // 处理备注编辑和保存
-function handleMemoEdit(memoDiv, el, main, sidebar) {
+const handleMemoEdit = (memoDiv, el, main, sidebar) => {
     const memoType = memoDiv.getAttribute('data-memo-type');
     let old = '';
     
@@ -205,18 +188,6 @@ function handleMemoEdit(memoDiv, el, main, sidebar) {
     input.setAttribute('placeholder', '输入备注内容...');
     input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.8em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;overflow-y:hidden;';
     input.addEventListener('input', () => autoResizeDiv(input));
-    
-    // 提取公共的编辑初始化逻辑
-    const initEditState = (targetInput) => {
-        memoDiv.classList.add('editing');
-        memoDiv.style.zIndex = '999';
-        targetInput.focus();
-        setEndOfContenteditable(targetInput);
-        requestAnimationFrame(() => {
-            autoResizeDiv(targetInput);
-            refreshMemoOffset(main, sidebar);
-        });
-    };
     
     const save = () => {
         const val = input.innerHTML.replace(/<div>/gi, '\n').replace(/<\/div>/gi, '').replace(/<br\s*\/?>/gi, '\n').replace(/<p>/gi, '\n').replace(/<\/p>/gi, '').replace(/&nbsp;/g, ' ').replace(/\n\s*\n\s*\n+/g, '\n\n').trim();
@@ -252,7 +223,14 @@ function handleMemoEdit(memoDiv, el, main, sidebar) {
             
             const { input: newInput, save: newSave } = handleMemoEdit(memoDiv, el, main, sidebar);
             newDiv.replaceWith(newInput);
-            initEditState(newInput);
+            memoDiv.classList.add('editing');
+            memoDiv.style.zIndex = '999';
+            newInput.focus();
+            setEndOfContenteditable(newInput);
+            requestAnimationFrame(() => {
+                autoResizeDiv(newInput);
+                refreshMemoOffset(main, sidebar);
+            });
         };
         input.replaceWith(newDiv);
         memoDiv.classList.remove('editing'); 
@@ -283,10 +261,10 @@ function handleMemoEdit(memoDiv, el, main, sidebar) {
     
     autoResizeDiv(input); 
     return { input, save };
-}
+};
 
 // 刷新侧边栏备注
-function refreshSideBarMemos(main, sidebar) {
+const refreshSideBarMemos = (main, sidebar) => {
     // 清除之前的内容
     sidebar.innerHTML = ''; 
     const frag = document.createDocumentFragment();
@@ -418,7 +396,7 @@ function refreshSideBarMemos(main, sidebar) {
         memoDiv.className = 'memo-item';
         memoDiv.setAttribute('data-node-id', memoData.blockId);
         memoDiv.setAttribute('data-memo-index', memoData.index);
-        memoDiv.setAttribute('data-memo-type', memoData.type); // 标记备注类型
+        memoDiv.setAttribute('data-memo-type', memoData.type);
         memoDiv.style.cssText = 'margin:0px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
         if (isBlockFolded) { 
             memoDiv.style.display = 'none'; 
@@ -439,7 +417,6 @@ function refreshSideBarMemos(main, sidebar) {
         }
         
         const memoContentDiv = memoDiv.querySelector('.memo-content-view');
-        // 为不同类型的备注绑定不同的编辑处理
         if (!isReadonly) {
             memoContentDiv.onclick = (e) => {
                 e.stopPropagation();
@@ -447,7 +424,6 @@ function refreshSideBarMemos(main, sidebar) {
                 
                 const { input, save } = handleMemoEdit(memoDiv, memoData.element, main, sidebar);
                 memoContentDiv.replaceWith(input);
-                // 使用handleMemoEdit中定义的公共初始化逻辑
                 memoDiv.classList.add('editing');
                 memoDiv.style.zIndex = '999';
                 input.focus();
@@ -464,9 +440,8 @@ function refreshSideBarMemos(main, sidebar) {
     sidebar.setAttribute('data-memo-count', `共 ${visibleMemoCount} 个备注`); 
     sidebar.appendChild(frag);
 
-    // 简化事件监听器添加逻辑，只在首次添加时绑定事件
+    // 事件委托
     if (!sidebar._delegated) {
-        // 合并相似的事件处理逻辑
         const handleMouseInteraction = (e, isEnter) => {
             const item = e.target.closest('.memo-item');
             if (!item || !sidebar.contains(item)) return; 
@@ -478,15 +453,12 @@ function refreshSideBarMemos(main, sidebar) {
                 const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
                 const memoType = item.getAttribute('data-memo-type');
                 
-                // 根据备注类型进行高亮处理
                 const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
                 if (blockEl) {
                     if (memoType === 'block') {
-                        // 块备注高亮整个块
                         blockEl.classList.add('memo-span-highlight');
                         createMemoConnection(item, blockEl);
                     } else {
-                        // 行内备注高亮具体的span元素
                         const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
                         const targetSpan = memoSpans[memoIndex];
                         if (targetSpan) {
@@ -497,7 +469,6 @@ function refreshSideBarMemos(main, sidebar) {
                 }
             } else {
                 removeMemoConnection();
-                // 移除所有高亮
                 main.querySelectorAll('.memo-span-highlight').forEach(el => el.classList.remove('memo-span-highlight'));
             }
         };
@@ -522,7 +493,6 @@ function refreshSideBarMemos(main, sidebar) {
             
             if (blockEl) {
                 if (memoType === 'block') {
-                    // 删除块备注
                     blockEl.removeAttribute('memo');
                     fetch('/api/block/updateBlock', { 
                         method: 'POST', 
@@ -537,7 +507,6 @@ function refreshSideBarMemos(main, sidebar) {
                         }) 
                     });
                 } else {
-                    // 删除行内备注
                     const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
                     const targetSpan = memoSpans[memoIndex];
                     if (targetSpan) {
@@ -571,10 +540,10 @@ function refreshSideBarMemos(main, sidebar) {
     if (protyleContent) {
         visibleMemoCount > 0 ? protyleContent.classList.add('Sv-memo') : protyleContent.classList.remove('Sv-memo');
     }
-}
+};
 
 // 更新内联备注到思源
-async function updateInlineMemo(el, content) {
+const updateInlineMemo = async (el, content) => {
     try {
         const blockEl = getBlockNode(el);
         if (!blockEl?.dataset.nodeId) return;
@@ -594,10 +563,10 @@ async function updateInlineMemo(el, content) {
     } catch (e) { 
         // 更新备注出错: e 
     }
-}
+};
 
 // 刷新编辑器
-function refreshEditor() {
+const refreshEditor = () => {
     if (!editorNode) return;
     Object.values(observers).flat().forEach(o => o.disconnect()); 
     observers = {};
@@ -614,7 +583,6 @@ function refreshEditor() {
                 refreshMemoOffset(main, sidebar);
             }, 100);
         });
-        // 监听行内备注和块级备注的变化
         observer.observe(main, { 
             childList: true, 
             subtree: true, 
@@ -640,22 +608,22 @@ function refreshEditor() {
     });
     document.querySelectorAll('.protyle-content').forEach(pc => {
         const main = pc.closest('.protyle')?.querySelector('.protyle-wysiwyg');
-        // 检查是否存在任何类型的备注
         if (main && !main.querySelector('span[data-type*="inline-memo"]') && !main.querySelector('[memo]')) { 
             pc.classList.remove('Sv-memo'); 
         }
     });
-}
+};
 
 // 开关侧边栏
-function openSideBar(open, save = false) {
+const openSideBar = (open, save = false) => {
     if (isEnabled === open) return;
     if (!editorNode && open) {
-        (function wait() {
+        const wait = () => {
             editorNode = document.querySelector('div.layout__center');
             if (editorNode) openSideBar(open, save); 
             else setTimeout(wait, 100);
-        })();
+        };
+        wait();
         return;
     }
     isEnabled = open;
@@ -677,26 +645,23 @@ function openSideBar(open, save = false) {
         unobserveDragTitle();
     }
     save && config.set('sidebarMemoEnabled', open ? '1' : '0');
-}
+};
 
-function init() {
+const init = () => {
     editorNode = document.querySelector('div.layout__center');
     const shouldEnable = document.documentElement.hasAttribute('savor-sidebar-memo') || 
                          document.documentElement.hasAttribute('savor-sidebar-block-memo');
     openSideBar(shouldEnable, true);
-}
+};
 
 // 清理函数
-function cleanupSidebarMemo() {
-    
-    // 关闭侧边栏
+const cleanupSidebarMemo = () => {
     try {
         openSideBar(false);
     } catch (e) {
         // 关闭侧边栏失败: e
     }
     
-    // 清理观察器
     if (dragMutationObserver) {
         dragMutationObserver.disconnect();
         dragMutationObserver = null;
@@ -707,24 +672,20 @@ function cleanupSidebarMemo() {
         dragTimeout = null;
     }
     
-    // 清理连接
     removeMemoConnection();
     
-    // 清理全局变量
     isEnabled = false;
     observers = {};
     editorNode = null;
     connectionCleanup = null;
     
-    // 移除相关样式
     const sbResizerStyles = document.getElementById('sb-resizer-styles');
     if (sbResizerStyles) sbResizerStyles.remove();
     
-    // 移除相关类名
     document.querySelectorAll('.protyle-content.Sv-memo').forEach(el => {
         el.classList.remove('Sv-memo');
     });
-}
+};
 
 // 初始化侧边栏备注模块
 export const initSidebarMemoModule = () => {
@@ -739,5 +700,4 @@ export const initSidebarMemoModule = () => {
     init();
 };
 
-// 导出清理函数
 export { cleanupSidebarMemo };
