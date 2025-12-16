@@ -920,7 +920,7 @@ span[data-type="a"]::before {
         color: var(--b3-theme-on-background);
         font-weight: 700;
     }
-    .callout-content [data-node-id] [spellcheck]{
+    .callout-content{
         padding-left: 28px;
     }
 }
