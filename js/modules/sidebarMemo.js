@@ -12,16 +12,7 @@ const autoResizeDiv = div => {
     div.style.height = (div.scrollHeight + 1) + 'px'; 
 };
 
-const setEndOfContenteditable = el => { 
-    const range = document.createRange(); 
-    range.selectNodeContents(el); 
-    range.collapse(false); 
-    const sel = window.getSelection(); 
-    sel.removeAllRanges(); 
-    sel.addRange(range); 
-};
-
-// 新增：确保光标正确定位到最后一个字符后
+// 确保光标正确定位到最后一个字符后
 const setCursorPositionToEnd = el => {
     const range = document.createRange();
     const selection = window.getSelection();
@@ -45,7 +36,7 @@ const setCursorPositionToEnd = el => {
 const getBlockNode = el => { 
     while (el && !el.dataset.nodeId) el = el.parentElement;
     return el && el.closest('[data-type="NodeBlockQueryEmbed"]')?.dataset.nodeId ? 
-           el.closest('[data-type="NodeBlockQueryEmbed"]') : el;
+        el.closest('[data-type="NodeBlockQueryEmbed"]') : el;
 };
 
 // 创建备忘录连接线
@@ -133,7 +124,7 @@ const refreshMemoOffset = (main, sidebar) => {
                 
                 // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
                 const isValidBlockType = memoType === 'block' || 
-                                       ['NodeParagraph', 'NodeHeading'].includes(block.getAttribute('data-type'));
+                                    ['NodeParagraph', 'NodeHeading'].includes(block.getAttribute('data-type'));
                 if (!isValidBlockType) return;
                 
                 let targetTop = 0;
@@ -164,17 +155,20 @@ const refreshMemoOffset = (main, sidebar) => {
                         blockRect.top - mainRect.top + blockRect.height / 2 - memoItem.offsetHeight / 2;
                 }
                 
-                // 重叠检查
-                targetTop = Math.max(targetTop, lastBottom + MARGIN);
-                
-                // 如果当前项正在编辑状态，保持当前位置但添加过渡效果
-                if (memoItem.classList.contains('editing')) {
-                    memoItem.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1),transform 0.3s cubic-bezier(0.4,0,0.2,1)';
+                // 重叠检查 - 更智能的间距处理
+                const isEditing = memoItem.classList.contains('editing');
+                // 对于编辑中的项，使用更精确的位置计算
+                if (isEditing) {
+                    // 确保编辑项不会与前一项重叠，但也不要过度拉开距离
+                    targetTop = Math.max(targetTop, lastBottom + 5); // 编辑时使用较小的间距
                 } else {
-                    memoItem.style.position = 'absolute';
-                    memoItem.style.top = `${targetTop}px`;
-                    memoItem.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1),transform 0.3s cubic-bezier(0.4,0,0.2,1)';
+                    // 对于非编辑项，保持正常的间距
+                    targetTop = Math.max(targetTop, lastBottom + MARGIN);
                 }
+                
+                memoItem.style.position = 'absolute';
+                memoItem.style.top = `${targetTop}px`;
+                memoItem.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1),transform 0.3s cubic-bezier(0.4,0,0.2,1)';
                 
                 lastBottom = targetTop + memoItem.offsetHeight;
             });
@@ -557,7 +551,7 @@ const refreshSideBarMemos = (main, sidebar) => {
                 if (blockEl) {
                     // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
                     const isValidBlockType = memoData.type === 'block' || 
-                                           ['NodeParagraph', 'NodeHeading'].includes(blockEl.getAttribute('data-type'));
+                                        ['NodeParagraph', 'NodeHeading'].includes(blockEl.getAttribute('data-type'));
                     if (isValidBlockType) {
                         // 获取目标元素
                         let targetElement = memoData.element;
@@ -605,7 +599,7 @@ const refreshSideBarMemos = (main, sidebar) => {
                 if (blockEl) {
                     // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
                     const isValidBlockType = memoType === 'block' || 
-                                           ['NodeParagraph', 'NodeHeading'].includes(blockEl.getAttribute('data-type'));
+                                        ['NodeParagraph', 'NodeHeading'].includes(blockEl.getAttribute('data-type'));
                     if (!isValidBlockType) return;
                     
                     if (memoType === 'block') {
@@ -686,7 +680,7 @@ const refreshSideBarMemos = (main, sidebar) => {
             if (blockEl) {
                 // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
                 const isValidBlockType = memoType === 'block' || 
-                                       ['NodeParagraph', 'NodeHeading']. includes(blockEl.getAttribute('data-type'));
+                                    ['NodeParagraph', 'NodeHeading']. includes(blockEl.getAttribute('data-type'));
                 
                 if (isValidBlockType) {
                     if (memoType === 'block') {
@@ -895,7 +889,7 @@ const openSideBar = (open, save = false) => {
 const init = () => {
     editorNode = document.querySelector('div.layout__center');
     const shouldEnable = document.documentElement.hasAttribute('savor-sidebar-memo') || 
-                         document.documentElement.hasAttribute('savor-sidebar-block-memo');
+                        document.documentElement.hasAttribute('savor-sidebar-block-memo');
     openSideBar(shouldEnable, true);
 };
 
