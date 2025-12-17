@@ -21,6 +21,26 @@ const setEndOfContenteditable = el => {
     sel.addRange(range); 
 };
 
+// 新增：确保光标正确定位到最后一个字符后
+const setCursorPositionToEnd = el => {
+    const range = document.createRange();
+    const selection = window.getSelection();
+    
+    // 清除现有选择
+    selection.removeAllRanges();
+    
+    // 将光标定位到内容末尾
+    if (el.lastChild) {
+        range.setStartAfter(el.lastChild);
+    } else {
+        range.selectNodeContents(el);
+        range.collapse(false);
+    }
+    
+    selection.addRange(range);
+    el.focus();
+};
+
 // 获取块节点
 const getBlockNode = el => { 
     while (el && !el.dataset.nodeId) el = el.parentElement;
@@ -147,9 +167,14 @@ const refreshMemoOffset = (main, sidebar) => {
                 // 重叠检查
                 targetTop = Math.max(targetTop, lastBottom + MARGIN);
                 
-                memoItem.style.position = 'absolute';
-                memoItem.style.top = `${targetTop}px`;
-                memoItem.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1),transform 0.3s cubic-bezier(0.4,0,0.2,1)';
+                // 如果当前项正在编辑状态，保持当前位置但添加过渡效果
+                if (memoItem.classList.contains('editing')) {
+                    memoItem.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1),transform 0.3s cubic-bezier(0.4,0,0.2,1)';
+                } else {
+                    memoItem.style.position = 'absolute';
+                    memoItem.style.top = `${targetTop}px`;
+                    memoItem.style.transition = 'top 0.3s cubic-bezier(0.4,0,0.2,1),transform 0.3s cubic-bezier(0.4,0,0.2,1)';
+                }
                 
                 lastBottom = targetTop + memoItem.offsetHeight;
             });
@@ -279,7 +304,7 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
             memoDiv.classList.add('editing');
             memoDiv.style.zIndex = '999';
             newInput.focus();
-            setEndOfContenteditable(newInput);
+            setCursorPositionToEnd(newInput);
             requestAnimationFrame(() => {
                 autoResizeDiv(newInput);
                 refreshMemoOffset(main, sidebar);
@@ -545,7 +570,7 @@ const refreshSideBarMemos = (main, sidebar) => {
                         memoDiv.classList.add('editing');
                         memoDiv.style.zIndex = '999';
                         input.focus();
-                        setEndOfContenteditable(input);
+                        setCursorPositionToEnd(input);
                         requestAnimationFrame(() => {
                             autoResizeDiv(input);
                             refreshMemoOffset(main, sidebar);
