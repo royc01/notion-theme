@@ -449,6 +449,13 @@ const refreshSideBarMemos = (main, sidebar) => {
     // 如果没有备注，直接返回
     if (allMemos.length === 0) { 
         sidebar.removeAttribute('data-memo-count'); 
+        
+        // 修复：即使没有备注也要确保清除 Sv-memo 类
+        const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
+        if (protyleContent) {
+            protyleContent.classList.remove('Sv-memo');
+        }
+        
         return; 
     }
     
@@ -727,9 +734,14 @@ const refreshSideBarMemos = (main, sidebar) => {
     
     refreshMemoOffset(main, sidebar);
     const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
-    protyleContent && (visibleMemoCount > 0 ? 
-        protyleContent.classList.add('Sv-memo') : 
-        protyleContent.classList.remove('Sv-memo'));
+    // 修复：无论是否有可见备注，都应该正确设置 Sv-memo 类
+    if (protyleContent) {
+        if (visibleMemoCount > 0) {
+            protyleContent.classList.add('Sv-memo');
+        } else {
+            protyleContent.classList.remove('Sv-memo');
+        }
+    }
 };
 
 // 更新内联备注到思源
@@ -804,10 +816,17 @@ const refreshEditor = () => {
         }
     });
     
+    // 修复：在全局范围内检查并清除没有备注的文档的 Sv-memo 类
     document.querySelectorAll('.protyle-content').forEach(pc => {
         const main = pc.closest('.protyle')?.querySelector('.protyle-wysiwyg');
-        if (main && !main.querySelector('span[data-type*="inline-memo"]') && !main.querySelector('[memo]')) { 
-            pc.classList.remove('Sv-memo'); 
+        // 增强检查逻辑：不仅检查是否有备注元素，还要检查侧边栏是否为空
+        if (main) {
+            const sidebar = main.parentElement.querySelector('#protyle-sidebar');
+            // 如果侧边栏存在但为空，或者完全没有备注元素，则移除 Sv-memo 类
+            if ((sidebar && (!sidebar.querySelector('.memo-item') || sidebar.children.length === 0)) || 
+                (!main.querySelector('span[data-type*="inline-memo"]') && !main.querySelector('[memo]'))) { 
+                pc.classList.remove('Sv-memo'); 
+            }
         }
     });
 };
