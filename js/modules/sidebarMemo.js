@@ -21,14 +21,14 @@ const setEndOfContenteditable = el => {
     sel.addRange(range); 
 };
 
-// 获取块节点 - 进一步简化
+// 获取块节点
 const getBlockNode = el => { 
     while (el && !el.dataset.nodeId) el = el.parentElement;
     return el && el.closest('[data-type="NodeBlockQueryEmbed"]')?.dataset.nodeId ? 
            el.closest('[data-type="NodeBlockQueryEmbed"]') : el;
 };
 
-// 创建备忘录连接线 - 进一步简化
+// 创建备忘录连接线
 const createMemoConnection = (memoDiv, memoSpan) => { 
     removeMemoConnection(); 
     if (!memoDiv || !memoSpan) return; 
@@ -63,7 +63,7 @@ const createMemoConnection = (memoDiv, memoSpan) => {
 
 const removeMemoConnection = () => connectionCleanup?.();
 
-// 判断某块及其所有父块是否有折叠 - 简化
+// 判断某块及其所有父块是否有折叠
 const isAnyAncestorFolded = block => {
     for (let current = block; current; current = current.parentElement) {
         if (current.getAttribute?.('fold') === '1') return true;
@@ -71,7 +71,7 @@ const isAnyAncestorFolded = block => {
     return false;
 };
 
-// 拖拽监听 - 简化
+// 拖拽监听
 const observeDragTitle = () => {
     if (dragMutationObserver) return;
     
@@ -96,20 +96,18 @@ const unobserveDragTitle = () => {
     dragTimeout = null;
 };
 
-// 刷新侧边栏备注位置 - 简化
+// 刷新侧边栏备注位置
 const refreshMemoOffset = (main, sidebar) => {
     requestAnimationFrame(() => {
         const MARGIN = 10;
         let lastBottom = 0;
         
-        // 简化过滤逻辑
         Array.from(sidebar.querySelectorAll('.memo-item'))
             .filter(item => item.style.display !== 'none')
             .forEach(memoItem => {
                 const nodeId = memoItem.getAttribute('data-node-id');
                 const memoType = memoItem.getAttribute('data-memo-type');
                 
-                // 合并查询和验证
                 const block = main.querySelector(`div[data-node-id="${nodeId}"]`);
                 if (!block) return;
                 
@@ -132,21 +130,21 @@ const refreshMemoOffset = (main, sidebar) => {
                     
                     // 获取所有行内备注元素
                     const memoSpans = Array.from(block.querySelectorAll('span[data-type*="inline-memo"]'));
-                    const memoContent = memoItem.querySelector('.memo-content-view')?.textContent || '';
+                    // 使用innerHTML而不是textContent来正确处理换行符
+                    const memoContent = memoItem.querySelector('.memo-content-view')?.innerHTML.replace(/<br>/g, '\n') || '';
                     
                     // 找到第一个包含相同备注内容的元素
                     const targetSpan = memoSpans.find(span => 
                         span.getAttribute('data-inline-memo-content') === memoContent
                     );
                     
-                    // 使用可选链简化条件
                     targetTop = targetSpan ? 
                         targetSpan.getBoundingClientRect().top - mainRect.top + 
                         (targetSpan.getBoundingClientRect().height / 2) - (memoItem.offsetHeight / 2) :
                         blockRect.top - mainRect.top + blockRect.height / 2 - memoItem.offsetHeight / 2;
                 }
                 
-                // 简化重叠检查
+                // 重叠检查
                 targetTop = Math.max(targetTop, lastBottom + MARGIN);
                 
                 memoItem.style.position = 'absolute';
@@ -158,12 +156,11 @@ const refreshMemoOffset = (main, sidebar) => {
     });
 };
 
-// 添加侧边栏 - 简化
+// 添加侧边栏
 const addSideBar = main => {
     const sidebar = main.parentElement.querySelector('#protyle-sidebar');
     const title = main.parentElement.querySelector('div.protyle-title');
     
-    // 合并条件判断
     if (!sidebar && title) {
         const newSidebar = document.createElement('div'); 
         newSidebar.id = 'protyle-sidebar';
@@ -176,15 +173,15 @@ const addSideBar = main => {
     return sidebar;
 };
 
-// 处理备注编辑和保存 - 简化
+// 处理备注编辑和保存
 const handleMemoEdit = (memoDiv, el, main, sidebar) => {
     const memoType = memoDiv.getAttribute('data-memo-type');
     const isBlockMemo = memoType === 'block';
     
-    // 简化旧值获取逻辑
+    // 获取旧值
     const old = isBlockMemo ? 
         (el.getAttribute('memo') || '') : 
-        (memoDiv.querySelector('.memo-content-view')?.textContent || '');
+        (memoDiv.querySelector('.memo-content-view')?.innerHTML.replace(/<br>/g, '\n') || '');
     
     const input = document.createElement('div');
     input.className = 'memo-edit-input';
@@ -195,9 +192,10 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
     input.addEventListener('input', () => autoResizeDiv(input));
     
     const save = () => {
+        // 保留原始HTML格式用于显示，同时提取纯文本用于比较
         const val = input.innerHTML.replace(/<div>/gi, '\n').replace(/<\/div>/gi, '').replace(/<br\s*\/?>/gi, '\n').replace(/<p>/gi, '\n').replace(/<\/p>/gi, '').replace(/&nbsp;/g, ' ').replace(/\n\s*\n\s*\n+/g, '\n\n').trim();
+        const htmlVal = input.innerHTML;
         
-        // 简化条件判断
         if (val !== old) {
             if (isBlockMemo) {
                 // 块备注更新逻辑
@@ -268,9 +266,9 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
         newDiv.className = 'memo-content-view'; 
         newDiv.style.cssText = 'font-size:0.8em;margin-bottom:4px;cursor:pointer;';
         
-        // 简化显示值设置
-        const displayVal = val || '<span style="color:#bbb;">点击编辑备注...</span>';
-        newDiv.innerHTML = typeof displayVal === 'string' ? displayVal : displayVal.replace(/\n/g, '<br>');
+        // 显示值设置 - 正确处理换行符
+        const displayVal = htmlVal || '<span style="color:#bbb;">点击编辑备注...</span>';
+        newDiv.innerHTML = displayVal;
         
         newDiv.onclick = (e) => {
             // 检查是否已经在编辑状态
@@ -294,13 +292,12 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
         refreshMemoOffset(main, sidebar);
     };
     
-    // 设置输入框事件 - 简化事件处理
+    // 设置输入框事件
     input.onblur = () => setTimeout(() => { 
         if (document.activeElement !== input) save(); 
     }, 100);
     
     input.onkeydown = e => { 
-        // 合并条件判断
         if ((e.key === 'Enter' && e.ctrlKey) || e.key === 'Escape') { 
             e.preventDefault(); 
             save(); 
@@ -324,7 +321,7 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
     return { input, save };
 };
 
-// 刷新侧边栏备注 - 进一步简化
+// 刷新侧边栏备注
 const refreshSideBarMemos = (main, sidebar) => {
     // 清除之前的内容
     sidebar.innerHTML = ''; 
@@ -336,13 +333,13 @@ const refreshSideBarMemos = (main, sidebar) => {
     // 使用Set来避免重复的块ID
     const processedBlocks = new Set();
     
-    // 提前检查当前启用的模式，避免重复DOM查询
+    // 提前检查当前启用的模式
     const isBlockMemoMode = document.documentElement.hasAttribute('savor-sidebar-block-memo');
     
-    // 预先获取所有块（块备注获取所有块）
+    // 获取所有块
     const allBlocks = Array.from(main.querySelectorAll('[data-node-id]'));
     
-    // 创建一个映射来存储块在文档中的顺序
+    // 创建块顺序映射
     const blockOrderMap = new Map();
     allBlocks.forEach((block, index) => {
         blockOrderMap.set(block.dataset.nodeId, index);
@@ -352,11 +349,11 @@ const refreshSideBarMemos = (main, sidebar) => {
     
     allBlocks.forEach(block => {
         const blockId = block.dataset.nodeId;
-        // 避免重复处理同一个块
+        // 避免重复处理
         if (processedBlocks.has(blockId)) return;
         processedBlocks.add(blockId);
         
-        // 对于每个块，先添加块备注（如果存在）- 不再限制块类型
+        // 添加块备注
         if (block.hasAttribute('memo')) {
             allMemos.push({
                 element: block,
@@ -370,7 +367,7 @@ const refreshSideBarMemos = (main, sidebar) => {
             });
         }
         
-        // 只有在非块备注模式下才收集行内备注，并且只针对特定块类型
+        // 收集行内备注
         if (!isBlockMemoMode) {
             // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
             const isValidBlockType = ['NodeParagraph', 'NodeHeading'].includes(block.getAttribute('data-type'));
@@ -390,7 +387,7 @@ const refreshSideBarMemos = (main, sidebar) => {
                         const lastGroup = memoGroups[memoGroups.length - 1];
                         const lastElement = lastGroup.elements[lastGroup.elements.length - 1].element;
                         
-                        // 检查是否相邻：lastElement后面紧跟着el
+                        // 检查是否相邻
                         let nextSibling = lastElement.nextSibling;
                         while (nextSibling && nextSibling.nodeType === Node.TEXT_NODE && nextSibling.textContent.trim() === '') {
                             nextSibling = nextSibling.nextSibling;
@@ -409,7 +406,7 @@ const refreshSideBarMemos = (main, sidebar) => {
                             index: i
                         });
                         
-                        // 将锚文本添加到texts数组中（避免重复）
+                        // 避免重复文本
                         if (!currentGroup.texts.includes(memoText)) {
                             currentGroup.texts.push(memoText);
                         }
@@ -446,7 +443,7 @@ const refreshSideBarMemos = (main, sidebar) => {
         }
     });
     
-    // 按照块顺序排序
+    // 按块顺序排序
     allMemos.sort((a, b) => a.blockOrder - b.blockOrder);
     
     // 如果没有备注，直接返回
@@ -455,7 +452,7 @@ const refreshSideBarMemos = (main, sidebar) => {
         return; 
     }
     
-    // 预先计算所有块的折叠状态，避免重复调用 isAnyAncestorFolded
+    // 计算块折叠状态
     const blockFoldStates = new Map();
     allMemos.forEach(memoData => {
         if (!blockFoldStates.has(memoData.blockId)) {
@@ -464,7 +461,7 @@ const refreshSideBarMemos = (main, sidebar) => {
         }
     });
     
-    // 按照排序后的顺序显示备注
+    // 显示备注
     allMemos.forEach(memoData => {
         const block = main.querySelector(`div[data-node-id="${memoData.blockId}"]`);
         // 如果块不存在，跳过
@@ -475,28 +472,26 @@ const refreshSideBarMemos = (main, sidebar) => {
         
         const memoDiv = document.createElement('div');
         memoDiv.className = 'memo-item';
-        // 合并属性设置逻辑
         memoDiv.setAttribute('data-node-id', memoData.blockId);
         memoDiv.setAttribute('data-memo-index', memoData.type === 'inline' ? (memoData.elements?.[0]?.index || -1) : -1);
         memoDiv.setAttribute('data-memo-type', memoData.type);
         
-        // 对于行内备注，存储元素数量
+        // 存储元素数量
         memoData.type === 'inline' && memoDiv.setAttribute('data-memo-element-count', memoData.elements?.length || 1);
         
         memoDiv.style.cssText = 'margin:0px 0px 8px 16px;padding:8px;border-radius:8px;position:relative;width:220px;box-shadow:rgba(0, 0, 0, 0.03) 0px 12px 20px, var(--b3-border-color) 0px 0px 0px 1px inset;';
         
-        // 简化显示/隐藏逻辑
+        // 显示/隐藏逻辑
         memoDiv.style.display = isBlockFolded ? 'none' : '';
         !isBlockFolded && visibleMemoCount++;
         
-        // 直接使用text，无需额外变量
         const formattedDisplayText = text;
         
         const memoContentStyle = isReadonly ? 'cursor:auto;' : 'cursor:pointer;';
         memoDiv.innerHTML = `<div class="memo-title-with-dot" style="font-weight:bold;margin-bottom:4px;font-size:0.9em;display:flex;"><span class="memo-title-dot"></span>${formattedDisplayText}</div><div class="memo-content-view" style="${memoContentStyle}font-size:0.8em;margin-bottom:4px;">${memo ? memo.replace(/\n/g, '<br>') : '<span style="color:#bbb;">点击编辑备注...</span>'}</div>`;
         
         const titleDiv = memoDiv.querySelector('.memo-title-with-dot');
-        // 简化删除按钮创建逻辑，但嵌入块内的备注不显示删除按钮
+        // 创建删除按钮
         if (titleDiv && !isReadonly) {
             // 检查是否在嵌入块内
             const blockEl = main.querySelector(`div[data-node-id="${memoData.blockId}"]`);
@@ -532,7 +527,7 @@ const refreshSideBarMemos = (main, sidebar) => {
                     const isValidBlockType = memoData.type === 'block' || 
                                            ['NodeParagraph', 'NodeHeading'].includes(blockEl.getAttribute('data-type'));
                     if (isValidBlockType) {
-                        // 对于行内备注，需要正确获取目标元素
+                        // 获取目标元素
                         let targetElement = memoData.element;
                         if (memoData.type === 'inline' && memoData.elements?.length > 0) {
                             targetElement = memoData.elements[0].element;
@@ -559,7 +554,7 @@ const refreshSideBarMemos = (main, sidebar) => {
     sidebar.setAttribute('data-memo-count', `共 ${visibleMemoCount} 个备注`); 
     sidebar.appendChild(frag);
 
-    // 事件委托 - 简化事件处理逻辑
+    // 事件委托
     if (!sidebar._delegated) {
         const handleMouseInteraction = (e, isEnter) => {
             const item = e.target.closest('.memo-item');
@@ -591,7 +586,8 @@ const refreshSideBarMemos = (main, sidebar) => {
                         if (elementCount > 1) {
                             // 对于合并的备注项，高亮所有相同内容的元素
                             const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
-                            const memoContent = item.querySelector('.memo-content-view')?.textContent || '';
+                            // 使用innerHTML而不是textContent来正确处理换行符
+                            const memoContent = item.querySelector('.memo-content-view')?.innerHTML.replace(/<br>/g, '\n') || '';
                             
                             // 高亮所有相同内容的备注元素
                             const targetSpans = memoSpans.filter(span => 
@@ -608,7 +604,8 @@ const refreshSideBarMemos = (main, sidebar) => {
                             
                             // 如果通过索引找不到目标元素，尝试通过内容匹配找到元素
                             if (!targetSpan) {
-                                const memoContent = item.querySelector('.memo-content-view')?.textContent || '';
+                                // 使用innerHTML而不是textContent来正确处理换行符
+                                const memoContent = item.querySelector('.memo-content-view')?.innerHTML.replace(/<br>/g, '\n') || '';
                                 targetSpan = memoSpans.find(span => 
                                     span.getAttribute('data-inline-memo-content') === memoContent
                                 );
@@ -626,12 +623,12 @@ const refreshSideBarMemos = (main, sidebar) => {
             }
         };
         
-        // 合并鼠标事件处理逻辑
+        // 鼠标事件处理
         ['mouseover', 'mouseout'].forEach(eventType => {
             sidebar.addEventListener(eventType, e => handleMouseInteraction(e, eventType === 'mouseover'));
         });
         
-        // 合并点击事件处理逻辑
+        // 点击事件处理
         sidebar.addEventListener('click', e => {
             const btn = e.target.closest('button[data-action="delete"]');
             if (!btn) return; 
@@ -657,14 +654,15 @@ const refreshSideBarMemos = (main, sidebar) => {
             if (blockEl) {
                 // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
                 const isValidBlockType = memoType === 'block' || 
-                                       ['NodeParagraph', 'NodeHeading'].includes(blockEl.getAttribute('data-type'));
+                                       ['NodeParagraph', 'NodeHeading']. includes(blockEl.getAttribute('data-type'));
                 
                 if (isValidBlockType) {
                     if (memoType === 'block') {
                         blockEl.removeAttribute('memo');
                     } else {
                         // 删除当前合并项中包含的行内备注
-                        const memoContent = item.querySelector('.memo-content-view').textContent;
+                        const memoContentDiv = item.querySelector('.memo-content-view');
+                        const memoContent = memoContentDiv ? memoContentDiv.innerHTML.replace(/<br>/g, '\n') : '';
                         const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
                         const elementCount = Number(item.getAttribute('data-memo-element-count')) || 1;
                         
@@ -690,7 +688,7 @@ const refreshSideBarMemos = (main, sidebar) => {
                             
                             // 如果通过索引找不到目标元素，尝试通过内容匹配找到元素
                             if (!targetSpan) {
-                                const memoContent = item.querySelector('.memo-content-view').textContent;
+                                const memoContent = memoContentDiv ? memoContentDiv.innerHTML.replace(/<br>/g, '\n') : '';
                                 targetSpan = memoSpans.find(span => 
                                     span.getAttribute('data-inline-memo-content') === memoContent
                                 );
@@ -757,7 +755,7 @@ const updateInlineMemo = async (el, content) => {
     }
 };
 
-// 刷新编辑器 - 简化
+// 刷新编辑器
 const refreshEditor = () => {
     if (!editorNode) return;
     Object.values(observers).flat().forEach(o => o.disconnect()); 
@@ -814,7 +812,7 @@ const refreshEditor = () => {
     });
 };
 
-// 开关侧边栏 - 简化
+// 开关侧边栏
 const openSideBar = (open, save = false) => {
     if (isEnabled === open) return;
     
@@ -857,7 +855,7 @@ const init = () => {
     openSideBar(shouldEnable, true);
 };
 
-// 清理函数 - 简化
+// 清理函数
 const cleanupSidebarMemo = () => {
     try {
         openSideBar(false);
