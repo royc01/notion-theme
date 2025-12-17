@@ -28,9 +28,13 @@
 	}
 	& .dock__item{
 		color: var(--Sv-dock-item-color);
-		padding:8px ;
 		border-radius: var(--Sv-dock-item-radius);
 		background-color: var(--Sv-list-background);
+		height: 14px;
+		width: 14px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		svg{
 			width: 12px;
 			height: 12px;
