@@ -651,6 +651,8 @@ const refreshSideBarMemos = (main, sidebar) => {
             
             item.remove(); 
             removeMemoConnection();
+            // 确保connectionCleanup被重置
+            connectionCleanup = null;
             
             if (blockEl) {
                 // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
