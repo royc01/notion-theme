@@ -136,7 +136,7 @@ const createMemoConnection = (memoDiv, memoSpan) => {
     container.id = 'memo-connection-container'; 
     container.style = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9998;will-change:transform;'; 
     container.innerHTML = `
-        <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+        <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.5;">
             <path stroke="var(--Sv-dock-item--activefocus-background)" stroke-width="2" fill="none" stroke-dasharray="6,4" stroke-linecap="round">
                 <animate attributeName="stroke-dashoffset" from="20" to="-20" dur="1.5s" repeatCount="indefinite"/>
             </path>

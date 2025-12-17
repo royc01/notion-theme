@@ -576,10 +576,10 @@
     }
     .b3-list-item__graphic,.color__square {
         margin:0px;
-        width:10px;
+        width:12px;
         height:12px;
         border:1px solid var(--b3-border-color);
-        padding: 2px 3px;
+        padding: 4px;
         border-radius: 3px;
         box-shadow:none;
         & + .b3-list-item__text{
