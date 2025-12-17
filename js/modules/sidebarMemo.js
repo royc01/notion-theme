@@ -39,6 +39,94 @@ const getBlockNode = el => {
         el.closest('[data-type="NodeBlockQueryEmbed"]') : el;
 };
 
+// 检查块类型是否有效（用于行内备注）
+const isValidBlockTypeForInlineMemo = block => {
+    return block && ['NodeParagraph', 'NodeHeading'].includes(block.getAttribute('data-type'));
+};
+
+// 检查是否在嵌入块内
+const isInsideEmbedBlock = blockEl => {
+    return blockEl?.closest('[data-type="NodeBlockQueryEmbed"]');
+};
+
+// 获取备注内容的HTML格式
+const getMemoContentHtml = memoItem => {
+    return memoItem.querySelector('.memo-content-view')?.innerHTML.replace(/<br>/g, '\n') || '';
+};
+
+// 更新块元素的备注内容
+const updateBlockMemoContent = (blockEl, oldContent, newContent) => {
+    const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
+    
+    memoSpans.forEach(span => {
+        if (span.getAttribute('data-inline-memo-content') === oldContent) {
+            span.setAttribute('data-inline-memo-content', newContent);
+        }
+    });
+    
+    // 更新块内容
+    return fetch('/api/block/updateBlock', { 
+        method: 'POST', 
+        headers: { 
+            'Content-Type': 'application/json', 
+            'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
+        }, 
+        body: JSON.stringify({ 
+            dataType: 'html', 
+            data: blockEl.outerHTML, 
+            id: blockEl.dataset.nodeId 
+        }) 
+    });
+};
+
+// 删除块元素中的备注
+const removeBlockMemoContent = (blockEl, memoContent) => {
+    const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
+    
+    memoSpans.forEach(span => {
+        const content = span.getAttribute('data-inline-memo-content');
+        // 只删除内容匹配的备注元素
+        if (content === memoContent) {
+            let types = (span.getAttribute("data-type") || "").split(" ").filter(t => t !== "inline-memo");
+            if (types.length) { 
+                span.setAttribute("data-type", types.join(" ")); 
+                span.removeAttribute("data-inline-memo-content"); 
+            } else { 
+                span.outerHTML = span.innerHTML; 
+            }
+        }
+    });
+    
+    // 更新块内容
+    return fetch('/api/block/updateBlock', { 
+        method: 'POST', 
+        headers: { 
+            'Content-Type': 'application/json', 
+            'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
+        }, 
+        body: JSON.stringify({ 
+            dataType: 'html', 
+            data: blockEl.outerHTML, 
+            id: blockEl.dataset.nodeId 
+        }) 
+    });
+};
+
+// 高亮备注元素
+const highlightMemoElements = (blockEl, memoContent) => {
+    const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
+    
+    // 高亮所有相同内容的备注元素
+    const targetSpans = memoSpans.filter(span => 
+        span.getAttribute('data-inline-memo-content') === memoContent
+    );
+    
+    targetSpans.forEach(span => span.classList.add('memo-span-highlight'));
+    
+    // 返回最后一个匹配的备注元素
+    return targetSpans[targetSpans.length - 1];
+};
+
 // 创建备忘录连接线
 const createMemoConnection = (memoDiv, memoSpan) => { 
     removeMemoConnection(); 
@@ -128,8 +216,7 @@ const refreshMemoOffset = (main, sidebar) => {
                 if (!block) return;
                 
                 // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
-                const isValidBlockType = memoType === 'block' || 
-                                    ['NodeParagraph', 'NodeHeading'].includes(block.getAttribute('data-type'));
+                const isValidBlockType = memoType === 'block' || isValidBlockTypeForInlineMemo(block);
                 if (!isValidBlockType) return;
                 
                 let targetTop = 0;
@@ -147,7 +234,7 @@ const refreshMemoOffset = (main, sidebar) => {
                     // 获取所有行内备注元素
                     const memoSpans = Array.from(block.querySelectorAll('span[data-type*="inline-memo"]'));
                     // 使用innerHTML而不是textContent来正确处理换行符
-                    const memoContent = memoItem.querySelector('.memo-content-view')?.innerHTML.replace(/<br>/g, '\n') || '';
+                    const memoContent = getMemoContentHtml(memoItem);
                     
                     // 找到第一个包含相同备注内容的元素
                     const targetSpan = memoSpans.find(span => 
@@ -242,46 +329,8 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
                 const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
                 
                 if (blockEl) {
-                    // 获取当前合并项包含的所有元素
-                    const elementCount = Number(memoDiv.getAttribute('data-memo-element-count')) || 1;
-                    const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
-                    const memoContent = old;
-                    
-                    if (elementCount > 1) {
-                        // 对于合并的备注项，只更新合并项中包含的元素
-                        memoSpans.forEach(span => {
-                            if (span.getAttribute('data-inline-memo-content') === memoContent) {
-                                span.setAttribute('data-inline-memo-content', val);
-                            }
-                        });
-                    } else {
-                        // 对于未合并的备注项，只更新对应的单个元素
-                        const memoIndex = Number(memoDiv.getAttribute('data-memo-index')) || 0;
-                        let targetSpan = memoSpans[memoIndex];
-                        
-                        // 如果通过索引找不到目标元素，尝试通过内容匹配找到元素
-                        if (!targetSpan) {
-                            targetSpan = memoSpans.find(span => 
-                                span.getAttribute('data-inline-memo-content') === memoContent
-                            );
-                        }
-                        
-                        targetSpan?.setAttribute('data-inline-memo-content', val);
-                    }
-                    
-                    // 更新块内容
-                    fetch('/api/block/updateBlock', { 
-                        method: 'POST', 
-                        headers: { 
-                            'Content-Type': 'application/json', 
-                            'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
-                        }, 
-                        body: JSON.stringify({ 
-                            dataType: 'html', 
-                            data: blockEl.outerHTML, 
-                            id: blockEl.dataset.nodeId 
-                        }) 
-                    });
+                    // 更新块备注内容
+                    updateBlockMemoContent(blockEl, old, val);
                 }
             }
         }
@@ -394,7 +443,7 @@ const refreshSideBarMemos = (main, sidebar) => {
         // 收集行内备注
         if (!isBlockMemoMode) {
             // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
-            const isValidBlockType = ['NodeParagraph', 'NodeHeading'].includes(block.getAttribute('data-type'));
+            const isValidBlockType = isValidBlockTypeForInlineMemo(block);
             if (isValidBlockType) {
                 // 收集块内的行内备注
                 const inlineMemos = block.querySelectorAll('span[data-type*="inline-memo"]');
@@ -526,10 +575,10 @@ const refreshSideBarMemos = (main, sidebar) => {
         if (titleDiv && !isReadonly) {
             // 检查是否在嵌入块内
             const blockEl = main.querySelector(`div[data-node-id="${memoData.blockId}"]`);
-            const isInsideEmbedBlock = blockEl?.closest('[data-type="NodeBlockQueryEmbed"]');
+            const isInsideEmbedBlockResult = isInsideEmbedBlock(blockEl);
             
             // 如果不在嵌入块内，才显示删除按钮
-            if (!isInsideEmbedBlock) {
+            if (!isInsideEmbedBlockResult) {
                 const deleteBtn = document.createElement('button');
                 deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconTrashcan"></use></svg>`;
                 deleteBtn.style.cssText = 'position:absolute;top:6px;right:6px;padding:0;border:none;border-radius:6px;cursor:pointer;z-index:2;';
@@ -548,15 +597,14 @@ const refreshSideBarMemos = (main, sidebar) => {
                 const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
                 
                 // 检查是否在嵌入块内
-                const isInsideEmbedBlock = blockEl?.closest('[data-type="NodeBlockQueryEmbed"]');
+                const isInsideEmbedBlockResult = isInsideEmbedBlock(blockEl);
                 
                 // 如果在嵌入块内，禁止编辑
-                if (isInsideEmbedBlock) return;
+                if (isInsideEmbedBlockResult) return;
                 
                 if (blockEl) {
                     // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
-                    const isValidBlockType = memoData.type === 'block' || 
-                                        ['NodeParagraph', 'NodeHeading'].includes(blockEl.getAttribute('data-type'));
+                    const isValidBlockType = memoData.type === 'block' || isValidBlockTypeForInlineMemo(blockEl);
                     if (isValidBlockType) {
                         // 获取目标元素
                         let targetElement = memoData.element;
@@ -603,48 +651,16 @@ const refreshSideBarMemos = (main, sidebar) => {
                 
                 if (blockEl) {
                     // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
-                    const isValidBlockType = memoType === 'block' || 
-                                        ['NodeParagraph', 'NodeHeading'].includes(blockEl.getAttribute('data-type'));
+                    const isValidBlockType = memoType === 'block' || isValidBlockTypeForInlineMemo(blockEl);
                     if (!isValidBlockType) return;
                     
                     if (memoType === 'block') {
                         blockEl.classList.add('memo-span-highlight');
                         createMemoConnection(item, blockEl);
                     } else {
-                        let targetSpan = null;
-                        const elementCount = Number(item.getAttribute('data-memo-element-count')) || 1;
-                        
-                        if (elementCount > 1) {
-                            // 对于合并的备注项，高亮所有相同内容的元素
-                            const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
-                            // 使用innerHTML而不是textContent来正确处理换行符
-                            const memoContent = item.querySelector('.memo-content-view')?.innerHTML.replace(/<br>/g, '\n') || '';
-                            
-                            // 高亮所有相同内容的备注元素
-                            const targetSpans = memoSpans.filter(span => 
-                                span.getAttribute('data-inline-memo-content') === memoContent
-                            );
-                            
-                            targetSpans.forEach(span => span.classList.add('memo-span-highlight'));
-                            // 修改为指向最后一个匹配的备注元素
-                            targetSpan = targetSpans[targetSpans.length - 1];
-                        } else {
-                            // 对于未合并的备注项，直接连接到对应的元素
-                            const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
-                            const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
-                            targetSpan = memoSpans[memoIndex];
-                            
-                            // 如果通过索引找不到目标元素，尝试通过内容匹配找到元素
-                            if (!targetSpan) {
-                                // 使用innerHTML而不是textContent来正确处理换行符
-                                const memoContent = item.querySelector('.memo-content-view')?.innerHTML.replace(/<br>/g, '\n') || '';
-                                targetSpan = memoSpans.find(span => 
-                                    span.getAttribute('data-inline-memo-content') === memoContent
-                                );
-                            }
-                            
-                            targetSpan?.classList.add('memo-span-highlight');
-                        }
+                        // 高亮备注元素
+                        const memoContent = getMemoContentHtml(item);
+                        const targetSpan = highlightMemoElements(blockEl, memoContent);
                         
                         targetSpan && createMemoConnection(item, targetSpan);
                     }
@@ -673,10 +689,10 @@ const refreshSideBarMemos = (main, sidebar) => {
             const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
             
             // 检查是否在嵌入块内
-            const isInsideEmbedBlock = blockEl?.closest('[data-type="NodeBlockQueryEmbed"]');
+            const isInsideEmbedBlockResult = isInsideEmbedBlock(blockEl);
             
             // 如果在嵌入块内，禁止删除
-            if (isInsideEmbedBlock) return;
+            if (isInsideEmbedBlockResult) return;
             
             item.remove(); 
             removeMemoConnection();
@@ -685,57 +701,15 @@ const refreshSideBarMemos = (main, sidebar) => {
             
             if (blockEl) {
                 // 行内备注只处理 NodeParagraph 和 NodeHeading 类型的节点
-                const isValidBlockType = memoType === 'block' || 
-                                    ['NodeParagraph', 'NodeHeading']. includes(blockEl.getAttribute('data-type'));
+                const isValidBlockType = memoType === 'block' || isValidBlockTypeForInlineMemo(blockEl);
                 
                 if (isValidBlockType) {
                     if (memoType === 'block') {
                         blockEl.removeAttribute('memo');
                     } else {
                         // 删除当前合并项中包含的行内备注
-                        const memoContentDiv = item.querySelector('.memo-content-view');
-                        const memoContent = memoContentDiv ? memoContentDiv.innerHTML.replace(/<br>/g, '\n') : '';
-                        const memoSpans = Array.from(blockEl.querySelectorAll('span[data-type*="inline-memo"]'));
-                        const elementCount = Number(item.getAttribute('data-memo-element-count')) || 1;
-                        
-                        if (elementCount > 1) {
-                            // 对于合并的备注项，只删除合并项中包含的元素
-                            memoSpans.forEach(span => {
-                                const content = span.getAttribute('data-inline-memo-content');
-                                // 只删除内容匹配的备注元素
-                                if (content === memoContent) {
-                                    let types = (span.getAttribute("data-type") || "").split(" ").filter(t => t !== "inline-memo");
-                                    if (types.length) { 
-                                        span.setAttribute("data-type", types.join(" ")); 
-                                        span.removeAttribute("data-inline-memo-content"); 
-                                    } else { 
-                                        span.outerHTML = span.innerHTML; 
-                                    }
-                                }
-                            });
-                        } else {
-                            // 对于未合并的备注项，只删除对应的单个元素
-                            const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
-                            let targetSpan = memoSpans[memoIndex];
-                            
-                            // 如果通过索引找不到目标元素，尝试通过内容匹配找到元素
-                            if (!targetSpan) {
-                                const memoContent = memoContentDiv ? memoContentDiv.innerHTML.replace(/<br>/g, '\n') : '';
-                                targetSpan = memoSpans.find(span => 
-                                    span.getAttribute('data-inline-memo-content') === memoContent
-                                );
-                            }
-                            
-                            if (targetSpan) {
-                                let types = (targetSpan.getAttribute("data-type") || "").split(" ").filter(t => t !== "inline-memo");
-                                if (types.length) { 
-                                    targetSpan.setAttribute("data-type", types.join(" ")); 
-                                    targetSpan.removeAttribute("data-inline-memo-content"); 
-                                } else { 
-                                    targetSpan.outerHTML = targetSpan.innerHTML; 
-                                }
-                            }
-                        }
+                        const memoContent = getMemoContentHtml(item);
+                        removeBlockMemoContent(blockEl, memoContent);
                     }
                     
                     fetch('/api/block/updateBlock', { 
