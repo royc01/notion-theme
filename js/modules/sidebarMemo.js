@@ -47,7 +47,12 @@ const createMemoConnection = (memoDiv, memoSpan) => {
     const container = document.createElement('div'); 
     container.id = 'memo-connection-container'; 
     container.style = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9998;'; 
-    container.innerHTML = `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;"><path stroke="var(--Sv-dock-item--activefocus-background)" stroke-width="2" fill="none" stroke-dasharray="6,4"></path></svg>`; 
+    container.innerHTML = `
+        <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+            <path stroke="var(--Sv-dock-item--activefocus-background)" stroke-width="2" fill="none" stroke-dasharray="6,4" stroke-linecap="round">
+                <animate attributeName="stroke-dashoffset" from="20" to="-20" dur="1s" repeatCount="indefinite"/>
+            </path>
+        </svg>`; 
     document.body.appendChild(container); 
     
     const path = container.querySelector('path'); 
@@ -621,7 +626,8 @@ const refreshSideBarMemos = (main, sidebar) => {
                             );
                             
                             targetSpans.forEach(span => span.classList.add('memo-span-highlight'));
-                            targetSpan = targetSpans[0];
+                            // 修改为指向最后一个匹配的备注元素
+                            targetSpan = targetSpans[targetSpans.length - 1];
                         } else {
                             // 对于未合并的备注项，直接连接到对应的元素
                             const memoIndex = Number(item.getAttribute('data-memo-index')) || 0;
