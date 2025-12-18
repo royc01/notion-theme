@@ -48,19 +48,15 @@ const handler = (e) => {
     // 只处理左右箭头键
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
     
-    // 如果没有斜杠菜单则不处理
+    // 如果没有斜杠菜单或为emoji菜单则不处理
     const menu = getMenu();
-    if (!menu) return;
+    if (!menu || menu.querySelector('.emojis')) return;
     
-    // 排除emoji菜单，避免影响emoji选择
-    if (menu.querySelector('.emojis')) return;
-    
-    // 移动焦点
-    move(e.key==='ArrowRight' ? 'right' : 'left');
-    
-    // 阻止事件冒泡和默认行为
-    e.preventDefault();
-    e.stopImmediatePropagation();
+    // 移动焦点并阻止默认行为
+    if (move(e.key==='ArrowRight' ? 'right' : 'left')) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+    }
 };
 
 // 事件监听器标识，防止重复安装
@@ -75,10 +71,9 @@ export const initSlashMenuNavigation = () => {
     isInstalled = true;
     
     // 隐藏分割线，保持行对齐
-    const styleId = 'slash-menu-hide-separator';
-    if (!document.getElementById(styleId)) {
+    if (!document.getElementById('slash-menu-hide-separator')) {
         const st = document.createElement('style');
-        st.id = styleId;
+        st.id = 'slash-menu-hide-separator';
         st.textContent = '.hint--menu .b3-menu__separator{display:none!important;}';
         document.head.appendChild(st);
     }
@@ -87,12 +82,8 @@ export const initSlashMenuNavigation = () => {
     window.addEventListener('keydown', handler, true);
     
     // 将初始化状态添加到全局对象
-    if (!window.SavorModules) {
-        window.SavorModules = {};
-    }
-    window.SavorModules.slashMenuNav = {
-        isInstalled: true
-    };
+    window.SavorModules = window.SavorModules || {};
+    window.SavorModules.slashMenuNav = { isInstalled: true };
 };
 
 /**
@@ -100,11 +91,7 @@ export const initSlashMenuNavigation = () => {
  */
 export const cleanupSlashMenuNavigation = () => {
     // 根据项目规范，此功能为永久保留功能，不实现实际清理逻辑
-    // 仅重置安装状态，但不移除事件监听器和样式
     isInstalled = false;
-    
-    // 清理全局对象中的状态
-    if (window.SavorModules && window.SavorModules.slashMenuNav) {
+    if (window.SavorModules?.slashMenuNav) 
         window.SavorModules.slashMenuNav.isInstalled = false;
-    }
 };
