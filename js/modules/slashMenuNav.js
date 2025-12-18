@@ -49,7 +49,11 @@ const handler = (e) => {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
     
     // 如果没有斜杠菜单则不处理
-    if (!getMenu()) return;
+    const menu = getMenu();
+    if (!menu) return;
+    
+    // 排除emoji菜单，避免影响emoji选择
+    if (menu.querySelector('.emojis')) return;
     
     // 移动焦点
     move(e.key==='ArrowRight' ? 'right' : 'left');
