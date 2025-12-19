@@ -251,7 +251,8 @@ export const initDraggable = (element) => {
             // 限制鼠标左键和非编辑元素
             if ((e.pointerType === "mouse" && e.button !== 0) || 
                 e.target.getAttribute?.("contenteditable") === "true" || 
-                e.target.closest?.('[data-type="a"]')) return;
+                e.target.closest?.('[data-type="a"]') ||
+                e.target.closest?.('.protyle-action--task')) return;
             
             // 找到被点击的列表项
             const clickedItem = e.target.closest?.('[data-type="NodeListItem"]');
