@@ -8,8 +8,11 @@
             margin: 0;
             transition: all 0.5s;
         }
-        & > :before {
+        &:not(.protyle-task--done) > :before {
             display: none;
+        }   
+        &.protyle-task--done > :before {
+            left: 30px;
         }   
         .p,[data-type="NodeHeading"] {
             display: flex;

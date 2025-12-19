@@ -100,8 +100,9 @@ body:not(.body--mobile){
     white-space: break-spaces;
     max-height: 282px;
     overflow-y: auto;
+    & b{color:var(--b3-font-color13);}
 }
-
+.memo-edit-input b{color:var(--b3-font-color13);}
 [data-memo-type="block"]{
     .memo-title-dot{
         display: none!important;
