@@ -183,24 +183,31 @@
 
 
 
-.av__kanban-group[style*="var(--b3-font-background1);"] {--b3-av-kanban-background: var(--b3-font-background3)!important;}
-.av__kanban-group[style*="var(--b3-font-background2);"] {--b3-av-kanban-background: var(--b3-font-background13)!important;}
-.av__kanban-group[style*="var(--b3-font-background3);"] {--b3-av-kanban-background: var(--b3-font-background12)!important;}
-.av__kanban-group[style*="var(--b3-font-background4);"] {--b3-av-kanban-background: var(--b3-font-background11)!important;}
-.av__kanban-group[style*="var(--b3-font-background5);"] {--b3-av-kanban-background: var(--b3-font-background10)!important;}
-.av__kanban-group[style*="var(--b3-font-background6);"] {--b3-av-kanban-background: var(--b3-font-background9)!important;}
-.av__kanban-group[style*="var(--b3-font-background7);"] {--b3-av-kanban-background: var(--b3-font-background8)!important;}
-.av__kanban-group[style*="var(--b3-font-background8);"] {--b3-av-kanban-background: var(--b3-font-background7)!important;}
-.av__kanban-group[style*="var(--b3-font-background9);"] {--b3-av-kanban-background: var(--b3-font-background6)!important;}
-.av__kanban-group[style*="var(--b3-font-background10);"] {--b3-av-kanban-background: var(--b3-font-background5)!important;}
-.av__kanban-group[style*="var(--b3-font-background11);"] {--b3-av-kanban-background: var(--b3-font-background4)!important;}
-.av__kanban-group[style*="var(--b3-font-background12);"] {--b3-av-kanban-background: var(--b3-font-background2)!important;}
-.av__kanban-group[style*="var(--b3-font-background13);"] {--b3-av-kanban-background: var(--b3-font-background1)!important;}
+.av__kanban-group[style*="var(--b3-font-background1)"]{--b3-av-kanban-background: var(--b3-font-background3)!important;}
+.av__kanban-group[style*="var(--b3-font-background2)"]{--b3-av-kanban-background: var(--b3-font-background13)!important;}
+.av__kanban-group[style*="var(--b3-font-background3)"]{--b3-av-kanban-background: var(--b3-font-background12)!important;}
+.av__kanban-group[style*="var(--b3-font-background4)"]{--b3-av-kanban-background: var(--b3-font-background11)!important;}
+.av__kanban-group[style*="var(--b3-font-background5)"]{--b3-av-kanban-background: var(--b3-font-background10)!important;}
+.av__kanban-group[style*="var(--b3-font-background6)"]{--b3-av-kanban-background: var(--b3-font-background9)!important;}
+.av__kanban-group[style*="var(--b3-font-background7)"]{--b3-av-kanban-background: var(--b3-font-background8)!important;}
+.av__kanban-group[style*="var(--b3-font-background8)"]{--b3-av-kanban-background: var(--b3-font-background7)!important;}
+.av__kanban-group[style*="var(--b3-font-background9)"]{--b3-av-kanban-background: var(--b3-font-background6)!important;}
+.av__kanban-group[style*="var(--b3-font-background10)"]{--b3-av-kanban-background: var(--b3-font-background5)!important;}
+.av__kanban-group[style*="var(--b3-font-background11)"]{--b3-av-kanban-background: var(--b3-font-background4)!important;}
+.av__kanban-group[style*="var(--b3-font-background12)"]{--b3-av-kanban-background: var(--b3-font-background2)!important;}
+.av__kanban-group[style*="var(--b3-font-background13)"]{--b3-av-kanban-background: var(--b3-font-background1)!important;}
 .av__kanban--bg .av__kanban-group::before {opacity: .3;}
-.av__kanban--bg .av__gallery-item::before,.av__kanban--bg .av__gallery-add::before{opacity: .4;}
-.av__kanban--bg .av__gallery-item,.av__kanban--bg .av__gallery-add {
+.av__kanban--bg .av__gallery-add::before{opacity: .4;}
+.av__kanban--bg .av__gallery-add {
     box-shadow:oklch(var(--b3-theme-on-background-base) / 0.05) 0 0 0 1px, rgba(0, 0, 0, .04) 0 2px 4px 0, var(--b3-av-kanban-background) 0 0 0 1px;
 }
 .av__kanban:not(.av__kanban--bg) .av__kanban-group{
     background-color: oklch(calc(var(--b3-theme-surface-base-l)) var(--b3-theme-surface-base-ch) / 0.6);
+}
+:root[data-theme-mode="light"]{
+	.av__kanban--bg .av__gallery-item::before{background-color: var(--b3-theme-background);opacity: 0.8;}
+	.av__kanban--bg .av__gallery-item{box-shadow: var(--b3-av-gallery-shadow);}
+}
+:root[data-theme-mode="dark"]{
+	.av__kanban--bg .av__gallery-item::before{opacity: 1;}
 }

@@ -111,7 +111,7 @@ body:not(.body--mobile,.body--window) #layouts{
     transition: margin-left .2s cubic-bezier(0, 0, .2, 1) 0ms,padding-left .2s cubic-bezier(0, 0, .2, 1) 0ms;
 }*/
 
-body--mac .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
+/*body--mac .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
         padding-left: 140px;
 }
 
@@ -119,7 +119,7 @@ body--mac .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layou
         & ~ .layout__center [data-type="wnd"]>.fn__flex>.layout-tab-bar:not(.layout-tab-bar--readonly){
             padding-left: 173px;
      }
-}
+}*/
 
 
 /*.layout__center .layout__resize:not(.layout__resize--lr) +.fn__flex .layout-tab-bar--readonly{

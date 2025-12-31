@@ -22,19 +22,19 @@
     url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%232f3437'/></svg>"),
     url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><rect  y='0%' width='100%' height='80%' fill='%232f3437'/></svg>");
 
-    --b3-font-background1: #484c4f;
-    --b3-font-background2: #363b3e;
-    --b3-font-background3: #453739;
-    --b3-font-background4: #3b3b3c;
-	--b3-font-background5: #484037;
-    --b3-font-background6: #484337;
-    --b3-font-background7: #484837;
-	--b3-font-background8: #314243;
-    --b3-font-background9: #324349;
-    --b3-font-background10: #324049;
-    --b3-font-background11: #3c3a4b;
-    --b3-font-background12: #453744;
-    --b3-font-background13: #483a3c;
+    --b3-font-background1: #484e56;
+    --b3-font-background2: #31383f;
+    --b3-font-background3: #4a3033;
+    --b3-font-background4: #38383a;
+	--b3-font-background5: #4e3f30;
+    --b3-font-background6: #4e4730;
+    --b3-font-background7: #4e4e30;
+	--b3-font-background8: #284749;
+    --b3-font-background9: #274752;
+    --b3-font-background10: #274052;
+    --b3-font-background11: #363353;
+    --b3-font-background12: #4a3048;
+    --b3-font-background13: #4d3336;
 
     .protyle-attr--refcount{
         background-color: oklch(calc(var(--b3-theme-surface-base-l)*1.2) var(--b3-theme-surface-base-ch));

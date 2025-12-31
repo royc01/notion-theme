@@ -45,19 +45,19 @@
     --Sv-block-ref-bottom: 2px solid #ff6000;
     --Sv-block-ref-bottom-d: 2px dashed #ff6000;
 
-    --b3-font-background1: #464946;
-    --b3-font-background2: #343835;
-    --b3-font-background3: #433430;
-    --b3-font-background4: #393833;
-	--b3-font-background5: #463d2e;
-    --b3-font-background6: #46402e;
-    --b3-font-background7: #46452e;
-	--b3-font-background8: #2f3f3a;
-    --b3-font-background9: #304040;
-    --b3-font-background10: #303d40;
-    --b3-font-background11: #3a3742;
-    --b3-font-background12: #43343b;
-    --b3-font-background13: #463733;
+    --b3-font-background1: #484e56;
+    --b3-font-background2: #31383f;
+    --b3-font-background3: #4a3033;
+    --b3-font-background4: #38383a;
+	--b3-font-background5: #4e3f30;
+    --b3-font-background6: #4e4730;
+    --b3-font-background7: #4e4e30;
+	--b3-font-background8: #284749;
+    --b3-font-background9: #274752;
+    --b3-font-background10: #274052;
+    --b3-font-background11: #363353;
+    --b3-font-background12: #4a3048;
+    --b3-font-background13: #4d3336;
 
     body::before {
         display: none;

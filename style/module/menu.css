@@ -205,7 +205,7 @@
                     border-radius: 6px;
                     overflow: unset !important;
                     /*background-color: var(--Sv-bazaar-item);*/
-                    margin: 0 10px 10px -5px;/*消除鼠标滚轮左右浮动*/
+                    margin: 0 10px 10px -6px;/*消除鼠标滚轮左右浮动*/
                     transition:none;
                     &:last-child{
                         margin-right: 0px;

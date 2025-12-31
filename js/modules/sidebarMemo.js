@@ -7,6 +7,16 @@ import { config } from './config.js';
 
 let isEnabled = false, observers = {}, editorNode = null, dragTimeout = null, dragMutationObserver = null, connectionCleanup = null;
 
+// 配置常量
+const CONFIG = {
+    SIDEBAR_WIDTH: 230,
+    MARGIN: 10,
+    EDITING_MARGIN: 5,
+    MIN_INPUT_HEIGHT: 60,
+    CONNECTION_OPACITY: 0.5,
+    Z_INDEX_EDITING: 999
+};
+
 const autoResizeDiv = div => { 
     div.style.height = 'auto'; 
     div.style.height = (div.scrollHeight + 1) + 'px'; 
@@ -65,18 +75,7 @@ const updateBlockMemoContent = (blockEl, oldContent, newContent) => {
     });
     
     // 更新块内容
-    return fetch('/api/block/updateBlock', { 
-        method: 'POST', 
-        headers: { 
-            'Content-Type': 'application/json', 
-            'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
-        }, 
-        body: JSON.stringify({ 
-            dataType: 'html', 
-            data: blockEl.outerHTML, 
-            id: blockEl.dataset.nodeId 
-        }) 
-    });
+    return updateBlock(blockEl);
 };
 
 // 删除块元素中的备注
@@ -98,6 +97,11 @@ const removeBlockMemoContent = (blockEl, memoContent) => {
     });
     
     // 更新块内容
+    return updateBlock(blockEl);
+};
+
+// 统一的块更新函数
+const updateBlock = (blockEl) => {
     return fetch('/api/block/updateBlock', { 
         method: 'POST', 
         headers: { 
@@ -134,9 +138,9 @@ const createMemoConnection = (memoDiv, memoSpan) => {
     
     const container = document.createElement('div'); 
     container.id = 'memo-connection-container'; 
-    container.style = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9998;will-change:transform;'; 
+    container.style = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:998;will-change:transform;'; 
     container.innerHTML = `
-        <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.5;">
+        <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:${CONFIG.CONNECTION_OPACITY};">
             <path stroke="var(--Sv-dock-item--activefocus-background)" stroke-width="2" fill="none" stroke-dasharray="6,4" stroke-linecap="round">
                 <animate attributeName="stroke-dashoffset" from="20" to="-20" dur="1.5s" repeatCount="indefinite"/>
             </path>
@@ -203,7 +207,6 @@ const unobserveDragTitle = () => {
 // 刷新侧边栏备注位置
 const refreshMemoOffset = (main, sidebar) => {
     requestAnimationFrame(() => {
-        const MARGIN = 10;
         let lastBottom = 0;
         
         Array.from(sidebar.querySelectorAll('.memo-item'))
@@ -252,10 +255,10 @@ const refreshMemoOffset = (main, sidebar) => {
                 // 对于编辑中的项，使用更精确的位置计算
                 if (isEditing) {
                     // 确保编辑项不会与前一项重叠，但也不要过度拉开距离
-                    targetTop = Math.max(targetTop, lastBottom + 5); // 编辑时使用较小的间距
+                    targetTop = Math.max(targetTop, lastBottom + CONFIG.EDITING_MARGIN); // 编辑时使用较小的间距
                 } else {
                     // 对于非编辑项，保持正常的间距
-                    targetTop = Math.max(targetTop, lastBottom + MARGIN);
+                    targetTop = Math.max(targetTop, lastBottom + CONFIG.MARGIN);
                 }
                 
                 memoItem.style.position = 'absolute';
@@ -276,7 +279,7 @@ const addSideBar = main => {
         const newSidebar = document.createElement('div'); 
         newSidebar.id = 'protyle-sidebar';
         title.insertAdjacentElement('beforeend', newSidebar);
-        newSidebar.style.cssText = 'position:absolute;right:-230px;width:230px;'; 
+        newSidebar.style.cssText = `position:absolute;right:-${CONFIG.SIDEBAR_WIDTH}px;width:${CONFIG.SIDEBAR_WIDTH}px;`; 
         main.style.minWidth = '90%';
         return newSidebar;
     }
@@ -299,7 +302,7 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
     input.contentEditable = 'true';
     input.innerHTML = old.replace(/\n/g, '<br>');
     input.setAttribute('placeholder', '输入备注内容...');
-    input.style.cssText = 'width:100%;min-height:60px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.8em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;overflow-y:hidden;';
+    input.style.cssText = `width:100%;min-height:${CONFIG.MIN_INPUT_HEIGHT}px;padding:6px;border:1px solid var(--b3-theme-primary);border-radius:8px;font-size:0.8em;resize:vertical;box-sizing:border-box;overflow:auto;outline:none;white-space:pre-wrap;word-break:break-all;overflow-y:hidden;`;
     input.addEventListener('input', () => autoResizeDiv(input));
     
     const save = () => {
@@ -311,18 +314,7 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
             if (isBlockMemo) {
                 // 块备注更新逻辑
                 el.setAttribute('memo', val);
-                fetch('/api/block/updateBlock', { 
-                    method: 'POST', 
-                    headers: { 
-                        'Content-Type': 'application/json', 
-                        'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
-                    }, 
-                    body: JSON.stringify({ 
-                        dataType: 'html', 
-                        data: el.outerHTML, 
-                        id: el.dataset.nodeId 
-                    }) 
-                });
+                updateBlock(el);
             } else {
                 // 行内备注更新逻辑
                 const nodeId = memoDiv.getAttribute('data-node-id');
@@ -350,7 +342,7 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
             const { input: newInput, save: newSave } = handleMemoEdit(memoDiv, el, main, sidebar);
             newDiv.replaceWith(newInput);
             memoDiv.classList.add('editing');
-            memoDiv.style.zIndex = '999';
+            memoDiv.style.zIndex = `${CONFIG.Z_INDEX_EDITING}`;
             newInput.focus();
             setCursorPositionToEnd(newInput);
             requestAnimationFrame(() => {
@@ -615,7 +607,7 @@ const refreshSideBarMemos = (main, sidebar) => {
                         const { input, save } = handleMemoEdit(memoDiv, targetElement, main, sidebar);
                         memoContentDiv.replaceWith(input);
                         memoDiv.classList.add('editing');
-                        memoDiv.style.zIndex = '999';
+                        memoDiv.style.zIndex = `${CONFIG.Z_INDEX_EDITING}`;
                         input.focus();
                         setCursorPositionToEnd(input);
                         requestAnimationFrame(() => {
@@ -712,18 +704,7 @@ const refreshSideBarMemos = (main, sidebar) => {
                         removeBlockMemoContent(blockEl, memoContent);
                     }
                     
-                    fetch('/api/block/updateBlock', { 
-                        method: 'POST', 
-                        headers: { 
-                            'Content-Type': 'application/json', 
-                            'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}` 
-                        }, 
-                        body: JSON.stringify({ 
-                            dataType: 'html', 
-                            data: blockEl.outerHTML, 
-                            id: blockEl.dataset.nodeId 
-                        }) 
-                    });
+                    updateBlock(blockEl);
                 }
             }
         });

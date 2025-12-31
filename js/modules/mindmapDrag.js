@@ -22,12 +22,8 @@ const SVG_ICONS = {
     MINIMIZE: `<svg><use xlink:href="#iconFullscreenExit"></use></svg>`
 };
 
-// 注入拖拽样式
-const ensureDTStyles = () => {
-    if (window.__dtStylesInjected) return;
-    const style = document.createElement("style");
-    style.id = "dt-inline-styles";
-    style.textContent = `[custom-f="dt"][data-draggable] { --dt-scale: 1; }
+// 拖拽相关样式定义
+const DRAGGABLE_STYLES = `[custom-f="dt"][data-draggable] { --dt-scale: 1; }
 [custom-f="dt"] [data-type="NodeListItem"][data-draggable] {
 cursor: grab;
 }
@@ -38,6 +34,13 @@ transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(var(--dt-scale, 1));
 [custom-f="dt"][data-animating] [data-type="NodeListItem"][data-draggable]:not([data-type="NodeListItem"] [data-type="NodeListItem"]) {
 transition: transform 0.25s ease;
 }`;
+
+// 注入拖拽样式
+const ensureDTStyles = () => {
+    if (window.__dtStylesInjected) return;
+    const style = document.createElement("style");
+    style.id = "dt-inline-styles";
+    style.textContent = DRAGGABLE_STYLES;
     document.head.appendChild(style);
     window.__dtStylesInjected = true;
 };
@@ -63,6 +66,43 @@ const createButton = (className, htmlContent, uniqueId) => {
 // 更新折叠按钮内容
 const updateCollapseButton = (btn, isFolded, childCount) => {
     btn.innerHTML = isFolded ? (childCount || '') : SVG_ICONS.COLLAPSE;
+};
+
+// 统一清理元素上所有相关属性和事件
+const cleanupElement = (element) => {
+    // 移除拖拽相关属性
+    element.removeAttribute('data-draggable');
+    
+    // 清理样式属性
+    element.style.removeProperty('--tx');
+    element.style.removeProperty('--ty');
+    element.style.removeProperty('--dt-scale');
+    element.style.removeProperty('cursor');
+    
+    // 清理数据属性
+    delete element.dataset.tx;
+    delete element.dataset.ty;
+    
+    // 移除事件监听器
+    ['wheel', 'dblclick', 'pointerdown'].forEach(name => {
+        if (element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`]) {
+            element.removeEventListener(name, element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`]);
+            delete element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`];
+        }
+    });
+    
+    // 断开并清理观察器
+    if (element._collapseObservers) {
+        element._collapseObservers.forEach(observer => observer.disconnect());
+        element._collapseObservers = null;
+    }
+    
+    // 移除按钮
+    const collapseBtn = element.querySelector('.collapse-btn.protyle-custom');
+    if (collapseBtn) collapseBtn.remove();
+    
+    const maximizeBtn = element.querySelector('.maximize-btn.protyle-custom');
+    if (maximizeBtn) maximizeBtn.remove();
 };
 
 // 创建并添加折叠按钮的通用函数
@@ -459,7 +499,7 @@ export const initMindmapDrag = async () => {
 export const cleanupDraggable = (element) => {
     // 清理所有列表项的拖拽相关属性（包括嵌套的）
     element.querySelectorAll('[data-type="NodeListItem"]').forEach(item => {
-        item.removeAttribute("data-draggable");
+        cleanupElement(item);
         // 只清理根列表项的坐标属性
         if (!item.matches('[data-type="NodeListItem"] [data-type="NodeListItem"]')) {
             item.style.removeProperty("--tx");
@@ -471,45 +511,13 @@ export const cleanupDraggable = (element) => {
     
     // 清理所有列表容器的相关属性
     element.querySelectorAll('[data-type="NodeList"]').forEach(list => {
-        list.style.removeProperty("--dt-scale");
-        list.style.removeProperty("cursor");
+        cleanupElement(list);
     });
 
-    // 重置所有列表项和NodeList元素
-    [...element.querySelectorAll('[data-type="NodeListItem"]'), 
-     ...element.querySelectorAll('[data-type="NodeList"]')].forEach(target => {
-        // 移除折叠按钮
-        const collapseBtn = target.querySelector('.collapse-btn.protyle-custom');
-        if (collapseBtn) collapseBtn.remove();
-        
-        // 断开并清理观察器
-        if (target._collapseObservers) {
-            target._collapseObservers.forEach(observer => observer.disconnect());
-            target._collapseObservers = null;
-        }
-    });
-
-    // 移除最大化按钮
-    const maximizeBtn = element.querySelector('.maximize-btn.protyle-custom');
-    if (maximizeBtn) maximizeBtn.remove();
-
-    // 移除根元素自身属性
-    element.removeAttribute("data-draggable");
+    // 清理根元素自身属性
+    cleanupElement(element);
     element._scale = 1;
-    element.style.removeProperty("--dt-scale");
     element.removeAttribute("data-i18n-tip");
-    element.style.removeProperty("cursor");
-
-    // 清理事件监听器
-    ['wheel', 'dblclick', 'pointerdown'].forEach(name => {
-        if (element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`]) {
-            element.removeEventListener(name, element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`]);
-            delete element[`_${name.charAt(0).toUpperCase()}${name.slice(1)}`];
-        }
-    });
-    
-    // 特别处理：确保所有折叠按钮都被移除
-    element.querySelectorAll('.collapse-btn.protyle-custom').forEach(btn => btn.remove());
 };
 
 // 清理导图拖拽功能
@@ -527,40 +535,6 @@ export const cleanupMindmapDrag = () => {
         
         // 清理所有已设置拖拽属性的元素
         document.querySelectorAll('[custom-f="dt"][data-draggable]').forEach(cleanupDraggable);
-        
-        // 统一清理所有NodeListItem和NodeList元素（包括嵌套的）
-        [...document.querySelectorAll('[data-type="NodeListItem"][data-draggable]'), 
-         ...document.querySelectorAll('[data-type="NodeList"]')].forEach(target => {
-            // 移除拖拽属性
-            if (target.matches('[data-type="NodeListItem"]')) {
-                target.removeAttribute('data-draggable');
-                // 只清理根列表项的坐标属性
-                if (!target.matches('[data-type="NodeListItem"] [data-type="NodeListItem"]')) {
-                    target.style.removeProperty('--tx');
-                    target.style.removeProperty('--ty');
-                    delete target.dataset.tx;
-                    delete target.dataset.ty;
-                }
-            }
-            
-            // 如果是列表容器，也需要清理相关属性
-            if (target.matches('[data-type="NodeList"]')) {
-                target.style.removeProperty('--dt-scale');
-                target.style.removeProperty('cursor');
-            }
-            
-            // 移除折叠按钮（使用与创建时相同的类名）
-            const collapseBtn = target.querySelector('.collapse-btn.protyle-custom');
-            if (collapseBtn) {
-                collapseBtn.remove();
-            }
-            
-            // 断开并清理观察器
-            if (target._collapseObservers) {
-                target._collapseObservers.forEach(observer => observer.disconnect());
-                target._collapseObservers = null;
-            }
-        });
         
         // 清理提示文本观察器
         if (window._listMapTipObserver) {

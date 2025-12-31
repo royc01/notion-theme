@@ -14,6 +14,11 @@ let layoutCenterObserver = null;
 let updateRightMargins = null;
 let updateLeftMargins = null;
 
+// 检测是否为 macOS 平台
+const isMacOS = () => {
+    return navigator.userAgent.includes('Macintosh') || navigator.userAgent.includes('Mac OS X');
+};
+
 /**
  * 初始化顶栏合并左右间距功能
  * @param {string} direction - 方向，"right" 或 "left"
@@ -59,7 +64,11 @@ export const initTabBarsMarginUnified = (direction = "right") => {
 
         // margin 计算
         const calculatedMargin = barButtonsTotalWidth - panelWidth - dockWidth;
-        const CUSTOM_MARGIN = isRight ? -14 : 0;
+        let CUSTOM_MARGIN = isRight ? -14 : 0;
+        // 如果是 macOS 平台且为左侧，则增加额外边距以适应窗口控制按钮
+        if (!isRight && isMacOS()) {
+            CUSTOM_MARGIN = 68; // macOS 左侧窗口控制按钮的额外边距（通常为68px）
+        }
         const marginValue = isRight
             ? `${Math.max(0, (calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN : CUSTOM_MARGIN))}px`
             : `${(calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN : CUSTOM_MARGIN)}px`;
