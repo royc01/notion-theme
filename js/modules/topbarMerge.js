@@ -41,37 +41,52 @@ export const initTabBarsMarginUnified = (direction = "right") => {
             return;
         }
 
-        // 动态计算按钮宽度
-        let barButtonsTotalWidth = 0;
+        // 获取窗口和drag元素的位置信息
         const drag = document.getElementById("drag");
+        let marginValue = "0px";
+        
         if (drag) {
-            let el = isRight ? drag.nextElementSibling : drag.previousElementSibling;
-            while (el) {
-                if (el.offsetParent !== null) {
-                    barButtonsTotalWidth += (el.offsetWidth ?? 0) + 4;
-                }
-                el = isRight ? el.nextElementSibling : el.previousElementSibling;
+            if (isRight) {
+                // 计算 #drag 到窗口右边界的距离
+                const dragRect = drag.getBoundingClientRect();
+                const windowWidth = window.innerWidth;
+                let distanceToWindowRight = windowWidth - dragRect.right;
+                
+                // 减去右侧dock的宽度
+                const rightDock = document.querySelector(".layout__dockr");
+                const rightDockWidth = rightDock?.classList.contains("layout--float")
+                    ? rightDock.querySelector(".dock")?.offsetWidth ?? 0
+                    : rightDock?.offsetWidth ?? 0;
+                const rightDockSelector = "#dockRight";
+                const rightDockRealWidth = document.querySelector(rightDockSelector)?.offsetWidth ?? 0;
+                
+                distanceToWindowRight -= (rightDockWidth + rightDockRealWidth);
+                
+                // 如果结果是负数，直接为0
+                distanceToWindowRight = Math.max(0, distanceToWindowRight);
+                
+                marginValue = `${distanceToWindowRight}px`;
+            } else {
+                // 计算 #drag 到窗口左边界的距离
+                const dragRect = drag.getBoundingClientRect();
+                let distanceToWindowLeft = dragRect.left;
+                
+                // 减去左侧dock的宽度
+                const leftDock = document.querySelector(".layout__dockl");
+                const leftDockWidth = leftDock?.classList.contains("layout--float")
+                    ? leftDock.querySelector(".dock")?.offsetWidth ?? 0
+                    : leftDock?.offsetWidth ?? 0;
+                const leftDockSelector = "#dockLeft";
+                const leftDockRealWidth = document.querySelector(leftDockSelector)?.offsetWidth ?? 0;
+                
+                distanceToWindowLeft -= (leftDockWidth + leftDockRealWidth);
+                
+                // 如果结果是负数，直接为0
+                distanceToWindowLeft = Math.max(0, distanceToWindowLeft);
+                
+                marginValue = `${distanceToWindowLeft}px`;
             }
         }
-
-        // 动态计算 panel/dock 宽度
-        const panel = document.querySelector(isRight ? ".layout__dockr" : ".layout__dockl");
-        const panelWidth = panel?.classList.contains("layout--float")
-            ? panel.querySelector(".dock")?.offsetWidth ?? 0
-            : panel?.offsetWidth ?? 0;
-        const dockId = isRight ? "#dockRight" : "#dockLeft";
-        const dockWidth = document.querySelector(dockId)?.offsetWidth ?? 0;
-
-        // margin 计算
-        const calculatedMargin = barButtonsTotalWidth - panelWidth - dockWidth;
-        let CUSTOM_MARGIN = isRight ? -14 : 0;
-        // 如果是 macOS 平台且为左侧，则增加额外边距以适应窗口控制按钮
-        if (!isRight && isMacOS()) {
-            CUSTOM_MARGIN = 68; // macOS 左侧窗口控制按钮的额外边距（通常为68px）
-        }
-        const marginValue = isRight
-            ? `${Math.max(0, (calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN : CUSTOM_MARGIN))}px`
-            : `${(calculatedMargin > 0 ? calculatedMargin + CUSTOM_MARGIN : CUSTOM_MARGIN)}px`;
 
         // 应用 margin
         if (isRight) {

@@ -112,6 +112,8 @@
     --b3-border-radius: 6px;
     --b3-border-radius-b: 12px;
 
+    --b3-scroll-color: var(--Sv-scroll-color-hover);
+
     /* 自定义文字 */
 	--b3-font-color1: oklch(var(--b3-font-color1-base-l) var(--b3-font-color1-base-ch));
     --b3-font-color2: oklch(var(--b3-font-color2-base-l) var(--b3-font-color2-base-ch));
@@ -514,6 +516,8 @@
     --Sv-layout--resize-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.2);
     --Sv-list-focus-active: oklch(var(--Sv-dock-item--activefocus-background--base) / 0.1);
 
+    --b3-list-hover: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.05);
+
     /* 反链面板 */
     --Sv-block-logo-color: var(--b3-theme-background);
     --Sv-block-logo-background: oklch(calc(var(--b3-theme-surface-base-l)*0.3) var(--b3-theme-surface-base-ch) / 0.2);
@@ -712,6 +716,8 @@
     --Sv-list-focus-hover: oklch(calc(var(--b3-theme-surface-base-l)*2) var(--b3-theme-surface-base-ch) / 0.4);
     --Sv-layout--resize-hover: oklch(calc(var(--b3-theme-surface-base-l)*4) var(--b3-theme-surface-base-ch) / 0.2);
     --Sv-list-focus-active: oklch(var(--Sv-dock-item--activefocus-background--base) / 0.1);
+
+    --b3-list-hover: var(--Sv-list-focus-hover);
     
     /* 反链面板 */
     --Sv-block-logo-color: var(--b3-theme-on-background);
