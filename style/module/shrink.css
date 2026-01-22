@@ -59,7 +59,8 @@
 	/*面板列表项*/.b3-list--background 
 	.b3-list-item{
 		border-radius:var(--Sv-list-item-radius);
-		margin:0 0 4px 0!important;
+		margin-left: 4px!important;
+		margin-right: 0px!important;
         padding-right: 3px;
         &:hover:not(.b3-list-item--focus):not(.dragover):not(.dragover__current):not(.dragover__top):not(.dragover__bottom){
             background-color: var(--Sv-list-background);
