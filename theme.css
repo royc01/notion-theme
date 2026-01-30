@@ -20,6 +20,7 @@
 @import url( style/custom/list2map.css);/* 列表转导图 */
 @import url( style/custom/list2table.css);/* 列表转表格 */
 @import url( style/custom/list2board.css);/* 列表转看板 */
+@import url( style/custom/list2tab.css);/* 列表转标签页 */
 @import url( style/custom/list-fold.css);/* 列表折叠 */
 @import url( style/custom/list2timeline.css);/* 列表转时间线 */
 
@@ -802,6 +803,9 @@
     &::before {
         display: none;
     }
+}
+.reminder-calendar-view{
+    background-color: var(--b3-theme-background);
 }
 
 /* 链接前加图标 

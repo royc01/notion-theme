@@ -1,0 +1,175 @@
+/*-----------------------------------------------列表转标签页-------------------------------------------*/
+
+.protyle-wysiwyg .list[custom-f~=tab], 
+.protyle-wysiwyg .list[custom-f="tab"] { 
+    --tab-header-height: 2.5rem; 
+    --tab-border-radius: 3px; 
+}
+
+/* 标签页容器 */
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab], 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] { 
+    display: flex; 
+    flex-direction: column; 
+    width: 100% !important; 
+    background-color: var(--b3-theme-background);
+    border: 5px solid var(--Sv-theme-surface);
+    border-radius: 8px;
+    overflow: hidden;
+} 
+
+/* 标签页头部容器 */ 
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab]>.tab-header-container, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"]>.tab-header-container { 
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 0;
+    background-color: var(--Sv-theme-surface);
+} 
+
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-headers, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-headers { 
+    display: flex; 
+    flex-direction: row; 
+    flex-grow: 1; 
+    overflow-x: auto; 
+} 
+
+/* 标签页标题 */ 
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-header, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-header { 
+    display: flex; 
+    align-items: center; 
+    height: calc(var(--tab-header-height) - 1px); 
+    padding: 0 1rem; 
+    cursor: pointer; 
+    border: 1px solid transparent; 
+    border-bottom: none; 
+    border-radius: var(--tab-border-radius) var(--tab-border-radius) 0 0; 
+    margin-right: 2px; 
+    background-color: transparent; 
+    color: var(--b3-theme-on-background); 
+    transition: all 0.2s ease; 
+    white-space: nowrap; 
+    flex-shrink: 0; 
+    min-width: 80px;
+    position: relative;
+    z-index: 1;
+}
+
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-header::after, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-header::after {
+    content: "";
+    bottom: 0;
+    position: absolute;
+    background-color: transparent;
+    height: 8px;
+    left: calc(-1 * var(--Sv-dock-item-radius));
+    border-radius: 0;
+    width: calc(100% + var(--Sv-dock-item-radius)*2);
+    background-size: 8px 8px, 8px 8px, calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
+    background-position: right bottom, left bottom, center top;
+    background-repeat: no-repeat;
+    z-index: 1;
+    opacity: 0;
+} 
+
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-header:hover, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-header:hover { 
+    background-color: var(--Sv-tab-bar-item-background);
+}
+
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-header:hover::after, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-header:hover::after {
+    opacity: 1;
+} 
+
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-header.active, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-header.active { 
+    background-color: var(--Sv-tab-bar-item-background-focus); 
+    border-radius: var(--Sv-tab-bar-item--focus-radius);
+    box-shadow: rgba(0, 0, 0, 0.03) 0px 0px 5px 0px;
+    transition: opacity .2s cubic-bezier(0, 0, .2, 1) 0ms;
+}
+
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-header.active::after, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-header.active::after {
+    content: "";
+    background-color: transparent;
+    background-image: var(--Sv-tab-bar-item-focus-after);
+    z-index: 2;
+    opacity: 1;
+    box-shadow: var(--Sv-tab-bar-item-background-focus) 0 8px 0 0;
+}
+
+
+/* 保持思源原生内容样式 */ 
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-header [data-node-id], 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-header [data-node-id] { 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    background: none !important; 
+    border: none !important; 
+    box-shadow: none !important;
+    display: block;
+} 
+
+/* 标签页内容容器 */ 
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab]>.tab-contents, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"]>.tab-contents { 
+    position: relative;
+    padding: 16px;
+    background-color: var(--b3-theme-background);
+} 
+
+/* 标签页内容项 */ 
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-content, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-content { 
+    display: none; 
+} 
+
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-content.active, 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-content.active,
+/* 默认显示第一个标签的内容 */
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-content:first-child,
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-content:first-child { 
+    display: block; 
+} 
+
+/* 标签内容中的列表项 */
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-content > .li,
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-content > .li {
+    margin: 0 0 12px 0;
+    padding: 8px;
+    background-color: var(--b3-font-background2);
+    border-radius: 6px;
+    border-left: 3px solid var(--b3-font-color13);
+}
+
+/* 处理标签内的标题 */
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] [data-type="NodeHeading"] > [spellcheck]:after,
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] [data-type="NodeHeading"] > [spellcheck]:after {
+    display: none;
+}
+
+/* 代码块样式 */
+.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .code-block,
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .code-block {
+    width: calc(100% - 12px);
+}
+
+/* 响应式设计 */ 
+@media (max-width: 768px) { 
+
+    .protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-headers, 
+    .protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-headers { 
+        flex-wrap: nowrap;
+    } 
+
+    .protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-header, 
+    .protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-header { 
+        min-width: 120px;
+    } 
+} 
+
+/*-----------------------------------------------列表转标签页 END-------------------------------------------*/

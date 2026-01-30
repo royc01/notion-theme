@@ -153,7 +153,7 @@ const positionHandles = async (sb) => {
             const rightRect = cols[i + 1].getBoundingClientRect();
             const centerX = ((leftRect.right + rightRect.left) / 2) - rect.left;
             const handle = document.createElement('div');
-            handle.className = HANDLE_CLASS;
+            handle.className = HANDLE_CLASS + ' protyle-custom';
             handle.style.left = centerX + 'px';
             attachDrag(sb, handle, cols[i], cols[i + 1]);
             sb.appendChild(handle);

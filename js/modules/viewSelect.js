@@ -11,6 +11,7 @@ const viewButtons = {
         { id: "TableView", attrName: "f", attrValue: "bg", icon: "iconTable", labelKey: "转换为表格" },
         { id: "kanbanView", attrName: "f", attrValue: "kb", icon: "iconMenu", labelKey: "转换为看板" },
         { id: "timelineView", attrName: "f", attrValue: "tl", icon: "iconList", labelKey: "转换为时间线" },
+        { id: "tabView", attrName: "f", attrValue: "tab", icon: "iconDock", labelKey: "转换为标签页" },
         { id: "DefaultView", attrName: "f", attrValue: "", icon: "iconList", labelKey: "恢复为列表" }
     ],
     NodeTable: [
@@ -138,9 +139,105 @@ const InsertMenuItem = (selectid, selecttype) => {
 let menuHandler = null;
 let viewSelectClickHandler = null;
 
+// 将列表转换为标签页结构
+const convertToTabView = (listElement) => {
+    if (listElement._convertedToTab) return;
+    
+    const children = listElement.querySelectorAll(':scope > .li');
+    if (children.length < 1) return;
+    
+    listElement._originalHTML = listElement.innerHTML;
+    listElement._convertedToTab = true;
+    
+    const headerContainer = document.createElement('div');
+    headerContainer.className = 'tab-header-container';
+    
+    const headers = document.createElement('div');
+    headers.className = 'tab-headers';
+    
+    const contentsContainer = document.createElement('div');
+    contentsContainer.className = 'tab-contents';
+    
+    children.forEach((li, index) => {
+        const firstChild = li.querySelector(':scope > [data-node-id]:not(.list)');
+        const subList = li.querySelector(':scope > .list');
+        
+        const tabHeader = document.createElement('div');
+        tabHeader.className = 'tab-header' + (index === 0 ? ' active' : '');
+        
+        if (firstChild) tabHeader.appendChild(firstChild.cloneNode(true));
+        
+        const tabContent = document.createElement('div');
+        tabContent.className = 'tab-content' + (index === 0 ? ' active' : '');
+        if (subList) tabContent.appendChild(subList.cloneNode(true));
+        
+        headers.appendChild(tabHeader);
+        contentsContainer.appendChild(tabContent);
+    });
+    
+    headerContainer.appendChild(headers);
+    listElement.innerHTML = '';
+    listElement.appendChild(headerContainer);
+    listElement.appendChild(contentsContainer);
+    
+    // 为每个标签页单独绑定事件，避免全局监听
+    headers.addEventListener('click', (event) => {
+        const clickedTab = event.target.closest('.tab-header');
+        if (!clickedTab) return;
+        
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const allTabs = headers.querySelectorAll('.tab-header');
+        const allContents = contentsContainer.querySelectorAll('.tab-content');
+        
+        allTabs.forEach(t => t.classList.remove('active'));
+        allContents.forEach(c => c.classList.remove('active'));
+        
+        clickedTab.classList.add('active');
+        const index = [...allTabs].indexOf(clickedTab);
+        allContents[index]?.classList.add('active');
+    });
+};
+
+const restoreFromTabView = (listElement) => {
+    if (!listElement._convertedToTab) return;
+    listElement.innerHTML = listElement._originalHTML || '';
+    delete listElement._originalHTML;
+    delete listElement._convertedToTab;
+};
+
 // 初始化菜单监控
 export const initViewSelect = () => {
     if (menuHandler) return;
+    
+    const initTabViews = () => {
+        document.querySelectorAll('.protyle-wysiwyg [data-type="NodeList"][custom-f~="tab"]')
+            .forEach(el => !el._convertedToTab && convertToTabView(el));
+    };
+    
+    setTimeout(initTabViews, 100);
+    
+    // 保存事件监听器引用以便清理
+    viewSelectClickHandler = viewSelectClickHandler || {};
+    viewSelectClickHandler._loadedProtyleHandler = () => setTimeout(initTabViews, 200);
+    window.siyuan?.eventBus?.on('loaded-protyle', viewSelectClickHandler._loadedProtyleHandler);
+    
+    // 防抖函数
+    let debounceTimer;
+    const debouncedInit = () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(initTabViews, 150);
+    };
+    
+    // 只监听 .protyle-wysiwyg 容器，减少监听范围
+    const observer = new MutationObserver(debouncedInit);
+    const protyleContainers = document.querySelectorAll('.protyle-wysiwyg');
+    protyleContainers.forEach(container => {
+        observer.observe(container, { childList: true, subtree: true, attributes: true, attributeFilter: ['custom-f'] });
+    });
+    
+    viewSelectClickHandler._tabObserver = observer;
     
     // 存储事件监听器引用，以便后续清理
     menuHandler = () => {
@@ -158,16 +255,19 @@ export const initViewSelect = () => {
     viewSelectClickHandler = (event) => {
         const item = event.target.closest('.b3-menu__item[data-view-item="1"]');
         if (!item) return;
+        
         const id = item.dataset.nodeId;
         const attrName = "custom-" + item.dataset.attrName;
         const attrValue = item.dataset.attrValue;
         const blocks = document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${id}"]`);
+        
         clearTransformData(id, blocks);
+        
         if (blocks?.length > 0) {
-            blocks.forEach(block => block.setAttribute(attrName, attrValue));
-            if (attrValue === "") {
-                // 不需要清理导图拖拽功能，通过CSS控制按钮显示/隐藏
-            }
+            blocks.forEach(block => {
+                block.setAttribute(attrName, attrValue);
+                attrValue === "tab" ? convertToTabView(block) : restoreFromTabView(block);
+            });
             设置思源块属性(id, { [attrName]: attrValue });
         }
     };
@@ -182,6 +282,12 @@ export const cleanupViewSelect = () => {
     }
     if (viewSelectClickHandler) {
         document.removeEventListener("click", viewSelectClickHandler, true);
+        if (viewSelectClickHandler._tabObserver) {
+            viewSelectClickHandler._tabObserver.disconnect();
+        }
+        if (viewSelectClickHandler._loadedProtyleHandler && window.siyuan?.eventBus) {
+            window.siyuan.eventBus.off('loaded-protyle', viewSelectClickHandler._loadedProtyleHandler);
+        }
         viewSelectClickHandler = null;
     }
 };

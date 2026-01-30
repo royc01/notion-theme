@@ -410,7 +410,7 @@ export const destroyTheme = () => {
         }
     });
     
-    // 清理视图选择功能
+    // 清理视图选择功能（先断开所有监听器）
     try {
         if (typeof cleanupViewSelect === 'function') {
             cleanupViewSelect();
@@ -418,6 +418,22 @@ export const destroyTheme = () => {
     } catch (e) {
         // [Savor] 清理视图选择功能时出错: ${e.message}
     }
+    
+    // 清理标签页 DOM，恢复原始结构（在断开监听器后执行）
+    setTimeout(() => {
+        try {
+            document.querySelectorAll('.protyle-wysiwyg [data-type="NodeList"]').forEach(listElement => {
+                if (listElement._convertedToTab && listElement._originalHTML) {
+                    listElement.innerHTML = listElement._originalHTML;
+                    delete listElement._originalHTML;
+                    delete listElement._convertedToTab;
+                    listElement.removeAttribute('custom-f');
+                }
+            });
+        } catch (e) {
+            // [Savor] 清理标签页 DOM 时出错: ${e.message}
+        }
+    }, 100);
     
     // 重新初始化超级块宽度调节功能
     try {

@@ -39,7 +39,7 @@
 }
 
 /* 按钮 */
-.b3-button--outline,.b3-button--text:not(.ft__selectnone,.bk_label),.b3-button.fn__block{
+/*.b3-button--outline,.b3-button--text:not(.ft__selectnone,.bk_label),.b3-button.fn__block{
     font-weight:700;
 	background-color:var( --Sv-button-background);
 	color: var(--Sv-button-color);
@@ -48,6 +48,14 @@
         background-color: var(--Sv-button-background-hover);
         box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, .2);
     }
+    svg{
+        height: 14px;
+        width: 14px;
+    }
+}*/
+.b3-button--outline{
+    font-weight:700;
+    box-shadow: inset 0 0 0 .6px var(--Sv-layout--resize-hover);
     svg{
         height: 14px;
         width: 14px;
