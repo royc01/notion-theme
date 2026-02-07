@@ -13,11 +13,19 @@ export const enableTypewriterMode = () => {
     typewriterHandler = throttle(() => {
         const sel = window.getSelection();
         if (!sel.rangeCount) return;
-        let node = sel.anchorNode || sel.getRangeAt(0).startContainer;
-        node = node.nodeType === 3 ? node.parentElement : node;
-        const line = node.closest(".p, .h1, .h2, .h3, .h4, .h5, .h6, .li");
-        if (!line) return;
-        line.scrollIntoView({ block: "center", inline: "nearest", behavior: "smooth" });
+        const range = sel.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        const editor = document.querySelector(".protyle-content") || document.documentElement;
+        const editorRect = editor.getBoundingClientRect();
+        const scrollTop = editor.scrollTop || document.documentElement.scrollTop || document.body.scrollTop;
+        const editorCenter = editorRect.top + editorRect.height / 2;
+        const cursorPosition = rect.top + rect.height / 2;
+        const scrollAmount = scrollTop + (cursorPosition - editorCenter);
+        if (editor === document.documentElement || editor === document.body) {
+            window.scrollTo({ top: scrollAmount, behavior: "smooth" });
+        } else {
+            editor.scrollTo({ top: scrollAmount, behavior: "smooth" });
+        }
     }, 100);
     document.addEventListener("selectionchange", typewriterHandler);
 };
