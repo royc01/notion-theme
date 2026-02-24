@@ -169,7 +169,6 @@
 /*h1~6标题间距*/
 .protyle-wysiwyg{
 &>.h1,&>.h2,&>.h3,&>.h4,&>.h5,&>.h6{
-	font-weight:700;
 	margin-top: .5em;
     margin-bottom: .1em;
 }}

@@ -279,7 +279,7 @@
         font-size:80%;
         min-height: 24px;
 		margin-left: -18px;
-        &+div{
+        &+div:not[data-type="NodeHeading"]{
             font-size:90%;
         }
         &:not(:first-child) {

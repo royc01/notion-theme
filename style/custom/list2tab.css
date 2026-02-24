@@ -129,14 +129,11 @@
 } 
 
 .protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-content.active, 
-.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-content.active,
-/* 默认显示第一个标签的内容 */
-.protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-content:first-child,
-.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-content:first-child { 
+.protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-content.active { 
     display: block; 
 } 
 
-/* 标签内容中的列表项 */
+/* 标签页内容中的列表项 */
 .protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] .tab-content > .li,
 .protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] .tab-content > .li {
     margin: 0 0 12px 0;
@@ -146,7 +143,7 @@
     border-left: 3px solid var(--b3-font-color13);
 }
 
-/* 处理标签内的标题 */
+/* 隐藏标签页内容中的标题序号 */
 .protyle-wysiwyg [data-type="NodeList"][custom-f~=tab] [data-type="NodeHeading"] > [spellcheck]:after,
 .protyle-wysiwyg [data-type="NodeList"][custom-f="tab"] [data-type="NodeHeading"] > [spellcheck]:after {
     display: none;
