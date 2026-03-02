@@ -49,6 +49,9 @@
                 display: none;
             }
         }
+        & .item__graphic + .item__text::before{
+            display: none;
+        }
         &:hover{
             background-color: var(--Sv-tab-bar-item-background);
             &::after{

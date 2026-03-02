@@ -211,7 +211,6 @@
 		.b3-button{
 			height: 28px;
 			border-radius: 8px;
-			background-color:var(--b3-theme-on-background);
             padding: 2px 8px;
 		}
 		.b3-chips .b3-chip{
