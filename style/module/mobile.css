@@ -39,7 +39,6 @@ body>.toolbar--border{
 		background-color: var(--b3-theme-background);
 	}
 	&>.fn__flex-column{
-	height:unset;
 	.fn__flex-1{
 		background-color: var(--b3-theme-background);
 	}

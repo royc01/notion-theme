@@ -67,6 +67,9 @@ body:not(.body--mobile,.body--window) #layouts{
         margin: 0 5px 5px 5px;
         box-shadow:  rgba(0, 0, 0, 0.03) 0px 1px 5px 0px;
     }
+    .layout__center .fn__flex.fn__none + .layout-tab-container{
+        margin: 5px;
+    }
     .layout__center div[data-type=wnd]{
         min-height: 90%;
     }
@@ -167,4 +170,3 @@ body:not(.body--mobile,.body--window) #layouts{
 #action {
     background: var(--Sv-theme-surface)!important;
 }
-

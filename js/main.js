@@ -1,5 +1,5 @@
 // ========================================
-// Savor 主题模块化入口文件
+// Savor 主题初始化入口
 // ========================================
 
 import { initUtils } from './modules/utils.js';
@@ -18,7 +18,48 @@ import { initMobileAndPlatformFeatures } from './modules/mobileMenu.js';
 import { initMindmapDrag } from './modules/mindmapDrag.js';
 import { initSuperBlockResizer } from './modules/superBlockResizer.js';
 
-// 创建统一的命名空间
+let savorInitPromise = null;
+let savorInitialized = false;
+
+const initAll = async () => {
+    if (savorInitPromise) return savorInitPromise;
+
+    // 允许切换到其他主题后再切回 Savor 时重新构建主题 UI。
+    if (savorInitialized) {
+        try {
+            window.destroyTheme?.();
+        } catch (error) {
+            // 清理失败时继续尝试重建
+        }
+        savorInitialized = false;
+    }
+
+    savorInitPromise = (async () => {
+        try {
+            initUtils();
+            await initConfig();
+            await initI18n();
+            await initButtons();
+            initTheme();
+            initStatusBarHiding();
+            initObservers();
+            initTabbarVertical();
+            initBulletThreadingModule();
+            initTypewriterModeModule();
+            initSidebarMemoModule();
+            initListPreview();
+            initMobileAndPlatformFeatures();
+            savorInitialized = true;
+        } catch (error) {
+            // 初始化失败: error
+        } finally {
+            savorInitPromise = null;
+        }
+    })();
+
+    return savorInitPromise;
+};
+
 export const Savor = {
     initUtils,
     initConfig,
@@ -35,39 +76,16 @@ export const Savor = {
     initMobileAndPlatformFeatures,
     initMindmapDrag,
     initSuperBlockResizer,
-    initAll: async () => {
-        try {
-            // 按顺序初始化所有模块
-            initUtils();
-            await initConfig();
-            await initI18n();
-            await initButtons();
-            initTheme();
-            initStatusBarHiding();
-            initObservers();
-            initTabbarVertical();
-            initBulletThreadingModule();
-            initTypewriterModeModule();
-            initSidebarMemoModule();
-            initListPreview();
-            initMobileAndPlatformFeatures();
-            // 视图选择UI功能已移除
-            await initMindmapDrag();
-            initSuperBlockResizer();
-        } catch (error) {
-            // 主题初始化失败: error
-        }
-    }
+    initAll
 };
 
-// 保持向后兼容性，单独导出函数
-export { 
-    initUtils, 
-    initConfig, 
-    initI18n, 
-    initButtons, 
-    initTheme, 
-    initStatusBarHiding, 
+export {
+    initUtils,
+    initConfig,
+    initI18n,
+    initButtons,
+    initTheme,
+    initStatusBarHiding,
     initObservers,
     initTabbarVertical,
     initBulletThreadingModule,
@@ -75,11 +93,8 @@ export {
     initSidebarMemoModule,
     initListPreview,
     initMobileAndPlatformFeatures,
-    // initViewSelect,
     initMindmapDrag,
     initSuperBlockResizer
 };
 
-// 主初始化函数
-// 已移至Savor命名空间，此处仅为向后兼容
-export const initAll = Savor.initAll;
+export { initAll };

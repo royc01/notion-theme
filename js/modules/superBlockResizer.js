@@ -350,6 +350,7 @@ const initSuperBlock = async (sb) => {
 
 let bodyObserver = null;
 let scanScheduled = false;
+let loadedProtyleHandler = null;
 
 const scan = async () => {
     scanScheduled = false;
@@ -439,11 +440,17 @@ export const start = () => {
     window._superBlockThemeChangeHandler = handleThemeChange;
     window.addEventListener('themechange', handleThemeChange, { passive: true });
     setTimeout(() => window.dispatchEvent(new Event('themechange')), 500);
-    window.siyuan?.eventBus?.on('loaded-protyle', () => setTimeout(scheduleScan, 200));
+    if (!loadedProtyleHandler) {
+        loadedProtyleHandler = () => setTimeout(scheduleScan, 200);
+        window.siyuan?.eventBus?.on('loaded-protyle', loadedProtyleHandler);
+    }
 }
 
 export const stop = () => {
-    try { window.siyuan?.eventBus?.off('loaded-protyle', scan); } catch (_) {}
+    if (loadedProtyleHandler) {
+        try { window.siyuan?.eventBus?.off('loaded-protyle', loadedProtyleHandler); } catch (_) {}
+        loadedProtyleHandler = null;
+    }
     bodyObserver?.disconnect(); bodyObserver = null;
     if (window._superBlockThemeChangeHandler) {
         window.removeEventListener('themechange', window._superBlockThemeChangeHandler);
@@ -470,7 +477,7 @@ export const initSuperBlockResizer = () => {
     if (document.readyState === 'complete') {
         start();
     } else {
-        window.addEventListener('load', start);
+        window.addEventListener('load', start, { once: true });
     }
 }
 
