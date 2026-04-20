@@ -3,6 +3,7 @@
 // ========================================
 
 import { debounce } from './utils.js';
+import { shouldUseMobileThemeLayout } from './device.js';
 
 // 模块状态变量
 let listPreviewActive = false;
@@ -16,6 +17,8 @@ export const initListPreview = () => {
         disableListPreview();
     }
     
+    if (shouldUseMobileThemeLayout()) return;
+
     listPreviewActive = true;
     
     listPreviewHandler = debounce(collapsedListPreviewEvent, 100);

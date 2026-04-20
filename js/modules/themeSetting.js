@@ -13,6 +13,7 @@ import { initPlatformDetection, cleanupPlatformDetection } from './platform.js';
 import { initSlashMenuNavigation } from './slashMenuNav.js';
 import { initSuperBlockResizer } from './superBlockResizer.js';
 import { initMobileAndPlatformFeatures, cleanupMobileMenu } from './mobileMenu.js';
+import { shouldLimitDesktopEnhancements } from './device.js';
 
 // 主题相关变量
 let featureButtonsActive = new Set();
@@ -29,6 +30,14 @@ const getCachedElement = (selector) => {
 
 // 获取配置项
 const getItem = config.get;
+const MOBILE_UNSAFE_FEATURE_IDS = new Set([
+    "topBar",
+    "tabbarVertical",
+    "typewriterMode",
+    "sidebarMemo",
+    "sidebarBlockMemo",
+    "colorFolder"
+]);
 
 // 应用记住的主题样式
 export const applyRememberedThemeStyle = async (skipFeatures = false) => {
@@ -68,8 +77,12 @@ export const applyRememberedThemeStyle = async (skipFeatures = false) => {
 
 // 应用记住的功能
 const applyRememberedFeatures = async () => {
+    const limitDesktopEnhancements = shouldLimitDesktopEnhancements();
     for (const btn of getAllButtons()) {
         if (btn.type === 'feature' && config.get(btn.attrName) === "1") {
+            if (limitDesktopEnhancements && MOBILE_UNSAFE_FEATURE_IDS.has(btn.id)) {
+                continue;
+            }
             featureButtonsActive.add(btn.id);
             
             const button = document.getElementById(btn.id);
@@ -81,6 +94,7 @@ const applyRememberedFeatures = async () => {
     }
     
     // 确保超级块宽度调节功能已初始化
+    if (limitDesktopEnhancements) return;
     if (typeof window.superBlockResizer?.start === 'function') {
         window.superBlockResizer.start();
     } else if (typeof window.initSuperBlockResizer === 'function') {

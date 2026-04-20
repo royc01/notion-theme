@@ -3,6 +3,7 @@
 // ========================================
 
 import { i18n } from './i18n.js';
+import { shouldUseMobileThemeLayout } from './device.js';
 
 // 拖拽功能防抖
 export const dragDebounce = (fn) => {
@@ -452,6 +453,10 @@ const initObserver = () => {
 
 // 添加主题切换处理函数
 const handleThemeChange = () => {
+    if (shouldUseMobileThemeLayout()) {
+        cleanupMindmapDrag();
+        return;
+    }
     // 先清理所有现有的导图元素
     document.querySelectorAll(`[custom-f="dt"]`).forEach(cleanupDraggable);
     
@@ -483,6 +488,10 @@ window.addEventListener('themechange', handleThemeChange, { passive: true });
 export const initMindmapDrag = async () => {
     // 等待i18n资源加载完成
     await i18n.ready();
+    if (shouldUseMobileThemeLayout()) {
+        cleanupMindmapDrag();
+        return;
+    }
     
     // 设置防抖函数
     window.dragDebounce = dragDebounce;

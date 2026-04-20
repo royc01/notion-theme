@@ -1,5 +1,6 @@
 // 超级块宽度调节模块
 import { throttle, debounce } from './utils.js';
+import { shouldUseMobileThemeLayout } from './device.js';
 
 // 常量定义
 const HANDLE_CLASS = 'sb-resize-handle';
@@ -413,6 +414,12 @@ const scheduleScan = debounce(() => {
 }, 30);
 
 export const start = () => {
+    if (shouldUseMobileThemeLayout()) {
+        stop();
+        document.getElementById('sb-resizer-styles')?.remove();
+        return;
+    }
+
     ensureStyles();
     setTimeout(() => scan(), 100);
     if (!bodyObserver) {
@@ -466,6 +473,7 @@ export const stop = () => {
     });
     document.querySelectorAll('.' + HANDLE_CLASS).forEach(el => el.remove());
     document.querySelectorAll('.sb-add-column-btn').forEach(btn => btn.remove());
+    document.getElementById('sb-resizer-styles')?.remove();
     scanScheduled = false;
 }
 
@@ -474,6 +482,10 @@ export const cleanup = stop;
 
 export const initSuperBlockResizer = () => {
     window.superBlockResizer = { start, stop, refresh, cleanup };
+    if (shouldUseMobileThemeLayout()) {
+        stop();
+        return;
+    }
     if (document.readyState === 'complete') {
         start();
     } else {

@@ -3,6 +3,7 @@
 // ========================================
 
 import { initMobileAndPlatformFeatures, cleanupMobileMenu } from './mobileMenu.js';
+import { isTouchCapable, shouldUseMobileThemeLayout } from './device.js';
 
 /**
  * 判断是否为移动端设备
@@ -10,7 +11,7 @@ import { initMobileAndPlatformFeatures, cleanupMobileMenu } from './mobileMenu.j
  */
 export const isMobile = () => {
     // 通过检查是否存在 #editor 元素来判断是否为移动端
-    return !!document.getElementById("editor");
+    return shouldUseMobileThemeLayout();
 };
 
 /**
@@ -62,7 +63,7 @@ export const isDesktop = () => {
  * @returns {boolean} 是否为触摸设备
  */
 export const isTouchDevice = () => {
-    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    return isTouchCapable();
 };
 
 /**

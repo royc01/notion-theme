@@ -3,13 +3,14 @@
 // ========================================
 
 import { renderAllButtons } from './themeSetting.js';
+import { isOfficialMobileLayout, isLikelyMobileBrowser, shouldUseMobileThemeLayout } from './device.js';
 
 /**
  * 判断是否为移动端设备
  * @returns {boolean} 是否为移动端
  */
 const isPhone = () => {
-    return !!document.getElementById("editor");
+    return shouldUseMobileThemeLayout();
 };
 
 /**
@@ -17,7 +18,7 @@ const isPhone = () => {
  */
 const initMobileMenu = () => {
     // 只在移动端设备上初始化
-    if (!isPhone()) return;
+    if (!isOfficialMobileLayout()) return;
     
     document.body.classList.add("body--mobile");
     
@@ -120,10 +121,13 @@ export const initMobileAndPlatformFeatures = () => {
     // 添加移动端相关类名
     if (isPhone()) {
         document.body.classList.add("body--mobile");
+        document.body.classList.toggle("body--mobile-browser", isLikelyMobileBrowser());
         // 延迟初始化移动端菜单，确保DOM元素已加载
-        setTimeout(() => {
-            initMobileMenu();
-        }, 1000);
+        if (isOfficialMobileLayout()) {
+            setTimeout(() => {
+                initMobileMenu();
+            }, 1000);
+        }
     }
 
     // 添加Mac相关类名
@@ -136,6 +140,7 @@ export const initMobileAndPlatformFeatures = () => {
 export const cleanupMobileMenu = () => {
     // 移除添加的元素和类名
     document.body.classList.remove("body--mobile");
+    document.body.classList.remove("body--mobile-browser");
     document.body.classList.remove("body--mac");
     
     // 移除移动端菜单元素
