@@ -17,6 +17,8 @@ import { destroyLifecycle } from './lifecycle.js';
 // 主题相关变量
 let domCache = new Map();
 let menuListeners = new WeakMap();
+// 标记 handleMenuClick 正在视图过渡回调内重新派发点击，避免与 initThemeObserver 的过渡竞争
+let isDispatchingThemeSwitch = false;
 
 // 获取缓存元素
 const getCachedElement = (selector) => {
@@ -205,24 +207,46 @@ const shouldShowSavorToolbar = () => {
 const handleMenuClick = (e) => {
     const menuItem = e.target.closest(".b3-menu__item");
     if (!menuItem) return;
-    
+
     const buttonText = menuItem.textContent.trim();
     const { themeLight, themeDark, themeOS } = window.siyuan.languages;
-    
+
     // 简化条件判断
     if (![themeLight, themeDark, themeOS].includes(buttonText)) return;
-    
-    let targetMode = buttonText === themeOS ? 
-        (window.matchMedia("(prefers-color-scheme: light)").matches ? themeLight : themeDark) : 
+
+    // 过渡回调内重新派发点击时放行，交给思源原生处理
+    if (isDispatchingThemeSwitch) return;
+
+    let targetMode = buttonText === themeOS ?
+        (window.matchMedia("(prefers-color-scheme: light)").matches ? themeLight : themeDark) :
         buttonText;
-    
+
     const currentMode = window.siyuan.config.appearance.mode === 0 ? themeLight : themeDark;
     if (targetMode === currentMode) return;
-    
+
     const targetTheme = targetMode === themeLight ? window.siyuan.config.appearance.themeLight : window.siyuan.config.appearance.themeDark;
     if (targetTheme !== "Savor") return;
-    
-    window.theme.applyThemeTransition(() => {});
+
+    // 拦截原生点击，将主题切换放入视图过渡回调内，让明暗切换拥有与配色切换一致的渐变动画
+    e.stopPropagation();
+    isDispatchingThemeSwitch = true;
+
+    const switchThemeInsideTransition = async () => {
+        // 先派发点击，让思源以旧的 mode 判断需要切换并异步保存配置（不等待响应）
+        menuItem.click();
+
+        // 立即同步更新 mode 与 data-theme-mode，无需等待思源 API，消除可感知的冻结延迟
+        const isDark = targetMode === themeDark;
+        window.siyuan.config.appearance.mode = isDark ? 1 : 0;
+        document.documentElement.setAttribute("data-theme-mode", isDark ? "dark" : "light");
+
+        // 在同一过渡内刷新工具栏按钮与配色，避免 initThemeObserver 再起一次过渡
+        renderAllButtons();
+        await applyRememberedThemeStyle(true);
+    };
+
+    const transition = window.theme.applyThemeTransition(switchThemeInsideTransition);
+    transition?.finished?.finally(() => { isDispatchingThemeSwitch = false; });
 };
 
 export const toggleMenuListener = (commonMenu, add = true) => {
@@ -282,9 +306,16 @@ export const initThemeObserver = () => {
         const newThemeMode = window.siyuan.config.appearance.mode === 0 ? "light" : "dark";
         const html = document.documentElement;
         const newThemeName = html.getAttribute(`data-${newThemeMode}-theme`);
-        
+
         if (previousThemeMode === newThemeMode && previousThemeName === newThemeName) return;
-        
+
+        // handleMenuClick 正在视图过渡内处理切换时，仅同步缓存的模式，避免再起一次过渡导致动画被打断
+        if (isDispatchingThemeSwitch) {
+            previousThemeMode = newThemeMode;
+            previousThemeName = newThemeName;
+            return;
+        }
+
         const isSavorToSavor = previousThemeName === "Savor" && newThemeName === "Savor";
         
         const commonMenu = getCachedElement("#commonMenu");
@@ -466,12 +497,14 @@ export const initTheme = () => {
             get themeMode() { return window.siyuan?.config?.appearance?.mode === 0 ? 'light' : 'dark'; },
 
             applyThemeTransition: (callback) => {
-                // 简化回调执行逻辑
-                const executeCallback = () => {
-                    callback?.();
-                };
-                
-                (document.startViewTransition && document.startViewTransition(executeCallback)) || executeCallback();
+                const executeCallback = () => callback?.();
+
+                if (document.startViewTransition) {
+                    return document.startViewTransition(executeCallback);
+                }
+                // 无 ViewTransition 支持时返回一个类 ViewTransition 对象，使调用方能统一处理 finished
+                const result = executeCallback();
+                return { finished: Promise.resolve(result) };
             },
         };
     }
