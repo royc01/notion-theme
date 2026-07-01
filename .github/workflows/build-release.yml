@@ -78,23 +78,21 @@ jobs:
           SAVOR_DIST_DIR: ${{ github.workspace }}/dist
 
       - name: 打包 zip
-        # 顶层放 Savor/ 目录，解压到 appearance/themes/ 即可直接使用
+        # 思源主题市场要求：zip 命名为 package.zip，解压后顶层即主题文件（不套目录）
         run: |
-          mkdir -p package/Savor
-          cp -r dist/* package/Savor/
-          cd package
-          zip -r "../Savor-${{ github.ref_name }}.zip" Savor
+          cd dist
+          zip -r ../package.zip .
 
       - name: 上传 zip 产物（便于失败时排查）
         uses: actions/upload-artifact@v4
         with:
-          name: Savor-${{ github.ref_name }}.zip
-          path: Savor-${{ github.ref_name }}.zip
+          name: package-${{ github.ref_name }}
+          path: package.zip
           retention-days: 7
 
       - name: 创建 GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           name: Savor ${{ github.ref_name }}
-          files: Savor-${{ github.ref_name }}.zip
+          files: package.zip
           generate_release_notes: true
