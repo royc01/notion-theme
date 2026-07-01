@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = resolve(__dirname, '..');
-const DEFAULT_DIST_DIR = `C:\\Users\\Administrator\\测试\\conf\\appearance\\themes\\Savor`;
+const DEFAULT_DIST_DIR = resolve(rootDir, 'dist');
 const distDir = process.env.SAVOR_DIST_DIR || DEFAULT_DIST_DIR;
 
 // 构建生成的文件 + 旧版本可能遗留的文件/目录
@@ -23,9 +23,7 @@ const generatedFiles = [
 ];
 
 // 需要清理的目录
-const generatedDirs = [
-  '.github',
-];
+const generatedDirs = [];
 
 if (existsSync(distDir)) {
   let cleaned = 0;

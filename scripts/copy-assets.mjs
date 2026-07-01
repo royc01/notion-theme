@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = resolve(__dirname, '..');
 
 // 思源笔记主题目录
-const DEFAULT_DIST_DIR = `C:\\Users\\Administrator\\测试\\conf\\appearance\\themes\\Savor`;
+const DEFAULT_DIST_DIR = resolve(rootDir, 'dist');
 const distDir = process.env.SAVOR_DIST_DIR || DEFAULT_DIST_DIR;
 
 // 需要复制的目录列表
