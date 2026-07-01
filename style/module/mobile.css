@@ -7,11 +7,8 @@
         flex: unset !important;
         width: unset !important;
     }
-    .sb-resize-handle{
-        display: none;
-    }
     #savorToolbar button{
-    &#tabbarVertical,&#topBar,&#colorFolder,&#typewriterMode,&#sidebarMemo,&#sidebarBlockMemo{
+    &#tabbarVertical,&#colorFolder,&#typewriterMode,&#sidebarMemo,&#sidebarBlockMemo{
         display: none!important;
     }
 }
@@ -78,4 +75,3 @@ body>.toolbar--border{
     margin: 0px 10px;
     border-radius: 6px;
 }
-

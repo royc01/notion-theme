@@ -1,3 +1,4 @@
+
 @keyframes statusExpand {
     0% {
         transform: scaleX(0.4) scaleY(0.4) translate(0px,0px);
@@ -10,7 +11,7 @@
 
 
 .toolbar:not(.toolbar--border) ~ #status,.body--window #status{
-	position: fixed;
+	position: absolute;
     display: flex;
     min-width: 0;
     align-items: center;
@@ -19,14 +20,16 @@
     text-overflow: ellipsis;
     height: 24px;
     line-height: 24px;
-    right: 0px;
-    bottom: 9px; 
-	border-radius: 6px;
+    bottom: calc(anchor(--sv-status-center bottom) + 14px);
+    right: calc(anchor(--sv-status-center right) + 8px);
+    max-width: calc(100vw - 16px);
+	border-radius: 12px;
     border: none;
-    background-color: var(--Sv-status-msg-background);
+    background-color: var(--Sv-theme-surface);
+    box-shadow: var(--Sv-main-shadow);
     transform-origin: 100% 100%;
     animation: statusExpand .1s ;
-    padding: 0;
+    padding: 0 5px;
     .toolbar__item:not(.toolbar__item--close) {
         padding:2px;
         margin: unset;
@@ -57,10 +60,11 @@
                 font-size:12px;
                 padding:0 6px;
                 position: absolute;
-                left: 0px;
+                left: 6px;
             }
     }
 }
+
 
 .status.fn__none{/*隐藏底栏保留停靠栏按钮*/
     display: flex!important;
@@ -75,10 +79,13 @@
 /* 隐藏内容 */
 #status.Sv-StatusHidden {
     height: 10px!important;
+    min-width: 54px;
     transition: all 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
-    position: relative;
+    position: fixed;
     cursor: pointer;
+    overflow: visible;
     background-color: transparent!important;
+    box-shadow: none!important;
     & div{
         opacity: 0;
         transition: all 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;

@@ -2,21 +2,19 @@
 // 主题功能模块
 // ========================================
 
-import { $, debounce, throttle } from './utils.js';
+import { debounce } from './utils.js';
 import { config } from './config.js';
 import { getAllButtons } from './buttons.js';
-import { initTabBarsMarginUnified, cleanupTopbarMerge } from './topbarMerge.js';
 import { initMiddleClickCollapse, cleanupMiddleClickCollapse } from './middleClickCollapse.js';
 import { initViewSelect, cleanupViewSelect } from './viewSelect.js';
 import { initMindmapDrag } from './mindmapDrag.js';
 import { initPlatformDetection, cleanupPlatformDetection } from './platform.js';
-import { initSlashMenuNavigation } from './slashMenuNav.js';
-import { initSuperBlockResizer } from './superBlockResizer.js';
-import { initMobileAndPlatformFeatures, cleanupMobileMenu } from './mobileMenu.js';
+import { initSlashMenuNavigation, cleanupSlashMenuNavigation } from './slashMenuNav.js';
+import { cleanupStatusBarHiding } from './statusBarHiding.js';
 import { shouldLimitDesktopEnhancements } from './device.js';
+import { destroyLifecycle } from './lifecycle.js';
 
 // 主题相关变量
-let featureButtonsActive = new Set();
 let domCache = new Map();
 let menuListeners = new WeakMap();
 
@@ -31,13 +29,29 @@ const getCachedElement = (selector) => {
 // 获取配置项
 const getItem = config.get;
 const MOBILE_UNSAFE_FEATURE_IDS = new Set([
-    "topBar",
     "tabbarVertical",
     "typewriterMode",
     "sidebarMemo",
     "sidebarBlockMemo",
     "colorFolder"
 ]);
+
+const resetRemovedTopbarMergeFeature = () => {
+    if (config.get("topbar隐藏") !== "0") {
+        config.set("topbar隐藏", "0");
+    }
+    if (document.documentElement.getAttribute('savor-tabbar') === 'merge') {
+        document.documentElement.removeAttribute('savor-tabbar');
+    }
+    document.querySelectorAll(".layout__center .layout-tab-bar--readonly").forEach(tabBar => {
+        tabBar.style.marginRight = "0px";
+    });
+    document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabBar => {
+        tabBar.style.marginLeft = "0px";
+    });
+    window.updateTabBarsMargin = null;
+    window.updateTabBarsMarginLeft = null;
+};
 
 // 应用记住的主题样式
 export const applyRememberedThemeStyle = async (skipFeatures = false) => {
@@ -77,28 +91,19 @@ export const applyRememberedThemeStyle = async (skipFeatures = false) => {
 
 // 应用记住的功能
 const applyRememberedFeatures = async () => {
+    resetRemovedTopbarMergeFeature();
     const limitDesktopEnhancements = shouldLimitDesktopEnhancements();
     for (const btn of getAllButtons()) {
         if (btn.type === 'feature' && config.get(btn.attrName) === "1") {
             if (limitDesktopEnhancements && MOBILE_UNSAFE_FEATURE_IDS.has(btn.id)) {
                 continue;
             }
-            featureButtonsActive.add(btn.id);
-            
             const button = document.getElementById(btn.id);
             button?.classList.add("button_on");
             
             // 现在所有功能都通过属性控制，不需要加载 CSS
             btn.onEnable?.();
         }
-    }
-    
-    // 确保超级块宽度调节功能已初始化
-    if (limitDesktopEnhancements) return;
-    if (typeof window.superBlockResizer?.start === 'function') {
-        window.superBlockResizer.start();
-    } else if (typeof window.initSuperBlockResizer === 'function') {
-        window.initSuperBlockResizer();
     }
 };
 
@@ -117,7 +122,6 @@ export const applyThemeForGroup = async (group, btn) => {
         btn.onEnable?.();
         updateColorfulHeading(btn.styleId);
         await applyRememberedFeatures();
-        setTimeout(() => { window.statusObserver?.updatePosition?.(); }, 100);
     });
     clearRememberedThemeGroup(group);
     config.set(btn.id, "1");
@@ -268,29 +272,6 @@ export const initSavorToolbar = () => {
 };
 
 // 底栏悬浮
-export const initStatusPosition = () => {
-    let lastOffset = null;
-    const updatePosition = () => {
-        const status = Savor$("#status");
-        if (!status) return;
-        const dockr = Savor$(".layout__dockr"), dockVertical = Savor$(".dock--vertical");
-        const dockrWidth = dockr?.offsetWidth || 0;
-        const isFloating = dockr?.classList.contains("layout--float");
-        const dockVerticalWidth = (!dockVertical || dockVertical.classList.contains("fn__none")) ? 0 : 26;
-        // 简化offset计算
-        const baseOffset = dockVerticalWidth ? dockVerticalWidth + 16 : 9;
-        const offset = (!dockrWidth || isFloating) ? baseOffset : dockrWidth + baseOffset;
-        const layoutCenter = document.querySelector('.layout__center');
-        status.style.maxWidth = layoutCenter ? `${layoutCenter.offsetWidth - 8}px` : '';
-        if (lastOffset !== offset) status.style.transform = `translateX(-${offset}px)`;
-        lastOffset = offset;
-    };
-    const observer = new ResizeObserver(throttle(updatePosition, 16));
-    [".layout__dockr", ".dock--vertical", ".layout__center"].forEach(sel => { const el = Savor$(sel); el && observer.observe(el); });
-    window.statusObserver = observer;
-    window.statusObserver.updatePosition = updatePosition;
-    updatePosition();
-};
 
 // 初始化主题观察器
 export const initThemeObserver = () => {
@@ -321,15 +302,6 @@ export const initThemeObserver = () => {
                 }
             } else if (existingSavorToolbar) {
                 // 不再移除，交由 CSS 控制显示
-            }
-            
-            // 确保超级块调节功能在主题切换后正常工作
-            try {
-                if (typeof window.superBlockResizer?.refresh === 'function') {
-                    setTimeout(() => window.superBlockResizer.refresh(), 100);
-                }
-            } catch (e) {
-                // 超级块调节功能刷新出错: e
             }
         }
         
@@ -377,40 +349,41 @@ export const initTopBarPluginMenuObserver = () => {
 };
 
 // 主题清理函数
-export const destroyTheme = () => {     
+export const destroyTheme = () => {
+    destroyLifecycle();
     // 清理功能按钮和全局变量
     window.allButtons?.forEach(btn => btn.type === 'feature' && Savor$(`#${btn.id}`)?.remove());
-    window.featureButtonsActive?.clear();
     Object.assign(window, {
-        tabBarsMarginInitialized: false,
         updateTabBarsMargin: null,
         updateTabBarsMarginLeft: null
     });
     
     // 断开观察器
-    [window.statusObserver, window.topBarPluginMenuObserver].forEach(obs => obs?.disconnect());
+    window.topBarPluginMenuObserver?.disconnect?.();
+    cleanupStatusBarHiding();
+    cleanupSlashMenuNavigation();
+    cleanupPlatformDetection();
 
     // 清理DOM和样式
     Savor$$('[id^="Sv-theme-color"], #savorToolbar, #savor-toolbar-visibility').forEach(el => el.remove());
     Savor$('#status')?.style.setProperty('transform', '');
     Savor$('#status')?.style.setProperty('max-width', '');
+    Savor$('#status')?.style.setProperty('right', '');
+    Savor$('#status')?.style.setProperty('bottom', '');
 
     // 清理缓存和属性
-    window.domCache?.clear();
+    domCache.clear();
     Savor$('#commonMenu') && window.toggleMenuListener?.(Savor$('#commonMenu'), false);
     document.documentElement.removeAttribute('savor-theme');
     document.documentElement.removeAttribute('savor-tabbar');
 
     // 统一清理所有功能模块
     const cleanupFunctions = [
-        'cleanupTopbarMerge',
         'cleanupTabbarVertical',
         'cleanupBulletThreading',
         'cleanupTypewriterMode',
         'cleanupSidebarMemo',
         'cleanupMiddleClickCollapse',
-        'cleanupPlatformDetection',
-        'cleanupMobileMenu',
         'disableListPreview'
     ];
     
@@ -448,29 +421,7 @@ export const destroyTheme = () => {
             // [Savor] 清理标签页 DOM 时出错: ${e.message}
         }
     }, 100);
-    
-    // 重新初始化超级块宽度调节功能
-    try {
-        // 停止功能
-        if (typeof window.superBlockResizer?.stop === 'function') {
-            window.superBlockResizer.stop();
-        }
-        
-        // 移除样式
-        const styleElement = document.getElementById('sb-resizer-styles');
-        if (styleElement) {
-            styleElement.remove();
-        }
-        
-        // 重新初始化功能
-        window.superBlockResizer = null;
-        if (typeof window.initSuperBlockResizer === 'function') {
-            window.initSuperBlockResizer();
-        }
-    } catch (e) {
-        // [Savor] 重新初始化超级块宽度调节功能时出错: ${e.message}
-    }
-    
+
     // 清理导图拖拽功能
     try {
         // 直接调用导图模块的清理函数
@@ -487,14 +438,7 @@ export const destroyTheme = () => {
         colorfulHeadingStyle.remove();
     }
     
-    // 额外清理可能存在的定时器
-    if (window._tabBarUpdateTimer) {
-        clearTimeout(window._tabBarUpdateTimer);
-        window._tabBarUpdateTimer = null;
-    }
-    
     // 清理可能存在的其他全局变量
-    window._tabBarsResizeObserver = null;
     window.updateTabBarsMargin = null;
     window.updateTabBarsMarginLeft = null;
 };
@@ -509,7 +453,6 @@ export const initTheme = () => {
         applyThemeForGroup,
         renderAllButtons,
         initSavorToolbar,
-        initStatusPosition,
         initThemeObserver,
         initTopBarPluginMenuObserver,
         toggleMenuListener,
@@ -523,108 +466,27 @@ export const initTheme = () => {
             get themeMode() { return window.siyuan?.config?.appearance?.mode === 0 ? 'light' : 'dark'; },
 
             applyThemeTransition: (callback) => {
-                const status = Savor$('#status');
-                const currentTransform = status?.style.transform;
-                
                 // 简化回调执行逻辑
                 const executeCallback = () => {
                     callback?.();
-                    if (status && currentTransform) {
-                        setTimeout(() => status.style.transform = currentTransform, 50);
-                    }
                 };
                 
                 (document.startViewTransition && document.startViewTransition(executeCallback)) || executeCallback();
             },
-
-            findEditableParent: (node) => {
-                const editableSelectors = ['[contenteditable="true"]', '.protyle-wysiwyg'];
-                return editableSelectors.reduce((found, selector) => 
-                    found || node.closest(selector), null);
-            },
-
-            createElementEx: (refElement, tag, id = null, mode = 'append') => {
-                if (!refElement || !tag) {
-                    // [Savor] 参考元素或标签名不存在
-                    return null;
-                }
-                
-                const el = document.createElement(tag);
-                if (id) el.id = id;
-                
-                try {
-                    const insertModes = {
-                        append: () => refElement.appendChild(el),
-                        prepend: () => refElement.insertBefore(el, refElement.firstChild),
-                        before: () => refElement.parentElement.insertBefore(el, refElement)
-                    };
-                    
-                    insertModes[mode]?.();
-                    return el;
-                } catch (error) {
-                    // [Savor] 创建元素失败: ${error.message}
-                    return null;
-                }
-            },
-
-            BodyEventRunFun: (eventStr, fun, accurate = 100, delay = 0, frequency = 1, frequencydelay = 16) => {
-                let isMove = false;
-                let _e = null;
-                
-                window.theme.EventUtil.on(document.body, eventStr, (e) => { 
-                    isMove = true; 
-                    _e = e; 
-                });
-                
-                setInterval(() => {
-                    if (!isMove) return;
-                    isMove = false;
-                    
-                    setTimeout(() => {
-                        fun(_e);
-                        if (frequency === 1) return;
-                        
-                        const minDelay = Math.max(16, frequencydelay);
-                        for (let i = 1; i < frequency; i++) {
-                            setTimeout(() => fun(_e), minDelay * i);
-                        }
-                    }, delay);
-                }, accurate);
-            },
-
-            EventUtil: {
-                on: (element, type, handler) => element?.addEventListener?.(type, handler, false),
-                off: (element, type, handler) => element?.removeEventListener?.(type, handler, false)
-            },
-
-            findAncestor: (element, fn, maxDepth = 50) => {
-                let depth = 0, parent = element?.parentElement;
-                while (parent && depth < maxDepth) {
-                    if (fn(parent)) return parent;
-                    parent = parent.parentElement;
-                    depth++;
-                }
-                return null;
-            },
-            
-            isSiyuanFloatingWindow: (element) => 
-                window.theme.findAncestor(element, v => v.getAttribute("data-oid") != null),
-            
-            setBlockFold: (id, fold) => {
-                if (!id || (window._lastFoldedId === id && window._lastFoldedState === fold)) return;
-                window._lastFoldedId = id; window._lastFoldedState = fold;
-                设置思源块属性(id, { fold });
-            },
-            
-            // 顶栏合并功能相关函数
-            initTabBarsMarginUnified,
-            cleanupTopbarMerge
         };
     }
-    
-    // 添加平台检测功能到window.theme对象
-    window.theme.initPlatformDetection = initPlatformDetection;
-    window.theme.cleanupPlatformDetection = cleanupPlatformDetection;
+
+    [
+        'findEditableParent',
+        'createElementEx',
+        'BodyEventRunFun',
+        'EventUtil',
+        'findAncestor',
+        'isSiyuanFloatingWindow',
+        'setBlockFold',
+        'initPlatformDetection',
+        'cleanupPlatformDetection'
+    ].forEach(key => delete window.theme[key]);
     
     // 添加各功能模块的清理函数到window.theme对象
     Object.assign(window.theme, {
@@ -652,9 +514,6 @@ export const initTheme = () => {
     
     // 初始化斜杠菜单左右键导航功能
     initSlashMenuNavigation();
-    
-    // 初始化超级块宽度调节功能
-    initSuperBlockResizer();
 };
 
 // 新增：统一处理彩色标题样式的工具函数，消除重复逻辑

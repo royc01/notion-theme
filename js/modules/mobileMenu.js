@@ -13,6 +13,50 @@ const isPhone = () => {
     return shouldUseMobileThemeLayout();
 };
 
+const mobileMenuState = {
+    initTimer: null,
+    waitObserver: null,
+    waitTimeout: null,
+    outsideClickHandler: null
+};
+
+const clearToolbarWaiters = () => {
+    mobileMenuState.waitObserver?.disconnect();
+    mobileMenuState.waitObserver = null;
+    if (mobileMenuState.waitTimeout) {
+        clearTimeout(mobileMenuState.waitTimeout);
+        mobileMenuState.waitTimeout = null;
+    }
+};
+
+const waitForElement = (selector, timeout = 5000) => {
+    return new Promise((resolve) => {
+        const existing = document.querySelector(selector);
+        if (existing) {
+            resolve(existing);
+            return;
+        }
+
+        clearToolbarWaiters();
+        mobileMenuState.waitObserver = new MutationObserver(() => {
+            const found = document.querySelector(selector);
+            if (!found) return;
+            clearToolbarWaiters();
+            resolve(found);
+        });
+
+        mobileMenuState.waitObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+        mobileMenuState.waitTimeout = setTimeout(() => {
+            clearToolbarWaiters();
+            resolve(null);
+        }, timeout);
+    });
+};
+
 /**
  * 初始化移动端菜单
  */
@@ -21,32 +65,6 @@ const initMobileMenu = () => {
     if (!isOfficialMobileLayout()) return;
     
     document.body.classList.add("body--mobile");
-    
-    const waitForElement = (selector, timeout = 5000) => {
-        return new Promise((resolve) => {
-            if (document.querySelector(selector)) {
-                resolve(document.querySelector(selector));
-                return;
-            }
-
-            const observer = new MutationObserver(() => {
-                if (document.querySelector(selector)) {
-                    observer.disconnect();
-                    resolve(document.querySelector(selector));
-                }
-            });
-
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-
-            setTimeout(() => {
-                observer.disconnect();
-                resolve(null);
-            }, timeout);
-        });
-    };
 
     waitForElement("#toolbarMore").then(toolbarMore => {
         if (!toolbarMore || document.getElementById("savorToolbar")) return;
@@ -92,11 +110,12 @@ const initMobileMenu = () => {
 
             toolbarMore.parentNode.insertBefore(toggleBtn, toolbarMore);
 
-            document.addEventListener("click", (e) => {
+            mobileMenuState.outsideClickHandler = (e) => {
                 if (!savorToolbar.contains(e.target) && e.target !== toggleBtn) {
                     savorToolbar.style.display = "none";
                 }
-            });
+            };
+            document.addEventListener("click", mobileMenuState.outsideClickHandler);
         }
 
         toolbarMore.parentNode.insertBefore(savorToolbar, toolbarMore);
@@ -118,13 +137,19 @@ const initMobileThemeButtons = (savorToolbar) => {
  * 初始化移动端和平台相关功能
  */
 export const initMobileAndPlatformFeatures = () => {
+    if (mobileMenuState.initTimer) {
+        clearTimeout(mobileMenuState.initTimer);
+        mobileMenuState.initTimer = null;
+    }
+
     // 添加移动端相关类名
     if (isPhone()) {
         document.body.classList.add("body--mobile");
         document.body.classList.toggle("body--mobile-browser", isLikelyMobileBrowser());
         // 延迟初始化移动端菜单，确保DOM元素已加载
         if (isOfficialMobileLayout()) {
-            setTimeout(() => {
+            mobileMenuState.initTimer = setTimeout(() => {
+                mobileMenuState.initTimer = null;
                 initMobileMenu();
             }, 1000);
         }
@@ -138,6 +163,16 @@ export const initMobileAndPlatformFeatures = () => {
 
 // 清理移动端菜单功能
 export const cleanupMobileMenu = () => {
+    if (mobileMenuState.initTimer) {
+        clearTimeout(mobileMenuState.initTimer);
+        mobileMenuState.initTimer = null;
+    }
+    clearToolbarWaiters();
+    if (mobileMenuState.outsideClickHandler) {
+        document.removeEventListener("click", mobileMenuState.outsideClickHandler);
+        mobileMenuState.outsideClickHandler = null;
+    }
+
     // 移除添加的元素和类名
     document.body.classList.remove("body--mobile");
     document.body.classList.remove("body--mobile-browser");

@@ -60,18 +60,23 @@
     background-color: var(--Sv-dock-background);
 }
 body:not(.body--mobile,.body--window) #layouts{
-    min-height: 90%;
     .layout__center .layout-tab-container{
         border-radius: var(--Sv-center-radius);
         /*border: 1px solid oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));*/
-        margin: 0 5px 5px 5px;
-        box-shadow:  rgba(0, 0, 0, 0.03) 0px 1px 5px 0px;
+        box-shadow: var(--Sv-main-shadow);
+        margin: 0 5px 5px;
     }
     .layout__center .fn__flex.fn__none + .layout-tab-container{
         margin: 5px;
     }
-    .layout__center div[data-type=wnd]{
-        min-height: 90%;
+}
+
+@supports (anchor-name: --sv-status-center) and (position-anchor: --sv-status-center) {
+    .layout__center{
+        anchor-name: --sv-status-center;
+    }
+    .layout__dockb:not(.layout--float):not(.fn__none){
+        anchor-name: --sv-status-dockb;
     }
 }
 

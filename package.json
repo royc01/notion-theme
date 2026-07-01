@@ -1,0 +1,25 @@
+{
+  "name": "savor-theme",
+  "version": "6.1.9",
+  "private": true,
+  "description": "Savor theme",
+  "author": "Roy",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build:js": "node scripts/build-js.mjs",
+    "build:css": "node scripts/build-css.mjs",
+    "build": "npm run clean && npm run build:js && npm run build:css && npm run copy:assets",
+    "watch:js": "node scripts/build-js.mjs --watch",
+    "watch:css": "node scripts/build-css.mjs --watch",
+    "watch": "concurrently -n js,css -c cyan,green \"node scripts/build-js.mjs --watch\" \"node scripts/build-css.mjs --watch\"",
+    "copy:assets": "node scripts/copy-assets.mjs",
+    "clean": "node scripts/clean.mjs",
+    "preview": "node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "esbuild": "^0.25.0",
+    "lightningcss": "^1.29.0"
+  }
+}

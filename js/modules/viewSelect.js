@@ -137,7 +137,13 @@ const InsertMenuItem = (selectid, selecttype) => {
 
 // 菜单监控处理器
 let menuHandler = null;
-let viewSelectClickHandler = null;
+const viewSelectState = {
+    clickHandler: null,
+    tabObserver: null,
+    loadedProtyleHandler: null,
+    debounceTimer: null,
+    initTimer: null
+};
 
 // 将列表转换为标签页结构
 const convertToTabView = (listElement) => {
@@ -207,27 +213,51 @@ const restoreFromTabView = (listElement) => {
     delete listElement._convertedToTab;
 };
 
+const clearViewSelectTimers = () => {
+    if (viewSelectState.debounceTimer) {
+        clearTimeout(viewSelectState.debounceTimer);
+        viewSelectState.debounceTimer = null;
+    }
+    if (viewSelectState.initTimer) {
+        clearTimeout(viewSelectState.initTimer);
+        viewSelectState.initTimer = null;
+    }
+};
+
 // 初始化菜单监控
 export const initViewSelect = () => {
-    if (menuHandler) return;
+    if (menuHandler || viewSelectState.clickHandler) return;
     
     const initTabViews = () => {
         document.querySelectorAll('.protyle-wysiwyg [data-type="NodeList"][custom-f~="tab"]')
             .forEach(el => !el._convertedToTab && convertToTabView(el));
     };
+
+    const scheduleInitTabViews = (delay = 0) => {
+        if (viewSelectState.initTimer) {
+            clearTimeout(viewSelectState.initTimer);
+        }
+        viewSelectState.initTimer = setTimeout(() => {
+            viewSelectState.initTimer = null;
+            initTabViews();
+        }, delay);
+    };
     
-    setTimeout(initTabViews, 100);
+    scheduleInitTabViews(100);
     
     // 保存事件监听器引用以便清理
-    viewSelectClickHandler = viewSelectClickHandler || {};
-    viewSelectClickHandler._loadedProtyleHandler = () => setTimeout(initTabViews, 200);
-    window.siyuan?.eventBus?.on('loaded-protyle', viewSelectClickHandler._loadedProtyleHandler);
+    viewSelectState.loadedProtyleHandler = () => scheduleInitTabViews(200);
+    window.siyuan?.eventBus?.on('loaded-protyle', viewSelectState.loadedProtyleHandler);
     
     // 防抖函数
-    let debounceTimer;
     const debouncedInit = () => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(initTabViews, 150);
+        if (viewSelectState.debounceTimer) {
+            clearTimeout(viewSelectState.debounceTimer);
+        }
+        viewSelectState.debounceTimer = setTimeout(() => {
+            viewSelectState.debounceTimer = null;
+            initTabViews();
+        }, 150);
     };
     
     // 只监听 .protyle-wysiwyg 容器，减少监听范围
@@ -237,7 +267,7 @@ export const initViewSelect = () => {
         observer.observe(container, { childList: true, subtree: true, attributes: true, attributeFilter: ['custom-f'] });
     });
     
-    viewSelectClickHandler._tabObserver = observer;
+    viewSelectState.tabObserver = observer;
     
     // 存储事件监听器引用，以便后续清理
     menuHandler = () => {
@@ -252,7 +282,7 @@ export const initViewSelect = () => {
     window.addEventListener("mouseup", menuHandler);
     
     // 统一的事件委托，处理视图选择子项点击
-    viewSelectClickHandler = (event) => {
+    viewSelectState.clickHandler = (event) => {
         const item = event.target.closest('.b3-menu__item[data-view-item="1"]');
         if (!item) return;
         
@@ -271,7 +301,7 @@ export const initViewSelect = () => {
             设置思源块属性(id, { [attrName]: attrValue });
         }
     };
-    document.addEventListener("click", viewSelectClickHandler, true);
+    document.addEventListener("click", viewSelectState.clickHandler, true);
 };
 
 // 清理视图选择功能
@@ -280,15 +310,18 @@ export const cleanupViewSelect = () => {
         window.removeEventListener("mouseup", menuHandler);
         menuHandler = null;
     }
-    if (viewSelectClickHandler) {
-        document.removeEventListener("click", viewSelectClickHandler, true);
-        if (viewSelectClickHandler._tabObserver) {
-            viewSelectClickHandler._tabObserver.disconnect();
-        }
-        if (viewSelectClickHandler._loadedProtyleHandler && window.siyuan?.eventBus) {
-            window.siyuan.eventBus.off('loaded-protyle', viewSelectClickHandler._loadedProtyleHandler);
-        }
-        viewSelectClickHandler = null;
+    if (viewSelectState.clickHandler) {
+        document.removeEventListener("click", viewSelectState.clickHandler, true);
+        viewSelectState.clickHandler = null;
     }
+    if (viewSelectState.tabObserver) {
+        viewSelectState.tabObserver.disconnect();
+        viewSelectState.tabObserver = null;
+    }
+    if (viewSelectState.loadedProtyleHandler && window.siyuan?.eventBus) {
+        window.siyuan.eventBus.off('loaded-protyle', viewSelectState.loadedProtyleHandler);
+    }
+    viewSelectState.loadedProtyleHandler = null;
+    clearViewSelectTimers();
 };
 

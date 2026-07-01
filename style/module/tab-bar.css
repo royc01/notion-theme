@@ -2,36 +2,11 @@
 
 .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
     background-color: transparent;
-    border: none;
-    margin-bottom: -5px;
-    padding-top: 5px;
-    padding-right:10px;
-    border-radius: 6px 6px 0 0;
-    border-left: 5px solid transparent;
     
     /*overflow: visible;这个不能加*/
     .item:not(.item--readonly){
-        min-height: 28px;
         border-radius: var(--Sv-tab-bar-item-radius);
-        padding: 1px 0 4px 0 ;
-        margin-bottom: 5px;
         overflow: unset !important; 
-        &::after{
-            content: "";
-            bottom: 0;
-            position: absolute;
-            background-color:transparent;
-            height: 8px;  
-            left: calc(-1 * var(--Sv-dock-item-radius)) ;
-            border-radius: 0;
-            width: calc(100% + var(--Sv-dock-item-radius)*2 );
-            /*background-image: var(--Sv-tab-bar-item-after);*/
-            background-size: 8px 8px,8px 8px,calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
-            background-position: right bottom, left bottom, center top;
-            background-repeat: no-repeat;
-            z-index: 1;
-            opacity: 0;
-            }
         & .item__text{
             &::before {
                 content: "📄";
@@ -60,21 +35,8 @@
         }
         &.item--focus{
             background-color: var(--Sv-tab-bar-item-background-focus);
-            border-radius: var(--Sv-tab-bar-item--focus-radius);
-            box-shadow:  rgba(0, 0, 0, 0.03) 0px 0px 5px 0px;
+            box-shadow: var(--Sv-main-shadow);
             transition: opacity .2s cubic-bezier(0, 0, .2, 1) 0ms;
-            &::after{
-                background-color:transparent;
-                background-image: var(--Sv-tab-bar-item-focus-after);
-                z-index: 2;
-                opacity: 1;
-                box-shadow: var(--Sv-tab-bar-item-background-focus) 0 8px 0 0; 
-                }
-            }
-            &:first-child::after{
-                left: calc(-1 * var(--Sv-dock-item-radius) + 8px) ;
-                width: calc(100% + var(--Sv-dock-item-radius)*2 - 8px);
-                box-shadow: var(--Sv-tab-bar-item-background-focus) 0px 8px 0 0; 
             }
         }
     &.layout-tab-bar--readonly{

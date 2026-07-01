@@ -1,69 +1,50 @@
 /* ————————————————————边栏———————————————————— */
 .dock{
-	background-color: var(--Sv-dock-background);
-	border: none!important;
-	&.dock--vertical{
-	width: 33px;
-	transition: padding-top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	}
-	&#dockLeft{
-		.dock__item{
-			margin: 5px 0px 5px 5px;
-		}
-	}
-	&#dockRight{
-		.dock__item{
-			margin: 5px 5px 5px 0px;
-		}
-	}
-	&#dockBottom{
-		height: 33px;
-		padding: 0 38px;
-		.dock__item{
-			margin: 0px 5px 5px 0px;
-		}
-		.fn__flex-1{
-			flex: 0;
-		}
-	}
 	& .dock__item{
-		color: var(--Sv-dock-item-color);
-		border-radius: var(--Sv-dock-item-radius);
-		background-color: var(--Sv-list-background);
-		height: 14px;
-		width: 14px;
+        padding: 7px;
+		border-radius: var(--Sv-item-radius);
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		svg{
-			width: 12px;
-			height: 12px;
-		}
-		&:first-child{
-			margin-top: 0px!important;
-		}
+        & svg{
+            width: 14px;
+            height: 14px;
+        }
 		&:hover{
 			color: var(--Sv-dock-item-hover-color);
 			background-color: var(--Sv-dock-item-active-background);
-			box-shadow:  rgba(0, 0, 0, 0.09) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
+			box-shadow: var(--Sv-main-shadow);
 		}
 		&.dock__item--activefocus{
 			background: var(--Sv-dock-item--activefocus-background)!important;
 			color:var(--Sv-dock-item--activefocus-color)!important;
-			box-shadow:  rgba(0, 0, 0, 0.09) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
+			box-shadow: var(--Sv-main-shadow);
 		}/*dock焦点状态*/
 	}
 	& .dock__item--active{
 		color: var(--Sv-dock-item-hover-color);
 		background-color: var(--Sv-dock-item-active-background);
-		box-shadow:  rgba(0, 0, 0, 0.09) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
+		box-shadow: var(--Sv-main-shadow);
 	}
 	& .dock__item--active:hover{
 		color: var(--Sv-dock-item-hover-color);
 		background-color: var(--Sv-dock-item-active-background-hover);
-		box-shadow:  rgba(0, 0, 0, 0.09) 0px 1px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
+		box-shadow: var(--Sv-main-shadow);
+	}
+    & .dock__split::after{
+        width: 16px;
+        left: 13px;
+        box-shadow: 0 1px 0 0 var(--b3-theme-background);
+		opacity: 0.5;
+    }
+}
+#dockLeft{
+	width: 40px;
+	& .dock__item{
+		margin: 7px 5px 7px 7px;
 	}
 }
-#dockLeft,#dockRight,.layout__dockl:not(.layout--float),.layout__dockr:not(.layout--float){
-    padding-top: 5px;
+#dockRight{
+	width: 40px;
+	& .dock__item{
+		margin: 7px 7px 7px 5px;
+	}
 }

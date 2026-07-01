@@ -64,6 +64,14 @@ body:not(.body--mobile){
 
     .memo-item {
         background-color: var(--Sv-protyle-toolbar-bg);
+        &::before{
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -12px;
+            width: 12px;
+        }
         & button{
             height: 20px;
             width: 20px;

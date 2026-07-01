@@ -2,8 +2,6 @@
 // 模块：垂直页签功能
 // ========================================
 
-import { config } from './config.js';
-
 // 垂直页签宽度调节功能
 export const tabbarResize = {
     resizer: null, isResizing: false, startX: 0, startWidth: 0, tabbar: null,

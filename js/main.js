@@ -3,6 +3,7 @@
 // ========================================
 
 import { initUtils } from './modules/utils.js';
+import { initLifecycle, destroyLifecycle } from './modules/lifecycle.js';
 import { initConfig } from './modules/config.js';
 import { initI18n } from './modules/i18n.js';
 import { initButtons } from './modules/buttons.js';
@@ -16,7 +17,6 @@ import { initSidebarMemoModule } from './modules/sidebarMemo.js';
 import { initListPreview } from './modules/listPreview.js';
 import { initMobileAndPlatformFeatures } from './modules/mobileMenu.js';
 import { initMindmapDrag } from './modules/mindmapDrag.js';
-import { initSuperBlockResizer } from './modules/superBlockResizer.js';
 
 let savorInitPromise = null;
 let savorInitialized = false;
@@ -37,6 +37,7 @@ const initAll = async () => {
     savorInitPromise = (async () => {
         try {
             initUtils();
+            initLifecycle();
             await initConfig();
             await initI18n();
             await initButtons();
@@ -48,7 +49,6 @@ const initAll = async () => {
             initTypewriterModeModule();
             initSidebarMemoModule();
             initListPreview();
-            initMobileAndPlatformFeatures();
             savorInitialized = true;
         } catch (error) {
             // 初始化失败: error
@@ -62,6 +62,8 @@ const initAll = async () => {
 
 export const Savor = {
     initUtils,
+    initLifecycle,
+    destroyLifecycle,
     initConfig,
     initI18n,
     initButtons,
@@ -75,12 +77,13 @@ export const Savor = {
     initListPreview,
     initMobileAndPlatformFeatures,
     initMindmapDrag,
-    initSuperBlockResizer,
     initAll
 };
 
 export {
     initUtils,
+    initLifecycle,
+    destroyLifecycle,
     initConfig,
     initI18n,
     initButtons,
@@ -93,8 +96,7 @@ export {
     initSidebarMemoModule,
     initListPreview,
     initMobileAndPlatformFeatures,
-    initMindmapDrag,
-    initSuperBlockResizer
+    initMindmapDrag
 };
 
 export { initAll };

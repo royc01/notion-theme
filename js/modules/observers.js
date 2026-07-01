@@ -2,7 +2,8 @@
 // 观察器模块
 // ========================================
 
-import { applyRememberedThemeStyle, initSavorToolbar, initThemeObserver, initTopBarPluginMenuObserver, toggleMenuListener, initStatusPosition } from './themeSetting.js';
+import { applyRememberedThemeStyle, initSavorToolbar, initThemeObserver, toggleMenuListener } from './themeSetting.js';
+import { addObserver } from './lifecycle.js';
 
 // 主初始化函数
 const initMain = async () => {
@@ -17,7 +18,7 @@ const initMain = async () => {
         initSavorToolbar();
         toggleMenuListener(commonMenuEl, true);
     } else {
-        const waitObserver = new MutationObserver((mutations, obs) => {
+        addObserver(document.body, { childList: true, subtree: true }, (mutations, obs) => {
             const cm = document.getElementById("commonMenu");
             if (cm) {
                 initSavorToolbar();
@@ -25,9 +26,7 @@ const initMain = async () => {
                 obs.disconnect();
             }
         });
-        waitObserver.observe(document.body, { childList: true, subtree: true });
     }
-    initStatusPosition();
 };
 
 // 初始化所有观察器

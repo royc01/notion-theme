@@ -2,6 +2,8 @@
 // 模块：斜杠菜单左右键导航
 // ========================================
 
+import { addEvent } from './lifecycle.js';
+
 /**
  * 获取当前显示的斜杠菜单
  * @returns {Element|null} 斜杠菜单元素
@@ -61,6 +63,8 @@ const handler = (e) => {
 
 // 事件监听器标识，防止重复安装
 let isInstalled = false;
+let cleanupKeydown = null;
+const STYLE_ID = 'slash-menu-hide-separator';
 
 /**
  * 初始化斜杠菜单左右键导航功能
@@ -71,15 +75,15 @@ export const initSlashMenuNavigation = () => {
     isInstalled = true;
     
     // 隐藏分割线，保持行对齐
-    if (!document.getElementById('slash-menu-hide-separator')) {
+    if (!document.getElementById(STYLE_ID)) {
         const st = document.createElement('style');
-        st.id = 'slash-menu-hide-separator';
+        st.id = STYLE_ID;
         st.textContent = '.hint--menu .b3-menu__separator{display:none!important;}';
         document.head.appendChild(st);
     }
     
     // 添加键盘事件监听器
-    window.addEventListener('keydown', handler, true);
+    cleanupKeydown = addEvent(window, 'keydown', handler, true);
     
     // 将初始化状态添加到全局对象
     window.SavorModules = window.SavorModules || {};
@@ -90,8 +94,11 @@ export const initSlashMenuNavigation = () => {
  * 清理斜杠菜单左右键导航功能
  */
 export const cleanupSlashMenuNavigation = () => {
-    // 根据项目规范，此功能为永久保留功能，不实现实际清理逻辑
+    cleanupKeydown?.();
+    cleanupKeydown = null;
+    document.getElementById(STYLE_ID)?.remove();
     isInstalled = false;
-    if (window.SavorModules?.slashMenuNav) 
+    if (window.SavorModules?.slashMenuNav) {
         window.SavorModules.slashMenuNav.isInstalled = false;
+    }
 };
