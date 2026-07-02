@@ -88,7 +88,7 @@
         background: url('savor-wind.png');
         background-attachment: fixed;
         background-size: auto;
-        z-index: 10;
+        z-index: 80;
         pointer-events: none;
     }
 }

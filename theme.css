@@ -6,7 +6,7 @@
 @import url(style/module/tab-bar.css); /* 页签 */
 @import url( style/module/breadcrumb.css);/* 面包屑 */
 @import url( style/module/editor.css);/* 编辑器 */
-/*@import url( style/module/menu.css); 菜单 */
+@import url( style/module/menu.css); /* 菜单 */
 
 @import url( style/module/ordered-list.css);/* 有序列表 */
 @import url( style/module/unordered-list.css);/* 无序列表 */
@@ -85,6 +85,7 @@
     --b3-theme-secondary: #f3a92f;
     --b3-theme-background-light: var(--b3-theme-surface-lighter);
     --b3-theme-surface-light: oklch(calc(var(--b3-theme-surface-base-l)*0.97) var(--b3-theme-surface-base-ch));
+    --b3-theme-surface: oklch(var(--b3-theme-surface-base-l) var(--b3-theme-surface-base-ch));
     --b3-theme-error: #eb5757;
     --b3-theme-success: #65b84d;
 
@@ -93,7 +94,7 @@
 
     /* 字体 */
     /* "Segoe UI" 和 Noto-COLRv1-2.047 冲突，故移除 */
-    --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", arial, sans-serif, emojis!important;
+    --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", arial, sans-serif, emojis;
     --b3-font-family-protyle: var(--b3-font-family);
     --b3-font-family-code: "Emojis Additional", "Emojis Reset", "JetBrainsMono-Regular", mononoki, Consolas, "Liberation Mono", var(--b3-font-family);
     --b3-font-family-graph: arial;
@@ -125,9 +126,6 @@
     /* 列表 */
     --b3-list-hover: rgba(0, 0, 0, .075);
     --b3-list-icon-hover: rgba(33, 34, 36, .1);
-
-    /* 菜单 */
-    --b3-menu-background: var(--b3-theme-surface);
 
     /* 提示 */
     --b3-tooltips-background: #312f35;
@@ -887,15 +885,15 @@ body{
 
 
 
-:root:lang(zh_CN) {
+:root:lang(zh-CN) {
     --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "PingFang SC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans GB", "Source Han Sans SC", arial, "Microsoft Yahei", sans-serif, emojis;
 }
 
-:root:lang(zh_CHT) {
+:root:lang(zh-CHT) {
     --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "PingFang TC", "Luxi Sans", "DejaVu Sans", "Hiragino Sans TC", "Source Han Sans TC", "Microsoft JhengHei", arial, sans-serif, emojis;
 }
 
-:root:lang(ja_JP) {
+:root:lang(ja-JP) {
     --b3-font-family: Harmony, 'Twitter Emoji', "Emojis Additional", "Emojis Reset", BlinkMacSystemFont, Helvetica, "Luxi Sans", "DejaVu Sans", "Hiragino Sans", "Yu Gothic UI", arial, sans-serif, emojis;
 }
 
@@ -939,7 +937,7 @@ body{
         width: 8px;
         border-radius: 6px;
         background-color: var(--Sv-layout--resize-hover);
-        margin-left: -4px;
+        margin-left: -2px;
     }
 }
 .layout__center+.layout__resize:hover{
@@ -948,7 +946,7 @@ body{
         width: 8px;
         border-radius: 6px;
         background-color: var(--Sv-layout--resize-hover);
-        margin-left: 0px;
+        margin-left: -2px;
     }
 }
 .layout__center{
@@ -961,19 +959,24 @@ body{
         }
     }
 }
-body:not(.body--mobile,.body--window) #layouts{
-    .layout__center .layout-tab-container{
+
+body:not(.body--mobile,.body--window,.body--toolbar-hide) #layouts{
+    .layout__center>.fn__flex{
         border-radius: var(--Sv-center-radius);
         box-shadow: var(--Sv-main-shadow);
         margin: 0 2px 8px;
+        overflow: hidden;
     }
-    .layout__center .fn__flex.fn__none + .layout-tab-container{
-        margin: 5px;
-    }
+
 }
 
-
-
+.body--toolbar-hide #layouts{
+    .layout__center .layout-tab-container {
+            border-radius: var(--Sv-center-radius);
+            box-shadow: var(--Sv-main-shadow);
+            margin: 0 2px 8px;
+    }
+}
 #savorPlugins{
 	display: none;
 }
@@ -985,64 +988,9 @@ body:not(.body--mobile,.body--window) #layouts{
 
 /*-----------------------新窗口-------------------------*/
 .body--window {
-    #layouts div[data-type=wnd]{
-        background-color: var(--Sv-toolbar-background)!important;
-    & > .fn__flex > .layout-tab-bar {
-        border-radius: 6px 0 0 6px;
-        background-color: transparent;
-        .item:not(.item--readonly) {
-            margin-left: 5px;
-            pointer-events: visibleFill;
-        }
-        & .item--readonly{
-            height: 28px;
-            & .block__icon--show{
-                background-color: transparent;
-                &[data-type="new"]{
-                    margin-right: 6px;
-                }
-                &:hover {
-                    background-color: var(--Sv-tab-bar-item-background-focus);
-                }
-            }
-        }
-        &.layout-tab-bar--readonly{
-            margin-right: 0px!important;
-            height: 33px;
-    }
-    }
-}
-    .toolbar__window .toolbar__item{
-        padding: 7px;
-        margin: 3px;
-        border-radius: 6px;
-        &#closeWindow{
-            width: 40px;
-            margin: 3px 1px;
-            &.toolbar__item--close{
-                padding: 2px 6px;
-            }
-            svg{
-                width: 12px!important;
-                height: 12px!important;
-                padding: 8px;
-                border-radius: 6px;
-            }
-            &:hover{
-            background-color: rgba(0, 0, 0, 0);
-            svg{
-                color: var(--Sv-toolbar-closeWindow-svg);
-                background: var(--Sv-toolbar-closeWindow-hover);
-            }
-            }
-        }
-    }
     #status {
-        right: -8px;
-        bottom: 0px;
-        #statusHelp {
-            right: 0px;
-        }
+        right: 4px;
+        bottom: 4px;
     }
 }
 
@@ -1077,5 +1025,3 @@ body:not(.body--mobile,.body--window) #layouts{
     animation-duration: 0.4s;
     animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-

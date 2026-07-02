@@ -1,23 +1,14 @@
 /* ————————————————————弹出菜单&设置菜单———————————————————— */
 .b3-menu{
 	box-shadow: var(--Sv-menu-shadow);
-	background-color: var(--Sv-menu-background);
 	border:none;
-	border-radius: var(--Sv-layout-radius);
 	padding: 4px 0;
     .b3-menu__items{
         padding: 0 4px;
-        .b3-menu__item:not(.submenu-inline){
-            &:not([data-type=nobg]):hover,&.b3-menu__item--current:not(.b3-menu__item--readonly){
-                background-color: var(--Sv-menu-item-hover);
-            }
-        }
     }
     .b3-menu__submenu{
-        background-color:var(--Sv-menu-background);
         box-shadow: var(--Sv-menu-shadow);
         border:none;
-        border-radius: var(--Sv-layout-radius);
         padding: 4px 0;
         margin-top: 4px;
     }
@@ -29,6 +20,9 @@
     }/*快捷键提示*/
     .b3-menu__separator{
         height: 0.5px;
+    }
+    .b3-menu__item{
+        border-radius: 12px;
     }
 }
 
@@ -138,10 +132,6 @@
 }
 .b3-select{
     box-shadow: none;
-    &:hover{
-        box-shadow: none;
-        background-color: var(--Sv-dock-background)!important;
-    }
 }
 
 
@@ -159,6 +149,10 @@
 .b3-dialog{
     .b3-dialog__scrim{
     background-color: var(--Sv--dialog-scrim);
+    }
+    .config__panel>.config__side{
+        border: none;
+        padding: 24px 0 24px 12px;
     }
     .b3-dialog__container{
         border: none;
@@ -194,9 +188,6 @@
             border-radius: 6px;
             height: unset;
             .config__tab-container {
-            &[data-name="bazaar"],&[data-name="image"]{
-                background-color: var(--Sv--dialog-container);
-            }
             & .b3-label :where(.fn__flex-1,.fn__block,.fn__flex-center):not(.ft__on-surface,.b3-button,.b3-form__icon,.fn__size200,ul,input):first-child,& :where(.b3-label,.config__ite)::first-line{
                 font-weight: 600;
             }
@@ -204,44 +195,22 @@
                 font-weight: 400 !important;
             }
             .layout-tab-bar{
-                background-color: transparent;
+                background-color: var(--b3-theme-surface);
+                border-radius: 8px;
                 border: none;
-                height: 43px;
-                margin-bottom: -6px;
+                padding: 0;
                 .item:not(.item--readonly){
-                    min-height: 33px;
                     border-radius: 6px;
                     overflow: unset !important;
                     /*background-color: var(--Sv-bazaar-item);*/
-                    margin: 0 10px 10px -6px;/*消除鼠标滚轮左右浮动*/
+                    margin: 2px;
                     transition:none;
-                    &:last-child{
-                        margin-right: 0px;
-                    }
-                    &:first-child{
-                        margin-left: 0px;/*消除鼠标滚轮左右浮动*/
-                    }
                     &:hover{
                         background-color: var(--Sv-bazaar-focus); 
                     }
                     &.item--focus{
                         background-color: var(--Sv-tab-bar-item-background-focus);
-                        border-radius: var(--Sv-tab-bar-item--focus-radius);
-                            &::after{
-                                background-color:transparent;
-                                top: 27px;
-                                height: 10px;  
-                                left: calc(-1 * var(--Sv-dock-item-radius) - 2px) ;
-                                border-radius: 0;
-                                width: calc(100% + var(--Sv-dock-item-radius)*2 + 4px);
-                                transition: var(--b3-transition);
-                                background-image: var(--Sv-tab-bar-item-focus-after);
-                                background-size: 12px 12px,12px 12px,
-                                calc(100% - var(--Sv-dock-item-radius)*2 - 4px) calc(100% + var(--Sv-dock-item-radius)*2 + 8px);
-                                background-position: right bottom, left bottom, center top;
-                                background-repeat: no-repeat;
-                                box-shadow: var(--Sv-tab-bar-item-background-focus) 0 8px 0 0;
-                            }
+                        box-shadow: var(--Sv-main-shadow);
                             & .item__text {
                                 font-weight: 700;
                             }
@@ -260,7 +229,6 @@
 
             .config-bazaar__panel{
                 background-color: var(--Sv-bazaar-focus); 
-                border-radius: 8px 8px 0 0;
             }
             }
         }
@@ -366,9 +334,9 @@
         .b3-card--current{
             box-shadow: var(--Sv-card-current-shadow);
         }
-        .b3-cards>.fn__flex-1{
-            margin-left: 6px!important;
-            min-width: 300px!important;
+        .b3-cards{
+            gap: 0px;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
         }
     }
 }

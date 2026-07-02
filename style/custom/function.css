@@ -75,7 +75,7 @@
     grid-column: 1 / -1 !important; /* 占据整行 */
     display: flex !important;
     align-items: center;
-    border-radius: 4px;
+    border-radius: 12px;
     padding: 0 0 0 8px;;
     margin-top: -3px;
     .b3-menu__icon {
@@ -99,8 +99,8 @@
         flex-wrap: nowrap ;
         margin:0px 4px 3px 4px;
         gap: 3px;
-        padding: 3px;
-        border-radius: 6px;
+        padding: 1px;
+        border-radius: 12px;
         background-color: var(--Sv-menu-item-hover);
         overflow:visible;
         .b3-menu__item {

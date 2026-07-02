@@ -27,6 +27,10 @@ const copyFiles = [
   'README_zh_CN.md',
 ];
 
+const extraFiles = [
+  ['style/theme/savor-wind.png', 'savor-wind.png'],
+];
+
 function copyAssets() {
   if (!existsSync(distDir)) {
     mkdirSync(distDir, { recursive: true });
@@ -58,6 +62,18 @@ function copyAssets() {
       console.log(`[资源] ✓ ${file}`);
     } else {
       console.warn(`[资源] ⚠ 源文件不存在: ${file}`);
+    }
+  }
+
+  for (const [src, dest] of extraFiles) {
+    const srcFile = resolve(rootDir, src);
+    const destFile = resolve(distDir, dest);
+    if (existsSync(srcFile)) {
+      rmSync(destFile, { force: true });
+      copyFileSync(srcFile, destFile);
+      console.log(`[资源] ✓ ${dest}`);
+    } else {
+      console.warn(`[资源] ⚠ 源文件不存在: ${src}`);
     }
   }
 

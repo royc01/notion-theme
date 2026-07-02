@@ -12,15 +12,11 @@
 				font-size: 12px;
 			}
 			&>svg.popover__block{
-                padding:2px;
 				color:transparent;		
 				background-color: transparent;
 			}
 		}	
 		&>svg.popover__block{
-			height: 10px;
-			width: 10px;
-			padding: 2px;
 			border-radius:4px;
 		}
 	}
