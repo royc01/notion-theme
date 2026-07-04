@@ -111,7 +111,7 @@
 
     /* 顶部工具栏 */
     --b3-toolbar-color: var(--b3-theme-on-surface);
-    --b3-toolbar-hover: rgba(255, 255, 255, .68);
+    --b3-toolbar-hover: var(--b3-list-hover);
     --b3-toolbar-left-mac: 74px;
 
     /* 线条 */
@@ -1024,4 +1024,35 @@ body:not(.body--mobile,.body--window,.body--toolbar-hide) #layouts{
 ::view-transition-new(root) {
     animation-duration: 0.4s;
     animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.callout{
+    border-radius: 8px;
+    .callout-info{
+        color: var(--b3-theme-on-background)!important;}
+    .callout-title{
+        font-weight: 700;
+    }
+    &::before{
+        display: none;
+    }
+    &[data-subtype="NOTE"]{
+        background-color: var(--Sv-callout-background10);
+        box-shadow: inset  0 0 0 2px var(--b3-font-background10);
+    }
+    &[data-subtype="TIP"]{
+        background-color: var(--Sv-callout-background8);
+        box-shadow: inset  0 0 0 2px var(--b3-font-background9);
+    }
+    &[data-subtype="IMPORTANT"]{
+        background-color: var(--Sv-callout-background11);
+        box-shadow: inset  0 0 0 2px var(--b3-font-background11);
+    }
+    &[data-subtype="WARNING"]{
+        background-color: var(--Sv-callout-background5);
+        box-shadow: inset  0 0 0 2px var(--b3-font-background5);
+    }
+    &[data-subtype="CAUTION"]{
+        background-color: var(--Sv-callout-background13);
+        box-shadow: inset  0 0 0 2px var(--b3-font-background3);
+    }
 }

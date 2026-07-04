@@ -64,6 +64,15 @@ const createButton = (className, htmlContent, uniqueId) => {
     return button;
 };
 
+const isEditableOrInteractiveTarget = (target) => {
+    if (!target?.closest) return false;
+    return target.getAttribute?.("contenteditable") === "true" ||
+        target.closest('[data-type="NodeMathBlock"]') ||
+        target.closest('.render-node') ||
+        target.closest('[data-type="a"]') ||
+        target.closest('button, input, textarea, select, [role="button"]');
+};
+
 // 更新折叠按钮内容
 const updateCollapseButton = (btn, isFolded, childCount) => {
     btn.innerHTML = isFolded ? (childCount || '') : SVG_ICONS.COLLAPSE;
@@ -250,14 +259,14 @@ export const initDraggable = (element) => {
 
         // 滚轮缩放和双击重置
         element.addEventListener("wheel", element._onWheel = e => {
-            if (e.target.getAttribute("contenteditable") === "true" || !e.altKey) return;
+            if (isEditableOrInteractiveTarget(e.target) || !e.altKey) return;
             e.preventDefault();
             element._scale = Math.min(Math.max((element._scale || 1) * (e.deltaY > 0 ? 0.9 : 1.1), 0.1), 5);
             element.style.setProperty("--dt-scale", String(element._scale));
         }, { passive: false });
         
         element.addEventListener("dblclick", element._onDoubleClick = e => {
-            if (e.target.getAttribute("contenteditable") === "true") return;
+            if (isEditableOrInteractiveTarget(e.target)) return;
             element._scale = 1;
             element.style.setProperty("--dt-scale", "1");
             element.setAttribute("data-animating", "true");
@@ -291,8 +300,7 @@ export const initDraggable = (element) => {
         element.addEventListener("pointerdown", element._onItemPointerDown = e => {
             // 限制鼠标左键和非编辑元素
             if ((e.pointerType === "mouse" && e.button !== 0) || 
-                e.target.getAttribute?.("contenteditable") === "true" || 
-                e.target.closest?.('[data-type="a"]') ||
+                isEditableOrInteractiveTarget(e.target) ||
                 e.target.closest?.('.protyle-action--task')) return;
             
             // 找到被点击的列表项

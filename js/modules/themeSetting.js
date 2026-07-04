@@ -45,12 +45,6 @@ const resetRemovedTopbarMergeFeature = () => {
     if (document.documentElement.getAttribute('savor-tabbar') === 'merge') {
         document.documentElement.removeAttribute('savor-tabbar');
     }
-    document.querySelectorAll(".layout__center .layout-tab-bar--readonly").forEach(tabBar => {
-        tabBar.style.marginRight = "0px";
-    });
-    document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabBar => {
-        tabBar.style.marginLeft = "0px";
-    });
     window.updateTabBarsMargin = null;
     window.updateTabBarsMarginLeft = null;
 };
