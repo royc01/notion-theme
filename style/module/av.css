@@ -150,12 +150,13 @@
         padding: 0 4px;
         margin: 0 4px 0px 0;
     &:hover{
-        background-color: var(--Sv-breadcrumb-hover);
+		box-shadow: var(--Sv-main-shadow)!important;
+        background-color: var(--Sv-breadcrumb-hover)!important;
         }
     }
     .item--focus{
-        box-shadow: none!important;
-        background-color: var(--Sv-breadcrumb-hover);
+        box-shadow: var(--Sv-main-shadow)!important;
+        background-color: var(--Sv-breadcrumb-hover)!important;
         &::after{
             display: none;
         }

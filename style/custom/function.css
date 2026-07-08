@@ -1,7 +1,6 @@
 #savorToolbar{
 	margin: 0 4px;
 	.b3-menu__item{
-        background-color: var(--Sv-menu-background);
 		&:hover{
 			background-color: var(--Sv-menu-item-hover)!important;
 		}

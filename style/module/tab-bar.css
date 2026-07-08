@@ -1,7 +1,52 @@
 /* ———————————————————页签———————————————————— */
+@property --mask-stop-start {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --mask-stop-end {
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 0px;
+}
+
+@keyframes maskAppear-mask-start-sv {
+    0% {
+        --mask-stop-start: 0px;
+    }
+    1%,
+    100% {
+        --mask-stop-start: 40px;
+    }
+}
+
+@keyframes maskAppear-mask-end-sv {
+    0% {
+        --mask-stop-end: 0px;
+    }
+    1%,
+    100% {
+        --mask-stop-end: 40px;
+    }
+}
+
+
+body:not(.body--mobile,.body--toolbar-hide) .layout__center .fn__flex-column>.fn__flex:has(>.layout-tab-bar:not(.layout-tab-bar--readonly)) {
+    background-color: var(--b3-theme-background);
+}
+
 .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar{
     padding: 0 3px;
     border: none;
+    &:not(.layout-tab-bar--readonly) {
+        -webkit-mask-image: linear-gradient(to right, transparent, black var(--mask-stop-start), black calc(100% - var(--mask-stop-end)), transparent);
+        mask-image: linear-gradient(to right, transparent, black var(--mask-stop-start), black calc(100% - var(--mask-stop-end)), transparent);
+        animation-name: maskAppear-mask-start-sv, maskAppear-mask-end-sv;
+        animation-range: 1px 100%, 0% calc(100% - 1px);
+        animation-direction: alternate, alternate-reverse;
+        animation-timeline: scroll(self x);
+    }
     /*overflow: visible;这个不能加*/
     .item:not(.item--readonly){
         border-radius: var(--Sv-tab-bar-item-radius);

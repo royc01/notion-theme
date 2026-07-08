@@ -18,10 +18,7 @@
         >.protyle-action {
             top: 12px;
             left: 125px;
-            scale: 1.5;
-            &::after,&:hover:after{
-                background-color: var(--b3-theme-background)!important;
-            }
+            scale: 1.2;
         }
 
         /* 第一个内容块：时间 */
