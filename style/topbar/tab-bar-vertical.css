@@ -14,15 +14,14 @@ body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]
 }
 body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizontal) .fn__flex:not(.av__views){
     & > .layout-tab-bar{
-	margin:0 -10px 0 0; 
 	border-bottom: none;
     display: block;
 	flex: 1;
     padding-left: 5px;
+    padding-right: 5px;
     &.layout-tab-bar--readonly {
         flex: initial;
-        width: calc(100% - 5px);
-        border-radius: 0 8px 0 0;
+        width: calc(100% - 2px);
     }
     .item:not(.item--readonly) {
         margin:0 -5px 5px 0!important;
@@ -33,7 +32,6 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
             margin-left: auto;
         }
         &.item--focus{
-            border-radius: 8px 0 0 8px;
             transition: opacity .2s cubic-bezier(0, 0, .2, 1) 0ms;
         &::after {
             background-color: transparent;
@@ -59,9 +57,6 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
             opacity: 1;
         }
         }
-        .item--pin:not(.item--readonly) {
-            padding: 2.5px 1.5px;
-        }
     }
 }
 body:not(.body--mobile,.body--window)  .layout__center [data-type='wnd'][data-id]:not(.tab-horizontal){
@@ -75,10 +70,6 @@ body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]
     width: var(--custom-tab-width);
     transition: width 0.3s ease;
     background-color: var(--Sv-vertical-bg);
-    &:not(.layout-tab-bar--readonly) {
-        margin-bottom: 5px;
-        border-radius: 0 0 0 8px;
-    }
 }
 
 

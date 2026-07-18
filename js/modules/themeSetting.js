@@ -157,8 +157,10 @@ export const renderAllButtons = (targetToolbar = null) => {
         
         button.setAttribute("data-type", btn.type);
         // 状态高亮
-        const isActivated = (btn.type === 'theme' && config.get(btn.id) === "1") || 
-                          (btn.type === 'feature' && getItem(btn.attrName) === "1");
+        const isActivated = btn.isActive?.() ?? (
+            (btn.type === 'theme' && config.get(btn.id) === "1") ||
+            (btn.type === 'feature' && getItem(btn.attrName) === "1")
+        );
         if (isActivated) {
             button.classList.add("button_on");
         }
@@ -175,15 +177,15 @@ export const renderAllButtons = (targetToolbar = null) => {
             } else if (btn.type === 'feature') {
                 const isActive = button.classList.contains("button_on");
                 if (isActive) {
+                    await btn.onDisable?.();
                     button.classList.remove("button_on");
                     document.getElementById(btn.styleId)?.remove();
-                    btn.onDisable?.();
-                    config.set(btn.attrName, "0");
+                    if (btn.persist !== false) config.set(btn.attrName, "0");
                 } else {
+                    await btn.onEnable?.();
                     button.classList.add("button_on");
                     // 现在所有功能都通过属性控制，不需要加载 CSS
-                    btn.onEnable?.();
-                    config.set(btn.attrName, "1");
+                    if (btn.persist !== false) config.set(btn.attrName, "1");
                 }
             }
         });

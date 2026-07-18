@@ -4,7 +4,7 @@
 
 // 垂直页签宽度调节功能
 export const tabbarResize = {
-    resizer: null, isResizing: false, startX: 0, startWidth: 0, tabbar: null,
+    resizer: null, resizeTarget: null, isResizing: false, startX: 0, startWidth: 0, tabbar: null,
     MIN: 150, MAX: 600,
     init() {
         this.remove(false);
@@ -12,14 +12,17 @@ export const tabbarResize = {
         if (tabbar) this.create(tabbar);
     },
     create(tabbar) {
-        this.resizer = document.createElement("div");
-        Object.assign(this.resizer, { id: "vertical-resize-handle" });
-        this.resizer.style.cssText = "position:absolute;top:0;right:0px;width:6px;height:100%;cursor:col-resize;background:transparent;z-index:2;";
         tabbar.style.position = "relative";
-        tabbar.appendChild(this.resizer);
-        this.resizer.onmousedown = e => this.start(e, tabbar);
+        this.resizeTarget = tabbar;
+        tabbar.addEventListener("mousedown", this.handleMouseDown);
         document.addEventListener("mousemove", this.move);
         document.addEventListener("mouseup", this.stop);
+    },
+    handleMouseDown: e => {
+        const tabbar = e.currentTarget;
+        const rect = tabbar.getBoundingClientRect();
+        if (e.button !== 0 || e.clientX < rect.right - 6) return;
+        tabbarResize.start(e, tabbar);
     },
     start(e, tabbar) {
         e.preventDefault();
@@ -41,13 +44,14 @@ export const tabbarResize = {
     remove(reset = true) {
         document.removeEventListener("mousemove", this.move);
         document.removeEventListener("mouseup", this.stop);
+        this.resizeTarget?.removeEventListener("mousedown", this.handleMouseDown);
         document.getElementById("vertical-resize-handle")?.remove();
         document.body.classList.remove("tabbar-resizing");
         if (reset) document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabbar => {
             tabbar.style.width = "";
             tabbar.style.position = "";
         });
-        Object.assign(this, { resizer: null, isResizing: false, tabbar: null });
+        Object.assign(this, { resizer: null, resizeTarget: null, isResizing: false, tabbar: null });
     }
 };
 

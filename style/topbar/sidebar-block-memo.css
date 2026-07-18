@@ -26,7 +26,7 @@ body:not(.body--mobile){
         .protyle-wysiwyg span[data-type~="inline-memo"][data-inline-memo-content]::before {
         content: attr(data-inline-memo-content);
         position: absolute;
-        top: -65%; /* 显示在文本上方 */
+        top: -50%; /* 显示在文本上方 */
         left: 50%; /* 水平居中 */
         transform: translateX(-50%); /* 通过转换实现精确居中 */
         z-index: 3;

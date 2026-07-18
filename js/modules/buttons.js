@@ -7,6 +7,19 @@ import { config } from './config.js';
 
 let allButtons = [];
 
+const setToolbarFusion = async (enabled) => {
+    const appearance = window.siyuan?.config?.appearance;
+    if (!appearance) throw new Error('思源外观设置不可用');
+
+    const response = await fetch('/api/setting/setAppearance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...appearance, hideToolbar: enabled })
+    });
+    const result = await response.json();
+    if (result.code !== 0) throw new Error(result.msg || '顶栏融合设置失败');
+};
+
 
 
 export const buildAllButtons = async () => {
@@ -63,6 +76,39 @@ export const buildAllButtons = async () => {
         // 官方字体配色按钮
         { id: "officialFontColors", type: "feature", label: i18n.t("官方字体配色"), styleId: "Sv-theme-official-font-colors", attrName: "officialFontColors", svg: "M13.067 10.667v7.467l2.933 2.933v-7.6l-2.933-2.8zM13.733 17.733v-5.333l1.733 1.6v5.333l-1.733-1.6zM9.333 22l3.733-3.733v-7.467l-3.733 3.6v7.6zM16 21.067l2.933-2.933v-7.467l-2.933 2.8v7.6zM18.933 10.667v7.467l3.733 3.733v-7.6l-3.733-3.6zM22 20.133l-2.533-2.4v-5.333l2.533 2.4v5.333z", onEnable: () => { document.documentElement.setAttribute('savor-official-font-colors', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-official-font-colors'); } }
     ];
+    const concealButtonIndex = allButtons.findIndex(button => button.id === "concealButton");
+    allButtons.splice(concealButtonIndex + 1, 0, {
+        id: "toolbarFusion",
+        type: "feature",
+        label: i18n.t("顶栏融合"),
+        attrName: "toolbarFusion",
+        svg: "M9.333 11.333c0-.4.267-.667.667-.667h12c.4 0 .667.267.667.667v10.667c0 .4-.267.667-.667.667H10c-.4 0-.667-.267-.667-.667V11.333zm1.334.667v2h10.666v-2H10.667zm0 3.333v6h10.666v-6H10.667z",
+        isActive: () => Boolean(window.siyuan?.config?.appearance?.hideToolbar),
+        persist: false,
+        onEnable: () => setToolbarFusion(true),
+        onDisable: () => setToolbarFusion(false)
+    });
+
+    const toolbarFusionButton = allButtons.find(button => button.id === "toolbarFusion");
+    const tabbarVerticalButton = allButtons.find(button => button.id === "tabbarVertical");
+    const enableTabbarVertical = tabbarVerticalButton.onEnable;
+
+    toolbarFusionButton.onEnable = async () => {
+        if (config.get(tabbarVerticalButton.attrName) === "1") {
+            tabbarVerticalButton.onDisable?.();
+            config.set(tabbarVerticalButton.attrName, "0");
+            document.getElementById(tabbarVerticalButton.id)?.classList.remove("button_on");
+        }
+        await setToolbarFusion(true);
+    };
+
+    tabbarVerticalButton.onEnable = async () => {
+        if (window.siyuan?.config?.appearance?.hideToolbar) {
+            await setToolbarFusion(false);
+            document.getElementById(toolbarFusionButton.id)?.classList.remove("button_on");
+        }
+        enableTabbarVertical?.();
+    };
 };
 
 export const getAllButtons = () => allButtons;
