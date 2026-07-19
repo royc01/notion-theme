@@ -4,7 +4,7 @@
 
 import { config } from './config.js';
 
-let isEnabled = false, observerCleanups = [], editorNode = null, dragTimeout = null, dragMutationObserver = null, connectionCleanup = null, activeConnectionItem = null;
+let isEnabled = false, observerCleanups = [], editorNode = null, dragTimeout = null, dragMutationObserver = null, editorMutationObserver = null, editorMutationRefreshTimer = null, kernelMemoSyncTimer = null, kernelMemoSyncInFlight = false, connectionCleanup = null, activeConnectionItem = null, refreshRetryTimer = null;
 const scrollBindings = new Map();
 
 // 配置常量
@@ -142,6 +142,145 @@ const restoreMainMinWidth = main => {
 const cleanupObservers = () => {
     observerCleanups.forEach(cleanup => cleanup?.());
     observerCleanups = [];
+};
+
+const stopEditorMutationObserver = () => {
+    editorMutationObserver?.disconnect();
+    editorMutationObserver = null;
+    clearTimeout(editorMutationRefreshTimer);
+    editorMutationRefreshTimer = null;
+};
+
+const getEditorDocumentId = main => {
+    return main?.getAttribute('data-doc-id') ||
+        main?.closest('.protyle')?.getAttribute('data-id') ||
+        main?.closest('[data-root-id]')?.getAttribute('data-root-id') || null;
+};
+
+// 内核完成保存时，编辑器偶尔不会把首次新增的块备注回写到当前 DOM。
+// 以当前打开文档的内核数据为准补齐 memo 属性，随后复用现有侧栏渲染逻辑。
+const syncBlockMemosFromKernel = async () => {
+    if (!isEnabled || kernelMemoSyncInFlight || !editorNode) return;
+
+    const editors = Array.from(editorNode.querySelectorAll('div.protyle-wysiwyg'))
+        .map(main => ({ main, documentId: getEditorDocumentId(main) }))
+        .filter(({ documentId }) => Boolean(documentId));
+    if (!editors.length) return;
+
+    kernelMemoSyncInFlight = true;
+    try {
+        const documentIds = [...new Set(editors.map(({ documentId }) => documentId))];
+        const quotedIds = documentIds.map(id => `'${id.replace(/'/g, "''")}'`).join(',');
+        const response = await fetch('/api/query/sql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}`
+            },
+            body: JSON.stringify({
+                stmt: `SELECT id, root_id, memo FROM blocks WHERE root_id IN (${quotedIds}) AND memo <> ''`
+            })
+        });
+        if (!response.ok) return;
+
+        const result = await response.json().catch(() => null);
+        if (result?.code !== 0 || !Array.isArray(result.data)) return;
+        if (!isEnabled || !editorNode) return;
+
+        const memosByDocument = new Map(documentIds.map(id => [id, new Map()]));
+        result.data.forEach(({ id, root_id: rootId, memo }) => {
+            if (id && memosByDocument.has(rootId)) {
+                memosByDocument.get(rootId).set(id, memo);
+            }
+        });
+
+        editors.forEach(({ main, documentId }) => {
+            if (!main.isConnected || getEditorDocumentId(main) !== documentId) return;
+
+            const currentMemos = memosByDocument.get(documentId) || new Map();
+            const previousMemos = main._sidebarMemoKernelMemos || new Map();
+            let changed = false;
+
+            main.querySelectorAll('[data-node-id]').forEach(block => {
+                const blockId = block.dataset.nodeId;
+                const kernelMemo = currentMemos.get(blockId);
+                const domMemo = block.getAttribute('memo');
+
+                if (kernelMemo !== undefined && domMemo !== kernelMemo) {
+                    block.setAttribute('memo', kernelMemo);
+                    changed = true;
+                } else if (kernelMemo === undefined && previousMemos.has(blockId) && domMemo === previousMemos.get(blockId)) {
+                    block.removeAttribute('memo');
+                    changed = true;
+                }
+            });
+
+            main._sidebarMemoKernelMemos = currentMemos;
+            if (changed) {
+                const sidebar = main.parentElement?.querySelector('#protyle-sidebar') || addSideBar(main);
+                sidebar && refreshSideBarMemos(main, sidebar);
+            }
+        });
+    } catch (e) {
+        // 内核暂不可用时继续使用 DOM 监听，不影响既有功能。
+    } finally {
+        kernelMemoSyncInFlight = false;
+    }
+};
+
+const startKernelMemoSync = () => {
+    if (kernelMemoSyncTimer) return;
+    void syncBlockMemosFromKernel();
+    kernelMemoSyncTimer = setInterval(() => void syncBlockMemosFromKernel(), 500);
+};
+
+const stopKernelMemoSync = () => {
+    clearInterval(kernelMemoSyncTimer);
+    kernelMemoSyncTimer = null;
+    kernelMemoSyncInFlight = false;
+};
+
+// 编辑器在应用事务时可能会替换整个块，导致原先绑定在单个编辑器上的监听器失效。
+// 监听布局容器可覆盖首次新增备注以及随后发生的编辑器重建。
+const observeEditorMutations = () => {
+    if (!editorNode || editorMutationObserver) return;
+
+    editorMutationObserver = new MutationObserver(mutations => {
+        const hasEditorChange = mutations.some(mutation => {
+            const target = mutation.target.nodeType === Node.ELEMENT_NODE ? mutation.target : mutation.target.parentElement;
+            if (target?.closest?.('div.protyle-wysiwyg')) return true;
+
+            return Array.from(mutation.addedNodes).some(node => {
+                const element = node.nodeType === Node.ELEMENT_NODE ? node : null;
+                return element?.matches?.('div.protyle-wysiwyg') || Boolean(element?.querySelector?.('div.protyle-wysiwyg'));
+            });
+        });
+        if (!hasEditorChange) return;
+
+        clearTimeout(editorMutationRefreshTimer);
+        editorMutationRefreshTimer = setTimeout(() => {
+            if (isEnabled) refreshEditor();
+        }, 100);
+    });
+
+    editorMutationObserver.observe(editorNode, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['data-inline-memo-content', 'data-readonly', 'data-type', 'fold', 'memo']
+    });
+};
+
+// 思源完成事务后，编辑器 DOM 可能会在 MutationObserver 的首次回调之后才更新。
+// 再延迟同步一次，避免新建的第一条备注要重载文档后才出现在侧栏。
+const scheduleMemoRefresh = () => {
+    clearTimeout(refreshRetryTimer);
+    refreshRetryTimer = setTimeout(() => {
+        if (isEnabled) {
+            refreshEditor();
+            void syncBlockMemosFromKernel();
+        }
+    }, 200);
 };
 
 // 持久化块更新
@@ -898,7 +1037,7 @@ const refreshEditor = () => {
             childList: true, 
             subtree: true, 
             attributes: true, 
-            attributeFilter: ['data-inline-memo-content', 'data-readonly', 'fold', 'memo'] 
+            attributeFilter: ['data-inline-memo-content', 'data-readonly', 'data-type', 'fold', 'memo']
         });
         
         observerCleanups.push(() => {
@@ -941,10 +1080,18 @@ const openSideBar = (open, save = false) => {
     
     if (open) {
         window.siyuan?.eventBus?.on('loaded-protyle', refreshEditor);
+        window.siyuan?.eventBus?.on('transaction-end', scheduleMemoRefresh);
         refreshEditor(); 
+        observeEditorMutations();
+        startKernelMemoSync();
         observeDragTitle();
     } else {
         window.siyuan?.eventBus?.off('loaded-protyle', refreshEditor);
+        window.siyuan?.eventBus?.off('transaction-end', scheduleMemoRefresh);
+        clearTimeout(refreshRetryTimer);
+        refreshRetryTimer = null;
+        stopEditorMutationObserver();
+        stopKernelMemoSync();
         cleanupObservers();
         unbindAllSidebarScroll();
         
@@ -979,6 +1126,12 @@ const cleanupSidebarMemo = () => {
     
     dragTimeout && clearTimeout(dragTimeout);
     dragTimeout = null;
+
+    clearTimeout(refreshRetryTimer);
+    refreshRetryTimer = null;
+
+    stopEditorMutationObserver();
+    stopKernelMemoSync();
     
     removeMemoConnection();
     unbindAllSidebarScroll();
@@ -1012,4 +1165,3 @@ export const initSidebarMemoModule = () => {
 };
 
 export { cleanupSidebarMemo };
-
