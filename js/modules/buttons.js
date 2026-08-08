@@ -20,6 +20,46 @@ const setToolbarFusion = async (enabled) => {
     if (result.code !== 0) throw new Error(result.msg || '顶栏融合设置失败');
 };
 
+const openTypewriterShortcutDialog = (current) => {
+    document.getElementById('savor-typewriter-shortcut-dialog')?.remove();
+
+    const dialog = document.createElement('div');
+    dialog.id = 'savor-typewriter-shortcut-dialog';
+    dialog.className = 'b3-dialog b3-dialog--open';
+    dialog.innerHTML = `
+        <div class="b3-dialog__scrim"></div>
+        <div class="b3-dialog__container" style="width: min(420px, calc(100vw - 32px));">
+            <div class="b3-dialog__header"><div class="b3-dialog__title">设置打字机模式快捷键</div></div>
+            <div class="b3-dialog__content" style="padding: 16px;">
+                <div style="margin-bottom: 8px;">请输入组合键，例如 Ctrl+Alt+T。</div>
+                <input class="b3-text-field fn__block" aria-label="打字机模式快捷键" />
+                <div class="b3-label__text" data-role="error" style="min-height: 20px; margin-top: 8px; color: var(--b3-theme-error, #d23f31);"></div>
+            </div>
+            <div class="b3-dialog__action"><button class="b3-button b3-button--cancel" data-role="cancel">取消</button><button class="b3-button b3-button--text" data-role="save">保存</button></div>
+        </div>`;
+
+    const input = dialog.querySelector('input');
+    const error = dialog.querySelector('[data-role="error"]');
+    const close = () => dialog.remove();
+    const save = () => {
+        if (window.setTypewriterShortcut?.(input.value)) return close();
+        error.textContent = '快捷键必须包含 Ctrl、Alt、Shift 或 Meta，例如 Ctrl+Alt+T。';
+        input.focus();
+    };
+
+    input.value = current;
+    dialog.querySelector('[data-role="cancel"]').addEventListener('click', close);
+    dialog.querySelector('[data-role="save"]').addEventListener('click', save);
+    dialog.querySelector('.b3-dialog__scrim').addEventListener('click', close);
+    dialog.addEventListener('keydown', event => {
+        if (event.key === 'Escape') close();
+        if (event.key === 'Enter') save();
+    });
+    document.body.appendChild(dialog);
+    input.focus();
+    input.select();
+};
+
 
 
 export const buildAllButtons = async () => {
@@ -76,6 +116,17 @@ export const buildAllButtons = async () => {
         // 官方字体配色按钮
         { id: "officialFontColors", type: "feature", label: i18n.t("官方字体配色"), styleId: "Sv-theme-official-font-colors", attrName: "officialFontColors", svg: "M13.067 10.667v7.467l2.933 2.933v-7.6l-2.933-2.8zM13.733 17.733v-5.333l1.733 1.6v5.333l-1.733-1.6zM9.333 22l3.733-3.733v-7.467l-3.733 3.6v7.6zM16 21.067l2.933-2.933v-7.467l-2.933 2.8v7.6zM18.933 10.667v7.467l3.733 3.733v-7.6l-3.733-3.6zM22 20.133l-2.533-2.4v-5.333l2.533 2.4v5.333z", onEnable: () => { document.documentElement.setAttribute('savor-official-font-colors', 'true'); }, onDisable: () => { document.documentElement.removeAttribute('savor-official-font-colors'); } }
     ];
+    const typewriterButton = allButtons.find(button => button.id === "typewriterMode");
+    if (typewriterButton) {
+        Object.assign(typewriterButton, {
+            getShortcut: () => window.getTypewriterShortcut?.(),
+            onConfigureShortcut: () => {
+                const current = window.getTypewriterShortcut?.() || 'Ctrl+Alt+T';
+                openTypewriterShortcutDialog(current);
+            }
+        });
+    }
+
     const concealButtonIndex = allButtons.findIndex(button => button.id === "concealButton");
     allButtons.splice(concealButtonIndex + 1, 0, {
         id: "toolbarFusion",

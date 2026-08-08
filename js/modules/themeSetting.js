@@ -193,6 +193,14 @@ export const renderAllButtons = (targetToolbar = null) => {
                 }
             }
         });
+        if (typeof btn.onConfigureShortcut === 'function') {
+            button.title = `${btn.label} (${btn.getShortcut?.() || ''})`;
+            button.addEventListener('contextmenu', (event) => {
+                event.preventDefault();
+                btn.onConfigureShortcut();
+                button.title = `${btn.label} (${btn.getShortcut?.() || ''})`;
+            });
+        }
         fragment.appendChild(button);
     });
     savorToolbar.appendChild(fragment);

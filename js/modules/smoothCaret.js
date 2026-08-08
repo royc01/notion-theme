@@ -14,7 +14,25 @@ const getCaretInfo = () => {
     const caretRect = rect.height > 0
         ? rect
         : Array.from(range.getClientRects()).find(item => item.height > 0);
-    return caretRect ? { rect: caretRect, color: getComputedStyle(element).color } : null;
+    if (caretRect) return { rect: caretRect, color: getComputedStyle(element).color };
+
+    // 空块没有文本矩形，优先使用内部 spellcheck 行，避免外层块的边距影响位置。
+    const line = element.closest('[spellcheck]')
+        || element.closest('[contenteditable="true"]')
+        || element.closest('[data-node-id]');
+    if (!line) return null;
+    const lineRect = line.getBoundingClientRect();
+    if (lineRect.height <= 0) return null;
+    const style = getComputedStyle(line);
+    const lineHeight = Number.parseFloat(style.lineHeight);
+    return {
+        rect: {
+            left: lineRect.left + Number.parseFloat(style.paddingLeft || 0),
+            top: lineRect.top + Number.parseFloat(style.paddingTop || 0),
+            height: Number.isFinite(lineHeight) ? lineHeight : lineRect.height
+        },
+        color: style.color
+    };
 };
 
 const hideCaret = () => caretElement?.classList.remove('savor-smooth-caret--visible');
