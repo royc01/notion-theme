@@ -1,7 +1,6 @@
 /* ————————————————————顶栏———————————————————— */
 body:not(.body--mobile,.body--window)>#toolbar{
     #barWorkspace/*工作空间*/ {
-        height:28px;
         padding:0 3px 0 10px;
         margin:4px 3px 4px 2px;
         align-items: center;
@@ -31,4 +30,10 @@ body:not(.body--mobile,.body--window)>#toolbar{
             width: 14px;
         }
     }
+}
+body:not(.body--toolbar-hide) #barWorkspace{
+    height: 22px !important;
+}
+.body--toolbar-hide #barWorkspace{
+    height:28px;
 }
