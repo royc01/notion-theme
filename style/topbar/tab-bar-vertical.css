@@ -24,7 +24,7 @@ body:not(.body--mobile,.body--window) [data-type='wnd'][data-id]:not(.tab-horizo
         width: calc(100% - 2px);
     }
     .item:not(.item--readonly) {
-        margin:0 -5px 5px 0!important;
+        margin:2px -5px 5px 0!important;
         max-width:unset;
         width: 100%;
         padding: 2.5px 0 ;
@@ -74,9 +74,34 @@ body:not(.body--mobile,.body--window) .layout__center [data-type='wnd'][data-id]
 
 
 
-#vertical-resize-handle:hover{
-    background-color: var(--Sv-layout--resize-hover)!important;
+.vertical-resize-handle {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    cursor: col-resize;
+    background-color: transparent;
+    transition: background-color .15s ease;
+}
+
+.vertical-resize-handle:hover {
+    background-color: var(--Sv-layout--resize-hover) !important;
     border-radius: 3px;
+}
+
+body.tabbar-resizing .vertical-resize-handle {
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.tabbar-resizing .vertical-resize-handle.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    background-color: var(--Sv-layout--resize-hover) !important;
+    border-radius: 3px;
+    cursor: col-resize;
 }
 
 /* 拖拽时的样式 */

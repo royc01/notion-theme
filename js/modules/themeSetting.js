@@ -90,7 +90,8 @@ const applyRememberedFeatures = async () => {
     resetRemovedTopbarMergeFeature();
     const limitDesktopEnhancements = shouldLimitDesktopEnhancements();
     for (const btn of getAllButtons()) {
-        if (btn.type === 'feature' && config.get(btn.attrName) === "1") {
+        const isFeatureEnabled = btn.isActive?.() ?? config.get(btn.attrName) === "1";
+        if (btn.type === 'feature' && isFeatureEnabled) {
             if (limitDesktopEnhancements && MOBILE_UNSAFE_FEATURE_IDS.has(btn.id)) {
                 continue;
             }
@@ -98,7 +99,10 @@ const applyRememberedFeatures = async () => {
             button?.classList.add("button_on");
             
             // 现在所有功能都通过属性控制，不需要加载 CSS
-            btn.onEnable?.();
+            // 不持久化的功能（如顶栏融合）由宿主应用恢复，无需再次调用设置接口。
+            if (btn.persist !== false) {
+                btn.onEnable?.();
+            }
         }
     }
 };
@@ -409,6 +413,7 @@ export const destroyTheme = () => {
         'cleanupTabbarVertical',
         'cleanupBulletThreading',
         'cleanupTypewriterMode',
+        'cleanupSmoothCaret',
         'cleanupSidebarMemo',
         'cleanupMiddleClickCollapse',
         'disableListPreview'
@@ -522,6 +527,7 @@ export const initTheme = () => {
         cleanupTabbarVertical: window.cleanupTabbarVertical,
         cleanupBulletThreading: window.cleanupBulletThreading,
         cleanupTypewriterMode: window.cleanupTypewriterMode,
+        cleanupSmoothCaret: window.cleanupSmoothCaret,
         cleanupSidebarMemo: window.cleanupSidebarMemo,
         cleanupMiddleClickCollapse: cleanupMiddleClickCollapse
     });

@@ -280,6 +280,11 @@
     --Sv-main-shadow:  var(--b3-border-color) 0px 0px 0 0.5px,rgba(0,0,0,0.05) 0px 1px 2px 0px;
     --Sv-dock-shadow: var(--b3-theme-background) 0px 0px 0 0.5px,rgba(0,0,0,0.05) 0px 1px 2px 0px;
 
+    /* 顶栏 */
+    --Sv-barWorkspace-color: var(--b3-theme-background);
+    --Sv-barWorkspace-background: oklch(68.98% 0.161 30.76);
+    --Sv-barWorkspace-background-hover: oklch(62.09% 0.1616 30.87);
+
     /* 边栏 */
     --Sv-item-radius: 10px;
     --Sv-dock-item-active-background: var(--b3-theme-background);
@@ -314,7 +319,7 @@
 	--h4-list-graphic: #71a796;
 	--h5-list-graphic: #dcbf61;
 	--h6-list-graphic: #dda36a;
-/* 反链面板 */
+    /* 反链面板 */
     --Sv-block-icon-active: var(--Sv-list-background);
     --Sv-backlink-background: var(--Sv-dock-background);
     --Sv-backlink-list: var(--Sv-theme-surface);
@@ -961,7 +966,7 @@ body{
 }
 
 body:not(.body--mobile,.body--window,.body--toolbar-hide) #layouts{
-    .layout__center>.fn__flex{
+    .layout__center>.fn__flex,.layout__center>.fn__flex-column>.fn__flex{
         border-radius: var(--Sv-center-radius);
         box-shadow: var(--Sv-main-shadow);
         margin: 0 2px 8px;
@@ -1010,10 +1015,10 @@ body:not(.body--mobile,.body--window,.body--toolbar-hide) #layouts{
     }
 }
 
-.layout__center [data-type="wnd"] .layout-tab-container .fn__flex-column{
+/*.layout__center [data-type="wnd"] .layout-tab-container .fn__flex-column{
     box-shadow: var(--b3-theme-background) 0 0 0 7px inset;
 }
-
+*/
 /*导出预览*/
 #action {
     background: var(--Sv-theme-surface)!important;
@@ -1056,3 +1061,10 @@ body:not(.body--mobile,.body--window,.body--toolbar-hide) #layouts{
         box-shadow: inset  0 0 0 2px var(--b3-font-background3);
     }
 }
+
+/* 平滑光标：原生插入符不可过渡，使用覆盖层提供短距离平移动画。 */
+:root[savor-smooth-caret="true"] .protyle-wysiwyg[contenteditable="true"] { caret-color: transparent; }
+.savor-smooth-caret { position: fixed; z-index: 9999; width: 2px; left: 0; top: 0; pointer-events: none; opacity: 0; border-radius: 1px; background: var(--b3-theme-primary, var(--b3-theme-on-background)); transform: translate3d(-9999px, -9999px, 0); transition: transform 180ms cubic-bezier(.16, 1, .3, 1), opacity 100ms ease; will-change: transform; }
+.savor-smooth-caret--visible { opacity: 1; animation: savor-smooth-caret-breathe 2s ease-in-out infinite; }
+@keyframes savor-smooth-caret-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .1; } }
+@media (prefers-reduced-motion: reduce) { .savor-smooth-caret { transition: none; } .savor-smooth-caret--visible { animation: none; } }

@@ -4,16 +4,32 @@
 
 // 垂直页签宽度调节功能
 export const tabbarResize = {
-    resizer: null, resizeTarget: null, isResizing: false, startX: 0, startWidth: 0, tabbar: null,
+    resizer: null, resizeTarget: null, resizeTargets: [], observer: null, isResizing: false, startX: 0, startWidth: 0, tabbar: null,
     MIN: 150, MAX: 600,
     init() {
         this.remove(false);
-        const tabbar = document.querySelector(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)");
-        if (tabbar) this.create(tabbar);
+        this.bindAll();
+        const layoutCenter = document.querySelector(".layout__center");
+        if (layoutCenter) {
+            this.observer = new MutationObserver(() => this.bindAll());
+            this.observer.observe(layoutCenter, { childList: true, subtree: true });
+        }
+    },
+    bindAll() {
+        document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)")
+            .forEach(tabbar => {
+                if (!this.resizeTargets.includes(tabbar)) this.create(tabbar);
+            });
     },
     create(tabbar) {
         tabbar.style.position = "relative";
         this.resizeTarget = tabbar;
+        const resizer = document.createElement("div");
+        resizer.className = "vertical-resize-handle";
+        resizer.setAttribute("aria-hidden", "true");
+        tabbar.append(resizer);
+        this.resizer = resizer;
+        this.resizeTargets.push(tabbar);
         tabbar.addEventListener("mousedown", this.handleMouseDown);
         document.addEventListener("mousemove", this.move);
         document.addEventListener("mouseup", this.stop);
@@ -27,6 +43,8 @@ export const tabbarResize = {
     start(e, tabbar) {
         e.preventDefault();
         Object.assign(this, { isResizing: true, startX: e.clientX, tabbar, startWidth: tabbar.offsetWidth });
+        this.resizer = tabbar.querySelector(".vertical-resize-handle");
+        this.resizer?.classList.add("is-active");
         document.body.classList.add("tabbar-resizing");
     },
     move: e => {
@@ -38,20 +56,24 @@ export const tabbarResize = {
     stop: () => {
         if (!tabbarResize.isResizing) return;
         tabbarResize.isResizing = false;
+        tabbarResize.resizer?.classList.remove("is-active");
         document.body.classList.remove("tabbar-resizing");
-        tabbarResize.tabbar = null;
+        Object.assign(tabbarResize, { tabbar: null, resizer: null });
     },
     remove(reset = true) {
+        this.observer?.disconnect();
         document.removeEventListener("mousemove", this.move);
         document.removeEventListener("mouseup", this.stop);
-        this.resizeTarget?.removeEventListener("mousedown", this.handleMouseDown);
-        document.getElementById("vertical-resize-handle")?.remove();
+        this.resizeTargets.forEach(tabbar => {
+            tabbar.removeEventListener("mousedown", this.handleMouseDown);
+            tabbar.querySelector(".vertical-resize-handle")?.remove();
+        });
         document.body.classList.remove("tabbar-resizing");
         if (reset) document.querySelectorAll(".layout__center .layout-tab-bar:not(.layout-tab-bar--readonly)").forEach(tabbar => {
             tabbar.style.width = "";
             tabbar.style.position = "";
         });
-        Object.assign(this, { resizer: null, resizeTarget: null, isResizing: false, tabbar: null });
+        Object.assign(this, { resizer: null, resizeTarget: null, resizeTargets: [], observer: null, isResizing: false, tabbar: null });
     }
 };
 

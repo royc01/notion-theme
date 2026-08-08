@@ -4,7 +4,7 @@
 
 import { config } from './config.js';
 
-let isEnabled = false, observerCleanups = [], editorNode = null, dragTimeout = null, dragMutationObserver = null, editorMutationObserver = null, editorMutationRefreshTimer = null, kernelMemoSyncTimer = null, kernelMemoSyncInFlight = false, connectionCleanup = null, activeConnectionItem = null, refreshRetryTimer = null;
+let isEnabled = false, observerCleanups = [], editorNode = null, dragTimeout = null, dragMutationObserver = null, editorMutationObserver = null, editorMutationRefreshTimer = null, kernelMemoSyncInFlight = false, connectionCleanup = null, activeConnectionItem = null, refreshRetryTimer = null;
 const scrollBindings = new Map();
 
 // 配置常量
@@ -49,9 +49,9 @@ const getBlockNode = el => {
         el.closest('[data-type="NodeBlockQueryEmbed"]') : el;
 };
 
-// 检查块类型是否有效（用于行内备注）
+// 检查块类型是否有效（用于行内备注；表格内的备注归属到表格块）
 const isValidBlockTypeForInlineMemo = block => {
-    return block && ['NodeParagraph', 'NodeHeading'].includes(block.getAttribute('data-type'));
+    return block && ['NodeParagraph', 'NodeHeading', 'NodeTable'].includes(block.getAttribute('data-type'));
 };
 
 // 检查是否在嵌入块内
@@ -228,15 +228,7 @@ const syncBlockMemosFromKernel = async () => {
     }
 };
 
-const startKernelMemoSync = () => {
-    if (kernelMemoSyncTimer) return;
-    void syncBlockMemosFromKernel();
-    kernelMemoSyncTimer = setInterval(() => void syncBlockMemosFromKernel(), 500);
-};
-
 const stopKernelMemoSync = () => {
-    clearInterval(kernelMemoSyncTimer);
-    kernelMemoSyncTimer = null;
     kernelMemoSyncInFlight = false;
 };
 
@@ -272,7 +264,7 @@ const observeEditorMutations = () => {
 };
 
 // 思源完成事务后，编辑器 DOM 可能会在 MutationObserver 的首次回调之后才更新。
-// 再延迟同步一次，避免新建的第一条备注要重载文档后才出现在侧栏。
+// 仅在事务稳定后同步一次，避免为侧栏备注持续轮询内核 SQL 接口。
 const scheduleMemoRefresh = () => {
     clearTimeout(refreshRetryTimer);
     refreshRetryTimer = setTimeout(() => {
@@ -280,7 +272,7 @@ const scheduleMemoRefresh = () => {
             refreshEditor();
             void syncBlockMemosFromKernel();
         }
-    }, 200);
+    }, 400);
 };
 
 // 持久化块更新
@@ -1083,7 +1075,7 @@ const openSideBar = (open, save = false) => {
         window.siyuan?.eventBus?.on('transaction-end', scheduleMemoRefresh);
         refreshEditor(); 
         observeEditorMutations();
-        startKernelMemoSync();
+        void syncBlockMemosFromKernel();
         observeDragTitle();
     } else {
         window.siyuan?.eventBus?.off('loaded-protyle', refreshEditor);

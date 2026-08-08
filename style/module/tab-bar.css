@@ -51,6 +51,7 @@ body:not(.body--mobile,.body--toolbar-hide) .layout__center .fn__flex-column>.fn
     .item:not(.item--readonly){
         border-radius: var(--Sv-tab-bar-item-radius);
         overflow: unset !important; 
+        margin: 6px 6px 6px 4px;
         & .item__text{
             &::before {
                 content: "📄";
@@ -100,7 +101,6 @@ body:not(.body--mobile,.body--toolbar-hide) .layout__center .fn__flex-column>.fn
         }
         &:hover{
             background-color: var(--b3-theme-surface);
-            box-shadow: var(--Sv-main-shadow);
             }
         }
     }
@@ -166,6 +166,7 @@ body:not(.body--mobile,.body--toolbar-hide) .layout__center .fn__flex-column>.fn
     }
 }
 .body--toolbar-hide .layout__center .fn__flex-column>.fn__flex>.layout-tab-bar {
+    background-color: transparent;
    .item:not(.item--readonly):hover,.item:not(.item--readonly).item--focus{
         background-color: var(--Sv-tab-bar-item-background-focus);
     }

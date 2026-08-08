@@ -42,13 +42,6 @@
 		margin-left: 6px;
 		font-size:90%;
 	}
-	.protyle-breadcrumb__arrow{
-		width: 0px;
-		height: 13px;
-		transform: rotate(18deg);
-		border-left: 1px solid var(--Sv-breadcrumb-arrow);
-		opacity: 0.6;
-	}
 }
 
 /*只读按钮*/

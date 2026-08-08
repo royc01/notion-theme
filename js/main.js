@@ -13,6 +13,7 @@ import { initObservers } from './modules/observers.js';
 import { initTabbarVertical } from './modules/tabbarVertical.js';
 import { initBulletThreadingModule } from './modules/bulletThreading.js';
 import { initTypewriterModeModule } from './modules/typewriterMode.js';
+import { initSmoothCaretModule } from './modules/smoothCaret.js';
 import { initSidebarMemoModule } from './modules/sidebarMemo.js';
 import { initListPreview } from './modules/listPreview.js';
 import { initMobileAndPlatformFeatures } from './modules/mobileMenu.js';
@@ -47,6 +48,8 @@ const initAll = async () => {
             initTabbarVertical();
             initBulletThreadingModule();
             initTypewriterModeModule();
+            initSmoothCaretModule();
+            window.enableSmoothCaret?.();
             initSidebarMemoModule();
             initListPreview();
             savorInitialized = true;
@@ -73,6 +76,7 @@ export const Savor = {
     initTabbarVertical,
     initBulletThreadingModule,
     initTypewriterModeModule,
+    initSmoothCaretModule,
     initSidebarMemoModule,
     initListPreview,
     initMobileAndPlatformFeatures,
@@ -93,6 +97,7 @@ export {
     initTabbarVertical,
     initBulletThreadingModule,
     initTypewriterModeModule,
+    initSmoothCaretModule,
     initSidebarMemoModule,
     initListPreview,
     initMobileAndPlatformFeatures,

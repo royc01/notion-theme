@@ -11,7 +11,8 @@
     .layout-tab-container{
         .layout__tab--active{
             .b3-list-item--focus{
-                background-color: var(--Sv-list-focus-active)!important;
+				background: linear-gradient(var(--Sv-list-focus-active), var(--Sv-list-focus-active)),var(--b3-theme-surface)!important;
+			    background-blend-mode: multiply;
             }
         }
     >.fn__flex-column{
@@ -47,19 +48,22 @@
 		margin: 0px;
 		padding: 0 4px 0 12px;
         &:hover:not(.b3-list-item--focus):not(.dragover):not(.dragover__current):not(.dragover__top):not(.dragover__bottom){
-            background-color: var(--Sv-list-background);
+			background: linear-gradient(var(--Sv-list-background), var(--Sv-list-background)),var(--b3-theme-surface);
+			background-blend-mode: multiply;
             .b3-list-item__text{
                 color: var(--Sv-list-focus-color);
             }
         }
         &.b3-list-item--focus{
             font-weight:600;
-            background-color: var(--Sv-list-background);
+            background: linear-gradient(var(--Sv-list-background), var(--Sv-list-background)),var(--b3-theme-surface);
+			background-blend-mode: multiply;
             .b3-list-item__text{
                 color: var(--Sv-list-focus-color);
             }
             &:hover{
-                background-color: var(--Sv-list-focus-hover);
+				background: linear-gradient(var(--Sv-list-focus-hover), var(--Sv-list-focus-hover)),var(--b3-theme-surface);
+			    background-blend-mode: multiply;
             }
         }
         .counter:not(:empty)/*引用数*/{
@@ -130,78 +134,84 @@
 		opacity:0.2;
 	}
 	& [data-subtype="h1"]{
-		&>.b3-list-item__text::before{
+		&>.b3-list-item__toggle::after{
 			position: absolute;
-			margin-inline-start: -22px;
+			margin-inline-start: 28px;
 			content:"❶";
 			color:var(--h1-list-graphic);
 			pointer-events: none;
 			opacity:0.5;
+			visibility: visible;
 		}
 		svg.b3-list-item__graphic:hover{
 			background-color:var(--h1-list-graphic);
 		}
 	}
 	& [data-subtype="h2"]{
-		&>.b3-list-item__text::before{
+		&>.b3-list-item__toggle::after{
 			position: absolute;
-			margin-inline-start: -22px;
+			margin-inline-start: 28px;
 			content:"❷";
 			color:var(--h2-list-graphic);
 			pointer-events: none;
 			opacity:0.5;
+			visibility: visible;
 		}
 		svg.b3-list-item__graphic:hover{
 			background-color:var(--h2-list-graphic);
 		}
 	}
 	& [data-subtype="h3"]{
-		&>.b3-list-item__text::before{
+		&>.b3-list-item__toggle::after{
 			position: absolute;
-			margin-inline-start: -22px;
+			margin-inline-start: 28px;
 			content:"❸";
 			color:var(--h3-list-graphic);
 			pointer-events: none;
 			opacity:0.5;
+			visibility: visible;
 		}
 		svg.b3-list-item__graphic:hover{
 			background-color:var(--h3-list-graphic);
 		}
 	}
 	& [data-subtype="h4"]{
-		&>.b3-list-item__text::before{
+		&>.b3-list-item__toggle::after{
 			position: absolute;
-			margin-inline-start: -22px;
+			margin-inline-start: 28px;
 			content:"❹";
 			color:var(--h4-list-graphic);
 			pointer-events: none;
 			opacity:0.5;
+			visibility: visible;
 		}
 		svg.b3-list-item__graphic:hover{
 			background-color:var(--h4-list-graphic);
 		}
 	}
 	& [data-subtype="h5"]{
-		&>.b3-list-item__text::before{
+		&>.b3-list-item__toggle::after{
 			position: absolute;
-			margin-inline-start: -22px;
+			margin-inline-start: 28px;
 			content:"❺";
 			color:var(--h5-list-graphic);
 			pointer-events: none;
 			opacity:0.5;
+			visibility: visible;
 		}
 		svg.b3-list-item__graphic:hover{
 			background-color:var(--h5-list-graphic);
 		}
 	}
 	& [data-subtype="h6"]{
-		&>.b3-list-item__text::before{
+		&>.b3-list-item__toggle::after{
 			position: absolute;
-			margin-inline-start: -22px;
+			margin-inline-start: 28px;
 			content:"❻";
 			color:var(--h6-list-graphic);
 			pointer-events: none;
 			opacity:0.5;
+			visibility: visible;
 		}
 		svg.b3-list-item__graphic:hover{
 			background-color:var(--h6-list-graphic);
@@ -223,12 +233,16 @@
 /*.sy__backlink .protyle-wysiwyg [data-node-id].li>.list {
     padding-left: 0px!important;
 }/*反链列表间距收窄*/
+.sy__backlink>.backlinkList>.b3-list>.backlinkList__item>.b3-list-item, .sy__backlink>.backlinkMList>.b3-list>.backlinkList__item>.b3-list-item {
+	background-color: var(--b3-theme-surface);
+}
+.sy__backlink .backlinkList__item>.protyle {
+    border-radius: 12px;
+}
 
 .sy__backlink{
-    background-color: var(--Sv-backlink-background);
 	overflow: hidden;
     .block__icons,.backlinkList,.backlinkMList{
-        background-color: var(--Sv-backlink-list);
 		border-radius:6px;
         &>.b3-list>.protyle{
 	    margin: 0px 8px 5px 8px;	
