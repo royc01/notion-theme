@@ -17,9 +17,14 @@ const getCaretInfo = () => {
     if (caretRect) return { rect: caretRect, color: getComputedStyle(element).color };
 
     // 空块没有文本矩形，优先使用内部 spellcheck 行，避免外层块的边距影响位置。
-    const line = element.closest('[spellcheck]')
-        || element.closest('[contenteditable="true"]')
-        || element.closest('[data-node-id]');
+    // 表格空单元格：spellcheck 可能命中单元格外的表格容器，需以 td/th 为界，否则光标会落到表格左上角。
+    const cell = element.closest('td, th');
+    let line = element.closest('[spellcheck]');
+    if (!line || (cell && !cell.contains(line))) {
+        line = cell
+            || element.closest('[contenteditable="true"]')
+            || element.closest('[data-node-id]');
+    }
     if (!line) return null;
     const lineRect = line.getBoundingClientRect();
     if (lineRect.height <= 0) return null;
