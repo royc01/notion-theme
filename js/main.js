@@ -49,7 +49,6 @@ const initAll = async () => {
             initBulletThreadingModule();
             initTypewriterModeModule();
             initSmoothCaretModule();
-            window.enableSmoothCaret?.();
             initSidebarMemoModule();
             initListPreview();
             savorInitialized = true;

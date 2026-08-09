@@ -156,7 +156,7 @@ export const renderAllButtons = (targetToolbar = null) => {
             button.innerHTML = `<svg class="b3-menu__icon savor-icon" viewBox="1 1 55 31" xmlns="http://www.w3.org/2000/svg">${btn.svg}</svg><span class="b3-menu__label">${btn.label}</span>`;
         } else {
             // 功能按钮使用路径数据
-            button.innerHTML = `<svg class="b3-menu__icon savor-icon" viewBox="9 10 14 14" xmlns="http://www.w3.org/2000/svg"><path d="${btn.svg}"></path></svg><span class="b3-menu__label">${btn.label}</span>`;
+            button.innerHTML = `<svg class="b3-menu__icon savor-icon" viewBox="${btn.viewBox || '9 10 14 14'}" xmlns="http://www.w3.org/2000/svg"><path d="${btn.svg}"></path></svg><span class="b3-menu__label">${btn.label}</span>`;
         }
         
         button.setAttribute("data-type", btn.type);
