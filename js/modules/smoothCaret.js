@@ -10,6 +10,24 @@ const getCaretInfo = () => {
     const node = range.startContainer;
     const element = node?.nodeType === Node.ELEMENT_NODE ? node : node?.parentElement;
     if (!element?.closest?.('.protyle-wysiwyg[contenteditable="true"]')) return null;
+
+    // 分割线节点的 Range 会覆盖整个块，不能直接作为插入符矩形使用。
+    const thematicBreak = element.closest('[data-type="NodeThematicBreak"]');
+    if (thematicBreak) {
+        const breakRect = thematicBreak.getBoundingClientRect();
+        const style = getComputedStyle(thematicBreak);
+        const fontSize = Number.parseFloat(style.fontSize) || 16;
+        const lineHeight = Number.parseFloat(style.lineHeight) || fontSize * 1.5;
+        return {
+            rect: {
+                left: breakRect.right - 1,
+                top: breakRect.top + Math.max(0, (breakRect.height - lineHeight) / 2),
+                height: lineHeight
+            },
+            color: style.color
+        };
+    }
+
     const rect = range.getBoundingClientRect();
     const caretRect = rect.height > 0
         ? rect
