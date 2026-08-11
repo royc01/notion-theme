@@ -8,7 +8,9 @@ import { addEvent } from './lifecycle.js';
  * 获取当前显示的斜杠菜单
  * @returns {Element|null} 斜杠菜单元素
  */
-const getMenu = () => document.querySelector('.hint--menu:not(.fn__none)');
+const getMenu = () => Array.from(
+    document.querySelectorAll('.hint--menu:not(.fn__none)')
+).find(menu => getComputedStyle(menu).display !== 'none') || null;
 
 /**
  * 设置菜单项焦点
@@ -37,8 +39,16 @@ const move = (dir) => {
     const row = items.filter(el => el.offsetTop === top).sort((a,b)=>a.offsetLeft-b.offsetLeft);
     if (row.length <= 1) return false;
     let i = row.indexOf(current); if (i < 0) i = 0;
-    const target = dir==='right' ? row[(i+1)%row.length] : row[(i-1+row.length)%row.length];
-    if (target !== current) setFocus(menu, target);
+
+    // 到达当前行边界时交还事件，让思源原生逻辑关闭菜单并移动光标。
+    // 不使用取模循环，避免用户在行首/行尾继续按键时被困在菜单中。
+    if ((dir === 'left' && i === 0) ||
+        (dir === 'right' && i === row.length - 1)) {
+        return false;
+    }
+
+    const target = dir === 'right' ? row[i + 1] : row[i - 1];
+    setFocus(menu, target);
     return true;
 };
 
