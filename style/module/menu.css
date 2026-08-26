@@ -238,6 +238,9 @@
             background-color: var(--Sv-bazaar-focus); 
 	        backdrop-filter:none;
         }
+        .config-bazaar__actions{
+            height: 28px;
+        }
     
         .config-bazaar__panel[data-type=downloaded]{
             .b3-button{
@@ -262,7 +265,7 @@
                 background-color: #ee6f5b;
                 color: #fff;
             }
-            [data-type="myPlugin"]{
+            [data-type="myUpdate"]{
                 clip-path: inset(-4px round 6px 0 0 6px);
             }
             [data-type="myWidget"]{
@@ -304,9 +307,11 @@
                 display: block;
             }*/
             .b3-card__actions{
+                /* Keep the action row in normal flow so a longer description
+                   cannot overlap it. */
                 position: absolute;
-                top: 70px;
-                right: 0px;
+                top:92px;
+                right: 0;
             }
         }
         }
@@ -321,6 +326,7 @@
             display: grid;
             grid-template-columns: 90px 1fr;
             margin: 6px 0 0 6px;
+            padding-bottom: 18px;
             box-shadow: none;
             background-color: var(--Sv-select-field);
             &:hover{

@@ -160,3 +160,24 @@
 .savor-icon{
     margin-bottom: -2px;
 }
+/* Savor 配色名称使用按钮伪元素渲染；保留空 b3-menu__label 以兼容思源菜单。 */
+#savorToolbar .b3-menu__item[data-type="theme"] > .b3-menu__label {
+    display: none;
+}
+#savorToolbar .b3-menu__item[data-type="theme"]::after {
+    content: attr(aria-label);
+    position: absolute;
+    right: 4px;
+    bottom: 0;
+    height: 18px;
+    min-width: unset;
+    color: var(--b3-theme-on-surface);
+    font-size: 10px;
+    line-height: 18px;
+}
+#savorToolbar .b3-menu__item[data-type="theme"]:hover::after {
+    color: var(--b3-theme-on-background);
+}
+#savorToolbar .b3-menu__item[data-type="theme"].button_on::after {
+    color: var(--Sv-dock-item--activefocus-background);
+}

@@ -277,6 +277,7 @@ const scheduleMemoRefresh = () => {
 
 // 持久化块更新
 const persistBlockUpdate = async (blockEl) => {
+    const blockId = blockEl.dataset.nodeId;
     try {
         const response = await fetch('/api/block/updateBlock', {
             method: 'POST',
@@ -285,9 +286,35 @@ const persistBlockUpdate = async (blockEl) => {
                 'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}`
             },
             body: JSON.stringify({
-                dataType: 'html',
+                // updateBlock 只接受 markdown 或 dom；html 会被新版内核拒绝。
+                dataType: 'dom',
                 data: blockEl.outerHTML,
-                id: blockEl.dataset.nodeId
+                id: blockId
+            })
+        });
+        if (!response.ok) return false;
+        const result = await response.json().catch(() => null);
+        return typeof result?.code === 'number' ? result.code === 0 : true;
+    } catch (e) {
+        return false;
+    }
+};
+
+// 块备注属于块的 IAL 属性。通过属性接口保存，避免 updateBlock 在新版内核中
+// 因完整块 DOM 校验失败而回滚备注删除。
+const persistBlockMemo = async (blockEl, memo) => {
+    const blockId = blockEl.dataset.nodeId;
+    try {
+        const response = await fetch('/api/attr/setBlockAttrs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${window.siyuan?.config?.api?.token ?? ''}`
+            },
+            body: JSON.stringify({
+                id: blockId,
+                // null 是内核约定的“删除该属性”。
+                attrs: { memo: memo || null }
             })
         });
         if (!response.ok) return false;
@@ -574,7 +601,7 @@ const handleMemoEdit = (memoDiv, el, main, sidebar) => {
             if (isBlockMemo) {
                 const previousMemo = el.getAttribute('memo');
                 el.setAttribute('memo', normalizedValue);
-                saved = await persistBlockUpdate(el);
+                saved = await persistBlockMemo(el, normalizedValue);
                 if (!saved) {
                     if (previousMemo === null) {
                         el.removeAttribute('memo');
@@ -818,6 +845,37 @@ const refreshSideBarMemos = (main, sidebar, memoState = null) => {
         main.querySelectorAll('.memo-span-highlight').forEach(el => el.classList.remove('memo-span-highlight'));
     };
 
+    const deleteMemo = async item => {
+        const nodeId = item.getAttribute('data-node-id');
+        const memoType = item.getAttribute('data-memo-type');
+        const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
+        if (!blockEl || isInsideEmbedBlock(blockEl)) return;
+
+        clearMemoHighlights();
+
+        let deleted = false;
+        const isValidBlockType = memoType === 'block' || isValidBlockTypeForInlineMemo(blockEl);
+        if (isValidBlockType) {
+            if (memoType === 'block') {
+                const previousMemo = blockEl.getAttribute('memo');
+                blockEl.removeAttribute('memo');
+                deleted = await persistBlockMemo(blockEl, '');
+                if (!deleted) {
+                    if (previousMemo === null) {
+                        blockEl.removeAttribute('memo');
+                    } else {
+                        blockEl.setAttribute('memo', previousMemo);
+                    }
+                }
+            } else {
+                deleted = await removeInlineMemoGroup(blockEl, item);
+            }
+        }
+
+        refreshSideBarMemos(main, sidebar);
+        if (!deleted) refreshMemoOffset(main, sidebar);
+    };
+
     // 处理悬停进入
     const handleMemoEnter = item => {
         if (item === activeConnectionItem) return;
@@ -884,6 +942,11 @@ const refreshSideBarMemos = (main, sidebar, memoState = null) => {
                 deleteBtn.innerHTML = `<svg class="b3-menu__icon" style="vertical-align:middle;"><use xlink:href="#iconTrashcan"></use></svg>`;
                 deleteBtn.style.cssText = 'position:absolute;top:6px;right:6px;padding:0;border:none;border-radius:6px;cursor:pointer;z-index:2;';
                 deleteBtn.setAttribute('data-action', 'delete'); 
+                deleteBtn.addEventListener('click', e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    void deleteMemo(memoDiv);
+                });
                 titleDiv.appendChild(deleteBtn);
             }
         }
@@ -936,53 +999,6 @@ const refreshSideBarMemos = (main, sidebar, memoState = null) => {
     sidebar.appendChild(frag);
 
     // 绑定删除事件
-    if (!sidebar._delegated) {
-        sidebar.addEventListener('click', async e => {
-            const btn = e.target.closest('button[data-action="delete"]');
-            if (!btn) return;
-
-            const item = btn.closest('.memo-item');
-            if (!item) return;
-            e.stopPropagation();
-
-            const nodeId = item.getAttribute('data-node-id');
-            const memoType = item.getAttribute('data-memo-type');
-            const blockEl = main.querySelector(`div[data-node-id="${nodeId}"]`);
-            const isInsideEmbedBlockResult = isInsideEmbedBlock(blockEl);
-            if (isInsideEmbedBlockResult) return;
-
-            clearMemoHighlights();
-
-            let deleted = false;
-            if (blockEl) {
-                const isValidBlockType = memoType === 'block' || isValidBlockTypeForInlineMemo(blockEl);
-                if (isValidBlockType) {
-                    if (memoType === 'block') {
-                        const previousMemo = blockEl.getAttribute('memo');
-                        blockEl.removeAttribute('memo');
-                        deleted = await persistBlockUpdate(blockEl);
-                        if (!deleted) {
-                            if (previousMemo === null) {
-                                blockEl.removeAttribute('memo');
-                            } else {
-                                blockEl.setAttribute('memo', previousMemo);
-                            }
-                        }
-                    } else {
-                        deleted = await removeInlineMemoGroup(blockEl, item);
-                    }
-                }
-            }
-
-            refreshSideBarMemos(main, sidebar);
-            if (!deleted) {
-                refreshMemoOffset(main, sidebar);
-            }
-        });
-
-        sidebar._delegated = true;
-    }
-    
     refreshMemoOffset(main, sidebar);
     const protyleContent = main.closest('.protyle')?.querySelector('.protyle-content');
     // 根据当前是否存在备注，维护 Sv-memo 类

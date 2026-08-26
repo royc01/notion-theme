@@ -153,7 +153,7 @@ export const renderAllButtons = (targetToolbar = null) => {
         // 根据按钮类型使用不同的 SVG 处理方式
         if (btn.type === 'theme') {
             // 主题按钮使用完整的 SVG 结构
-            button.innerHTML = `<svg class="b3-menu__icon savor-icon" viewBox="1 1 55 31" xmlns="http://www.w3.org/2000/svg">${btn.svg}</svg><span class="b3-menu__label">${btn.label}</span>`;
+            button.innerHTML = `<svg class="b3-menu__icon savor-icon" viewBox="1 1 55 31" xmlns="http://www.w3.org/2000/svg">${btn.svg}</svg><span class="b3-menu__label" aria-hidden="true"></span>`;
         } else {
             // 功能按钮使用路径数据
             button.innerHTML = `<svg class="b3-menu__icon savor-icon" viewBox="${btn.viewBox || '9 10 14 14'}" xmlns="http://www.w3.org/2000/svg"><path d="${btn.svg}"></path></svg><span class="b3-menu__label">${btn.label}</span>`;
@@ -276,6 +276,7 @@ const ensureSavorToolbarCSS = () => {
         st = document.createElement("style"); 
         st.id = id; 
         st.textContent = `
+
             #commonMenu[data-name="barmode"] #savorToolbar {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
