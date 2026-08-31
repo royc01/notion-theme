@@ -2,10 +2,6 @@
 .b3-menu{
 	box-shadow: var(--Sv-menu-shadow);
 	border:none;
-	padding: 4px 0;
-    .b3-menu__items{
-        padding: 0 4px;
-    }
     .b3-menu__submenu{
         box-shadow: var(--Sv-menu-shadow);
         border:none;

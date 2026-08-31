@@ -84,6 +84,8 @@ const initMobileMenu = () => {
             min-width: 140px;
         `;
 
+        const mobileTopBar = document.getElementById("mobileTopBar");
+
         if (!document.getElementById("savorToolbarToggle")) {
             const toggleBtn = document.createElement("button");
             toggleBtn.id = "savorToolbarToggle";
@@ -105,10 +107,21 @@ const initMobileMenu = () => {
             
             toggleBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
-                savorToolbar.style.display = (savorToolbar.style.display === "none" ? "grid" : "none");
+                const isHidden = savorToolbar.style.display === "none";
+                if (isHidden) {
+                    const toggleRect = toggleBtn.getBoundingClientRect();
+                    savorToolbar.style.top = `${toggleRect.bottom + 8}px`;
+                    savorToolbar.style.right = `${window.innerWidth - toggleRect.right}px`;
+                }
+                savorToolbar.style.display = isHidden ? "grid" : "none";
             });
 
-            toolbarMore.parentNode.insertBefore(toggleBtn, toolbarMore);
+            if (mobileTopBar) {
+                mobileTopBar.appendChild(toggleBtn);
+            } else {
+                // 兼容不含 mobileTopBar 的旧版移动端布局
+                toolbarMore.parentNode.insertBefore(toggleBtn, toolbarMore);
+            }
 
             mobileMenuState.outsideClickHandler = (e) => {
                 if (!savorToolbar.contains(e.target) && e.target !== toggleBtn) {
@@ -118,7 +131,9 @@ const initMobileMenu = () => {
             document.addEventListener("click", mobileMenuState.outsideClickHandler);
         }
 
-        toolbarMore.parentNode.insertBefore(savorToolbar, toolbarMore);
+        // 弹窗挂在 body 下，避免被 mobileTopBar 的层叠上下文或 overflow 裁剪。
+        // 打开时会根据 toggleBtn 的位置重新定位，因此仍会跟随顶部栏按钮。
+        document.body.appendChild(savorToolbar);
 
         initMobileThemeButtons(savorToolbar);
     });
