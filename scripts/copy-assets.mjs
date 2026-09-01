@@ -16,13 +16,11 @@ const DEFAULT_DIST_DIR = resolve(rootDir, 'dist');
 const distDir = process.env.SAVOR_DIST_DIR || DEFAULT_DIST_DIR;
 
 // 需要复制的目录列表
-const copyDirs = ['font', 'i18n'];
+const copyDirs = ['font', 'i18n', 'image'];
 
 // 需要复制的单个文件列表
 const copyFiles = [
   'theme.json',
-  'icon.png',
-  'preview.png',
   'README.md',
   'README_zh_CN.md',
 ];
