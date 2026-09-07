@@ -9,7 +9,7 @@
         width: unset !important;
     }
     #savorToolbar button{
-    &#tabbarVertical,&#colorFolder,&#typewriterMode,&#sidebarMemo,&#sidebarBlockMemo{
+    &#tabbarVertical,&#typewriterMode,&#sidebarMemo,&#sidebarBlockMemo{
         display: none!important;
     }
 }
@@ -85,4 +85,7 @@ body>.toolbar--border{
 }
 #menu .mobile-main-menu__search{
     padding: 8px 10px;
+}
+.mobile-bottom-bar__item{
+    color: var(--b3-theme-on-surface);
 }

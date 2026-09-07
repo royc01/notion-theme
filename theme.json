@@ -6,6 +6,8 @@
   "frontends": [ 
     "all"
   ],
+  "icon": "icon.webp",
+  "preview": "preview.webp",
   "displayName": {
     "default": "Savor",
     "zh_CN": "写味"

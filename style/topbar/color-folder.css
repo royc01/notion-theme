@@ -1,5 +1,5 @@
 html[savor-color-folder="true"] {
-.sy__file .b3-list--background:nth-child(4n-3){
+:is(.sy__file, .b3-list--mobile) .b3-list--background:nth-child(4n-3){
     background-color: var(--Sv-bq-background5) !important;
     box-shadow: 0 0 0 1px var(--Sv-bq-background5) inset;
     border-radius: 6px;
@@ -13,7 +13,7 @@ html[savor-color-folder="true"] {
         color:#f67563;
     }
 }
-.sy__file .b3-list--background:nth-child(4n-2){
+:is(.sy__file, .b3-list--mobile) .b3-list--background:nth-child(4n-2){
     background-color: var(--Sv-bq-background7) !important;
     box-shadow: 0 0 0 1px var(--Sv-bq-background7) inset;
     border-radius: 6px;
@@ -27,7 +27,7 @@ html[savor-color-folder="true"] {
         color:#ff9b1e;
     }
 }
-.sy__file .b3-list--background:nth-child(4n-1){
+:is(.sy__file, .b3-list--mobile) .b3-list--background:nth-child(4n-1){
     background-color: var(--Sv-bq-background9) !important;
     box-shadow: 0 0 0 1px var(--Sv-bq-background9) inset;
     border-radius: 6px;
@@ -41,7 +41,7 @@ html[savor-color-folder="true"] {
         color:#64bbaa;
     }
 }
-.sy__file .b3-list--background:nth-child(4n){
+:is(.sy__file, .b3-list--mobile) .b3-list--background:nth-child(4n){
     background-color: var(--Sv-bq-background10) !important;
     box-shadow: 0 0 0 1px var(--Sv-bq-background10) inset;
     border-radius: 6px;
@@ -54,5 +54,8 @@ html[savor-color-folder="true"] {
     & .b3-list-item__arrow{
         color:#49adbb;
     }
+}
+.b3-list--mobile .b3-list-item{
+    margin: 0px;
 }
 }
