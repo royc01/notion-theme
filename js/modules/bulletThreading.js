@@ -7,6 +7,21 @@ let selectionChangeHandler = null;
 let btRafId = null;
 let btLastItems = [];
 
+const clearBulletLineMetrics = (node) => {
+    node.style.removeProperty('--en-bullet-line-height');
+    node.style.removeProperty('--en-bullet-line-top');
+    node.style.removeProperty('--en-bullet-line-left');
+    node.style.removeProperty('--en-bullet-line-width');
+};
+
+const getBulletCenter = (item) => {
+    const action = item.querySelector(':scope > .protyle-action');
+    if (!action) return null;
+
+    const { left, top, width, height } = action.getBoundingClientRect();
+    return { x: left + width / 2, y: top + height / 2 };
+};
+
 // 初始化列表子弹线功能
 export const initBulletThreading = () => {
     if (bulletThreadingActive) return;
@@ -18,7 +33,7 @@ export const initBulletThreading = () => {
             // 清理上一次标记
             btLastItems.forEach(node => {
                 node.classList.remove('en_item_bullet_actived', 'en_item_bullet_line');
-                node.style.removeProperty('--en-bullet-line-height');
+                clearBulletLineMetrics(node);
             });
             btLastItems = [];
             return;
@@ -28,7 +43,7 @@ export const initBulletThreading = () => {
         // 清理上一次标记（避免全局查询）
         btLastItems.forEach(node => {
             node.classList.remove('en_item_bullet_actived', 'en_item_bullet_line');
-            node.style.removeProperty('--en-bullet-line-height');
+            clearBulletLineMetrics(node);
         });
         btLastItems = [];
 
@@ -40,9 +55,22 @@ export const initBulletThreading = () => {
         if (items.length === 0) return;
 
         for (let i = 0; i < items.length - 1; i++) {
-            const h = items[i].getBoundingClientRect().top - items[i + 1].getBoundingClientRect().top;
-            items[i].style.setProperty('--en-bullet-line-height', `${h}px`);
-            items[i].classList.add('en_item_bullet_line');
+            const item = items[i];
+            const parentItem = items[i + 1];
+            const itemRect = item.getBoundingClientRect();
+            const itemBullet = getBulletCenter(item);
+            const parentBullet = getBulletCenter(parentItem);
+
+            if (itemBullet && parentBullet) {
+                item.style.setProperty('--en-bullet-line-height', `${itemBullet.y - parentBullet.y}px`);
+                item.style.setProperty('--en-bullet-line-top', `${parentBullet.y - itemRect.top}px`);
+                item.style.setProperty('--en-bullet-line-left', `${parentBullet.x - itemRect.left}px`);
+                item.style.setProperty('--en-bullet-line-width', `${itemBullet.x - parentBullet.x}px`);
+            } else {
+                const height = itemRect.top - parentItem.getBoundingClientRect().top;
+                item.style.setProperty('--en-bullet-line-height', `${height}px`);
+            }
+            item.classList.add('en_item_bullet_line');
         }
         items.forEach(item => item.classList.add('en_item_bullet_actived'));
         btLastItems = items.slice();
@@ -64,7 +92,7 @@ export const removeBulletThreading = () => {
     // 清理剩余标记
     btLastItems.forEach(node => {
         node.classList.remove('en_item_bullet_actived', 'en_item_bullet_line');
-        node.style.removeProperty('--en-bullet-line-height');
+        clearBulletLineMetrics(node);
     });
     btLastItems = [];
 };

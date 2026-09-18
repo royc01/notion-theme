@@ -4,7 +4,7 @@
  * 复制 theme.json、font/、i18n/ 等非构建产物的文件
  */
 
-import { existsSync, mkdirSync, cpSync, readdirSync, statSync, copyFileSync, rmSync } from 'fs';
+import { existsSync, mkdirSync, cpSync, readdirSync, statSync, copyFileSync, rmSync, readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -21,8 +21,10 @@ const copyDirs = ['font', 'i18n'];
 // 需要复制的单个文件列表
 const copyFiles = [
   'theme.json',
-  'icon.png',
-  'preview.png',
+  // Keep these extensions in sync with the declarations in theme.json.
+  // The marketplace checks the package root using case-sensitive names.
+  'icon.webp',
+  'preview.webp',
   'README.md',
   'README_zh_CN.md',
 ];
@@ -80,6 +82,18 @@ function copyAssets() {
   console.log('[资源] ✓ 静态资源复制完成');
 }
 
+// Validate exact (case-sensitive) root filenames, as required by the marketplace checker.
+function validateManifestAssets() {
+  const manifest = JSON.parse(readFileSync(resolve(distDir, 'theme.json'), 'utf-8'));
+  const rootNames = new Set(readdirSync(distDir, { withFileTypes: true }).map((entry) => entry.name));
+  for (const field of ['icon', 'preview']) {
+    const asset = manifest[field];
+    if (typeof asset === 'string' && !rootNames.has(asset)) {
+      throw new Error(`theme.json ${field} asset "${asset}" is missing from package root`);
+    }
+  }
+}
+
 function countFiles(dir) {
   let count = 0;
   const entries = readdirSync(dir, { withFileTypes: true });
@@ -95,3 +109,4 @@ function countFiles(dir) {
 }
 
 copyAssets();
+validateManifestAssets();

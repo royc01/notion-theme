@@ -7,11 +7,8 @@ import { i18n } from './i18n.js';
 // 视图按钮配置
 const viewButtons = {
     NodeList: [
-        { id: "GraphView", attrName: "f", attrValue: "dt", icon: "iconFiles", labelKey: "转换为导图" },
-        { id: "TableView", attrName: "f", attrValue: "bg", icon: "iconTable", labelKey: "转换为表格" },
         { id: "kanbanView", attrName: "f", attrValue: "kb", icon: "iconMenu", labelKey: "转换为看板" },
         { id: "timelineView", attrName: "f", attrValue: "tl", icon: "iconList", labelKey: "转换为时间线" },
-        { id: "tabView", attrName: "f", attrValue: "tab", icon: "iconDock", labelKey: "转换为标签页" },
         { id: "DefaultView", attrName: "f", attrValue: "", icon: "iconList", labelKey: "恢复为列表" }
     ],
     NodeTable: [
@@ -73,20 +70,6 @@ const getBlockSelected = () => {
     } : null;
 };
 
-// 清除转换数据
-const clearTransformData = (id, blocks) => {
-    try {
-        const positions = JSON.parse(localStorage.getItem("dt-positions") || "{}");
-        if (positions[id]) {
-            delete positions[id];
-            localStorage.setItem("dt-positions", JSON.stringify(positions));
-            // 注意：cleanupDraggable函数需要在其他模块中定义
-        }
-    } catch (error) {
-        // 清除transform数据出错: error
-    }
-};
-
 // 统一API请求函数
 const apiRequest = async (url, data) => {
     try {
@@ -138,136 +121,12 @@ const InsertMenuItem = (selectid, selecttype) => {
 // 菜单监控处理器
 let menuHandler = null;
 const viewSelectState = {
-    clickHandler: null,
-    tabObserver: null,
-    loadedProtyleHandler: null,
-    debounceTimer: null,
-    initTimer: null
-};
-
-// 将列表转换为标签页结构
-const convertToTabView = (listElement) => {
-    if (listElement._convertedToTab) return;
-    
-    const children = listElement.querySelectorAll(':scope > .li');
-    if (children.length < 1) return;
-    
-    listElement._originalHTML = listElement.innerHTML;
-    listElement._convertedToTab = true;
-    
-    const headerContainer = document.createElement('div');
-    headerContainer.className = 'tab-header-container';
-    
-    const headers = document.createElement('div');
-    headers.className = 'tab-headers';
-    
-    const contentsContainer = document.createElement('div');
-    contentsContainer.className = 'tab-contents';
-    
-    children.forEach((li, index) => {
-        const firstChild = li.querySelector(':scope > [data-node-id]:not(.list)');
-        const subList = li.querySelector(':scope > .list');
-        
-        const tabHeader = document.createElement('div');
-        tabHeader.className = 'tab-header' + (index === 0 ? ' active' : '');
-        
-        if (firstChild) tabHeader.appendChild(firstChild.cloneNode(true));
-        
-        const tabContent = document.createElement('div');
-        tabContent.className = 'tab-content' + (index === 0 ? ' active' : '');
-        if (subList) tabContent.appendChild(subList.cloneNode(true));
-        
-        headers.appendChild(tabHeader);
-        contentsContainer.appendChild(tabContent);
-    });
-    
-    headerContainer.appendChild(headers);
-    listElement.innerHTML = '';
-    listElement.appendChild(headerContainer);
-    listElement.appendChild(contentsContainer);
-    
-    // 为每个标签页单独绑定事件，避免全局监听
-    headers.addEventListener('click', (event) => {
-        const clickedTab = event.target.closest('.tab-header');
-        if (!clickedTab) return;
-        
-        event.preventDefault();
-        event.stopPropagation();
-        
-        const allTabs = headers.querySelectorAll('.tab-header');
-        const allContents = contentsContainer.querySelectorAll('.tab-content');
-        
-        allTabs.forEach(t => t.classList.remove('active'));
-        allContents.forEach(c => c.classList.remove('active'));
-        
-        clickedTab.classList.add('active');
-        const index = [...allTabs].indexOf(clickedTab);
-        allContents[index]?.classList.add('active');
-    });
-};
-
-const restoreFromTabView = (listElement) => {
-    if (!listElement._convertedToTab) return;
-    listElement.innerHTML = listElement._originalHTML || '';
-    delete listElement._originalHTML;
-    delete listElement._convertedToTab;
-};
-
-const clearViewSelectTimers = () => {
-    if (viewSelectState.debounceTimer) {
-        clearTimeout(viewSelectState.debounceTimer);
-        viewSelectState.debounceTimer = null;
-    }
-    if (viewSelectState.initTimer) {
-        clearTimeout(viewSelectState.initTimer);
-        viewSelectState.initTimer = null;
-    }
+    clickHandler: null
 };
 
 // 初始化菜单监控
 export const initViewSelect = () => {
     if (menuHandler || viewSelectState.clickHandler) return;
-    
-    const initTabViews = () => {
-        document.querySelectorAll('.protyle-wysiwyg [data-type="NodeList"][custom-f~="tab"]')
-            .forEach(el => !el._convertedToTab && convertToTabView(el));
-    };
-
-    const scheduleInitTabViews = (delay = 0) => {
-        if (viewSelectState.initTimer) {
-            clearTimeout(viewSelectState.initTimer);
-        }
-        viewSelectState.initTimer = setTimeout(() => {
-            viewSelectState.initTimer = null;
-            initTabViews();
-        }, delay);
-    };
-    
-    scheduleInitTabViews(100);
-    
-    // 保存事件监听器引用以便清理
-    viewSelectState.loadedProtyleHandler = () => scheduleInitTabViews(200);
-    window.siyuan?.eventBus?.on('loaded-protyle', viewSelectState.loadedProtyleHandler);
-    
-    // 防抖函数
-    const debouncedInit = () => {
-        if (viewSelectState.debounceTimer) {
-            clearTimeout(viewSelectState.debounceTimer);
-        }
-        viewSelectState.debounceTimer = setTimeout(() => {
-            viewSelectState.debounceTimer = null;
-            initTabViews();
-        }, 150);
-    };
-    
-    // 只监听 .protyle-wysiwyg 容器，减少监听范围
-    const observer = new MutationObserver(debouncedInit);
-    const protyleContainers = document.querySelectorAll('.protyle-wysiwyg');
-    protyleContainers.forEach(container => {
-        observer.observe(container, { childList: true, subtree: true, attributes: true, attributeFilter: ['custom-f'] });
-    });
-    
-    viewSelectState.tabObserver = observer;
     
     // 存储事件监听器引用，以便后续清理
     menuHandler = () => {
@@ -291,12 +150,9 @@ export const initViewSelect = () => {
         const attrValue = item.dataset.attrValue;
         const blocks = document.querySelectorAll(`.protyle-wysiwyg [data-node-id="${id}"]`);
         
-        clearTransformData(id, blocks);
-        
         if (blocks?.length > 0) {
             blocks.forEach(block => {
                 block.setAttribute(attrName, attrValue);
-                attrValue === "tab" ? convertToTabView(block) : restoreFromTabView(block);
             });
             设置思源块属性(id, { [attrName]: attrValue });
         }
@@ -314,14 +170,5 @@ export const cleanupViewSelect = () => {
         document.removeEventListener("click", viewSelectState.clickHandler, true);
         viewSelectState.clickHandler = null;
     }
-    if (viewSelectState.tabObserver) {
-        viewSelectState.tabObserver.disconnect();
-        viewSelectState.tabObserver = null;
-    }
-    if (viewSelectState.loadedProtyleHandler && window.siyuan?.eventBus) {
-        window.siyuan.eventBus.off('loaded-protyle', viewSelectState.loadedProtyleHandler);
-    }
-    viewSelectState.loadedProtyleHandler = null;
-    clearViewSelectTimers();
 };
 

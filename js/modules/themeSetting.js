@@ -7,7 +7,6 @@ import { config } from './config.js';
 import { getAllButtons } from './buttons.js';
 import { initMiddleClickCollapse, cleanupMiddleClickCollapse } from './middleClickCollapse.js';
 import { initViewSelect, cleanupViewSelect } from './viewSelect.js';
-import { initMindmapDrag } from './mindmapDrag.js';
 import { initPlatformDetection, cleanupPlatformDetection } from './platform.js';
 import { initSlashMenuNavigation, cleanupSlashMenuNavigation } from './slashMenuNav.js';
 import { cleanupStatusBarHiding } from './statusBarHiding.js';
@@ -447,32 +446,6 @@ export const destroyTheme = () => {
         // [Savor] 清理视图选择功能时出错: ${e.message}
     }
     
-    // 清理标签页 DOM，恢复原始结构（在断开监听器后执行）
-    setTimeout(() => {
-        try {
-            document.querySelectorAll('.protyle-wysiwyg [data-type="NodeList"]').forEach(listElement => {
-                if (listElement._convertedToTab && listElement._originalHTML) {
-                    listElement.innerHTML = listElement._originalHTML;
-                    delete listElement._originalHTML;
-                    delete listElement._convertedToTab;
-                    listElement.removeAttribute('custom-f');
-                }
-            });
-        } catch (e) {
-            // [Savor] 清理标签页 DOM 时出错: ${e.message}
-        }
-    }, 100);
-
-    // 清理导图拖拽功能
-    try {
-        // 直接调用导图模块的清理函数
-        if (typeof window.cleanupMindmapDrag === 'function') {
-            window.cleanupMindmapDrag();
-        }
-    } catch (e) {
-        // [Savor] 清理导图拖拽功能时出错: ${e.message}
-    }
-    
     // 清理彩色标题样式元素
     const colorfulHeadingStyle = document.getElementById("snippet-SvcolorfulHeading");
     if (colorfulHeadingStyle) {
@@ -549,9 +522,6 @@ export const initTheme = () => {
     
     // 初始化视图选择UI功能
     initViewSelect();
-    
-    // 初始化导图拖拽功能
-    initMindmapDrag();
     
     // 初始化平台检测功能
     initPlatformDetection();

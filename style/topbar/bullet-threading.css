@@ -99,4 +99,11 @@
     width: 25px;
     top: calc(var(--en-bullet-line-height) * -1 + 16px);
   }
+
+  .protyle-wysiwyg [data-type="NodeList"] .en_item_bullet_line[style*="--en-bullet-line-top"]:not(.protyle-wysiwyg--select)::after {
+    left: calc(var(--en-bullet-line-left) - 1px);
+    width: var(--en-bullet-line-width);
+    height: var(--en-bullet-line-height);
+    top: calc(var(--en-bullet-line-top) + 1px);
+  }
 }

@@ -17,7 +17,6 @@ import { initSmoothCaretModule } from './modules/smoothCaret.js';
 import { initSidebarMemoModule } from './modules/sidebarMemo.js';
 import { initListPreview } from './modules/listPreview.js';
 import { initMobileAndPlatformFeatures } from './modules/mobileMenu.js';
-import { initMindmapDrag } from './modules/mindmapDrag.js';
 
 let savorInitPromise = null;
 let savorInitialized = false;
@@ -79,7 +78,6 @@ export const Savor = {
     initSidebarMemoModule,
     initListPreview,
     initMobileAndPlatformFeatures,
-    initMindmapDrag,
     initAll
 };
 
@@ -99,8 +97,7 @@ export {
     initSmoothCaretModule,
     initSidebarMemoModule,
     initListPreview,
-    initMobileAndPlatformFeatures,
-    initMindmapDrag
+    initMobileAndPlatformFeatures
 };
 
 export { initAll };
