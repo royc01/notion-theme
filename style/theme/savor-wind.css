@@ -76,7 +76,7 @@
     --b3-font-background13: #fae2e5;
 
 
-    .b3-list-item{
+    .b3-list-item__icon{
         filter: grayscale(50%);
     }
     
