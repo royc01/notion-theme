@@ -2,13 +2,17 @@
 // 模块：打字机模式功能
 // ========================================
 
-import { throttle } from './utils.js';
 import { config } from './config.js';
 
 const TYPEWRITER_SHORTCUT_KEY = 'typewriterModeShortcut';
 const DEFAULT_TYPEWRITER_SHORTCUT = 'Ctrl+Alt+T';
 
-let typewriterModeActive = false, typewriterHandler = null, typewriterEnterHandler = null, typewriterShortcutHandler = null;
+const TYPEWRITER_SCROLL_SMOOTH_TIME = 0.16;
+
+let typewriterModeActive = false, typewriterHandler = null, typewriterEnterHandler = null, typewriterWheelHandler = null, typewriterShortcutHandler = null;
+let typewriterSyncFrameId = null, typewriterScrollFrameId = null;
+let typewriterScrollEditor = null, typewriterScrollTarget = 0, typewriterScrollVelocity = 0, typewriterScrollTimestamp = 0;
+let typewriterLastSelection = null, typewriterSyncForced = false;
 
 const normalizeShortcut = (shortcut) => {
     const parts = String(shortcut || '').trim().split('+').map(part => part.trim()).filter(Boolean);
@@ -91,40 +95,158 @@ const getCaretRect = (range, selection) => {
     return null;
 };
 
-const syncTypewriterScroll = () => {
+const getSelectionSnapshot = (selection) => ({
+        anchorNode: selection.anchorNode,
+        anchorOffset: selection.anchorOffset,
+        focusNode: selection.focusNode,
+        focusOffset: selection.focusOffset,
+        rangeCount: selection.rangeCount
+    });
+
+const hasSelectionChanged = (selection) => {
+    const current = getSelectionSnapshot(selection);
+    const changed = !typewriterLastSelection
+        || Object.keys(current).some(key => current[key] !== typewriterLastSelection[key]);
+    typewriterLastSelection = current;
+    return changed;
+};
+
+const isDocumentScroller = (editor) => editor === document.documentElement || editor === document.body;
+
+const getScrollTop = (editor) => isDocumentScroller(editor)
+    ? (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0)
+    : editor.scrollTop;
+
+const setScrollTop = (editor, top) => {
+    if (isDocumentScroller(editor)) window.scrollTo(0, top);
+    else editor.scrollTop = top;
+};
+
+const getMaxScrollTop = (editor) => {
+    if (isDocumentScroller(editor)) {
+        const scroller = document.scrollingElement || document.documentElement;
+        return Math.max(0, scroller.scrollHeight - window.innerHeight);
+    }
+    return Math.max(0, editor.scrollHeight - editor.clientHeight);
+};
+
+const stopTypewriterScroll = () => {
+    if (typewriterScrollFrameId !== null) cancelAnimationFrame(typewriterScrollFrameId);
+    typewriterScrollFrameId = null;
+    typewriterScrollEditor = null;
+    typewriterScrollVelocity = 0;
+    typewriterScrollTimestamp = 0;
+};
+
+const animateTypewriterScroll = (timestamp) => {
+    typewriterScrollFrameId = null;
+    const editor = typewriterScrollEditor;
+    if (!typewriterModeActive || !editor?.isConnected) {
+        stopTypewriterScroll();
+        return;
+    }
+
+    const current = getScrollTop(editor);
+    const distance = typewriterScrollTarget - current;
+    if (Math.abs(distance) < 0.5 && Math.abs(typewriterScrollVelocity) < 1) {
+        setScrollTop(editor, typewriterScrollTarget);
+        stopTypewriterScroll();
+        return;
+    }
+
+    const deltaTime = typewriterScrollTimestamp
+        ? Math.min((timestamp - typewriterScrollTimestamp) / 1000, 0.034)
+        : 1 / 60;
+    typewriterScrollTimestamp = timestamp;
+
+    // Critically damped motion keeps its velocity when the caret moves again.
+    const omega = 2 / TYPEWRITER_SCROLL_SMOOTH_TIME;
+    const x = omega * deltaTime;
+    const decay = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x);
+    const change = current - typewriterScrollTarget;
+    const temp = (typewriterScrollVelocity + omega * change) * deltaTime;
+    typewriterScrollVelocity = (typewriterScrollVelocity - omega * temp) * decay;
+    let next = typewriterScrollTarget + (change + temp) * decay;
+
+    if ((typewriterScrollTarget - current) * (next - typewriterScrollTarget) > 0) {
+        next = typewriterScrollTarget;
+        typewriterScrollVelocity = 0;
+    }
+    setScrollTop(editor, next);
+    typewriterScrollFrameId = requestAnimationFrame(animateTypewriterScroll);
+};
+
+const scrollTypewriterEditorTo = (editor, top) => {
+    const target = Math.min(Math.max(0, top), getMaxScrollTop(editor));
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+        stopTypewriterScroll();
+        setScrollTop(editor, target);
+        return;
+    }
+
+    if (typewriterScrollEditor !== editor) {
+        stopTypewriterScroll();
+        typewriterScrollEditor = editor;
+    }
+    typewriterScrollTarget = target;
+    if (typewriterScrollFrameId === null) {
+        typewriterScrollTimestamp = 0;
+        typewriterScrollFrameId = requestAnimationFrame(animateTypewriterScroll);
+    }
+};
+
+const syncTypewriterScroll = (force = false) => {
     const sel = window.getSelection();
     if (!sel.rangeCount) return;
+    if (!force && !hasSelectionChanged(sel)) return;
+    if (force) hasSelectionChanged(sel);
     const range = sel.getRangeAt(0);
     const rect = getCaretRect(range, sel);
     if (!rect) return;
     const editor = getTypewriterEditor(sel);
     const editorRect = editor.getBoundingClientRect();
-    const scrollTop = editor === document.documentElement || editor === document.body
-        ? (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0)
-        : editor.scrollTop;
+    const scrollTop = getScrollTop(editor);
     const editorCenter = editorRect.top + editorRect.height / 2;
     const cursorPosition = rect.top + rect.height / 2;
     const scrollAmount = scrollTop + (cursorPosition - editorCenter);
-    if (editor === document.documentElement || editor === document.body) {
-        window.scrollTo({ top: scrollAmount, behavior: "smooth" });
-    } else {
-        editor.scrollTo({ top: scrollAmount, behavior: "smooth" });
-    }
+    scrollTypewriterEditorTo(editor, scrollAmount);
+};
+
+const scheduleTypewriterSync = (force = false) => {
+    typewriterSyncForced = typewriterSyncForced || force;
+    if (typewriterSyncFrameId !== null) return;
+    typewriterSyncFrameId = requestAnimationFrame(() => {
+        typewriterSyncFrameId = null;
+        const shouldForce = typewriterSyncForced;
+        typewriterSyncForced = false;
+        syncTypewriterScroll(shouldForce);
+    });
 };
 
 // 启用打字机模式
 export const enableTypewriterMode = () => {
     if (typewriterModeActive) return;
     typewriterModeActive = true;
-    typewriterHandler = throttle(() => requestAnimationFrame(syncTypewriterScroll), 100);
+    typewriterHandler = scheduleTypewriterSync;
     typewriterEnterHandler = (event) => {
         if (event.key !== "Enter") return;
         const target = event.target;
         if (!target?.closest?.(".protyle-content")) return;
-        requestAnimationFrame(syncTypewriterScroll);
+        scheduleTypewriterSync(true);
+    };
+    typewriterWheelHandler = () => {
+        if (typewriterSyncFrameId !== null) {
+            cancelAnimationFrame(typewriterSyncFrameId);
+            typewriterSyncFrameId = null;
+            typewriterSyncForced = false;
+        }
+        stopTypewriterScroll();
+        const selection = window.getSelection();
+        if (selection?.rangeCount) typewriterLastSelection = getSelectionSnapshot(selection);
     };
     document.addEventListener("selectionchange", typewriterHandler);
     document.addEventListener("keyup", typewriterEnterHandler, true);
+    document.addEventListener("wheel", typewriterWheelHandler, { passive: true, capture: true });
 };
 
 // 禁用打字机模式
@@ -139,6 +261,17 @@ export const disableTypewriterMode = () => {
         document.removeEventListener("keyup", typewriterEnterHandler, true);
         typewriterEnterHandler = null;
     }
+    if (typewriterWheelHandler) {
+        document.removeEventListener("wheel", typewriterWheelHandler, true);
+        typewriterWheelHandler = null;
+    }
+    if (typewriterSyncFrameId !== null) {
+        cancelAnimationFrame(typewriterSyncFrameId);
+        typewriterSyncFrameId = null;
+    }
+    typewriterSyncForced = false;
+    typewriterLastSelection = null;
+    stopTypewriterScroll();
 };
 
 // 初始化打字机模式模块

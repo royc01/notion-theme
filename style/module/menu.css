@@ -50,7 +50,7 @@
         width: 14px;
     }
 }
-.b3-button--cancel{
+/*.b3-button--cancel{
     font-weight:700;
 	background-color: var(--Sv-button-cancel);
 	color: var(--b3-theme-on-background);

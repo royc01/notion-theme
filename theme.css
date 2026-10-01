@@ -194,7 +194,7 @@
     --b3-select-background: url("data:image/svg+xml;utf8,<svg fill='rgba(95, 99, 104, .68)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right 2px center var(--b3-theme-background);
 
     /* switch */
-    --b3-switch-background: #e1e3e1;
+    --b3-switch-background: var(--b3-list-hover);
     --b3-switch-border: var(--b3-theme-on-surface-light);
     --b3-switch-hover: rgba(31, 31, 31, 0.06);
     --b3-switch-checked: #fff;
@@ -1074,4 +1074,8 @@ body:not(.body--mobile,.body--window,.body--toolbar-hide) #layouts{
 
 .protyle-wysiwyg [data-node-id] span[data-type~=block-ref]:not(.av__celltext), .protyle-wysiwyg [data-node-id] span[data-type~=file-annotation-ref], .protyle-wysiwyg [data-table-cell-node] span[data-type~=block-ref]:not(.av__celltext), .protyle-wysiwyg [data-table-cell-node] span[data-type~=file-annotation-ref], .protyle-wysiwyg td.dragover__top span[data-type~=block-ref]:not(.av__celltext), .protyle-wysiwyg td.dragover__top span[data-type~=file-annotation-ref], .protyle-wysiwyg td.dragover__bottom span[data-type~=block-ref]:not(.av__celltext), .protyle-wysiwyg td.dragover__bottom span[data-type~=file-annotation-ref], .protyle-wysiwyg th.dragover__top span[data-type~=block-ref]:not(.av__celltext), .protyle-wysiwyg th.dragover__top span[data-type~=file-annotation-ref], .protyle-wysiwyg th.dragover__bottom span[data-type~=block-ref]:not(.av__celltext), .protyle-wysiwyg th.dragover__bottom span[data-type~=file-annotation-ref], .table__cell-rich [data-node-id] span[data-type~=block-ref]:not(.av__celltext), .table__cell-rich [data-node-id] span[data-type~=file-annotation-ref], .table__cell-rich [data-table-cell-node] span[data-type~=block-ref]:not(.av__celltext), .table__cell-rich [data-table-cell-node] span[data-type~=file-annotation-ref], .table__cell-rich td.dragover__top span[data-type~=block-ref]:not(.av__celltext), .table__cell-rich td.dragover__top span[data-type~=file-annotation-ref], .table__cell-rich td.dragover__bottom span[data-type~=block-ref]:not(.av__celltext), .table__cell-rich td.dragover__bottom span[data-type~=file-annotation-ref], .table__cell-rich th.dragover__top span[data-type~=block-ref]:not(.av__celltext), .table__cell-rich th.dragover__top span[data-type~=file-annotation-ref], .table__cell-rich th.dragover__bottom span[data-type~=block-ref]:not(.av__celltext), .table__cell-rich th.dragover__bottom span[data-type~=file-annotation-ref]{
     background-image:none;
+}
+
+.b3-select--noborder{
+    background-color: unset;
 }
