@@ -33,6 +33,7 @@
         height: 36px;
         margin: 0px;
         border-radius: 4px;
+        color: var(--b3-toolbar-color);
     }
     .b3-menu__label{
         position: absolute;

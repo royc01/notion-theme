@@ -211,6 +211,19 @@ const shouldShowSavorToolbar = () => {
     return document.documentElement.getAttribute(`data-${mode}-theme`) === "Savor";
 };
 
+// 思源原生会在切换模式时刷新顶栏入口，但在主题接管菜单点击并使用
+// View Transition 时，该刷新可能被跳过。确保按钮图标始终反映当前模式。
+const syncBarModeIcon = () => {
+    const barMode = document.getElementById("barMode");
+    const icon = barMode?.querySelector("svg use");
+    if (!icon) return;
+
+    const isDark = document.documentElement.getAttribute("data-theme-mode") === "dark";
+    const href = isDark ? "#iconDark" : "#iconLight";
+    if (icon.getAttribute("href") !== href) icon.setAttribute("href", href);
+    if (icon.getAttribute("xlink:href") !== href) icon.setAttribute("xlink:href", href);
+};
+
 const handleMenuClick = (e) => {
     const menuItem = e.target.closest(".b3-menu__item");
     if (!menuItem) return;
@@ -246,6 +259,7 @@ const handleMenuClick = (e) => {
         const isDark = targetMode === themeDark;
         window.siyuan.config.appearance.mode = isDark ? 1 : 0;
         document.documentElement.setAttribute("data-theme-mode", isDark ? "dark" : "light");
+        syncBarModeIcon();
 
         // 在同一过渡内刷新工具栏按钮与配色，避免 initThemeObserver 再起一次过渡
         renderAllButtons();
@@ -311,6 +325,8 @@ export const initThemeObserver = () => {
     let previousThemeName = shouldShowSavorToolbar() ? "Savor" : null;
     
     const themeObserver = new MutationObserver(debounce(() => {
+        syncBarModeIcon();
+
         const newThemeMode = window.siyuan.config.appearance.mode === 0 ? "light" : "dark";
         const html = document.documentElement;
         const newThemeName = html.getAttribute(`data-${newThemeMode}-theme`);
@@ -352,6 +368,7 @@ export const initThemeObserver = () => {
         attributes: true,
         attributeFilter: ["data-theme-mode", "data-light-theme", "data-dark-theme", "class", "data-mode"]
     });
+    syncBarModeIcon();
 };
 
 // topBarPlugin 菜单调整
