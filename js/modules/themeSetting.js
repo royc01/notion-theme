@@ -33,8 +33,7 @@ const MOBILE_UNSAFE_FEATURE_IDS = new Set([
     "tabbarVertical",
     "typewriterMode",
     "sidebarMemo",
-    "sidebarBlockMemo",
-    "colorFolder"
+    "sidebarBlockMemo"
 ]);
 
 const resetRemovedTopbarMergeFeature = () => {
@@ -141,7 +140,8 @@ export const renderAllButtons = (targetToolbar = null) => {
         else if (btn.type === 'feature') acc[1].push(btn);
         return acc;
     }, [[], []]);
-    const buttons = [...themeButtons, ...featureButtons];
+    const buttons = [...themeButtons, ...featureButtons]
+        .filter(btn => !(shouldLimitDesktopEnhancements() && btn.id === "toolbarFusion"));
 
     buttons.forEach(btn => {
         const button = document.createElement("button");
