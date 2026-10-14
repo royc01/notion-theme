@@ -217,7 +217,7 @@
 	 line-height:1.1em;
 }
 /* 任务列表 */
-.protyle-wysiwyg .li[data-task="X"]>.protyle-action--task::before {
+.protyle-wysiwyg .li[data-task="X"]>.protyle-action--task::before,.protyle-wysiwyg .li.protyle-task--done>.protyle-action--task::before {
     content: "" !important;
     position: absolute;
     width: 0.9em;
