@@ -44,13 +44,8 @@ body>.toolbar--border{
     &>.b3-menu__title{
         background-color: var(--Sv-theme-surface);
     }
-    &>.mobile-main-menu__groups{
-        margin: 0px 10px;
-        border: none;
-        border-radius: 6px;
-    }
     .b3-menu__items{
-        padding: 0;
+        padding: 10px;
     }
     .b3-menu__item{
         border: none;

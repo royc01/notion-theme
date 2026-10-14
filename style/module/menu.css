@@ -2,21 +2,13 @@
 .b3-menu{
 	box-shadow: var(--Sv-menu-shadow);
 	border:none;
-    .b3-menu__submenu{
-        box-shadow: var(--Sv-menu-shadow);
-        border:none;
-        padding: 4px 0;
-        margin-top: 4px;
-    }
     .b3-menu__icon--small{
         margin-right:-4px;
     }
     .b3-menu__accelerator{
         color:var(--Sv-menu-accelerator);
     }/*快捷键提示*/
-    .b3-menu__separator{
-        height: 0.5px;
-    }
+
 }
 .b3-menu__icon {
     color: var(--b3-toolbar-color);
@@ -312,7 +304,6 @@
                 /* Keep the action row in normal flow so a longer description
                    cannot overlap it. */
                 position: absolute;
-                top:92px;
                 right: 0;
             }
         }
@@ -328,7 +319,6 @@
             display: grid;
             grid-template-columns: 90px 1fr;
             margin: 6px 0 0 6px;
-            padding-bottom: 18px;
             box-shadow: none;
             background-color: var(--Sv-select-field);
             &:hover{
@@ -342,7 +332,7 @@
             gap: 0px;
             grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
             .b3-card__actions{
-                padding: 0 11px 2px;
+                padding: 0 11px 5px;
             }
         }
     }

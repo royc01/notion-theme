@@ -1079,3 +1079,8 @@ body:not(.body--mobile,.body--window,.body--toolbar-hide) #layouts{
 .b3-select--noborder{
     background-color: unset;
 }
+
+.protyle-wysiwyg .tabs-tab[aria-selected=true], .protyle-wysiwyg .tabs-control[aria-selected=true], .b3-typography .tabs-tab[aria-selected=true], .b3-typography .tabs-control[aria-selected=true] {
+    box-shadow: var(--Sv-main-shadow) !important;
+    background-color: var(--Sv-breadcrumb-hover) !important;
+}
