@@ -53,6 +53,7 @@
         order: 99;
     }
     .status__msg:not(:empty){
+            position: relative;
             padding-left: 26px!important;
             padding-right: 10px;
             &::after{
