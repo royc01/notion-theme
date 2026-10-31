@@ -1,5 +1,5 @@
 /* ————————————————————边栏———————————————————— */
-.dock{
+:where(html:not([data-ui-density="compact"])) .dock{
 	& .dock__item{
         padding: 7px;
 		border-radius: var(--Sv-item-radius);
@@ -35,15 +35,21 @@
 		opacity: 0.7;
     }
 }
-#dockLeft{
+:where(html:not([data-ui-density="compact"])) #dockLeft{
 	width: 40px;
 	& .dock__item{
 		margin: 7px 5px 7px 7px;
 	}
 }
-#dockRight{
+:where(html:not([data-ui-density="compact"])) #dockRight{
 	width: 40px;
 	& .dock__item{
 		margin: 7px 7px 7px 5px;
 	}
+}
+
+:where(html:not([data-ui-density="compact"])) .layout__center .fn__flex-column > .fn__flex > .layout-tab-bar {
+    .item:not(.item--readonly) {
+        margin: 6px 6px 6px 4px;
+    }
 }

@@ -3,7 +3,7 @@
 .layout__dockl,.layout__dockr,.layout__dockb{
     background-color: transparent;
     >.fn__flex{
-        border-radius: var(--b3-border-radius-b);
+        border-radius: var(--Sv-center-radius);
         margin: 1px 3px 8px 3px;
         background-color: oklch(var(--b3-theme-surface-base-l) var(--b3-theme-surface-base-ch));
         box-shadow: var(--Sv-dock-shadow);
