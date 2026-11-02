@@ -28,8 +28,16 @@ export const isTouchCapable = () => {
 
 export const isMobileUserAgent = () => MOBILE_USER_AGENT_RE.test(navigator.userAgent || "");
 
+const isDesktopClient = () => {
+    const frontend = document.documentElement.getAttribute("data-frontend");
+    return frontend === "desktop"
+        || frontend === "desktop-window"
+        || /\bElectron\b/i.test(navigator.userAgent || "");
+};
+
 export const isLikelyMobileBrowser = () => {
-    if (isOfficialMobileLayout()) return false;
+    // 桌面客户端启动时窗口可能尚未恢复尺寸，触摸能力和临时窄视口不能作为移动端依据。
+    if (isOfficialMobileLayout() || isDesktopClient()) return false;
 
     return isMobileUserAgent()
         || (isTouchCapable() && getViewportWidth() <= 900);

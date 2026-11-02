@@ -157,10 +157,11 @@ export const initMobileAndPlatformFeatures = () => {
         mobileMenuState.initTimer = null;
     }
 
-    // 添加移动端相关类名
-    if (isPhone()) {
-        document.body.classList.add("body--mobile");
-        document.body.classList.toggle("body--mobile-browser", isLikelyMobileBrowser());
+    // 同步移动端相关类名，重新初始化时也清理先前误加的状态。
+    const mobileLayout = isPhone();
+    document.body.classList.toggle("body--mobile", mobileLayout);
+    document.body.classList.toggle("body--mobile-browser", mobileLayout && isLikelyMobileBrowser());
+    if (mobileLayout) {
         // 延迟初始化移动端菜单，确保DOM元素已加载
         if (isOfficialMobileLayout()) {
             mobileMenuState.initTimer = setTimeout(() => {
