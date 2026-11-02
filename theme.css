@@ -1084,3 +1084,8 @@ body:not(.body--mobile,.body--window,.body--toolbar-hide) #layouts{
     box-shadow: var(--Sv-main-shadow) !important;
     background-color: var(--Sv-breadcrumb-hover) !important;
 }
+
+
+.b3-list-item__icon, .b3-menu__avemoji, .b3-list-item__switch {
+    font-family: var(--b3-font-family-emoji);
+}
